@@ -3,8 +3,8 @@
 .public PlaySE
 .public SysTask_CreateOnMainQueue
 .public SysTask_Destroy
-.public Heap_AllocAtEnd
-.public Heap_FreeExplicit
+.public AllocFromHeapAtEnd
+.public FreeToHeapExplicit
 .public SysTask_GetData
 .public GF_AssertFail
 .public MapObjectManager_GetPriority

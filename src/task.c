@@ -5,7 +5,7 @@
 static TaskManager *Task_New(FieldSystem *fieldSystem, TaskFunc taskFunc, void *env) {
     TaskManager *taskman;
 
-    taskman = Heap_AllocAtEnd((enum HeapID)32, sizeof(TaskManager));
+    taskman = AllocFromHeapAtEnd((HeapID)32, sizeof(TaskManager));
     taskman->prev = NULL;
     taskman->func = taskFunc;
     taskman->state = 0;
@@ -13,7 +13,7 @@ static TaskManager *Task_New(FieldSystem *fieldSystem, TaskFunc taskFunc, void *
     taskman->unk10 = 0;
     taskman->unk14 = NULL;
     taskman->fieldSystem = fieldSystem;
-    taskman->unk1C = Heap_AllocAtEnd((enum HeapID)32, sizeof(TaskManagerUnkSub1C));
+    taskman->unk1C = AllocFromHeapAtEnd((HeapID)32, sizeof(TaskManagerUnkSub1C));
     return taskman;
 }
 
@@ -30,7 +30,7 @@ void TaskManager_Jump(TaskManager *taskman, TaskFunc taskFunc, void *env) {
     taskman->state = 0;
     taskman->env = env;
     if (taskman->unk14 != NULL || taskman->unk14 != NULL) {
-        Heap_Free(taskman->unk14);
+        FreeToHeap(taskman->unk14);
         taskman->unk10 = 0;
         taskman->unk14 = NULL;
     }
@@ -55,10 +55,10 @@ BOOL FieldSystem_RunTaskFrame(FieldSystem *fieldSystem) {
     while (fieldSystem->taskman->func(fieldSystem->taskman) == TRUE) {
         prevTask = fieldSystem->taskman->prev;
         if (fieldSystem->taskman->unk14 != NULL) {
-            Heap_Free(fieldSystem->taskman->unk14);
+            FreeToHeap(fieldSystem->taskman->unk14);
         }
-        Heap_Free(fieldSystem->taskman->unk1C);
-        Heap_Free(fieldSystem->taskman);
+        FreeToHeap(fieldSystem->taskman->unk1C);
+        FreeToHeap(fieldSystem->taskman);
         fieldSystem->taskman = prevTask;
         if (prevTask == NULL) {
             return TRUE;
@@ -97,7 +97,7 @@ static BOOL Task_RunApplicationUntilComplete(TaskManager *taskManager) {
         break;
     case 1:
         if (!FieldSystem_ApplicationIsRunning(fieldSystem)) {
-            Heap_Free(env);
+            FreeToHeap(env);
             return TRUE;
         }
         break;
@@ -108,7 +108,7 @@ static BOOL Task_RunApplicationUntilComplete(TaskManager *taskManager) {
 void CallApplicationAsTask(TaskManager *taskManager, const OverlayManagerTemplate *template, void *work) {
     struct UnkTaskEnv *env;
 
-    env = Heap_AllocAtEnd((enum HeapID)32, sizeof(struct UnkTaskEnv));
+    env = AllocFromHeapAtEnd((HeapID)32, sizeof(struct UnkTaskEnv));
     env->state = 0;
     env->template = template;
     env->work = work;

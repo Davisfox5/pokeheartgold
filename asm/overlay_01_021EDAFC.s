@@ -181,7 +181,7 @@ ov01_021EDC28: ; 0x021EDC28
 	lsl r1, r1, #4
 	str r2, [sp, #0x18]
 	add r5, r3, #0
-	bl Heap_Alloc
+	bl AllocFromHeap
 	add r4, r0, #0
 	bne _021EDC48
 	add sp, #0x1c
@@ -579,7 +579,7 @@ _021EDF08:
 	bl DestroyMsgData
 _021EDF2E:
 	add r0, r6, #0
-	bl Heap_Free
+	bl FreeToHeap
 	pop {r4, r5, r6, pc}
 	.balign 4, 0
 	thumb_func_end ov01_021EDF00
@@ -1446,7 +1446,7 @@ _021EE5BE:
 	ldr r0, [r6, #4]
 	bl SysTask_Destroy
 	add r0, r6, #0
-	bl Heap_Free
+	bl FreeToHeap
 	pop {r4, r5, r6, pc}
 	.balign 4, 0
 _021EE5CC: .word SEQ_SE_DP_SELECT
@@ -1730,7 +1730,7 @@ _021EE80A:
 	ldr r0, [r6, #4]
 	bl SysTask_Destroy
 	add r0, r6, #0
-	bl Heap_Free
+	bl FreeToHeap
 _021EE816:
 	pop {r4, r5, r6, pc}
 	.balign 4, 0
@@ -2354,7 +2354,7 @@ _021EECBA:
 	add r4, r0, #0
 	ldr r0, [r5, #0xc]
 	bl Save_PlayerData_GetCoinsAddr
-	bl Coins_GetValue
+	bl CheckCoins
 	add r2, r0, #0
 	b _021EED04
 _021EECD2:
@@ -2376,7 +2376,7 @@ _021EECEE:
 	add r4, r0, #0
 	ldr r0, [r5, #0xc]
 	bl Save_Pokeathlon_Get
-	bl PokeathlonSave_GetAthletePoints
+	bl SavePokeathlon_GetAthletePoints
 	add r2, r0, #0
 _021EED04:
 	mov r0, #1

@@ -6,7 +6,9 @@
 
 #include "assert.h"
 #include "bag.h"
+#include "field_player_avatar.h"
 #include "field_system.h"
+#include "fieldmap.h"
 #include "frontier_data.h"
 #include "game_stats.h"
 #include "heap.h"
@@ -14,7 +16,6 @@
 #include "mail.h"
 #include "party.h"
 #include "party_menu.h"
-#include "player_avatar.h"
 #include "player_data.h"
 #include "pokedex_util.h"
 #include "pokemon.h"
@@ -22,7 +23,6 @@
 #include "save_special_ribbons.h"
 #include "scrcmd.h"
 #include "script.h"
-#include "script_manager.h"
 #include "task.h"
 #include "unk_02030A98.h"
 #include "unk_02035900.h"
@@ -105,9 +105,9 @@ static void sub_0204F1E4(TaskManager *, u16, u16 *);
 static BOOL sub_0204F228(TaskManager *);
 static void sub_0204F284(TaskManager *, void *, BattleHallChallengeType);
 static BOOL sub_0204F2B8(TaskManager *);
-static u32 sub_0204F320(UnkStruct_0204F284 *, FieldSystem *, enum HeapID);
+static u32 sub_0204F320(UnkStruct_0204F284 *, FieldSystem *, HeapID);
 static u32 sub_0204F3F8(UnkStruct_0204F284 *, FieldSystem *);
-static u32 sub_0204F448(UnkStruct_0204F284 *, FieldSystem *, enum HeapID);
+static u32 sub_0204F448(UnkStruct_0204F284 *, FieldSystem *, HeapID);
 static u32 sub_0204F4D8(UnkStruct_0204F284 *, FieldSystem *);
 
 const u8 unk_020FC224[] = {
@@ -251,7 +251,7 @@ BOOL ScrCmd_634(ScriptContext *ctx) {
 }
 
 static void sub_0204F1E4(TaskManager *taskManager, u16 playerSpecies, u16 *resultPtr) {
-    UnkStruct_0204F1E4 *r4 = Heap_Alloc(HEAP_ID_FIELD2, sizeof(UnkStruct_0204F1E4));
+    UnkStruct_0204F1E4 *r4 = AllocFromHeap(HEAP_ID_FIELD, sizeof(UnkStruct_0204F1E4));
     memset(r4, 0, sizeof(UnkStruct_0204F1E4));
     r4->playerTeam = playerSpecies;
     r4->result = resultPtr;
@@ -278,7 +278,7 @@ static BOOL sub_0204F228(TaskManager *taskManager) {
         }
         break;
     case 2:
-        Heap_Free(r4);
+        FreeToHeap(r4);
         return TRUE;
     }
     return FALSE;
@@ -286,7 +286,7 @@ static BOOL sub_0204F228(TaskManager *taskManager) {
 
 static void sub_0204F284(TaskManager *taskManager, void *a1, BattleHallChallengeType challengeType) {
     FieldSystem *fieldSystem = TaskManager_GetFieldSystem(taskManager);
-    UnkStruct_0204F284 *r4 = Heap_Alloc(HEAP_ID_FIELD2, sizeof(UnkStruct_0204F284));
+    UnkStruct_0204F284 *r4 = AllocFromHeap(HEAP_ID_FIELD, sizeof(UnkStruct_0204F284));
     MI_CpuFill8(r4, 0, sizeof(UnkStruct_0204F284));
     r4->challengeType = challengeType;
     r4->unk08 = a1;
@@ -298,27 +298,27 @@ static BOOL sub_0204F2B8(TaskManager *taskManager) {
     UnkStruct_0204F284 *r4 = TaskManager_GetEnvironment(taskManager);
     switch (r4->state) {
     case 0:
-        r4->state = sub_0204F320(r4, fieldSystem, HEAP_ID_FIELD2);
+        r4->state = sub_0204F320(r4, fieldSystem, HEAP_ID_FIELD);
         break;
     case 1:
         r4->state = sub_0204F3F8(r4, fieldSystem);
         break;
     case 2:
-        r4->state = sub_0204F448(r4, fieldSystem, HEAP_ID_FIELD2);
+        r4->state = sub_0204F448(r4, fieldSystem, HEAP_ID_FIELD);
         break;
     case 3:
         r4->state = sub_0204F4D8(r4, fieldSystem);
         break;
     case 4:
-        Heap_Free(r4);
+        FreeToHeap(r4);
         return TRUE;
     }
     return FALSE;
 }
 
-static u32 sub_0204F320(UnkStruct_0204F284 *a0, FieldSystem *fieldSystem, enum HeapID unused) {
-    PartyMenuArgs *partyMenuArgs = Heap_Alloc(HEAP_ID_FIELD2, sizeof(PartyMenuArgs));
-    MI_CpuClearFast((u32 *)partyMenuArgs, sizeof(PartyMenuArgs));
+static u32 sub_0204F320(UnkStruct_0204F284 *a0, FieldSystem *fieldSystem, HeapID unused) {
+    PartyMenuArgs *partyMenuArgs = AllocFromHeap(HEAP_ID_FIELD, sizeof(PartyMenuArgs));
+    MIi_CpuClearFast(0, (u32 *)partyMenuArgs, sizeof(PartyMenuArgs));
     partyMenuArgs->party = SaveArray_Party_Get(fieldSystem->saveData);
     partyMenuArgs->bag = Save_Bag_Get(fieldSystem->saveData);
     partyMenuArgs->mailbox = Save_Mailbox_Get(fieldSystem->saveData);
@@ -356,15 +356,15 @@ static u32 sub_0204F3F8(UnkStruct_0204F284 *a0, FieldSystem *fieldSystem) {
     default:
         MI_CpuCopy8(partyMenu->selectedOrder, a0->selectedMons, 2);
         a0->partySlot = partyMenu->partySlot;
-        Heap_Free(partyMenu);
+        FreeToHeap(partyMenu);
         *(a0->unk08) = NULL;
         return 2;
     }
 }
 
-static u32 sub_0204F448(UnkStruct_0204F284 *a0, FieldSystem *fieldSystem, enum HeapID heapID) {
+static u32 sub_0204F448(UnkStruct_0204F284 *a0, FieldSystem *fieldSystem, HeapID heapId) {
     SaveData *saveData = fieldSystem->saveData;
-    PokemonSummaryArgs *args = Heap_AllocAtEnd(heapID, sizeof(PokemonSummaryArgs));
+    PokemonSummaryArgs *args = AllocFromHeapAtEnd(heapId, sizeof(PokemonSummaryArgs));
     MI_CpuFill8(args, 0, sizeof(PokemonSummaryArgs));
     args->options = Save_PlayerData_GetOptionsAddr(saveData);
     args->party = SaveArray_Party_Get(saveData);
@@ -390,7 +390,7 @@ static u32 sub_0204F4D8(UnkStruct_0204F284 *a0, FieldSystem *fieldSystem) {
     }
     PokemonSummaryArgs *pokemonSummaryArgs = *(a0->unk08);
     a0->partySlot = pokemonSummaryArgs->partySlot;
-    Heap_Free(pokemonSummaryArgs);
+    FreeToHeap(pokemonSummaryArgs);
     *(a0->unk08) = NULL;
     return 0;
 }
@@ -421,22 +421,22 @@ BOOL ScrCmd_BufferBattleHallStreak(ScriptContext *ctx) {
         }
     }
     if (unk0 != NULL) {
-        Heap_Free(unk0);
+        FreeToHeap(unk0);
     }
     BufferIntegerAsString(*messageFormat, strIdxWinStreak, winStreak, CountDigits(winStreak), PRINTING_MODE_RIGHT_ALIGN, TRUE);
-    u16 battlePoints = 0;
+    u16 bp = 0;
     u32 currWinStreakLevel = 0;
     u16 prevWinStreakLevel = *winStreakLevel;
     for (i = *winStreakLevel; i < NELEMS(battleHallWinStreakBP); i++) {
         if (battleHallWinStreakBP[i].winStreakTarget <= winStreak) {
-            battlePoints += battleHallWinStreakBP[i].bp;
+            bp += battleHallWinStreakBP[i].bp;
             (*winStreakLevel)++;
             currWinStreakLevel = i;
         }
     }
-    GameStats_Add(Save_GameStats_Get(ctx->fieldSystem->saveData), GAME_STAT_BATTLE_POINTS_RECEIVED, battlePoints);
-    if (battlePoints) {
-        FrontierData_BattlePointAction(Save_FrontierData_Get(ctx->fieldSystem->saveData), battlePoints, 5);
+    GameStats_Add(Save_GameStats_Get(ctx->fieldSystem->saveData), GAME_STAT_BATTLE_POINTS, bp);
+    if (bp != 0) {
+        FrontierData_BattlePointAction(Save_FrontierData_Get(ctx->fieldSystem->saveData), bp, 5);
     }
     if (winStreak == 0) {
         *result = 0;
@@ -454,7 +454,7 @@ BOOL ScrCmd_BufferBattleHallStreak(ScriptContext *ctx) {
     u32 currWinStreakTarget = battleHallWinStreakBP[currWinStreakLevel].winStreakTarget;
     BufferIntegerAsString(*messageFormat, strIdxCurrWinStreakTarget, currWinStreakTarget, CountDigits(currWinStreakTarget), PRINTING_MODE_RIGHT_ALIGN, TRUE);
     BufferIntegerAsString(*messageFormat, strIdxNextWinStreakTarget, battleHallWinStreakBP[*winStreakLevel].winStreakTarget, CountDigits(battleHallWinStreakBP[*winStreakLevel].winStreakTarget), PRINTING_MODE_RIGHT_ALIGN, TRUE);
-    BufferIntegerAsString(*messageFormat, strIdxBP, battlePoints, CountDigits(battlePoints), PRINTING_MODE_RIGHT_ALIGN, TRUE);
+    BufferIntegerAsString(*messageFormat, strIdxBP, bp, CountDigits(bp), PRINTING_MODE_RIGHT_ALIGN, TRUE);
     return FALSE;
 }
 
@@ -483,7 +483,7 @@ BOOL ScrCmd_BattleHallCountUsedSpecies(ScriptContext *ctx) {
         }
     }
     if (unk1 != NULL) {
-        Heap_Free(unk1);
+        FreeToHeap(unk1);
     }
     *result = numSpecies;
     return FALSE;
@@ -507,7 +507,7 @@ BOOL ScrCmd_BattleHallGetTotalStreak(ScriptContext *ctx) {
         }
     }
     if (unk1 != NULL) {
-        Heap_Free(unk1);
+        FreeToHeap(unk1);
     }
     if (winStreak > BATTLE_HALL_MAX_WIN_STREAK) {
         winStreak = BATTLE_HALL_MAX_WIN_STREAK;

@@ -5,10 +5,10 @@
 
 	.rodata
 
-	ScrDef scr_seq_T24R0601_000
-	ScrDefEnd
+	scrdef scr_seq_T24R0601_000
+	scrdef_end
 
 scr_seq_T24R0601_000:
-	SimpleNPCMsg msg_0578_T24R0601_00000
-	End
+	simple_npc_msg msg_0578_T24R0601_00000
+	end
 	.balign 4, 0

@@ -2,11 +2,11 @@
 #pragma once
 .public NARC_ReadWholeMember
 .public NARC_GetMemberSize
-.public Heap_Create
-.public Heap_Destroy
-.public Heap_Alloc
-.public Heap_AllocAtEnd
-.public Heap_Free
+.public CreateHeap
+.public DestroyHeap
+.public AllocFromHeap
+.public AllocFromHeapAtEnd
+.public FreeToHeap
 .public GF_AssertFail
 .public memset
 .public ov01_021FC4C4

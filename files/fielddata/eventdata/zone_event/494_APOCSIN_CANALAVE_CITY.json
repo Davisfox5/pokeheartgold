@@ -1,0 +1,256 @@
+{
+  "header": "fielddata/script/scr_seq/event_EVERYWHERE.h",
+  "bgs": [
+    {
+      "scriptId": 62,
+      "type": 1,
+      "x": 59,
+      "z": 712,
+      "y": 0,
+      "dir": 0
+    },
+    {
+      "scriptId": 62,
+      "type": 1,
+      "x": 36,
+      "z": 753,
+      "y": 0,
+      "dir": 0
+    }
+  ],
+  "objects": [
+    {
+      "id": 200,
+      "spriteId": "SPRITE_SEAMAN",
+      "movement": 0,
+      "type": 0,
+      "eventFlag": 0,
+      "scriptId": 1,
+      "facingDirection": 0,
+      "param0": 0,
+      "param1": 0,
+      "param2": 0,
+      "xRange": 0,
+      "yRange": 0,
+      "x": 38,
+      "z": 744,
+      "y": 0
+    },
+    {
+      "id": 201,
+      "spriteId": "SPRITE_DELIVERY",
+      "movement": 0,
+      "type": 0,
+      "eventFlag": 0,
+      "scriptId": 18,
+      "facingDirection": 0,
+      "param0": 0,
+      "param1": 0,
+      "param2": 0,
+      "xRange": 0,
+      "yRange": 0,
+      "x": 40,
+      "z": 744,
+      "y": 0
+    },
+    {
+      "id": 2,
+      "spriteId": "SPRITE_MANIA",
+      "movement": 3,
+      "type": 0,
+      "eventFlag": 0,
+      "scriptId": 5,
+      "facingDirection": 0,
+      "param0": 0,
+      "param1": 0,
+      "param2": 0,
+      "xRange": 1,
+      "yRange": 1,
+      "x": 58,
+      "z": 749,
+      "y": 0
+    },
+    {
+      "id": 3,
+      "spriteId": "SPRITE_GSGIRL2",
+      "movement": 0,
+      "type": 0,
+      "eventFlag": 0,
+      "scriptId": 3,
+      "facingDirection": 1,
+      "param0": 0,
+      "param1": 0,
+      "param2": 0,
+      "xRange": 0,
+      "yRange": 0,
+      "x": 52,
+      "z": 717,
+      "y": 0
+    },
+    {
+      "id": 4,
+      "spriteId": "SPRITE_GSMAN2",
+      "movement": 3,
+      "type": 0,
+      "eventFlag": 0,
+      "scriptId": 4,
+      "facingDirection": 3,
+      "param0": 0,
+      "param1": 0,
+      "param2": 0,
+      "xRange": 2,
+      "yRange": 1,
+      "x": 59,
+      "z": 728,
+      "y": 0
+    },
+    {
+      "id": 5,
+      "spriteId": "SPRITE_GSWOMAN3",
+      "movement": 4,
+      "type": 0,
+      "eventFlag": 0,
+      "scriptId": 3,
+      "facingDirection": 1,
+      "param0": 0,
+      "param1": 0,
+      "param2": 0,
+      "xRange": 0,
+      "yRange": 1,
+      "x": 33,
+      "z": 730,
+      "y": 0
+    },
+    {
+      "id": 6,
+      "spriteId": "SPRITE_GSMAN1",
+      "movement": 0,
+      "type": 0,
+      "eventFlag": 0,
+      "scriptId": 5,
+      "facingDirection": 1,
+      "param0": 0,
+      "param1": 0,
+      "param2": 0,
+      "xRange": 0,
+      "yRange": 0,
+      "x": 52,
+      "z": 718,
+      "y": 0
+    },
+    {
+      "id": 7,
+      "spriteId": "SPRITE_GSOLDMAN1",
+      "movement": 5,
+      "type": 0,
+      "eventFlag": 0,
+      "scriptId": 14,
+      "facingDirection": 2,
+      "param0": 0,
+      "param1": 0,
+      "param2": 0,
+      "xRange": 1,
+      "yRange": 0,
+      "x": 41,
+      "z": 735,
+      "y": 0
+    },
+    {
+      "id": 8,
+      "spriteId": "SPRITE_SEAMAN",
+      "movement": 0,
+      "type": 0,
+      "eventFlag": 0,
+      "scriptId": 3,
+      "facingDirection": 2,
+      "param0": 0,
+      "param1": 0,
+      "param2": 0,
+      "xRange": 0,
+      "yRange": 0,
+      "x": 45,
+      "z": 750,
+      "y": 0
+    }
+  ],
+  "warps": [
+    {
+      "x": 39,
+      "z": 731,
+      "header": "MAP_APOC_SIN_H00_CANALAVE_CITY",
+      "anchor": 0,
+      "y": 0
+    },
+    {
+      "x": 58,
+      "z": 722,
+      "header": "MAP_APOC_SIN_PC_CANALAVE_CITY",
+      "anchor": 0,
+      "y": 0
+    },
+    {
+      "x": 53,
+      "z": 740,
+      "header": "MAP_APOC_SIN_MART_CANALAVE_CITY",
+      "anchor": 0,
+      "y": 0
+    },
+    {
+      "x": 37,
+      "z": 718,
+      "header": "MAP_APOC_SIN_H03_CANALAVE_CITY",
+      "anchor": 0,
+      "y": 0
+    },
+    {
+      "x": 54,
+      "z": 748,
+      "header": "MAP_APOC_SIN_H04_CANALAVE_CITY",
+      "anchor": 0,
+      "y": 0
+    },
+    {
+      "x": 58,
+      "z": 713,
+      "header": "MAP_APOC_SIN_H05_CANALAVE_CITY",
+      "anchor": 0,
+      "y": 0
+    },
+    {
+      "x": 39,
+      "z": 748,
+      "header": "MAP_APOC_SIN_H06_CANALAVE_CITY",
+      "anchor": 0,
+      "y": 0
+    },
+    {
+      "x": 63,
+      "z": 754,
+      "header": "MAP_APOC_SIN_H07_CANALAVE_CITY",
+      "anchor": 0,
+      "y": 0
+    },
+    {
+      "x": 63,
+      "z": 755,
+      "header": "MAP_APOC_SIN_H08_CANALAVE_CITY",
+      "anchor": 0,
+      "y": 0
+    },
+    {
+      "x": 53,
+      "z": 732,
+      "header": "MAP_APOC_SIN_H09_CANALAVE_CITY",
+      "anchor": 0,
+      "y": 0
+    },
+    {
+      "x": 38,
+      "z": 740,
+      "header": "MAP_APOC_SIN_H10_CANALAVE_CITY",
+      "anchor": 0,
+      "y": 0
+    }
+  ],
+  "coords": []
+}

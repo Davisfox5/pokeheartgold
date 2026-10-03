@@ -3,7 +3,7 @@
 .public BeginNormalPaletteFade
 .public IsPaletteFadeFinished
 .public sub_0200FBF4
-.public Heap_Alloc
+.public AllocFromHeap
 .public GfGfx_EngineATogglePlanes
 .public SpriteList_RenderAndAnimateSprites
 .public Sprite_Delete
@@ -26,7 +26,7 @@
 .public ov01_021F06EC
 .public ov01_021F0718
 .public ov01_021F074C
-.public HBlankSystem_Start
-.public HBlankSystem_Stop
+.public ov01_021FB4F4
+.public ov01_021FB514
 .public ov114_0225F020
 .public ov114_0225F280

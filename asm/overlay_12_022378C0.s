@@ -329,7 +329,7 @@ _02237FD8:
 	mov r1, #0x32
 	mov r0, #5
 	lsl r1, r1, #6
-	bl Heap_Alloc
+	bl AllocFromHeap
 	mov r1, #0x1d
 	lsl r1, r1, #4
 	str r0, [r5, r1]
@@ -361,7 +361,7 @@ _02237FD8:
 	str r0, [sp]
 	add r0, r5, #0
 	add r2, r4, #0
-	bl BattleInput_NewInit
+	bl ov12_022660D0
 	mov r1, #0x67
 	lsl r1, r1, #2
 	str r0, [r4, r1]
@@ -446,7 +446,7 @@ _02237FD8:
 	mov r0, #0x67
 	lsl r0, r0, #2
 	ldr r0, [r4, r0]
-	bl BattleInput_LoadDefaultResources
+	bl ov12_02266390
 	mov r0, #7
 	mov r1, #5
 	bl NARC_New
@@ -464,12 +464,12 @@ _02237FD8:
 	ldr r2, [r4, r2]
 	add r0, r6, #0
 	add r1, r5, #0
-	bl BattleInput_ChangeMenu
+	bl ov12_02266508
 	mov r1, #0x67
 	lsl r1, r1, #2
 	ldr r1, [r4, r1]
 	add r0, r5, #0
-	bl BattleInput_LoadBallGaugeResources
+	bl ov12_02266644
 	add r0, r6, #0
 	bl NARC_Delete
 	add r0, r5, #0
@@ -894,14 +894,14 @@ _022384D6:
 	ldr r1, [r6, #4]
 	bl Party_Copy
 	ldr r0, [r5, #0x68]
-	bl Heap_Free
+	bl FreeToHeap
 	add r1, r6, #0
 	add r1, #0xf8
 	ldr r0, [r5, #0x48]
 	ldr r1, [r1]
 	bl PlayerProfile_Copy
 	ldr r0, [r5, #0x48]
-	bl Heap_Free
+	bl FreeToHeap
 	ldr r0, [sp]
 	add r6, r6, #4
 	add r0, r0, #1
@@ -919,14 +919,14 @@ _022384D6:
 	ldr r1, [r7, r1]
 	bl Save_Bag_Copy
 	ldr r0, [r4, #0x58]
-	bl Heap_Free
+	bl FreeToHeap
 	mov r1, #0x11
 	lsl r1, r1, #4
 	ldr r0, [r4, #0x60]
 	ldr r1, [r7, r1]
 	bl Pokedex_Copy
 	ldr r0, [r4, #0x60]
-	bl Heap_Free
+	bl FreeToHeap
 	mov r0, #0x45
 	ldr r1, [r4, #0x64]
 	lsl r0, r0, #2
@@ -1040,13 +1040,13 @@ _022384D6:
 	lsl r7, r7, #4
 _0223861E:
 	ldr r0, [r5, r7]
-	bl Heap_Free
+	bl FreeToHeap
 	add r6, r6, #1
 	add r5, #0x10
 	cmp r6, #4
 	blt _0223861E
 	ldr r0, [r4, #0x18]
-	bl Heap_Free
+	bl FreeToHeap
 	ldr r0, [r4, #0x28]
 	mov r1, #0
 	bl PaletteData_FreeBuffers
@@ -1116,15 +1116,15 @@ _022386C0:
 	mov r1, #3
 	bl WindowArray_Delete
 	ldr r0, [r4, #4]
-	bl Heap_Free
+	bl FreeToHeap
 	mov r0, #0x22
 	lsl r0, r0, #4
 	ldr r0, [r4, r0]
-	bl Heap_Free
+	bl FreeToHeap
 	mov r0, #0x89
 	lsl r0, r0, #2
 	ldr r0, [r4, r0]
-	bl Heap_Free
+	bl FreeToHeap
 	mov r0, #0x6a
 	lsl r0, r0, #2
 	ldr r0, [r4, r0]
@@ -1166,7 +1166,7 @@ _02238748:
 	bl ov12_0226BEF0
 _02238756:
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	ldr r0, _022387A0 ; =FS_OVERLAY_ID(OVY_6)
 	bl UnloadOverlayByID
 	ldr r0, _022387A4 ; =FS_OVERLAY_ID(OVY_7)
@@ -1299,7 +1299,7 @@ _02238838:
 	add r1, r0, #0
 	bl GfGfx_EngineATogglePlanes
 	add r0, r4, #0
-	bl BgConfig_InitBattleMenuBackgrounds
+	bl ov12_0226604C
 	add r0, r5, #0
 	bl BattleSystem_GetFrame
 	add r7, r0, #0
@@ -1501,7 +1501,7 @@ ov12_02238A30: ; 0x02238A30
 	mov r1, #3
 	bl FreeBgTilemapBuffer
 	add r0, r4, #0
-	bl BgConfig_CleanupBattleMenuBackgrounds
+	bl ov12_022660A8
 	pop {r4, pc}
 	thumb_func_end ov12_02238A30
 
@@ -4165,7 +4165,7 @@ _02239FE2:
 	add r5, r4, #0
 _02239FFA:
 	ldr r0, [r5, #0x10]
-	bl Heap_Free
+	bl FreeToHeap
 	add r6, r6, #1
 	add r5, r5, #4
 	cmp r6, #4
@@ -4256,9 +4256,9 @@ ov12_0223A088: ; 0x0223A088
 	mov r1, #1
 	bl FreeBgTilemapBuffer
 	ldr r0, [r4, #4]
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	pop {r4, pc}
 	thumb_func_end ov12_0223A088
 
@@ -4309,7 +4309,7 @@ _0223A11C:
 _0223A130:
 	mov r0, #5
 	mov r1, #0x30
-	bl Heap_Alloc
+	bl AllocFromHeap
 	mov r1, #0x71
 	lsl r1, r1, #2
 	str r0, [r4, r1]
@@ -4445,7 +4445,7 @@ _0223A236:
 	ldr r0, [r0, #0x14]
 	cmp r0, #0
 	beq _0223A244
-	bl Heap_Free
+	bl FreeToHeap
 _0223A244:
 	add r4, r4, #1
 	add r5, r5, #4
@@ -4454,7 +4454,7 @@ _0223A244:
 	mov r0, #0x71
 	lsl r0, r0, #2
 	ldr r0, [r6, r0]
-	bl Heap_Free
+	bl FreeToHeap
 	mov r0, #1
 	pop {r3, r4, r5, r6, r7, pc}
 _0223A25A:
@@ -4493,7 +4493,7 @@ _0223A290:
 	lsr r5, r0, #0x18
 	mov r0, #5
 	mov r1, #0x30
-	bl Heap_Alloc
+	bl AllocFromHeap
 	mov r1, #0x71
 	lsl r1, r1, #2
 	str r0, [r4, r1]
@@ -4641,7 +4641,7 @@ _0223A3C6:
 	ldr r0, [r0, #0x14]
 	cmp r0, #0
 	beq _0223A3D4
-	bl Heap_Free
+	bl FreeToHeap
 _0223A3D4:
 	add r4, r4, #1
 	add r5, r5, #4
@@ -4650,7 +4650,7 @@ _0223A3D4:
 	mov r0, #0x71
 	lsl r0, r0, #2
 	ldr r0, [r6, r0]
-	bl Heap_Free
+	bl FreeToHeap
 	mov r0, #1
 	pop {r3, r4, r5, r6, r7, pc}
 _0223A3EA:
@@ -4691,7 +4691,7 @@ _0223A41A:
 	bl HandleLoadOverlay
 	mov r0, #5
 	mov r1, #0x30
-	bl Heap_Alloc
+	bl AllocFromHeap
 	add r6, r0, #0
 	mov r0, #0x66
 	lsl r0, r0, #2
@@ -4724,14 +4724,14 @@ _0223A464:
 	mov r0, #0x51
 	lsl r0, r0, #2
 	ldr r0, [r7, r0]
-	mov r1, #0x16 ; GAME_STAT_LOCAL_LINK_BATTLE_WINS
+	mov r1, #0x16
 	bl GameStats_Inc
 	b _0223A4CE
 _0223A47A:
 	mov r0, #0x51
 	lsl r0, r0, #2
 	ldr r0, [r7, r0]
-	mov r1, #0x1b ; GAME_STAT_WIFI_BATTLE_WINS
+	mov r1, #0x1b
 	bl GameStats_Inc
 	b _0223A4CE
 _0223A488:
@@ -4741,14 +4741,14 @@ _0223A488:
 	mov r0, #0x51
 	lsl r0, r0, #2
 	ldr r0, [r7, r0]
-	mov r1, #0x17 ; GAME_STAT_LOCAL_LINK_BATTLE_LOSSES
+	mov r1, #0x17
 	bl GameStats_Inc
 	b _0223A4CE
 _0223A49E:
 	mov r0, #0x51
 	lsl r0, r0, #2
 	ldr r0, [r7, r0]
-	mov r1, #0x1c ; GAME_STAT_WIFI_BATTLE_LOSSES
+	mov r1, #0x1c
 	bl GameStats_Inc
 	b _0223A4CE
 _0223A4AC:
@@ -4758,14 +4758,14 @@ _0223A4AC:
 	mov r0, #0x51
 	lsl r0, r0, #2
 	ldr r0, [r7, r0]
-	mov r1, #0x18 ; GAME_STAT_LOCAL_LINK_BATTLE_DRAWS
+	mov r1, #0x18
 	bl GameStats_Inc
 	b _0223A4CE
 _0223A4C2:
 	mov r0, #0x51
 	lsl r0, r0, #2
 	ldr r0, [r7, r0]
-	mov r1, #0x1d ; GAME_STAT_WIFI_BATTLE_DRAWS
+	mov r1, #0x1d
 	bl GameStats_Inc
 _0223A4CE:
 	ldr r1, [r7]
@@ -4920,14 +4920,14 @@ _0223A5FE:
 	ldr r0, [r5, #0x14]
 	cmp r0, #0
 	beq _0223A608
-	bl Heap_Free
+	bl FreeToHeap
 _0223A608:
 	add r4, r4, #1
 	add r5, r5, #4
 	cmp r4, #4
 	blt _0223A5FE
 	add r0, r6, #0
-	bl Heap_Free
+	bl FreeToHeap
 	mov r0, #1
 	pop {r4, r5, r6, pc}
 _0223A61A:

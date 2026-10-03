@@ -1,0 +1,139 @@
+{
+  "header": "fielddata/script/scr_seq/event_EVERYWHERE.h",
+  "bgs": [
+    {
+      "scriptId": 36,
+      "type": 1,
+      "x": 822,
+      "z": 473,
+      "y": 0,
+      "dir": 0
+    },
+    {
+      "scriptId": 36,
+      "type": 1,
+      "x": 822,
+      "z": 445,
+      "y": 0,
+      "dir": 0
+    }
+  ],
+  "objects": [
+    {
+      "id": 0,
+      "spriteId": "SPRITE_GSWOMAN6",
+      "movement": 3,
+      "type": 0,
+      "eventFlag": 0,
+      "scriptId": 3,
+      "facingDirection": 0,
+      "param0": 0,
+      "param1": 0,
+      "param2": 0,
+      "xRange": 1,
+      "yRange": 2,
+      "x": 806,
+      "z": 458,
+      "y": 0
+    },
+    {
+      "id": 1,
+      "spriteId": "SPRITE_GSWOMAN6",
+      "movement": 3,
+      "type": 0,
+      "eventFlag": 0,
+      "scriptId": 3,
+      "facingDirection": 3,
+      "param0": 0,
+      "param1": 0,
+      "param2": 0,
+      "xRange": 3,
+      "yRange": 1,
+      "x": 822,
+      "z": 459,
+      "y": 0
+    },
+    {
+      "id": 2,
+      "spriteId": "SPRITE_GSFIGHTER",
+      "movement": 3,
+      "type": 0,
+      "eventFlag": 0,
+      "scriptId": 6,
+      "facingDirection": 0,
+      "param0": 0,
+      "param1": 0,
+      "param2": 0,
+      "xRange": 3,
+      "yRange": 1,
+      "x": 809,
+      "z": 477,
+      "y": 0
+    },
+    {
+      "id": 3,
+      "spriteId": "SPRITE_GSWOMAN3",
+      "movement": 3,
+      "type": 0,
+      "eventFlag": 0,
+      "scriptId": 2,
+      "facingDirection": 0,
+      "param0": 0,
+      "param1": 0,
+      "param2": 0,
+      "xRange": 1,
+      "yRange": 1,
+      "x": 806,
+      "z": 471,
+      "y": 0
+    },
+    {
+      "id": 4,
+      "spriteId": "SPRITE_GSSWIMMERM",
+      "movement": 0,
+      "type": 0,
+      "eventFlag": 0,
+      "scriptId": 17,
+      "facingDirection": 1,
+      "param0": 0,
+      "param1": 0,
+      "param2": 0,
+      "xRange": 0,
+      "yRange": 0,
+      "x": 816,
+      "z": 455,
+      "y": 0
+    }
+  ],
+  "warps": [
+    {
+      "x": 822,
+      "z": 469,
+      "header": "MAP_APOC_SIN_H00_RESORT_AREA",
+      "anchor": 0,
+      "y": 0
+    },
+    {
+      "x": 810,
+      "z": 455,
+      "header": "MAP_APOC_SIN_H01_RESORT_AREA",
+      "anchor": 0,
+      "y": 0
+    },
+    {
+      "x": 824,
+      "z": 453,
+      "header": "MAP_APOC_SIN_H02_RESORT_AREA",
+      "anchor": 0,
+      "y": 0
+    },
+    {
+      "x": 802,
+      "z": 472,
+      "header": "MAP_APOC_SIN_PC_RESORT_AREA",
+      "anchor": 0,
+      "y": 0
+    }
+  ],
+  "coords": []
+}

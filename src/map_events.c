@@ -11,14 +11,14 @@ static void MapEvents_ReadFromNarc(MapEvents *events, u32 mapno);
 static void MapEvents_ComputeRamHeader(MapEvents *events);
 static void MapScriptHeader_ReadFromNarc(MapEvents *events, u32 mapno);
 
-void Field_AllocateMapEvents(FieldSystem *work, enum HeapID heapID) {
+void Field_AllocateMapEvents(FieldSystem *work, HeapID heapId) {
     GF_ASSERT(work->mapEvents == NULL);
-    work->mapEvents = Heap_Alloc(heapID, sizeof(MapEvents));
+    work->mapEvents = AllocFromHeap(heapId, sizeof(MapEvents));
 }
 
 void Field_FreeMapEvents(FieldSystem *work) {
     GF_ASSERT(work->mapEvents != NULL);
-    Heap_Free(work->mapEvents);
+    FreeToHeap(work->mapEvents);
 }
 
 void Field_InitMapEvents(FieldSystem *work, u32 mapno) {
@@ -43,7 +43,7 @@ void Field_InitMapObjectsFromZoneEventData(FieldSystem *fieldSystem) {
     }
 }
 
-BgEvent *Field_GetBgEvents(FieldSystem *fieldSystem) {
+BG_EVENT *Field_GetBgEvents(FieldSystem *fieldSystem) {
     return fieldSystem->mapEvents->bg_events;
 }
 
@@ -51,7 +51,7 @@ u32 Field_GetNumBgEvents(const FieldSystem *fieldSystem) {
     return fieldSystem->mapEvents->num_bg_events;
 }
 
-const WarpEvent *Field_GetWarpEventI(const FieldSystem *fieldSystem, u32 warpno) {
+const WARP_EVENT *Field_GetWarpEventI(const FieldSystem *fieldSystem, u32 warpno) {
     MapEvents *events = fieldSystem->mapEvents;
     if (warpno >= fieldSystem->mapEvents->num_warp_events) {
         return NULL;
@@ -76,7 +76,7 @@ u32 Field_GetNumCoordEvents(const FieldSystem *fieldSystem) {
     return fieldSystem->mapEvents->num_coord_events;
 }
 
-const CoordEvent *Field_GetCoordEvents(const FieldSystem *fieldSystem) {
+const COORD_EVENT *Field_GetCoordEvents(const FieldSystem *fieldSystem) {
     return fieldSystem->mapEvents->coord_events;
 }
 
@@ -101,7 +101,7 @@ BOOL Field_SetEventDefaultXYPos(FieldSystem *fieldSystem, int id, u16 x, u16 y) 
         }
     }
 
-    GF_ASSERT(FALSE);
+    GF_ASSERT(0);
     return FALSE;
 }
 
@@ -117,7 +117,7 @@ BOOL Field_SetEventDefaultDirection(FieldSystem *fieldSystem, int id, u16 dirn) 
         }
     }
 
-    GF_ASSERT(FALSE);
+    GF_ASSERT(0);
     return FALSE;
 }
 
@@ -133,19 +133,19 @@ BOOL Field_SetEventDefaultMovement(FieldSystem *fieldSystem, int id, u16 movemen
         }
     }
 
-    GF_ASSERT(FALSE);
+    GF_ASSERT(0);
     return FALSE;
 }
 
 BOOL Field_SetWarpXYPos(FieldSystem *fieldSystem, int warpno, u16 x, u16 y) {
-    WarpEvent *warps = fieldSystem->mapEvents->warp_events;
+    WARP_EVENT *warps = fieldSystem->mapEvents->warp_events;
     warps[warpno].x = x;
     warps[warpno].z = y;
     return TRUE;
 }
 
 BOOL Field_SetBgEventXYPos(FieldSystem *fieldSystem, int bgno, u32 x, u32 y) {
-    BgEvent *bgs = Field_GetBgEvents(fieldSystem);
+    BG_EVENT *bgs = Field_GetBgEvents(fieldSystem);
     bgs[bgno].x = x;
     bgs[bgno].z = y;
     return TRUE;
@@ -157,11 +157,11 @@ static void MapEvents_ComputeRamHeader(MapEvents *events) {
     events->num_bg_events = *(u32 *)ptr;
     ptr += sizeof(u32);
     if (events->num_bg_events != 0) {
-        events->bg_events = (BgEvent *)ptr;
+        events->bg_events = (BG_EVENT *)ptr;
     } else {
         events->bg_events = NULL;
     }
-    ptr += events->num_bg_events * sizeof(BgEvent);
+    ptr += events->num_bg_events * sizeof(BG_EVENT);
 
     events->num_object_events = *(u32 *)ptr;
     ptr += sizeof(u32);
@@ -175,30 +175,30 @@ static void MapEvents_ComputeRamHeader(MapEvents *events) {
     events->num_warp_events = *(u32 *)ptr;
     ptr += sizeof(u32);
     if (events->num_warp_events != 0) {
-        events->warp_events = (WarpEvent *)ptr;
+        events->warp_events = (WARP_EVENT *)ptr;
     } else {
         events->warp_events = NULL;
     }
-    ptr += events->num_warp_events * sizeof(WarpEvent);
+    ptr += events->num_warp_events * sizeof(WARP_EVENT);
 
     events->num_coord_events = *(u32 *)ptr;
     ptr += sizeof(u32);
     if (events->num_coord_events != 0) {
-        events->coord_events = (CoordEvent *)ptr;
+        events->coord_events = (COORD_EVENT *)ptr;
     } else {
         events->coord_events = NULL;
     }
 }
 
-void WildEncounters_ReadFromNarc(EncounterData *encData, u32 mapno) {
-    memset(encData, 0, sizeof(EncounterData));
+void WildEncounters_ReadFromNarc(ENC_DATA *encData, u32 mapno) {
+    memset(encData, 0, sizeof(ENC_DATA));
     if (MapHeader_HasWildEncounters(mapno)) {
         int bank = MapHeader_GetWildEncounterBank(mapno);
         ReadWholeNarcMemberByIdPair(encData, ENCDATA_NARC, bank);
     }
 }
 
-EncounterData *MapEvents_GetLoadedEncTable(FieldSystem *fieldSystem) {
+ENC_DATA *MapEvents_GetLoadedEncTable(FieldSystem *fieldSystem) {
     return &fieldSystem->mapEvents->wildEncounters;
 }
 

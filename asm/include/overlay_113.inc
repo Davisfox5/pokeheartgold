@@ -16,8 +16,8 @@
 .public GfGfxLoader_LoadScrnDataFromOpenNarc
 .public GfGfxLoader_GXLoadPalFromOpenNarc
 .public GfGfxLoader_GetScrnDataFromOpenNarc
-.public thunk_ClearMainOAM
-.public thunk_ClearSubOAM
+.public sub_0200B2E0
+.public sub_0200B2E8
 .public NewMsgDataFromNarc
 .public DestroyMsgData
 .public ReadMsgDataIntoString
@@ -51,7 +51,7 @@
 .public LoadUserFrameGfx2
 .public BeginNormalPaletteFade
 .public IsPaletteFadeFinished
-.public ResetVisibleHardwareWindows
+.public sub_0200FBDC
 .public sub_0200FBF4
 .public YesNoPrompt_Create
 .public YesNoPrompt_Destroy
@@ -59,9 +59,9 @@
 .public MenuInputStateMgr_SetState
 .public Main_SetVBlankIntrCB
 .public HBlankInterruptDisable
-.public Heap_Create
-.public Heap_Destroy
-.public Heap_Free
+.public CreateHeap
+.public DestroyHeap
+.public FreeToHeap
 .public BgConfig_Alloc
 .public SetBothScreensModesAndDisable
 .public InitBgFromTemplate

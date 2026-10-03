@@ -5,36 +5,21 @@
 
 	.rodata
 
-	ScrDef scr_seq_D26R0103_000
-	ScrDefEnd
+	scrdef scr_seq_D26R0103_000
+	scrdef_end
 
+; ===== APOCRYPHA Ch3: the modified King's Rock, left behind in the wipe.
+; A quest object, not a usable item; Silver examines it topside. =====
 scr_seq_D26R0103_000:
-	PlaySE SEQ_SE_DP_SELECT
-	LockAll
-	FacePlayer
-	GoToIfSet FLAG_GOT_KINGS_ROCK_FROM_SLOWPOKE_WELL_MAN, _004F
-	NPCMsg msg_0092_D26R0103_00000
-	WaitABPress
-	CloseMsg
-	GoToIfNoItemSpace ITEM_KINGS_ROCK, 1, _005A
-	CallStd std_give_item_verbose
-	SetFlag FLAG_GOT_KINGS_ROCK_FROM_SLOWPOKE_WELL_MAN
-	GoTo _004F
-
-_004F:
-	NPCMsg msg_0092_D26R0103_00002
-	WaitButton
-	CloseMsg
-	ReleaseAll
-	End
-
-_005A:
-	CallStd std_bag_is_full
-	CloseMsg
-	ReleaseAll
-	End
-
-_0064:
-	End
-
+	play_se SEQ_SE_DP_SELECT
+	lockall
+	npc_msg msg_0092_D26R0103_00000
+	npc_msg msg_0092_D26R0103_00001
+	play_fanfare SEQ_ME_ITEM
+	wait_fanfare
+	closemsg
+	hide_person obj_D26R0103_gsassistantm
+	setflag FLAG_APOC_CH3_KINGSROCK_TAKEN
+	releaseall
+	end
 	.balign 4, 0

@@ -1,17 +1,16 @@
 #include "constants/scrcmd.h"
 #include "fielddata/script/scr_seq/event_T10R0701.h"
-#include "constants/init_script_types.h"
-	.include "asm/macros/script.inc"
-
 	.rodata
 	.option alignment off
 
-	InitScriptEntry_OnFrameTable scr_seq_T10R0701_map_scripts_2
-	InitScriptEntry_OnLoad _EV_scr_seq_T10R0701_001 + 1
-	InitScriptEntryEnd
+	.byte 1
+	.word scr_seq_T10R0701_map_scripts_2-.-4
+	.byte 4
+	.short _EV_scr_seq_T10R0701_001 + 1, 0
+	.byte 0
 
 scr_seq_T10R0701_map_scripts_2:
-	InitScriptGoToIfEqual VAR_TEMP_x4001, 0, _EV_scr_seq_T10R0701_000 + 1
-	InitScriptFrameTableEnd
+	.short VAR_TEMP_x4001, 0, _EV_scr_seq_T10R0701_000 + 1
+	.short 0
 
-	InitScriptEnd
+	.balign 4, 0

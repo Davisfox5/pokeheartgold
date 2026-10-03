@@ -139,9 +139,9 @@ ov97_0221E69C: ; 0x0221E69C
 	bl ObjCharTransfer_Destroy
 	bl ObjPlttTransfer_Destroy
 	ldr r0, [r4]
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	mov r0, #1
 	pop {r4, pc}
 	.balign 4, 0
@@ -617,7 +617,7 @@ ov97_0221EA88: ; 0x0221EA88
 	add r6, r0, #0
 	add r1, sp, #8
 	add r2, r5, #0
-	bl Party_GetMonAprijuiceModifiers
+	bl Party_GetUnkSubSlot
 	add r0, r6, #0
 	add r1, r5, #0
 	bl Party_GetMonByIndex
@@ -891,7 +891,7 @@ _0221EC3C:
 	add r0, r7, #0
 	add r1, #2
 	add r2, r4, #0
-	bl Party_GetMonAprijuiceModifiers
+	bl Party_GetUnkSubSlot
 	add r2, sp, #0x14
 	add r0, sp, #0x1c
 	add r1, sp, #0x24
@@ -907,7 +907,7 @@ _0221ECE2:
 	lsl r1, r4, #2
 	ldrh r2, [r6, #4]
 	ldr r1, [r7, r1]
-	bl PokeathlonSave_GetUnkDC_AtIndex
+	bl sub_020319A8
 	cmp r0, #0
 	beq _0221ECFE
 	add r1, r6, r4
@@ -988,7 +988,7 @@ _0221ED94:
 	lsl r1, r4, #2
 	ldrh r2, [r6, #4]
 	ldr r1, [r7, r1]
-	bl PokeathlonSave_GetUnkDC_AtIndex
+	bl sub_020319A8
 	cmp r0, #0
 	beq _0221EDB0
 	add r1, r6, r4
@@ -1108,7 +1108,7 @@ ov97_0221EE84: ; 0x0221EE84
 	mov r1, #0xbf
 	lsl r1, r1, #2
 	add r5, r0, #0
-	bl Heap_Alloc
+	bl AllocFromHeap
 	mov r2, #0xbf
 	mov r1, #0
 	lsl r2, r2, #2
@@ -1353,11 +1353,11 @@ _0221F092:
 	mov r0, #0x52
 	lsl r0, r0, #2
 	ldr r0, [r6, r0]
-	bl SpriteTransfer_DeleteCharTransferTask
+	bl sub_0200AEB0
 	mov r0, #0x53
 	lsl r0, r0, #2
 	ldr r0, [r6, r0]
-	bl SpriteTransfer_DeletePlttTransferTask
+	bl sub_0200B0A8
 	add r0, r4, #1
 	lsl r0, r0, #0x18
 	lsr r4, r0, #0x18
@@ -1379,7 +1379,7 @@ _0221F0BC:
 	ldr r0, [r5, #4]
 	bl SpriteList_Delete
 	add r0, r7, #0
-	bl Heap_Free
+	bl FreeToHeap
 	pop {r3, r4, r5, r6, r7, pc}
 	.balign 4, 0
 	thumb_func_end ov97_0221F020
@@ -1434,7 +1434,7 @@ _0221F114:
 	ldr r0, [sp]
 	lsl r1, r1, #2
 	ldr r0, [r0, r1]
-	bl Heap_Free
+	bl FreeToHeap
 	add sp, #8
 	pop {r3, r4, r5, r6, r7, pc}
 	.balign 4, 0
@@ -2327,11 +2327,11 @@ _0221F80E:
 	str r0, [r5, r1]
 	sub r1, #0xc
 	ldr r0, [r5, r1]
-	bl SpriteTransfer_CreateCharTransferTask_AllocAtEnd
+	bl sub_0200ADA4
 	mov r0, #0x53
 	lsl r0, r0, #2
 	ldr r0, [r5, r0]
-	bl SpriteTransfer_CreateExtPlttTransferTask
+	bl sub_0200AF94
 	mov r0, #2
 	str r0, [sp]
 	str r0, [sp, #4]
@@ -2394,11 +2394,11 @@ _0221F80E:
 	str r0, [r5, r1]
 	sub r1, #0xc
 	ldr r0, [r5, r1]
-	bl SpriteTransfer_CreateCharTransferTask_AllocAtEnd
+	bl sub_0200ADA4
 	mov r0, #0x59
 	lsl r0, r0, #2
 	ldr r0, [r5, r0]
-	bl SpriteTransfer_CreateExtPlttTransferTask
+	bl sub_0200AF94
 	mov r0, #3
 	str r0, [sp]
 	mov r0, #2
@@ -2463,11 +2463,11 @@ _0221F80E:
 	str r0, [r5, r1]
 	sub r1, #0xc
 	ldr r0, [r5, r1]
-	bl SpriteTransfer_CreateCharTransferTask_AllocAtEnd
+	bl sub_0200ADA4
 	mov r0, #0x5f
 	lsl r0, r0, #2
 	ldr r0, [r5, r0]
-	bl SpriteTransfer_CreateExtPlttTransferTask
+	bl sub_0200AF94
 	add sp, #0x10
 	pop {r3, r4, r5, r6, r7, pc}
 	.balign 4, 0
@@ -2594,7 +2594,7 @@ _0221FA70:
 	mov r1, #0x32
 	ldr r0, [r5]
 	lsl r1, r1, #6
-	bl Heap_Alloc
+	bl AllocFromHeap
 	mov r1, #0x96
 	lsl r1, r1, #2
 	str r0, [r5, r1]
@@ -2706,7 +2706,7 @@ ov97_0221FBA0: ; 0x0221FBA0
 	ldr r4, [r5, r0]
 	sub r0, r0, #4
 	ldr r0, [r5, r0]
-	bl SpriteTransfer_GetCharProxy
+	bl sub_0200AF00
 	add r6, r0, #0
 	add r0, r4, #0
 	add r1, r6, #0
@@ -2780,7 +2780,7 @@ _0221FC3A:
 	mov r2, #0x20
 	bl MIi_CpuCopy16
 	add r0, r5, #0
-	bl Heap_Free
+	bl FreeToHeap
 	add sp, #0x24
 	pop {r4, r5, pc}
 	thumb_func_end ov97_0221FBDC

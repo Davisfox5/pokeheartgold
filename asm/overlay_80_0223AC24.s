@@ -13,7 +13,7 @@ ov80_0223AC24: ; 0x0223AC24
 	mov r1, #0x4c
 	str r2, [sp]
 	add r5, r3, #0
-	bl Heap_Alloc
+	bl AllocFromHeap
 	mov r1, #0
 	mov r2, #0x4c
 	add r4, r0, #0
@@ -156,7 +156,7 @@ _0223AD30:
 _0223AD40:
 	bl SysTask_Destroy
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	add sp, #4
 	pop {r3, r4, pc}
 _0223AD4E:
@@ -264,7 +264,7 @@ _0223ADEE:
 ov80_0223ADF4: ; 0x0223ADF4
 	push {r4, lr}
 	mov r1, #0x30
-	bl Heap_Alloc
+	bl AllocFromHeap
 	mov r1, #0
 	mov r2, #0x30
 	add r4, r0, #0
@@ -276,10 +276,10 @@ ov80_0223ADF4: ; 0x0223ADF4
 
 	thumb_func_start ov80_0223AE0C
 ov80_0223AE0C: ; 0x0223AE0C
-	ldr r3, _0223AE10 ; =Heap_Free
+	ldr r3, _0223AE10 ; =FreeToHeap
 	bx r3
 	.balign 4, 0
-_0223AE10: .word Heap_Free
+_0223AE10: .word FreeToHeap
 	thumb_func_end ov80_0223AE0C
 
 	thumb_func_start ov80_0223AE14
@@ -442,7 +442,7 @@ ov80_0223AF30: ; 0x0223AF30
 	mov r1, #0x19
 	lsl r1, r1, #4
 	add r6, r0, #0
-	bl Heap_Alloc
+	bl AllocFromHeap
 	mov r2, #0x19
 	mov r1, #0
 	lsl r2, r2, #4
@@ -476,7 +476,7 @@ _0223AF68:
 	cmp r4, #0x60
 	blt _0223AF68
 	add r0, r6, #0
-	bl Heap_Free
+	bl FreeToHeap
 	pop {r4, r5, r6, pc}
 	.balign 4, 0
 	thumb_func_end ov80_0223AF60
@@ -1268,7 +1268,7 @@ ov80_0223B544: ; 0x0223B544
 	add r4, r0, #0
 	ldr r1, _0223B5D4 ; =0x00003024
 	add r0, r5, #0
-	bl Heap_Alloc
+	bl AllocFromHeap
 	ldr r2, _0223B5D4 ; =0x00003024
 	str r0, [sp]
 	mov r1, #0
@@ -1354,7 +1354,7 @@ _0223B5F2:
 	bl sub_02014A38
 _0223B602:
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	pop {r4, pc}
 	.balign 4, 0
 	thumb_func_end ov80_0223B5E8

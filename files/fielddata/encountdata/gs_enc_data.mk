@@ -1,19 +1,13 @@
 
 # Encounter data
-ENCDATA_DIR := files/fielddata/encountdata
 ENCDATA_NARCS := \
-	$(ENCDATA_DIR)/g_enc_data.narc \
-	$(ENCDATA_DIR)/s_enc_data.narc
-ENCDATA_JSON := $(ENCDATA_DIR)/gs_enc_data.json
+	files/fielddata/encountdata/g_enc_data.narc \
+	files/fielddata/encountdata/s_enc_data.narc
 
-$(ENCDATA_DIR)/g_enc_data.narc: GAME_VERSION_S = ENC_HEARTGOLD
-$(ENCDATA_DIR)/s_enc_data.narc: GAME_VERSION_S = ENC_SOULSILVER
+$(ENCDATA_NARCS): MANIFEST = files/fielddata/encountdata/enc_data.txt
 
-$(ENCDATA_NARCS): %.narc: $(ENCDATA_JSON) $(ENCDATA_JSON).txt | $(WORK_DIR)/include/global.h
-	$(JSONPROC) $^ $*.c
-	$(WINE) $(MWCC) $(MWCFLAGS) -D$(GAME_VERSION_S) -c -o $*.o $*.c
-	$(O2NARC) $*.o $@ -n
-#	@$(RM) $*.o $*.c
+$(ENCDATA_NARCS): %.narc: %.csv $(MANIFEST) $$(csvdep)
+	$(CSV2BIN) compile $< $@ $(MANIFEST) $(CSV2BINFLAGS)
 
 clean-gs-enc-data:
 	$(RM) $(ENCDATA_NARCS)

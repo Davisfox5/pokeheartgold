@@ -2,10 +2,10 @@
 #pragma once
 .public UnloadOverlayByID
 .public HandleLoadOverlay
-.public Heap_Create
-.public Heap_Alloc
-.public Heap_AllocAtEnd
-.public Heap_Free
+.public CreateHeap
+.public AllocFromHeap
+.public AllocFromHeapAtEnd
+.public FreeToHeap
 .public sub_020378E4
 .public sub_020398C8
 .public sub_0203A05C

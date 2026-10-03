@@ -18,7 +18,7 @@ sub_02095DF4: ; 0x02095DF4
 	mov r1, #0x20
 	add r6, r2, #0
 	add r7, r3, #0
-	bl Heap_AllocAtEnd
+	bl AllocFromHeapAtEnd
 	add r2, r0, #0
 	mov r0, #0
 	str r0, [r2]
@@ -67,7 +67,7 @@ _02095E54: ; jump table
 _02095E5C:
 	mov r0, #0xb
 	mov r1, #0x10
-	bl Heap_AllocAtEnd
+	bl AllocFromHeapAtEnd
 	str r0, [r4, #4]
 	ldr r0, [r4, #8]
 	cmp r0, #0
@@ -132,9 +132,9 @@ _02095EC4:
 	ldr r0, [r4, #0x1c]
 	strh r1, [r0]
 	ldr r0, [r4, #4]
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	mov r0, #1
 	pop {r3, r4, r5, pc}
 _02095EF4:

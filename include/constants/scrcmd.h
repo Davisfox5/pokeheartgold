@@ -3,18 +3,15 @@
 
 #include <nitro/types.h>
 
-#include "constants/abilities.h"
 #include "constants/badge.h"
 #include "constants/flags.h"
 #include "constants/game_stats.h"
+#include "constants/global.fieldmap.h"
 #include "constants/global.h"
-#include "constants/global_fieldmap.h"
-#include "constants/init_script_types.h"
 #include "constants/items.h"
 #include "constants/maps.h"
 #include "constants/movements.h"
 #include "constants/moves.h"
-#include "constants/phone_constants.h"
 #include "constants/phone_contacts.h"
 #include "constants/pokemon.h"
 #include "constants/ranking.h"
@@ -57,12 +54,5 @@
 #define SCR_MG_MESSAGE_FAILED   6
 #define SCR_MG_END              7
 #define SCR_MG_END2             8
-
-// signpost window commands
-#define MAPSIGNCOMMAND_NOP      0
-#define MAPSIGNCOMMAND_SHOW     1
-#define MAPSIGNCOMMAND_WIPE_OUT 2
-#define MAPSIGNCOMMAND_WIPE_IN  3
-#define MAPSIGNCOMMAND_HIDE     4
 
 #endif // POKEHEARTGOLD_CONSTANTS_SCRCMD_H

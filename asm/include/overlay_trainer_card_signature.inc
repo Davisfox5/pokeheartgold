@@ -26,10 +26,10 @@
 .public AddCharResObjFromOpenNarc
 .public AddPlttResObjFromOpenNarc
 .public AddCellOrAnimResObjFromOpenNarc
-.public SpriteTransfer_CreateCharTransferTask
-.public SpriteTransfer_DeleteCharTransferTask
-.public SpriteTransfer_CreateExtPlttTransferTask
-.public SpriteTransfer_DeletePlttTransferTask
+.public sub_0200ACF0
+.public sub_0200AEB0
+.public sub_0200AF94
+.public sub_0200B0A8
 .public OamManager_Create
 .public OamManager_ApplyAndResetBuffers
 .public OamManager_Free
@@ -55,9 +55,9 @@
 .public Main_SetVBlankIntrCB
 .public HBlankInterruptDisable
 .public SetKeyRepeatTimers
-.public Heap_Create
-.public Heap_Destroy
-.public Heap_Free
+.public CreateHeap
+.public DestroyHeap
+.public FreeToHeap
 .public BgConfig_Alloc
 .public SetBothScreensModesAndDisable
 .public InitBgFromTemplate

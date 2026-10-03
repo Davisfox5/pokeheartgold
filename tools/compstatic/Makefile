@@ -1,5 +1,5 @@
 CC := gcc
-CFLAGS := -O3
+CFLAGS := -O3 -fsigned-char
 
 SRCS = $(wildcard *.c)
 OBJS = $(SRCS:%.c=%.o)

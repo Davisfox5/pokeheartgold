@@ -5,10 +5,14 @@
 
 	.rodata
 
-	ScrDef scr_seq_R04_000
-	ScrDefEnd
+	scrdef scr_seq_R04_000
+	scrdef_end
 
 scr_seq_R04_000:
-	TrainerTipsEx 2, msg_0328_R04_00000
-	End
+	scrcmd_055 2, 0
+	scrcmd_057 3
+	scrcmd_058
+	trainer_tips msg_0328_R04_00000, VAR_SPECIAL_RESULT
+	callstd std_signpost
+	end
 	.balign 4, 0

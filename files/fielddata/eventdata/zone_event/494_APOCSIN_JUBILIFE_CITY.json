@@ -1,0 +1,303 @@
+{
+  "header": "fielddata/script/scr_seq/event_EVERYWHERE.h",
+  "bgs": [
+    {
+      "scriptId": 67,
+      "type": 1,
+      "x": 168,
+      "z": 795,
+      "y": 0,
+      "dir": 0
+    }
+  ],
+  "objects": [
+    {
+      "id": 0,
+      "spriteId": "SPRITE_GSWOMAN3",
+      "movement": 5,
+      "type": 0,
+      "eventFlag": 0,
+      "scriptId": 5,
+      "facingDirection": 3,
+      "param0": 0,
+      "param1": 0,
+      "param2": 0,
+      "xRange": 1,
+      "yRange": 0,
+      "x": 145,
+      "z": 761,
+      "y": 0
+    },
+    {
+      "id": 1,
+      "spriteId": "SPRITE_GSMAN3",
+      "movement": 5,
+      "type": 0,
+      "eventFlag": 0,
+      "scriptId": 6,
+      "facingDirection": 2,
+      "param0": 0,
+      "param1": 0,
+      "param2": 0,
+      "xRange": 1,
+      "yRange": 0,
+      "x": 174,
+      "z": 757,
+      "y": 0
+    },
+    {
+      "id": 2,
+      "spriteId": "SPRITE_GSBOY3",
+      "movement": 2,
+      "type": 0,
+      "eventFlag": 0,
+      "scriptId": 12,
+      "facingDirection": 0,
+      "param0": 0,
+      "param1": 0,
+      "param2": 0,
+      "xRange": 0,
+      "yRange": 0,
+      "x": 145,
+      "z": 791,
+      "y": 0
+    },
+    {
+      "id": 3,
+      "spriteId": "SPRITE_GSGIRL1",
+      "movement": 3,
+      "type": 0,
+      "eventFlag": 0,
+      "scriptId": 3,
+      "facingDirection": 1,
+      "param0": 0,
+      "param1": 0,
+      "param2": 0,
+      "xRange": 1,
+      "yRange": 1,
+      "x": 161,
+      "z": 754,
+      "y": 0
+    },
+    {
+      "id": 4,
+      "spriteId": "SPRITE_GSOLDMAN1",
+      "movement": 2,
+      "type": 0,
+      "eventFlag": 0,
+      "scriptId": 2,
+      "facingDirection": 1,
+      "param0": 0,
+      "param1": 0,
+      "param2": 0,
+      "xRange": 0,
+      "yRange": 0,
+      "x": 172,
+      "z": 780,
+      "y": 0
+    },
+    {
+      "id": 5,
+      "spriteId": "SPRITE_GSBOY3",
+      "movement": 4,
+      "type": 0,
+      "eventFlag": 0,
+      "scriptId": 13,
+      "facingDirection": 1,
+      "param0": 0,
+      "param1": 0,
+      "param2": 0,
+      "xRange": 0,
+      "yRange": 1,
+      "x": 179,
+      "z": 770,
+      "y": 0
+    },
+    {
+      "id": 6,
+      "spriteId": "SPRITE_GSOLDMAN1",
+      "movement": 3,
+      "type": 0,
+      "eventFlag": 0,
+      "scriptId": 3,
+      "facingDirection": 2,
+      "param0": 0,
+      "param1": 0,
+      "param2": 0,
+      "xRange": 1,
+      "yRange": 1,
+      "x": 169,
+      "z": 766,
+      "y": 0
+    },
+    {
+      "id": 7,
+      "spriteId": "SPRITE_GSMAN3",
+      "movement": 0,
+      "type": 0,
+      "eventFlag": 0,
+      "scriptId": 3,
+      "facingDirection": 0,
+      "param0": 0,
+      "param1": 0,
+      "param2": 0,
+      "xRange": 0,
+      "yRange": 0,
+      "x": 164,
+      "z": 761,
+      "y": 0
+    },
+    {
+      "id": 8,
+      "spriteId": "SPRITE_GSMAN3",
+      "movement": 0,
+      "type": 0,
+      "eventFlag": 0,
+      "scriptId": 4,
+      "facingDirection": 1,
+      "param0": 0,
+      "param1": 0,
+      "param2": 0,
+      "xRange": 0,
+      "yRange": 0,
+      "x": 154,
+      "z": 778,
+      "y": 0
+    },
+    {
+      "id": 9,
+      "spriteId": "SPRITE_GSGIRL1",
+      "movement": 0,
+      "type": 0,
+      "eventFlag": 0,
+      "scriptId": 12,
+      "facingDirection": 3,
+      "param0": 0,
+      "param1": 0,
+      "param2": 0,
+      "xRange": 0,
+      "yRange": 0,
+      "x": 180,
+      "z": 782,
+      "y": 0
+    },
+    {
+      "id": 10,
+      "spriteId": "SPRITE_GSGIRL1",
+      "movement": 0,
+      "type": 0,
+      "eventFlag": 0,
+      "scriptId": 2,
+      "facingDirection": 2,
+      "param0": 0,
+      "param1": 0,
+      "param2": 0,
+      "xRange": 0,
+      "yRange": 0,
+      "x": 182,
+      "z": 782,
+      "y": 0
+    }
+  ],
+  "warps": [
+    {
+      "x": 180,
+      "z": 755,
+      "header": "MAP_APOC_SIN_H00_JUBILIFE_CITY",
+      "anchor": 0,
+      "y": 0
+    },
+    {
+      "x": 149,
+      "z": 778,
+      "header": "MAP_APOC_SIN_H01_JUBILIFE_CITY",
+      "anchor": 0,
+      "y": 0
+    },
+    {
+      "x": 180,
+      "z": 776,
+      "header": "MAP_APOC_SIN_PC_JUBILIFE_CITY",
+      "anchor": 0,
+      "y": 0
+    },
+    {
+      "x": 164,
+      "z": 751,
+      "header": "MAP_APOC_SIN_H03_JUBILIFE_CITY",
+      "anchor": 0,
+      "y": 0
+    },
+    {
+      "x": 167,
+      "z": 788,
+      "header": "MAP_APOC_SIN_H04_JUBILIFE_CITY",
+      "anchor": 0,
+      "y": 0
+    },
+    {
+      "x": 145,
+      "z": 751,
+      "header": "MAP_APOC_SIN_H05_JUBILIFE_CITY",
+      "anchor": 0,
+      "y": 0
+    },
+    {
+      "x": 179,
+      "z": 766,
+      "header": "MAP_APOC_SIN_MART_JUBILIFE_CITY",
+      "anchor": 0,
+      "y": 0
+    },
+    {
+      "x": 168,
+      "z": 776,
+      "header": "MAP_APOC_SIN_H07_JUBILIFE_CITY",
+      "anchor": 0,
+      "y": 0
+    },
+    {
+      "x": 141,
+      "z": 751,
+      "header": "MAP_APOC_SIN_H08_JUBILIFE_CITY",
+      "anchor": 0,
+      "y": 0
+    },
+    {
+      "x": 140,
+      "z": 788,
+      "header": "MAP_APOC_SIN_H09_JUBILIFE_CITY",
+      "anchor": 0,
+      "y": 0
+    },
+    {
+      "x": 129,
+      "z": 736,
+      "header": "MAP_APOC_SIN_H10_JUBILIFE_CITY",
+      "anchor": 0,
+      "y": 0
+    },
+    {
+      "x": 128,
+      "z": 736,
+      "header": "MAP_APOC_SIN_H11_JUBILIFE_CITY",
+      "anchor": 0,
+      "y": 0
+    },
+    {
+      "x": 128,
+      "z": 758,
+      "header": "MAP_APOC_SIN_H12_JUBILIFE_CITY",
+      "anchor": 0,
+      "y": 0
+    },
+    {
+      "x": 128,
+      "z": 759,
+      "header": "MAP_APOC_SIN_H13_JUBILIFE_CITY",
+      "anchor": 0,
+      "y": 0
+    }
+  ],
+  "coords": []
+}

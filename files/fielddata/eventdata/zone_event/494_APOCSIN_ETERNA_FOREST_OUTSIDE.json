@@ -1,0 +1,25 @@
+{
+  "header": "fielddata/script/scr_seq/event_EVERYWHERE.h",
+  "bgs": [],
+  "objects": [
+    {
+      "id": 0,
+      "spriteId": "SPRITE_GSWOMAN2",
+      "movement": 3,
+      "type": 0,
+      "eventFlag": 0,
+      "scriptId": 9,
+      "facingDirection": 2,
+      "param0": 0,
+      "param1": 0,
+      "param2": 0,
+      "xRange": 2,
+      "yRange": 1,
+      "x": 232,
+      "z": 560,
+      "y": 0
+    }
+  ],
+  "warps": [],
+  "coords": []
+}

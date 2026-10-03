@@ -5,15 +5,19 @@
 
 	.rodata
 
-	ScrDef scr_seq_R06_000
-	ScrDef scr_seq_R06_001
-	ScrDefEnd
+	scrdef scr_seq_R06_000
+	scrdef scr_seq_R06_001
+	scrdef_end
 
 scr_seq_R06_000:
-	SimpleNPCMsg msg_0334_R06_00000
-	End
+	simple_npc_msg msg_0334_R06_00000
+	end
 
 scr_seq_R06_001:
-	TrainerTipsEx 2, msg_0334_R06_00001
-	End
+	scrcmd_055 2, 0
+	scrcmd_057 3
+	scrcmd_058
+	trainer_tips msg_0334_R06_00001, VAR_SPECIAL_RESULT
+	callstd std_signpost
+	end
 	.balign 4, 0

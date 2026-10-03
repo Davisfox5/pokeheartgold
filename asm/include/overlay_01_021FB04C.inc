@@ -3,9 +3,9 @@
 .public NARC_ReadFile
 .public SysTask_CreateOnMainQueue
 .public SysTask_Destroy
-.public Heap_Alloc
-.public Heap_AllocAtEnd
-.public Heap_Free
+.public AllocFromHeap
+.public AllocFromHeapAtEnd
+.public FreeToHeap
 .public SysTask_GetData
 .public GF_AssertFail
 .public MIi_CpuClear32

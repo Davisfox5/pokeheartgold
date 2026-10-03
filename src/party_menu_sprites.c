@@ -379,16 +379,16 @@ void sub_0207EB24(PartyMenu *partyMenu) {
     SpriteSystem_InitSprites(partyMenu->spriteRenderer, partyMenu->spriteGfxHandler, 49);
     G2dRenderer_SetSubSurfaceCoords(SpriteSystem_GetRenderer(partyMenu->spriteRenderer), 0, FX32_CONST(256));
 
-    ResdatIdList _021018B4 = {
-        .charRes = NARC_resdat_resdat_00000050_bin,
-        .plttRes = NARC_resdat_resdat_00000051_bin,
-        .cellRes = NARC_resdat_resdat_00000049_bin,
-        .animRes = NARC_resdat_resdat_00000048_bin,
-        .mcelRes = 0xFFFF,
-        .manmRes = 0xFFFF,
-        .headerId = NARC_resdat_resdat_00000084_bin,
+    u16 _021018B4[7] = {
+        NARC_resdat_resdat_00000050_bin,
+        NARC_resdat_resdat_00000051_bin,
+        NARC_resdat_resdat_00000049_bin,
+        NARC_resdat_resdat_00000048_bin,
+        0xFFFF,
+        0xFFFF,
+        NARC_resdat_resdat_00000084_bin,
     };
-    sub_0200D294(partyMenu->spriteRenderer, partyMenu->spriteGfxHandler, &_021018B4);
+    sub_0200D294(partyMenu->spriteRenderer, partyMenu->spriteGfxHandler, _021018B4);
 }
 
 void sub_0207EBE4(PartyMenu *partyMenu, u8 partySlot, u16 x, u16 y, NARC *narc) {
@@ -407,17 +407,17 @@ void sub_0207EBE4(PartyMenu *partyMenu, u8 partySlot, u16 x, u16 y, NARC *narc) 
     sp1C.x = x;
     sp1C.y = y;
     sp1C.z = 0;
-    sp1C.animation = 0;
-    sp1C.drawPriority = 0;
-    sp1C.pal = GetMonIconPaletteEx(partyMenu->monsDrawState[partySlot].species, partyMenu->monsDrawState[partySlot].form, isEgg) + 3;
-    sp1C.vram = NNS_G2D_VRAM_TYPE_2DMAIN;
-    sp1C.paletteMode = 0;
+    sp1C.animSeqNo = 0;
+    sp1C.rotation = 0;
+    sp1C.palIndex = GetMonIconPaletteEx(partyMenu->monsDrawState[partySlot].species, partyMenu->monsDrawState[partySlot].form, isEgg) + 3;
+    sp1C.whichScreen = NNS_G2D_VRAM_TYPE_2DMAIN;
+    sp1C.unk_18 = 0;
     sp1C.unk_1C = 0;
     sp1C.unk_20 = 0;
     sp1C.unk_24 = 0;
     partyMenu->monsDrawState[partySlot].iconSprite = SpriteSystem_CreateSpriteFromResourceHeader(partyMenu->spriteRenderer, partyMenu->spriteGfxHandler, &sp1C);
-    sp1C.vram = NNS_G2D_VRAM_TYPE_2DMAIN;
-    sp1C.pal = GetMonIconPaletteEx(partyMenu->monsDrawState[partySlot].species, partyMenu->monsDrawState[partySlot].form, isEgg) + 1;
+    sp1C.whichScreen = NNS_G2D_VRAM_TYPE_2DMAIN;
+    sp1C.palIndex = GetMonIconPaletteEx(partyMenu->monsDrawState[partySlot].species, partyMenu->monsDrawState[partySlot].form, isEgg) + 1;
     sp1C.x = x;
     sp1C.y = y + 0x100;
     partyMenu->monsDrawState[partySlot].mainScreenIconSprite = SpriteSystem_CreateSpriteFromResourceHeader(partyMenu->spriteRenderer, partyMenu->spriteGfxHandler, &sp1C);
@@ -446,7 +446,7 @@ void sub_0207ECE0(PartyMenu *partyMenu, u8 partySlot) {
         DC_FlushRange(pCharData->pRawData, pCharData->szByte);
         GXS_LoadOBJ(pCharData->pRawData, subImageLocation, pCharData->szByte);
     }
-    Heap_Free(ncgrFile);
+    FreeToHeap(ncgrFile);
     thunk_Sprite_SetPaletteOverride(partyMenu->monsDrawState[partySlot].iconSprite, GetMonIconPaletteEx(species, form, FALSE) + 3);
     thunk_Sprite_SetPaletteOverride(partyMenu->monsDrawState[partySlot].mainScreenIconSprite, GetMonIconPaletteEx(species, form, FALSE) + 1);
     NARC_Delete(narc);
@@ -483,14 +483,14 @@ void sub_0207EF5C(PartyMenu *partyMenu, u8 partySlot, u16 x, u16 y) {
     sp0.x = x;
     sp0.y = y;
     sp0.z = 0;
-    sp0.animation = 0;
-    sp0.pal = 0;
-    sp0.paletteMode = 0;
+    sp0.animSeqNo = 0;
+    sp0.palIndex = 0;
+    sp0.unk_18 = 0;
     sp0.unk_1C = 0;
     sp0.unk_20 = 0;
     sp0.unk_24 = 0;
-    sp0.drawPriority = 1;
-    sp0.vram = NNS_G2D_VRAM_TYPE_2DMAIN;
+    sp0.rotation = 1;
+    sp0.whichScreen = NNS_G2D_VRAM_TYPE_2DMAIN;
     partyMenu->sprites[partySlot + PARTY_MENU_SPRITE_ID_BALL] = SpriteSystem_CreateSpriteFromResourceHeader(partyMenu->spriteRenderer, partyMenu->spriteGfxHandler, &sp0);
 }
 
@@ -610,7 +610,7 @@ void sub_0207F178(PartyMenu *partyMenu) {
 
 void sub_0207F240(PartyMenu *partyMenu, u8 partySlot, int selected) {
     u8 sp1, sp0;
-    DpadMenuBox_GetPosition(&partyMenu->dpadMenuBox[partySlot], &sp1, &sp0);
+    sub_02020A0C(&partyMenu->unk_948[partySlot], &sp1, &sp0);
     Sprite_SetAnimCtrlSeq(partyMenu->sprites[PARTY_MENU_SPRITE_ID_CURSOR], sub_0207B5EC(partyMenu->args->unk_25, partySlot));
     Sprite_SetDrawFlag(partyMenu->sprites[PARTY_MENU_SPRITE_ID_CURSOR], TRUE);
     Sprite_SetPositionXY(partyMenu->sprites[PARTY_MENU_SPRITE_ID_CURSOR], sp1, sp0);

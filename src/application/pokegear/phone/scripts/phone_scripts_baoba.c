@@ -53,7 +53,7 @@ BOOL GearPhoneCall_Baoba(PokegearPhoneCallContext *ctx) {
     switch (state->scriptState) {
     case 0:
         PhoneCall_InitMsgDataAndBufferNames(ctx);
-        areas = PhoneCallPersistentState_SafariZoneArrangement_AllocAndGet(ctx->callPersistentState, &numAreas, ctx->heapID);
+        areas = PhoneCallPersistentState_SafariZoneArrangement_AllocAndGet(ctx->callPersistentState, &numAreas, ctx->heapId);
         if (numAreas == 0) {
             PhoneCallMessagePrint_Gendered(ctx, ctx->msgData_PhoneContact, msg_0667_00038, msg_0667_00039);
         } else if (numAreas >= 6) {
@@ -65,7 +65,7 @@ BOOL GearPhoneCall_Baoba(PokegearPhoneCallContext *ctx) {
             numAreas = 2 * (numAreas - 1);
             PhoneCallMessagePrint_Gendered(ctx, ctx->msgData_PhoneContact, msg_0667_00014 + numAreas, msg_0667_00015 + numAreas);
         }
-        Heap_Free(areas);
+        FreeToHeap(areas);
         break;
     default:
         if (!PhoneCall_IsMessageDonePrinting(ctx)) {

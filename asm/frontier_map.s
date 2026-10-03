@@ -8,7 +8,7 @@
 FrontierMap_Init: ; 0x02238648
 	push {r3, r4, r5, r6, r7, lr}
 	add r6, r0, #0
-	bl Frontier_GetLaunchArgs
+	bl Frontier_GetLaunchParam
 	add r4, r0, #0
 	ldr r0, [r4, #8]
 	bl Save_PlayerData_GetProfile
@@ -52,10 +52,10 @@ FrontierMap_Init: ; 0x02238648
 	mov r0, #3
 	mov r1, #0x65
 	lsl r2, r2, #0x10
-	bl Heap_Create
+	bl CreateHeap
 	mov r0, #0x65
 	mov r1, #0xc4
-	bl Heap_Alloc
+	bl AllocFromHeap
 	mov r1, #0
 	mov r2, #0xc4
 	add r4, r0, #0
@@ -167,7 +167,7 @@ _022386D4:
 	bl ov80_0222ACA0
 	lsl r0, r0, #0x10
 	lsr r0, r0, #0x10
-	bl Sound_SetFieldBGM
+	bl sub_02004AC8
 	add r0, r5, #0
 	mov r1, #3
 	bl ov80_0222ACA0
@@ -223,7 +223,7 @@ FrontierMap_Free: ; 0x0223885C
 	push {r4, lr}
 	add r4, r0, #0
 	ldr r0, [r4, #8]
-	bl Frontier_GetLaunchArgs
+	bl Frontier_GetLaunchParam
 	add r2, r4, #0
 	add r2, #0xc1
 	add r1, r4, #0
@@ -274,7 +274,7 @@ FrontierMap_Free: ; 0x0223885C
 	ldr r0, [r4, #4]
 	bl PaletteData_Free
 	ldr r0, [r4]
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r4, #0
 	add r0, #0x94
 	ldr r0, [r0]
@@ -295,7 +295,7 @@ FrontierMap_Free: ; 0x0223885C
 	bl ov80_0223937C
 	bl sub_02021238
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	mov r2, #1
 	lsl r2, r2, #0x1a
 	ldr r1, [r2]
@@ -311,7 +311,7 @@ FrontierMap_Free: ; 0x0223885C
 	bl Main_SetVBlankIntrCB
 	bl HBlankInterruptDisable
 	mov r0, #0x65
-	bl Heap_Destroy
+	bl DestroyHeap
 	mov r0, #0
 	bl TextFlags_SetCanABSpeedUpPrint
 	mov r0, #0
@@ -546,7 +546,7 @@ FrontierMap_Scroll: ; 0x02238B28
 	push {r3, r4, r5, lr}
 	add r5, r0, #0
 	ldr r0, [r5, #8]
-	bl Frontier_GetLaunchArgs
+	bl Frontier_GetLaunchParam
 	add r4, r0, #0
 	add r0, #0x20
 	ldrb r0, [r0]
@@ -591,7 +591,7 @@ ov80_02238B7C: ; 0x02238B7C
 	sub sp, #0x10
 	add r5, r0, #0
 	ldr r0, [r5, #8]
-	bl Frontier_GetLaunchArgs
+	bl Frontier_GetLaunchParam
 	add r7, r0, #0
 	add r0, r5, #0
 	add r0, #0x1c
@@ -1026,7 +1026,7 @@ FrontierMap_LoadPaletteData: ; 0x02238F10
 	mov r3, #0x65
 	bl PaletteData_LoadNarc
 	ldr r0, [r4, #8]
-	bl Frontier_GetLaunchArgs
+	bl Frontier_GetLaunchParam
 	ldr r0, [r0, #4]
 	bl Options_GetFrame
 	lsl r0, r0, #0x18
@@ -1289,7 +1289,7 @@ _0223915A:
 	bl GX_LoadBGExtPltt
 	bl GX_EndLoadBGExtPltt
 	ldr r0, [sp, #0x14]
-	bl Heap_Free
+	bl FreeToHeap
 _02239198:
 	mov r1, #0
 	str r1, [sp]
@@ -1374,7 +1374,7 @@ _02239198:
 	bl GX_LoadBGExtPltt
 	bl GX_EndLoadBGExtPltt
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 _0223925E:
 	ldr r0, [r5]
 	mov r1, #3

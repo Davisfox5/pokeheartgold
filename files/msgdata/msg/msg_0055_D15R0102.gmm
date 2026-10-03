@@ -12,4 +12,28 @@
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">A Pokémon statue...\nIt looks very distinguished.</language>
 	</row>
+	<row id="msg_0055_D15R0102_00003" index="3">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">KESTRA: We are HELPING. We found\nthree of the tags Ren hid.\rTotally helping. Why is that sage\nlooking at us like that.</language>
+	</row>
+	<row id="msg_0055_D15R0102_00004" index="4">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">REN: Because that sage has watched\ngenerations of children pretend to\fhelp. We are not the first. We are\nmerely the loudest.\rThree more tags are still out\nthere--one a floor, knowing me.\fGrab them if you spot them.\rIf I apologize in alphabetical\norder, do you think they’ll know I\fmean it? ...No. Yeah. Bad idea.\nForget I said it.</language>
+	</row>
+	<row id="msg_0055_D15R0102_00005" index="5">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">REN: Symbols, categories, one very\nunflattering BELLSPROUT doodle.\rIf you find a tag, that’s mine.\nWas mine. Is the tower’s.</language>
+	</row>
+	<row id="msg_0055_D15R0102_00006" index="6">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">KESTRA: I’m going to stand very\nstill until the sages stop\fwatching me.\rGo get the tags--you’re the\ncredible one.</language>
+	</row>
+	<row id="msg_0055_D15R0102_00007" index="7">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">A paper training tag is wedged\nbehind the beam, fluttering every\ftime the pillar sways.\rIt is very much not supposed to be\nhere.</language>
+	</row>
+	<row id="msg_0055_D15R0102_00008" index="8">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">{STRVAR_1 3, 0, 0} worked the training\ntag free of the beam!\rOne of Ren’s--the handwriting gives\nit away.</language>
+	</row>
 </body>

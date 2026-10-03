@@ -1,0 +1,34 @@
+{
+  "header": "fielddata/script/scr_seq/event_EVERYWHERE.h",
+  "bgs": [
+    {
+      "scriptId": 37,
+      "type": 1,
+      "x": 114,
+      "z": 504,
+      "y": 0,
+      "dir": 0
+    }
+  ],
+  "objects": [
+    {
+      "id": 0,
+      "spriteId": "SPRITE_SEAMAN",
+      "movement": 0,
+      "type": 0,
+      "eventFlag": 0,
+      "scriptId": 17,
+      "facingDirection": 3,
+      "param0": 0,
+      "param1": 0,
+      "param2": 0,
+      "xRange": 0,
+      "yRange": 0,
+      "x": 99,
+      "z": 502,
+      "y": 0
+    }
+  ],
+  "warps": [],
+  "coords": []
+}

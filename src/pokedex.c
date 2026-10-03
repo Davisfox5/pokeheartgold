@@ -22,8 +22,8 @@ u32 Save_Pokedex_sizeof(void) {
     return sizeof(Pokedex);
 }
 
-Pokedex *Pokedex_New(enum HeapID heapID) {
-    Pokedex *ret = Heap_Alloc(heapID, sizeof(Pokedex));
+Pokedex *Pokedex_New(HeapID heapId) {
+    Pokedex *ret = AllocFromHeap(heapId, sizeof(Pokedex));
     Save_Pokedex_Init(ret);
     return ret;
 }
@@ -34,7 +34,7 @@ void Pokedex_Copy(const Pokedex *src, Pokedex *dest) {
 
 BOOL DexSpeciesIsInvalid(u16 species) {
     if (species == SPECIES_NONE || species > SPECIES_ARCEUS) {
-        GF_ASSERT(FALSE);
+        GF_ASSERT(0);
         return TRUE;
     }
 
@@ -127,7 +127,7 @@ static u8 *Pokedex_GetFormOrderAddr(Pokedex *pokedex, u32 species) {
     case SPECIES_PICHU:
         return &pokedex->pichuFormOrder; // + 830;
     default:
-        GF_ASSERT(FALSE);
+        GF_ASSERT(0);
         return NULL;
     }
 }
@@ -574,7 +574,7 @@ u16 Pokedex_CountJohtoDexOwned(Pokedex *pokedex) {
             n++;
         }
     }
-    Heap_Free(johto_species);
+    FreeToHeap(johto_species);
     return n;
 }
 
@@ -589,7 +589,7 @@ u16 Pokedex_CountJohtoDexSeen(Pokedex *pokedex) {
             n++;
         }
     }
-    Heap_Free(johto_species);
+    FreeToHeap(johto_species);
     return n;
 }
 
@@ -626,7 +626,7 @@ u16 Pokedex_CountJohtoOwned_ExcludeMythical(Pokedex *pokedex) {
             n++;
         }
     }
-    Heap_Free(johto_dex);
+    FreeToHeap(johto_dex);
     return n;
 }
 
@@ -660,18 +660,18 @@ u32 Pokedex_GetSeenSpindaPersonality(Pokedex *pokedex, u32 arg) {
     if (arg == 0) {
         personality = pokedex->spindaPersonality;
     } else {
-        GF_ASSERT(FALSE);
+        GF_ASSERT(0);
     }
     return personality;
 }
 
-int Pokedex_SpeciesGetLastSeenGender(Pokedex *pokedex, u16 species, u32 idx) {
+int Pokedex_SpeciesGetLastSeenGender(Pokedex *pokedex, u16 species, u32 a2) {
     ASSERT_POKEDEX(pokedex);
     if (DexSpeciesIsInvalid(species)) {
         return -1;
     }
     if (CheckDexFlag((u8 *)pokedex->seenSpecies, species)) {
-        return Pokedex_SpeciesGetLastSeenGender_Internal(pokedex, species, idx);
+        return Pokedex_SpeciesGetLastSeenGender_Internal(pokedex, species, a2);
     }
     return -1;
 }
@@ -804,7 +804,7 @@ void Pokedex_SetMonCaughtFlag(Pokedex *pokedex, Pokemon *mon) {
     u32 gender_ct;
 
     species = GetMonData(mon, MON_DATA_SPECIES, NULL);
-    language = GetMonData(mon, MON_DATA_LANGUAGE, NULL);
+    language = GetMonData(mon, MON_DATA_GAME_LANGUAGE, NULL);
     personality = GetMonData(mon, MON_DATA_PERSONALITY, NULL);
     gender = GetMonGender(mon);
 
@@ -844,9 +844,9 @@ BOOL Pokedex_GetNatDexFlag(const Pokedex *pokedex) {
     return pokedex->nationalDex;
 }
 
-void Pokedex_EnableFormDetection(Pokedex *pokedex) {
+void sub_0202A57C(Pokedex *pokedex) {
     ASSERT_POKEDEX(pokedex);
-    pokedex->canDetectForms = TRUE;
+    pokedex->unk_334 = TRUE;
 }
 
 BOOL Pokedex_HasCaughtMonWithLanguage(Pokedex *pokedex, u32 species, u32 language) {

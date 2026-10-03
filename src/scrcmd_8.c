@@ -1,11 +1,11 @@
+#include "fieldmap.h"
 #include "friend_group.h"
 #include "launch_application.h"
 #include "math_util.h"
 #include "scrcmd.h"
-#include "script_manager.h"
 #include "unk_0202C730.h"
 
-BOOL ScrCmd_GetStaticEncounterOutcome(ScriptContext *ctx) {
+BOOL ScrCmd_GetStaticEncounterOutcomeFlag(ScriptContext *ctx) {
     u32 *winFlag = FieldSysGetAttrAddr(ctx->fieldSystem, SCRIPTENV_BATTLE_WIN_FLAG);
     u16 *variable = ScriptGetVarPointer(ctx);
     *variable = *winFlag;
@@ -56,7 +56,7 @@ BOOL ScrCmd_465(ScriptContext *ctx) {
         return FALSE;
     }
     case 6: {
-        String *str = String_New(64, HEAP_ID_FIELD3);
+        String *str = String_New(64, HEAP_ID_32);
         PlayerProfile *profile = Save_PlayerData_GetProfile(ctx->fieldSystem->saveData);
         PlayerName_FlatToString(profile, str);
         sub_0202C7F8(group, 0, 1, str);

@@ -6,7 +6,7 @@
 .public HandleFadeUpdateFrame
 .public IsPaletteFadeFinished
 .public sub_0200FB70
-.public ResetVisibleHardwareWindows
+.public sub_0200FBDC
 .public SetMasterBrightnessNeutral
 .public sub_0200FBF4
 .public sub_0200FC20
@@ -65,8 +65,8 @@
 .public sub_02013488
 .public HBlankInterruptDisable
 .public Main_SetHBlankIntrCB
-.public Heap_AllocAtEnd
-.public Heap_Free
+.public AllocFromHeapAtEnd
+.public FreeToHeap
 .public GF_AssertFail
 .public GXx_SetMasterBrightness_
 .public GX_LoadBGPltt

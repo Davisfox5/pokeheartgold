@@ -30,7 +30,7 @@
 	</row>
 	<row id="msg_0073_D24R0102_00007" index="7">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">You have to hear this!\nThis is a big discovery!\rIf you turn on the radio in the ruins,\nyou can receive mysterious radio waves!\rIt’s proof that UNOWN communicate\nwith each other using radio waves!\r</language>
+		<language name="English">You have to hear this!\nThis is a big discovery!\rThe Silph survey equipment keeps\ncatching anomalous readings in the\fruins--patterned pulses, like\nsomething is signaling!\rIt’s proof that UNOWN communicate\nwith each other!\r</language>
 	</row>
 	<row id="msg_0073_D24R0102_00008" index="8">
 		<attribute name="window_context_name">used</attribute>

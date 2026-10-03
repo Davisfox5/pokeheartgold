@@ -5,27 +5,27 @@
 
 	.rodata
 
-	ScrDef scr_seq_T22R0701_000
-	ScrDef scr_seq_T22R0701_001
-	ScrDefEnd
+	scrdef scr_seq_T22R0701_000
+	scrdef scr_seq_T22R0701_001
+	scrdef_end
 
 scr_seq_T22R0701_000:
-	PlaySE SEQ_SE_DP_SELECT
-	LockAll
-	FacePlayer
-	GoToIfSet FLAG_HIDE_ROUTE_36_SUDOWOODO, _0026
-	NPCMsg msg_0563_T22R0701_00000
-	GoTo _0029
+	play_se SEQ_SE_DP_SELECT
+	lockall
+	faceplayer
+	goto_if_set FLAG_HIDE_ROUTE_36_SUDOWOODO, _0026
+	npc_msg msg_0563_T22R0701_00000
+	goto _0029
 
 _0026:
-	NPCMsg msg_0563_T22R0701_00001
+	npc_msg msg_0563_T22R0701_00001
 _0029:
-	WaitButton
-	CloseMsg
-	ReleaseAll
-	End
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
 
 scr_seq_T22R0701_001:
-	SimpleNPCMsg msg_0563_T22R0701_00002
-	End
+	simple_npc_msg msg_0563_T22R0701_00002
+	end
 	.balign 4, 0

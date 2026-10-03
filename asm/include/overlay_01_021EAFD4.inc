@@ -3,8 +3,8 @@
 .public NARC_New
 .public NARC_Delete
 .public NARC_AllocAndReadWholeMember
-.public Heap_Alloc
-.public Heap_Free
+.public AllocFromHeap
+.public FreeToHeap
 .public GF_CreateNewVramTransferTask
 .public sub_02020838
 .public sub_020208DC
@@ -12,8 +12,8 @@
 .public GF_AssertFail
 .public NNS_G3dGetTex
 .public sprintf
-.public FieldTextureManager_Init
-.public FieldTextureManager_LoadTexture
-.public FieldTextureManager_Free
-.public FieldTextureManager_FreeAllSlots
-.public FieldTextureManager_Destroy
+.public ov01_021EAFD4
+.public ov01_021EB00C
+.public ov01_021EB114
+.public ov01_021EB1BC
+.public ov01_021EB1DC

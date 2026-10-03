@@ -5,171 +5,171 @@
 
 	.rodata
 
-	ScrDef scr_seq_T10R0701_000
-	ScrDef scr_seq_T10R0701_001
-	ScrDefEnd
+	scrdef scr_seq_T10R0701_000
+	scrdef scr_seq_T10R0701_001
+	scrdef_end
 
 scr_seq_T10R0701_001:
-	StopBGM 0
-	End
+	stop_bgm 0
+	end
 
 scr_seq_T10R0701_000:
-	ScrCmd_609
-	LockAll
-	ToggleFollowingPokemonMovement 0
-	WaitFollowingPokemonMovement
-	FollowingPokemonMovement 55
-	ApplyMovement obj_player, _0188
-	ApplyMovement obj_T10R0701_wataru, _0194
-	WaitMovement
-	WaitFollowingPokemonMovement
-	ToggleFollowingPokemonMovement 1
-	FollowingPokemonMovement 48
-	BufferPlayersName 0
-	GenderMsgBox msg_0528_T10R0701_00000, msg_0528_T10R0701_00001
-	CloseMsg
-	ToggleFollowingPokemonMovement 0
-	WaitFollowingPokemonMovement
-	FollowingPokemonMovement 55
-	ApplyMovement obj_player, _01A8
-	WaitMovement
-	WaitFollowingPokemonMovement
-	ToggleFollowingPokemonMovement 1
-	FollowingPokemonMovement 48
-	PartyCountNotEgg VAR_SPECIAL_RESULT
-	HallOfFameAnim VAR_SPECIAL_RESULT
-	AddSpecialGameStat SCORE_EVENT_LEAGUE_WIN
-	FadeScreen 6, 1, 0, RGB_BLACK
-	WaitFade
-	Call _01B4
-	HasItem ITEM_S_S__TICKET, 1, VAR_SPECIAL_RESULT
-	Compare VAR_SPECIAL_RESULT, 1
-	GoToIfEq _009A
-	SetVar VAR_SCENE_PLAYERS_HOUSE_1F, 3
+	scrcmd_609
+	lockall
+	toggle_following_pokemon_movement 0
+	wait_following_pokemon_movement
+	following_pokemon_movement 55
+	apply_movement obj_player, _0188
+	apply_movement obj_T10R0701_wataru, _0194
+	wait_movement
+	wait_following_pokemon_movement
+	toggle_following_pokemon_movement 1
+	following_pokemon_movement 48
+	buffer_players_name 0
+	gender_msgbox msg_0528_T10R0701_00000, msg_0528_T10R0701_00001
+	closemsg
+	toggle_following_pokemon_movement 0
+	wait_following_pokemon_movement
+	following_pokemon_movement 55
+	apply_movement obj_player, _01A8
+	wait_movement
+	wait_following_pokemon_movement
+	toggle_following_pokemon_movement 1
+	following_pokemon_movement 48
+	party_count_not_egg VAR_SPECIAL_RESULT
+	hall_of_fame_anim VAR_SPECIAL_RESULT
+	add_special_game_stat SCORE_EVENT_23
+	fade_screen 6, 1, 0, RGB_BLACK
+	wait_fade
+	call _01B4
+	hasitem ITEM_S_S__TICKET, 1, VAR_SPECIAL_RESULT
+	compare VAR_SPECIAL_RESULT, 1
+	goto_if_eq _009A
+	setvar VAR_SCENE_PLAYERS_HOUSE_1F, 3
 _009A:
-	SetFlag FLAG_UNK_97E
-	ClearFlag FLAG_HIDE_LAKE_OF_RAGE_PRYCE
-	CallIfUnset FLAG_CAUGHT_HO_OH, _01C9
-	CallIfUnset FLAG_CAUGHT_LUGIA, _01CF
-	CallIfUnset FLAG_CAUGHT_SUDOWOODO, _01D5
-	CallIfUnset FLAG_CAUGHT_RED_GYARADOS, _01DB
-	CallIfUnset FLAG_CAUGHT_MEWTWO, _01E1
-	CallIfUnset FLAG_CAUGHT_ARTICUNO, _01E7
-	CallIfUnset FLAG_CAUGHT_ZAPDOS, _01ED
-	CallIfUnset FLAG_CAUGHT_MOLTRES, _0206
-	GoToIfUnset FLAG_CAUGHT_SNORLAX, _020C
+	setflag FLAG_UNK_97E
+	clearflag FLAG_HIDE_LAKE_OF_RAGE_PRYCE
+	call_if_unset FLAG_CAUGHT_HO_OH, _01C9
+	call_if_unset FLAG_CAUGHT_LUGIA, _01CF
+	call_if_unset FLAG_CAUGHT_SUDOWOODO, _01D5
+	call_if_unset FLAG_CAUGHT_RED_GYARADOS, _01DB
+	call_if_unset FLAG_CAUGHT_MEWTWO, _01E1
+	call_if_unset FLAG_CAUGHT_ARTICUNO, _01E7
+	call_if_unset FLAG_CAUGHT_ZAPDOS, _01ED
+	call_if_unset FLAG_CAUGHT_MOLTRES, _0206
+	goto_if_unset FLAG_CAUGHT_SNORLAX, _020C
 _0105:
-	CallIfUnset FLAG_CAUGHT_SUICUNE, _0227
-	GetGameVersion VAR_TEMP_x4000
-	Compare VAR_TEMP_x4000, 7
-	GoToIfNe _012D
-	GoTo _023A
+	call_if_unset FLAG_CAUGHT_SUICUNE, _0227
+	get_game_version VAR_TEMP_x4000
+	compare VAR_TEMP_x4000, 7
+	goto_if_ne _012D
+	goto _023A
 
 _0127:
-	GoTo _0133
+	goto _0133
 
 _012D:
-	GoTo _024F
+	goto _024F
 
 _0133:
-	CallIfUnset FLAG_CAUGHT_RAYQUAZA, _0264
-	Compare VAR_ROAMER_ENTEI_STATUS, 2
-	CallIfEq _026A
-	Compare VAR_ROAMER_RAIKOU_STATUS, 2
-	CallIfEq _0275
-	Compare VAR_ROAMER_LATIAS_STATUS, 2
-	CallIfEq _0280
-	Compare VAR_ROAMER_LATIOS_STATUS, 2
-	CallIfEq _028B
-	HOFCredits 0
-	RestoreOverworld
-	FadeScreen 6, 1, 1, RGB_BLACK
-	WaitFade
-	ReleaseAll
-	End
+	call_if_unset FLAG_CAUGHT_RAYQUAZA, _0264
+	compare VAR_ROAMER_ENTEI_STATUS, 2
+	call_if_eq _026A
+	compare VAR_ROAMER_RAIKOU_STATUS, 2
+	call_if_eq _0275
+	compare VAR_ROAMER_LATIAS_STATUS, 2
+	call_if_eq _0280
+	compare VAR_ROAMER_LATIOS_STATUS, 2
+	call_if_eq _028B
+	hof_credits 0
+	restore_overworld
+	fade_screen 6, 1, 1, RGB_BLACK
+	wait_fade
+	releaseall
+	end
 
 	.balign 4, 0
 _0188:
-	WalkNormalNorth 14
-	FaceEast 2
-	EndMovement
+	step 12, 14
+	step 3, 2
+	step_end
 
 	.balign 4, 0
 _0194:
-	WalkNormalNorth 12
-	FaceEast 2
-	WalkNormalEast
-	FaceWest 2
-	EndMovement
+	step 12, 12
+	step 3, 2
+	step 15, 1
+	step 2, 2
+	step_end
 
 	.balign 4, 0
 _01A8:
-	FaceNorth 2
-	WalkNormalNorth 4
-	EndMovement
+	step 0, 2
+	step 12, 4
+	step_end
 
 _01B4:
-	GoToIfSet FLAG_GAME_CLEAR, _01C3
-	SetFlag FLAG_UNK_998
+	goto_if_set FLAG_GAME_CLEAR, _01C3
+	setflag FLAG_UNK_998
 _01C3:
-	ClearFlag FLAG_UNK_25F
-	Return
+	clearflag FLAG_UNK_25F
+	return
 
 _01C9:
-	ClearFlag FLAG_HIDE_BELL_TOWER_HO_OH
-	Return
+	clearflag FLAG_HIDE_BELL_TOWER_HO_OH
+	return
 
 _01CF:
-	ClearFlag FLAG_HIDE_WHIRL_ISLAND_LUGIA
-	Return
+	clearflag FLAG_HIDE_WHIRL_ISLAND_LUGIA
+	return
 
 _01D5:
-	ClearFlag FLAG_HIDE_ROUTE_36_SUDOWOODO
-	Return
+	clearflag FLAG_HIDE_ROUTE_36_SUDOWOODO
+	return
 
 _01DB:
-	ClearFlag FLAG_HIDE_LAKE_OF_RAGE_RED_GYARADOS
-	Return
+	clearflag FLAG_HIDE_LAKE_OF_RAGE_RED_GYARADOS
+	return
 
 _01E1:
-	ClearFlag FLAG_HIDE_CERULEAN_CAVE_MEWTWO
-	Return
+	clearflag FLAG_HIDE_CERULEAN_CAVE_MEWTWO
+	return
 
 _01E7:
-	ClearFlag FLAG_HIDE_SEAFOAM_ISLAND_ARTICUNO
-	Return
+	clearflag FLAG_HIDE_SEAFOAM_ISLAND_ARTICUNO
+	return
 
 _01ED:
-	CheckBadge BADGE_EARTH, VAR_SPECIAL_RESULT
-	Compare VAR_SPECIAL_RESULT, 1
-	GoToIfNe _0204
-	ClearFlag FLAG_HIDE_ROUTE_10_ZAPDOS
+	check_badge BADGE_EARTH, VAR_SPECIAL_RESULT
+	compare VAR_SPECIAL_RESULT, 1
+	goto_if_ne _0204
+	clearflag FLAG_HIDE_ROUTE_10_ZAPDOS
 _0204:
-	Return
+	return
 
 _0206:
-	ClearFlag FLAG_HIDE_MT_SILVER_CAVE_MOLTRES
-	Return
+	clearflag FLAG_HIDE_MT_SILVER_CAVE_MOLTRES
+	return
 
 _020C:
-	GoToIfSet FLAG_SNORLAX_MEET, _021D
-	GoTo _0105
+	goto_if_set FLAG_SNORLAX_MEET, _021D
+	goto _0105
 
 _021D:
-	ClearFlag FLAG_HIDE_ROUTE_12_SNORLAX
-	GoTo _0105
+	clearflag FLAG_HIDE_ROUTE_12_SNORLAX
+	goto _0105
 
 _0227:
-	Compare VAR_SCENE_ROUTE_25, 3
-	GoToIfNe _0238
-	ClearFlag FLAG_HIDE_BURNED_TOWER_STATIC_SUICUNE
+	compare VAR_SCENE_ROUTE_25, 3
+	goto_if_ne _0238
+	clearflag FLAG_HIDE_BURNED_TOWER_STATIC_SUICUNE
 _0238:
-	Return
+	return
 
 _023A:
-	GoToIfSet FLAG_CAUGHT_KYOGRE, _0133
-	ClearFlag FLAG_BEAT_OR_ESCAPED_FROM_GROUDON_OR_KYOGRE
-	GoTo _0133
+	goto_if_set FLAG_CAUGHT_KYOGRE, _0133
+	clearflag FLAG_BEAT_OR_ESCAPED_FROM_GROUDON_OR_KYOGRE
+	goto _0133
 
 // This branch is for SoulSilver, so this should be checking
 // FLAG_CAUGHT_GROUDON instead of FLAG_CAUGHT_KYOGRE. This problem
@@ -178,31 +178,31 @@ _023A:
 // VAR_SCENE_EMBEDDED_TOWER to 4 and the tower does not regenerate
 // Groudon if the variable is 4 or more, the mistake has no effect.
 _024F:
-	GoToIfSet FLAG_CAUGHT_KYOGRE, _0133
-	ClearFlag FLAG_BEAT_OR_ESCAPED_FROM_GROUDON_OR_KYOGRE
-	GoTo _0133
+	goto_if_set FLAG_CAUGHT_KYOGRE, _0133
+	clearflag FLAG_BEAT_OR_ESCAPED_FROM_GROUDON_OR_KYOGRE
+	goto _0133
 
 _0264:
-	ClearFlag FLAG_HIDE_EMBEDDED_TOWER_RAYQUAZA
-	Return
+	clearflag FLAG_HIDE_EMBEDDED_TOWER_RAYQUAZA
+	return
 
 _026A:
-	SetVar VAR_ROAMER_ENTEI_STATUS, 0
-	CreateRoamer 1
-	Return
+	setvar VAR_ROAMER_ENTEI_STATUS, 0
+	create_roamer 1
+	return
 
 _0275:
-	SetVar VAR_ROAMER_RAIKOU_STATUS, 0
-	CreateRoamer 0
-	Return
+	setvar VAR_ROAMER_RAIKOU_STATUS, 0
+	create_roamer 0
+	return
 
 _0280:
-	SetVar VAR_ROAMER_LATIAS_STATUS, 0
-	CreateRoamer 2
-	Return
+	setvar VAR_ROAMER_LATIAS_STATUS, 0
+	create_roamer 2
+	return
 
 _028B:
-	SetVar VAR_ROAMER_LATIOS_STATUS, 0
-	CreateRoamer 3
-	Return
+	setvar VAR_ROAMER_LATIOS_STATUS, 0
+	create_roamer 3
+	return
 	.balign 4, 0

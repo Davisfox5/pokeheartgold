@@ -131,8 +131,8 @@
 .public sub_02015720
 .public sub_02015754
 .public sub_0201576C
-.public Heap_Alloc
-.public Heap_Free
+.public AllocFromHeap
+.public FreeToHeap
 .public SetBgControlParam
 .public SetBgPriority
 .public ToggleBgLayer
@@ -208,7 +208,7 @@
 .public ov07_02232A44
 .public ov07_02232A54
 .public ov07_02232AB8
-.public UnkBallData_SetBallAnimation
+.public ov07_02232F58
 .public ov07_02232F60
 .public ov07_02233DB8
 .public ov07_02233E88
@@ -234,8 +234,8 @@
 .public ov07_02234B5C
 .public ov07_022377DC
 .public ov07_022377F4
-.public BattleSystem_GetSpriteSystem
-.public BattleSystem_GetSpriteManager
+.public BattleSystem_GetSpriteRenderer
+.public BattleSystem_GetGfxHandler
 .public BattleSystem_GetPaletteData
 .public ov12_0223BB88
 .public ov12_0223C1C4

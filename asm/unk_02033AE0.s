@@ -711,7 +711,7 @@ sub_02033F44: ; 0x02033F44
 	lsl r7, r4, #4
 	mov r0, #0xf
 	add r1, r7, #0
-	bl Heap_Alloc
+	bl AllocFromHeap
 	mov r1, #0
 	add r2, r7, #0
 	str r0, [r5, #0x18]
@@ -743,11 +743,11 @@ sub_02033F70: ; 0x02033F70
 
 	thumb_func_start sub_02033F90
 sub_02033F90: ; 0x02033F90
-	ldr r3, _02033F98 ; =Heap_Free
+	ldr r3, _02033F98 ; =FreeToHeap
 	ldr r0, [r0, #0x18]
 	bx r3
 	nop
-_02033F98: .word Heap_Free
+_02033F98: .word FreeToHeap
 	thumb_func_end sub_02033F90
 
 	thumb_func_start sub_02033F9C
@@ -1001,7 +1001,7 @@ sub_0203410C: ; 0x0203410C
 	bne _02034128
 	mov r0, #0xf
 	mov r1, #0x18
-	bl Heap_Alloc
+	bl AllocFromHeap
 	ldr r1, _02034150 ; =_021D412C
 	str r0, [r1]
 _02034128:
@@ -1036,7 +1036,7 @@ sub_02034154: ; 0x02034154
 	ldr r0, [r0]
 	cmp r0, #0
 	beq _02034168
-	bl Heap_Free
+	bl FreeToHeap
 	ldr r0, _0203416C ; =_021D412C
 	mov r1, #0
 	str r1, [r0]

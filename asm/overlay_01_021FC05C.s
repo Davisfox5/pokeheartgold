@@ -171,7 +171,7 @@ ov01_021FC14C: ; 0x021FC14C
 	bl BG_LoadPlttData
 	mov r0, #4
 	mov r1, #0x20
-	bl Heap_Alloc
+	bl AllocFromHeap
 	mov r1, #0x11
 	mov r2, #0x20
 	add r4, r0, #0
@@ -184,7 +184,7 @@ ov01_021FC14C: ; 0x021FC14C
 	mov r3, #0x20
 	bl BG_LoadCharTilesData
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	ldr r2, _021FC1A0 ; =0x00006001
 	add r0, r5, #0
 	mov r1, #2
@@ -389,7 +389,7 @@ ov01_021FC2F0: ; 0x021FC2F0
 	str r0, [r4]
 _021FC302:
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	pop {r4, pc}
 	.balign 4, 0
 	thumb_func_end ov01_021FC2F0
@@ -492,17 +492,17 @@ _021FC3A8:
 	cmp r0, #0
 	bge _021FC4B2
 	ldr r0, [r5, #0x40]
-	bl PlayerAvatar_GetXCoord
+	bl GetPlayerXCoord
 	add r6, r0, #0
 	ldr r0, [r5, #0x40]
-	bl PlayerAvatar_GetZCoord
+	bl GetPlayerZCoord
 	add r2, r0, #0
 	add r0, r5, #0
 	add r1, r6, #0
 	bl GetMetatileBehavior
 	add r1, r0, #0
 	add r0, r5, #0
-	bl FieldSystem_CanGenerateStepEncounter
+	bl ov02_02247F9C
 	cmp r0, #0
 	beq _021FC3EE
 	mov r0, #6
@@ -552,7 +552,7 @@ _021FC434:
 _021FC444:
 	add r0, r5, #0
 	add r1, r6, #0
-	bl FieldSystem_PerformSweetScentEncounterCheck
+	bl ov02_02247170
 	cmp r0, #0
 	bne _021FC4B2
 	bl GF_AssertFail

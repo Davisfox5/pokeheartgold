@@ -15,8 +15,8 @@
 .public BeginNormalPaletteFade
 .public IsPaletteFadeFinished
 .public sub_0200FBF4
-.public Heap_Alloc
-.public Heap_Free
+.public AllocFromHeap
+.public FreeToHeap
 .public SetBgPriority
 .public BgSetPosTextAndCommit
 .public AddWindowParameterized

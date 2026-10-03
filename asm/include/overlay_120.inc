@@ -9,8 +9,8 @@
 .public BeginNormalPaletteFade
 .public IsPaletteFadeFinished
 .public sub_0200FC20
-.public Heap_Alloc
-.public Heap_Free
+.public AllocFromHeap
+.public FreeToHeap
 .public InitBgFromTemplate
 .public FreeBgTilemapBuffer
 .public SetBgPriority
@@ -58,8 +58,8 @@
 .public ov01_021F12B4
 .public ov01_021F12D0
 .public ov01_021F12E8
-.public HBlankSystem_Start
-.public HBlankSystem_Stop
+.public ov01_021FB4F4
+.public ov01_021FB514
 .public ov120_0225F714
 .public ov120_0225FA5C
 .public ov120_0225FA68

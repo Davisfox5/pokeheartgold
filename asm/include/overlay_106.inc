@@ -46,9 +46,9 @@
 .public sub_020145B4
 .public Main_SetVBlankIntrCB
 .public HBlankInterruptDisable
-.public Heap_Alloc
-.public Heap_Free
-.public HeapExp_FndInitAllocator
+.public AllocFromHeap
+.public FreeToHeap
+.public GF_ExpHeap_FndInitAllocator
 .public BgConfig_Alloc
 .public SetBothScreensModesAndDisable
 .public InitBgFromTemplate

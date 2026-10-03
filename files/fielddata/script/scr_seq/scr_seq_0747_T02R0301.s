@@ -5,55 +5,55 @@
 
 	.rodata
 
-	ScrDef scr_seq_T02R0301_000
-	ScrDef scr_seq_T02R0301_001
-	ScrDef scr_seq_T02R0301_002
-	ScrDef scr_seq_T02R0301_003
-	ScrDef scr_seq_T02R0301_004
-	ScrDef scr_seq_T02R0301_005
-	ScrDef scr_seq_T02R0301_006
-	ScrDef scr_seq_T02R0301_007
-	ScrDefEnd
+	scrdef scr_seq_T02R0301_000
+	scrdef scr_seq_T02R0301_001
+	scrdef scr_seq_T02R0301_002
+	scrdef scr_seq_T02R0301_003
+	scrdef scr_seq_T02R0301_004
+	scrdef scr_seq_T02R0301_005
+	scrdef scr_seq_T02R0301_006
+	scrdef scr_seq_T02R0301_007
+	scrdef_end
 
 scr_seq_T02R0301_000:
-	SimpleNPCMsg msg_0457_T02R0301_00000
-	End
+	simple_npc_msg msg_0457_T02R0301_00000
+	end
 
 scr_seq_T02R0301_001:
-	SimpleNPCMsg msg_0457_T02R0301_00001
-	End
+	simple_npc_msg msg_0457_T02R0301_00001
+	end
 
 scr_seq_T02R0301_002:
-	SimpleNPCMsg msg_0457_T02R0301_00002
-	End
+	simple_npc_msg msg_0457_T02R0301_00002
+	end
 
 scr_seq_T02R0301_003:
-	SimpleNPCMsg msg_0457_T02R0301_00003
-	End
+	simple_npc_msg msg_0457_T02R0301_00003
+	end
 
 scr_seq_T02R0301_004:
-	SimpleNPCMsg msg_0457_T02R0301_00004
-	End
+	simple_npc_msg msg_0457_T02R0301_00004
+	end
 
 scr_seq_T02R0301_005:
-	PlaySE SEQ_SE_DP_SELECT
-	LockAll
-	NPCMsg msg_0457_T02R0301_00005
-	WaitButton
-	CloseMsg
-	ReleaseAll
-	End
+	play_se SEQ_SE_DP_SELECT
+	lockall
+	npc_msg msg_0457_T02R0301_00005
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
 
 scr_seq_T02R0301_006:
-	PlaySE SEQ_SE_DP_SELECT
-	LockAll
-	NPCMsg msg_0457_T02R0301_00006
-	WaitButton
-	CloseMsg
-	ReleaseAll
-	End
+	play_se SEQ_SE_DP_SELECT
+	lockall
+	npc_msg msg_0457_T02R0301_00006
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
 
 scr_seq_T02R0301_007:
-	SimpleNPCMsg msg_0457_T02R0301_00007
-	End
+	simple_npc_msg msg_0457_T02R0301_00007
+	end
 	.balign 4, 0

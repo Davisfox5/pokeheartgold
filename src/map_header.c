@@ -110,7 +110,7 @@ u16 MapHeader_GetEventsBank(u32 mapId) {
     return sMapHeaders[mapId].eventsBank;
 }
 
-u32 MapHeader_GetMapSec(u32 mapId) {
+u16 MapHeader_GetMapSec(u32 mapId) {
     mapId = MapNumberBoundsCheck(mapId);
     return sMapHeaders[mapId].mapsec;
 }
@@ -125,9 +125,9 @@ u8 MapHeader_GetMomCallIntroParam(u32 mapId) {
     return sMapHeaders[mapId].momCallIntroParam;
 }
 
-u32 MapHeader_GetRegionNo(u32 mapId) {
+BOOL MapHeader_IsInKanto(u32 mapId) {
     mapId = MapNumberBoundsCheck(mapId);
-    return sMapHeaders[mapId].regionNo;
+    return sMapHeaders[mapId].isKanto;
 }
 
 u32 MapHeader_GetWeatherType(u32 mapId) {

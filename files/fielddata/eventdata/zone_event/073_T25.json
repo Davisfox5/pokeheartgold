@@ -455,6 +455,23 @@
       "x": 366,
       "z": 335,
       "y": 0
+    },
+    {
+      "id": "obj_T25_kestra",
+      "spriteId": "SPRITE_KESTRA",
+      "movement": 0,
+      "type": 0,
+      "eventFlag": "FLAG_APOC_CH4_HIDE_KESTRA_PLAZA",
+      "scriptId": "_EV_scr_seq_T25_034 + 1",
+      "facingDirection": 1,
+      "param0": 0,
+      "param1": 0,
+      "param2": 0,
+      "xRange": 0,
+      "yRange": 0,
+      "x": 366,
+      "z": 371,
+      "y": 0
     }
   ],
   "warps": [
@@ -586,8 +603,18 @@
       "w": 10,
       "h": 1,
       "y": 0,
-      "val": 3,
-      "var": "VAR_SCENE_ROCKET_TAKEOVER"
+      "val": 0,
+      "var": "VAR_APOC_CH4_SCENE"
+    },
+    {
+      "scriptId": "_EV_scr_seq_T25_033 + 1",
+      "x": 364,
+      "z": 370,
+      "w": 3,
+      "h": 1,
+      "y": 0,
+      "val": 1,
+      "var": "VAR_APOC_CH4_SCENE"
     }
   ]
 }

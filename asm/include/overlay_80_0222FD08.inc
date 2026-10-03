@@ -1,7 +1,7 @@
 #include <nitro/fs/overlay.h>
 #pragma once
-.public Heap_Alloc
-.public Heap_Free
+.public AllocFromHeap
+.public FreeToHeap
 .public LCRandom
 .public GF_AssertFail
 .public Save_GameStats_Get
@@ -31,7 +31,7 @@
 .public SaveArray_Party_Init
 .public Party_GetCount
 .public Party_GetMonByIndex
-.public Party_SafeCopyMonToSlot_ResetAprijuiceModifiers
+.public Party_SafeCopyMonToSlot_ResetUnkSub
 .public MI_CpuFill8
 .public _s32_div_f
 .public _0223DD40

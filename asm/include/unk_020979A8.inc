@@ -6,8 +6,8 @@
 .public GF_SndGetFadeTimer
 .public BeginNormalPaletteFade
 .public IsPaletteFadeFinished
-.public Heap_AllocAtEnd
-.public Heap_Free
+.public AllocFromHeapAtEnd
+.public FreeToHeap
 .public GF_AssertFail
 .public sub_0203FC90
 .public TaskManager_Call
@@ -16,7 +16,7 @@
 .public TaskManager_GetEnvironment
 .public TaskManager_GetStatePtr
 .public sub_020537F0
-.public FieldBGM_PlayForMapHeader
+.public sub_02055110
 .public CallTask_LeaveOverworld
 .public sub_02055408
 .public Field_GetTimeOfDay

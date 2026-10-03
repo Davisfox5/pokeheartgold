@@ -13,7 +13,7 @@ ov46_02258800: ; 0x02258800
 	mov r0, #3
 	mov r1, #0x77
 	lsl r2, r2, #0x10
-	bl Heap_Create
+	bl CreateHeap
 	ldr r1, _02258918 ; =0x00000404
 	add r0, r4, #0
 	mov r2, #0x77
@@ -315,7 +315,7 @@ _02258A80:
 	bl ov46_02259474
 	ldr r0, [r5]
 	bl Save_GameStats_Get
-	mov r1, #0x21 ; SCORE_EVENT_WIFI_PLAZA_ACCESSED
+	mov r1, #0x21
 	bl GameStats_AddScore
 	bl GF_RTC_DateTimeToSec
 	ldr r2, [r6, #0xc]
@@ -550,9 +550,9 @@ _02258C68:
 	add r0, #0xd8
 	str r1, [r0]
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	mov r0, #0x77
-	bl Heap_Destroy
+	bl DestroyHeap
 	ldr r0, _02258CB0 ; =gSystem + 0x60
 	mov r1, #0
 	strb r1, [r0, #9]
@@ -572,7 +572,7 @@ ov46_02258CB4: ; 0x02258CB4
 	mov r0, #3
 	mov r1, #0x77
 	lsl r2, r2, #0x10
-	bl Heap_Create
+	bl CreateHeap
 	ldr r1, _02258D98 ; =0x00000404
 	add r0, r5, #0
 	mov r2, #0x77
@@ -883,9 +883,9 @@ _02258F2C:
 	add r0, #0xd8
 	str r1, [r0]
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	mov r0, #0x77
-	bl Heap_Destroy
+	bl DestroyHeap
 	ldr r0, _02258F6C ; =gSystem + 0x60
 	mov r1, #0
 	strb r1, [r0, #9]
@@ -1083,7 +1083,7 @@ _02258FAE:
 	mov r2, #0x80
 	bl MIi_CpuCopy16
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	mov r0, #0
 	mov r1, #0x57
 	str r0, [sp, #0x24]
@@ -1316,7 +1316,7 @@ _022592C0:
 	cmp r4, #3
 	blt _022592C0
 	ldr r0, [r6, #0xc]
-	bl Heap_Free
+	bl FreeToHeap
 	pop {r4, r5, r6, pc}
 	.balign 4, 0
 _022592DC: .word _02259598

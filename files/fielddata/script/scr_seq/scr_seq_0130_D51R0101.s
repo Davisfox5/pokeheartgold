@@ -5,102 +5,106 @@
 
 	.rodata
 
-	ScrDef scr_seq_D51R0101_000
-	ScrDef scr_seq_D51R0101_001
-	ScrDef scr_seq_D51R0101_002
-	ScrDef scr_seq_D51R0101_003
-	ScrDefEnd
+	scrdef scr_seq_D51R0101_000
+	scrdef scr_seq_D51R0101_001
+	scrdef scr_seq_D51R0101_002
+	scrdef scr_seq_D51R0101_003
+	scrdef_end
 
 scr_seq_D51R0101_002:
-	Compare VAR_SCENE_SINJOH_MYSTRI_ROOM, 5
-	GoToIfEq _0021
-	End
+	compare VAR_SCENE_SINJOH_MYSTRI_ROOM, 5
+	goto_if_eq _0021
+	end
 
 _0021:
-	MovePersonFacing obj_D51R0101_mount_2, 13, 1, 28, DIR_NORTH
-	End
+	move_person_facing obj_D51R0101_mount_2, 13, 1, 28, DIR_NORTH
+	end
 
 scr_seq_D51R0101_000:
-	ScrCmd_609
-	LockAll
-	ApplyMovement obj_D51R0101_mount_2, _007C
-	WaitMovement
-	ApplyMovement obj_player, _0094
-	WaitMovement
-	NPCMsg msg_0145_D51R0101_00000
-	CloseMsg
-	ApplyMovement obj_D51R0101_mount_2, _009C
-	WaitMovement
-	NPCMsg msg_0145_D51R0101_00001
-	CloseMsg
-	ApplyMovement obj_D51R0101_mount_2, _00A8
-	WaitMovement
-	MovePersonFacing obj_D51R0101_mount_2, 13, 1, 28, DIR_NORTH
-	SetVar VAR_SCENE_SINJOH_MYSTRI_ROOM, 5
-	ReleaseAll
-	End
+	scrcmd_609
+	lockall
+	apply_movement obj_D51R0101_mount_2, _007C
+	wait_movement
+	apply_movement obj_player, _0094
+	wait_movement
+	npc_msg msg_0145_D51R0101_00000
+	closemsg
+	apply_movement obj_D51R0101_mount_2, _009C
+	wait_movement
+	npc_msg msg_0145_D51R0101_00001
+	closemsg
+	apply_movement obj_D51R0101_mount_2, _00A8
+	wait_movement
+	move_person_facing obj_D51R0101_mount_2, 13, 1, 28, DIR_NORTH
+	setvar VAR_SCENE_SINJOH_MYSTRI_ROOM, 5
+	releaseall
+	end
 
 	.balign 4, 0
 _007C:
-	WalkOnSpotNormalNorth
-	EmoteExclamationMark
-	Delay8
-	WalkNormalNorth 3
-	WalkOnSpotNormalWest
-	EndMovement
+	step 32, 1
+	step 75, 1
+	step 63, 1
+	step 12, 3
+	step 34, 1
+	step_end
 
 	.balign 4, 0
 _0094:
-	WalkOnSpotNormalEast
-	EndMovement
+	step 35, 1
+	step_end
 
 	.balign 4, 0
 _009C:
-	EmoteExclamationMark
-	Delay8
-	EndMovement
+	step 75, 1
+	step 63, 1
+	step_end
 
 	.balign 4, 0
 _00A8:
-	WalkNormalSouth 4
-	WalkNormalWest
-	WalkNormalSouth 4
-	EndMovement
+	step 13, 4
+	step 14, 1
+	step 13, 4
+	step_end
 
 scr_seq_D51R0101_001:
-	PlaySE SEQ_SE_DP_SELECT
-	LockAll
-	FacePlayer
-	NPCMsg msg_0145_D51R0101_00002
-	CloseMsg
-	ApplyMovement obj_D51R0101_mount_2, _0108
-	WaitMovement
-	ScrCmd_307 0, 0, 20, 25, 77
-	ScrCmd_310 77
-	ScrCmd_308 77
-	ApplyMovement obj_D51R0101_mount_2, _0114
-	WaitMovement
-	HidePerson obj_D51R0101_mount_2
-	SetFlag FLAG_UNK_2DB
-	ScrCmd_311 77
-	ScrCmd_308 77
-	ScrCmd_309 77
-	SetVar VAR_SCENE_SINJOH_MYSTRI_ROOM, 6
-	ReleaseAll
-	End
+	play_se SEQ_SE_DP_SELECT
+	lockall
+	faceplayer
+	npc_msg msg_0145_D51R0101_00002
+	closemsg
+	apply_movement obj_D51R0101_mount_2, _0108
+	wait_movement
+	scrcmd_307 0, 0, 20, 25, 77
+	scrcmd_310 77
+	scrcmd_308 77
+	apply_movement obj_D51R0101_mount_2, _0114
+	wait_movement
+	hide_person obj_D51R0101_mount_2
+	setflag FLAG_UNK_2DB
+	scrcmd_311 77
+	scrcmd_308 77
+	scrcmd_309 77
+	setvar VAR_SCENE_SINJOH_MYSTRI_ROOM, 6
+	releaseall
+	end
 
 	.balign 4, 0
 _0108:
-	WalkNormalEast 7
-	WalkNormalNorth 2
-	EndMovement
+	step 15, 7
+	step 12, 2
+	step_end
 
 	.balign 4, 0
 _0114:
-	WalkNormalNorth
-	EndMovement
+	step 12, 1
+	step_end
 
 scr_seq_D51R0101_003:
-	TrainerTipsEx 2, msg_0145_D51R0101_00007
-	End
+	scrcmd_055 2, 0
+	scrcmd_057 3
+	scrcmd_058
+	trainer_tips msg_0145_D51R0101_00007, VAR_SPECIAL_RESULT
+	callstd std_signpost
+	end
 	.balign 4, 0

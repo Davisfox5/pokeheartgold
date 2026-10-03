@@ -940,4 +940,76 @@
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">Cliff Edge Gate</language>
 	</row>
+	<row id="msg_0279_00235" index="235">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Twinleaf Town</language>
+	</row>
+	<row id="msg_0279_00236" index="236">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Sandgem Town</language>
+	</row>
+	<row id="msg_0279_00237" index="237">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Jubilife City</language>
+	</row>
+	<row id="msg_0279_00238" index="238">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Oreburgh City</language>
+	</row>
+	<row id="msg_0279_00239" index="239">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Floaroma Town</language>
+	</row>
+	<row id="msg_0279_00240" index="240">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Eterna City</language>
+	</row>
+	<row id="msg_0279_00241" index="241">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Hearthome City</language>
+	</row>
+	<row id="msg_0279_00242" index="242">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Solaceon Town</language>
+	</row>
+	<row id="msg_0279_00243" index="243">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Veilstone City</language>
+	</row>
+	<row id="msg_0279_00244" index="244">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Pastoria City</language>
+	</row>
+	<row id="msg_0279_00245" index="245">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Celestic Town</language>
+	</row>
+	<row id="msg_0279_00246" index="246">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Canalave City</language>
+	</row>
+	<row id="msg_0279_00247" index="247">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Snowpoint City</language>
+	</row>
+	<row id="msg_0279_00248" index="248">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Sunyshore City</language>
+	</row>
+	<row id="msg_0279_00249" index="249">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Pokemon League</language>
+	</row>
+	<row id="msg_0279_00250" index="250">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Sinnoh Route</language>
+	</row>
+	<row id="msg_0279_00251" index="251">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Sinnoh Lakefront</language>
+	</row>
+	<row id="msg_0279_00252" index="252">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Battle Zone</language>
+	</row>
 </body>

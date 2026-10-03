@@ -4,6 +4,7 @@
 
 #include "constants/sndseq.h"
 
+#include "frontier/overlay_80.h"
 #include "frontier/overlay_80_02238034.h"
 #include "msgdata/msg.naix"
 
@@ -17,17 +18,16 @@
 #include "palette.h"
 #include "party.h"
 #include "party_menu.h"
-#include "poke_overlay.h"
 #include "pokemon.h"
 #include "pokemon_icon_idx.h"
-#include "screen_fade.h"
-#include "sprite_transfer.h"
 #include "system.h"
 #include "touchscreen.h"
 #include "unk_02005D10.h"
 #include "unk_02009D48.h"
 #include "unk_0200A090.h"
+#include "unk_0200ACF0.h"
 #include "unk_0200B150.h"
+#include "unk_0200FA24.h"
 #include "unk_02030A98.h"
 #include "unk_02035900.h"
 #include "unk_020379A0.h"
@@ -101,7 +101,7 @@ BOOL BattleArcadeGameBoard_InitOverlay(OverlayManager *man, int *state) {
 
     HandleLoadOverlay(FS_OVERLAY_ID(OVY_80), OVY_LOAD_ASYNC);
     BattleArcadeGameBoard_InitSub();
-    Heap_Create(HEAP_ID_3, HEAP_ID_GAME_BOARD, 0x20000);
+    CreateHeap(HEAP_ID_3, HEAP_ID_GAME_BOARD, 0x20000);
     work = OverlayManager_CreateAndGetData(man, sizeof(GAME_BOARD_WORK), HEAP_ID_GAME_BOARD);
     memset(work, 0, sizeof(GAME_BOARD_WORK));
 
@@ -221,7 +221,7 @@ BOOL ov84_0223DFF0(OverlayManager *man, int *state) {
     OverlayManager_FreeData(man);
 
     Main_SetVBlankIntrCB(NULL, NULL);
-    Heap_Destroy(HEAP_ID_GAME_BOARD);
+    DestroyHeap(HEAP_ID_GAME_BOARD);
     UnloadOverlayByID(FS_OVERLAY_ID(OVY_80));
 
     return TRUE;
@@ -285,7 +285,7 @@ static BOOL BattleArcadeGameBoard_Init(GAME_BOARD_WORK *work) {
                 work->substate++;
             }
         } else {
-            BeginNormalPaletteFade(FADE_BOTH_SCREENS, FADE_TYPE_BRIGHTNESS_IN, FADE_TYPE_BRIGHTNESS_IN, RGB_BLACK, 6, 3, HEAP_ID_GAME_BOARD);
+            BeginNormalPaletteFade(0, 1, 1, 0, 6, 3, HEAP_ID_GAME_BOARD);
             work->substate++;
         }
         break;
@@ -293,7 +293,7 @@ static BOOL BattleArcadeGameBoard_Init(GAME_BOARD_WORK *work) {
         if (BattleArcade_MultiplayerCheck(work->type) == TRUE) {
             if (work->unkF >= 2) {
                 work->unkF = 0;
-                BeginNormalPaletteFade(FADE_BOTH_SCREENS, FADE_TYPE_BRIGHTNESS_IN, FADE_TYPE_BRIGHTNESS_IN, RGB_BLACK, 6, 3, HEAP_ID_GAME_BOARD);
+                BeginNormalPaletteFade(0, 1, 1, 0, 6, 3, HEAP_ID_GAME_BOARD);
                 work->substate++;
             }
         } else {
@@ -476,7 +476,7 @@ static BOOL BattleArcadeGameBoard_EndMulti(GAME_BOARD_WORK *work) {
 static BOOL BattleArcadeGameBoard_End(GAME_BOARD_WORK *work) {
     switch (work->substate) {
     case 0:
-        BeginNormalPaletteFade(FADE_BOTH_SCREENS, FADE_TYPE_BRIGHTNESS_OUT, FADE_TYPE_BRIGHTNESS_OUT, RGB_BLACK, 6, 1, HEAP_ID_GAME_BOARD);
+        BeginNormalPaletteFade(0, 0, 0, 0, 6, 1, HEAP_ID_GAME_BOARD);
         work->substate++;
         break;
     case 1:
@@ -640,7 +640,7 @@ static void ov84_0223E958(BgConfig *config) {
     FreeBgTilemapBuffer(config, 3);
     FreeBgTilemapBuffer(config, 1);
     FreeBgTilemapBuffer(config, 4);
-    Heap_Free(config);
+    FreeToHeap(config);
 }
 
 static void BattleArcade_VBlank(void *_work) {
@@ -725,7 +725,7 @@ static void ov84_0223EB44(void) {
     DC_FlushRange(dat->pRawData, 224);
     GX_LoadBGPltt(dat->pRawData, 0, 224);
 
-    Heap_Free(buffer);
+    FreeToHeap(buffer);
 }
 
 static void ov84_0223EB78(GAME_BOARD_WORK *work, GFBgLayer layer) {
@@ -1231,11 +1231,11 @@ static void ov84_0223F2B4(GAME_BOARD_SUB_3E8 *work, Party *playerParty, Party *o
     ov84_0223F5E4(work, playerParty, opponentParty, type);
 
     for (i = 0; i < 11; i++) {
-        SpriteTransfer_CreateCharTransferTask(work->resourceObj[i][GF_GFX_RES_TYPE_CHAR]);
+        sub_0200ACF0(work->resourceObj[i][GF_GFX_RES_TYPE_CHAR]);
     }
 
     for (i = 0; i < 4; i++) {
-        SpriteTransfer_CreateExtPlttTransferTask(work->resourceObj[i][GF_GFX_RES_TYPE_PLTT]);
+        sub_0200AF94(work->resourceObj[i][GF_GFX_RES_TYPE_PLTT]);
     }
 
     GfGfx_EngineBTogglePlanes(GX_PLANEMASK_OBJ, GF_PLANE_TOGGLE_ON);
@@ -1259,8 +1259,8 @@ static Sprite *ov84_0223F374(GAME_BOARD_SUB_3E8 *work, u32 chara, u32 pal, u32 c
         template.scale.y = 1 * FX32_ONE;
         template.scale.z = 1 * FX32_ONE;
         template.rotation = 0;
-        template.drawPriority = prio;
-        template.heapID = HEAP_ID_GAME_BOARD;
+        template.priority = prio;
+        template.heapId = HEAP_ID_GAME_BOARD;
 
         if (display == 0) {
             template.whichScreen = NNS_G2D_VRAM_TYPE_2DMAIN;
@@ -1282,11 +1282,11 @@ static void ov84_0223F418(GAME_BOARD_SUB_3E8 *work) {
     u8 i;
 
     for (i = 0; i < 11; i++) {
-        SpriteTransfer_DeleteCharTransferTask(work->resourceObj[i][GF_GFX_RES_TYPE_CHAR]);
+        sub_0200AEB0(work->resourceObj[i][GF_GFX_RES_TYPE_CHAR]);
     }
 
     for (i = 0; i < 4; i++) {
-        SpriteTransfer_DeletePlttTransferTask(work->resourceObj[i][GF_GFX_RES_TYPE_PLTT]);
+        sub_0200B0A8(work->resourceObj[i][GF_GFX_RES_TYPE_PLTT]);
     }
 
     for (i = 0; i < 4; i++) {
@@ -1370,7 +1370,7 @@ static BATTLE_ARCADE_OBJECT *BattleArcadeObject_Create(GAME_BOARD_SUB_3E8 *work,
     VecFx32 vec;
     u32 i;
 
-    obj = Heap_Alloc(HEAP_ID_GAME_BOARD, sizeof(BATTLE_ARCADE_OBJECT));
+    obj = AllocFromHeap(HEAP_ID_GAME_BOARD, sizeof(BATTLE_ARCADE_OBJECT));
 
     u8 *temp = (u8 *)obj;
     for (i = sizeof(BATTLE_ARCADE_OBJECT); i; i--) {
@@ -1397,7 +1397,7 @@ static BATTLE_ARCADE_OBJECT *BattleArcadeObject_Create(GAME_BOARD_SUB_3E8 *work,
 
 static void *BattleArcadeObj_Delete(BATTLE_ARCADE_OBJECT *obj) {
     Sprite_Delete(obj->sprite);
-    Heap_Free(obj);
+    FreeToHeap(obj);
     return NULL;
 }
 

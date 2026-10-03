@@ -4,4 +4,8 @@
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">Have you been to Lavender Town?\nThere’s a tall Radio Tower there.</language>
 	</row>
+	<row id="msg_0339_R08R0201_00001" index="1">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Hold on--the routes out of Saffron\nare closed while the League runs\fsafety inspections.\rCity’s open; the roads aren’t.\nSorry!</language>
+	</row>
 </body>

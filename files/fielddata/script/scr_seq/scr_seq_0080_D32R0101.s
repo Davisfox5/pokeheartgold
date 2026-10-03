@@ -5,326 +5,326 @@
 
 	.rodata
 
-	ScrDef scr_seq_D32R0101_000
-	ScrDef scr_seq_D32R0101_001
-	ScrDef scr_seq_D32R0101_002
-	ScrDef scr_seq_D32R0101_003
-	ScrDef scr_seq_D32R0101_004
-	ScrDef scr_seq_D32R0101_005
-	ScrDef scr_seq_D32R0101_006
-	ScrDef scr_seq_D32R0101_007
-	ScrDef scr_seq_D32R0101_008
-	ScrDef scr_seq_D32R0101_009
-	ScrDef scr_seq_D32R0101_010
-	ScrDef scr_seq_D32R0101_011
-	ScrDefEnd
+	scrdef scr_seq_D32R0101_000
+	scrdef scr_seq_D32R0101_001
+	scrdef scr_seq_D32R0101_002
+	scrdef scr_seq_D32R0101_003
+	scrdef scr_seq_D32R0101_004
+	scrdef scr_seq_D32R0101_005
+	scrdef scr_seq_D32R0101_006
+	scrdef scr_seq_D32R0101_007
+	scrdef scr_seq_D32R0101_008
+	scrdef scr_seq_D32R0101_009
+	scrdef scr_seq_D32R0101_010
+	scrdef scr_seq_D32R0101_011
+	scrdef_end
 
 scr_seq_D32R0101_011:
-	SetFlag FLAG_SYS_FLYPOINT_UNION_CAVE
-	SetVar VAR_UNK_40E5, 2
-	End
+	setflag FLAG_SYS_FLYPOINT_UNION_CAVE
+	setvar VAR_UNK_40E5, 2
+	end
 
 scr_seq_D32R0101_000:
-	ScrCmd_609
-	LockAll
-	SetVar VAR_UNK_40E6, 1
-	Call _02FF
-	NPCMsg msg_0103_D32R0101_00000
-	CloseMsg
-	Call _0333
-	GoToIfSet FLAG_UNK_176, _0077
-	NPCMsg msg_0103_D32R0101_00001
-	BufferPlayersName 0
-	PlayFanfare SEQ_ME_ITEM
-	NPCMsg msg_0103_D32R0101_00002
-	WaitFanfare
-	SetFlag FLAG_UNK_176
+	scrcmd_609
+	lockall
+	setvar VAR_UNK_40E6, 1
+	call _02FF
+	npc_msg msg_0103_D32R0101_00000
+	closemsg
+	call _0333
+	goto_if_set FLAG_UNK_176, _0077
+	npc_msg msg_0103_D32R0101_00001
+	buffer_players_name 0
+	play_fanfare SEQ_ME_ITEM
+	npc_msg msg_0103_D32R0101_00002
+	wait_fanfare
+	setflag FLAG_UNK_176
 _0077:
-	NPCMsg msg_0103_D32R0101_00003
-	Call _00A6
-	TouchscreenMenuShow
-	NPCMsg msg_0103_D32R0101_00010
-	WaitButton
-	CloseMsg
-	ReleaseAll
-	End
+	npc_msg msg_0103_D32R0101_00003
+	call _00A6
+	touchscreen_menu_show
+	npc_msg msg_0103_D32R0101_00010
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
 
 scr_seq_D32R0101_001:
-	PlaySE SEQ_SE_DP_SELECT
-	LockAll
-	FacePlayer
-	NPCMsg msg_0103_D32R0101_00004
-	Call _00A6
-	GoTo _012B
-	End
+	play_se SEQ_SE_DP_SELECT
+	lockall
+	faceplayer
+	npc_msg msg_0103_D32R0101_00004
+	call _00A6
+	goto _012B
+	end
 
 _00A6:
-	TouchscreenMenuHide
-	MenuInitStdGmm 1, 1, 0, 1, VAR_SPECIAL_RESULT
-	MenuItemAdd 451, 255, 0
-	MenuItemAdd 452, 255, 1
-	MenuItemAdd 453, 255, 2
-	MenuItemAdd 454, 255, 3
-	MenuItemAdd 455, 255, 4
-	MenuItemAdd 456, 255, 5
-	MenuExec
-	Switch VAR_SPECIAL_RESULT
-	Case 0, _0138
-	Case 1, _0170
-	Case 2, _0146
-	Case 3, _0154
-	Case 4, _0162
-	Return
+	touchscreen_menu_hide
+	menu_init_std_gmm 1, 1, 0, 1, VAR_SPECIAL_RESULT
+	menu_item_add 451, 255, 0
+	menu_item_add 452, 255, 1
+	menu_item_add 453, 255, 2
+	menu_item_add 454, 255, 3
+	menu_item_add 455, 255, 4
+	menu_item_add 456, 255, 5
+	menu_exec
+	switch VAR_SPECIAL_RESULT
+	case 0, _0138
+	case 1, _0170
+	case 2, _0146
+	case 3, _0154
+	case 4, _0162
+	return
 
 _012B:
-	TouchscreenMenuShow
-	NPCMsg msg_0103_D32R0101_00010
-	WaitButton
-	CloseMsg
-	ReleaseAll
-	End
+	touchscreen_menu_show
+	npc_msg msg_0103_D32R0101_00010
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
 
 _0138:
-	NPCMsg msg_0103_D32R0101_00005
-	NPCMsg msg_0103_D32R0101_00004
-	GoTo _00A6
-	End
+	npc_msg msg_0103_D32R0101_00005
+	npc_msg msg_0103_D32R0101_00004
+	goto _00A6
+	end
 
 _0146:
-	NPCMsg msg_0103_D32R0101_00007
-	NPCMsg msg_0103_D32R0101_00004
-	GoTo _00A6
-	End
+	npc_msg msg_0103_D32R0101_00007
+	npc_msg msg_0103_D32R0101_00004
+	goto _00A6
+	end
 
 _0154:
-	NPCMsg msg_0103_D32R0101_00008
-	NPCMsg msg_0103_D32R0101_00004
-	GoTo _00A6
-	End
+	npc_msg msg_0103_D32R0101_00008
+	npc_msg msg_0103_D32R0101_00004
+	goto _00A6
+	end
 
 _0162:
-	NPCMsg msg_0103_D32R0101_00009
-	NPCMsg msg_0103_D32R0101_00004
-	GoTo _00A6
-	End
+	npc_msg msg_0103_D32R0101_00009
+	npc_msg msg_0103_D32R0101_00004
+	goto _00A6
+	end
 
 _0170:
-	NPCMsg msg_0103_D32R0101_00006
-	NPCMsg msg_0103_D32R0101_00004
-	GoTo _00A6
-	End
+	npc_msg msg_0103_D32R0101_00006
+	npc_msg msg_0103_D32R0101_00004
+	goto _00A6
+	end
 
 scr_seq_D32R0101_002:
-	PlaySE SEQ_SE_DP_SELECT
-	LockAll
-	FacePlayer
-	NPCMsg msg_0103_D32R0101_00017
-	TouchscreenMenuHide
-	GetMenuChoice VAR_SPECIAL_RESULT
-	TouchscreenMenuShow
-	Compare VAR_SPECIAL_RESULT, 0
-	GoToIfEq _01AD
-	Compare VAR_SPECIAL_RESULT, 1
-	GoToIfEq _01B8
-	End
+	play_se SEQ_SE_DP_SELECT
+	lockall
+	faceplayer
+	npc_msg msg_0103_D32R0101_00017
+	touchscreen_menu_hide
+	getmenuchoice VAR_SPECIAL_RESULT
+	touchscreen_menu_show
+	compare VAR_SPECIAL_RESULT, 0
+	goto_if_eq _01AD
+	compare VAR_SPECIAL_RESULT, 1
+	goto_if_eq _01B8
+	end
 
 _01AD:
-	NPCMsg msg_0103_D32R0101_00018
-	GoTo _01B8
-	End
+	npc_msg msg_0103_D32R0101_00018
+	goto _01B8
+	end
 
 _01B8:
-	NPCMsg msg_0103_D32R0101_00019
-	GoTo _01C3
-	End
+	npc_msg msg_0103_D32R0101_00019
+	goto _01C3
+	end
 
 _01C3:
-	WaitButton
-	CloseMsg
-	ReleaseAll
-	End
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
 
 scr_seq_D32R0101_003:
-	PlaySE SEQ_SE_DP_SELECT
-	LockAll
-	FacePlayer
-	NPCMsg msg_0103_D32R0101_00020
-	TouchscreenMenuHide
-	GetMenuChoice VAR_SPECIAL_RESULT
-	TouchscreenMenuShow
-	Compare VAR_SPECIAL_RESULT, 0
-	GoToIfEq _01FA
-	Compare VAR_SPECIAL_RESULT, 1
-	GoToIfEq _0205
-	End
+	play_se SEQ_SE_DP_SELECT
+	lockall
+	faceplayer
+	npc_msg msg_0103_D32R0101_00020
+	touchscreen_menu_hide
+	getmenuchoice VAR_SPECIAL_RESULT
+	touchscreen_menu_show
+	compare VAR_SPECIAL_RESULT, 0
+	goto_if_eq _01FA
+	compare VAR_SPECIAL_RESULT, 1
+	goto_if_eq _0205
+	end
 
 _01FA:
-	NPCMsg msg_0103_D32R0101_00021
-	GoTo _0205
-	End
+	npc_msg msg_0103_D32R0101_00021
+	goto _0205
+	end
 
 _0205:
-	NPCMsg msg_0103_D32R0101_00022
-	GoTo _0210
-	End
+	npc_msg msg_0103_D32R0101_00022
+	goto _0210
+	end
 
 _0210:
-	WaitButton
-	CloseMsg
-	ReleaseAll
-	End
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
 
 scr_seq_D32R0101_004:
-	PlaySE SEQ_SE_DP_SELECT
-	LockAll
-	FacePlayer
-	NPCMsg msg_0103_D32R0101_00023
-	TouchscreenMenuHide
-	GetMenuChoice VAR_SPECIAL_RESULT
-	TouchscreenMenuShow
-	Compare VAR_SPECIAL_RESULT, 0
-	GoToIfEq _0247
-	Compare VAR_SPECIAL_RESULT, 1
-	GoToIfEq _0252
-	End
+	play_se SEQ_SE_DP_SELECT
+	lockall
+	faceplayer
+	npc_msg msg_0103_D32R0101_00023
+	touchscreen_menu_hide
+	getmenuchoice VAR_SPECIAL_RESULT
+	touchscreen_menu_show
+	compare VAR_SPECIAL_RESULT, 0
+	goto_if_eq _0247
+	compare VAR_SPECIAL_RESULT, 1
+	goto_if_eq _0252
+	end
 
 _0247:
-	NPCMsg msg_0103_D32R0101_00024
-	GoTo _0252
-	End
+	npc_msg msg_0103_D32R0101_00024
+	goto _0252
+	end
 
 _0252:
-	NPCMsg msg_0103_D32R0101_00025
-	GoTo _025D
-	End
+	npc_msg msg_0103_D32R0101_00025
+	goto _025D
+	end
 
 _025D:
-	WaitButton
-	CloseMsg
-	ReleaseAll
-	End
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
 
 scr_seq_D32R0101_005:
-	PlaySE SEQ_SE_DP_SELECT
-	LockAll
-	FacePlayer
-	NPCMsg msg_0103_D32R0101_00026
-	TouchscreenMenuHide
-	GetMenuChoice VAR_SPECIAL_RESULT
-	TouchscreenMenuShow
-	Compare VAR_SPECIAL_RESULT, 0
-	GoToIfEq _0294
-	Compare VAR_SPECIAL_RESULT, 1
-	GoToIfEq _029F
-	End
+	play_se SEQ_SE_DP_SELECT
+	lockall
+	faceplayer
+	npc_msg msg_0103_D32R0101_00026
+	touchscreen_menu_hide
+	getmenuchoice VAR_SPECIAL_RESULT
+	touchscreen_menu_show
+	compare VAR_SPECIAL_RESULT, 0
+	goto_if_eq _0294
+	compare VAR_SPECIAL_RESULT, 1
+	goto_if_eq _029F
+	end
 
 _0294:
-	NPCMsg msg_0103_D32R0101_00027
-	GoTo _029F
-	End
+	npc_msg msg_0103_D32R0101_00027
+	goto _029F
+	end
 
 _029F:
-	NPCMsg msg_0103_D32R0101_00028
-	GoTo _02AA
-	End
+	npc_msg msg_0103_D32R0101_00028
+	goto _02AA
+	end
 
 _02AA:
-	WaitButton
-	CloseMsg
-	ReleaseAll
-	End
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
 
 scr_seq_D32R0101_006:
-	PlaySE SEQ_SE_DP_SELECT
-	LockAll
-	FacePlayer
-	NPCMsg msg_0103_D32R0101_00029
-	TouchscreenMenuHide
-	GetMenuChoice VAR_SPECIAL_RESULT
-	TouchscreenMenuShow
-	Compare VAR_SPECIAL_RESULT, 0
-	GoToIfEq _02E1
-	Compare VAR_SPECIAL_RESULT, 1
-	GoToIfEq _02EC
-	End
+	play_se SEQ_SE_DP_SELECT
+	lockall
+	faceplayer
+	npc_msg msg_0103_D32R0101_00029
+	touchscreen_menu_hide
+	getmenuchoice VAR_SPECIAL_RESULT
+	touchscreen_menu_show
+	compare VAR_SPECIAL_RESULT, 0
+	goto_if_eq _02E1
+	compare VAR_SPECIAL_RESULT, 1
+	goto_if_eq _02EC
+	end
 
 _02E1:
-	NPCMsg msg_0103_D32R0101_00030
-	GoTo _02EC
-	End
+	npc_msg msg_0103_D32R0101_00030
+	goto _02EC
+	end
 
 _02EC:
-	NPCMsg msg_0103_D32R0101_00031
-	GoTo _02F7
-	End
+	npc_msg msg_0103_D32R0101_00031
+	goto _02F7
+	end
 
 _02F7:
-	WaitButton
-	CloseMsg
-	ReleaseAll
-	End
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
 
 _02FF:
-	ApplyMovement obj_D32R0101_bfsw2, _0384
-	ApplyMovement obj_D32R0101_bfsw2_2, _0384
-	ApplyMovement obj_D32R0101_bfsw2_3, _0384
-	ApplyMovement obj_D32R0101_bfsw2_4, _0384
-	ApplyMovement obj_D32R0101_bfsw2_5, _0384
-	ApplyMovement obj_D32R0101_bfsw2_6, _0384
-	WaitMovement
-	Return
+	apply_movement obj_D32R0101_bfsw2, _0384
+	apply_movement obj_D32R0101_bfsw2_2, _0384
+	apply_movement obj_D32R0101_bfsw2_3, _0384
+	apply_movement obj_D32R0101_bfsw2_4, _0384
+	apply_movement obj_D32R0101_bfsw2_5, _0384
+	apply_movement obj_D32R0101_bfsw2_6, _0384
+	wait_movement
+	return
 
 _0333:
-	ToggleFollowingPokemonMovement 0
-	WaitFollowingPokemonMovement
-	FollowingPokemonMovement 55
-	ApplyMovement obj_D32R0101_bfsw2, _038C
-	ApplyMovement obj_D32R0101_bfsw2_2, _038C
-	ApplyMovement obj_D32R0101_bfsw2_3, _038C
-	ApplyMovement obj_D32R0101_bfsw2_4, _0394
-	ApplyMovement obj_D32R0101_bfsw2_5, _0394
-	ApplyMovement obj_D32R0101_bfsw2_6, _0394
-	ApplyMovement obj_player, _039C
-	WaitMovement
-	WaitFollowingPokemonMovement
-	ToggleFollowingPokemonMovement 1
-	FollowingPokemonMovement 48
-	Return
+	toggle_following_pokemon_movement 0
+	wait_following_pokemon_movement
+	following_pokemon_movement 55
+	apply_movement obj_D32R0101_bfsw2, _038C
+	apply_movement obj_D32R0101_bfsw2_2, _038C
+	apply_movement obj_D32R0101_bfsw2_3, _038C
+	apply_movement obj_D32R0101_bfsw2_4, _0394
+	apply_movement obj_D32R0101_bfsw2_5, _0394
+	apply_movement obj_D32R0101_bfsw2_6, _0394
+	apply_movement obj_player, _039C
+	wait_movement
+	wait_following_pokemon_movement
+	toggle_following_pokemon_movement 1
+	following_pokemon_movement 48
+	return
 
 	.balign 4, 0
 _0384:
-	FaceSouth
-	EndMovement
+	step 1, 1
+	step_end
 
 	.balign 4, 0
 _038C:
-	FaceEast
-	EndMovement
+	step 3, 1
+	step_end
 
 	.balign 4, 0
 _0394:
-	FaceWest
-	EndMovement
+	step 2, 1
+	step_end
 
 	.balign 4, 0
 _039C:
-	WalkNormalNorth 3
-	WalkOnSpotNormalWest
-	EndMovement
+	step 12, 3
+	step 34, 1
+	step_end
 
 scr_seq_D32R0101_007:
-	SimpleNPCMsg msg_0103_D32R0101_00032
-	End
+	simple_npc_msg msg_0103_D32R0101_00032
+	end
 
 scr_seq_D32R0101_008:
-	SimpleNPCMsg msg_0103_D32R0101_00033
-	End
+	simple_npc_msg msg_0103_D32R0101_00033
+	end
 
 scr_seq_D32R0101_009:
-	SimpleNPCMsg msg_0103_D32R0101_00034
-	End
+	simple_npc_msg msg_0103_D32R0101_00034
+	end
 
 scr_seq_D32R0101_010:
-	SimpleNPCMsg msg_0103_D32R0101_00035
-	End
+	simple_npc_msg msg_0103_D32R0101_00035
+	end
 	.balign 4, 0

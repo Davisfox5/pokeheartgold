@@ -21,7 +21,7 @@ _021E5912:
 	mov r0, #3
 	mov r1, #0x98
 	lsl r2, r2, #0x10
-	bl Heap_Create
+	bl CreateHeap
 	mov r1, #0x16
 	add r0, r6, #0
 	lsl r1, r1, #4
@@ -125,7 +125,7 @@ _021E59DE:
 	add r0, r5, #0
 	bl OverlayManager_FreeData
 	mov r0, #0x98
-	bl Heap_Destroy
+	bl DestroyHeap
 	mov r0, #1
 	pop {r3, r4, r5, pc}
 	thumb_func_end UnownReport_Exit
@@ -156,9 +156,9 @@ ov113_021E59F8: ; 0x021E59F8
 	mov r1, #0
 	bl sub_0200FBF4
 	mov r0, #0
-	bl ResetVisibleHardwareWindows
+	bl sub_0200FBDC
 	mov r0, #1
-	bl ResetVisibleHardwareWindows
+	bl sub_0200FBDC
 	pop {r3, pc}
 	.balign 4, 0
 _021E5A40: .word 0xFFFFE0FF
@@ -1525,7 +1525,7 @@ ov113_021E6490: ; 0x021E6490
 	mov r1, #5
 	bl FreeBgTilemapBuffer
 	ldr r0, [r4, #0x40]
-	bl Heap_Free
+	bl FreeToHeap
 	ldr r2, _021E64D8 ; =0x04000304
 	ldrh r1, [r2]
 	lsr r0, r2, #0xb
@@ -1709,27 +1709,27 @@ ov113_021E663C: ; 0x021E663C
 	mov r0, #0x12
 	lsl r0, r0, #4
 	ldr r0, [r4, r0]
-	bl Heap_Free
+	bl FreeToHeap
 	mov r0, #0x11
 	lsl r0, r0, #4
 	ldr r0, [r4, r0]
-	bl Heap_Free
+	bl FreeToHeap
 	mov r0, #1
 	lsl r0, r0, #8
 	ldr r0, [r4, r0]
-	bl Heap_Free
+	bl FreeToHeap
 	mov r0, #0x15
 	lsl r0, r0, #4
 	ldr r0, [r4, r0]
-	bl Heap_Free
+	bl FreeToHeap
 	mov r0, #5
 	lsl r0, r0, #6
 	ldr r0, [r4, r0]
-	bl Heap_Free
+	bl FreeToHeap
 	mov r0, #0x13
 	lsl r0, r0, #4
 	ldr r0, [r4, r0]
-	bl Heap_Free
+	bl FreeToHeap
 	pop {r4, pc}
 	.balign 4, 0
 	thumb_func_end ov113_021E663C
@@ -1876,9 +1876,9 @@ ov113_021E677C: ; 0x021E677C
 	mov r3, #2
 	bl SpriteSystem_Init
 	ldr r0, [r5]
-	bl thunk_ClearMainOAM
+	bl sub_0200B2E0
 	ldr r0, [r5]
-	bl thunk_ClearSubOAM
+	bl sub_0200B2E8
 	add r0, r5, #0
 	add r0, #0xac
 	ldr r0, [r0]
@@ -2090,7 +2090,7 @@ ov113_021E6930: ; 0x021E6930
 	str r1, [r0]
 	bl GF_DestroyVramTransferManager
 	ldr r0, [r4]
-	bl thunk_ClearMainOAM
+	bl sub_0200B2E0
 	pop {r4, pc}
 	thumb_func_end ov113_021E6930
 

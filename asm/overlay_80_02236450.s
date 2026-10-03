@@ -39,7 +39,7 @@ ov80_02236450: ; 0x02236450
 	bl ov80_022364A4
 	add r4, r0, #0
 	ldr r0, [sp, #0x14]
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r4, #0
 	add sp, #0x18
 	pop {r3, r4, r5, r6, r7, pc}
@@ -82,7 +82,7 @@ _022364DE:
 	str r0, [sp, #0x24]
 _022364E2:
 	add r0, r7, #0
-	bl FrontierFieldSystem_0204B510
+	bl sub_0204B510
 	ldr r1, [sp, #0x14]
 	ldrh r1, [r1, #2]
 	bl _s32_div_f
@@ -223,13 +223,13 @@ _022365E8:
 	b _022364E2
 _022365EE:
 	ldr r0, [sp, #0x18]
-	bl GetFrontierTrainerIVs
+	bl sub_0204B4D4
 	str r0, [sp, #0x3c]
 	add r0, r7, #0
-	bl FrontierFieldSystem_0204B510
+	bl sub_0204B510
 	add r5, r0, #0
 	add r0, r7, #0
-	bl FrontierFieldSystem_0204B510
+	bl sub_0204B510
 	lsl r0, r0, #0x10
 	orr r0, r5
 	str r0, [sp, #0x38]
@@ -462,10 +462,10 @@ _022367AA:
 	bne _022367F0
 _022367BE:
 	add r0, r4, #0
-	bl FrontierFieldSystem_0204B510
+	bl sub_0204B510
 	add r6, r0, #0
 	add r0, r4, #0
-	bl FrontierFieldSystem_0204B510
+	bl sub_0204B510
 	lsl r0, r0, #0x10
 	add r7, r6, #0
 	orr r7, r0
@@ -697,7 +697,7 @@ _022369A6:
 	blt _02236964
 _022369B8:
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r7, #0
 	bl BattleSetup_SetAllySideBattlersToPlayer
 	ldr r0, [r5, #4]
@@ -797,7 +797,7 @@ _02236A62:
 	blt _02236A62
 _02236A7E:
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	add sp, #0x10
 	pop {r3, r4, r5, r6, r7, pc}
 	thumb_func_end ov80_02236A34

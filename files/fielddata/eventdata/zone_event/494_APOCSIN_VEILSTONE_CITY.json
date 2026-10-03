@@ -1,0 +1,355 @@
+{
+  "header": "fielddata/script/scr_seq/event_EVERYWHERE.h",
+  "bgs": [
+    {
+      "scriptId": 52,
+      "type": 1,
+      "x": 688,
+      "z": 592,
+      "y": 0,
+      "dir": 0
+    },
+    {
+      "scriptId": 52,
+      "type": 1,
+      "x": 698,
+      "z": 599,
+      "y": 0,
+      "dir": 0
+    },
+    {
+      "scriptId": 52,
+      "type": 1,
+      "x": 729,
+      "z": 616,
+      "y": 0,
+      "dir": 0
+    },
+    {
+      "scriptId": 52,
+      "type": 1,
+      "x": 730,
+      "z": 629,
+      "y": 0,
+      "dir": 0
+    },
+    {
+      "scriptId": 52,
+      "type": 1,
+      "x": 732,
+      "z": 628,
+      "y": 0,
+      "dir": 0
+    },
+    {
+      "scriptId": 52,
+      "type": 1,
+      "x": 731,
+      "z": 622,
+      "y": 0,
+      "dir": 0
+    },
+    {
+      "scriptId": 52,
+      "type": 1,
+      "x": 732,
+      "z": 630,
+      "y": 0,
+      "dir": 0
+    }
+  ],
+  "objects": [
+    {
+      "id": 0,
+      "spriteId": "SPRITE_GANG",
+      "movement": 3,
+      "type": 0,
+      "eventFlag": 0,
+      "scriptId": 3,
+      "facingDirection": 1,
+      "param0": 0,
+      "param1": 0,
+      "param2": 0,
+      "xRange": 1,
+      "yRange": 3,
+      "x": 722,
+      "z": 614,
+      "y": 0
+    },
+    {
+      "id": 1,
+      "spriteId": "SPRITE_GSBIGMAN",
+      "movement": 3,
+      "type": 0,
+      "eventFlag": 0,
+      "scriptId": 6,
+      "facingDirection": 1,
+      "param0": 0,
+      "param1": 0,
+      "param2": 0,
+      "xRange": 1,
+      "yRange": 2,
+      "x": 706,
+      "z": 614,
+      "y": 0
+    },
+    {
+      "id": 2,
+      "spriteId": "SPRITE_GSGIRL3",
+      "movement": 3,
+      "type": 0,
+      "eventFlag": 0,
+      "scriptId": 3,
+      "facingDirection": 1,
+      "param0": 0,
+      "param1": 0,
+      "param2": 0,
+      "xRange": 2,
+      "yRange": 1,
+      "x": 701,
+      "z": 618,
+      "y": 0
+    },
+    {
+      "id": 3,
+      "spriteId": "SPRITE_LADY",
+      "movement": 3,
+      "type": 0,
+      "eventFlag": 0,
+      "scriptId": 3,
+      "facingDirection": 1,
+      "param0": 0,
+      "param1": 0,
+      "param2": 0,
+      "xRange": 2,
+      "yRange": 1,
+      "x": 699,
+      "z": 606,
+      "y": 0
+    },
+    {
+      "id": 4,
+      "spriteId": "SPRITE_GSGIRL3",
+      "movement": 3,
+      "type": 0,
+      "eventFlag": 0,
+      "scriptId": 13,
+      "facingDirection": 1,
+      "param0": 0,
+      "param1": 0,
+      "param2": 0,
+      "xRange": 2,
+      "yRange": 1,
+      "x": 710,
+      "z": 605,
+      "y": 0
+    },
+    {
+      "id": 5,
+      "spriteId": "SPRITE_GANG",
+      "movement": 3,
+      "type": 0,
+      "eventFlag": 0,
+      "scriptId": 6,
+      "facingDirection": 1,
+      "param0": 0,
+      "param1": 0,
+      "param2": 0,
+      "xRange": 2,
+      "yRange": 1,
+      "x": 709,
+      "z": 612,
+      "y": 0
+    },
+    {
+      "id": 6,
+      "spriteId": "SPRITE_GANG",
+      "movement": 3,
+      "type": 0,
+      "eventFlag": 0,
+      "scriptId": 4,
+      "facingDirection": 3,
+      "param0": 0,
+      "param1": 0,
+      "param2": 0,
+      "xRange": 1,
+      "yRange": 1,
+      "x": 711,
+      "z": 625,
+      "y": 0
+    },
+    {
+      "id": 7,
+      "spriteId": "SPRITE_GANG",
+      "movement": 3,
+      "type": 0,
+      "eventFlag": 0,
+      "scriptId": 3,
+      "facingDirection": 2,
+      "param0": 0,
+      "param1": 0,
+      "param2": 0,
+      "xRange": 1,
+      "yRange": 1,
+      "x": 687,
+      "z": 624,
+      "y": 0
+    },
+    {
+      "id": 8,
+      "spriteId": "SPRITE_GSGIRL3",
+      "movement": 3,
+      "type": 0,
+      "eventFlag": 0,
+      "scriptId": 13,
+      "facingDirection": 1,
+      "param0": 0,
+      "param1": 0,
+      "param2": 0,
+      "xRange": 2,
+      "yRange": 1,
+      "x": 705,
+      "z": 632,
+      "y": 0
+    },
+    {
+      "id": 9,
+      "spriteId": "SPRITE_GANG",
+      "movement": 0,
+      "type": 0,
+      "eventFlag": 0,
+      "scriptId": 6,
+      "facingDirection": 1,
+      "param0": 0,
+      "param1": 0,
+      "param2": 0,
+      "xRange": 0,
+      "yRange": 0,
+      "x": 695,
+      "z": 613,
+      "y": 0
+    }
+  ],
+  "warps": [
+    {
+      "x": 678,
+      "z": 598,
+      "header": "MAP_APOC_SIN_H00_VEILSTONE_CITY",
+      "anchor": 0,
+      "y": 0
+    },
+    {
+      "x": 678,
+      "z": 599,
+      "header": "MAP_APOC_SIN_H01_VEILSTONE_CITY",
+      "anchor": 0,
+      "y": 0
+    },
+    {
+      "x": 706,
+      "z": 623,
+      "header": "MAP_APOC_SIN_H02_VEILSTONE_CITY",
+      "anchor": 0,
+      "y": 0
+    },
+    {
+      "x": 701,
+      "z": 603,
+      "header": "MAP_APOC_SIN_H03_VEILSTONE_CITY",
+      "anchor": 0,
+      "y": 0
+    },
+    {
+      "x": 701,
+      "z": 591,
+      "header": "MAP_APOC_SIN_H04_VEILSTONE_CITY",
+      "anchor": 0,
+      "y": 0
+    },
+    {
+      "x": 716,
+      "z": 623,
+      "header": "MAP_APOC_SIN_H05_VEILSTONE_CITY",
+      "anchor": 0,
+      "y": 0
+    },
+    {
+      "x": 690,
+      "z": 623,
+      "header": "MAP_APOC_SIN_H06_VEILSTONE_CITY",
+      "anchor": 0,
+      "y": 0
+    },
+    {
+      "x": 696,
+      "z": 623,
+      "header": "MAP_APOC_SIN_H07_VEILSTONE_CITY",
+      "anchor": 0,
+      "y": 0
+    },
+    {
+      "x": 711,
+      "z": 602,
+      "header": "MAP_APOC_SIN_H08_VEILSTONE_CITY",
+      "anchor": 0,
+      "y": 0
+    },
+    {
+      "x": 717,
+      "z": 602,
+      "header": "MAP_APOC_SIN_H09_VEILSTONE_CITY",
+      "anchor": 0,
+      "y": 0
+    },
+    {
+      "x": 717,
+      "z": 611,
+      "header": "MAP_APOC_SIN_PC_VEILSTONE_CITY",
+      "anchor": 0,
+      "y": 0
+    },
+    {
+      "x": 718,
+      "z": 638,
+      "header": "MAP_APOC_SIN_H11_VEILSTONE_CITY",
+      "anchor": 0,
+      "y": 0
+    },
+    {
+      "x": 719,
+      "z": 638,
+      "header": "MAP_APOC_SIN_H12_VEILSTONE_CITY",
+      "anchor": 0,
+      "y": 0
+    },
+    {
+      "x": 684,
+      "z": 611,
+      "header": "MAP_APOC_SIN_H13_VEILSTONE_CITY",
+      "anchor": 0,
+      "y": 0
+    },
+    {
+      "x": 714,
+      "z": 589,
+      "header": "MAP_APOC_SIN_H14_VEILSTONE_CITY",
+      "anchor": 0,
+      "y": 0
+    },
+    {
+      "x": 717,
+      "z": 589,
+      "header": "MAP_APOC_SIN_H15_VEILSTONE_CITY",
+      "anchor": 0,
+      "y": 0
+    },
+    {
+      "x": 720,
+      "z": 589,
+      "header": "MAP_APOC_SIN_H16_VEILSTONE_CITY",
+      "anchor": 0,
+      "y": 0
+    }
+  ],
+  "coords": []
+}

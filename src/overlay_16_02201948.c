@@ -1,12 +1,13 @@
+#include "global.h"
 
 #include "constants/items.h"
 
 #include "bag_cursor.h"
 #include "bag_view.h"
 #include "berry_pots_app.h"
+#include "launch_application.h"
 #include "overlay_15.h"
 #include "overlay_16.h"
-#include "poke_overlay.h"
 
 FS_EXTERN_OVERLAY(OVY_15);
 FS_EXTERN_OVERLAY(OVY_17);
@@ -40,7 +41,7 @@ static const OverlayManagerTemplate ov16_02201B78 = {
 static const u8 *unused_02201BA0;
 
 typedef struct UnkStruct_ov16_0220196C {
-    enum HeapID heapID;
+    HeapID heapId;
     BerryPotsArgs *args;
     OverlayManager *ovyManager;
     u8 unkC[0x10 - 0xC];
@@ -73,11 +74,11 @@ BOOL BerryPots_Init(OverlayManager *manager, int *state) {
     HandleLoadOverlay(FS_OVERLAY_ID(OVY_17), OVY_LOAD_ASYNC);
     ov17_02201BC0();
 
-    Heap_Create(HEAP_ID_3, HEAP_ID_BERRY_POTS, 0x20000);
+    CreateHeap(HEAP_ID_3, HEAP_ID_BERRY_POTS, 0x20000);
 
     UnkStruct_ov16_0220196C *unk = OverlayManager_CreateAndGetData(manager, sizeof(UnkStruct_ov16_0220196C), HEAP_ID_BERRY_POTS);
     MI_CpuFill8(unk, 0, sizeof(UnkStruct_ov16_0220196C));
-    unk->heapID = HEAP_ID_BERRY_POTS;
+    unk->heapId = HEAP_ID_BERRY_POTS;
     unk->args = OverlayManager_GetArgs(manager);
     ov16_02201A34(unk);
 
@@ -114,24 +115,24 @@ BOOL BerryPots_Exit(OverlayManager *manager, int *state) {
     ov16_02201A4C(unk);
 
     OverlayManager_FreeData(manager);
-    Heap_Destroy(HEAP_ID_BERRY_POTS);
+    DestroyHeap(HEAP_ID_BERRY_POTS);
     UnloadOverlayByID(FS_OVERLAY_ID(OVY_17));
 
     return TRUE;
 }
 
 static void ov16_02201A34(UnkStruct_ov16_0220196C *unk) {
-    unk->cursor1 = BagCursor_New(unk->heapID);
-    unk->cursor2 = BagCursor_New(unk->heapID);
+    unk->cursor1 = BagCursor_New(unk->heapId);
+    unk->cursor2 = BagCursor_New(unk->heapId);
 }
 
 static void ov16_02201A4C(UnkStruct_ov16_0220196C *unk) {
-    Heap_Free(unk->cursor2);
-    Heap_Free(unk->cursor1);
+    FreeToHeap(unk->cursor2);
+    FreeToHeap(unk->cursor1);
 }
 
 static u32 ov16_02201A60(UnkStruct_ov16_0220196C *unk) {
-    unk->ovyManager = OverlayManager_New(&ov16_02201B68, unk, unk->heapID);
+    unk->ovyManager = OverlayManager_New(&ov16_02201B68, unk, unk->heapId);
     return 1;
 }
 
@@ -154,13 +155,13 @@ static u32 ov16_02201AA0(UnkStruct_ov16_0220196C *unk) {
     case 1:
         unused_02201BA0 = (u8 *)ov16_02201B60;
 
-        unk->bagView = Bag_CreateView(bag, ov16_02201B60, unk->heapID);
+        unk->bagView = Bag_CreateView(bag, ov16_02201B60, unk->heapId);
         sub_0207789C(unk->bagView, unk->args->saveData, 6, unk->cursor2, unk->args->menuInputStatePtr);
         break;
     case 2:
         unused_02201BA0 = (u8 *)ov16_02201B64;
 
-        unk->bagView = Bag_CreateView(bag, ov16_02201B64, unk->heapID);
+        unk->bagView = Bag_CreateView(bag, ov16_02201B64, unk->heapId);
         sub_0207789C(unk->bagView, unk->args->saveData, 6, unk->cursor1, unk->args->menuInputStatePtr);
         break;
     default:
@@ -168,7 +169,7 @@ static u32 ov16_02201AA0(UnkStruct_ov16_0220196C *unk) {
         break;
     }
 
-    unk->ovyManager = OverlayManager_New(&ov16_02201B78, unk->bagView, unk->heapID);
+    unk->ovyManager = OverlayManager_New(&ov16_02201B78, unk->bagView, unk->heapId);
     return 3;
 }
 
@@ -178,7 +179,7 @@ static u32 ov16_02201B24(UnkStruct_ov16_0220196C *unk) {
     }
 
     unk->unk16 = ((u8)sub_0207790C(unk->bagView) == 4) ? BagView_GetItemId(unk->bagView) : 0xFFFF;
-    Heap_Free(unk->bagView);
+    FreeToHeap(unk->bagView);
     unk->bagView = NULL;
 
     return 0;

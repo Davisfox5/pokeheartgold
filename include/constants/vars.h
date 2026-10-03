@@ -61,15 +61,15 @@
 #define NUM_OBJ_GFX_VARS 16
 
 #define VAR_PLAYER_STARTER                 0x4030
-#define VAR_UNK_4031                       0x4031
+#define VAR_APOC_FRIEND_STARTER                       0x4031
 #define VAR_UNK_4032                       0x4032
 #define VAR_BUENAS_PASSWORD_SET            0x4033
-#define VAR_UNK_4034                       0x4034
+#define VAR_APOC_CH3_WELL_PROGRESS        0x4034
 #define VAR_MAGIKARP_SIZE_RECORD           0x4035
 #define VAR_UNK_4036                       0x4036
 #define VAR_UNK_4037                       0x4037
-#define VAR_UNK_4038                       0x4038
-#define VAR_UNK_4039                       0x4039
+#define VAR_APOC_CH3_AZALEA_SCENE         0x4038
+#define VAR_APOC_CH4_SCENE                0x4039
 #define VAR_UNK_403A                       0x403A
 #define VAR_UNK_403B                       0x403B
 #define VAR_LOTO_NUMBER_LO                 0x403C
@@ -87,7 +87,7 @@
 #define VAR_ROAMER_LATIOS_STATUS           0x4048
 #define VAR_UNK_4049                       0x4049
 #define VAR_UNK_404A                       0x404A
-#define VAR_FRIENDSHIP_STEPS               0x404B
+#define VAR_UNK_404B                       0x404B
 #define VAR_UNK_404C                       0x404C
 #define VAR_BATTLE_TOWER_PRINT_PROGRESS    0x404D
 #define VAR_BATTLE_FACTORY_PRINT_PROGRESS  0x404E

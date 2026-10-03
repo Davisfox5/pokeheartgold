@@ -13,7 +13,6 @@
 #include "item.h"
 #include "move.h"
 #include "msgdata.h"
-#include "obj_char_transfer.h"
 #include "options.h"
 #include "palette.h"
 #include "player_data.h"
@@ -26,7 +25,6 @@
 #include "sys_task_api.h"
 #include "trainer_data.h"
 #include "unk_0200CE7C.h"
-#include "unk_02013534.h"
 
 typedef struct BattleMessage {
     u8 unk0;
@@ -38,9 +36,11 @@ typedef struct BattleMessage {
 } BattleMessage;
 
 typedef struct BattleMessageData {
-    u32 id;
-    int tag;
-    int params[6];
+    u8 unk0;
+    u8 unk1;
+    u16 unk2;
+    int unk4[6];
+    int unk1C;
 } BattleMessageData;
 
 typedef struct GetterWork GetterWork;
@@ -125,9 +125,9 @@ typedef struct TrainerAIData {
     u8 unk13;
     u8 *unk14;
     u8 unk18[4];
-    u16 moves[BATTLER_MAX][MOVES_MAX];
-    u8 abilities[BATTLER_MAX];
-    u16 heldItems[BATTLER_MAX];
+    u16 unk1C[4][4];
+    u8 unk5C[4];
+    u16 unk60[4];
     u16 unk68[2][4];
     u32 unk78[8];
     u8 unk98;
@@ -255,10 +255,10 @@ typedef struct BattleMon {
     u32 otid;
     u16 item;
     u16 unk76;
-    u8 hitCount;
+    u8 unk78;
     u8 msgFlag;
     u8 gender : 4;
-    u8 otGender : 4;
+    u8 metGender : 4;
     u8 ball;
     u32 moveEffectFlags;
     u32 moveEffectFlagsTemp;
@@ -419,7 +419,7 @@ typedef struct BattleContext {
     u16 unk_310C[4];
     int flingData;
     int flingScript;
-    u8 safariCatchRateStage;
+    u8 unk_311C;
     u8 safariRunAttempts;
     u8 runAttempts;
     u8 battleEndFlag;
@@ -444,7 +444,7 @@ typedef struct BattleHpBar {
     };
     ManagedSprite *boxObj;
     ManagedSprite *arrowObj;
-    BattleSystem *battleSystem;
+    BattleSystem *bsys;
     SysTask *unk10;
     Window unk14;
     u8 battlerId;
@@ -474,21 +474,17 @@ typedef struct BattleHpBar {
     u16 unk54;
 } BattleHpBar;
 
-typedef struct UnkBallData UnkBallData;
-
 typedef struct OpponentData {
     u32 unk0[6];
-    ManagedSprite *managedSprite;
+    u32 unk18;
     u32 *unk1C;
     Pokepic *pokepic;
     u32 *unk24;
     BattleHpBar hpBar;
     void *unk80;
-    u8 unk84[0x4];
-    UnkBallData *ballData;
-    u8 unk8C[0x108];
+    u8 unk84[0x110];
     u8 unk194;
-    u8 battlerType;
+    u8 unk195;
     u8 unk196;
     u8 unk197;
     SysTask *unk198;
@@ -501,7 +497,7 @@ typedef struct OpponentData {
 
 typedef struct UnkBattleSystemSub17C {
     ManagedSprite *unk0;
-    BattleSystem *battleSystem;
+    BattleSystem *bsys;
     u8 unk8;
     u8 unk9;
     s16 unkA;
@@ -521,8 +517,6 @@ typedef struct UnkBattleSystemSub220 {
     int unk4;
     int unk8;
 } UnkBattleSystemSub220;
-
-typedef struct BattleInput BattleInput;
 
 struct BattleSystem {
     u32 *unk0;
@@ -547,7 +541,7 @@ struct BattleSystem {
     PCStorage *storage;
     Party *trainerParty[4];
     SOUND_CHATOT *chatotVoice[4];
-    PokepicManager *pokepicManager;
+    u32 *unk88;
     u32 *unk8C;
     SpriteSystem *spriteRenderer;
     SpriteManager *gfxHandler;
@@ -557,7 +551,7 @@ struct BattleSystem {
     u8 trainerGender[4];
     Trainer trainers[4];
     UnkBattleSystemSub17C unk17C[2]; // Battle Background..?
-    BattleInput *battleInput;
+    u32 *unk19C;
     u32 *unk1A0[2];
     BattleNumberPrinter *hpNumPrinter;
     BattleNumberPrinter *levelNumPrinter;
@@ -565,7 +559,7 @@ struct BattleSystem {
     Options *options;
     u32 *unk1B8;
     void *unk1BC;
-    u8 *unk1C0;
+    u32 *unk1C0;
     u32 *unk1C4;
     void *unk1C8; // related to animations
     u32 *unk1CC;
@@ -595,7 +589,7 @@ struct BattleSystem {
     u8 criticalHpMusic : 2;
     u8 criticalHpMusicDelay : 3;
     Terrain terrain;
-    int backgroundId;
+    int unk2404;
     int location;
     u32 battleSpecial;
     int timezone; // might be timeOfDay? unclear
@@ -608,7 +602,7 @@ struct BattleSystem {
     int unk2424;
     int unk2428;
     int weather;
-    BOOL metBill;
+    int unk2430;
     u32 unk2434;
     int unk2438;
     int unk243C;
@@ -625,27 +619,27 @@ struct BattleSystem {
     u32 isRecordingPaused : 1;
     u32 unk2474_1 : 1;
     u32 unk2474_2 : 1;
-    u32 isFishing : 1;
+    u32 unk2474_3 : 1;
     u32 unk2474_4 : 28;
     u32 unk2478;
     SysTask *unk247C;
     u8 chatotVoiceParam[4];
-    Pokemon *bugContestCaughtMon;
+    u32 unk2488;
     u8 unk248C[4];
 };
 
 struct GetterWork {
-    BattleSystem *battleSystem;
+    BattleSystem *bsys;
     BattleContext *ctx;
-    UnkBallData *ballData;
-    ManagedSprite *unkC[2];
-    TextOBJ *unk14;
-    UnkStruct_02021AC8 unk18;
-    int captureType;
+    u32 unk8;
+    u32 unkC[2];
+    u32 unk14;
+    u32 unk18[3];
+    int unk24;
     int state;
-    int ballID;
-    int tempData[8];
-    void *tempPointers[2];
+    int unk2C;
+    int unk30[8];
+    void *unk50[2];
 }; // size: 0x58
 
 typedef BOOL (*BtlCmdFunc)(BattleSystem *, BattleContext *);
@@ -678,58 +672,5 @@ typedef struct BattleItem {
     u8 page;
     u8 monIndex;
 } BattleItem;
-
-typedef struct BattleCursorPosition BattleCursorPosition;
-
-typedef struct UnkStruct_134 {
-    s32 unk0;
-    enum HeapID heapID;
-    s32 unk8;
-    s32 unkC;
-    int ball;
-    s32 unk14;
-    s32 unk18;
-    SpriteSystem *spriteSystem;
-    PaletteData *paletteData;
-    BattleSystem *battleSystem;
-} UnkStruct_134;
-
-typedef struct UnkStruct_50C {
-    BgConfig *bgConfig;
-    PaletteData *paletteData;
-    PokepicManager *pokepicManager;
-    Pokemon *mon;
-    BOOL natDexEnabled;
-    enum HeapID heapID;
-} UnkStruct_50C;
-
-struct UnkBallData { // TODO: Give a better name.
-    int unk0;
-    int unk4;
-    int unk8;
-    int unkC;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    u8 unk20;
-    u8 unk21;
-    s8 unk22;
-    u8 unk23;
-    BOOL unk24;
-    int unk28;
-    SpriteManager *spriteManager;
-    ManagedSprite *managedSprite;
-    u8 unk34[0x5C];
-    UnkStruct_134 unk90;
-    u8 unkB8[0xC];
-    int unkC4;
-    int unkC8;
-    SysTask *unkCC;
-    int unkD0;
-    int unkD4;
-    int unkD8;
-    int unkDC;
-}; // Size: 0xe0
 
 #endif

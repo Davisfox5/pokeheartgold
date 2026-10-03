@@ -458,7 +458,7 @@ _021F7016:
 	add r2, r4, #0
 	bl BufferPlayersName
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r5, #0
 	mov r1, #0x41
 	bl ov01_021F71C4
@@ -641,7 +641,7 @@ _021F71AC:
 	add r0, r4, #0
 	bl ov01_021F7268
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	bl sub_0203E30C
 	mov r0, #1
 	pop {r3, r4, r5, pc}
@@ -676,14 +676,14 @@ _021F71DC:
 	ldr r0, [r0, #8]
 	add r1, #0x10
 	mov r2, #3
-	bl DialogBox_AddWindowToLayer3
+	bl sub_0205B514
 	ldr r0, [r4, #0x30]
 	ldr r0, [r0, #0xc]
 	bl Save_PlayerData_GetOptionsAddr
 	add r1, r0, #0
 	add r0, r4, #0
 	add r0, #0x10
-	bl DialogBox_LoadFrame
+	bl sub_0205B564
 	ldr r0, [r4, #0x30]
 	ldr r0, [r0, #0xc]
 	bl Save_PlayerData_GetOptionsAddr
@@ -692,7 +692,7 @@ _021F71DC:
 	ldr r1, [r4, #0xc]
 	add r0, #0x10
 	mov r3, #1
-	bl DialogBox_PrintMessage
+	bl sub_0205B5B4
 	str r0, [r4, #0x40]
 	pop {r3, r4, r5, pc}
 	.balign 4, 0
@@ -759,7 +759,7 @@ ov01_021F729C: ; 0x021F729C
 	ldr r5, [r6, #0x10]
 	mov r0, #0xb
 	mov r1, #0x9c
-	bl Heap_AllocAtEnd
+	bl AllocFromHeapAtEnd
 	add r4, r0, #0
 	bl ov01_021F722C
 	str r6, [r4, #0x30]

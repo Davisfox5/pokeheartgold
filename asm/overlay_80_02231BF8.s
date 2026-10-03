@@ -28,7 +28,7 @@ FrtCmd_151: ; 0x02231BF8
 	str r0, [sp, #0x14]
 	ldr r0, [r5]
 	ldr r0, [r0]
-	bl Frontier_GetLaunchArgs
+	bl Frontier_GetLaunchParam
 	str r6, [sp]
 	lsl r2, r4, #0x18
 	ldr r1, [sp, #0x14]
@@ -82,7 +82,7 @@ FrtCmd_154: ; 0x02231C8C
 	add r5, r0, #0
 	ldr r0, [r5]
 	ldr r0, [r0]
-	bl Frontier_GetLaunchArgs
+	bl Frontier_GetLaunchParam
 	add r6, r0, #0
 	ldr r0, [r5]
 	ldr r0, [r0]
@@ -90,7 +90,7 @@ FrtCmd_154: ; 0x02231C8C
 	add r7, r0, #0
 	mov r0, #0xb
 	mov r1, #0x30
-	bl Heap_Alloc
+	bl AllocFromHeap
 	mov r1, #0
 	mov r2, #0x30
 	add r4, r0, #0
@@ -121,7 +121,7 @@ FrtCmd_164: ; 0x02231CE0
 	add r5, r0, #0
 	ldr r0, [r5]
 	ldr r0, [r0]
-	bl Frontier_GetLaunchArgs
+	bl Frontier_GetLaunchParam
 	add r6, r0, #0
 	ldr r0, [r5]
 	ldr r0, [r0]
@@ -129,7 +129,7 @@ FrtCmd_164: ; 0x02231CE0
 	add r7, r0, #0
 	mov r0, #0xb
 	mov r1, #0x30
-	bl Heap_Alloc
+	bl AllocFromHeap
 	mov r1, #0
 	mov r2, #0x30
 	add r4, r0, #0
@@ -168,14 +168,14 @@ FrtCmd_155: ; 0x02231D34
 	add r2, r0, #0
 	ldr r0, [r4, #0x28]
 	mov r1, #0
-	bl Party_SafeCopyMonToSlot_ResetAprijuiceModifiers
+	bl Party_SafeCopyMonToSlot_ResetUnkSub
 	ldr r0, [r5, #4]
 	mov r1, #1
 	bl Party_GetMonByIndex
 	add r2, r0, #0
 	ldr r0, [r4, #0x28]
 	mov r1, #1
-	bl Party_SafeCopyMonToSlot_ResetAprijuiceModifiers
+	bl Party_SafeCopyMonToSlot_ResetUnkSub
 	ldrb r0, [r4, #0x10]
 	bl ov80_02237D8C
 	cmp r0, #0
@@ -186,7 +186,7 @@ FrtCmd_155: ; 0x02231D34
 	add r2, r0, #0
 	ldr r0, [r4, #0x28]
 	mov r1, #2
-	bl Party_SafeCopyMonToSlot_ResetAprijuiceModifiers
+	bl Party_SafeCopyMonToSlot_ResetUnkSub
 	b _02231DA8
 _02231D84:
 	ldr r0, [r5, #0xc]
@@ -195,14 +195,14 @@ _02231D84:
 	add r2, r0, #0
 	ldr r0, [r4, #0x28]
 	mov r1, #2
-	bl Party_SafeCopyMonToSlot_ResetAprijuiceModifiers
+	bl Party_SafeCopyMonToSlot_ResetUnkSub
 	ldr r0, [r5, #0xc]
 	mov r1, #1
 	bl Party_GetMonByIndex
 	add r2, r0, #0
 	ldr r0, [r4, #0x28]
 	mov r1, #3
-	bl Party_SafeCopyMonToSlot_ResetAprijuiceModifiers
+	bl Party_SafeCopyMonToSlot_ResetUnkSub
 _02231DA8:
 	ldr r0, [r5, #0x14]
 	bl IsBattleResultWin
@@ -221,7 +221,7 @@ FrtCmd_156: ; 0x02231DBC
 	add r5, r0, #0
 	ldr r0, [r5]
 	ldr r0, [r0]
-	bl Frontier_GetLaunchArgs
+	bl Frontier_GetLaunchParam
 	add r6, r0, #0
 	ldr r0, [r5]
 	ldr r0, [r0]
@@ -250,7 +250,7 @@ FrtCmd_157: ; 0x02231DF8
 	add r5, r0, #0
 	ldr r0, [r5]
 	ldr r0, [r0]
-	bl Frontier_GetLaunchArgs
+	bl Frontier_GetLaunchParam
 	add r6, r0, #0
 	ldr r0, [r5]
 	ldr r0, [r0]
@@ -258,7 +258,7 @@ FrtCmd_157: ; 0x02231DF8
 	add r7, r0, #0
 	mov r0, #0xb
 	mov r1, #0x30
-	bl Heap_Alloc
+	bl AllocFromHeap
 	mov r1, #0
 	mov r2, #0x30
 	add r4, r0, #0
@@ -332,7 +332,7 @@ ov80_02231E94: ; 0x02231E94
 	add r1, r4, #0
 	bl ov80_02232AEC
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	pop {r4, pc}
 	thumb_func_end ov80_02231E94
 
@@ -389,7 +389,7 @@ FrtCmd_160: ; 0x02231ED0
 	ldr r0, [sp, #0x10]
 	ldr r0, [r0]
 	ldr r0, [r0]
-	bl Frontier_GetLaunchArgs
+	bl Frontier_GetLaunchParam
 	add r7, r0, #0
 	ldr r0, [sp, #0x18]
 	cmp r0, #0x2c
@@ -895,13 +895,13 @@ FrtCmd_162: ; 0x022322C8
 FrtCmd_163: ; 0x022322F8
 	push {r4, lr}
 	add r4, r0, #0
-	bl FrontierScriptContext_ReadHalfWord
+	bl FrontierScript_ReadU16
 	add r1, r4, #0
 	add r1, #0x78
 	strh r0, [r1]
 	ldr r1, _02232314 ; =ov80_02232318
 	add r0, r4, #0
-	bl FrontierScriptContext_Pause
+	bl ov80_0222AB84
 	mov r0, #1
 	pop {r4, pc}
 	nop
@@ -938,13 +938,13 @@ _02232344: .word 0x00000A1A
 FrtCmd_165: ; 0x02232348
 	push {r4, lr}
 	add r4, r0, #0
-	bl FrontierScriptContext_ReadHalfWord
+	bl FrontierScript_ReadU16
 	add r1, r4, #0
 	add r1, #0x78
 	strh r0, [r1]
 	ldr r1, _02232364 ; =ov80_02232368
 	add r0, r4, #0
-	bl FrontierScriptContext_Pause
+	bl ov80_0222AB84
 	mov r0, #1
 	pop {r4, pc}
 	nop
@@ -1034,7 +1034,7 @@ FrtCmd_166: ; 0x022323E8
 	add r6, r0, #0
 	ldr r0, [r5]
 	ldr r0, [r0]
-	bl Frontier_GetLaunchArgs
+	bl Frontier_GetLaunchParam
 	ldr r0, [r0, #8]
 	bl Save_Frontier_GetStatic
 	add r5, r0, #0
@@ -1066,7 +1066,7 @@ FrtCmd_167: ; 0x02232430
 	add r6, r0, #0
 	ldr r0, [r5]
 	ldr r0, [r0]
-	bl Frontier_GetLaunchArgs
+	bl Frontier_GetLaunchParam
 	ldr r0, [r0, #8]
 	bl Save_Frontier_GetStatic
 	lsl r1, r4, #0x18
@@ -1089,7 +1089,7 @@ FrtCmd_168: ; 0x02232460
 	add r6, r0, #0
 	ldr r0, [r5]
 	ldr r0, [r0]
-	bl Frontier_GetLaunchArgs
+	bl Frontier_GetLaunchParam
 	lsl r1, r4, #0x18
 	ldr r0, [r0, #8]
 	lsr r1, r1, #0x18
@@ -1106,7 +1106,7 @@ FrtCmd_169: ; 0x0223248C
 	add r5, r0, #0
 	ldr r0, [r5]
 	ldr r0, [r0]
-	bl Frontier_GetLaunchArgs
+	bl Frontier_GetLaunchParam
 	ldr r1, [r5, #0x1c]
 	add r0, r1, #1
 	str r0, [r5, #0x1c]

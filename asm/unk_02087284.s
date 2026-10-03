@@ -21,7 +21,7 @@ sub_02087284: ; 0x02087284
 	mov r1, #0x42
 	add r0, r4, #0
 	lsl r1, r1, #2
-	bl Heap_Alloc
+	bl AllocFromHeap
 	ldr r1, [sp, #8]
 	mov r3, #0
 	str r1, [r0, #0x10]
@@ -944,7 +944,7 @@ _020879C6:
 	ldr r0, [r4]
 	bl NARC_Delete
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	mov r0, #0
 	pop {r4, pc}
 _020879DA:

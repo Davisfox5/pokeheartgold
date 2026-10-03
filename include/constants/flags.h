@@ -1,7 +1,6 @@
 #ifndef POKEHEARTGOLD_CONSTANTS_FLAGS_H
 #define POKEHEARTGOLD_CONSTANTS_FLAGS_H
 
-#include "constants/flypoints.h"
 #include "constants/trainers.h"
 
 #define FLAG_ACTION_CLEAR 0
@@ -218,7 +217,7 @@
 #define FLAG_GOT_TM10_FROM_LAKE_OF_RAGE_MAN             0xC7
 #define FLAG_UNK_0C8                                    0xC8
 #define FLAG_GOT_RED_SCALE                              0xC9
-#define FLAG_ROCKET_HIDEOUT_CLEARED                     0xCA
+#define FLAG_RED_GYARADOS_MEET                          0xCA
 #define FLAG_REMOVED_ROCKET_HIDEOUT_B3F_ELECTRODE_1     0xCB
 #define FLAG_REMOVED_ROCKET_HIDEOUT_B3F_ELECTRODE_2     0xCC
 #define FLAG_REMOVED_ROCKET_HIDEOUT_B3F_ELECTRODE_3     0xCD
@@ -456,8 +455,8 @@
 #define FLAG_UNK_1B2                                              0x1B2
 #define FLAG_UNK_1B3                                              0x1B3
 #define FLAG_UNK_1B4                                              0x1B4
-#define FLAG_UNK_1B5                                              0x1B5
-#define FLAG_UNK_1B6                                              0x1B6
+#define FLAG_HIDE_CHERRYGROVE_SILVER                                              0x1B5
+#define FLAG_HIDE_CHERRYGROVE_GOLD                                              0x1B6
 #define FLAG_HIDE_ROCKET_TAKEOVER_1                               0x1B7
 #define FLAG_HIDE_ROCKET_TAKEOVER_2                               0x1B8
 #define FLAG_HIDE_ROCKET_TAKEOVER_3                               0x1B9
@@ -508,7 +507,7 @@
 #define FLAG_HIDE_ROCKET_HIDEOUT_B3F_LANCE                        0x1E6
 #define FLAG_HIDE_MAHOGANY_SHOP_SALESWOMAN                        0x1E7
 #define FLAG_UNK_1E8                                              0x1E8
-#define FLAG_UNK_1E9                                              0x1E9
+#define FLAG_HIDE_CHERRYGROVE_FRIEND                                              0x1E9
 #define FLAG_HIDE_ICE_PATH_BOULDER_1_INIT                         0x1EA
 #define FLAG_HIDE_ICE_PATH_BOULDER_2_INIT                         0x1EB
 #define FLAG_HIDE_ICE_PATH_BOULDER_3_INIT                         0x1EC
@@ -577,12 +576,12 @@
 #define FLAG_UNK_22B                                              0x22B
 #define FLAG_UNK_22C                                              0x22C
 #define FLAG_UNK_22D                                              0x22D
-#define FLAG_UNK_22E                                              0x22E
+#define FLAG_APOC_CH2_HIDE_RENKESTRA_TOWER                        0x22E // reclaimed: FLAG_APOC_R29_INTRO_DONE was vacated (zero references)
 #define FLAG_HIDE_BATTLE_TOWER_RECEPTIONIST                       0x22F
-#define FLAG_UNK_230                                              0x230
-#define FLAG_UNK_231                                              0x231
-#define FLAG_UNK_232                                              0x232
-#define FLAG_UNK_233                                              0x233
+#define FLAG_APOC_CATCH_TUT_DONE                                              0x230
+#define FLAG_APOC_MOM_GOODBYE_DONE                                              0x231
+#define FLAG_APOC_HOUSE_POTION                                    0x232
+#define FLAG_APOC_CH2_ROUTE30_INTRO_DONE                          0x233
 #define FLAG_UNK_234                                              0x234
 #define FLAG_HIDE_RUINS_OF_ALPH_ASSISTANTS                        0x235
 #define FLAG_HIDE_RUINS_OF_ALPH_TOURISTS                          0x236
@@ -625,7 +624,7 @@
 #define FLAG_UNK_25B                                              0x25B
 #define FLAG_UNK_25C                                              0x25C
 #define FLAG_UNK_25D                                              0x25D
-#define FLAG_UNK_25E                                              0x25E
+#define FLAG_APOC_CH2_MRPOKEMON_GIFT                              0x25E
 #define FLAG_UNK_25F                                              0x25F
 #define FLAG_UNK_260                                              0x260
 #define FLAG_HIDE_ROUTE_11_SNORLAX                                0x261
@@ -1056,31 +1055,31 @@
 #define FLAG_HIDDENITEM_R45_R46_PP_MAX                0x406
 #define NUM_HIDDEN_ITEMS                              231
 
-#define FLAG_UNK_407 0x407
-#define FLAG_UNK_408 0x408
-#define FLAG_UNK_409 0x409
-#define FLAG_UNK_40A 0x40A
-#define FLAG_UNK_40B 0x40B
-#define FLAG_UNK_40C 0x40C
-#define FLAG_UNK_40D 0x40D
-#define FLAG_UNK_40E 0x40E
-#define FLAG_UNK_40F 0x40F
-#define FLAG_UNK_410 0x410
-#define FLAG_UNK_411 0x411
-#define FLAG_UNK_412 0x412
-#define FLAG_UNK_413 0x413
-#define FLAG_UNK_414 0x414
-#define FLAG_UNK_415 0x415
-#define FLAG_UNK_416 0x416
-#define FLAG_UNK_417 0x417
-#define FLAG_UNK_418 0x418
-#define FLAG_UNK_419 0x419
-#define FLAG_UNK_41A 0x41A
-#define FLAG_UNK_41B 0x41B
-#define FLAG_UNK_41C 0x41C
-#define FLAG_UNK_41D 0x41D
-#define FLAG_UNK_41E 0x41E
-#define FLAG_UNK_41F 0x41F
+#define FLAG_APOC_CH2_HIDE_KESTRA_GATE                            0x407
+#define FLAG_APOC_CH2_HIDE_REN_TOWERDOORS                         0x408
+#define FLAG_APOC_ALWAYS_HIDDEN                                   0x409
+#define FLAG_APOC_CH2_TOWER_RENKESTRA_DONE                        0x40A
+#define FLAG_APOC_CH2_TAG1_RETURNED                               0x40B
+#define FLAG_APOC_CH2_TAG2_RETURNED                               0x40C
+#define FLAG_APOC_CH2_TAG3_RETURNED                               0x40D
+#define FLAG_APOC_CH2_FLASH_GIVEN                                 0x40E
+#define FLAG_APOC_CH2_HIDE_REN_CAMPUS                             0x40F
+#define FLAG_APOC_CH2_REN_THANKS_DONE                             0x410
+#define FLAG_APOC_CH2_PRACTICUM_DONE                              0x411
+#define FLAG_APOC_CH2_KESTRA_BATTLE_DONE                          0x412
+#define FLAG_APOC_CH2_HIDE_KESTRA_GYMFRONT                        0x413
+#define FLAG_APOC_CH2_RUINS_ETHER_TAKEN                           0x414
+#define FLAG_APOC_CH2_HIDE_KESTRA_TOWERDOORS                      0x415
+#define FLAG_APOC_CH2_HIDE_EARL_TOWERDOORS                        0x416
+#define FLAG_APOC_CH3_HIDE_TURK_TOWN                              0x417
+#define FLAG_APOC_CH3_SILVER_MET                                  0x418
+#define FLAG_APOC_CH3_BADGE_DONE                                  0x419
+#define FLAG_APOC_CH3_HIDE_SILVER_T23                             0x41A
+#define FLAG_APOC_CH3_HIDE_KURT_T23                               0x41B
+#define FLAG_APOC_CH3_HIDE_KESTRA_T23                             0x41C
+#define FLAG_APOC_CH3_HIDE_WELL_CASE                              0x41D
+#define FLAG_APOC_CH3_KINGSROCK_TAKEN                             0x41E
+#define FLAG_APOC_CH3_HIDE_TURK_GYM                               0x41F
 
 // Item ball collection flags
 
@@ -1339,14 +1338,14 @@
 #define FLAG_HIDE_ITEMBALL_T03_WISE_GLASSES      0x51C
 #define FLAG_HIDE_ITEMBALL_R03_BIG_ROOT          0x51D
 #define FLAG_HIDE_ITEMBALL_T26_TM57              0x51E
-#define FLAG_UNK_51F                             0x51F
-#define FLAG_UNK_520                             0x520
-#define FLAG_UNK_521                             0x521
-#define FLAG_UNK_522                             0x522
-#define FLAG_UNK_523                             0x523
-#define FLAG_UNK_524                             0x524
-#define FLAG_UNK_525                             0x525
-#define FLAG_UNK_526                             0x526
+#define FLAG_APOC_CH4_GOLDENROD_INTRO_DONE                        0x51F
+#define FLAG_APOC_CH4_MEL_MET                                     0x520
+#define FLAG_APOC_CH4_RIVAL_SENDOFF_DONE                          0x521
+#define FLAG_APOC_CH4_SAFFRON_ARRIVED                             0x522
+#define FLAG_APOC_CH4_HIDE_KESTRA_PLAZA                           0x523
+#define FLAG_APOC_CH4_HIDE_MEL_TOWER                              0x524
+#define FLAG_APOC_CH4_RESERVED_525                                0x525
+#define FLAG_APOC_CH4_HIDE_MEL_SAFFRON                            0x526
 #define FLAG_UNK_527                             0x527
 #define FLAG_UNK_528                             0x528
 #define FLAG_UNK_529                             0x529
@@ -1708,7 +1707,7 @@
 #define FLAG_STRENGTH_ACTIVE                              0x962
 #define FLAG_UNK_963                                      0x963
 #define FLAG_GAME_CLEAR                                   0x964
-#define FLAG_SYS_STEP_TAKEN                               0x965
+#define FLAG_UNK_965                                      0x965
 #define FLAG_UNK_966                                      0x966
 #define FLAG_SYS_SAFARI                                   0x967
 #define FLAG_UNK_968                                      0x968
@@ -1739,8 +1738,8 @@
 #define FLAG_SYS_CIANWOOD_WATERFALL_DISABLE               0x981
 #define FLAG_UNK_982                                      0x982
 #define FLAG_SYS_HATCHED_TOGEPI_EGG                       0x983
-#define FLAG_SYS_GOT_BIKE_SHOP_CALL                       0x984
-#define FLAG_SYS_GOT_BILL_PC_FULL_CALL                    0x985
+#define FLAG_UNK_984                                      0x984
+#define FLAG_UNK_985                                      0x985
 #define FLAG_SYS_MOMS_SAVINGS                             0x986
 #define FLAG_SYS_OAK_ACKNOWLEDGED_JOHTO_DEX_COMPLETION    0x987
 #define FLAG_SYS_OAK_ACKNOWLEDGED_NATIONAL_DEX_COMPLETION 0x988
@@ -1753,7 +1752,7 @@
 #define FLAG_UNK_98F                                      0x98F
 #define FLAG_UNK_990                                      0x990
 #define FLAG_UNK_991                                      0x991
-#define FLAG_SYS_TRIGGER_EGG_CALL                         0x992
+#define FLAG_UNK_992                                      0x992
 #define FLAG_BUG_CONTEST_ACTIVE                           0x993
 #define FLAG_UNK_994                                      0x994
 #define FLAG_UNK_995                                      0x995
@@ -1765,7 +1764,7 @@
 #define FLAG_ROCKET_TAKEOVER_ACTIVE                       0x99B
 #define FLAG_UNK_99C                                      0x99C
 #define FLAG_UNK_99D                                      0x99D
-#define FLAG_SYS_SUBSCRIBED_TO_EGG_CALLS                  0x99E
+#define FLAG_UNK_99E                                      0x99E
 #define FLAG_UNK_99F                                      0x99F
 #define FLAG_UNK_9A0                                      0x9A0
 #define FLAG_UNK_9A1                                      0x9A1
@@ -1783,7 +1782,7 @@
 #define FLAG_UNK_9AD                                      0x9AD
 #define FLAG_UNK_9AE                                      0x9AE
 #define FLAG_UNK_9AF                                      0x9AF
-#define FLAG_SYS_FLYPOINT_PALLET                          0x9B0 // TODO define wrt FLYPOINT consts
+#define FLAG_SYS_FLYPOINT_PALLET                          0x9B0
 #define FLAG_SYS_FLYPOINT_VIRIDIAN                        0x9B1
 #define FLAG_SYS_FLYPOINT_PEWTER                          0x9B2
 #define FLAG_SYS_FLYPOINT_CERULEAN                        0x9B3

@@ -66,7 +66,7 @@ _02092B52:
 	strh r0, [r1, #2]
 _02092B6A:
 	ldr r0, [r4, #4]
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r5, #0
 	bl FieldSystem_LoadFieldOverlay
 	mov r0, #0x19
@@ -88,8 +88,8 @@ sub_02092B7C: ; 0x02092B7C
 	cmp r0, #0
 	beq _02092BAE
 	mov r0, #1
-	bl FieldMap_FadeScreen
-	ldr r1, _02092BB0 ; =Task_Mart
+	bl ov01_021E636C
+	ldr r1, _02092BB0 ; =ov03_02256E2C
 	add r0, r5, #0
 	add r2, r4, #0
 	bl TaskManager_Jump
@@ -99,6 +99,6 @@ sub_02092B7C: ; 0x02092B7C
 _02092BAE:
 	pop {r4, r5, r6, pc}
 	.balign 4, 0
-_02092BB0: .word Task_Mart
+_02092BB0: .word ov03_02256E2C
 _02092BB4: .word 0x00000272
 	thumb_func_end sub_02092B7C

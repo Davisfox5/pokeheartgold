@@ -41,7 +41,7 @@ sub_02087A8C: ; 0x02087A8C
 	mov r0, #3
 	mov r1, #0x7e
 	lsl r2, r2, #0x10
-	bl Heap_Create
+	bl CreateHeap
 	add r0, r5, #0
 	mov r1, #0x2c
 	mov r2, #0x7e
@@ -57,7 +57,7 @@ sub_02087A8C: ; 0x02087A8C
 	ldr r1, _02087B00 ; =0x00004170
 	str r0, [r4, #0xc]
 	mov r0, #0x7e
-	bl Heap_Alloc
+	bl AllocFromHeap
 	ldr r2, _02087B00 ; =0x00004170
 	str r0, [r4, #0x14]
 	mov r1, #0
@@ -207,7 +207,7 @@ sub_02087BAC: ; 0x02087BAC
 	bl sub_0202FC24
 _02087BC2:
 	ldr r0, [r4, #0x14]
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r5, #0
 	bl OverlayManager_FreeData
 	mov r0, #1
@@ -217,7 +217,7 @@ _02087BC2:
 	mov r1, #0x7f
 	bl GF_SndHandleSetPlayerVolume
 	mov r0, #0x7e
-	bl Heap_Destroy
+	bl DestroyHeap
 	mov r0, #1
 	pop {r3, r4, r5, pc}
 	thumb_func_end sub_02087BAC
@@ -353,7 +353,7 @@ _02087CDA:
 	ldr r1, [r5, #0x10]
 	lsl r0, r0, #2
 	ldr r0, [r1, r0]
-	bl Heap_Free
+	bl FreeToHeap
 	ldr r0, [r5, #0x10]
 	bl BattleSetup_Delete
 	mov r0, #0
@@ -429,7 +429,7 @@ _02087D88:
 	ldr r1, [r5, #0x10]
 	lsl r0, r0, #2
 	ldr r0, [r1, r0]
-	bl Heap_Free
+	bl FreeToHeap
 	ldr r0, [r5, #0x10]
 	bl BattleSetup_Delete
 	ldr r0, [r5, #8]
@@ -437,17 +437,17 @@ _02087D88:
 	mov r0, #0
 	bl sub_02005B68
 	mov r0, #0
-	bl Sound_SetScene
+	bl sub_02004AD8
 	ldr r0, [r5, #0x28]
 	ldr r1, [r0, #0x20]
 	ldr r1, [r1]
-	bl FieldBGM_GetEffective
+	bl FieldSystem_GetOverriddenMusicId
 	add r4, r0, #0
 	ldr r0, [r5, #0x28]
 	ldr r1, [r0, #0x20]
 	ldr r1, [r1]
-	bl FieldBGM_GetForMapHeader
-	bl Sound_SetFieldBGM
+	bl GetMapMusic
+	bl sub_02004AC8
 	mov r0, #0
 	add r1, r4, #0
 	bl sub_02055198

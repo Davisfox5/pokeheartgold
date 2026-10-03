@@ -4,4 +4,8 @@
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">Kurt: Hey there, {STRVAR_1 3, 0, 0}!\rThe guard up top took off when\nI shouted at him.\rBut then I took a tumble down the well.\rI slammed down hard on my back,\nso I can’t move.\rRats! If I were fit, my Pokémon\nwould’ve punished them...\rAh, it can’t be helped.\r{STRVAR_1 3, 0, 0}, show them how gutsy\nyou are in my place!</language>
 	</row>
+	<row id="msg_0090_D26R0101_00001" index="1">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">TURK (from above): Wait--not\nalone! We go down TOGETHER,\fremember?\rCome back up. I’m at the well\nmouth.</language>
+	</row>
 </body>

@@ -5,26 +5,14 @@
 
 #include "sys_task_api.h"
 
-// typedef'd in battle.h
-struct BattleCursorPosition {
-    s8 commandX;
-    s8 commandY;
-    s8 moveX;
-    s8 moveY;
-    s8 targetX;
-    s8 targetY;
-    s8 monTargetType;
-    u8 unk_07[1];
-};
-
 typedef struct BattleCursor {
     void *unk0[5];
     SysTask *task;
 } BattleCursor;
 
-void BattleCursor_LoadResources(SpriteSystem *renderer, SpriteManager *gfxHandler, PaletteData *plttData, enum HeapID heapID, u32 character, u32 pal, u32 cell, u32 animation);
+void BattleCursor_LoadResources(SpriteSystem *renderer, SpriteManager *gfxHandler, PaletteData *plttData, HeapID heapId, u32 character, u32 pal, u32 cell, u32 animation);
 void BattleCursor_FreeResources(SpriteManager *gfxHandler, u32 character, u32 pal, u32 cell, u32 animation);
-BattleCursor *BattleCursor_New(SpriteSystem *renderer, SpriteManager *gfxHandler, enum HeapID heapID, u32 character, u32 pal, u32 cell, u32 animation, u32 a7, u32 a8);
+BattleCursor *BattleCursor_New(SpriteSystem *renderer, SpriteManager *gfxHandler, HeapID heapId, u32 character, u32 pal, u32 cell, u32 animation, u32 a7, u32 a8);
 void BattleCursor_Delete(BattleCursor *cursor);
 void ov12_0226BA4C(BattleCursor *cursor, int x0, int y0, int x1, int y1, int x2, int y2, int x3, int y3, fx32 a9);
 void ov12_0226BAD4(BattleCursor *cursor, int x0, int y0, int x1, int y1, int x2, int y2, int x3, int y3);

@@ -40,8 +40,7 @@ fi
 
 for fl in "$dir"/*.bin; do
     lz=
-    ch1=$(head -c1 "$fl")
-    if [ $ch1 = $(echo -ne '\020') ] || [ $ch1 = $(echo -ne '\021') ]; then
+    if [ $(head -c1 "$fl" | hexdump -ve '1/1 "%02x"') = '10' ]; then
         mv "$fl" "$fl.lz"
         "$REPO_DIR/tools/nitrogfx/nitrogfx" "$fl.lz" "$fl"
         lz=.lz
@@ -56,8 +55,5 @@ for fl in "$dir"/*.bin; do
         continue
     fi
     mv "$fl" "${fl%.*}.$ext"
-    if [ -n "$lz" ]; then
-        mv "$fl$lz" "${fl%.*}.$ext$lz"
-    fi
     echo "${fl%.*}.$ext$lz"
 done

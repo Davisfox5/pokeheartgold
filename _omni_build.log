@@ -1,0 +1,87 @@
+wine: dlls/ntdll/unix/virtual.c:267: anon_mmap_fixed: Assertion `!((UINT_PTR)start & host_page_mask)' failed.
+qemu: uncaught target signal 6 (Aborted) - core dumped
+Aborted
+make tools
+wine: dlls/ntdll/unix/virtual.c:267: anon_mmap_fixed: Assertion `!((UINT_PTR)start & host_page_mask)' failed.
+qemu: uncaught target signal 6 (Aborted) - core dumped
+Aborted
+gcc -O3 -o mwasmarm_patcher mwasmarm_patcher.c
+mkdir -p .deps
+gcc -O3 -o fixrom fixrom.c
+g++ -Wall -std=c++11 -O2 -I . jsonproc.cpp -o jsonproc 
+g++ -std=c++17 -O2 -Wall -Wno-switch -Wno-unused-but-set-variable -DNDEBUG -MT msgenc.o -MMD -MP -MF .deps/msgenc.d -c -o msgenc.o msgenc.cpp
+g++ -std=c++17 -g -O2 -DNDEBUG -MT main.o -MMD -MP -MF .deps/main.d -c -o main.o main.cpp
+g++ Source.cpp Narc.cpp -o knarc -lstdc++fs -std=c++17 -O2 -Wall -Wno-switch
+gcc -O3 -g -DNDEBUG -DSOURCE_DIR="\"/work/tools/gen_fx_consts\"" -MT main.o -MMD -MP -MF .deps/main.d -c -o main.o main.c
+gcc -O3 -MT component.o -MMD -MP -MF .deps/component.d -c -o component.o component.c
+g++ -O3 -std=c++11 -g -MT o2narc.o -MMD -MP -MF .deps/o2narc.d -c -o o2narc.o o2narc.cpp
+gcc -Wall -Wextra -Werror -Wno-sign-compare -std=gnu17 -DPNG_SKIP_SETJMP_CHECK -I/usr/include/libpng16 -O2 main.c convert_png.c gfx.c jasc_pal.c lz.c rl.c util.c font.c huff.c json.c cJSON.c -o nitrogfx  -lpng16 -lz
+gcc -O3 -MT compress.o -MMD -MP -MF .deps/compress.d -c -o compress.o compress.c
+gcc -O3 -g -DNDEBUG -DSOURCE_DIR="\"/work/tools/gen_fx_consts\"" -MT fx_encode.o -MMD -MP -MF .deps/fx_encode.d -c -o fx_encode.o fx_encode.c
+gcc -O3 -g -DNDEBUG -DSOURCE_DIR="\"/work/tools/gen_fx_consts\"" -MT fx_data.o -MMD -MP -MF .deps/fx_data.d -c -o fx_data.o fx_data.c
+g++ -std=c++17 -O2 -Wall -Wno-switch -Wno-unused-but-set-variable -DNDEBUG -MT Options.o -MMD -MP -MF .deps/Options.d -c -o Options.o Options.cpp
+g++ -std=c++17 -O2 -Wall -Wno-switch -Wno-unused-but-set-variable -DNDEBUG -MT MessagesConverter.o -MMD -MP -MF .deps/MessagesConverter.d -c -o MessagesConverter.o MessagesConverter.cpp
+g++ -O3 -std=c++11 -g -MT Options.o -MMD -MP -MF .deps/Options.d -c -o Options.o Options.cpp
+gcc -O3 -MT digest.o -MMD -MP -MF .deps/digest.d -c -o digest.o digest.c
+gcc  -o gen_fx_consts main.o fx_encode.o fx_data.o
+gcc -O3 -MT files.o -MMD -MP -MF .deps/files.d -c -o files.o files.c
+g++ -std=c++17 -g -O2 -DNDEBUG -MT CsvFile.o -MMD -MP -MF .deps/CsvFile.d -c -o CsvFile.o CsvFile.cpp
+g++ -O3 -std=c++11 -g -MT RelocElfReader.o -MMD -MP -MF .deps/RelocElfReader.d -c -o RelocElfReader.o RelocElfReader.cpp
+g++ -std=c++17 -O2 -Wall -Wno-switch -Wno-unused-but-set-variable -DNDEBUG -MT MessagesDecoder.o -MMD -MP -MF .deps/MessagesDecoder.d -c -o MessagesDecoder.o MessagesDecoder.cpp
+gcc -O3 -MT main.o -MMD -MP -MF .deps/main.d -c -o main.o main.c
+g++   -g -std=c++17 -MT mod123encry.o -MMD -MP -MF .deps/mod123encry.d -c -o mod123encry.o mod123encry.cpp
+g++ -std=c++17 -g -O2 -DNDEBUG -MT Manifest.o -MMD -MP -MF .deps/Manifest.d -c -o Manifest.o Manifest.cpp
+gcc -O3 -MT misc.o -MMD -MP -MF .deps/misc.d -c -o misc.o misc.c
+gcc -O3 -MT overlay_defs.o -MMD -MP -MF .deps/overlay_defs.d -c -o overlay_defs.o overlay_defs.c
+g++  -o o2narc o2narc.o Options.o RelocElfReader.o
+g++   -g -std=c++17 -MT NtrRom.o -MMD -MP -MF .deps/NtrRom.d -c -o NtrRom.o NtrRom.cpp
+g++ -std=c++17 -O2 -Wall -Wno-switch -Wno-unused-but-set-variable -DNDEBUG -MT MessagesEncoder.o -MMD -MP -MF .deps/MessagesEncoder.d -c -o MessagesEncoder.o MessagesEncoder.cpp
+g++   -g -std=c++17 -MT Decrypt.o -MMD -MP -MF .deps/Decrypt.d -c -o Decrypt.o Decrypt.cpp
+gcc -O3 -MT overlay_modules.o -MMD -MP -MF .deps/overlay_modules.d -c -o overlay_modules.o overlay_modules.c
+gcc -O3 -MT overlay_table.o -MMD -MP -MF .deps/overlay_table.d -c -o overlay_table.o overlay_table.c
+g++   -g -std=c++17 -MT Encrypt.o -MMD -MP -MF .deps/Encrypt.d -c -o Encrypt.o Encrypt.cpp
+g++   -g -std=c++17 -MT CryptoRc4.o -MMD -MP -MF .deps/CryptoRc4.d -c -o CryptoRc4.o CryptoRc4.cpp
+g++ -std=c++17 -g -O2 -DNDEBUG -MT Options.o -MMD -MP -MF .deps/Options.d -c -o Options.o Options.cpp
+g++   -g -std=c++17 -MT Overlay.o -MMD -MP -MF .deps/Overlay.d -c -o Overlay.o Overlay.cpp
+gcc -O3 -MT print.o -MMD -MP -MF .deps/print.d -c -o print.o print.c
+g++ -std=c++17 -O2 -Wall -Wno-switch -Wno-unused-but-set-variable -DNDEBUG -MT Gmm.o -MMD -MP -MF .deps/Gmm.d -c -o Gmm.o Gmm.cpp
+gcc -O3 -MT static_module.o -MMD -MP -MF .deps/static_module.d -c -o static_module.o static_module.c
+g++ -std=c++17 -O2 -Wall -Wno-switch -Wno-unused-but-set-variable -DNDEBUG -MT pugixml.o -MMD -MP -MF .deps/pugixml.d -c -o pugixml.o pugixml.cpp
+cc   -g -MT ntruncompbw.o -MMD -MP -MF .deps/ntruncompbw.d -c -o ntruncompbw.o ntruncompbw.c
+gcc -O3 -MT str.o -MMD -MP -MF .deps/str.d -c -o str.o str.c
+g++  -o mod123encry mod123encry.o NtrRom.o Decrypt.o Encrypt.o CryptoRc4.o Overlay.o ntruncompbw.o
+gcc  -o compstatic component.o compress.o digest.o files.o main.o misc.o overlay_defs.o overlay_modules.o overlay_table.o print.o static_module.o str.o
+g++  -o csv2bin main.o CsvFile.o Manifest.o Options.o
+g++  -o msgenc msgenc.o Options.o MessagesConverter.o MessagesDecoder.o MessagesEncoder.o Gmm.o pugixml.o
+make patch_mwasmarm
+wine: dlls/ntdll/unix/virtual.c:267: anon_mmap_fixed: Assertion `!((UINT_PTR)start & host_page_mask)' failed.
+qemu: uncaught target signal 6 (Aborted) - core dumped
+Aborted
+/work//tools/mwasmarm_patcher/mwasmarm_patcher -q /work//tools/mwccarm/2.0/sp2p2/mwasmarm.exe
+make build/heartgold.us/pokeheartgold.us.nds
+wine: dlls/ntdll/unix/virtual.c:267: anon_mmap_fixed: Assertion `!((UINT_PTR)start & host_page_mask)' failed.
+qemu: uncaught target signal 6 (Aborted) - core dumped
+Aborted
+cp files/a/0/7/5.heartgold.us files/a/0/7/5
+cp files/application/zukanlist/zukan_data/zukan_enc_gold.narc files/a/1/3/3
+/work//tools/jsonproc/jsonproc files/arc/headbutt.json files/arc/headbutt.json.txt files/arc/headbutt.s
+wine /work//tools/mwccarm/2.0/sp2p2/mwasmarm.exe -DHEARTGOLD -DGAME_REMASTER=0 -DENGLISH -DPM_KEEP_ASSERTS -DSDK_ARM9 -DSDK_CODE_ARM -DSDK_FINALROM  -proc arm5te -g -gccinc -i . -i ./include -i ./asm/include -i ./files -i ./lib/asm/include -i ./lib/NitroDWC/asm/include -i ./lib/MSL_C/asm/include -i ./lib/NitroSDK/asm/include -i ./lib/syscall/asm/include -i ./asm -i ./files/msgdata -I./lib/include -DSDK_ASM -o files/arc/headbutt.o files/arc/headbutt.s
+/work//tools/jsonproc/jsonproc files/tel/pmtel_book.json files/tel/pmtel_book.json.txt files/tel/pmtel_book.s
+/work//tools/csv2bin/csv2bin compile files/data/mushi/mushi_trainer.csv files/data/mushi/mushi_trainer.bin files/data/mushi/mushi_trainer.txt -i ./include
+/work//tools/csv2bin/csv2bin compile files/data/mushi/mushi_encount.csv files/data/mushi/mushi_encount.bin files/data/mushi/mushi_encount.txt -i ./include
+/work//tools/jsonproc/jsonproc files/fielddata/wazaoshie/waza_oshie.json files/fielddata/wazaoshie/waza_oshie.json.txt files/fielddata/wazaoshie/waza_oshie.s
+/work//tools/jsonproc/jsonproc files/poketool/trainer/trainers.json files/poketool/trainer/trname.json.txt files/msgdata/msg/msg_0729.gmm
+wine: dlls/ntdll/unix/virtual.c:267: anon_mmap_fixed: Assertion `!((UINT_PTR)start & host_page_mask)' failed.
+qemu: uncaught target signal 6 (Aborted) - core dumped
+make[1]: *** [files/arc/headbutt.mk:6: files/arc/headbutt.heartgold.us.narc] Aborted
+make[1]: *** Waiting for unfinished jobs....
+wine /work//tools/mwccarm/2.0/sp2p2/mwasmarm.exe -DHEARTGOLD -DGAME_REMASTER=0 -DENGLISH -DPM_KEEP_ASSERTS -DSDK_ARM9 -DSDK_CODE_ARM -DSDK_FINALROM  -proc arm5te -g -gccinc -i . -i ./include -i ./asm/include -i ./files -i ./lib/asm/include -i ./lib/NitroDWC/asm/include -i ./lib/MSL_C/asm/include -i ./lib/NitroSDK/asm/include -i ./lib/syscall/asm/include -i ./asm -i ./files/msgdata -I./lib/include -DSDK_ASM -c -o files/tel/pmtel_book.o files/tel/pmtel_book.s
+wine /work//tools/mwccarm/2.0/sp2p2/mwasmarm.exe -DPM_ASM -DHEARTGOLD -DGAME_REMASTER=0 -DENGLISH -DPM_KEEP_ASSERTS -DSDK_ARM9 -DSDK_CODE_ARM -DSDK_FINALROM  -proc arm5te -g -gccinc -i . -i ./include -i ./asm/include -i ./files -i ./lib/asm/include -i ./lib/NitroDWC/asm/include -i ./lib/MSL_C/asm/include -i ./lib/NitroSDK/asm/include -i ./lib/syscall/asm/include -i ./asm -i ./files/msgdata -I./lib/include -DSDK_ASM -o files/fielddata/wazaoshie/waza_oshie.o files/fielddata/wazaoshie/waza_oshie.s
+sed -r -i 's/&/&amp;/g' files/msgdata/msg/msg_0729.gmm
+wine: dlls/ntdll/unix/virtual.c:267: anon_mmap_fixed: Assertion `!((UINT_PTR)start & host_page_mask)' failed.
+qemu: uncaught target signal 6 (Aborted) - core dumped
+wine: dlls/ntdll/unix/virtual.c:267: anon_mmap_fixed: Assertion `!((UINT_PTR)start & host_page_mask)' failed.
+make[1]: *** [files/tel/pmtel_book.mk:7: files/tel/pmtel_book.dat] Aborted
+qemu: uncaught target signal 6 (Aborted) - core dumped
+make[1]: *** [files/fielddata/wazaoshie/waza_oshie.mk:10: files/fielddata/wazaoshie/waza_oshie.bin] Aborted
+make: *** [Makefile:37: all] Error 2

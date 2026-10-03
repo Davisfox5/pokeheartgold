@@ -10,7 +10,7 @@ ov80_022384D8: ; 0x022384D8
 	add r5, r0, #0
 	mov r0, #0x65
 	mov r1, #8
-	bl Heap_Alloc
+	bl AllocFromHeap
 	mov r1, #0
 	mov r2, #8
 	add r4, r0, #0
@@ -29,7 +29,7 @@ ov80_022384FC: ; 0x022384FC
 	add r5, r0, #0
 	mov r0, #0x65
 	mov r1, #0xc
-	bl Heap_Alloc
+	bl AllocFromHeap
 	add r4, r0, #0
 	mov r1, #0
 	mov r2, #0xc
@@ -130,7 +130,7 @@ ov80_022385B0: ; 0x022385B0
 	ldr r0, [r4, #4]
 	bl ov80_022385C4
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	pop {r4, pc}
 	.balign 4, 0
 	thumb_func_end ov80_022385B0
@@ -142,7 +142,7 @@ ov80_022385C4: ; 0x022385C4
 	ldr r0, [r4]
 	bl SysTask_Destroy
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	pop {r4, pc}
 	.balign 4, 0
 	thumb_func_end ov80_022385C4

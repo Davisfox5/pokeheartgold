@@ -4,4 +4,8 @@
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">You are from Johto, aren’t you?\nHow do you like Kanto?\fIt’s nice, don’t you agree?\fHow many cities have you visited?\fHave you been to Cerulean City already?\fThe view at Cerulean Cape is really\fsomething, isn’t it?\fIt’s a good place for dates.\fDo you have anyone in mind?\r..................\rSorry, am I prying too much?</language>
 	</row>
+	<row id="msg_0332_R05R0301_00001" index="1">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Hold on--the routes out of Saffron\nare closed while the League runs\fsafety inspections.\rCity’s open; the roads aren’t.\nSorry!</language>
+	</row>
 </body>

@@ -1,0 +1,339 @@
+<?xml version="1.0"?>
+<body language="English">
+	<row id="msg_0830_APOCSIN_00000" index="0">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Sinnoh, at last! You came over on the\nCherrygrove ferry too, didn’t you?</language>
+	</row>
+	<row id="msg_0830_APOCSIN_00001" index="1">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Strange days. Trainers from Johto and\nKanto just walking around Sinnoh…\fI don’t mind it one bit, honestly.</language>
+	</row>
+	<row id="msg_0830_APOCSIN_00002" index="2">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">This city’s barely changed since I was\nlittle. The rest of the world sure has.</language>
+	</row>
+	<row id="msg_0830_APOCSIN_00003" index="3">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">The Pokémon Center will patch up your\nteam. The clerk at the mart still\fstocks the good stuff, too.</language>
+	</row>
+	<row id="msg_0830_APOCSIN_00004" index="4">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Sailors say you can walk the coast for\ndays and never leave Sinnoh.\fI say let them try HOENN’s beaches.</language>
+	</row>
+	<row id="msg_0830_APOCSIN_00005" index="5">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Watch the tall grass around here.\nThe wild Pokémon aren’t shy.</language>
+	</row>
+	<row id="msg_0830_APOCSIN_00006" index="6">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">I’ve been walking this route for years.\nStill find new Pokémon every season.</language>
+	</row>
+	<row id="msg_0830_APOCSIN_00007" index="7">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">A storm’s always brewing off Mt. Coronet.\nDress warm, trainer.</language>
+	</row>
+	<row id="msg_0830_APOCSIN_00008" index="8">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">My team’s in top shape--but league rules\nsay exhibition matches only this month.\fCome find me when the season opens!</language>
+	</row>
+	<row id="msg_0830_APOCSIN_00009" index="9">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">I used to battle every trainer who made\neye contact. I’m retired now.\fMostly.</language>
+	</row>
+	<row id="msg_0830_APOCSIN_00010" index="10">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">A lady told me the ferry goes all the\nway to JOHTO! That’s across the SEA!</language>
+	</row>
+	<row id="msg_0830_APOCSIN_00011" index="11">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">I’m gonna catch a STARLY and name it\nMister Feathers!</language>
+	</row>
+	<row id="msg_0830_APOCSIN_00012" index="12">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">In my day, crossing regions took weeks\nby boat. Now look at you youngsters.</language>
+	</row>
+	<row id="msg_0830_APOCSIN_00013" index="13">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">The old legends of Sinnoh live in these\nmountains. Tread kindly, child.</language>
+	</row>
+	<row id="msg_0830_APOCSIN_00014" index="14">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">The current’s gentle today. A strong\nswimmer could cross to the far shore.</language>
+	</row>
+	<row id="msg_0830_APOCSIN_00015" index="15">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Me? I just like watching the water.\nThe Pokémon under there like it too.</language>
+	</row>
+	<row id="msg_0830_APOCSIN_00016" index="16">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Ahoy! You look like an explorer.\nTake these--the full set of\fHIDDEN MACHINES!\rUse them from the bag: the field\nmoves work as long as you carry them.</language>
+	</row>
+	<row id="msg_0830_APOCSIN_00017" index="17">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Got your HMs already!\nGo see the world, trainer.</language>
+	</row>
+	<row id="msg_0830_APOCSIN_00018" index="18">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Acuity Lakefront</language>
+	</row>
+	<row id="msg_0830_APOCSIN_00019" index="19">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Snowpoint City\n“City of Snow!”</language>
+	</row>
+	<row id="msg_0830_APOCSIN_00020" index="20">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Flower Paradise</language>
+	</row>
+	<row id="msg_0830_APOCSIN_00021" index="21">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Stark Mountain Outside</language>
+	</row>
+	<row id="msg_0830_APOCSIN_00022" index="22">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Seabreak Path</language>
+	</row>
+	<row id="msg_0830_APOCSIN_00023" index="23">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Fullmoon Island</language>
+	</row>
+	<row id="msg_0830_APOCSIN_00024" index="24">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Newmoon Island</language>
+	</row>
+	<row id="msg_0830_APOCSIN_00025" index="25">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Route 217</language>
+	</row>
+	<row id="msg_0830_APOCSIN_00026" index="26">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Route 227</language>
+	</row>
+	<row id="msg_0830_APOCSIN_00027" index="27">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Route 225</language>
+	</row>
+	<row id="msg_0830_APOCSIN_00028" index="28">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Survival Area\n“For Tough Trainers!”</language>
+	</row>
+	<row id="msg_0830_APOCSIN_00029" index="29">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Route 226</language>
+	</row>
+	<row id="msg_0830_APOCSIN_00030" index="30">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Route 228</language>
+	</row>
+	<row id="msg_0830_APOCSIN_00031" index="31">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Route 216</language>
+	</row>
+	<row id="msg_0830_APOCSIN_00032" index="32">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Fight Area\n“The Battle Zone!”</language>
+	</row>
+	<row id="msg_0830_APOCSIN_00033" index="33">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Route 230</language>
+	</row>
+	<row id="msg_0830_APOCSIN_00034" index="34">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Route 229</language>
+	</row>
+	<row id="msg_0830_APOCSIN_00035" index="35">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Resort Area\n“For Relaxation!”</language>
+	</row>
+	<row id="msg_0830_APOCSIN_00036" index="36">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Iron Island</language>
+	</row>
+	<row id="msg_0830_APOCSIN_00037" index="37">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Route 224</language>
+	</row>
+	<row id="msg_0830_APOCSIN_00038" index="38">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Eterna Forest Outside</language>
+	</row>
+	<row id="msg_0830_APOCSIN_00039" index="39">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Route 205 North</language>
+	</row>
+	<row id="msg_0830_APOCSIN_00040" index="40">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Eterna City\n“History Living!”</language>
+	</row>
+	<row id="msg_0830_APOCSIN_00041" index="41">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Route 211 West</language>
+	</row>
+	<row id="msg_0830_APOCSIN_00042" index="42">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Route 211 East</language>
+	</row>
+	<row id="msg_0830_APOCSIN_00043" index="43">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Celestic Town\n“Living History!”</language>
+	</row>
+	<row id="msg_0830_APOCSIN_00044" index="44">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Route 210 North</language>
+	</row>
+	<row id="msg_0830_APOCSIN_00045" index="45">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Route 210 South</language>
+	</row>
+	<row id="msg_0830_APOCSIN_00046" index="46">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Pokemon League</language>
+	</row>
+	<row id="msg_0830_APOCSIN_00047" index="47">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Fuego Ironworks Outside</language>
+	</row>
+	<row id="msg_0830_APOCSIN_00048" index="48">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Route 205 South</language>
+	</row>
+	<row id="msg_0830_APOCSIN_00049" index="49">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Route 206</language>
+	</row>
+	<row id="msg_0830_APOCSIN_00050" index="50">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Route 215</language>
+	</row>
+	<row id="msg_0830_APOCSIN_00051" index="51">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Veilstone City\n“Hewn from Rock!”</language>
+	</row>
+	<row id="msg_0830_APOCSIN_00052" index="52">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Floaroma Town\n“Vivid and Scented!”</language>
+	</row>
+	<row id="msg_0830_APOCSIN_00053" index="53">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Route 223</language>
+	</row>
+	<row id="msg_0830_APOCSIN_00054" index="54">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Valley Windworks Outside</language>
+	</row>
+	<row id="msg_0830_APOCSIN_00055" index="55">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Solaceon Town\n“Free of Worry!”</language>
+	</row>
+	<row id="msg_0830_APOCSIN_00056" index="56">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Route 214</language>
+	</row>
+	<row id="msg_0830_APOCSIN_00057" index="57">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Route 204 North</language>
+	</row>
+	<row id="msg_0830_APOCSIN_00058" index="58">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Hearthome City\n“Warm and Kind!”</language>
+	</row>
+	<row id="msg_0830_APOCSIN_00059" index="59">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Route 209</language>
+	</row>
+	<row id="msg_0830_APOCSIN_00060" index="60">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Spring Path</language>
+	</row>
+	<row id="msg_0830_APOCSIN_00061" index="61">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Canalave City\n“The Cargo Port!”</language>
+	</row>
+	<row id="msg_0830_APOCSIN_00062" index="62">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Route 204 South</language>
+	</row>
+	<row id="msg_0830_APOCSIN_00063" index="63">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Route 207</language>
+	</row>
+	<row id="msg_0830_APOCSIN_00064" index="64">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Route 208</language>
+	</row>
+	<row id="msg_0830_APOCSIN_00065" index="65">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Route 218</language>
+	</row>
+	<row id="msg_0830_APOCSIN_00066" index="66">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Jubilife City\n“City of Joy!”</language>
+	</row>
+	<row id="msg_0830_APOCSIN_00067" index="67">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Route 203</language>
+	</row>
+	<row id="msg_0830_APOCSIN_00068" index="68">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Oreburgh City\n“City of Energy!”</language>
+	</row>
+	<row id="msg_0830_APOCSIN_00069" index="69">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Route 212 North</language>
+	</row>
+	<row id="msg_0830_APOCSIN_00070" index="70">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Valor Lakefront</language>
+	</row>
+	<row id="msg_0830_APOCSIN_00071" index="71">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Sunyshore City\n“Solar Powered!”</language>
+	</row>
+	<row id="msg_0830_APOCSIN_00072" index="72">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Route 222</language>
+	</row>
+	<row id="msg_0830_APOCSIN_00073" index="73">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Verity Lakefront</language>
+	</row>
+	<row id="msg_0830_APOCSIN_00074" index="74">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Route 202</language>
+	</row>
+	<row id="msg_0830_APOCSIN_00075" index="75">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Pastoria City\n“Marsh Country!”</language>
+	</row>
+	<row id="msg_0830_APOCSIN_00076" index="76">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Route 213</language>
+	</row>
+	<row id="msg_0830_APOCSIN_00077" index="77">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Route 201</language>
+	</row>
+	<row id="msg_0830_APOCSIN_00078" index="78">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Sandgem Town\n“Town of Sand!”</language>
+	</row>
+	<row id="msg_0830_APOCSIN_00079" index="79">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Route 212 South</language>
+	</row>
+	<row id="msg_0830_APOCSIN_00080" index="80">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Twinleaf Town\n“Fresh and Free!”</language>
+	</row>
+	<row id="msg_0830_APOCSIN_00081" index="81">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Route 219</language>
+	</row>
+	<row id="msg_0830_APOCSIN_00082" index="82">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Route 220</language>
+	</row>
+	<row id="msg_0830_APOCSIN_00083" index="83">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Route 221</language>
+	</row>
+</body>

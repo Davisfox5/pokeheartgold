@@ -5,31 +5,31 @@
 
 	.rodata
 
-	ScrDef scr_seq_R10PC0101_000
-	ScrDef scr_seq_R10PC0101_001
-	ScrDef scr_seq_R10PC0101_002
-	ScrDef scr_seq_R10PC0101_003
-	ScrDefEnd
+	scrdef scr_seq_R10PC0101_000
+	scrdef scr_seq_R10PC0101_001
+	scrdef scr_seq_R10PC0101_002
+	scrdef scr_seq_R10PC0101_003
+	scrdef_end
 
 scr_seq_R10PC0101_000:
-	SetVar VAR_SPECIAL_x8007, 0
-	CallStd std_nurse_joy
-	End
+	setvar VAR_SPECIAL_x8007, 0
+	callstd std_nurse_joy
+	end
 
 scr_seq_R10PC0101_001:
-	SimpleNPCMsg msg_0342_R10PC0101_00000
-	End
+	simple_npc_msg msg_0342_R10PC0101_00000
+	end
 
 scr_seq_R10PC0101_002:
-	GoToIfSet FLAG_RESTORED_POWER, _004F
-	SimpleNPCMsg msg_0342_R10PC0101_00001
-	End
+	goto_if_set FLAG_RESTORED_POWER, _004F
+	simple_npc_msg msg_0342_R10PC0101_00001
+	end
 
 _004F:
-	SimpleNPCMsg msg_0342_R10PC0101_00002
-	End
+	simple_npc_msg msg_0342_R10PC0101_00002
+	end
 
 scr_seq_R10PC0101_003:
-	SimpleNPCMsg msg_0342_R10PC0101_00003
-	End
+	simple_npc_msg msg_0342_R10PC0101_00003
+	end
 	.balign 4, 0

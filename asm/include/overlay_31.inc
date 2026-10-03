@@ -33,9 +33,9 @@
 .public YesNoPrompt_InitFromTemplate
 .public YesNoPrompt_HandleInputForSave
 .public MenuInputStateMgr_GetState
-.public Heap_Create
-.public Heap_Destroy
-.public Heap_Free
+.public CreateHeap
+.public DestroyHeap
+.public FreeToHeap
 .public InitBgFromTemplate
 .public FreeBgTilemapBuffer
 .public BG_LoadScreenTilemapData
@@ -66,9 +66,9 @@
 .public Options_GetTextFrameDelay
 .public Options_GetFrame
 .public Save_Pokeathlon_Get
-.public PokeathlonSave_GetAthletePoints
-.public PokeathlonSave_GetUnkB78_AtIndex
-.public PokeathlonSave_GetUnkB7C_AtIndex
+.public SavePokeathlon_GetAthletePoints
+.public sub_02031A78
+.public sub_02031AB8
 .public GetItemAttr
 .public GXS_SetGraphicsMode
 .public GX_SetBankForSubBG

@@ -5,147 +5,147 @@
 
 	.rodata
 
-	ScrDef scr_seq_D17R1101_000
-	ScrDef scr_seq_D17R1101_001
-	ScrDefEnd
+	scrdef scr_seq_D17R1101_000
+	scrdef scr_seq_D17R1101_001
+	scrdef_end
 
 scr_seq_D17R1101_000:
-	GoToIfUnset FLAG_UNK_189, _001B
-	ClearFlag FLAG_UNK_189
-	End
+	goto_if_unset FLAG_UNK_189, _001B
+	clearflag FLAG_UNK_189
+	end
 
 _001B:
-	GoToIfUnset FLAG_GAME_CLEAR, _00A5
-	GetPhoneBookRematch PHONE_CONTACT_MORTY, VAR_TEMP_x4001
-	Compare VAR_TEMP_x4001, 0
-	GoToIfNe _00A5
-	CheckRegisteredPhoneNumber PHONE_CONTACT_MORTY, VAR_TEMP_x4001
-	Compare VAR_TEMP_x4001, 1
-	GoToIfEq _0084
-	GetWeekday VAR_TEMP_x4000
-	Compare VAR_TEMP_x4000, 1
-	GoToIfNe _0067
-	ClearFlag FLAG_UNK_2CA
-	GoTo _0082
+	goto_if_unset FLAG_GAME_CLEAR, _00A5
+	get_phone_book_rematch PHONE_CONTACT_MORTY, VAR_TEMP_x4001
+	compare VAR_TEMP_x4001, 0
+	goto_if_ne _00A5
+	check_registered_phone_number PHONE_CONTACT_MORTY, VAR_TEMP_x4001
+	compare VAR_TEMP_x4001, 1
+	goto_if_eq _0084
+	get_weekday VAR_TEMP_x4000
+	compare VAR_TEMP_x4000, 1
+	goto_if_ne _0067
+	clearflag FLAG_UNK_2CA
+	goto _0082
 
 _0067:
-	Compare VAR_TEMP_x4000, 2
-	GoToIfNe _007E
-	ClearFlag FLAG_UNK_2CA
-	GoTo _0082
+	compare VAR_TEMP_x4000, 2
+	goto_if_ne _007E
+	clearflag FLAG_UNK_2CA
+	goto _0082
 
 _007E:
-	SetFlag FLAG_UNK_2CA
+	setflag FLAG_UNK_2CA
 _0082:
-	End
+	end
 
 _0084:
-	GetWeekday VAR_TEMP_x4000
-	Compare VAR_TEMP_x4000, 5
-	GoToIfNe _009F
-	ClearFlag FLAG_UNK_2CA
-	GoTo _00A3
+	get_weekday VAR_TEMP_x4000
+	compare VAR_TEMP_x4000, 5
+	goto_if_ne _009F
+	clearflag FLAG_UNK_2CA
+	goto _00A3
 
 _009F:
-	SetFlag FLAG_UNK_2CA
+	setflag FLAG_UNK_2CA
 _00A3:
-	End
+	end
 
 _00A5:
-	SetFlag FLAG_UNK_2CA
-	End
+	setflag FLAG_UNK_2CA
+	end
 
 scr_seq_D17R1101_001:
-	PlaySE SEQ_SE_DP_SELECT
-	LockAll
-	FacePlayer
-	CheckRegisteredPhoneNumber PHONE_CONTACT_MORTY, VAR_TEMP_x4001
-	Compare VAR_TEMP_x4001, 1
-	GoToIfEq _0159
-	Compare VAR_TEMP_x4002, 1
-	GoToIfGe _014E
-	NPCMsg msg_0059_D17R1101_00000
+	play_se SEQ_SE_DP_SELECT
+	lockall
+	faceplayer
+	check_registered_phone_number PHONE_CONTACT_MORTY, VAR_TEMP_x4001
+	compare VAR_TEMP_x4001, 1
+	goto_if_eq _0159
+	compare VAR_TEMP_x4002, 1
+	goto_if_ge _014E
+	npc_msg msg_0059_D17R1101_00000
 _00D6:
-	TouchscreenMenuHide
-	GetMenuChoice VAR_SPECIAL_RESULT
-	TouchscreenMenuShow
-	Compare VAR_SPECIAL_RESULT, 0
-	GoToIfEq _00FA
-	Compare VAR_SPECIAL_RESULT, 1
-	GoToIfGe _013D
-	End
+	touchscreen_menu_hide
+	getmenuchoice VAR_SPECIAL_RESULT
+	touchscreen_menu_show
+	compare VAR_SPECIAL_RESULT, 0
+	goto_if_eq _00FA
+	compare VAR_SPECIAL_RESULT, 1
+	goto_if_ge _013D
+	end
 
 _00FA:
-	BufferPlayersName 0
-	NPCMsg msg_0059_D17R1101_00001
-	PlayFanfare SEQ_ME_POKEGEAR_REGIST
-	WaitFanfare
-	RegisterGearNumber PHONE_CONTACT_MORTY
-	NPCMsg msg_0059_D17R1101_00002
-	WaitButton
-	CloseMsg
-	FadeScreen 6, 1, 0, RGB_BLACK
-	WaitFade
-	SetFlag FLAG_UNK_2CA
-	HidePerson obj_D17R1101_gsleader4
-	PlaySE SEQ_SE_DP_KAIDAN2
-	WaitSE SEQ_SE_DP_KAIDAN2
-	FadeScreen 6, 1, 1, RGB_BLACK
-	WaitFade
-	ReleaseAll
-	End
+	buffer_players_name 0
+	npc_msg msg_0059_D17R1101_00001
+	play_fanfare SEQ_ME_POKEGEAR_REGIST
+	wait_fanfare
+	register_gear_number PHONE_CONTACT_MORTY
+	npc_msg msg_0059_D17R1101_00002
+	wait_button_or_walk_away
+	closemsg
+	fade_screen 6, 1, 0, RGB_BLACK
+	wait_fade
+	setflag FLAG_UNK_2CA
+	hide_person obj_D17R1101_gsleader4
+	play_se SEQ_SE_DP_KAIDAN2
+	wait_se SEQ_SE_DP_KAIDAN2
+	fade_screen 6, 1, 1, RGB_BLACK
+	wait_fade
+	releaseall
+	end
 
 _013D:
-	SetVar VAR_TEMP_x4002, 1
-	NPCMsg msg_0059_D17R1101_00003
-	WaitButton
-	CloseMsg
-	ReleaseAll
-	End
+	setvar VAR_TEMP_x4002, 1
+	npc_msg msg_0059_D17R1101_00003
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
 
 _014E:
-	NPCMsg msg_0059_D17R1101_00004
-	GoTo _00D6
-	End
+	npc_msg msg_0059_D17R1101_00004
+	goto _00D6
+	end
 
 _0159:
-	NPCMsg msg_0059_D17R1101_00005
-	TouchscreenMenuHide
-	GetMenuChoice VAR_SPECIAL_RESULT
-	TouchscreenMenuShow
-	Compare VAR_SPECIAL_RESULT, 1
-	GoToIfEq _01BA
-	PhotoAlbumIsFull VAR_SPECIAL_RESULT
-	Compare VAR_SPECIAL_RESULT, 1
-	GoToIfEq _01C5
-	NPCMsg msg_0059_D17R1101_00006
-	CloseMsg
-	SetFlag FLAG_UNK_189
-	FadeScreen 6, 1, 0, RGB_BLACK
-	WaitFade
-	CameronPhoto 20
-	FacePlayer
-	LockAll
-	FadeScreen 6, 1, 1, RGB_BLACK
-	WaitFade
-	ClearFlag FLAG_UNK_189
-	NPCMsg msg_0059_D17R1101_00007
-	WaitButton
-	CloseMsg
-	ReleaseAll
-	End
+	npc_msg msg_0059_D17R1101_00005
+	touchscreen_menu_hide
+	getmenuchoice VAR_SPECIAL_RESULT
+	touchscreen_menu_show
+	compare VAR_SPECIAL_RESULT, 1
+	goto_if_eq _01BA
+	photo_album_is_full VAR_SPECIAL_RESULT
+	compare VAR_SPECIAL_RESULT, 1
+	goto_if_eq _01C5
+	npc_msg msg_0059_D17R1101_00006
+	closemsg
+	setflag FLAG_UNK_189
+	fade_screen 6, 1, 0, RGB_BLACK
+	wait_fade
+	cameron_photo 20
+	faceplayer
+	lockall
+	fade_screen 6, 1, 1, RGB_BLACK
+	wait_fade
+	clearflag FLAG_UNK_189
+	npc_msg msg_0059_D17R1101_00007
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
 
 _01BA:
-	NPCMsg msg_0059_D17R1101_00008
-	WaitButton
-	CloseMsg
-	ReleaseAll
-	End
+	npc_msg msg_0059_D17R1101_00008
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
 
 _01C5:
-	NPCMsg msg_0059_D17R1101_00009
-	WaitButton
-	CloseMsg
-	ReleaseAll
-	End
+	npc_msg msg_0059_D17R1101_00009
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
 	.balign 4, 0

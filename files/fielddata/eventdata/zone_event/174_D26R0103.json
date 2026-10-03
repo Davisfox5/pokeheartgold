@@ -3,10 +3,10 @@
   "objects": [
     {
       "id": "obj_D26R0103_gsassistantm",
-      "spriteId": "SPRITE_GSASSISTANTM",
+      "spriteId": "SPRITE_MONSTARBALL",
       "movement": 3,
       "type": 0,
-      "eventFlag": "FLAG_NOTHING",
+      "eventFlag": "FLAG_APOC_CH3_KINGSROCK_TAKEN",
       "scriptId": "_EV_scr_seq_D26R0103_000 + 1",
       "facingDirection": 2,
       "param0": 0,

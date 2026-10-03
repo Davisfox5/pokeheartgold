@@ -44,9 +44,9 @@
 .public Main_SetVBlankIntrCB
 .public Main_SetHBlankIntrCB
 .public SetKeyRepeatTimers
-.public Heap_Create
-.public Heap_Destroy
-.public Heap_Free
+.public CreateHeap
+.public DestroyHeap
+.public FreeToHeap
 .public BgConfig_Alloc
 .public SetBothScreensModesAndDisable
 .public InitBgFromTemplate

@@ -2,9 +2,9 @@
 
 #include "intro_movie_internal.h"
 #include "math_util.h"
-#include "screen_fade.h"
 #include "sys_task_api.h"
 #include "system.h"
+#include "unk_0200FA24.h"
 
 void Task_IntroMovie_BlendFadeEffect(SysTask *task, void *pVoid);
 int IntroMovie_BgLayerToScrollEffectSlot(GFBgLayer bgId);
@@ -57,9 +57,9 @@ void IntroMovie_BuildSpriteResourcesHeaderAndTemplate(int resId, IntroMovieOverl
     SetVec(template->position, 0, 0, 0);
     SetVec(template->scale, FX32_ONE, FX32_ONE, FX32_ONE);
     template->rotation = 0;
-    template->drawPriority = 0;
+    template->priority = 0;
     template->whichScreen = whichScreen;
-    template->heapID = HEAP_ID_INTRO_MOVIE;
+    template->heapId = HEAP_ID_INTRO_MOVIE;
 }
 
 void IntroMovie_RendererSetSurfaceCoords(IntroMovieOverlayData *data, int mainx, int mainy, int subx, int suby) {
@@ -451,16 +451,16 @@ void Task_IntroMovie_CircleWipeEffect(SysTask *task, void *pVoid) {
 
         u8 screen = effectData->whichScreen == 0 ? PM_LCD_BOTTOM : PM_LCD_TOP;
         if (effectData->kind == 1) {
-            sub_0200FBF4((PMLCDTarget)screen, RGB_WHITE);
+            sub_0200FBF4(screen, RGB_WHITE);
         } else if (effectData->kind == 3) {
-            sub_0200FBF4((PMLCDTarget)screen, RGB_BLACK);
+            sub_0200FBF4(screen, RGB_BLACK);
         } else {
             if (effectData->whichScreen) {
                 GX_SetVisibleWnd(GX_WNDMASK_NONE);
             } else {
                 GXS_SetVisibleWnd(0);
             }
-            SetMasterBrightnessNeutral((PMLCDTarget)screen);
+            SetMasterBrightnessNeutral(screen);
         }
         Main_SetHBlankIntrCB(NULL, NULL);
     }

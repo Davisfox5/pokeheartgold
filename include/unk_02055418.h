@@ -5,9 +5,8 @@
 #include "sav_system_info.h"
 #include "script.h"
 
-// Berry Patch Manager in pokeplatinum. Definitely used for something else here.
 typedef struct UnkStruct_020556FC {
-    enum HeapID heapID;
+    HeapID heapID;
     NNSG3dRenderObj unk4;
     NNSG3dResMdl *unk58;
     NNSG3dResFileHeader *unk5c;
@@ -26,8 +25,8 @@ u32 Field_GetHour(FieldSystem *fieldSystem);
 void sub_02055624(FieldSystem *fieldSystem, RTCDate *date, RTCTime *time);
 void FieldSystem_GetGameClearTime(FieldSystem *fieldSystem, RTCDate *date, RTCTime *time);
 void FieldSystem_SetGameClearTime(FieldSystem *fieldSystem);
-BOOL FieldSystem_HasPenalty(FieldSystem *fieldSystem);
-UnkStruct_020556FC *sub_02055680(FieldSystem *fieldSystem, enum HeapID heapID);
+BOOL sub_02055670(FieldSystem *fieldSystem);
+UnkStruct_020556FC *sub_02055680(FieldSystem *fieldSystem, HeapID heapID);
 void sub_020556A8(UnkStruct_020556FC *unkPtr);
 void sub_020556B8(FieldSystem *fieldSystem);
 void sub_020556C8(FieldSystem *fieldSystem, UnkStruct_020556FC *unkPtrB);

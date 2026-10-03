@@ -1,19 +1,21 @@
 #include "main.h"
 
+#include "global.h"
+
 #include "brightness.h"
 #include "communication_error.h"
 #include "font.h"
 #include "gf_rtc.h"
 #include "math_util.h"
 #include "player_data.h"
-#include "poke_overlay.h"
 #include "save_data_read_error.h"
-#include "screen_fade.h"
 #include "sound.h"
 #include "sound_02004A44.h"
 #include "sys_task.h"
 #include "system.h"
 #include "timer_3.h"
+#include "unk_0200B150.h"
+#include "unk_0200FA24.h"
 #include "unk_02018380.h"
 #include "unk_020210A0.h"
 #include "unk_02026E30.h"
@@ -63,7 +65,7 @@ void NitroMain(void) {
     sub_02005D00();
     InitSoundData(Save_Chatot_Get(_02111868.unk_10.saveData), Save_PlayerData_GetOptionsAddr(_02111868.unk_10.saveData));
     Init_Timer3();
-    if (sub_02039FFC(HEAP_ID_3) == 3) {
+    if (sub_02039FFC(3) == 3) {
         ShowWFCUserInfoWarning(HEAP_ID_3, 0);
     }
     if (!Save_FlashChipIsDetected(_02111868.unk_10.saveData)) {
@@ -75,13 +77,13 @@ void NitroMain(void) {
             RegisterMainOverlay(FS_OVERLAY_ID(intro_title), &gApplication_IntroMovie);
             break;
         case 1:
-            sub_0200FBF4(PM_LCD_TOP, RGB_BLACK);
-            sub_0200FBF4(PM_LCD_BOTTOM, RGB_BLACK);
+            sub_0200FBF4(0, 0);
+            sub_0200FBF4(1, 0);
             _02111868.unk_10.unk_04 = 1;
             RegisterMainOverlay(FS_OVERLAY_ID(OVY_36), &ov36_App_MainMenu_SelectOption_Continue);
             break;
         default:
-            GF_ASSERT(FALSE);
+            GF_ASSERT(0);
             break;
         }
     }
@@ -201,12 +203,12 @@ static void sub_02000F60(void) {
 }
 
 static void DoSoftReset(u32 param) {
-    sub_0200FBF4(PM_LCD_TOP, RGB_WHITE);
-    sub_0200FBF4(PM_LCD_BOTTOM, RGB_WHITE);
+    sub_0200FBF4(0, RGB_WHITE);
+    sub_0200FBF4(1, RGB_WHITE);
     if (sub_02038D90()) {
         Save_Cancel(SaveData_Get());
     }
-    while (TRUE) {
+    while (1) {
         HandleDSLidAction();
         sub_02000F40(param);
     }

@@ -2,11 +2,11 @@
 <body language="English">
 	<row id="msg_0571_T23R0501_00000" index="0">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">Hm? Who are you?\r{STRVAR_1 3, 0, 0}, eh? You want me to make\nsome Balls?\rSorry, but that’ll have to wait.\rDo you know Team Rocket?\nAh, don’t worry. I’ll tell you anyhow.\rTeam Rocket’s an evil gang that\nuses Pokémon for their dirty work.\rThey’re supposed to have disbanded\nthree years ago.\rAnyway, they’re at the well, cutting\noff SlowpokeTails for sale!\rSo I’m going to go give them a\nlesson in pain!\rHang on, SLOWPOKE!\nOld Kurt is on his way!</language>
+		<language name="English">-</language>
 	</row>
 	<row id="msg_0571_T23R0501_00001" index="1">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">Kurt: Hi, {STRVAR_1 3, 0, 0}!\nYou handled yourself like a real hero.\rAs I mentioned before, Team Rocket was\ndisbanded by a boy called Red three\fyears ago.\rNow that they have come back...\nI have a bad feeling about it...\rIn any case, it would please me greatly\nto make Poké Balls for a Trainer\flike you, {STRVAR_1 3, 0, 0}.\fThis is all I have now, but take it.\r</language>
+		<language name="English">-</language>
 	</row>
 	<row id="msg_0571_T23R0501_00002" index="2">
 		<attribute name="window_context_name">garbage</attribute>
@@ -47,7 +47,7 @@
 	</row>
 	<row id="msg_0571_T23R0501_00011" index="11">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The SLOWPOKE are gone...\nWere they taken away by bad people?</language>
+		<language name="English">I can’t find Bubbles. She always\nwaits by our step for breakfast.\fShe didn’t come.\rIf you see a SLOWPOKE with a chip\nin her tail, that’s Bubbles, okay?\fTell her I’m waiting.</language>
 	</row>
 	<row id="msg_0571_T23R0501_00012" index="12">
 		<attribute name="window_context_name">used</attribute>
@@ -55,7 +55,7 @@
 	</row>
 	<row id="msg_0571_T23R0501_00013" index="13">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The SLOWPOKE my dad gave me came\nback! Its tail has grown back, too!</language>
+		<language name="English">You found her! You found Bubbles!\rSee? She’s yawning again. That\nmeans she’s REALLY okay.\rThank you, thank you, THANK you!</language>
 	</row>
 	<row id="msg_0571_T23R0501_00014" index="14">
 		<attribute name="window_context_name">used</attribute>
@@ -83,7 +83,7 @@
 	</row>
 	<row id="msg_0571_T23R0501_00020" index="20">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">SLOWPOKE: ...\nYawn?</language>
+		<language name="English">BUBBLES: ...\n...Yaaawn!</language>
 	</row>
 	<row id="msg_0571_T23R0501_00021" index="21">
 		<attribute name="window_context_name">used</attribute>
@@ -99,6 +99,30 @@
 	</row>
 	<row id="msg_0571_T23R0501_00024" index="24">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The radio is declaring the revival\nof Team Rocket!</language>
+		<language name="English">The radio is on.\rA Goldenrod interviewer is asking\nwho chartered last week’s freight\fcars. The host laughs it off.</language>
+	</row>
+	<row id="msg_0571_T23R0501_00025" index="25">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">KURT: You’re not from here. Good.\nMeans you can see it plain--\feveryone born in this town’s gone\nhalf deaf to that well, and now\fit’s screaming and they’re\narguing about PERMITS.</language>
+	</row>
+	<row id="msg_0571_T23R0501_00026" index="26">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">KURT: I’d go down myself. These\nknees say otherwise. These lungs\fsay otherwise, loud as that\nmachine-hum.\rI made balls for this town for\nsixty years so its Pokémon could\fcome home safe. And I can’t walk\ndown my own well to bring them\fhome.</language>
+	</row>
+	<row id="msg_0571_T23R0501_00027" index="27">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">KURT: Turk’s at the well mouth.\nMy grandson. He’s got the heart\ffor it and none of the nerve--he\nwon’t go down alone, and he’s\fright not to.\rBut two of you? Go on. Find out\nwhat they’re doing to my SLOWPOKE.</language>
+	</row>
+	<row id="msg_0571_T23R0501_00028" index="28">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">KURT: You brought them back.\rSome of them... aren’t right.\nBut you brought them back.</language>
+	</row>
+	<row id="msg_0571_T23R0501_00029" index="29">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">KURT: Sixty years of balls out of\nthis workshop. Here’s a different\fsort of stone--the honest kind of\nKing’s Rock.\rThe kind that helps a Pokémon\nbecome itself when IT chooses.</language>
+	</row>
+	<row id="msg_0571_T23R0501_00030" index="30">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">KURT: Bring me Apricorns whenever\nyou like. The work’s good for my\fhands, and the balls are good for\nthis town.</language>
 	</row>
 </body>

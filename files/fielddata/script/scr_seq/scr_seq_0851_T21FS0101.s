@@ -5,52 +5,52 @@
 
 	.rodata
 
-	ScrDef scr_seq_T21FS0101_000
-	ScrDef scr_seq_T21FS0101_001
-	ScrDef scr_seq_T21FS0101_002
-	ScrDef scr_seq_T21FS0101_003
-	ScrDefEnd
+	scrdef scr_seq_T21FS0101_000
+	scrdef scr_seq_T21FS0101_001
+	scrdef scr_seq_T21FS0101_002
+	scrdef scr_seq_T21FS0101_003
+	scrdef_end
 
 scr_seq_T21FS0101_000:
-	PlaySE SEQ_SE_DP_SELECT
-	LockAll
-	FacePlayer
-	CallStd std_mart_intro
-	HoldMsg
-	SetVar VAR_SPECIAL_x8004, 0
-	CallStd std_pokemart
-	ReleaseAll
-	End
+	play_se SEQ_SE_DP_SELECT
+	lockall
+	faceplayer
+	callstd std_mart_intro
+	holdmsg
+	setvar VAR_SPECIAL_x8004, 0
+	callstd std_pokemart
+	releaseall
+	end
 
 scr_seq_T21FS0101_003:
-	PlaySE SEQ_SE_DP_SELECT
-	LockAll
-	FacePlayer
-	CallStd std_mart_intro
-	HoldMsg
-	SetVar VAR_SPECIAL_x8004, 0
-	CallStd std_special_mart
-	ReleaseAll
-	End
+	play_se SEQ_SE_DP_SELECT
+	lockall
+	faceplayer
+	callstd std_mart_intro
+	holdmsg
+	setvar VAR_SPECIAL_x8004, 0
+	callstd std_special_mart
+	releaseall
+	end
 
 scr_seq_T21FS0101_002:
-	PlaySE SEQ_SE_DP_SELECT
-	LockAll
-	FacePlayer
-	Compare VAR_SCENE_ELMS_LAB, 4
-	GoToIfLt _0068
-	NPCMsg msg_0551_T21FS0101_00001
-	GoTo _006B
+	play_se SEQ_SE_DP_SELECT
+	lockall
+	faceplayer
+	compare VAR_SCENE_ELMS_LAB, 4
+	goto_if_lt _0068
+	npc_msg msg_0551_T21FS0101_00001
+	goto _006B
 
 _0068:
-	NPCMsg msg_0551_T21FS0101_00000
+	npc_msg msg_0551_T21FS0101_00000
 _006B:
-	WaitButton
-	CloseMsg
-	ReleaseAll
-	End
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
 
 scr_seq_T21FS0101_001:
-	SimpleNPCMsg msg_0551_T21FS0101_00002
-	End
+	simple_npc_msg msg_0551_T21FS0101_00002
+	end
 	.balign 4, 0

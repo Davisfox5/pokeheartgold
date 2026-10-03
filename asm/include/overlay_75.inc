@@ -64,10 +64,10 @@
 .public Sys_SetSleepDisableFlag
 .public Sys_ClearSleepDisableFlag
 .public SetKeyRepeatTimers
-.public Heap_Create
-.public Heap_Destroy
-.public Heap_Alloc
-.public Heap_Free
+.public CreateHeap
+.public DestroyHeap
+.public AllocFromHeap
+.public FreeToHeap
 .public BgConfig_Alloc
 .public SetBothScreensModesAndDisable
 .public InitBgFromTemplate
@@ -112,8 +112,8 @@
 .public SaveGameNormal
 .public Save_ClearStatusFlags
 .public Save_SysInfo_Get
-.public Save_SysInfo_GetDwcProfileId
-.public Save_SysInfo_SetDwcProfileId
+.public Save_SysInfo_GetField4C
+.public Save_SysInfo_SetField4C
 .public Save_PlayerData_GetProfile
 .public Save_PlayerData_GetOptionsAddr
 .public Options_GetFrame

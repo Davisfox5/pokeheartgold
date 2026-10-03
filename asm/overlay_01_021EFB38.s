@@ -226,7 +226,7 @@ ov01_021EFCDC: ; 0x021EFCDC
 	bl NARC_Delete
 	ldr r1, [r5, #0xc]
 	mov r0, #4
-	bl Heap_FreeExplicit
+	bl FreeToHeapExplicit
 	add r0, r4, #0
 	bl DestroySysTaskAndEnvironment
 	pop {r3, r4, r5, pc}
@@ -241,7 +241,7 @@ ov01_021EFCF8: ; 0x021EFCF8
 	mov r1, #0x4c
 	str r2, [sp]
 	add r5, r3, #0
-	bl Heap_Alloc
+	bl AllocFromHeap
 	mov r1, #0
 	mov r2, #0x4c
 	add r4, r0, #0
@@ -384,7 +384,7 @@ _021EFE04:
 _021EFE14:
 	bl SysTask_Destroy
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	add sp, #4
 	pop {r3, r4, pc}
 _021EFE22:
@@ -654,7 +654,7 @@ ov01_021EFFEC: ; 0x021EFFEC
 	push {r4, lr}
 	mov r0, #4
 	mov r1, #0x30
-	bl Heap_Alloc
+	bl AllocFromHeap
 	mov r1, #0
 	mov r2, #0x30
 	add r4, r0, #0
@@ -695,7 +695,7 @@ _021F0036:
 	and r0, r1
 	str r0, [r2]
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	pop {r4, pc}
 	nop
 _021F004C: .word 0xFFFF1FFF
@@ -972,7 +972,7 @@ ov01_021F0250: ; 0x021F0250
 	push {r4, r5, r6, lr}
 	mov r0, #4
 	mov r1, #0x48
-	bl Heap_Alloc
+	bl AllocFromHeap
 	mov r1, #0
 	mov r2, #0x48
 	add r4, r0, #0
@@ -1021,7 +1021,7 @@ _021F02AA:
 	and r0, r1
 	str r0, [r2]
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	pop {r4, pc}
 	nop
 _021F02C0: .word 0xFFFF1FFF
@@ -1308,7 +1308,7 @@ ov01_021F0454: ; 0x021F0454
 	add r0, r5, #0
 	bl BgTilemapRectChangePalette
 	add r0, r6, #0
-	bl Heap_Free
+	bl FreeToHeap
 	lsl r1, r4, #0x18
 	add r0, r5, #0
 	lsr r1, r1, #0x18
@@ -1527,11 +1527,11 @@ ov01_021F0614: ; 0x021F0614
 	bl AddCellOrAnimResObjFromOpenNarc
 	str r0, [r4, #0xc]
 	ldr r0, [r4]
-	bl SpriteTransfer_CreateCharTransferTask_AllocAtEnd
+	bl sub_0200ADA4
 	ldr r0, [r4]
 	bl sub_0200A740
 	ldr r0, [r4, #4]
-	bl SpriteTransfer_CreatePlttTransferTask
+	bl sub_0200B00C
 	mov r0, #0
 	mov r2, #0x4b
 	str r6, [sp]
@@ -1572,9 +1572,9 @@ ov01_021F06EC: ; 0x021F06EC
 	add r4, r1, #0
 	add r5, r0, #0
 	ldr r0, [r4]
-	bl SpriteTransfer_DeleteCharTransferTask
+	bl sub_0200AEB0
 	ldr r0, [r4, #4]
-	bl SpriteTransfer_DeletePlttTransferTask
+	bl sub_0200B0A8
 	mov r7, #0x4b
 	mov r6, #0
 	lsl r7, r7, #2
@@ -1641,7 +1641,7 @@ ov01_021F074C: ; 0x021F074C
 ov01_021F0768: ; 0x021F0768
 	push {r4, lr}
 	mov r1, #0x30
-	bl Heap_Alloc
+	bl AllocFromHeap
 	mov r1, #0
 	mov r2, #0x30
 	add r4, r0, #0
@@ -1653,10 +1653,10 @@ ov01_021F0768: ; 0x021F0768
 
 	thumb_func_start ov01_021F0780
 ov01_021F0780: ; 0x021F0780
-	ldr r3, _021F0784 ; =Heap_Free
+	ldr r3, _021F0784 ; =FreeToHeap
 	bx r3
 	.balign 4, 0
-_021F0784: .word Heap_Free
+_021F0784: .word FreeToHeap
 	thumb_func_end ov01_021F0780
 
 	thumb_func_start ov01_021F0788
@@ -1763,7 +1763,7 @@ _021F07F6:
 ov01_021F0848: ; 0x021F0848
 	push {r4, lr}
 	mov r1, #0x30
-	bl Heap_Alloc
+	bl AllocFromHeap
 	mov r1, #0
 	mov r2, #0x30
 	add r4, r0, #0
@@ -1775,10 +1775,10 @@ ov01_021F0848: ; 0x021F0848
 
 	thumb_func_start ov01_021F0860
 ov01_021F0860: ; 0x021F0860
-	ldr r3, _021F0864 ; =Heap_Free
+	ldr r3, _021F0864 ; =FreeToHeap
 	bx r3
 	.balign 4, 0
-_021F0864: .word Heap_Free
+_021F0864: .word FreeToHeap
 	thumb_func_end ov01_021F0860
 
 	thumb_func_start ov01_021F0868
@@ -1968,7 +1968,7 @@ ov01_021F09BC: ; 0x021F09BC
 	add r6, r0, #0
 	mov r0, #4
 	mov r1, #0xcc
-	bl Heap_Alloc
+	bl AllocFromHeap
 	mov r1, #0
 	mov r2, #0xcc
 	add r7, r0, #0
@@ -2002,7 +2002,7 @@ _021F09F4:
 	cmp r4, #0x30
 	blt _021F09F4
 	add r0, r6, #0
-	bl Heap_Free
+	bl FreeToHeap
 	pop {r4, r5, r6, pc}
 	.balign 4, 0
 	thumb_func_end ov01_021F09EC
@@ -2178,7 +2178,7 @@ ov01_021F0B44: ; 0x021F0B44
 	push {r4, lr}
 	mov r0, #4
 	mov r1, #0xe8
-	bl Heap_Alloc
+	bl AllocFromHeap
 	mov r1, #0
 	mov r2, #0xe8
 	add r4, r0, #0
@@ -2199,7 +2199,7 @@ ov01_021F0B5C: ; 0x021F0B5C
 	bl ov01_021F0CDC
 _021F0B6E:
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	pop {r4, pc}
 	.balign 4, 0
 	thumb_func_end ov01_021F0B5C
@@ -2547,7 +2547,7 @@ ov01_021F0DDC: ; 0x021F0DDC
 _021F0DEC:
 	mov r0, #4
 	mov r1, #0x18
-	bl Heap_Alloc
+	bl AllocFromHeap
 	ldr r1, _021F0E5C ; =ov01_02209B64
 	mov r2, #0x18
 	str r0, [r1]
@@ -2678,7 +2678,7 @@ _021F0ECE:
 	bl ov01_021E6340
 	ldr r0, _021F0F04 ; =ov01_02209B64
 	ldr r0, [r0]
-	bl Heap_Free
+	bl FreeToHeap
 	ldr r0, _021F0F04 ; =ov01_02209B64
 	mov r1, #0
 	str r1, [r0]
@@ -2709,7 +2709,7 @@ _021F0F2A:
 	mov r1, #0x12
 	mov r0, #4
 	lsl r1, r1, #0xa
-	bl Heap_Alloc
+	bl AllocFromHeap
 	ldr r2, _021F0FAC ; =ov01_02209B64
 	mov r3, #0x12
 	ldr r1, [r2]
@@ -2880,7 +2880,7 @@ _021F106E:
 	ldr r0, _021F1090 ; =ov01_02209B64
 	ldr r0, [r0]
 	ldr r0, [r0, #0xc]
-	bl Heap_Free
+	bl FreeToHeap
 	ldr r0, _021F1090 ; =ov01_02209B64
 	mov r2, #0
 	ldr r1, [r0]
@@ -3008,7 +3008,7 @@ _021F1154:
 	add r0, r2, #0
 	bl SetBothScreensModesAndDisable
 	ldr r0, [r4, #8]
-	bl Thunk_ov01_021E6138
+	bl ov01_021E6050
 	ldr r2, _021F1200 ; =0x0400000E
 	mov r0, #0x43
 	ldrh r1, [r2]
@@ -3076,7 +3076,7 @@ ov01_021F1210: ; 0x021F1210
 	mov r1, #2
 	bl FreeBgTilemapBuffer
 	ldr r0, [r4, #8]
-	bl Thunk_BgConfig_Init
+	bl ov01_021E6048
 	pop {r4, pc}
 	thumb_func_end ov01_021F1210
 

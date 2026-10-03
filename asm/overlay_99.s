@@ -21,7 +21,7 @@ _021E591C:
 	mov r0, #3
 	mov r1, #0x84
 	lsl r2, r0, #0x10
-	bl Heap_Create
+	bl CreateHeap
 	add r0, r4, #0
 	mov r1, #0x94
 	mov r2, #0x84
@@ -95,9 +95,9 @@ _021E591C:
 	mov r1, #4
 	bl SetKeyRepeatTimers
 	mov r0, #0
-	bl ResetVisibleHardwareWindows
+	bl sub_0200FBDC
 	mov r0, #1
-	bl ResetVisibleHardwareWindows
+	bl sub_0200FBDC
 	ldr r0, _021E5A00 ; =ov99_021E6250
 	add r1, r4, #0
 	bl Main_SetVBlankIntrCB
@@ -126,7 +126,7 @@ PokeathlonCourseRecord_Exit: ; 0x021E5A04
 	add r0, r5, #0
 	bl OverlayManager_FreeData
 	mov r0, #0x84
-	bl Heap_Destroy
+	bl DestroyHeap
 	ldr r0, _021E5A34 ; =FS_OVERLAY_ID(OVY_98)
 	bl UnloadOverlayByID
 	mov r0, #1
@@ -279,7 +279,7 @@ ov99_021E5B54: ; 0x021E5B54
 	ldr r0, [r5, #0xc]
 	add r4, r1, #0
 	mov r1, #8
-	bl Heap_Alloc
+	bl AllocFromHeap
 	ldr r1, [r4]
 	str r1, [r0]
 	ldr r1, [r4, #4]
@@ -297,10 +297,10 @@ ov99_021E5B70: ; 0x021E5B70
 
 	thumb_func_start ov99_021E5B74
 ov99_021E5B74: ; 0x021E5B74
-	ldr r3, _021E5B78 ; =Heap_Free
+	ldr r3, _021E5B78 ; =FreeToHeap
 	bx r3
 	.balign 4, 0
-_021E5B78: .word Heap_Free
+_021E5B78: .word FreeToHeap
 	thumb_func_end ov99_021E5B74
 
 	thumb_func_start ov99_021E5B7C
@@ -555,7 +555,7 @@ _021E5D3A:
 	cmp r4, #8
 	blo _021E5D3A
 	ldr r0, [r5, #4]
-	bl Heap_Free
+	bl FreeToHeap
 	pop {r4, r5, r6, pc}
 	.balign 4, 0
 _021E5D54: .word _021E954C
@@ -1838,7 +1838,7 @@ _021E6798:
 	mov r0, #3
 	mov r1, #0x84
 	lsl r2, r0, #0x10
-	bl Heap_Create
+	bl CreateHeap
 	mov r1, #0x49
 	add r0, r4, #0
 	lsl r1, r1, #2
@@ -1886,9 +1886,9 @@ _021E6798:
 	add r0, r4, #0
 	bl ov99_021E6D34
 	mov r0, #0
-	bl ResetVisibleHardwareWindows
+	bl sub_0200FBDC
 	mov r0, #1
-	bl ResetVisibleHardwareWindows
+	bl sub_0200FBDC
 	ldr r0, _021E683C ; =ov99_021E6938
 	add r1, r4, #0
 	bl Main_SetVBlankIntrCB
@@ -1925,7 +1925,7 @@ ov99_021E6840: ; 0x021E6840
 	add r0, r5, #0
 	bl OverlayManager_FreeData
 	mov r0, #0x84
-	bl Heap_Destroy
+	bl DestroyHeap
 	ldr r0, _021E6884 ; =FS_OVERLAY_ID(OVY_98)
 	bl UnloadOverlayByID
 	mov r0, #1
@@ -2194,7 +2194,7 @@ _021E6A7E:
 	cmp r4, #4
 	blo _021E6A7E
 	ldr r0, [r5, #4]
-	bl Heap_Free
+	bl FreeToHeap
 	pop {r4, r5, r6, pc}
 	.balign 4, 0
 _021E6A98: .word ov99_021E9D88
@@ -2789,7 +2789,7 @@ ov99_021E6F70: ; 0x021E6F70
 	bl GF_AssertFail
 _021E6F7C:
 	add r0, r5, #0
-	bl PokeathlonSave_GetUnkAEC
+	bl sub_02031990
 	mov r2, #0
 _021E6F84:
 	lsl r1, r2, #1
@@ -2842,7 +2842,7 @@ ov99_021E6FD0: ; 0x021E6FD0
 	ldr r0, [r7, #0xc]
 	add r5, r1, #0
 	mov r1, #0x1c
-	bl Heap_Alloc
+	bl AllocFromHeap
 	mov r1, #0
 	mov r2, #0x1c
 	add r4, r0, #0
@@ -2851,13 +2851,13 @@ ov99_021E6FD0: ; 0x021E6FD0
 	ldr r6, [r5]
 	str r0, [sp, #8]
 	add r0, r6, #0
-	bl PokeathlonSave_dummy1
+	bl sub_02031974
 	add r5, r0, #0
 	add r0, r6, #0
-	bl PokeathlonSave_GetRecordsSolo
+	bl sub_0203197C
 	str r0, [sp, #4]
 	add r0, r6, #0
-	bl PokeathlonSave_GetUnkDC
+	bl sub_02031978
 	str r0, [sp]
 	mov r2, #0
 	add r3, r4, #0
@@ -2903,10 +2903,10 @@ _021E700C:
 
 	thumb_func_start ov99_021E7060
 ov99_021E7060: ; 0x021E7060
-	ldr r3, _021E7064 ; =Heap_Free
+	ldr r3, _021E7064 ; =FreeToHeap
 	bx r3
 	.balign 4, 0
-_021E7064: .word Heap_Free
+_021E7064: .word FreeToHeap
 	thumb_func_end ov99_021E7060
 
 	thumb_func_start ov99_021E7068
@@ -3697,7 +3697,7 @@ _021E75B2:
 	bne _021E75E6
 	add r0, r0, #4
 	ldr r0, [r5, r0]
-	bl GridInputHandler_GetNextInput
+	bl sub_02019F74
 	add r4, r0, #0
 	add r0, r5, #0
 	bl ov99_021E7508
@@ -4005,7 +4005,7 @@ _021E783C:
 	mov r0, #3
 	mov r1, #0x84
 	lsl r2, r0, #0x10
-	bl Heap_Create
+	bl CreateHeap
 	mov r1, #0x4d
 	add r0, r4, #0
 	lsl r1, r1, #4
@@ -4057,9 +4057,9 @@ _021E783C:
 	add r0, r4, #0
 	bl ov99_021E8224
 	mov r0, #0
-	bl ResetVisibleHardwareWindows
+	bl sub_0200FBDC
 	mov r0, #1
-	bl ResetVisibleHardwareWindows
+	bl sub_0200FBDC
 	ldr r0, _021E78EC ; =ov99_021E7A54
 	add r1, r4, #0
 	bl Main_SetVBlankIntrCB
@@ -4081,7 +4081,7 @@ PokeathlonMedals_Exit: ; 0x021E78F0
 	mov r0, #0x3f
 	lsl r0, r0, #4
 	ldr r0, [r4, r0]
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r4, #0
 	bl ov99_021E7AB8
 	ldr r1, _021E7944 ; =0x00000404
@@ -4101,7 +4101,7 @@ PokeathlonMedals_Exit: ; 0x021E78F0
 	add r0, r5, #0
 	bl OverlayManager_FreeData
 	mov r0, #0x84
-	bl Heap_Destroy
+	bl DestroyHeap
 	ldr r0, _021E7948 ; =FS_OVERLAY_ID(OVY_98)
 	bl UnloadOverlayByID
 	mov r0, #1
@@ -4282,7 +4282,7 @@ ov99_021E7A78: ; 0x021E7A78
 	str r0, [sp, #8]
 	ldr r0, _021E7AB4 ; =ov99_021EA03C
 	add r3, r4, #0
-	bl GridInputHandler_Create
+	bl sub_02019BA4
 	mov r1, #0xff
 	lsl r1, r1, #2
 	str r0, [r4, r1]
@@ -4303,7 +4303,7 @@ ov99_021E7AB8: ; 0x021E7AB8
 	ldr r0, [r4, r0]
 	cmp r0, #0
 	beq _021E7AD2
-	bl GridInputHandler_Free
+	bl sub_02019BDC
 	mov r0, #0xff
 	mov r1, #0
 	lsl r0, r0, #2
@@ -4395,7 +4395,7 @@ _021E7B4C:
 	add r0, #8
 	ldr r0, [r5, r0]
 	mov r6, #0
-	bl GridInputHandler_GetNextInput
+	bl sub_02019F74
 	cmp r7, #0
 	beq _021E7B80
 	cmp r0, #0x1e
@@ -4421,7 +4421,7 @@ _021E7B96:
 	lsl r0, r0, #2
 	ldr r0, [r5, r0]
 	add r1, r6, #0
-	bl GridInputHandler_SetNextInput
+	bl sub_02019F7C
 	add r0, r5, #0
 	add r1, r6, #0
 	bl ov99_021E7C58
@@ -4445,12 +4445,12 @@ ov99_021E7BC8: ; 0x021E7BC8
 	mov r0, #0xff
 	lsl r0, r0, #2
 	ldr r0, [r5, r0]
-	bl GridInputHandler_HandleInput_AllowHold
+	bl sub_02019D18
 	add r6, r0, #0
 	mov r0, #0xff
 	lsl r0, r0, #2
 	ldr r0, [r5, r0]
-	bl GridInputHandler_GetNextInput
+	bl sub_02019F74
 	add r4, r0, #0
 	ldr r0, _021E7C50 ; =ov99_021E9F54
 	bl TouchscreenHitbox_FindHitboxAtTouchNew
@@ -4520,11 +4520,11 @@ ov99_021E7C58: ; 0x021E7C58
 	lsl r0, r0, #2
 	ldr r0, [r5, r0]
 	add r4, r1, #0
-	bl GridInputHandler_GetDpadBox
+	bl sub_0201A018
 	add r1, sp, #0
 	add r1, #1
 	add r2, sp, #0
-	bl DpadMenuBox_GetPosition
+	bl sub_02020A0C
 	ldr r0, _021E7C9C ; =0x00000408
 	add r2, sp, #0
 	ldrb r1, [r2, #1]
@@ -4559,7 +4559,7 @@ ov99_021E7CA8: ; 0x021E7CA8
 	lsl r1, r4, #0x18
 	ldr r0, [r5, r0]
 	lsr r1, r1, #0x18
-	bl GridInputHandler_SetNextInput
+	bl sub_02019F7C
 	add r0, r5, #0
 	add r1, r4, #0
 	bl ov99_021E7C58
@@ -4846,7 +4846,7 @@ _021E7ED0:
 	cmp r4, #7
 	blo _021E7ED0
 	ldr r0, [r5]
-	bl Heap_Free
+	bl FreeToHeap
 	pop {r4, r5, r6, pc}
 	nop
 _021E7EEC: .word ov99_021EA348
@@ -5372,7 +5372,7 @@ _021E831E:
 	mov r0, #3
 	mov r1, #0x84
 	lsl r2, r0, #0x10
-	bl Heap_Create
+	bl CreateHeap
 	add r0, r4, #0
 	mov r1, #0xe4
 	mov r2, #0x84
@@ -5408,9 +5408,9 @@ _021E831E:
 	add r0, r4, #0
 	bl ov99_021E8818
 	mov r0, #0
-	bl ResetVisibleHardwareWindows
+	bl sub_0200FBDC
 	mov r0, #1
-	bl ResetVisibleHardwareWindows
+	bl sub_0200FBDC
 	ldr r0, _021E83A8 ; =ov99_021E856C
 	add r1, r4, #0
 	bl Main_SetVBlankIntrCB
@@ -5445,7 +5445,7 @@ PokeathlonEventRecord_Exit: ; 0x021E83AC
 	add r0, r5, #0
 	bl OverlayManager_FreeData
 	mov r0, #0x84
-	bl Heap_Destroy
+	bl DestroyHeap
 	ldr r0, _021E83F0 ; =FS_OVERLAY_ID(OVY_98)
 	bl UnloadOverlayByID
 	mov r0, #1
@@ -5915,7 +5915,7 @@ _021E876A:
 	cmp r4, #6
 	blo _021E876A
 	ldr r0, [r5, #4]
-	bl Heap_Free
+	bl FreeToHeap
 	pop {r4, r5, r6, pc}
 	.balign 4, 0
 _021E8784: .word ov99_021EA59C
@@ -7531,7 +7531,7 @@ ov99_021E93DC: ; 0x021E93DC
 	mov r1, #7
 	ldr r0, [r5, #0xc]
 	lsl r1, r1, #6
-	bl Heap_Alloc
+	bl AllocFromHeap
 	mov r2, #7
 	add r4, r0, #0
 	mov r1, #0
@@ -7562,7 +7562,7 @@ ov99_021E9418: ; 0x021E9418
 	ldr r0, [r4, r0]
 	bl String_Delete
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	pop {r4, pc}
 	.balign 4, 0
 	thumb_func_end ov99_021E9418

@@ -7,12 +7,6 @@
 #include "palette.h"
 #include "touchscreen.h"
 
-enum TouchscreenListMenuTextAlignment {
-    TSMENU_ALIGN_LEFT,
-    TSMENU_ALIGN_CENTER,
-    TSMENU_ALIGN_RIGHT,
-};
-
 typedef struct TouchscreenListMenuTemplate {
     u8 wrapAround : 1;
     u8 centered : 7;
@@ -28,14 +22,14 @@ typedef struct TouchscreenListMenuTemplate {
 
 typedef struct TouchscreenListMenuHeader {
     TouchscreenListMenuTemplate template;
-    ListMenuItem *listMenuItems;
+    LISTMENUITEM *listMenuItems;
     BgConfig *bgConfig;
     u8 numWindows;
     u8 unk15[0x3];
 } TouchscreenListMenuHeader;
 
 typedef struct TouchscreenListMenuSpawner {
-    enum HeapID heapID;
+    HeapID heapId;
     NNSG2dCharacterData *pCharData;
     NNSG2dPaletteData *pPlttData;
     void *charDataRaw;
@@ -61,15 +55,15 @@ struct TouchscreenListMenu {
     u8 y;
     u8 selection;
     u8 animTimer;
-    enum HeapID heapID;
+    HeapID heapId;
     TouchscreenListMenuCallback callback;
     void *callbackArg;
 };
 
-TouchscreenListMenuSpawner *TouchscreenListMenuSpawner_Create(enum HeapID heapID, PaletteData *paletteData);
+TouchscreenListMenuSpawner *TouchscreenListMenuSpawner_Create(HeapID heapId, PaletteData *paletteData);
 void TouchscreenListMenuSpawner_Destroy(TouchscreenListMenuSpawner *spawner);
 TouchscreenListMenu *TouchscreenListMenu_Create(TouchscreenListMenuSpawner *spawner, TouchscreenListMenuHeader *header, u8 isTouch, u8 x, u8 y, u8 width, u8 selection);
-TouchscreenListMenu *TouchscreenListMenu_CreateWithAlignment(TouchscreenListMenuSpawner *spawner, TouchscreenListMenuHeader *header, u8 isTouch, u8 x, u8 y, u8 width, u8 selection, enum TouchscreenListMenuTextAlignment alignment);
+TouchscreenListMenu *TouchscreenListMenu_CreateWithAlignment(TouchscreenListMenuSpawner *spawner, TouchscreenListMenuHeader *header, u8 isTouch, u8 x, u8 y, u8 width, u8 selection, int alignment);
 TouchscreenListMenu *TouchscreenListMenu_CreateWithCallback(TouchscreenListMenuSpawner *spawner, TouchscreenListMenuHeader *header, u8 isTouch, u8 x, u8 y, u8 width, u8 selection, TouchscreenListMenuCallback callback, void *callbackArg, BOOL silent);
 u8 TouchscreenListMenu_WasLastInputTouch(TouchscreenListMenu *menu);
 void TouchscreenListMenu_Destroy(TouchscreenListMenu *menu);

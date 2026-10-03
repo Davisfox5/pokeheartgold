@@ -129,4 +129,8 @@
 		<language name="English"></language>
 		<language name="日本語">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</language>
 	</row>
+	<row id="msg_0537_T11R0701_00031" index="31">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Lobby’s open to the public.\nEverything upstairs isn’t--\fnot without a company badge.\rSecurity’s been tight lately.\nHonestly, even I don’t know half\fof what goes on up there anymore.</language>
+	</row>
 </body>

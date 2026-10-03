@@ -10,7 +10,7 @@ sub_02014A08: ; 0x02014A08
 	add r5, r1, #0
 	mov r1, #0xc
 	add r4, r2, #0
-	bl Heap_Alloc
+	bl AllocFromHeap
 	mov r1, #0
 	strb r1, [r0]
 	strb r1, [r0, #1]
@@ -39,7 +39,7 @@ sub_02014A38: ; 0x02014A38
 	bl GF_AssertFail
 _02014A42:
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	pop {r4, pc}
 	.balign 4, 0
 	thumb_func_end sub_02014A38
@@ -141,7 +141,7 @@ sub_02014AD8: ; 0x02014AD8
 	push {r3, r4, r5, lr}
 	ldr r1, _02014B04 ; =0x0000079C
 	add r5, r0, #0
-	bl Heap_Alloc
+	bl AllocFromHeap
 	ldr r2, _02014B04 ; =0x0000079C
 	mov r1, #0
 	add r4, r0, #0
@@ -272,7 +272,7 @@ sub_02014BD8: ; 0x02014BD8
 	ldr r0, [r4, r0]
 	bl sub_02014A38
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	pop {r4, pc}
 	.balign 4, 0
 	thumb_func_end sub_02014BD8

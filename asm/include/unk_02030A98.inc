@@ -4,8 +4,8 @@
 .public MailMsg_Init_WithBank
 .public GetECWordIndexByPair
 .public GetCategoryAndMsgNoByECWordIdx
-.public Heap_Alloc
-.public Heap_Free
+.public AllocFromHeap
+.public FreeToHeap
 .public GF_AssertFail
 .public String_New
 .public CopyU16ArrayToStringN

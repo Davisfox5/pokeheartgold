@@ -11,7 +11,6 @@ typedef enum RTC_TimeOfDay {
     RTC_TIMEOFDAY_EVE,
     RTC_TIMEOFDAY_NITE,
     RTC_TIMEOFDAY_LATE,
-    RTC_TIMEOFDAY_COUNT,
 } TIMEOFDAY;
 
 typedef enum TimeOfDayWildParam {

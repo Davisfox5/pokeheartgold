@@ -5,174 +5,174 @@
 
 	.rodata
 
-	ScrDef scr_seq_0071_000
-	ScrDef scr_seq_0071_001
-	ScrDef scr_seq_0071_002
-	ScrDefEnd
+	scrdef scr_seq_0071_000
+	scrdef scr_seq_0071_001
+	scrdef scr_seq_0071_002
+	scrdef_end
 
 scr_seq_0071_000:
-	End
+	end
 
 scr_seq_0071_001:
-	Compare VAR_UNK_414E, 0
-	CallIfNe _001F
-	End
+	compare VAR_UNK_414E, 0
+	call_if_ne _001F
+	end
 
 _001F:
-	MakeObjectVisible obj_player
-	Return
+	make_object_visible obj_player
+	return
 
 scr_seq_0071_002:
-	ScrCmd_609
-	LockAll
-	Call _0090
-	Random VAR_SPECIAL_RESULT, 4
-	Switch VAR_SPECIAL_RESULT
-	Case 1, _00F2
-	Case 2, _010C
-	Case 3, _0126
-	GoTo _00D8
+	scrcmd_609
+	lockall
+	call _0090
+	random VAR_SPECIAL_RESULT, 4
+	switch VAR_SPECIAL_RESULT
+	case 1, _00F2
+	case 2, _010C
+	case 3, _0126
+	goto _00D8
 
 _0068:
-	FadeScreen 6, 1, 0, RGB_BLACK
-	WaitFade
-	Warp MAP_BATTLE_TOWER_UNUSED_3, 0, 7, 6, DIR_NORTH
-	FadeScreen 6, 1, 1, RGB_BLACK
-	WaitFade
-	ReleaseAll
-	End
+	fade_screen 6, 1, 0, RGB_BLACK
+	wait_fade
+	warp MAP_BATTLE_TOWER_UNUSED_3, 0, 7, 6, DIR_NORTH
+	fade_screen 6, 1, 1, RGB_BLACK
+	wait_fade
+	releaseall
+	end
 
 _0090:
-	ScrCmd_307 0, 0, 2, 2, 77
-	ScrCmd_310 77
-	ScrCmd_308 77
-	ApplyMovement 0, _0140
-	WaitMovement
-	ScrCmd_374 obj_player
-	ApplyMovement obj_player, _014C
-	WaitMovement
-	ScrCmd_311 77
-	ScrCmd_308 77
-	ScrCmd_309 77
-	Return
+	scrcmd_307 0, 0, 2, 2, 77
+	scrcmd_310 77
+	scrcmd_308 77
+	apply_movement 0, _0140
+	wait_movement
+	scrcmd_374 obj_player
+	apply_movement obj_player, _014C
+	wait_movement
+	scrcmd_311 77
+	scrcmd_308 77
+	scrcmd_309 77
+	return
 
 _00C4:
-	ApplyMovement 0, _0154
-	ApplyMovement obj_player, _0164
-	WaitMovement
-	Return
+	apply_movement 0, _0154
+	apply_movement obj_player, _0164
+	wait_movement
+	return
 
 _00D8:
-	ApplyMovement 0, _0178
-	ApplyMovement obj_player, _0188
-	WaitMovement
-	GoTo _0068
-	End
+	apply_movement 0, _0178
+	apply_movement obj_player, _0188
+	wait_movement
+	goto _0068
+	end
 
 _00F2:
-	ApplyMovement 0, _019C
-	ApplyMovement obj_player, _01AC
-	WaitMovement
-	GoTo _0068
-	End
+	apply_movement 0, _019C
+	apply_movement obj_player, _01AC
+	wait_movement
+	goto _0068
+	end
 
 _010C:
-	ApplyMovement 0, _01C0
-	ApplyMovement obj_player, _01D0
-	WaitMovement
-	GoTo _0068
-	End
+	apply_movement 0, _01C0
+	apply_movement obj_player, _01D0
+	wait_movement
+	goto _0068
+	end
 
 _0126:
-	ApplyMovement 0, _01E4
-	ApplyMovement obj_player, _01F4
-	WaitMovement
-	GoTo _0068
-	End
+	apply_movement 0, _01E4
+	apply_movement obj_player, _01F4
+	wait_movement
+	goto _0068
+	end
 
 	.balign 4, 0
 _0140:
-	WalkNormalSouth 3
-	FaceNorth
-	EndMovement
+	step 13, 3
+	step 0, 1
+	step_end
 
 	.balign 4, 0
 _014C:
-	WalkNormalSouth 2
-	EndMovement
+	step 13, 2
+	step_end
 
 	.balign 4, 0
 _0154:
-	FaceNorth
-	WalkNormalNorth 2
-	SetInvisible
-	EndMovement
+	step 0, 1
+	step 12, 2
+	step 69, 1
+	step_end
 
 	.balign 4, 0
 _0164:
-	WalkNormalEast
-	FaceNorth
-	WalkFasterNorth
-	SetInvisible
-	EndMovement
+	step 15, 1
+	step 0, 1
+	step 20, 1
+	step 69, 1
+	step_end
 
 	.balign 4, 0
 _0178:
-	WalkNormalEast 4
-	WalkNormalNorth 2
-	SetInvisible
-	EndMovement
+	step 15, 4
+	step 12, 2
+	step 69, 1
+	step_end
 
 	.balign 4, 0
 _0188:
-	WalkNormalSouth
-	WalkNormalEast 4
-	WalkNormalNorth 2
-	SetInvisible
-	EndMovement
+	step 13, 1
+	step 15, 4
+	step 12, 2
+	step 69, 1
+	step_end
 
 	.balign 4, 0
 _019C:
-	WalkNormalEast 8
-	WalkNormalNorth 2
-	SetInvisible
-	EndMovement
+	step 15, 8
+	step 12, 2
+	step 69, 1
+	step_end
 
 	.balign 4, 0
 _01AC:
-	WalkNormalSouth
-	WalkNormalEast 8
-	WalkNormalNorth 2
-	SetInvisible
-	EndMovement
+	step 13, 1
+	step 15, 8
+	step 12, 2
+	step 69, 1
+	step_end
 
 	.balign 4, 0
 _01C0:
-	WalkNormalEast 12
-	WalkNormalNorth 2
-	SetInvisible
-	EndMovement
+	step 15, 12
+	step 12, 2
+	step 69, 1
+	step_end
 
 	.balign 4, 0
 _01D0:
-	WalkNormalSouth
-	WalkNormalEast 12
-	WalkNormalNorth 2
-	SetInvisible
-	EndMovement
+	step 13, 1
+	step 15, 12
+	step 12, 2
+	step 69, 1
+	step_end
 
 	.balign 4, 0
 _01E4:
-	WalkNormalEast 16
-	WalkNormalNorth 2
-	SetInvisible
-	EndMovement
+	step 15, 16
+	step 12, 2
+	step 69, 1
+	step_end
 
 	.balign 4, 0
 _01F4:
-	WalkNormalSouth
-	WalkNormalEast 16
-	WalkNormalNorth 2
-	SetInvisible
-	EndMovement
+	step 13, 1
+	step 15, 16
+	step 12, 2
+	step 69, 1
+	step_end
 	.balign 4, 0

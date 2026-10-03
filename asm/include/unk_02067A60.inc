@@ -2,9 +2,9 @@
 #pragma once
 .public PlayCry
 .public IsCryFinished
-.public Heap_Alloc
-.public Heap_AllocAtEnd
-.public Heap_Free
+.public AllocFromHeap
+.public AllocFromHeapAtEnd
+.public FreeToHeap
 .public GF_AssertFail
 .public Save_Roamers_Get
 .public RoamerSave_SetFlute

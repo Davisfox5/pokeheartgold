@@ -5,9 +5,9 @@
 
 	.rodata
 
-	ScrDef scr_seq_T27PC0105_000
-	ScrDefEnd
+	scrdef scr_seq_T27PC0105_000
+	scrdef_end
 
 scr_seq_T27PC0105_000:
-	End
+	end
 	.balign 4, 0

@@ -16,90 +16,90 @@ static void *GfGfxLoader_GetPlttDataInternal(void *data, NNSG2dPaletteData **ppP
 static void *GfGfxLoader_GetCellBankInternal(void *data, NNSG2dCellDataBank **ppCellbank);
 static void *GfGfxLoader_GetAnimBankInternal(void *data, NNSG2dAnimBankData **ppAnimbank);
 
-u32 GfGfxLoader_LoadCharData(NarcId narcId, s32 memberNo, BgConfig *bgConfig, GFBgLayer layer, u32 tileStart, u32 szByte, BOOL isCompressed, enum HeapID heapID) {
+u32 GfGfxLoader_LoadCharData(NarcId narcId, s32 memberNo, BgConfig *bgConfig, GFBgLayer layer, u32 tileStart, u32 szByte, BOOL isCompressed, HeapID heapId) {
     void *data;
-    data = GfGfxLoader_LoadFromNarc(narcId, memberNo, isCompressed, heapID, FALSE);
+    data = GfGfxLoader_LoadFromNarc(narcId, memberNo, isCompressed, heapId, FALSE);
     return GfGfxLoader_LoadCharDataInternal(data, bgConfig, layer, tileStart, szByte);
 }
 
-void GfGfxLoader_LoadScrnData(NarcId narcId, s32 memberNo, BgConfig *bgConfig, GFBgLayer layer, u32 tileStart, u32 szByte, BOOL isCompressed, enum HeapID heapID) {
+void GfGfxLoader_LoadScrnData(NarcId narcId, s32 memberNo, BgConfig *bgConfig, GFBgLayer layer, u32 tileStart, u32 szByte, BOOL isCompressed, HeapID heapId) {
     void *data;
-    data = GfGfxLoader_LoadFromNarc(narcId, memberNo, isCompressed, heapID, TRUE);
+    data = GfGfxLoader_LoadFromNarc(narcId, memberNo, isCompressed, heapId, TRUE);
     GfGfxLoader_LoadScrnDataInternal(data, bgConfig, layer, tileStart, szByte);
 }
 
-void GfGfxLoader_GXLoadPal(NarcId narcId, s32 memberNo, enum GFPalLoadLocation location, enum GFPalSlotOffset palSlotOffset, u32 szByte, enum HeapID heapID) {
-    GfGfxLoader_GXLoadPalWithSrcOffset(narcId, memberNo, location, 0, palSlotOffset, szByte, heapID);
+void GfGfxLoader_GXLoadPal(NarcId narcId, s32 memberNo, enum GFPalLoadLocation location, enum GFPalSlotOffset palSlotOffset, u32 szByte, HeapID heapId) {
+    GfGfxLoader_GXLoadPalWithSrcOffset(narcId, memberNo, location, 0, palSlotOffset, szByte, heapId);
 }
 
-void GfGfxLoader_GXLoadPalWithSrcOffset(NarcId narcId, s32 memberNo, enum GFPalLoadLocation location, u32 srcOffset, enum GFPalSlotOffset palSlotOffset, u32 szByte, enum HeapID heapID) {
+void GfGfxLoader_GXLoadPalWithSrcOffset(NarcId narcId, s32 memberNo, enum GFPalLoadLocation location, u32 srcOffset, enum GFPalSlotOffset palSlotOffset, u32 szByte, HeapID heapId) {
     void *data;
-    data = GfGfxLoader_LoadFromNarc(narcId, memberNo, FALSE, heapID, TRUE);
+    data = GfGfxLoader_LoadFromNarc(narcId, memberNo, FALSE, heapId, TRUE);
     GfGfxLoader_GXLoadPalWithSrcOffsetInternal(data, location, srcOffset, palSlotOffset, szByte);
 }
 
-void GfGfxLoader_PartiallyLoadPalette(NarcId narcId, s32 memberNo, NNS_G2D_VRAM_TYPE type, u32 baseAddr, enum HeapID heapID, NNSG2dImagePaletteProxy *pPltProxy) {
+void GfGfxLoader_PartiallyLoadPalette(NarcId narcId, s32 memberNo, NNS_G2D_VRAM_TYPE type, u32 baseAddr, HeapID heapId, NNSG2dImagePaletteProxy *pPltProxy) {
     void *data;
-    data = GfGfxLoader_LoadFromNarc(narcId, memberNo, FALSE, heapID, TRUE);
+    data = GfGfxLoader_LoadFromNarc(narcId, memberNo, FALSE, heapId, TRUE);
     GfGfxLoader_PartiallyLoadPaletteInternal(data, type, baseAddr, pPltProxy);
 }
 
-u32 GfGfxLoader_LoadImageMapping(NarcId narcId, s32 memberNo, BOOL isCompressed, GFBgLayer layer, u32 szByte, NNS_G2D_VRAM_TYPE type, u32 baseAddr, enum HeapID heapID, NNSG2dImageProxy *pImgProxy) {
+u32 GfGfxLoader_LoadImageMapping(NarcId narcId, s32 memberNo, BOOL isCompressed, GFBgLayer layer, u32 szByte, NNS_G2D_VRAM_TYPE type, u32 baseAddr, HeapID heapId, NNSG2dImageProxy *pImgProxy) {
     void *data;
-    data = GfGfxLoader_LoadFromNarc(narcId, memberNo, isCompressed, heapID, TRUE);
+    data = GfGfxLoader_LoadFromNarc(narcId, memberNo, isCompressed, heapId, TRUE);
     return GfGfxLoader_LoadImageMappingInternal(data, layer, szByte, type, baseAddr, pImgProxy);
 }
 
-void *GfGfxLoader_GetCharData(NarcId narcId, s32 memberNo, BOOL isCompressed, NNSG2dCharacterData **ppCharData, enum HeapID heapID) {
+void *GfGfxLoader_GetCharData(NarcId narcId, s32 memberNo, BOOL isCompressed, NNSG2dCharacterData **ppCharData, HeapID heapId) {
     void *data;
-    data = GfGfxLoader_LoadFromNarc(narcId, memberNo, isCompressed, heapID, FALSE);
+    data = GfGfxLoader_LoadFromNarc(narcId, memberNo, isCompressed, heapId, FALSE);
     return GfGfxLoader_GetCharDataInternal(data, ppCharData);
 }
 
-void *GfGfxLoader_GetScrnData(NarcId narcId, s32 memberNo, BOOL isCompressed, NNSG2dScreenData **ppScrnData, enum HeapID heapID) {
+void *GfGfxLoader_GetScrnData(NarcId narcId, s32 memberNo, BOOL isCompressed, NNSG2dScreenData **ppScrnData, HeapID heapId) {
     void *data;
-    data = GfGfxLoader_LoadFromNarc(narcId, memberNo, isCompressed, heapID, FALSE);
+    data = GfGfxLoader_LoadFromNarc(narcId, memberNo, isCompressed, heapId, FALSE);
     return GfGfxLoader_GetScrnDataInternal(data, ppScrnData);
 }
 
-void *GfGfxLoader_GetPlttData(NarcId narcId, s32 memberNo, NNSG2dPaletteData **ppPlttData, enum HeapID heapID) {
+void *GfGfxLoader_GetPlttData(NarcId narcId, s32 memberNo, NNSG2dPaletteData **ppPlttData, HeapID heapId) {
     void *data;
-    data = GfGfxLoader_LoadFromNarc(narcId, memberNo, FALSE, heapID, FALSE);
+    data = GfGfxLoader_LoadFromNarc(narcId, memberNo, FALSE, heapId, FALSE);
     return GfGfxLoader_GetPlttDataInternal(data, ppPlttData);
 }
 
-void *GfGfxLoader_GetCellBank(NarcId narcId, s32 memberNo, BOOL isCompressed, NNSG2dCellDataBank **ppCellBank, enum HeapID heapID) {
+void *GfGfxLoader_GetCellBank(NarcId narcId, s32 memberNo, BOOL isCompressed, NNSG2dCellDataBank **ppCellBank, HeapID heapId) {
     void *data;
-    data = GfGfxLoader_LoadFromNarc(narcId, memberNo, isCompressed, heapID, FALSE);
+    data = GfGfxLoader_LoadFromNarc(narcId, memberNo, isCompressed, heapId, FALSE);
     return GfGfxLoader_GetCellBankInternal(data, ppCellBank);
 }
 
-void *GfGfxLoader_GetAnimBank(NarcId narcId, s32 memberNo, BOOL isCompressed, NNSG2dAnimBankData **ppAnimBank, enum HeapID heapID) {
+void *GfGfxLoader_GetAnimBank(NarcId narcId, s32 memberNo, BOOL isCompressed, NNSG2dAnimBankData **ppAnimBank, HeapID heapId) {
     void *data;
-    data = GfGfxLoader_LoadFromNarc(narcId, memberNo, isCompressed, heapID, FALSE);
+    data = GfGfxLoader_LoadFromNarc(narcId, memberNo, isCompressed, heapId, FALSE);
     return GfGfxLoader_GetAnimBankInternal(data, ppAnimBank);
 }
 
-void *GfGfxLoader_LoadFromNarc(NarcId narcId, s32 fileId, BOOL isCompressed, enum HeapID heapID, BOOL atEnd) {
+void *GfGfxLoader_LoadFromNarc(NarcId narcId, s32 fileId, BOOL isCompressed, HeapID heapId, BOOL atEnd) {
     void *data;
     void *uncompBuf;
 
     if (isCompressed || atEnd == TRUE) {
-        data = Heap_AllocAtEnd(heapID, GetNarcMemberSizeByIdPair(narcId, fileId));
+        data = AllocFromHeapAtEnd(heapId, GetNarcMemberSizeByIdPair(narcId, fileId));
     } else {
-        data = Heap_Alloc(heapID, GetNarcMemberSizeByIdPair(narcId, fileId));
+        data = AllocFromHeap(heapId, GetNarcMemberSizeByIdPair(narcId, fileId));
     }
     if (data != NULL) {
         ReadWholeNarcMemberByIdPair(data, narcId, fileId);
         if (isCompressed) {
             if (atEnd == FALSE) {
-                uncompBuf = Heap_Alloc(heapID, MI_GetUncompressedSize(data));
+                uncompBuf = AllocFromHeap(heapId, MI_GetUncompressedSize(data));
             } else {
-                uncompBuf = Heap_AllocAtEnd(heapID, MI_GetUncompressedSize(data));
+                uncompBuf = AllocFromHeapAtEnd(heapId, MI_GetUncompressedSize(data));
             }
             if (uncompBuf != NULL) {
                 MI_UncompressLZ8(data, uncompBuf);
-                Heap_Free(data);
+                FreeToHeap(data);
             }
             data = uncompBuf; // Potential memory leak
         }
@@ -107,28 +107,28 @@ void *GfGfxLoader_LoadFromNarc(NarcId narcId, s32 fileId, BOOL isCompressed, enu
     return data;
 }
 
-void *GfGfxLoader_LoadFromNarc_GetSizeOut(NarcId narcId, s32 fileId, BOOL isCompressed, enum HeapID heapID, BOOL atEnd, u32 *sizeOut) {
+void *GfGfxLoader_LoadFromNarc_GetSizeOut(NarcId narcId, s32 fileId, BOOL isCompressed, HeapID heapId, BOOL atEnd, u32 *sizeOut) {
     void *data;
     void *uncompBuf;
 
     *sizeOut = GetNarcMemberSizeByIdPair(narcId, fileId);
     if (isCompressed || atEnd == TRUE) {
-        data = Heap_AllocAtEnd(heapID, *sizeOut);
+        data = AllocFromHeapAtEnd(heapId, *sizeOut);
     } else {
-        data = Heap_Alloc(heapID, *sizeOut);
+        data = AllocFromHeap(heapId, *sizeOut);
     }
     if (data != NULL) {
         ReadWholeNarcMemberByIdPair(data, narcId, fileId);
         if (isCompressed) {
             *sizeOut = MI_GetUncompressedSize(data);
             if (atEnd == FALSE) {
-                uncompBuf = Heap_Alloc(heapID, *sizeOut);
+                uncompBuf = AllocFromHeap(heapId, *sizeOut);
             } else {
-                uncompBuf = Heap_AllocAtEnd(heapID, *sizeOut);
+                uncompBuf = AllocFromHeapAtEnd(heapId, *sizeOut);
             }
             if (uncompBuf != NULL) {
                 MI_UncompressLZ8(data, uncompBuf);
-                Heap_Free(data);
+                FreeToHeap(data);
             }
             data = uncompBuf; // Potential memory leak
         }
@@ -136,97 +136,97 @@ void *GfGfxLoader_LoadFromNarc_GetSizeOut(NarcId narcId, s32 fileId, BOOL isComp
     return data;
 }
 
-u32 GfGfxLoader_LoadCharDataFromOpenNarc(NARC *narc, s32 memberNo, BgConfig *bgConfig, GFBgLayer layer, u32 tileStart, u32 szByte, BOOL isCompressed, enum HeapID heapID) {
+u32 GfGfxLoader_LoadCharDataFromOpenNarc(NARC *narc, s32 memberNo, BgConfig *bgConfig, GFBgLayer layer, u32 tileStart, u32 szByte, BOOL isCompressed, HeapID heapId) {
     void *data;
-    data = GfGfxLoader_LoadFromOpenNarc(narc, memberNo, isCompressed, heapID, FALSE);
+    data = GfGfxLoader_LoadFromOpenNarc(narc, memberNo, isCompressed, heapId, FALSE);
     return GfGfxLoader_LoadCharDataInternal(data, bgConfig, layer, tileStart, szByte);
 }
 
-void GfGfxLoader_LoadScrnDataFromOpenNarc(NARC *narc, s32 memberNo, BgConfig *bgConfig, GFBgLayer layer, u32 tileStart, u32 szByte, BOOL isCompressed, enum HeapID heapID) {
+void GfGfxLoader_LoadScrnDataFromOpenNarc(NARC *narc, s32 memberNo, BgConfig *bgConfig, GFBgLayer layer, u32 tileStart, u32 szByte, BOOL isCompressed, HeapID heapId) {
     void *data;
-    data = GfGfxLoader_LoadFromOpenNarc(narc, memberNo, isCompressed, heapID, TRUE);
+    data = GfGfxLoader_LoadFromOpenNarc(narc, memberNo, isCompressed, heapId, TRUE);
     GfGfxLoader_LoadScrnDataInternal(data, bgConfig, layer, tileStart, szByte);
 }
 
-void GfGfxLoader_GXLoadPalFromOpenNarc(NARC *narc, s32 memberNo, enum GFPalLoadLocation location, enum GFPalSlotOffset palSlotOffset, u32 szByte, enum HeapID heapID) {
-    GfGfxLoader_GXLoadPalWithSrcOffsetFromOpenNarc(narc, memberNo, location, 0, palSlotOffset, szByte, heapID);
+void GfGfxLoader_GXLoadPalFromOpenNarc(NARC *narc, s32 memberNo, enum GFPalLoadLocation location, enum GFPalSlotOffset palSlotOffset, u32 szByte, HeapID heapId) {
+    GfGfxLoader_GXLoadPalWithSrcOffsetFromOpenNarc(narc, memberNo, location, 0, palSlotOffset, szByte, heapId);
 }
 
-void GfGfxLoader_GXLoadPalWithSrcOffsetFromOpenNarc(NARC *narc, s32 memberNo, enum GFPalLoadLocation location, u32 srcOffset, enum GFPalSlotOffset palSlotOffset, u32 szByte, enum HeapID heapID) {
+void GfGfxLoader_GXLoadPalWithSrcOffsetFromOpenNarc(NARC *narc, s32 memberNo, enum GFPalLoadLocation location, u32 srcOffset, enum GFPalSlotOffset palSlotOffset, u32 szByte, HeapID heapId) {
     void *data;
-    data = GfGfxLoader_LoadFromOpenNarc(narc, memberNo, FALSE, heapID, TRUE);
+    data = GfGfxLoader_LoadFromOpenNarc(narc, memberNo, FALSE, heapId, TRUE);
     GfGfxLoader_GXLoadPalWithSrcOffsetInternal(data, location, srcOffset, palSlotOffset, szByte);
 }
 
-void GfGfxLoader_PartiallyLoadPaletteFromOpenNarc(NARC *narc, s32 memberNo, NNS_G2D_VRAM_TYPE type, u32 baseAddr, enum HeapID heapID, struct NNSG2dImagePaletteProxy *pPltProxy) {
+void GfGfxLoader_PartiallyLoadPaletteFromOpenNarc(NARC *narc, s32 memberNo, NNS_G2D_VRAM_TYPE type, u32 baseAddr, HeapID heapId, struct NNSG2dImagePaletteProxy *pPltProxy) {
     void *data;
-    data = GfGfxLoader_LoadFromOpenNarc(narc, memberNo, FALSE, heapID, TRUE);
+    data = GfGfxLoader_LoadFromOpenNarc(narc, memberNo, FALSE, heapId, TRUE);
     GfGfxLoader_PartiallyLoadPaletteInternal(data, type, baseAddr, pPltProxy);
 }
 
-u32 GfGfxLoader_LoadImageMappingFromOpenNarc(NARC *narc, s32 memberNo, BOOL isCompressed, GFBgLayer layer, u32 szByte, NNS_G2D_VRAM_TYPE type, u32 baseAddr, enum HeapID heapID, NNSG2dImageProxy *pImgProxy) {
+u32 GfGfxLoader_LoadImageMappingFromOpenNarc(NARC *narc, s32 memberNo, BOOL isCompressed, GFBgLayer layer, u32 szByte, NNS_G2D_VRAM_TYPE type, u32 baseAddr, HeapID heapId, NNSG2dImageProxy *pImgProxy) {
     void *data;
-    data = GfGfxLoader_LoadFromOpenNarc(narc, memberNo, isCompressed, heapID, TRUE);
+    data = GfGfxLoader_LoadFromOpenNarc(narc, memberNo, isCompressed, heapId, TRUE);
     return GfGfxLoader_LoadImageMappingInternal(data, layer, szByte, type, baseAddr, pImgProxy);
 }
 
-void *GfGfxLoader_GetCharDataFromOpenNarc(NARC *narc, s32 memberNo, BOOL isCompressed, NNSG2dCharacterData **ppCharData, enum HeapID heapID) {
+void *GfGfxLoader_GetCharDataFromOpenNarc(NARC *narc, s32 memberNo, BOOL isCompressed, NNSG2dCharacterData **ppCharData, HeapID heapId) {
     void *data;
-    data = GfGfxLoader_LoadFromOpenNarc(narc, memberNo, isCompressed, heapID, FALSE);
+    data = GfGfxLoader_LoadFromOpenNarc(narc, memberNo, isCompressed, heapId, FALSE);
     return GfGfxLoader_GetCharDataInternal(data, ppCharData);
 }
 
-void *GfGfxLoader_GetScrnDataFromOpenNarc(NARC *narc, s32 memberNo, BOOL isCompressed, NNSG2dScreenData **ppScrnData, enum HeapID heapID) {
+void *GfGfxLoader_GetScrnDataFromOpenNarc(NARC *narc, s32 memberNo, BOOL isCompressed, NNSG2dScreenData **ppScrnData, HeapID heapId) {
     void *data;
-    data = GfGfxLoader_LoadFromOpenNarc(narc, memberNo, isCompressed, heapID, FALSE);
+    data = GfGfxLoader_LoadFromOpenNarc(narc, memberNo, isCompressed, heapId, FALSE);
     return GfGfxLoader_GetScrnDataInternal(data, ppScrnData);
 }
 
-void *GfGfxLoader_GetPlttDataFromOpenNarc(NARC *narc, s32 memberNo, NNSG2dPaletteData **ppPlttData, enum HeapID heapID) {
+void *GfGfxLoader_GetPlttDataFromOpenNarc(NARC *narc, s32 memberNo, NNSG2dPaletteData **ppPlttData, HeapID heapId) {
     void *data;
-    data = GfGfxLoader_LoadFromOpenNarc(narc, memberNo, FALSE, heapID, FALSE);
+    data = GfGfxLoader_LoadFromOpenNarc(narc, memberNo, FALSE, heapId, FALSE);
     return GfGfxLoader_GetPlttDataInternal(data, ppPlttData);
 }
 
-void *GfGfxLoader_GetCellBankFromOpenNarc(NARC *narc, s32 memberNo, BOOL isCompressed, NNSG2dCellDataBank **ppCellBank, enum HeapID heapID) {
+void *GfGfxLoader_GetCellBankFromOpenNarc(NARC *narc, s32 memberNo, BOOL isCompressed, NNSG2dCellDataBank **ppCellBank, HeapID heapId) {
     void *data;
-    data = GfGfxLoader_LoadFromOpenNarc(narc, memberNo, isCompressed, heapID, FALSE);
+    data = GfGfxLoader_LoadFromOpenNarc(narc, memberNo, isCompressed, heapId, FALSE);
     return GfGfxLoader_GetCellBankInternal(data, ppCellBank);
 }
 
-void *GfGfxLoader_GetAnimBankFromOpenNarc(NARC *narc, s32 memberNo, BOOL isCompressed, NNSG2dAnimBankData **ppAnimBank, enum HeapID heapID) {
+void *GfGfxLoader_GetAnimBankFromOpenNarc(NARC *narc, s32 memberNo, BOOL isCompressed, NNSG2dAnimBankData **ppAnimBank, HeapID heapId) {
     void *data;
-    data = GfGfxLoader_LoadFromOpenNarc(narc, memberNo, isCompressed, heapID, FALSE);
+    data = GfGfxLoader_LoadFromOpenNarc(narc, memberNo, isCompressed, heapId, FALSE);
     return GfGfxLoader_GetAnimBankInternal(data, ppAnimBank);
 }
 
-void *GfGfxLoader_LoadFromOpenNarc(NARC *narc, s32 fileId, BOOL isCompressed, enum HeapID heapID, BOOL atEnd) {
+void *GfGfxLoader_LoadFromOpenNarc(NARC *narc, s32 fileId, BOOL isCompressed, HeapID heapId, BOOL atEnd) {
     u32 size;
-    return GfGfxLoader_LoadFromOpenNarc_GetSizeOut(narc, fileId, isCompressed, heapID, atEnd, &size);
+    return GfGfxLoader_LoadFromOpenNarc_GetSizeOut(narc, fileId, isCompressed, heapId, atEnd, &size);
 }
 
-void *GfGfxLoader_LoadFromOpenNarc_GetSizeOut(NARC *narc, s32 fileId, BOOL isCompressed, enum HeapID heapID, BOOL atEnd, u32 *sizeOut) {
+void *GfGfxLoader_LoadFromOpenNarc_GetSizeOut(NARC *narc, s32 fileId, BOOL isCompressed, HeapID heapId, BOOL atEnd, u32 *sizeOut) {
     void *data;
     void *uncompBuf;
 
     *sizeOut = NARC_GetMemberSize(narc, fileId);
     if (isCompressed || atEnd == TRUE) {
-        data = Heap_AllocAtEnd(heapID, *sizeOut);
+        data = AllocFromHeapAtEnd(heapId, *sizeOut);
     } else {
-        data = Heap_Alloc(heapID, *sizeOut);
+        data = AllocFromHeap(heapId, *sizeOut);
     }
     if (data != NULL) {
         NARC_ReadWholeMember(narc, fileId, data);
         if (isCompressed) {
             *sizeOut = MI_GetUncompressedSize(data);
             if (atEnd == FALSE) {
-                uncompBuf = Heap_Alloc(heapID, *sizeOut);
+                uncompBuf = AllocFromHeap(heapId, *sizeOut);
             } else {
-                uncompBuf = Heap_AllocAtEnd(heapID, *sizeOut);
+                uncompBuf = AllocFromHeapAtEnd(heapId, *sizeOut);
             }
             if (uncompBuf != NULL) {
                 MI_UncompressLZ8(data, uncompBuf);
-                Heap_Free(data);
+                FreeToHeap(data);
             }
             data = uncompBuf; // Potential memory leak
         }
@@ -244,7 +244,7 @@ static u32 GfGfxLoader_LoadCharDataInternal(void *data, BgConfig *bgConfig, GFBg
             }
             BG_LoadCharTilesData(bgConfig, (u8)layer, pCharData->pRawData, szByte, tileStart);
         }
-        Heap_Free(data);
+        FreeToHeap(data);
     }
     return szByte;
 }
@@ -264,7 +264,7 @@ static void GfGfxLoader_LoadScrnDataInternal(void *data, BgConfig *bgConfig, GFB
             }
             BgCopyOrUncompressTilemapBufferRangeToVram(bgConfig, (u8)layer, pScrnData->rawData, szByte, tileStart);
         }
-        Heap_Free(data);
+        FreeToHeap(data);
     }
 }
 
@@ -313,7 +313,7 @@ static void GfGfxLoader_GXLoadPalWithSrcOffsetInternal(void *data, enum GFPalLoa
                 break;
             }
         }
-        Heap_Free(data);
+        FreeToHeap(data);
     }
 }
 
@@ -330,7 +330,7 @@ static void GfGfxLoader_PartiallyLoadPaletteInternal(void *data, NNS_G2D_VRAM_TY
                 NNS_G2dLoadPalette(pPlttData, baseAddr, type, pPltProxy);
             }
         }
-        Heap_Free(data);
+        FreeToHeap(data);
     }
 }
 
@@ -369,7 +369,7 @@ static u32 GfGfxLoader_LoadImageMappingInternal(void *data, int layout, u32 szBy
             _020F5950[layout](pCharData, baseAddr, type, pImgProxy);
             size = pCharData->szByte;
         }
-        Heap_Free(data);
+        FreeToHeap(data);
     }
     return size;
 }
@@ -377,7 +377,7 @@ static u32 GfGfxLoader_LoadImageMappingInternal(void *data, int layout, u32 szBy
 static void *GfGfxLoader_GetCharDataInternal(void *data, NNSG2dCharacterData **ppCharData) {
     if (data != NULL) {
         if (!NNS_G2dGetUnpackedBGCharacterData(data, ppCharData)) {
-            Heap_Free(data);
+            FreeToHeap(data);
             return NULL;
         }
     }
@@ -387,7 +387,7 @@ static void *GfGfxLoader_GetCharDataInternal(void *data, NNSG2dCharacterData **p
 static void *GfGfxLoader_GetScrnDataInternal(void *data, NNSG2dScreenData **ppScrnData) {
     if (data != NULL) {
         if (!NNS_G2dGetUnpackedScreenData(data, ppScrnData)) {
-            Heap_Free(data);
+            FreeToHeap(data);
             return NULL;
         }
     }
@@ -397,7 +397,7 @@ static void *GfGfxLoader_GetScrnDataInternal(void *data, NNSG2dScreenData **ppSc
 static void *GfGfxLoader_GetPlttDataInternal(void *data, NNSG2dPaletteData **ppPlttData) {
     if (data != NULL) {
         if (!NNS_G2dGetUnpackedPaletteData(data, ppPlttData)) {
-            Heap_Free(data);
+            FreeToHeap(data);
             return NULL;
         }
     }
@@ -407,7 +407,7 @@ static void *GfGfxLoader_GetPlttDataInternal(void *data, NNSG2dPaletteData **ppP
 static void *GfGfxLoader_GetCellBankInternal(void *data, NNSG2dCellDataBank **ppCellBank) {
     if (data != NULL) {
         if (!NNS_G2dGetUnpackedCellBank(data, ppCellBank)) {
-            Heap_Free(data);
+            FreeToHeap(data);
             return NULL;
         }
     }
@@ -417,7 +417,7 @@ static void *GfGfxLoader_GetCellBankInternal(void *data, NNSG2dCellDataBank **pp
 static void *GfGfxLoader_GetAnimBankInternal(void *data, NNSG2dAnimBankData **ppAnimBank) {
     if (data != NULL) {
         if (!NNS_G2dGetUnpackedAnimBank(data, ppAnimBank)) {
-            Heap_Free(data);
+            FreeToHeap(data);
             return NULL;
         }
     }

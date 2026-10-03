@@ -3,9 +3,9 @@
 
 #include "save.h"
 
-typedef struct FrontierData FrontierData;
+typedef struct FRONTIERDATA FRONTIERDATA;
 
-FrontierData *Save_FrontierData_Get(SaveData *saveData);
-u32 FrontierData_BattlePointAction(FrontierData *frontierData, u32 param, u32 action);
+FRONTIERDATA *Save_FrontierData_Get(SaveData *saveData);
+u32 FrontierData_BattlePointAction(FRONTIERDATA *frontierData, u32 param, u32 action);
 
 #endif // POKEHEARTGOLD_FRONTIER_DATA_H

@@ -29,7 +29,7 @@ WirelessTradeSelectMon_Init: ; 0x0221BE20
 	ldr r2, _0221BFA4 ; =0x00070FA0
 	mov r0, #3
 	mov r1, #0x1a
-	bl Heap_Create
+	bl CreateHeap
 	mov r0, #4
 	mov r1, #0x1a
 	bl FontID_Alloc
@@ -1726,19 +1726,19 @@ ov65_0221CCB0: ; 0x0221CCB0
 	mov r0, #0xb7
 	lsl r0, r0, #2
 	ldr r0, [r6, r0]
-	bl SpriteTransfer_DeleteCharTransferTask
+	bl sub_0200AEB0
 	mov r0, #0xbb
 	lsl r0, r0, #2
 	ldr r0, [r6, r0]
-	bl SpriteTransfer_DeleteCharTransferTask
+	bl sub_0200AEB0
 	mov r0, #0x2e
 	lsl r0, r0, #4
 	ldr r0, [r6, r0]
-	bl SpriteTransfer_DeletePlttTransferTask
+	bl sub_0200B0A8
 	mov r0, #0x2f
 	lsl r0, r0, #4
 	ldr r0, [r6, r0]
-	bl SpriteTransfer_DeletePlttTransferTask
+	bl sub_0200B0A8
 	mov r7, #0xb3
 	mov r4, #0
 	add r5, r6, #0
@@ -1776,7 +1776,7 @@ ov65_0221CD0C: ; 0x0221CD0C
 _0221CD22:
 	ldr r0, _0221CD68 ; =0x0000079C
 	ldr r0, [r4, r0]
-	bl Heap_Free
+	bl FreeToHeap
 	ldr r0, [r5, r7]
 	add r4, r4, #4
 	add r6, r6, #1
@@ -1795,7 +1795,7 @@ _0221CD38:
 _0221CD4A:
 	ldr r0, _0221CD70 ; =0x000007B4
 	ldr r0, [r4, r0]
-	bl Heap_Free
+	bl FreeToHeap
 	ldr r0, [r5, r7]
 	add r4, r4, #4
 	add r6, r6, #1
@@ -1829,7 +1829,7 @@ WirelessTradeSelectMon_Exit: ; 0x0221CD74
 	bl String_Delete
 	ldr r0, _0221CE14 ; =0x00002228
 	ldr r0, [r4, r0]
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r4, #0
 	bl ov65_0221CCB0
 	ldr r0, _0221CE18 ; =0x00000444
@@ -1843,7 +1843,7 @@ WirelessTradeSelectMon_Exit: ; 0x0221CD74
 	lsl r1, r1, #6
 	ldr r1, [r4, r1]
 	mov r0, #0x1a
-	bl Heap_FreeExplicit
+	bl FreeToHeapExplicit
 	mov r0, #0x19
 	lsl r0, r0, #4
 	ldr r0, [r4, r0]
@@ -1872,7 +1872,7 @@ WirelessTradeSelectMon_Exit: ; 0x0221CD74
 	mov r0, #4
 	bl FontID_Release
 	mov r0, #0x1a
-	bl Heap_Destroy
+	bl DestroyHeap
 	mov r0, #1
 	pop {r3, r4, r5, pc}
 	.balign 4, 0
@@ -2272,7 +2272,7 @@ ov65_0221D0EC: ; 0x0221D0EC
 	bl SaveArray_Party_sizeof
 	add r1, r0, #0
 	mov r0, #0x1a
-	bl Heap_Alloc
+	bl AllocFromHeap
 	ldr r1, _0221D1C4 ; =0x00002228
 	str r0, [r5, r1]
 	ldr r0, [r5, r1]
@@ -2375,7 +2375,7 @@ _0221D232:
 	bl BG_LoadScreenTilemapData
 _0221D250:
 	add r0, r6, #0
-	bl Heap_Free
+	bl FreeToHeap
 _0221D256:
 	add sp, #8
 	pop {r4, r5, r6, pc}
@@ -2732,19 +2732,19 @@ _0221D424:
 	str r0, [r5, r1]
 	sub r1, #0x1c
 	ldr r0, [r5, r1]
-	bl SpriteTransfer_CreateCharTransferTask
+	bl sub_0200ACF0
 	mov r0, #0xbb
 	lsl r0, r0, #2
 	ldr r0, [r5, r0]
-	bl SpriteTransfer_CreateCharTransferTask
+	bl sub_0200ACF0
 	mov r0, #0x2e
 	lsl r0, r0, #4
 	ldr r0, [r5, r0]
-	bl SpriteTransfer_CreateExtPlttTransferTask
+	bl sub_0200AF94
 	mov r0, #0x2f
 	lsl r0, r0, #4
 	ldr r0, [r5, r0]
-	bl SpriteTransfer_CreateExtPlttTransferTask
+	bl sub_0200AF94
 	bl sub_02074490
 	add r1, r0, #0
 	mov r0, #0x80
@@ -4689,7 +4689,7 @@ _0221E4C0:
 	add r2, r6, #0
 	bl BufferPlayersName
 	add r0, r6, #0
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r5, #0
 	mov r1, #0x41
 	bl ov65_0221E330
@@ -6850,17 +6850,17 @@ _0221F6BC:
 	bl CopyPokemonToPokemon
 	add r0, r7, #0
 	add r1, r6, #0
-	bl Party_ResetMonAprijuiceModifiers
+	bl Party_ResetUnkSubSlot
 	ldr r0, [sp, #4]
 	ldr r1, [sp, #8]
-	bl Party_ResetMonAprijuiceModifiers
+	bl Party_ResetUnkSubSlot
 	ldr r0, [r5, #0x1c]
-	mov r1, #0x14 ; GAME_STAT_LOCAL_LINK_TRADES
+	mov r1, #0x14
 	bl GameStats_Inc
 	ldr r0, [sp, #0xc]
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	add sp, #0x18
 	pop {r3, r4, r5, r6, r7, pc}
 	.balign 4, 0

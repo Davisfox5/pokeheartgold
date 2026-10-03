@@ -85,7 +85,7 @@ _02014DD2:
 _02014DDC:
 	ldr r0, [sp, #0x2c]
 	mov r1, #0xdc
-	bl Heap_Alloc
+	bl AllocFromHeap
 	add r4, r0, #0
 	bne _02014DEC
 	bl GF_AssertFail
@@ -260,7 +260,7 @@ _02014F38:
 	ldr r0, [r5, #4]
 	cmp r0, #0
 	beq _02014F50
-	bl Heap_Free
+	bl FreeToHeap
 	mov r0, #0
 	str r0, [r5, #4]
 _02014F50:
@@ -287,7 +287,7 @@ _02014F6C:
 	bl Camera_Delete
 _02014F76:
 	add r0, r5, #0
-	bl Heap_Free
+	bl FreeToHeap
 	pop {r3, r4, r5, r6, r7, pc}
 	nop
 _02014F80: .word _021D10A8
@@ -1561,7 +1561,7 @@ ListMenuCursorNew: ; 0x02015788
 	push {r3, r4, r5, lr}
 	mov r1, #8
 	add r5, r0, #0
-	bl Heap_Alloc
+	bl AllocFromHeap
 	add r4, r0, #0
 	beq _020157AA
 	ldr r0, _020157B0 ; =0x0001020F
@@ -1595,7 +1595,7 @@ _020157C2:
 	bl String_Delete
 _020157D0:
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 _020157D6:
 	pop {r4, pc}
 	thumb_func_end DestroyListMenuCursorObj

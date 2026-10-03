@@ -1,0 +1,101 @@
+{
+  "header": "fielddata/script/scr_seq/event_EVERYWHERE.h",
+  "bgs": [
+    {
+      "scriptId": 27,
+      "type": 1,
+      "x": 741,
+      "z": 264,
+      "y": 0,
+      "dir": 0
+    },
+    {
+      "scriptId": 27,
+      "type": 1,
+      "x": 749,
+      "z": 280,
+      "y": 0,
+      "dir": 0
+    },
+    {
+      "scriptId": 27,
+      "type": 1,
+      "x": 744,
+      "z": 326,
+      "y": 0,
+      "dir": 0
+    }
+  ],
+  "objects": [
+    {
+      "id": 0,
+      "spriteId": "SPRITE_GSMAN3",
+      "movement": 0,
+      "type": 0,
+      "eventFlag": 0,
+      "scriptId": 2,
+      "facingDirection": 2,
+      "param0": 0,
+      "param1": 0,
+      "param2": 0,
+      "xRange": 0,
+      "yRange": 0,
+      "x": 756,
+      "z": 308,
+      "y": 0
+    },
+    {
+      "id": 1,
+      "spriteId": "SPRITE_GSWOMAN3",
+      "movement": 0,
+      "type": 0,
+      "eventFlag": 0,
+      "scriptId": 2,
+      "facingDirection": 0,
+      "param0": 0,
+      "param1": 0,
+      "param2": 0,
+      "xRange": 0,
+      "yRange": 0,
+      "x": 747,
+      "z": 311,
+      "y": 0
+    },
+    {
+      "id": 2,
+      "spriteId": "SPRITE_GSFIGHTER",
+      "movement": 0,
+      "type": 0,
+      "eventFlag": 0,
+      "scriptId": 10,
+      "facingDirection": 1,
+      "param0": 0,
+      "param1": 0,
+      "param2": 0,
+      "xRange": 0,
+      "yRange": 0,
+      "x": 764,
+      "z": 266,
+      "y": 0
+    },
+    {
+      "id": 3,
+      "spriteId": "SPRITE_GSWOMAN3",
+      "movement": 0,
+      "type": 0,
+      "eventFlag": 0,
+      "scriptId": 11,
+      "facingDirection": 2,
+      "param0": 0,
+      "param1": 0,
+      "param2": 0,
+      "xRange": 0,
+      "yRange": 0,
+      "x": 752,
+      "z": 295,
+      "y": 0
+    }
+  ],
+  "warps": [],
+  "coords": []
+}

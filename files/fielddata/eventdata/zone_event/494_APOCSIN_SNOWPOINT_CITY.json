@@ -1,0 +1,118 @@
+{
+  "header": "fielddata/script/scr_seq/event_EVERYWHERE.h",
+  "bgs": [
+    {
+      "scriptId": 20,
+      "type": 1,
+      "x": 381,
+      "z": 220,
+      "y": 0,
+      "dir": 0
+    }
+  ],
+  "objects": [
+    {
+      "id": 0,
+      "spriteId": "SPRITE_SKIERW",
+      "movement": 3,
+      "type": 0,
+      "eventFlag": 0,
+      "scriptId": 6,
+      "facingDirection": 1,
+      "param0": 0,
+      "param1": 0,
+      "param2": 0,
+      "xRange": 2,
+      "yRange": 1,
+      "x": 365,
+      "z": 243,
+      "y": 0
+    },
+    {
+      "id": 1,
+      "spriteId": "SPRITE_SEAMAN",
+      "movement": 4,
+      "type": 0,
+      "eventFlag": 0,
+      "scriptId": 17,
+      "facingDirection": 0,
+      "param0": 0,
+      "param1": 0,
+      "param2": 0,
+      "xRange": 0,
+      "yRange": 1,
+      "x": 373,
+      "z": 228,
+      "y": 0
+    },
+    {
+      "id": 2,
+      "spriteId": "SPRITE_SKIERW",
+      "movement": 0,
+      "type": 0,
+      "eventFlag": 0,
+      "scriptId": 5,
+      "facingDirection": 1,
+      "param0": 0,
+      "param1": 0,
+      "param2": 0,
+      "xRange": 0,
+      "yRange": 0,
+      "x": 367,
+      "z": 198,
+      "y": 0
+    }
+  ],
+  "warps": [
+    {
+      "x": 353,
+      "z": 208,
+      "header": "MAP_APOC_SIN_H00_SNOWPOINT_CITY",
+      "anchor": 0,
+      "y": 0
+    },
+    {
+      "x": 379,
+      "z": 208,
+      "header": "MAP_APOC_SIN_H01_SNOWPOINT_CITY",
+      "anchor": 0,
+      "y": 0
+    },
+    {
+      "x": 366,
+      "z": 197,
+      "header": "MAP_APOC_SIN_H02_SNOWPOINT_CITY",
+      "anchor": 0,
+      "y": 0
+    },
+    {
+      "x": 353,
+      "z": 232,
+      "header": "MAP_APOC_SIN_MART_SNOWPOINT_CITY",
+      "anchor": 0,
+      "y": 0
+    },
+    {
+      "x": 379,
+      "z": 233,
+      "header": "MAP_APOC_SIN_PC_SNOWPOINT_CITY",
+      "anchor": 0,
+      "y": 0
+    },
+    {
+      "x": 367,
+      "z": 222,
+      "header": "MAP_APOC_SIN_H05_SNOWPOINT_CITY",
+      "anchor": 0,
+      "y": 0
+    },
+    {
+      "x": 367,
+      "z": 197,
+      "header": "MAP_APOC_SIN_H06_SNOWPOINT_CITY",
+      "anchor": 0,
+      "y": 0
+    }
+  ],
+  "coords": []
+}

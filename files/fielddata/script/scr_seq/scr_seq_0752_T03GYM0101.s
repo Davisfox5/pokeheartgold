@@ -5,170 +5,170 @@
 
 	.rodata
 
-	ScrDef scr_seq_T03GYM0101_000
-	ScrDef scr_seq_T03GYM0101_001
-	ScrDef scr_seq_T03GYM0101_002
-	ScrDef scr_seq_T03GYM0101_003
-	ScrDefEnd
+	scrdef scr_seq_T03GYM0101_000
+	scrdef scr_seq_T03GYM0101_001
+	scrdef scr_seq_T03GYM0101_002
+	scrdef scr_seq_T03GYM0101_003
+	scrdef_end
 
 scr_seq_T03GYM0101_003:
-	GetPhoneBookRematch PHONE_CONTACT_BROCK, VAR_TEMP_x4001
-	Compare VAR_TEMP_x4001, 0
-	GoToIfNe _00FB
-	CheckRegisteredPhoneNumber PHONE_CONTACT_BROCK, VAR_TEMP_x4001
-	Compare VAR_TEMP_x4001, 1
-	GoToIfEq _00A4
-	CheckBadge BADGE_EARTH, VAR_TEMP_x4002
-	Compare VAR_TEMP_x4002, 1
-	GoToIfEq _0053
-	GoTo _00F5
-	End
+	get_phone_book_rematch PHONE_CONTACT_BROCK, VAR_TEMP_x4001
+	compare VAR_TEMP_x4001, 0
+	goto_if_ne _00FB
+	check_registered_phone_number PHONE_CONTACT_BROCK, VAR_TEMP_x4001
+	compare VAR_TEMP_x4001, 1
+	goto_if_eq _00A4
+	check_badge BADGE_EARTH, VAR_TEMP_x4002
+	compare VAR_TEMP_x4002, 1
+	goto_if_eq _0053
+	goto _00F5
+	end
 
 _0053:
-	ScrCmd_522 VAR_TEMP_x4000
-	Compare VAR_TEMP_x4000, 12
-	GoToIfNe _006E
-	SetFlag FLAG_HIDE_PEWTER_GYM_BROCK
-	GoTo _00A2
+	scrcmd_522 VAR_TEMP_x4000
+	compare VAR_TEMP_x4000, 12
+	goto_if_ne _006E
+	setflag FLAG_HIDE_PEWTER_GYM_BROCK
+	goto _00A2
 
 _006E:
-	Compare VAR_TEMP_x4000, 13
-	GoToIfNe _0085
-	SetFlag FLAG_HIDE_PEWTER_GYM_BROCK
-	GoTo _00A2
+	compare VAR_TEMP_x4000, 13
+	goto_if_ne _0085
+	setflag FLAG_HIDE_PEWTER_GYM_BROCK
+	goto _00A2
 
 _0085:
-	Compare VAR_TEMP_x4000, 14
-	GoToIfNe _009C
-	SetFlag FLAG_HIDE_PEWTER_GYM_BROCK
-	GoTo _00A2
+	compare VAR_TEMP_x4000, 14
+	goto_if_ne _009C
+	setflag FLAG_HIDE_PEWTER_GYM_BROCK
+	goto _00A2
 
 _009C:
-	GoTo _00F5
+	goto _00F5
 
 _00A2:
-	End
+	end
 
 _00A4:
-	ScrCmd_522 VAR_TEMP_x4000
-	Compare VAR_TEMP_x4000, 17
-	GoToIfNe _00BF
-	SetFlag FLAG_HIDE_PEWTER_GYM_BROCK
-	GoTo _00F3
+	scrcmd_522 VAR_TEMP_x4000
+	compare VAR_TEMP_x4000, 17
+	goto_if_ne _00BF
+	setflag FLAG_HIDE_PEWTER_GYM_BROCK
+	goto _00F3
 
 _00BF:
-	Compare VAR_TEMP_x4000, 18
-	GoToIfNe _00D6
-	SetFlag FLAG_HIDE_PEWTER_GYM_BROCK
-	GoTo _00F3
+	compare VAR_TEMP_x4000, 18
+	goto_if_ne _00D6
+	setflag FLAG_HIDE_PEWTER_GYM_BROCK
+	goto _00F3
 
 _00D6:
-	Compare VAR_TEMP_x4000, 19
-	GoToIfNe _00ED
-	SetFlag FLAG_HIDE_PEWTER_GYM_BROCK
-	GoTo _00F3
+	compare VAR_TEMP_x4000, 19
+	goto_if_ne _00ED
+	setflag FLAG_HIDE_PEWTER_GYM_BROCK
+	goto _00F3
 
 _00ED:
-	GoTo _00F5
+	goto _00F5
 
 _00F3:
-	End
+	end
 
 _00F5:
-	ClearFlag FLAG_HIDE_PEWTER_GYM_BROCK
-	End
+	clearflag FLAG_HIDE_PEWTER_GYM_BROCK
+	end
 
 _00FB:
-	SetFlag FLAG_HIDE_PEWTER_GYM_BROCK
-	End
+	setflag FLAG_HIDE_PEWTER_GYM_BROCK
+	end
 
 scr_seq_T03GYM0101_000:
-	PlaySE SEQ_SE_DP_SELECT
-	LockAll
-	FacePlayer
-	CheckBadge BADGE_BOULDER, VAR_SPECIAL_RESULT
-	Compare VAR_SPECIAL_RESULT, 1
-	GoToIfEq _0195
-	NPCMsg msg_0462_T03GYM0101_00000
-	CloseMsg
-	TrainerBattle TRAINER_LEADER_BROCK_BROCK, 0, 0, 0
-	CheckBattleWon VAR_SPECIAL_RESULT
-	Compare VAR_SPECIAL_RESULT, 0
-	GoToIfEq _01B8
-	GiveBadge BADGE_BOULDER
-	AddVar VAR_UNK_4135, 1
-	AddSpecialGameStat SCORE_EVENT_BADGE_GET
-	SetTrainerFlag TRAINER_CAMPER_JERRY
-	SetTrainerFlag TRAINER_HIKER_EDWIN
-	NPCMsg msg_0462_T03GYM0101_00001
-	BufferPlayersName 0
-	NPCMsg msg_0462_T03GYM0101_00002
-	PlayFanfare SEQ_ME_BADGE
-	WaitFanfare
-	BufferPlayersName 0
-	GenderMsgBox msg_0462_T03GYM0101_00003, msg_0462_T03GYM0101_00004
-	GoTo _016C
+	play_se SEQ_SE_DP_SELECT
+	lockall
+	faceplayer
+	check_badge BADGE_BOULDER, VAR_SPECIAL_RESULT
+	compare VAR_SPECIAL_RESULT, 1
+	goto_if_eq _0195
+	npc_msg msg_0462_T03GYM0101_00000
+	closemsg
+	trainer_battle TRAINER_LEADER_BROCK_BROCK, 0, 0, 0
+	check_battle_won VAR_SPECIAL_RESULT
+	compare VAR_SPECIAL_RESULT, 0
+	goto_if_eq _01B8
+	give_badge BADGE_BOULDER
+	addvar VAR_UNK_4135, 1
+	add_special_game_stat SCORE_EVENT_BADGE_GET
+	settrainerflag TRAINER_CAMPER_JERRY
+	settrainerflag TRAINER_HIKER_EDWIN
+	npc_msg msg_0462_T03GYM0101_00001
+	buffer_players_name 0
+	npc_msg msg_0462_T03GYM0101_00002
+	play_fanfare SEQ_ME_BADGE
+	wait_fanfare
+	buffer_players_name 0
+	gender_msgbox msg_0462_T03GYM0101_00003, msg_0462_T03GYM0101_00004
+	goto _016C
 
 _016C:
-	GoToIfNoItemSpace ITEM_TM80, 1, _01AE
-	CallStd std_give_item_verbose
-	SetFlag FLAG_GOT_TM80_FROM_BROCK
+	goto_if_no_item_space ITEM_TM80, 1, _01AE
+	callstd std_give_item_verbose
+	setflag FLAG_GOT_TM80_FROM_BROCK
 _0195:
-	GoToIfUnset FLAG_GOT_TM80_FROM_BROCK, _016C
-	BufferPlayersName 0
-	NPCMsg msg_0462_T03GYM0101_00005
-	WaitButton
-	CloseMsg
-	ReleaseAll
-	End
+	goto_if_unset FLAG_GOT_TM80_FROM_BROCK, _016C
+	buffer_players_name 0
+	npc_msg msg_0462_T03GYM0101_00005
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
 
 _01AE:
-	CallStd std_bag_is_full
-	CloseMsg
-	ReleaseAll
-	End
+	callstd std_bag_is_full
+	closemsg
+	releaseall
+	end
 
 _01B8:
-	WhiteOut
-	ReleaseAll
-	End
+	white_out
+	releaseall
+	end
 
 scr_seq_T03GYM0101_001:
-	PlaySE SEQ_SE_DP_SELECT
-	LockAll
-	FacePlayer
-	CheckBadge BADGE_BOULDER, VAR_SPECIAL_RESULT
-	Compare VAR_SPECIAL_RESULT, 1
-	GoToIfEq _01E4
-	NPCMsg msg_0462_T03GYM0101_00006
-	WaitButton
-	CloseMsg
-	ReleaseAll
-	End
+	play_se SEQ_SE_DP_SELECT
+	lockall
+	faceplayer
+	check_badge BADGE_BOULDER, VAR_SPECIAL_RESULT
+	compare VAR_SPECIAL_RESULT, 1
+	goto_if_eq _01E4
+	npc_msg msg_0462_T03GYM0101_00006
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
 
 _01E4:
-	NPCMsg msg_0462_T03GYM0101_00007
-	WaitButton
-	CloseMsg
-	ReleaseAll
-	End
+	npc_msg msg_0462_T03GYM0101_00007
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
 
 scr_seq_T03GYM0101_002:
-	PlaySE SEQ_SE_DP_SELECT
-	LockAll
-	FacePlayer
-	CheckBadge BADGE_BOULDER, VAR_SPECIAL_RESULT
-	BufferPlayersName 0
-	Compare VAR_SPECIAL_RESULT, 0
-	GoToIfNe _0216
-	NPCMsg msg_0462_T03GYM0101_00008
-	GoTo _0219
+	play_se SEQ_SE_DP_SELECT
+	lockall
+	faceplayer
+	check_badge BADGE_BOULDER, VAR_SPECIAL_RESULT
+	buffer_players_name 0
+	compare VAR_SPECIAL_RESULT, 0
+	goto_if_ne _0216
+	npc_msg msg_0462_T03GYM0101_00008
+	goto _0219
 
 _0216:
-	NPCMsg msg_0462_T03GYM0101_00009
+	npc_msg msg_0462_T03GYM0101_00009
 _0219:
-	WaitButton
-	CloseMsg
-	ReleaseAll
-	End
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
 	.balign 4, 0

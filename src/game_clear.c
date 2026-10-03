@@ -9,7 +9,6 @@
 #include "msgdata/msg/msg_0040.h"
 
 #include "bg_window.h"
-#include "field_bgm.h"
 #include "game_stats.h"
 #include "hall_of_fame.h"
 #include "launch_application.h"
@@ -21,13 +20,14 @@
 #include "save_arrays.h"
 #include "save_local_field_data.h"
 #include "save_vars_flags.h"
-#include "screen_fade.h"
 #include "sound.h"
 #include "sound_02004A44.h"
 #include "sys_flags.h"
 #include "task.h"
 #include "text.h"
 #include "unk_02005D10.h"
+#include "unk_0200FA24.h"
+#include "unk_02054E00.h"
 #include "unk_020552A4.h"
 #include "unk_02055418.h"
 #include "unk_0206793C.h"
@@ -112,7 +112,7 @@ BOOL sub_0205298C(TaskManager *taskman) {
         break;
     case 2:
         if (!GF_SndGetFadeTimer()) {
-            FieldBGM_Stop();
+            sub_02054F14();
             ++(*state);
             break;
         }
@@ -122,7 +122,7 @@ BOOL sub_0205298C(TaskManager *taskman) {
         ++(*state);
         break;
     case 4:
-        BeginNormalPaletteFade(FADE_BOTH_SCREENS, FADE_TYPE_BRIGHTNESS_IN, FADE_TYPE_BRIGHTNESS_IN, RGB_WHITE, 8, 1, HEAP_ID_FIELD3);
+        BeginNormalPaletteFade(0, 1, 1, RGB_WHITE, 8, 1, HEAP_ID_32);
         G2_BlendNone();
         ++(*state);
         break;
@@ -139,7 +139,7 @@ static void AddHallOfFameEntry(FieldSystem *fieldSystem, BOOL gameCleared) {
     int val;
     RTCDate date;
 
-    HallOfFame *hof = LoadHallOfFame(fieldSystem->saveData, HEAP_ID_FIELD2, &val);
+    HallOfFame *hof = LoadHallOfFame(fieldSystem->saveData, HEAP_ID_FIELD, &val);
     if (val != 1 || !gameCleared) {
         Save_HOF_Init(hof);
     }
@@ -148,7 +148,7 @@ static void AddHallOfFameEntry(FieldSystem *fieldSystem, BOOL gameCleared) {
     GF_RTC_CopyDate(&date);
     Save_HOF_RecordParty(hof, party, &date);
     SaveHallOfFame(fieldSystem->saveData, hof);
-    Heap_Free(hof);
+    FreeToHeap(hof);
 }
 
 // Launches the Hall of Fame Congratulations app if the player beat Lance. Saves
@@ -166,14 +166,14 @@ static BOOL Task_GameClear(TaskManager *taskman) {
             break;
         }
         GameClearSave_InitGraphics(fieldSystem, env);
-        BeginNormalPaletteFade(FADE_MAIN_ONLY, FADE_TYPE_BRIGHTNESS_IN, FADE_TYPE_BRIGHTNESS_IN, RGB_BLACK, 8, 1, HEAP_ID_FIELD3);
+        BeginNormalPaletteFade(3, 1, 1, RGB_BLACK, 8, 1, HEAP_ID_32);
         *state = 2;
         break;
     case 1:
         if (!FieldSystem_ApplicationIsRunning(fieldSystem)) {
-            Heap_Create(HEAP_ID_3, HEAP_ID_FIELD1, 0x20000);
+            CreateHeap(HEAP_ID_3, HEAP_ID_4, 0x20000);
             GameClearSave_InitGraphics(fieldSystem, env);
-            BeginNormalPaletteFade(FADE_MAIN_ONLY, FADE_TYPE_BRIGHTNESS_IN, FADE_TYPE_BRIGHTNESS_IN, RGB_BLACK, 8, 1, HEAP_ID_FIELD3);
+            BeginNormalPaletteFade(3, 1, 1, RGB_BLACK, 8, 1, HEAP_ID_32);
             ++(*state);
         }
         break;
@@ -217,7 +217,7 @@ static BOOL Task_GameClear(TaskManager *taskman) {
         ++(*state);
         break;
     case 7:
-        BeginNormalPaletteFade(FADE_MAIN_ONLY, FADE_TYPE_BRIGHTNESS_OUT, FADE_TYPE_BRIGHTNESS_OUT, RGB_BLACK, 8, 1, HEAP_ID_FIELD3);
+        BeginNormalPaletteFade(3, 0, 0, RGB_BLACK, 8, 1, HEAP_ID_32);
         env->bgmVolume = 127;
         ++(*state);
         break;
@@ -248,8 +248,8 @@ static BOOL Task_GameClear(TaskManager *taskman) {
         break;
     case 11:
         if (!FieldSystem_ApplicationIsRunning(fieldSystem)) {
-            Heap_Free(env);
-            Heap_Destroy(HEAP_ID_FIELD1);
+            FreeToHeap(env);
+            DestroyHeap(HEAP_ID_4);
             OS_ResetSystem(0);
             return TRUE;
         }
@@ -269,7 +269,7 @@ void CallTask_GameClear(TaskManager *taskman, u16 vsTrainerRed) {
     PlayerProfile *profile;
 
     fieldSystem = TaskManager_GetFieldSystem(taskman);
-    env = Heap_Alloc(HEAP_ID_FIELD3, sizeof(GameClearWork));
+    env = AllocFromHeap(HEAP_ID_32, sizeof(GameClearWork));
     varsFlags = Save_VarsFlags_Get(fieldSystem->saveData);
     profile = Save_PlayerData_GetProfile(fieldSystem->saveData);
     dynamicWarp = LocalFieldData_GetDynamicWarp(Save_LocalFieldData_Get(fieldSystem->saveData));
@@ -294,13 +294,13 @@ void CallTask_GameClear(TaskManager *taskman, u16 vsTrainerRed) {
     PlayerProfile_SetGameClearFlag(profile);
 
     if (!env->vsTrainerRed) {
-        GameStats_Inc(Save_GameStats_Get(fieldSystem->saveData), GAME_STAT_LEAGUE_WINS);
+        GameStats_Inc(Save_GameStats_Get(fieldSystem->saveData), GAME_STAT_UNK74);
     }
     TaskManager_Call(taskman, Task_GameClear, env);
 }
 
 static void GameClearSave_InitGraphics(FieldSystem *fieldSystem, GameClearWork *env) {
-    env->bgConfig = BgConfig_Alloc(HEAP_ID_FIELD2);
+    env->bgConfig = BgConfig_Alloc(HEAP_ID_FIELD);
     env->windowText = NULL;
     env->waitingIcon = NULL;
     InitWindow(&env->window);
@@ -309,44 +309,44 @@ static void GameClearSave_InitGraphics(FieldSystem *fieldSystem, GameClearWork *
     SetBothScreensModesAndDisable(&sGameClearSaveBgModeSet);
     BG_SetMaskColor(3, RGB_BLACK);
     InitBgFromTemplate(env->bgConfig, 3, &sGameClearSaveBgTemplate, 0);
-    BG_ClearCharDataRange(3, 32, 0, HEAP_ID_FIELD3);
+    BG_ClearCharDataRange(3, 32, 0, HEAP_ID_32);
     FillBgTilemapRect(env->bgConfig, 3, RGB_BLACK, 0, 0, 32, 32, 17);
     BgCommitTilemapBufferToVram(env->bgConfig, 3);
 }
 
 static void GameClearSave_PrintSaving(FieldSystem *fieldSystem, GameClearWork *env) {
     Options *options = Save_PlayerData_GetOptionsAddr(fieldSystem->saveData);
-    env->windowText = ReadMsgData_NewNarc_NewString(NARC_msgdata_msg, NARC_msg_msg_0040_bin, msg_0040_00015, HEAP_ID_FIELD3);
-    DialogBox_AddWindowToLayer3(env->bgConfig, &env->window, GF_BG_LYR_MAIN_3);
-    DialogBox_LoadFrame(&env->window, options);
-    env->printerId = DialogBox_PrintMessage(&env->window, env->windowText, options, 1);
+    env->windowText = ReadMsgData_NewNarc_NewString(NARC_msgdata_msg, NARC_msg_msg_0040_bin, msg_0040_00015, HEAP_ID_32);
+    sub_0205B514(env->bgConfig, &env->window, 3);
+    sub_0205B564(&env->window, options);
+    env->printerId = sub_0205B5B4(&env->window, env->windowText, options, 1);
     env->waitingIcon = WaitingIcon_New(&env->window, 0x000003e2);
 }
 
 static BOOL GameClearSave_IsPrintFinished(GameClearWork *env) {
-    return DialogBox_IsPrintFinished((u8)env->printerId);
+    return IsPrintFinished((u8)env->printerId);
 }
 
 static void sub_02052E70(GameClearWork *env) {
     String_Delete(env->windowText);
     sub_0200F450(env->waitingIcon);
-    DialogBox_Clear(&env->window);
+    sub_0205B5A8(&env->window);
 }
 
 static void GameClearSave_PrintSaveStatus(FieldSystem *fieldSystem, GameClearWork *env, int writeStatus) {
-    MsgData *msgData = NewMsgDataFromNarc(MSGDATA_LOAD_LAZY, NARC_msgdata_msg, NARC_msg_msg_0040_bin, HEAP_ID_FIELD1);
+    MsgData *msgData = NewMsgDataFromNarc(MSGDATA_LOAD_LAZY, NARC_msgdata_msg, NARC_msg_msg_0040_bin, HEAP_ID_4);
 
     if (writeStatus == 2) {
-        MessageFormat *msgFmt = MessageFormat_New(HEAP_ID_FIELD1);
+        MessageFormat *msgFmt = MessageFormat_New(HEAP_ID_4);
         BufferPlayersName(msgFmt, 0, Save_PlayerData_GetProfile(fieldSystem->saveData));
-        env->windowText = ReadMsgData_ExpandPlaceholders(msgFmt, msgData, msg_0040_00016, HEAP_ID_FIELD1);
+        env->windowText = ReadMsgData_ExpandPlaceholders(msgFmt, msgData, msg_0040_00016, HEAP_ID_4);
         MessageFormat_Delete(msgFmt);
     } else {
         env->windowText = NewString_ReadMsgData(msgData, msg_0040_00018);
     }
     DestroyMsgData(msgData);
     Options *options = Save_PlayerData_GetOptionsAddr(fieldSystem->saveData);
-    env->printerId = DialogBox_PrintMessage(&env->window, env->windowText, options, 1);
+    env->printerId = sub_0205B5B4(&env->window, env->windowText, options, 1);
 }
 
 static void GameClearSave_Free(FieldSystem *fieldSystem, GameClearWork *env) {
@@ -357,5 +357,5 @@ static void GameClearSave_Free(FieldSystem *fieldSystem, GameClearWork *env) {
         RemoveWindow(&env->window);
     }
     FreeBgTilemapBuffer(env->bgConfig, 3);
-    Heap_Free(env->bgConfig);
+    FreeToHeap(env->bgConfig);
 }

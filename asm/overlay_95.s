@@ -612,7 +612,7 @@ ov95_021E5DD0: ; 0x021E5DD0
 	mov r1, #0x12
 	lsl r1, r1, #0xa
 	add r4, r0, #0
-	bl Heap_Alloc
+	bl AllocFromHeap
 	add r2, r0, #0
 	mov r0, #1
 	str r0, [sp]
@@ -670,7 +670,7 @@ ov95_021E5E40: ; 0x021E5E40
 	add r0, r5, #0
 	bl sub_02014EBC
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	pop {r3, r4, r5, pc}
 	thumb_func_end ov95_021E5E40
 
@@ -712,7 +712,7 @@ ov95_021E5E90: ; 0x021E5E90
 	add r5, r0, #0
 	ldr r0, [r5]
 	mov r1, #0x10
-	bl Heap_Alloc
+	bl AllocFromHeap
 	add r4, r0, #0
 	bne _021E5EA4
 	bl GF_AssertFail
@@ -763,10 +763,10 @@ _021E5EEC:
 
 	thumb_func_start ov95_021E5EF0
 ov95_021E5EF0: ; 0x021E5EF0
-	ldr r3, _021E5EF4 ; =Heap_Free
+	ldr r3, _021E5EF4 ; =FreeToHeap
 	bx r3
 	.balign 4, 0
-_021E5EF4: .word Heap_Free
+_021E5EF4: .word FreeToHeap
 	thumb_func_end ov95_021E5EF0
 
 	thumb_func_start ov95_021E5EF8
@@ -2600,7 +2600,7 @@ HatchEggApp_Init: ; 0x021E6D70
 	mov r0, #3
 	mov r1, #0x46
 	lsl r2, r2, #0x12
-	bl Heap_Create
+	bl CreateHeap
 	add r0, r5, #0
 	mov r1, #0x8c
 	mov r2, #0x46
@@ -2816,7 +2816,7 @@ HatchEggApp_Exit: ; 0x021E6F0C
 	mov r1, #3
 	bl FreeBgTilemapBuffer
 	ldr r0, [r4, #4]
-	bl Heap_Free
+	bl FreeToHeap
 	bl GF_DestroyVramTransferManager
 	ldr r0, [r4, #0x3c]
 	bl PokepicManager_Delete
@@ -2829,12 +2829,12 @@ HatchEggApp_Exit: ; 0x021E6F0C
 	add r0, r5, #0
 	bl OverlayManager_FreeData
 	mov r0, #0x46
-	bl Heap_Destroy
+	bl DestroyHeap
 	mov r0, #0
 	add r1, r0, #0
 	bl Main_SetVBlankIntrCB
 	bl HBlankInterruptDisable
-	bl Field_SetEnvironmentSoundState_None_Unk2
+	bl sub_0203E354
 	mov r0, #1
 	pop {r3, r4, r5, pc}
 	.balign 4, 0
@@ -2906,7 +2906,7 @@ _021E703A:
 _021E7042:
 	ldr r0, [sp]
 	mov r1, #0x3c
-	bl Heap_Alloc
+	bl AllocFromHeap
 	mov r1, #0
 	mov r2, #0x3c
 	add r4, r0, #0
@@ -2953,7 +2953,7 @@ _021E7082:
 	mov r1, #6
 	bl FreeBgTilemapBuffer
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	pop {r4, pc}
 	.balign 4, 0
 	thumb_func_end ov95_021E7078

@@ -10,7 +10,7 @@ ov80_02235FC8: ; 0x02235FC8
 	add r4, r0, #0
 	mov r0, #0xb
 	mov r1, #0xb4
-	bl Heap_Alloc
+	bl AllocFromHeap
 	ldr r1, _02235FE8 ; =ov80_0223DD50
 	mov r2, #0xb4
 	str r0, [r1]
@@ -29,7 +29,7 @@ ov80_02235FEC: ; 0x02235FEC
 	push {r3, lr}
 	cmp r0, #0
 	beq _02235FF6
-	bl Heap_Free
+	bl FreeToHeap
 _02235FF6:
 	pop {r3, pc}
 	thumb_func_end ov80_02235FEC
@@ -129,7 +129,7 @@ ov80_0223608C: ; 0x0223608C
 	mov r0, #0xb
 	mov r1, #0x44
 	add r4, r2, #0
-	bl Heap_Alloc
+	bl AllocFromHeap
 	add r1, r5, #0
 	add r1, #0xa8
 	str r0, [r1]
@@ -451,7 +451,7 @@ _022362F0:
 	add r0, r4, #0
 	add r0, #0xa8
 	ldr r0, [r0]
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r4, #0
 	mov r1, #0
 	add r0, #0xa8
@@ -474,7 +474,7 @@ ov80_02236330: ; 0x02236330
 	add r4, r1, #0
 	add r0, r3, #0
 	mov r1, #0x3c
-	bl Heap_AllocAtEnd
+	bl AllocFromHeapAtEnd
 	add r1, r4, #0
 	add r1, #0xac
 	str r0, [r1]
@@ -589,7 +589,7 @@ ov80_0223641C: ; 0x0223641C
 	add r0, r4, #0
 	add r0, #0xac
 	ldr r0, [r0]
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r4, #0
 	mov r1, #0
 	add r0, #0xac

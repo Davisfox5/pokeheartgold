@@ -33,7 +33,7 @@ HallOfFameShowcase_Init: ; 0x021E5900
 	mov r0, #3
 	mov r1, #0x3b
 	lsl r2, r2, #0x12
-	bl Heap_Create
+	bl CreateHeap
 	mov r1, #0x1d
 	add r0, r5, #0
 	lsl r1, r1, #4
@@ -111,7 +111,7 @@ HallOfFameShowcase_Exit: ; 0x021E59C8
 	add r0, r5, #0
 	bl OverlayManager_FreeData
 	mov r0, #0x3b
-	bl Heap_Destroy
+	bl DestroyHeap
 	mov r0, #1
 	pop {r3, r4, r5, pc}
 	.balign 4, 0
@@ -450,7 +450,7 @@ ov64_021E5CA4: ; 0x021E5CA4
 	mov r1, #0
 	bl FreeBgTilemapBuffer
 	ldr r0, [r4, #4]
-	bl Heap_Free
+	bl FreeToHeap
 	pop {r4, pc}
 	thumb_func_end ov64_021E5CA4
 
@@ -1110,7 +1110,7 @@ ov64_021E622C: ; 0x021E622C
 	ldr r1, _021E6258 ; =ov64_021E7008
 	ldr r2, _021E625C ; =ov64_021E6EA8
 	add r3, r4, #0
-	bl GridInputHandler_Create
+	bl sub_02019BA4
 	mov r1, #6
 	lsl r1, r1, #6
 	str r0, [r4, r1]
@@ -1126,11 +1126,11 @@ _021E625C: .word ov64_021E6EA8
 ov64_021E6260: ; 0x021E6260
 	mov r1, #6
 	lsl r1, r1, #6
-	ldr r3, _021E626C ; =GridInputHandler_Free
+	ldr r3, _021E626C ; =sub_02019BDC
 	ldr r0, [r0, r1]
 	bx r3
 	nop
-_021E626C: .word GridInputHandler_Free
+_021E626C: .word sub_02019BDC
 	thumb_func_end ov64_021E6260
 
 	thumb_func_start ov64_021E6270
@@ -1278,7 +1278,7 @@ _021E635E:
 	mov r0, #6
 	lsl r0, r0, #6
 	ldr r0, [r4, r0]
-	bl GridInputHandler_HandleInput_AllowHold
+	bl sub_02019D18
 	mov r1, #2
 	add r5, r0, #0
 	mvn r1, r1
@@ -1360,7 +1360,7 @@ _021E63F6:
 	mov r0, #6
 	lsl r0, r0, #6
 	ldr r0, [r4, r0]
-	bl GridInputHandler_GetNextInput
+	bl sub_02019F74
 	add r1, r0, #0
 	add r0, r4, #0
 	bl ov64_021E677C
@@ -1371,7 +1371,7 @@ _021E6410:
 	mov r0, #6
 	lsl r0, r0, #6
 	ldr r0, [r4, r0]
-	bl GridInputHandler_GetNextInput
+	bl sub_02019F74
 	ldr r1, _021E64F0 ; =gSystem
 	ldr r2, [r1, #0x4c]
 	mov r1, #0x10
@@ -1662,7 +1662,7 @@ _021E6656:
 	mov r0, #6
 	lsl r0, r0, #6
 	ldr r0, [r5, r0]
-	bl GridInputHandler_GetNextInput
+	bl sub_02019F74
 	add r1, r0, #0
 	add r0, r5, #0
 	bl ov64_021E677C
@@ -1905,7 +1905,7 @@ _021E685E:
 	mov r1, #0x32
 	mov r0, #0x3b
 	lsl r1, r1, #6
-	bl Heap_AllocAtEnd
+	bl AllocFromHeapAtEnd
 	mov r1, #0x19
 	lsl r1, r1, #4
 	str r0, [sp, #0x28]
@@ -1960,7 +1960,7 @@ _021E685E:
 	lsl r2, r2, #6
 	bl ov64_021E5AC8
 	ldr r0, [sp, #0x28]
-	bl Heap_Free
+	bl FreeToHeap
 	ldr r0, [sp, #0x24]
 	ldr r0, [r0, r6]
 	ldr r0, [r0]
@@ -2331,7 +2331,7 @@ ov64_021E6BD8: ; 0x021E6BD8
 	lsl r0, r0, #6
 	ldr r0, [r4, r0]
 	add r5, r1, #0
-	bl GridInputHandler_GetDpadBox
+	bl sub_0201A018
 	add r2, r0, #0
 	mov r0, #0x17
 	lsl r0, r0, #4
@@ -2486,7 +2486,7 @@ _021E6C84:
 	str r0, [sp, #0x14]
 	mov r0, #0x3b
 	add r1, r4, #0
-	bl Heap_Alloc
+	bl AllocFromHeap
 	add r7, r0, #0
 	mov r0, #0x66
 	lsl r0, r0, #2
@@ -2563,7 +2563,7 @@ _021E6D8C:
 	bl ov64_021E5AAC
 _021E6DCE:
 	add r0, r7, #0
-	bl Heap_Free
+	bl FreeToHeap
 	ldr r1, [sp, #0x24]
 	ldr r0, [sp, #0x28]
 	ldr r0, [r1, r0]
@@ -2590,7 +2590,7 @@ _021E6E02:
 	mov r2, #0x20
 	bl ov64_021E5AE4
 	ldr r0, [sp, #0x1c]
-	bl Heap_Free
+	bl FreeToHeap
 	add sp, #0x68
 	pop {r3, r4, r5, r6, r7, pc}
 	nop

@@ -5,26 +5,26 @@
 
 	.rodata
 
-	ScrDef scr_seq_T28PC0101_000
-	ScrDef scr_seq_T28PC0101_001
-	ScrDef scr_seq_T28PC0101_002
-	ScrDef scr_seq_T28PC0101_003
-	ScrDefEnd
+	scrdef scr_seq_T28PC0101_000
+	scrdef scr_seq_T28PC0101_001
+	scrdef scr_seq_T28PC0101_002
+	scrdef scr_seq_T28PC0101_003
+	scrdef_end
 
 scr_seq_T28PC0101_000:
-	SetVar VAR_SPECIAL_x8007, 2
-	CallStd std_nurse_joy
-	End
+	setvar VAR_SPECIAL_x8007, 2
+	callstd std_nurse_joy
+	end
 
 scr_seq_T28PC0101_001:
-	SimpleNPCMsg msg_0624_T28PC0101_00000
-	End
+	simple_npc_msg msg_0624_T28PC0101_00000
+	end
 
 scr_seq_T28PC0101_002:
-	SimpleNPCMsg msg_0624_T28PC0101_00001
-	End
+	simple_npc_msg msg_0624_T28PC0101_00001
+	end
 
 scr_seq_T28PC0101_003:
-	SimpleNPCMsg msg_0624_T28PC0101_00002
-	End
+	simple_npc_msg msg_0624_T28PC0101_00002
+	end
 	.balign 4, 0

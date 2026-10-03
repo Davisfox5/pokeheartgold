@@ -46,11 +46,11 @@
 	</row>
 	<row id="msg_0378_R31_00011" index="11">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">I found a good Pokémon in Dark Cave.\nI’m going to raise it to take on\fFalkner.\rHe’s the leader of Violet City’s Gym.</language>
+		<language name="English">I want to catch a good Pokémon in\nDark Cave and show that visiting\fgym leader at Violet’s practice\nhall what route kids can do!</language>
 	</row>
 	<row id="msg_0378_R31_00012" index="12">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">Dark Cave...\rIf a Pokémon could light it up,\nI’d explore it.</language>
+		<language name="English">You can go in, but you can’t go\nFAR--it’s pitch black past the\ffirst room. You’d need Flash.\rThey say the sages at Sprout Tower\nteach it, if you’re respectful\fenough to be taught anything.</language>
 	</row>
 	<row id="msg_0378_R31_00013" index="13">
 		<attribute name="window_context_name">used</attribute>
@@ -58,10 +58,10 @@
 	</row>
 	<row id="msg_0378_R31_00014" index="14">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">Dark Cave</language>
+		<language name="English">DARK CAVE\rBring your own light.\nWe mean it.</language>
 	</row>
 	<row id="msg_0378_R31_00015" index="15">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">Huh? What is it?\nIs that a Pokémon Egg?\fI’ve never seen one.\r...Zzz...</language>
+		<language name="English">Huh? What is it...?\nI came out here for some quiet.\rAll that student racket from\nViolet carries down the route...\r...Zzz...</language>
 	</row>
 </body>

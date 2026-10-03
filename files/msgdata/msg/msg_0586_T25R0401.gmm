@@ -2,35 +2,35 @@
 <body language="English">
 	<row id="msg_0586_T25R0401_00000" index="0">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">Bill: Hi, {STRVAR_1 3, 0, 0}! Would you do\nsomething for me and take this EEVEE?\rIt came over when I was adjusting\nNintendo Wi-Fi Connection.\rSomeone has to take care of it,\nbut I don’t like being outside.\rCan I count on you to play with it,\n{STRVAR_1 3, 0, 0}? {YESNO 0}</language>
+		<language name="English">-</language>
 	</row>
 	<row id="msg_0586_T25R0401_00001" index="1">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">Bill: I knew you’d come through!\nYou’re the real deal! Way to go!\fOK, I’m counting on you.\fTake good care of it!\r</language>
+		<language name="English">-</language>
 	</row>
 	<row id="msg_0586_T25R0401_00002" index="2">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">{STRVAR_1 3, 0, 0} received\nthe EEVEE!</language>
+		<language name="English">-</language>
 	</row>
 	<row id="msg_0586_T25R0401_00003" index="3">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">Bill: Professor Elm said EEVEE can\nevolve into seven different kinds\fof Pokémon!</language>
+		<language name="English">-</language>
 	</row>
 	<row id="msg_0586_T25R0401_00004" index="4">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">Whoa, wait. You can’t carry any\nmore Pokémon.</language>
+		<language name="English">-</language>
 	</row>
 	<row id="msg_0586_T25R0401_00005" index="5">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">Oh... Now what to do?</language>
+		<language name="English">-</language>
 	</row>
 	<row id="msg_0586_T25R0401_00006" index="6">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">Bill: I used to do experiments on\ntransferring things.\rBoth the GTS and Nintendo Wi-Fi\nConnection were inspired by\fmy machine that transfers things!</language>
+		<language name="English">Bill: I look after the Storage\nSystem’s regional link.\rBoxes sync fine inside Johto, but\nanything crossing to another region\fgets stuck in the queue for days.\rSomething is clogging the line\nbetween regions... I’ll find it.</language>
 	</row>
 	<row id="msg_0586_T25R0401_00007" index="7">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">Give a nickname to\nthe EEVEE you received? {YESNO 0}</language>
+		<language name="English">-</language>
 	</row>
 	<row id="msg_0586_T25R0401_00008" index="8">
 		<attribute name="window_context_name">garbage</attribute>
@@ -39,7 +39,7 @@
 	</row>
 	<row id="msg_0586_T25R0401_00009" index="9">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">Oh, you collect Pokémon?\nMy son Bill is an expert.\rHe just got called to the Pokémon\nCenter in Ecruteak City.</language>
+		<language name="English">Oh, you collect Pokémon?\nMy son Bill minds the Storage network.\rHe’s been up all night lately--\ntransfers to the other regions\fkeep stalling on him.</language>
 	</row>
 	<row id="msg_0586_T25R0401_00010" index="10">
 		<attribute name="window_context_name">used</attribute>
@@ -47,7 +47,7 @@
 	</row>
 	<row id="msg_0586_T25R0401_00011" index="11">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">My big brother Bill made the\nPokémon Storage System.</language>
+		<language name="English">My big brother Bill keeps the\nStorage System linked up across\fregions.\rHe says the line to the other\nregions has gone all laggy.</language>
 	</row>
 	<row id="msg_0586_T25R0401_00012" index="12">
 		<attribute name="window_context_name">used</attribute>
@@ -59,7 +59,7 @@
 	</row>
 	<row id="msg_0586_T25R0401_00014" index="14">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">My brother made the\nPokémon Storage System.\rI was going to give you Bill’s number...</language>
+		<language name="English">My brother keeps the Storage\nnetwork running.\rI was going to give you Bill’s number...</language>
 	</row>
 	<row id="msg_0586_T25R0401_00015" index="15">
 		<attribute name="window_context_name">used</attribute>

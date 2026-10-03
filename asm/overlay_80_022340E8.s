@@ -14,7 +14,7 @@ BattleArcadeData_Alloc: ; 0x022340E8
 	ldr r1, _02234370 ; =0x00000A88
 	mov r0, #0xb
 	str r3, [sp, #8]
-	bl Heap_Alloc
+	bl AllocFromHeap
 	ldr r1, _02234374 ; =ov80_0223DD4C
 	ldr r2, _02234370 ; =0x00000A88
 	str r0, [r1]
@@ -470,7 +470,7 @@ _022344A6:
 	cmp r7, #4
 	blt _022344A6
 	add r0, r6, #0
-	bl Heap_Free
+	bl FreeToHeap
 	add sp, #0x18c
 	pop {r4, r5, r6, r7, pc}
 	.balign 4, 0
@@ -524,19 +524,19 @@ BattleArcadeData_Free: ; 0x02234520
 	ldr r0, [r4, #0x70]
 	cmp r0, #0
 	beq _02234530
-	bl Heap_Free
+	bl FreeToHeap
 _02234530:
 	ldr r0, [r4, #0x74]
 	cmp r0, #0
 	beq _0223453A
-	bl Heap_Free
+	bl FreeToHeap
 _0223453A:
 	ldr r2, _0223454C ; =0x00000A88
 	add r0, r4, #0
 	mov r1, #0
 	bl MI_CpuFill8
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 _0223454A:
 	pop {r4, pc}
 	.balign 4, 0
@@ -828,7 +828,7 @@ ov80_02234774: ; 0x02234774
 	mov r2, #0xb
 	mov r3, #0xcc
 	bl ov80_02229F04
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, sp, #0
 	ldrh r0, [r0, #4]
 	lsl r0, r0, #0x18
@@ -1152,7 +1152,7 @@ ov80_02234968: ; 0x02234968
 	bl GX_LoadBGExtPltt
 	bl GX_EndLoadBGExtPltt
 	add r0, r5, #0
-	bl Heap_Free
+	bl FreeToHeap
 	mov r0, #4
 	mov r1, #1
 	bl GfGfx_EngineATogglePlanes
@@ -1658,7 +1658,7 @@ _02234DDC:
 	mov r1, #2
 	mov r0, #0x65
 	lsl r1, r1, #0xc
-	bl Heap_Alloc
+	bl AllocFromHeap
 	mov r2, #2
 	mov r1, #0
 	lsl r2, r2, #0xc
@@ -1696,9 +1696,9 @@ _02234DDC:
 	ldr r0, [sp, #4]
 	bl NARC_Delete
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r6, #0
-	bl Heap_Free
+	bl FreeToHeap
 	add sp, #0xc
 	pop {r4, r5, r6, r7, pc}
 	thumb_func_end ov80_02234DC4

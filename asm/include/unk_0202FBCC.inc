@@ -5,8 +5,8 @@
 .public sub_0201A738
 .public sub_0201A748
 .public sub_0201A774
-.public Heap_Alloc
-.public Heap_Free
+.public AllocFromHeap
+.public FreeToHeap
 .public _MonEncryptSegment
 .public _MonDecryptSegment
 .public GF_AssertFail

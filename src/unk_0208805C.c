@@ -3,8 +3,8 @@
 #include "global.h"
 
 #include "gf_gfx_loader.h"
-#include "screen_fade.h"
 #include "system.h"
+#include "unk_0200FA24.h"
 
 u8 sub_02088108(s16 *a0, u16 a1, s16 a2);
 
@@ -57,11 +57,11 @@ u8 CalculateHpBarColor(u16 hp, u16 maxHp, u32 pixelsWide) {
     return HpBar_GetColorIdx(CalculateHpBarPixelsLength(hp, maxHp, pixelsWide), pixelsWide);
 }
 
-void sub_020880CC(u8 a0, enum HeapID heapID) {
+void sub_020880CC(u8 a0, HeapID heapId) {
     if (a0 == 0) {
-        BeginNormalPaletteFade(FADE_BOTH_SCREENS, FADE_TYPE_BRIGHTNESS_IN, FADE_TYPE_BRIGHTNESS_IN, RGB_BLACK, 6, 1, heapID);
+        BeginNormalPaletteFade(0, 1, 1, RGB_BLACK, 6, 1, heapId);
     } else {
-        BeginNormalPaletteFade(FADE_BOTH_SCREENS, FADE_TYPE_UNK_8, FADE_TYPE_BRIGHTNESS_OUT, RGB_BLACK, 6, 1, heapID);
+        BeginNormalPaletteFade(0, 8, 0, RGB_BLACK, 6, 1, heapId);
     }
 }
 
@@ -125,19 +125,19 @@ int sub_020881C0(s16 *a0, u16 a1) {
     return 0;
 }
 
-void BgConfig_LoadAssetFromOpenNarc(BgConfig *bgConfig, enum HeapID heapID, NARC *narc, NarcId unused, int fileId, GFBgLayer layer, BgGfxAssetType kind, u32 szByte, u32 offset) {
+void sub_0208820C(BgConfig *bgConfig, HeapID heapId, NARC *narc, NarcId unused, int fileId, GFBgLayer layer, int kind, u32 szByte, u32 offset) {
     switch (kind) {
-    case GF_BG_GFX_TYPE_CHAR:
-        GfGfxLoader_LoadCharDataFromOpenNarc(narc, fileId, bgConfig, layer, offset, szByte, FALSE, heapID);
+    case 0:
+        GfGfxLoader_LoadCharDataFromOpenNarc(narc, fileId, bgConfig, layer, offset, szByte, FALSE, heapId);
         break;
-    case GF_BG_GFX_TYPE_SCRN:
-        GfGfxLoader_LoadScrnDataFromOpenNarc(narc, fileId, bgConfig, layer, offset, szByte, FALSE, heapID);
+    case 1:
+        GfGfxLoader_LoadScrnDataFromOpenNarc(narc, fileId, bgConfig, layer, offset, szByte, FALSE, heapId);
         break;
-    case GF_BG_GFX_TYPE_PLTT:
+    case 2:
         if (layer <= GF_BG_LYR_MAIN_3) {
-            GfGfxLoader_GXLoadPalFromOpenNarc(narc, fileId, GF_PAL_LOCATION_MAIN_BG, (enum GFPalSlotOffset)offset, szByte, heapID);
+            GfGfxLoader_GXLoadPalFromOpenNarc(narc, fileId, GF_PAL_LOCATION_MAIN_BG, (enum GFPalSlotOffset)offset, szByte, heapId);
         } else {
-            GfGfxLoader_GXLoadPalFromOpenNarc(narc, fileId, GF_PAL_LOCATION_SUB_BG, (enum GFPalSlotOffset)offset, szByte, heapID);
+            GfGfxLoader_GXLoadPalFromOpenNarc(narc, fileId, GF_PAL_LOCATION_SUB_BG, (enum GFPalSlotOffset)offset, szByte, heapId);
         }
         break;
     }

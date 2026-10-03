@@ -297,19 +297,19 @@ static const int sPokepicShadowUVParams[4][4] = {
     { 0xA0, 0xC0, 0xE0, 0xD0 },
 };
 
-PokepicManager *PokepicManager_Create(enum HeapID heapID) {
-    PokepicManager *ret = Heap_Alloc(heapID, sizeof(PokepicManager));
+PokepicManager *PokepicManager_Create(HeapID heapId) {
+    PokepicManager *ret = AllocFromHeap(heapId, sizeof(PokepicManager));
     MI_CpuClearFast(ret, sizeof(PokepicManager));
-    ret->heapID = heapID;
+    ret->heapId = heapId;
     ret->unread_330 = 0;
     ret->charBaseAddr = 0;
     ret->charSize = 0x8000;
     ret->plttBaseAddr = 0;
     ret->plttSize = 0x80;
-    ret->charRawData = Heap_Alloc(heapID, 0x8000);
-    ret->plttRawData = Heap_Alloc(heapID, 0xC0);
+    ret->charRawData = AllocFromHeap(heapId, 0x8000);
+    ret->plttRawData = AllocFromHeap(heapId, 0xC0);
     MI_CpuClearFast(ret->plttRawData, 4);
-    ret->plttRawDataUnfaded = Heap_Alloc(heapID, 0xC0);
+    ret->plttRawDataUnfaded = AllocFromHeap(heapId, 0xC0);
     MI_CpuClearFast(ret->plttRawDataUnfaded, 4);
     for (int i = 0; i < 4; ++i) {
         MI_CpuClearFast(&ret->pics[i], sizeof(Pokepic));
@@ -319,7 +319,7 @@ PokepicManager *PokepicManager_Create(enum HeapID heapID) {
 
     NNSG2dCharacterData *charData;
     u8 *pRawCharData;
-    void *pNcgrFile = AllocAndReadWholeNarcMemberByIdPair(NARC_poketool_pokegra_otherpoke, NARC_otherpoke_259_NCGR, ret->heapID); // shadow.png
+    void *pNcgrFile = AllocAndReadWholeNarcMemberByIdPair(NARC_poketool_pokegra_otherpoke, NARC_otherpoke_259_NCGR, ret->heapId); // shadow.png
     NNS_G2dGetUnpackedCharacterData(pNcgrFile, &charData);
     ret->charData.pixelFmt = charData->pixelFmt;
     ret->charData.mapingType = charData->mapingType;
@@ -334,7 +334,7 @@ PokepicManager *PokepicManager_Create(enum HeapID heapID) {
             ret->charRawData[dstOffs] = pRawCharData[srcOffs];
         }
     }
-    Heap_Free(pNcgrFile);
+    FreeToHeap(pNcgrFile);
     ret->needLoadImage = 1;
     ret->needLoadPltt = 1;
     return ret;
@@ -445,10 +445,10 @@ void PokepicManager_DrawAll(PokepicManager *pokepicManager) {
 }
 
 void PokepicManager_Delete(PokepicManager *pokepicManager) {
-    Heap_Free(pokepicManager->charRawData);
-    Heap_Free(pokepicManager->plttRawData);
-    Heap_Free(pokepicManager->plttRawDataUnfaded);
-    Heap_Free(pokepicManager);
+    FreeToHeap(pokepicManager->charRawData);
+    FreeToHeap(pokepicManager->plttRawData);
+    FreeToHeap(pokepicManager->plttRawDataUnfaded);
+    FreeToHeap(pokepicManager);
 }
 
 void Pokepic_StartAnim(Pokepic *pokepic) {
@@ -1125,7 +1125,7 @@ static void PokepicManager_BufferCharData(PokepicManager *pokepicManager) {
         if (pokepicManager->pics[i].active && pokepicManager->pics[i].needReloadChar) {
             pokepicManager->pics[i].needReloadChar = FALSE;
             needCharUpdate = TRUE;
-            ncgrFile = AllocAndReadWholeNarcMemberByIdPair((NarcId)pokepicManager->pics[i].template.narcID, pokepicManager->pics[i].template.charDataID, pokepicManager->heapID);
+            ncgrFile = AllocAndReadWholeNarcMemberByIdPair((NarcId)pokepicManager->pics[i].template.narcID, pokepicManager->pics[i].template.charDataID, pokepicManager->heapId);
             NNS_G2dGetUnpackedCharacterData(ncgrFile, &pCharData);
             pokepicManager->charData.pixelFmt = pCharData->pixelFmt;
             pokepicManager->charData.mapingType = pCharData->mapingType;
@@ -1209,7 +1209,7 @@ static void PokepicManager_BufferCharData(PokepicManager *pokepicManager) {
                     }
                 }
             }
-            Heap_Free(ncgrFile);
+            FreeToHeap(ncgrFile);
         }
     }
     pokepicManager->needLoadImage = needCharUpdate;
@@ -1227,7 +1227,7 @@ static void PokepicManager_BufferPlttData(PokepicManager *pokepicManager) {
         if (pokepicManager->pics[i].active && pokepicManager->pics[i].needReloadPltt) {
             pokepicManager->pics[i].needReloadPltt = FALSE;
             needPlttUpdate = TRUE;
-            nclrFile = AllocAndReadWholeNarcMemberByIdPair((NarcId)pokepicManager->pics[i].template.narcID, pokepicManager->pics[i].template.palDataID, pokepicManager->heapID);
+            nclrFile = AllocAndReadWholeNarcMemberByIdPair((NarcId)pokepicManager->pics[i].template.narcID, pokepicManager->pics[i].template.palDataID, pokepicManager->heapId);
             NNS_G2dGetUnpackedPaletteData(nclrFile, &plttData);
             pokepicManager->plttData.fmt = plttData->fmt;
             src = plttData->pRawData;
@@ -1235,16 +1235,16 @@ static void PokepicManager_BufferPlttData(PokepicManager *pokepicManager) {
                 pokepicManager->plttRawData[j + 16 * i] = src[j];
                 pokepicManager->plttRawDataUnfaded[j + 16 * i] = src[j];
             }
-            Heap_Free(nclrFile);
+            FreeToHeap(nclrFile);
             if (pokepicManager->pics[i].shadow.palSlot != 0) {
-                nclrFile = AllocAndReadWholeNarcMemberByIdPair(NARC_poketool_pokegra_otherpoke, NARC_otherpoke_260_NCLR, pokepicManager->heapID);
+                nclrFile = AllocAndReadWholeNarcMemberByIdPair(NARC_poketool_pokegra_otherpoke, NARC_otherpoke_260_NCLR, pokepicManager->heapId);
                 NNS_G2dGetUnpackedPaletteData(nclrFile, &plttData);
                 src = plttData->pRawData;
                 for (j = 0; j < 16; ++j) {
                     pokepicManager->plttRawData[j + 16 * (3 + pokepicManager->pics[i].shadow.palSlot)] = src[j];
                     pokepicManager->plttRawDataUnfaded[j + 16 * (3 + pokepicManager->pics[i].shadow.palSlot)] = src[j];
                 }
-                Heap_Free(nclrFile);
+                FreeToHeap(nclrFile);
             }
         }
         if (pokepicManager->pics[i].active && pokepicManager->pics[i].drawParam.fadeActive) {

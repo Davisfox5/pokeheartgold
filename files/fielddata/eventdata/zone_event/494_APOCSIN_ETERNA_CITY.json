@@ -1,0 +1,270 @@
+{
+  "header": "fielddata/script/scr_seq/event_EVERYWHERE.h",
+  "bgs": [
+    {
+      "scriptId": 41,
+      "type": 1,
+      "x": 327,
+      "z": 521,
+      "y": 0,
+      "dir": 0
+    },
+    {
+      "scriptId": 41,
+      "type": 1,
+      "x": 285,
+      "z": 520,
+      "y": 0,
+      "dir": 0
+    },
+    {
+      "scriptId": 41,
+      "type": 1,
+      "x": 327,
+      "z": 525,
+      "y": 0,
+      "dir": 0
+    },
+    {
+      "scriptId": 41,
+      "type": 1,
+      "x": 355,
+      "z": 521,
+      "y": 0,
+      "dir": 0
+    },
+    {
+      "scriptId": 41,
+      "type": 1,
+      "x": 347,
+      "z": 517,
+      "y": 0,
+      "dir": 0
+    }
+  ],
+  "objects": [
+    {
+      "id": 0,
+      "spriteId": "SPRITE_GSMAN2",
+      "movement": 2,
+      "type": 0,
+      "eventFlag": 0,
+      "scriptId": 6,
+      "facingDirection": 0,
+      "param0": 0,
+      "param1": 0,
+      "param2": 0,
+      "xRange": 0,
+      "yRange": 0,
+      "x": 303,
+      "z": 561,
+      "y": 0
+    },
+    {
+      "id": 1,
+      "spriteId": "SPRITE_GSOLDMAN1",
+      "movement": 3,
+      "type": 0,
+      "eventFlag": 0,
+      "scriptId": 14,
+      "facingDirection": 2,
+      "param0": 0,
+      "param1": 0,
+      "param2": 0,
+      "xRange": 1,
+      "yRange": 1,
+      "x": 300,
+      "z": 550,
+      "y": 0
+    },
+    {
+      "id": 2,
+      "spriteId": "SPRITE_BOZU",
+      "movement": 0,
+      "type": 0,
+      "eventFlag": 0,
+      "scriptId": 3,
+      "facingDirection": 0,
+      "param0": 0,
+      "param1": 0,
+      "param2": 0,
+      "xRange": 0,
+      "yRange": 0,
+      "x": 330,
+      "z": 527,
+      "y": 0
+    },
+    {
+      "id": 3,
+      "spriteId": "SPRITE_GSWOMAN2",
+      "movement": 3,
+      "type": 0,
+      "eventFlag": 0,
+      "scriptId": 2,
+      "facingDirection": 2,
+      "param0": 0,
+      "param1": 0,
+      "param2": 0,
+      "xRange": 1,
+      "yRange": 1,
+      "x": 312,
+      "z": 552,
+      "y": 0
+    },
+    {
+      "id": 4,
+      "spriteId": "SPRITE_GSWOMAN3",
+      "movement": 4,
+      "type": 0,
+      "eventFlag": 0,
+      "scriptId": 4,
+      "facingDirection": 0,
+      "param0": 0,
+      "param1": 0,
+      "param2": 0,
+      "xRange": 0,
+      "yRange": 1,
+      "x": 308,
+      "z": 552,
+      "y": 0
+    },
+    {
+      "id": 5,
+      "spriteId": "SPRITE_CAMPBOY",
+      "movement": 2,
+      "type": 0,
+      "eventFlag": 0,
+      "scriptId": 2,
+      "facingDirection": 3,
+      "param0": 0,
+      "param1": 0,
+      "param2": 0,
+      "xRange": 0,
+      "yRange": 0,
+      "x": 302,
+      "z": 538,
+      "y": 0
+    },
+    {
+      "id": 6,
+      "spriteId": "SPRITE_GSWOMAN2",
+      "movement": 0,
+      "type": 0,
+      "eventFlag": 0,
+      "scriptId": 6,
+      "facingDirection": 0,
+      "param0": 0,
+      "param1": 0,
+      "param2": 0,
+      "xRange": 0,
+      "yRange": 0,
+      "x": 302,
+      "z": 565,
+      "y": 0
+    },
+    {
+      "id": 7,
+      "spriteId": "SPRITE_CAMPBOY",
+      "movement": 0,
+      "type": 0,
+      "eventFlag": 0,
+      "scriptId": 12,
+      "facingDirection": 1,
+      "param0": 0,
+      "param1": 0,
+      "param2": 0,
+      "xRange": 0,
+      "yRange": 0,
+      "x": 297,
+      "z": 531,
+      "y": 0
+    }
+  ],
+  "warps": [
+    {
+      "x": 305,
+      "z": 530,
+      "header": "MAP_APOC_SIN_PC_ETERNA_CITY",
+      "anchor": 0,
+      "y": 0
+    },
+    {
+      "x": 309,
+      "z": 548,
+      "header": "MAP_APOC_SIN_MART_ETERNA_CITY",
+      "anchor": 0,
+      "y": 0
+    },
+    {
+      "x": 310,
+      "z": 539,
+      "header": "MAP_APOC_SIN_H02_ETERNA_CITY",
+      "anchor": 0,
+      "y": 0
+    },
+    {
+      "x": 305,
+      "z": 519,
+      "header": "MAP_APOC_SIN_H03_ETERNA_CITY",
+      "anchor": 0,
+      "y": 0
+    },
+    {
+      "x": 315,
+      "z": 548,
+      "header": "MAP_APOC_SIN_H04_ETERNA_CITY",
+      "anchor": 0,
+      "y": 0
+    },
+    {
+      "x": 298,
+      "z": 562,
+      "header": "MAP_APOC_SIN_H05_ETERNA_CITY",
+      "anchor": 0,
+      "y": 0
+    },
+    {
+      "x": 327,
+      "z": 537,
+      "header": "MAP_APOC_SIN_H06_ETERNA_CITY",
+      "anchor": 0,
+      "y": 0
+    },
+    {
+      "x": 316,
+      "z": 521,
+      "header": "MAP_APOC_SIN_H07_ETERNA_CITY",
+      "anchor": 0,
+      "y": 0
+    },
+    {
+      "x": 304,
+      "z": 569,
+      "header": "MAP_APOC_SIN_H08_ETERNA_CITY",
+      "anchor": 0,
+      "y": 0
+    },
+    {
+      "x": 305,
+      "z": 569,
+      "header": "MAP_APOC_SIN_H09_ETERNA_CITY",
+      "anchor": 0,
+      "y": 0
+    },
+    {
+      "x": 312,
+      "z": 562,
+      "header": "MAP_APOC_SIN_H10_ETERNA_CITY",
+      "anchor": 0,
+      "y": 0
+    },
+    {
+      "x": 310,
+      "z": 530,
+      "header": "MAP_APOC_SIN_H11_ETERNA_CITY",
+      "anchor": 0,
+      "y": 0
+    }
+  ],
+  "coords": []
+}

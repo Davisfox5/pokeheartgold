@@ -8,4 +8,8 @@
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">TM29 is Psychic.\rIt may lower the target’s Sp. Def.</language>
 	</row>
+	<row id="msg_0534_T11R0501_00002" index="2">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">...\r...I see you. Fresh off the\nMagnet Train, mind still full\fof Johto.\rNo. Not yet.\rCome back when you’ve made a name\nfor yourself in Kanto--I’ll have\fsomething waiting for you.</language>
+	</row>
 </body>

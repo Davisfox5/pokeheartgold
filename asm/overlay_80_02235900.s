@@ -10,7 +10,7 @@ FrtCmd_170: ; 0x02235900
 	add r4, r0, #0
 	ldr r0, [r4]
 	ldr r0, [r0]
-	bl Frontier_GetLaunchArgs
+	bl Frontier_GetLaunchParam
 	ldr r0, [r0, #8]
 	bl ov80_02235FC8
 	add r1, r0, #0
@@ -65,13 +65,13 @@ FrtCmd_172: ; 0x02235934
 FrtCmd_173: ; 0x02235970
 	push {r4, lr}
 	add r4, r0, #0
-	bl FrontierScriptContext_ReadHalfWord
+	bl FrontierScript_ReadU16
 	add r1, r4, #0
 	add r1, #0x78
 	strh r0, [r1]
 	ldr r1, _0223598C ; =ov80_02235990
 	add r0, r4, #0
-	bl FrontierScriptContext_Pause
+	bl ov80_0222AB84
 	mov r0, #1
 	pop {r4, pc}
 	nop
@@ -104,13 +104,13 @@ _022359AE:
 FrtCmd_202: ; 0x022359B4
 	push {r4, lr}
 	add r4, r0, #0
-	bl FrontierScriptContext_ReadHalfWord
+	bl FrontierScript_ReadU16
 	add r1, r4, #0
 	add r1, #0x78
 	strh r0, [r1]
 	ldr r1, _022359D0 ; =ov80_022359D4
 	add r0, r4, #0
-	bl FrontierScriptContext_Pause
+	bl ov80_0222AB84
 	mov r0, #1
 	pop {r4, pc}
 	nop
@@ -196,7 +196,7 @@ FrtCmd_175: ; 0x02235A44
 	add r4, r0, #0
 	ldr r0, [r5]
 	ldr r0, [r0]
-	bl Frontier_GetLaunchArgs
+	bl Frontier_GetLaunchParam
 	ldr r1, [r0, #0x24]
 	add r0, r4, #0
 	add r0, #0x98
@@ -269,7 +269,7 @@ _02235AF2:
 	add r0, r5, #0
 	add r0, #0xa8
 	ldr r0, [r0]
-	bl Heap_Free
+	bl FreeToHeap
 	mov r0, #0
 	add r5, #0xa8
 	str r0, [r5]
@@ -314,7 +314,7 @@ FrtCmd_178: ; 0x02235B20
 	add r4, r0, #0
 	ldr r0, [r7]
 	ldr r0, [r0]
-	bl Frontier_GetLaunchArgs
+	bl Frontier_GetLaunchParam
 	add r7, r0, #0
 	ldr r0, [sp]
 	cmp r0, #0xd
@@ -717,7 +717,7 @@ FrtCmd_179: ; 0x02235E84
 	add r5, r0, #0
 	ldr r0, [r5]
 	ldr r0, [r0]
-	bl Frontier_GetLaunchArgs
+	bl Frontier_GetLaunchParam
 	add r7, r0, #0
 	ldr r0, [r5]
 	ldr r0, [r0]
@@ -738,7 +738,7 @@ _02235EA4:
 	ldr r0, [r7, #8]
 	mov r1, #0
 	mov r2, #6
-	bl FrontierFieldSystem_New
+	bl sub_0204A824
 	add r4, r0, #0
 	ldr r0, [r5]
 	add r1, r4, #0
@@ -803,7 +803,7 @@ _02235F10:
 	bne _02235F44
 	ldr r1, [r7, #8]
 	add r0, r4, #0
-	bl FrontierFieldSystem_SetRandomFrontierTrainers
+	bl sub_0204ABC8
 _02235F44:
 	ldr r0, [r7, #8]
 	bl SaveArray_Party_Get
@@ -838,7 +838,7 @@ FrtCmd_180: ; 0x02235F64
 FrtCmd_181: ; 0x02235F80
 	push {r3, lr}
 	ldr r1, _02235F8C ; =ov80_02235F90
-	bl FrontierScriptContext_Pause
+	bl ov80_0222AB84
 	mov r0, #1
 	pop {r3, pc}
 	.balign 4, 0
@@ -872,7 +872,7 @@ FrtCmd_182: ; 0x02235FB4
 	ldr r0, [r0]
 	ldr r0, [r0]
 	bl Frontier_GetData
-	bl FrontierFieldSystem_Free
+	bl sub_0204AA2C
 	mov r0, #0
 	pop {r3, pc}
 	.balign 4, 0

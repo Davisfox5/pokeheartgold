@@ -70,7 +70,7 @@
 	</row>
 	<row id="msg_0550_T21_00017" index="17">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">When you’re with Pokémon,\ngoing anywhere is fun.</language>
+		<language name="English">These boats don’t go far anymore.\rUsed to be you could ride the coast\nclear to Olivine.\rNow they mostly just... sit. Rocking\nwith the tide, going nowhere.</language>
 	</row>
 	<row id="msg_0550_T21_00018" index="18">
 		<attribute name="window_context_name">used</attribute>
@@ -78,11 +78,11 @@
 	</row>
 	<row id="msg_0550_T21_00019" index="19">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">I battled the Trainers on the road.\nMy Pokémon lost.\rThey’re a mess! I must take them to\na Pokémon Center.</language>
+		<language name="English">Did you SEE him? The CHAMPION, right\nhere in Cherrygrove!\rOne day I’m gonna fly off into the\nclouds just like that. You’ll see.</language>
 	</row>
 	<row id="msg_0550_T21_00020" index="20">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">A Pokémon I caught had an item.\nI think it’s Mystic Water.\rI don’t need it, so do you want it?\r</language>
+		<language name="English">Champion or not, Silver still drops in\nto lose to Gold now and then.\rDoes the old man good. Don’t tell Gold\nI said he won.\f...Say. A Pokémon I hooked off the pier\nwas holding this. Mystic Water, I\nthink. No use to me - you want it?\r</language>
 	</row>
 	<row id="msg_0550_T21_00021" index="21">
 		<attribute name="window_context_name">used</attribute>
@@ -94,10 +94,198 @@
 	</row>
 	<row id="msg_0550_T21_00023" index="23">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">Cherrygrove City\nThe City of Fragrant Flowers</language>
+		<language name="English">CHERRYGROVE CITY\n“Where the cherry trees and the sea\nlook after their own.”</language>
 	</row>
 	<row id="msg_0550_T21_00024" index="24">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">Guide Gent’s House\nFull-of-Energy, High-Speed Old Man</language>
+		<language name="English">There’s no plaque here.\rJust a quiet house, a worn battle ring\nin the yard, and a man who’s done\nenough.</language>
+	</row>
+	<row id="msg_0550_T21_00025" index="25">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Heh. Didn’t expect a crowd.\nSilver never learned to lose well.\rYour friend ran on up to the route -\ngo catch up with her.\r</language>
+	</row>
+	<row id="msg_0550_T21_00026" index="26">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">GOLD: TYPHLOSION! Fire Blast, now!\r</language>
+	</row>
+	<row id="msg_0550_T21_00027" index="27">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">SILVER: Alakazam. Psychic.\rEnd it.\r</language>
+	</row>
+	<row id="msg_0550_T21_00028" index="28">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">SILVER: ...And that’s the match.\rYour TYPHLOSION still hits like a\nfreight train, old man.\rBut your reads have gone soft.\rHalf a step behind me the whole way.\rRetirement’s made you rusty, Gold.\r</language>
+	</row>
+	<row id="msg_0550_T21_00029" index="29">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">GOLD: Hah! No sense denying it.\rThat’s the first real battle I’ve had\nin years.\rFelt good. Felt like the old days.\r</language>
+	</row>
+	<row id="msg_0550_T21_00030" index="30">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">SILVER: You could have the old days\nback any time you wanted.\rCome back to the League.\rThe circuit’s grown dull with no one\nleft worth fearing.\r</language>
+	</row>
+	<row id="msg_0550_T21_00031" index="31">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">GOLD: And upstage the Champion in\nfront of the whole world?\rNot a chance.\r...Besides. Everything I need is\nright here in this quiet little town.\r</language>
+	</row>
+	<row id="msg_0550_T21_00032" index="32">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">SILVER: ...Heh. Same old Gold.\rTake care of yourself.\rI’ve got a region waiting on me.\r</language>
+	</row>
+	<row id="msg_0550_T21_00033" index="33">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">KESTRA: No way. No way, no way -\rThat’s Champion Silver. Here.\nIn the flesh.\r</language>
+	</row>
+	<row id="msg_0550_T21_00034" index="34">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">KESTRA: Did you SEE that?!\r...Hey. I don’t know you, and I know\neverybody round here.\rYou must’ve just got in. Some first\nday, huh?\r</language>
+	</row>
+	<row id="msg_0550_T21_00035" index="35">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">KESTRA: That’s gonna be me one day.\rThe whole world stopping just to\nwatch.\rYou’ll see.\r</language>
+	</row>
+	<row id="msg_0550_T21_00036" index="36">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">KESTRA: ...And he just flies off. Like\nthe sky belongs to him.\rAnyway - welcome to the neighborhood,\nstranger.\rTry to keep up. Things are about to\nget interesting.\r</language>
+	</row>
+	<row id="msg_0550_T21_00037" index="37">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">KESTRA: Whoa - hold up, hold up!\rYou can’t just walk into the tall\ngrass with no Pokémon of your own.\rThe wild ones out there won’t care\nhow new you are.\r</language>
+	</row>
+	<row id="msg_0550_T21_00038" index="38">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">KESTRA: ...You really don’t have one\nyet, do you. New kid, for real.\rLucky for you - I know exactly where\nto fix that.\rCome on. This way!\r</language>
+	</row>
+	<row id="msg_0550_T21_00039" index="39">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">KESTRA: There you are, slowpoke!\rLook at this place - real tall grass,\nreal wild Pokémon, just waiting.\rI’ve been creeping around trying not\nto spook ’em -\f...Wait. Wait wait wait. THERE’S one!\rCome on, {STRVAR_1 3, 0, 0} - let’s\nget him!\r</language>
+	</row>
+	<row id="msg_0550_T21_00040" index="40">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">GOLD: Whoa - HOLD it, you two! You\ndon’t go charging a wild Pokémon\nwith none of your own.\r...And now it’s spotted you. Of\ncourse it has.\fStand back, both of you.\rLet me show you how this is done.\r</language>
+	</row>
+	<row id="msg_0550_T21_00041" index="41">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">GOLD: ...And - gotcha.\rHeh. Still got the touch.\r</language>
+	</row>
+	<row id="msg_0550_T21_00042" index="42">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">GOLD: Phew. That was close.\rYou kids can’t go running off into\ntall grass like that!\rWhat to do with you two... *sigh*\fAlright. Come with me.\rGuess it’s my job to show you the\nropes, now that the old man’s gone.\r</language>
+	</row>
+	<row id="msg_0550_T21_00043" index="43">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">GOLD: Alright, uh... that’s the tour.\rYou should, uh, go play at home now.\nOr something.\r</language>
+	</row>
+	<row id="msg_0550_T21_00044" index="44">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">KESTRA: Aren’t you going to give us our\nvery first Pokémon now?!\r</language>
+	</row>
+	<row id="msg_0550_T21_00045" index="45">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">GOLD: Uh...\r</language>
+	</row>
+	<row id="msg_0550_T21_00046" index="46">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">KESTRA: Come onnnn! That’s what\nChampions doooo, right?\rRight, {STRVAR_1 3, 0, 0}?!\r</language>
+	</row>
+	<row id="msg_0550_T21_00047" index="47">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">GOLD: Well, uh... I mean, I suppose\nso...\r</language>
+	</row>
+	<row id="msg_0550_T21_00048" index="48">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">KESTRA: Yaaaay! My HERO!\r</language>
+	</row>
+	<row id="msg_0550_T21_00049" index="49">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">GOLD: Uh, ok. Wait right here.\r</language>
+	</row>
+	<row id="msg_0550_T21_00050" index="50">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">GOLD: Ok, here we go.\rThese three Pokémon are very special\nto me.\rYou can each pick one - but you have\nto promise to take really good care\nof them, ok?\r</language>
+	</row>
+	<row id="msg_0550_T21_00051" index="51">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">KESTRA: Yaaaay! {STRVAR_1 3, 0, 0}, you\ngo first!\r</language>
+	</row>
+	<row id="msg_0550_T21_00052" index="52">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">{STRVAR_1 3, 0, 0} received the\n{STRVAR_1 0, 1, 0}!</language>
+	</row>
+	<row id="msg_0550_T21_00053" index="53">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">KESTRA: Then I’m taking THIS one!\rType advantage, right out of the gate.\nNothing personal.\r{STRVAR_1 0, 1, 0}, you’re with me!\r</language>
+	</row>
+	<row id="msg_0550_T21_00054" index="54">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">KESTRA: First stop: Professor Elm’s\nlab in New Bark!\rLast one there is a Slowpoke!\rSmell ya later,\n{STRVAR_1 3, 0, 0}!\r</language>
+	</row>
+	<row id="msg_0550_T21_00055" index="55">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">GOLD: I rang Professor Elm--he’ll fix\nyou both up with a Pokédex.\rRoute 29, straight east. You should\nprobably go keep an eye on her...\rWelp. Typhlosion and I have some\ngardening to do.\rGood luck out there.\r</language>
+	</row>
+	<row id="msg_0550_T21_00056" index="56">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">ONLOOKER: That’s the CHAMPION! Right\nhere, in OUR town!\rI’m not blinking. Not gonna miss a\nsingle second of this.\r</language>
+	</row>
+	<row id="msg_0550_T21_00057" index="57">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">ONLOOKER: Ten years retired, and Gold\nstill makes the Champion sweat for it.\r...That’s our Gold. Heh.\r</language>
+	</row>
+	<row id="msg_0550_T21_00058" index="58">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">KESTRA: Okay, okay - where are my\nmanners.\rI’m Kestra. Born here, raised here. I\nknow every cobble in this town.\rAnd you - nope. Don’t know you. New\nface. I’d remember a new face.\fSo? What do I call you?\r</language>
+	</row>
+	<row id="msg_0550_T21_00059" index="59">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">KESTRA: {STRVAR_1 3, 0, 0}.\r{STRVAR_1 3, 0, 0}! Ha - good name.\rI’m gonna be hollering it across a\nwhole lot of battlefields, so it’s\nlucky it’s a good one.\r</language>
+	</row>
+	<row id="msg_0550_T21_00060" index="60">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">KESTRA: Me, I’ve wanted one thing since\nI could walk. ONE.\rTo be like him. Champion Silver. The\nbest there has ever been.\rYou just rolled in, so you wouldn’t\nknow - but everybody round here does.\fHe’s half the reason any of us ever\npicked up a Poké Ball.\rAnd he battled in MY town, on my first\nreal day. That has GOT to be a sign.\r</language>
+	</row>
+	<row id="msg_0550_T21_00061" index="61">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">KESTRA: Anyway - standing still is for\npeople who already made it, and that\nsure isn’t us. Yet!\rCome on, {STRVAR_1 3, 0, 0}. The whole\nregion’s out THIS way.\rTry to keep up, partner!\r</language>
+	</row>
+	<row id="msg_0550_T21_00062" index="62">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">GOLD: And before you two go tearing\noff - here. You’ll want these.\rRunning Shoes, so I don’t have to watch\nyou amble off at a crawl.\rAnd a Map Card for your Pokégear, so\n“I got lost” stops being an excuse.\r</language>
+	</row>
+	<row id="msg_0550_T21_00063" index="63">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">{STRVAR_1 3, 0, 0} received the\nRunning Shoes and the Map Card!\r</language>
+	</row>
+	<row id="msg_0550_T21_00064" index="64">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">GOLD: ...Right. The grand tour, since\nthe old man’s not here to give it.\rFirst stop. That’s the Pokémon\nCenter - it patches your Pokémon up,\nfree, every time.\fUse it more than you think you’ll\nneed to.\r</language>
+	</row>
+	<row id="msg_0550_T21_00065" index="65">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Whoa, did you SEE that battle?! That\nMurkrow was unbelievably fast!\r</language>
+	</row>
+	<row id="msg_0550_T21_00066" index="66">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Cherrygrove’s usually so quiet...\nA real battle right here! My heart’s\nstill pounding.\r</language>
+	</row>
+	<row id="msg_0550_T21_00067" index="67">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Heh, that youngster’s got some spark.\nReminds me of my own trainer days.\r</language>
+	</row>
+	<row id="msg_0550_T21_00068" index="68">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">GOLD: That road east is Route 29.\nIt runs to New Bark - Professor\nElm’s lab.\rLast calm stretch in Johto.\r</language>
+	</row>
+	<row id="msg_0550_T21_00069" index="69">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">KESTRA: I promise nothing.\r</language>
+	</row>
+	<row id="msg_0550_T21_00070" index="70">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">GOLD: The Poké Mart. Balls, Potions,\nRepels - it keeps you stocked.\rMoney goes fast out there. Spend it\non what keeps you standing.\r</language>
+	</row>
+	<row id="msg_0550_T21_00071" index="71">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">GOLD: And that... that’s the sea.\rIt’s pretty. It’s also deep. Stay\nout of it until something on your\nteam can swim.\r</language>
 	</row>
 </body>

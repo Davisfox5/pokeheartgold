@@ -17,7 +17,7 @@ sub_020932E0: ; 0x020932E0
 	ldr r1, _02093348 ; =0x000046E8
 	add r6, r0, #0
 	add r7, r2, #0
-	bl Heap_Alloc
+	bl AllocFromHeap
 	ldr r2, _02093348 ; =0x000046E8
 	mov r1, #0
 	add r4, r0, #0
@@ -40,7 +40,7 @@ _02093314:
 	mov r1, #0xc
 	ldr r0, [r4, #4]
 	mul r1, r2
-	bl Heap_Alloc
+	bl AllocFromHeap
 	mov r1, #0x8d
 	lsl r1, r1, #4
 	str r0, [r4, r1]
@@ -48,7 +48,7 @@ _02093314:
 	ldr r0, [r4, #4]
 	add r1, #0x22
 	lsl r1, r1, #2
-	bl Heap_Alloc
+	bl AllocFromHeap
 	ldr r1, _0209334C ; =0x000007E4
 	str r0, [r4, r1]
 	add r1, r4, #0
@@ -85,18 +85,18 @@ sub_02093354: ; 0x02093354
 	bl sub_020950D4
 	ldr r0, _02093428 ; =0x000046C8
 	ldr r0, [r5, r0]
-	bl Heap_Free
+	bl FreeToHeap
 	ldr r0, _0209342C ; =0x000046CC
 	ldr r0, [r5, r0]
-	bl Heap_Free
+	bl FreeToHeap
 	mov r0, #0x57
 	lsl r0, r0, #2
 	ldr r0, [r5, r0]
-	bl SpriteTransfer_DeleteCharTransferTask
+	bl sub_0200AEB0
 	mov r0, #0x16
 	lsl r0, r0, #4
 	ldr r0, [r5, r0]
-	bl SpriteTransfer_DeletePlttTransferTask
+	bl sub_0200B0A8
 	mov r7, #0x51
 	mov r6, #0
 	add r4, r5, #0
@@ -112,16 +112,16 @@ _020933AA:
 	bl SpriteList_Delete
 	ldr r0, _02093430 ; =0x000046A4
 	ldr r0, [r5, r0]
-	bl Heap_Free
+	bl FreeToHeap
 	ldr r0, [r5, #8]
 	bl YesNoPrompt_Destroy
 	ldr r0, _02093434 ; =0x000007E4
 	ldr r0, [r5, r0]
-	bl Heap_Free
+	bl FreeToHeap
 	mov r0, #0x8d
 	lsl r0, r0, #4
 	ldr r0, [r5, r0]
-	bl Heap_Free
+	bl FreeToHeap
 	mov r0, #4
 	bl FontID_Release
 	ldr r0, _02093438 ; =gSystem + 0x60
@@ -143,7 +143,7 @@ _020933AA:
 	mov r1, #3
 	bl FreeBgTilemapBuffer
 	add r0, r5, #0
-	bl Heap_Free
+	bl FreeToHeap
 	pop {r3, r4, r5, r6, r7, pc}
 	nop
 _0209341C: .word 0x000046B8
@@ -991,11 +991,11 @@ _02093A7A:
 	str r0, [r5, r1]
 	sub r1, #0xc
 	ldr r0, [r5, r1]
-	bl SpriteTransfer_CreateCharTransferTask_AllocAtEnd
+	bl sub_0200ADA4
 	mov r0, #0x16
 	lsl r0, r0, #4
 	ldr r0, [r5, r0]
-	bl SpriteTransfer_CreateExtPlttTransferTask
+	bl sub_0200AF94
 	bl sub_02074490
 	add r1, r0, #0
 	mov r0, #0
@@ -1060,7 +1060,7 @@ sub_02093B84: ; 0x02093B84
 	ldrb r1, [r5, #0xd]
 	ldr r0, [r5, #4]
 	lsl r1, r1, #3
-	bl Heap_Alloc
+	bl AllocFromHeap
 	ldr r1, _02093CD0 ; =0x000046A4
 	mov r7, #0
 	str r0, [r5, r1]
@@ -2121,7 +2121,7 @@ sub_02094400: ; 0x02094400
 	mov r1, #1
 	ldr r0, [r5, #4]
 	lsl r1, r1, #0xc
-	bl Heap_AllocAtEnd
+	bl AllocFromHeapAtEnd
 	str r0, [sp, #0x20]
 	mov r7, #0
 	add r4, r5, #0
@@ -2206,7 +2206,7 @@ _020944BA:
 	cmp r7, #0x1e
 	blt _02094420
 	ldr r0, [sp, #0x20]
-	bl Heap_Free
+	bl FreeToHeap
 	ldr r0, [sp, #0x1c]
 	bl NARC_Delete
 	ldr r1, _0209451C ; =sub_02094758
@@ -2260,7 +2260,7 @@ sub_02094528: ; 0x02094528
 	mov r1, #1
 	ldr r0, [r6, #4]
 	lsl r1, r1, #0xc
-	bl Heap_AllocAtEnd
+	bl AllocFromHeapAtEnd
 	str r0, [sp, #0x24]
 	ldr r0, _02094654 ; =0x00004640
 	ldr r0, [r6, r0]
@@ -2360,7 +2360,7 @@ _020945DA:
 	blt _020945DA
 _02094606:
 	ldr r0, [sp, #0x24]
-	bl Heap_Free
+	bl FreeToHeap
 	ldr r0, [sp, #0x20]
 	bl NARC_Delete
 	ldr r1, _0209465C ; =sub_02094758
@@ -2415,7 +2415,7 @@ sub_02094668: ; 0x02094668
 	mov r1, #1
 	ldr r0, [r4, #4]
 	lsl r1, r1, #0xc
-	bl Heap_AllocAtEnd
+	bl AllocFromHeapAtEnd
 	str r0, [sp, #0x18]
 	mov r3, #0
 	mov r1, #0x83
@@ -2501,7 +2501,7 @@ _02094702:
 	bl sub_02094C08
 _0209472A:
 	ldr r0, [sp, #0x18]
-	bl Heap_Free
+	bl FreeToHeap
 	ldr r0, [sp, #0x14]
 	bl NARC_Delete
 	ldr r1, _02094750 ; =sub_02094758
@@ -2812,7 +2812,7 @@ _0209495C:
 	mov r1, #1
 	ldr r0, [r5, #4]
 	lsl r1, r1, #0xc
-	bl Heap_AllocAtEnd
+	bl AllocFromHeapAtEnd
 	add r7, r0, #0
 	ldr r3, _020949E0 ; =0x000046A0
 	str r7, [sp]
@@ -2845,7 +2845,7 @@ _0209495C:
 	mov r1, #1
 	bl Sprite_SetDrawFlag
 	add r0, r7, #0
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r4, #0
 	bl NARC_Delete
 	ldr r1, _020949EC ; =sub_02094758

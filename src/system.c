@@ -15,7 +15,7 @@ void VBlankCB_DmaOnly(void);
 void CallHBlankIntrCallback(void);
 void HBlankIntrRegsToggle(BOOL enable);
 void sub_0201A1B4(void);
-void ApplyButtonModeToInput(void);
+void sub_0201A5E8(void);
 
 void VBlankCB_DmaTasksFramecounter(void) {
     OS_SetIrqCheckFlag(OS_IE_VBLANK);
@@ -107,7 +107,7 @@ void sub_0201A1B4(void) {
     while (heap_size_pre & 3) {
         heap_size_pre++;
     }
-    Heap_InitSystem(sDefaultHeapSpec, NELEMS(sDefaultHeapSpec), HEAP_ID_MAX, heap_size_pre);
+    InitHeapSystem(sDefaultHeapSpec, NELEMS(sDefaultHeapSpec), HEAP_ID_MAX, heap_size_pre);
 }
 
 void InitSystemForTheGame(void) {
@@ -159,7 +159,7 @@ void InitGraphicMemory(void) {
     MI_CpuClearFast((void *)HW_DB_PLTT, HW_DB_PLTT_SIZE);
 }
 
-void *Sys_AllocAndReadFile(enum HeapID heapID, const char *path) {
+void *Sys_AllocAndReadFile(HeapID heapId, const char *path) {
     FSFile file;
     void *ret;
     u32 size;
@@ -167,10 +167,10 @@ void *Sys_AllocAndReadFile(enum HeapID heapID, const char *path) {
     FS_InitFile(&file);
     if (FS_OpenFile(&file, path)) {
         size = FS_GetLength(&file);
-        ret = Heap_Alloc(heapID, size);
+        ret = AllocFromHeap(heapId, size);
         if (ret != NULL) {
             if (FS_ReadFile(&file, ret, size) != size) {
-                Heap_FreeExplicit(heapID, ret);
+                FreeToHeapExplicit(heapId, ret);
                 ret = NULL;
             }
         }
@@ -199,7 +199,7 @@ void sub_0201A430(void) {
 
     for (i = 127; i > -1; i--) {
         if (gFileCache[i].data != NULL) {
-            Heap_Free(gFileCache[i].data);
+            FreeToHeap(gFileCache[i].data);
             gFileCache[i].data = NULL;
             gFileCache[i].hash = 0;
         }
@@ -271,7 +271,7 @@ void ReadKeypadAndTouchpad(void) {
     gSystem.newKeys = gSystem.newKeysRaw;
     gSystem.heldKeys = gSystem.heldKeysRaw;
     gSystem.newAndRepeatedKeys = gSystem.newAndRepeatedKeysRaw;
-    ApplyButtonModeToInput();
+    sub_0201A5E8();
     if (!gSystem.touchpadReadAuto) {
         while (TP_RequestRawSampling(&rawTpData)) {}
     } else {
@@ -328,7 +328,7 @@ void ReadKeypadAndTouchpad(void) {
         adrs &= ((pat) ^ 0xFFFF); \
     }
 
-void ApplyButtonModeToInput(void) {
+void sub_0201A5E8(void) {
     switch (gSystem.buttonMode) {
     case BUTTONMODE_NORMAL:
         break;
@@ -366,16 +366,16 @@ void sub_0201A738(int a0) {
     gSystem.softResetDisabled &= ~a0;
 }
 
-void sub_0201A748(enum HeapID heapID) {
+void sub_0201A748(HeapID heapId) {
     GF_ASSERT(gSystem.unk74 == NULL);
-    gSystem.unk74 = Heap_AllocAtEnd(heapID, sizeof(u32));
+    gSystem.unk74 = AllocFromHeapAtEnd(heapId, sizeof(u32));
     *gSystem.unk74 = 0x2F93A1BC;
 }
 
 void sub_0201A774(void) {
     GF_ASSERT(gSystem.unk74 != NULL);
     *gSystem.unk74 = 0;
-    Heap_Free(gSystem.unk74);
+    FreeToHeap(gSystem.unk74);
     gSystem.unk74 = NULL;
 }
 

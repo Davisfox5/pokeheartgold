@@ -6,7 +6,6 @@
 #include "map_header.h"
 #include "npc_trade.h"
 #include "player_data.h"
-#include "poke_overlay.h"
 #include "pokedex.h"
 #include "ribbon.h"
 #include "save_arrays.h"
@@ -17,7 +16,7 @@
 FS_EXTERN_OVERLAY(npc_trade);
 
 BOOL ScrCmd_GiveMon(ScriptContext *ctx) {
-    u32 map = MapHeader_GetMapSec(ctx->fieldSystem->location->mapId);
+    u16 map = MapHeader_GetMapSec(ctx->fieldSystem->location->mapId);
     FieldSystem *fieldSystem = ctx->fieldSystem;
     Pokedex *pokedex = Save_Pokedex_Get(fieldSystem->saveData);
 
@@ -29,12 +28,12 @@ BOOL ScrCmd_GiveMon(ScriptContext *ctx) {
     u16 *retPtr = ScriptGetVarPointer(ctx);
 
     Party *party = SaveArray_Party_Get(fieldSystem->saveData);
-    *retPtr = GiveMon(HEAP_ID_FIELD2, fieldSystem->saveData, species, level, form, ability, heldItem, map, 24);
+    *retPtr = GiveMon(HEAP_ID_FIELD, fieldSystem->saveData, species, level, form, ability, heldItem, map, 24);
 
     return FALSE;
 }
 
-BOOL ScrCmd_ReturnLoanMon(ScriptContext *ctx) {
+BOOL ScrCmd_TakeMon(ScriptContext *ctx) {
     u8 slot = ScriptGetVar(ctx);
     Party *party = SaveArray_Party_Get(ctx->fieldSystem->saveData);
     Party_RemoveMon(party, slot);
@@ -56,7 +55,7 @@ BOOL ScrCmd_GetPartyMonSpecies(ScriptContext *ctx) {
     return FALSE;
 }
 
-BOOL ScrCmd_PartyMonIsMine(ScriptContext *ctx) {
+BOOL ScrCmd_PartymonIsMine(ScriptContext *ctx) {
     FieldSystem *fieldSystem = ctx->fieldSystem;
     SaveData *save = FieldSystem_GetSaveData(fieldSystem);
     PlayerProfile *profile = Save_PlayerData_GetProfile(save);
@@ -65,7 +64,7 @@ BOOL ScrCmd_PartyMonIsMine(ScriptContext *ctx) {
     u16 *mine = ScriptGetVarPointer(ctx);
 
     Pokemon *mon = Party_GetMonByIndex(SaveArray_Party_Get(fieldSystem->saveData), *slot);
-    u16 pokemonID = GetMonData(mon, MON_DATA_OT_ID, NULL);
+    u16 pokemonID = GetMonData(mon, MON_DATA_OTID, NULL);
     u16 playerID = PlayerProfile_GetTrainerID(profile);
 
     if (pokemonID == playerID) {
@@ -87,12 +86,12 @@ BOOL ScrCmd_GiveEgg(ScriptContext *ctx) {
     Party *party = SaveArray_Party_Get(fieldSystem->saveData);
     u8 partyCount = Party_GetCount(party);
     if (partyCount < PARTY_SIZE) {
-        Pokemon *mon = AllocMonZeroed(HEAP_ID_FIELD2);
+        Pokemon *mon = AllocMonZeroed(HEAP_ID_FIELD);
         ZeroMonData(mon);
         int val = sub_02017FE4(MAPSECTYPE_GIFT, offset);
         SetEggStats(mon, species, 1, profile, 3, val);
         Party_AddMon(party, mon);
-        Heap_Free(mon);
+        FreeToHeap(mon);
     }
 
     return FALSE;
@@ -245,7 +244,7 @@ BOOL ScrCmd_MonAddFriendship(ScriptContext *ctx) {
     FieldSystem *fieldSystem = ctx->fieldSystem;
     u16 friendshipModifier = ScriptGetVar(ctx);
     u16 slot = ScriptGetVar(ctx);
-    u32 map = MapHeader_GetMapSec(ctx->fieldSystem->location->mapId);
+    u16 map = MapHeader_GetMapSec(ctx->fieldSystem->location->mapId);
 
     Pokemon *mon = Party_GetMonByIndex(SaveArray_Party_Get(fieldSystem->saveData), slot);
     u16 friendship = GetMonData(mon, MON_DATA_FRIENDSHIP, NULL);
@@ -254,11 +253,11 @@ BOOL ScrCmd_MonAddFriendship(ScriptContext *ctx) {
             friendshipModifier++;
         }
 
-        if (map == GetMonData(mon, MON_DATA_EGG_LOCATION, NULL)) {
+        if (map == GetMonData(mon, MON_DATA_EGG_MET_LOCATION, NULL)) {
             friendshipModifier++;
         }
 
-        if (GetItemAttr(GetMonData(mon, MON_DATA_HELD_ITEM, NULL), ITEMATTR_HOLD_EFFECT, HEAP_ID_FIELD2) == HOLD_EFFECT_FRIENDSHIP_UP) {
+        if (GetItemAttr(GetMonData(mon, MON_DATA_HELD_ITEM, NULL), ITEMATTR_HOLD_EFFECT, HEAP_ID_FIELD) == HOLD_EFFECT_FRIENDSHIP_UP) {
             friendshipModifier = friendshipModifier * 150 / 100;
         }
     }
@@ -505,11 +504,11 @@ BOOL ScrCmd_KenyaCheck(ScriptContext *ctx) {
 
     HandleLoadOverlay(FS_OVERLAY_ID(npc_trade), OVY_LOAD_ASYNC);
     Mail *kenyaMail = NPCTrade_MakeKenyaMail();
-    Mail *mail = Mail_New(HEAP_ID_FIELD2);
-    GetMonData(mon, MON_DATA_MAIL, mail);
+    Mail *mail = Mail_New(HEAP_ID_FIELD);
+    GetMonData(mon, MON_DATA_MAIL_STRUCT, mail);
     *kenya = Mail_Compare(kenyaMail, mail);
-    Heap_Free(mail);
-    Heap_Free(kenyaMail);
+    FreeToHeap(mail);
+    FreeToHeap(kenyaMail);
     UnloadOverlayByID(FS_OVERLAY_ID(npc_trade));
 
     return FALSE;
@@ -524,17 +523,17 @@ BOOL ScrCmd_KenyaCheckPartyOrMailbox(ScriptContext *ctx) {
     Party *party = SaveArray_Party_Get(fieldSystem->saveData);
     HandleLoadOverlay(FS_OVERLAY_ID(npc_trade), OVY_LOAD_ASYNC);
     Mail *kenyaMail = NPCTrade_MakeKenyaMail();
-    Mail *mail = Mail_New(HEAP_ID_FIELD2);
+    Mail *mail = Mail_New(HEAP_ID_FIELD);
     UnloadOverlayByID(FS_OVERLAY_ID(npc_trade));
 
     for (i = 0; i < Party_GetCount(party); i++) {
         Pokemon *mon = Party_GetMonByIndex(party, i);
         if (ItemIdIsMail(GetMonData(mon, MON_DATA_HELD_ITEM, NULL))) {
-            GetMonData(mon, MON_DATA_MAIL, mail);
+            GetMonData(mon, MON_DATA_MAIL_STRUCT, mail);
             if (Mail_Compare(kenyaMail, mail)) {
                 *kenya = TRUE;
-                Heap_Free(mail);
-                Heap_Free(kenyaMail);
+                FreeToHeap(mail);
+                FreeToHeap(kenyaMail);
                 return FALSE;
             }
         }
@@ -555,8 +554,8 @@ BOOL ScrCmd_KenyaCheckPartyOrMailbox(ScriptContext *ctx) {
         }
     }
 
-    Heap_Free(mail);
-    Heap_Free(kenyaMail);
+    FreeToHeap(mail);
+    FreeToHeap(kenyaMail);
     return FALSE;
 }
 
@@ -571,11 +570,11 @@ BOOL ScrCmd_MonGiveMail(ScriptContext *ctx) {
     }
 
     item = ITEM_NONE;
-    Mail *mail = Mail_New(HEAP_ID_FIELD2);
+    Mail *mail = Mail_New(HEAP_ID_FIELD);
     Mail_Init(mail);
-    SetMonData(mon, MON_DATA_MAIL, mail);
+    SetMonData(mon, MON_DATA_MAIL_STRUCT, mail);
     SetMonData(mon, MON_DATA_HELD_ITEM, &item);
-    Heap_Free(mail);
+    FreeToHeap(mail);
 
     return FALSE;
 }
@@ -768,7 +767,7 @@ BOOL ScrCmd_MonHasItem(ScriptContext *ctx) {
     return FALSE;
 }
 
-BOOL ScrCmd_GetPartyMonForm2(ScriptContext *ctx) {
+BOOL ScrCmd_GetPartymonForm(ScriptContext *ctx) {
     u16 slot = ScriptGetVar(ctx);
     u16 *form = ScriptGetVarPointer(ctx);
 

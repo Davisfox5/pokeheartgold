@@ -5,14 +5,14 @@
 
 	.rodata
 
-	ScrDef scr_seq_R16R0301_000
-	ScrDefEnd
+	scrdef scr_seq_R16R0301_000
+	scrdef_end
 
 scr_seq_R16R0301_000:
-	ClearFlag FLAG_UNK_149
-	End
+	clearflag FLAG_UNK_149
+	end
 
 _000C:
-	End
+	end
 
 	.balign 4, 0

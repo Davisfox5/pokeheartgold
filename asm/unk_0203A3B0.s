@@ -73,7 +73,7 @@ sub_0203A3B0: ; 0x0203A3B0
 	bl sub_0203A59C
 	add r0, r4, #0
 	mov r1, #0x24
-	bl Heap_AllocAtEnd
+	bl AllocFromHeapAtEnd
 	add r4, r0, #0
 	ldr r0, _0203A428 ; =sub_0203A42C
 	add r1, r4, #0
@@ -157,7 +157,7 @@ sub_0203A444: ; 0x0203A444
 	strh r1, [r0, #4]
 _0203A466:
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	pop {r4, pc}
 	nop
 _0203A470: .word 0x40000200
@@ -199,7 +199,7 @@ sub_0203A4AC: ; 0x0203A4AC
 	push {r3, lr}
 	mov r1, #0x96
 	lsl r1, r1, #2
-	bl Heap_AllocAtEnd
+	bl AllocFromHeapAtEnd
 	str r0, [sp]
 	ldr r0, _0203A4D0 ; =_0210F930
 	add r1, sp, #0
@@ -223,7 +223,7 @@ sub_0203A4D4: ; 0x0203A4D4
 	add r0, r3, #0
 	lsl r1, r1, #2
 	add r4, r2, #0
-	bl Heap_AllocAtEnd
+	bl AllocFromHeapAtEnd
 	str r0, [sp, #4]
 	cmp r0, #0
 	beq _0203A52A
@@ -253,7 +253,7 @@ _0203A518:
 	bl GXS_LoadOBJPltt
 _0203A524:
 	ldr r0, [sp, #4]
-	bl Heap_Free
+	bl FreeToHeap
 _0203A52A:
 	add sp, #8
 	pop {r3, r4, r5, pc}
@@ -342,14 +342,14 @@ _0203A5CA:
 	mov r1, #0x13
 	add r0, r5, #0
 	lsl r1, r1, #6
-	bl Heap_AllocAtEnd
+	bl AllocFromHeapAtEnd
 	str r0, [sp, #4]
 	b _0203A5EC
 _0203A5E0:
 	mov r1, #0x96
 	add r0, r5, #0
 	lsl r1, r1, #2
-	bl Heap_AllocAtEnd
+	bl AllocFromHeapAtEnd
 	str r0, [sp, #4]
 _0203A5EC:
 	ldr r0, [sp, #4]
@@ -483,7 +483,7 @@ _0203A6C6:
 	bl GXS_LoadOBJ
 _0203A6DC:
 	ldr r0, [sp, #4]
-	bl Heap_Free
+	bl FreeToHeap
 _0203A6E2:
 	add sp, #8
 	pop {r3, r4, r5, r6, r7, pc}

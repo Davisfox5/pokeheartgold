@@ -5,115 +5,115 @@
 
 	.rodata
 
-	ScrDef scr_seq_D24R0213_000
-	ScrDef scr_seq_D24R0213_001
-	ScrDefEnd
+	scrdef scr_seq_D24R0213_000
+	scrdef scr_seq_D24R0213_001
+	scrdef_end
 
 scr_seq_D24R0213_000:
-	ScrCmd_609
-	LockAll
-	SetVar VAR_UNK_40D1, 1
-	ScrCmd_729 VAR_SPECIAL_RESULT
-	Compare VAR_SPECIAL_RESULT, 0
-	GoToIfEq _0034
-	Compare VAR_SPECIAL_RESULT, 1
-	GoToIfEq _007E
-	End
+	scrcmd_609
+	lockall
+	setvar VAR_UNK_40D1, 1
+	scrcmd_729 VAR_SPECIAL_RESULT
+	compare VAR_SPECIAL_RESULT, 0
+	goto_if_eq _0034
+	compare VAR_SPECIAL_RESULT, 1
+	goto_if_eq _007E
+	end
 
 _0034:
-	GetPlayerFacing VAR_SPECIAL_RESULT
-	Compare VAR_SPECIAL_RESULT, 0
-	GoToIfNe _0053
-	ApplyMovement obj_player, _0108
-	GoTo _0076
+	get_player_facing VAR_SPECIAL_RESULT
+	compare VAR_SPECIAL_RESULT, 0
+	goto_if_ne _0053
+	apply_movement obj_player, _0108
+	goto _0076
 
 _0053:
-	Compare VAR_SPECIAL_RESULT, 3
-	GoToIfNe _006E
-	ApplyMovement obj_player, _0140
-	GoTo _0076
+	compare VAR_SPECIAL_RESULT, 3
+	goto_if_ne _006E
+	apply_movement obj_player, _0140
+	goto _0076
 
 _006E:
-	ApplyMovement obj_player, _0124
+	apply_movement obj_player, _0124
 _0076:
-	WaitMovement
-	GoTo _00DA
+	wait_movement
+	goto _00DA
 
 _007E:
-	GetPlayerFacing VAR_SPECIAL_RESULT
-	Compare VAR_SPECIAL_RESULT, 0
-	GoToIfNe _00A5
-	ApplyMovement obj_player, _0108
-	ApplyMovement obj_partner_poke, _0114
-	GoTo _00D8
+	get_player_facing VAR_SPECIAL_RESULT
+	compare VAR_SPECIAL_RESULT, 0
+	goto_if_ne _00A5
+	apply_movement obj_player, _0108
+	apply_movement obj_partner_poke, _0114
+	goto _00D8
 
 _00A5:
-	Compare VAR_SPECIAL_RESULT, 3
-	GoToIfNe _00C8
-	ApplyMovement obj_player, _0140
-	ApplyMovement obj_partner_poke, _014C
-	GoTo _00D8
+	compare VAR_SPECIAL_RESULT, 3
+	goto_if_ne _00C8
+	apply_movement obj_player, _0140
+	apply_movement obj_partner_poke, _014C
+	goto _00D8
 
 _00C8:
-	ApplyMovement obj_player, _0124
-	ApplyMovement obj_partner_poke, _0130
+	apply_movement obj_player, _0124
+	apply_movement obj_partner_poke, _0130
 _00D8:
-	WaitMovement
+	wait_movement
 _00DA:
-	PlaySE SEQ_SE_GS_RAKKA01
-	FadeScreen 6, 1, 0, RGB_BLACK
-	WaitFade
-	Warp MAP_RUINS_OF_ALPH_SOUTHEAST_HIDDEN_ROOM, 0, 11, 7, VAR_SPECIAL_RESULT
-	FadeScreen 6, 1, 1, RGB_BLACK
-	WaitFade
-	ReleaseAll
-	End
+	play_se SEQ_SE_GS_RAKKA01
+	fade_screen 6, 1, 0, RGB_BLACK
+	wait_fade
+	warp MAP_RUINS_OF_ALPH_SOUTHEAST_HIDDEN_ROOM, 0, 11, 7, VAR_SPECIAL_RESULT
+	fade_screen 6, 1, 1, RGB_BLACK
+	wait_fade
+	releaseall
+	end
 
 	.balign 4, 0
 _0108:
-	WalkOnSpotFasterNorth 4
-	SetInvisible
-	EndMovement
+	step 40, 4
+	step 69, 1
+	step_end
 
 	.balign 4, 0
 _0114:
-	Delay4 3
-	WalkFasterNorth
-	SetInvisible
-	EndMovement
+	step 62, 3
+	step 20, 1
+	step 69, 1
+	step_end
 
 	.balign 4, 0
 _0124:
-	WalkOnSpotFasterWest 4
-	SetInvisible
-	EndMovement
+	step 42, 4
+	step 69, 1
+	step_end
 
 	.balign 4, 0
 _0130:
-	Delay4 3
-	WalkFasterWest
-	SetInvisible
-	EndMovement
+	step 62, 3
+	step 22, 1
+	step 69, 1
+	step_end
 
 	.balign 4, 0
 _0140:
-	WalkOnSpotFasterEast 4
-	SetInvisible
-	EndMovement
+	step 43, 4
+	step 69, 1
+	step_end
 
 	.balign 4, 0
 _014C:
-	Delay4 3
-	WalkFasterEast
-	SetInvisible
-	EndMovement
+	step 62, 3
+	step 23, 1
+	step 69, 1
+	step_end
 
 scr_seq_D24R0213_001:
-	PlaySE SEQ_SE_DP_SELECT
-	LockAll
-	NPCMsg msg_0081_D24R0213_00000
-	WaitButton
-	CloseMsg
-	ReleaseAll
-	End
+	play_se SEQ_SE_DP_SELECT
+	lockall
+	npc_msg msg_0081_D24R0213_00000
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
 	.balign 4, 0

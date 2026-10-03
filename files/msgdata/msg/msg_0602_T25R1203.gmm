@@ -30,7 +30,7 @@
 	</row>
 	<row id="msg_0602_T25R1203_00007" index="7">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">Let me attempt the alphabet rap using\nGoldenrod, dig?\rG... Go south from here for the\nIlex Forest.\rO... Over land is not where you’ll find\nthe Goldenrod Tunnel.\rL... Looking like criminals in their black\npajamas is Team Rocket.\rD... Um... D... is...\nYeah, I know, lame-o.\fYou give it a try!</language>
+		<language name="English">Let me attempt the alphabet rap using\nGoldenrod, dig?\rG... Go south from here for the\nIlex Forest.\rO... Over land is not where you’ll find\nthe Goldenrod Tunnel.\rL... Lounging in their black pajamas,\nthat’s the Radio Tower night shift.\rD... Um... D... is...\nYeah, I know, lame-o.\fYou give it a try!</language>
 	</row>
 	<row id="msg_0602_T25R1203_00008" index="8">
 		<attribute name="window_context_name">used</attribute>

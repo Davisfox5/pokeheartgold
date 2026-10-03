@@ -1,8 +1,6 @@
 #ifndef POKEHEARTGOLD_GYMMICK_H
 #define POKEHEARTGOLD_GYMMICK_H
 
-#include "global.h"
-
 typedef enum GymmickType {
     GYMMICK_NONE,
     GYMMICK_ECRUTEAK,

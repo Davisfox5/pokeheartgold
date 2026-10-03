@@ -40,4 +40,40 @@
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">We request that you make sure you\nrefrain from keeping large Pokémon out\fat the station.</language>
 	</row>
+	<row id="msg_0587_T25R0501_00010" index="10">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Magnet Train to Saffron, departing\nshortly. Passes, please.\r...None? The pass office is--well.\nIt’s in Saffron.\rI know exactly how that sounds.</language>
+	</row>
+	<row id="msg_0587_T25R0501_00011" index="11">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Magnet Train to Saffron, departing\nshortly. Passes, please.</language>
+	</row>
+	<row id="msg_0587_T25R0501_00012" index="12">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">MEL: Two. Press. They’re with\nme--witness on the Azalea story,\ffully cleared, we’re on a\ndeadline.\rDon’t say anything. You don’t\nhave a pass, I have a pass, the\fdifference is a sentence I’m\nvery good at saying.\rKeep walking. Window seat.</language>
+	</row>
+	<row id="msg_0587_T25R0501_00013" index="13">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">...Press. Sure.\nEverybody’s press this week.</language>
+	</row>
+	<row id="msg_0587_T25R0501_00014" index="14">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">MEL: Okay. Window’s yours. People\nalways think they won’t want the\fwindow and then they spend the\nwhole ride looking out it.\rLook--there, see how the country\nchanges? You can almost see where\fJohto stops being Johto.</language>
+	</row>
+	<row id="msg_0587_T25R0501_00015" index="15">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">MEL: So here’s what I’ve\nactually got, and it’s not much.\rSilph’s research partnerships\nhave been expanding. Quietly. Into\fplaces research doesn’t usually\ngo.\rThe Ruins of Alph. Your well. A\ncouple of sites up north I’ve\fonly got rumors on.</language>
+	</row>
+	<row id="msg_0587_T25R0501_00016" index="16">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">MEL: I don’t have a theory. I\nwant to be SO clear about that.\rI have THREADS. Just threads.\nThings that shouldn’t be near\feach other that keep turning up\nholding hands.\rAnd I cannot leave a thread alone.\nIt’s a medical condition. Ask\fanyone who’s ever worked with me.\nAsk anyone who’s ever DATED me.</language>
+	</row>
+	<row id="msg_0587_T25R0501_00017" index="17">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">MEL: But that coat. The Silph\ncoat. That’s not a thread,\fthat’s a KNOT.\rAnd it came out of a kid’s\nmemory, off a forest road, which\fmeans it’s clean--nobody coached\nyou, you just SAW it.\rA person who just saw the thing\nand says the thing. Don’t ever\flose that. The job ruins it\neventually.\fHang onto it as long as you can.</language>
+	</row>
+	<row id="msg_0587_T25R0501_00018" index="18">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Magnet Train to Saffron.\nPasses, please.\r...The fare office is in Saffron.\nYes. I know how that sounds.</language>
+	</row>
 </body>

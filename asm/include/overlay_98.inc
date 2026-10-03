@@ -44,9 +44,9 @@
 .public sub_02014510
 .public Main_SetVBlankIntrCB
 .public HBlankInterruptDisable
-.public Heap_Alloc
-.public Heap_AllocAtEnd
-.public Heap_Free
+.public AllocFromHeap
+.public AllocFromHeapAtEnd
+.public FreeToHeap
 .public AddWindow
 .public RemoveWindow
 .public ScheduleWindowCopyToVram

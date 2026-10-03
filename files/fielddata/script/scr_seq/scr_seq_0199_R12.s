@@ -5,226 +5,234 @@
 
 	.rodata
 
-	ScrDef scr_seq_R12_000
-	ScrDef scr_seq_R12_001
-	ScrDef scr_seq_R12_002
-	ScrDef scr_seq_R12_003
-	ScrDef scr_seq_R12_004
-	ScrDef scr_seq_R12_005
-	ScrDefEnd
+	scrdef scr_seq_R12_000
+	scrdef scr_seq_R12_001
+	scrdef scr_seq_R12_002
+	scrdef scr_seq_R12_003
+	scrdef scr_seq_R12_004
+	scrdef scr_seq_R12_005
+	scrdef_end
 
 scr_seq_R12_001:
-	GoToIfUnset FLAG_UNK_189, _002B
-	ClearFlag FLAG_UNK_189
-	End
+	goto_if_unset FLAG_UNK_189, _002B
+	clearflag FLAG_UNK_189
+	end
 
 _002B:
-	GetWeekday VAR_TEMP_x4000
-	Compare VAR_TEMP_x4000, 1
-	GoToIfEq _004F
-	Compare VAR_TEMP_x4000, 3
-	GoToIfEq _004F
-	SetFlag FLAG_HIDE_CAMERON
-	End
+	get_weekday VAR_TEMP_x4000
+	compare VAR_TEMP_x4000, 1
+	goto_if_eq _004F
+	compare VAR_TEMP_x4000, 3
+	goto_if_eq _004F
+	setflag FLAG_HIDE_CAMERON
+	end
 
 _004F:
-	ClearFlag FLAG_HIDE_CAMERON
-	End
+	clearflag FLAG_HIDE_CAMERON
+	end
 
 scr_seq_R12_004:
-	GoToIfSet FLAG_ENGAGING_STATIC_POKEMON, _006D
-	GoToIfSet FLAG_SNORLAX_MEET, _0087
-	End
+	goto_if_set FLAG_ENGAGING_STATIC_POKEMON, _006D
+	goto_if_set FLAG_SNORLAX_MEET, _0087
+	end
 
 _006D:
-	SetFlag FLAG_HIDE_ROUTE_12_SNORLAX
-	HidePerson obj_R12_kabigon
-	HidePerson obj_R12_gsbabyboy1
-	HidePerson obj_R12_gsbabyboy1_2
-	HidePerson obj_R12_gsbabyboy1_3
-	ClearFlag FLAG_ENGAGING_STATIC_POKEMON
-	End
+	setflag FLAG_HIDE_ROUTE_12_SNORLAX
+	hide_person obj_R12_kabigon
+	hide_person obj_R12_gsbabyboy1
+	hide_person obj_R12_gsbabyboy1_2
+	hide_person obj_R12_gsbabyboy1_3
+	clearflag FLAG_ENGAGING_STATIC_POKEMON
+	end
 
 _0087:
-	End
+	end
 
 scr_seq_R12_000:
-	PlaySE SEQ_SE_DP_SELECT
-	LockAll
-	FacePlayer
-	GetStdMsgNaix 2, VAR_SPECIAL_RESULT
-	MsgBoxExtern VAR_SPECIAL_RESULT, 0
-	TouchscreenMenuHide
-	GetMenuChoice VAR_SPECIAL_RESULT
-	TouchscreenMenuShow
-	Compare VAR_SPECIAL_RESULT, 1
-	GoToIfEq _01B1
-	PhotoAlbumIsFull VAR_SPECIAL_RESULT
-	Compare VAR_SPECIAL_RESULT, 1
-	GoToIfEq _01C5
-	GetStdMsgNaix 2, VAR_SPECIAL_RESULT
-	MsgBoxExtern VAR_SPECIAL_RESULT, 1
-	CloseMsg
-	ToggleFollowingPokemonMovement 0
-	WaitFollowingPokemonMovement
-	FollowingPokemonMovement 55
-	GetPlayerFacing VAR_SPECIAL_RESULT
-	Compare VAR_SPECIAL_RESULT, 0
-	GoToIfNe _0102
-	ApplyMovement obj_player, _01DC
-	ApplyMovement obj_R12_gsmiddleman1, _0228
-	GoTo _0150
+	play_se SEQ_SE_DP_SELECT
+	lockall
+	faceplayer
+	get_std_msg_naix 2, VAR_SPECIAL_RESULT
+	msgbox_extern VAR_SPECIAL_RESULT, 0
+	touchscreen_menu_hide
+	getmenuchoice VAR_SPECIAL_RESULT
+	touchscreen_menu_show
+	compare VAR_SPECIAL_RESULT, 1
+	goto_if_eq _01B1
+	photo_album_is_full VAR_SPECIAL_RESULT
+	compare VAR_SPECIAL_RESULT, 1
+	goto_if_eq _01C5
+	get_std_msg_naix 2, VAR_SPECIAL_RESULT
+	msgbox_extern VAR_SPECIAL_RESULT, 1
+	closemsg
+	toggle_following_pokemon_movement 0
+	wait_following_pokemon_movement
+	following_pokemon_movement 55
+	get_player_facing VAR_SPECIAL_RESULT
+	compare VAR_SPECIAL_RESULT, 0
+	goto_if_ne _0102
+	apply_movement obj_player, _01DC
+	apply_movement obj_R12_gsmiddleman1, _0228
+	goto _0150
 
 _0102:
-	Compare VAR_SPECIAL_RESULT, 1
-	GoToIfNe _011D
-	ApplyMovement obj_player, _01F4
-	GoTo _0150
+	compare VAR_SPECIAL_RESULT, 1
+	goto_if_ne _011D
+	apply_movement obj_player, _01F4
+	goto _0150
 
 _011D:
-	Compare VAR_SPECIAL_RESULT, 3
-	GoToIfNe _0140
-	ApplyMovement obj_player, _0214
-	ApplyMovement obj_R12_gsmiddleman1, _0228
-	GoTo _0150
+	compare VAR_SPECIAL_RESULT, 3
+	goto_if_ne _0140
+	apply_movement obj_player, _0214
+	apply_movement obj_R12_gsmiddleman1, _0228
+	goto _0150
 
 _0140:
-	ApplyMovement obj_player, _0200
-	ApplyMovement obj_R12_gsmiddleman1, _0228
+	apply_movement obj_player, _0200
+	apply_movement obj_R12_gsmiddleman1, _0228
 _0150:
-	WaitMovement
-	WaitFollowingPokemonMovement
-	ToggleFollowingPokemonMovement 1
-	FollowingPokemonMovement 48
-	ScrCmd_729 VAR_SPECIAL_RESULT
-	Compare VAR_SPECIAL_RESULT, 1
-	GoToIfNe _0177
-	ApplyMovement obj_partner_poke, _0234
-	WaitMovement
+	wait_movement
+	wait_following_pokemon_movement
+	toggle_following_pokemon_movement 1
+	following_pokemon_movement 48
+	scrcmd_729 VAR_SPECIAL_RESULT
+	compare VAR_SPECIAL_RESULT, 1
+	goto_if_ne _0177
+	apply_movement obj_partner_poke, _0234
+	wait_movement
 _0177:
-	SetFlag FLAG_UNK_189
-	FadeScreen 6, 1, 0, RGB_BLACK
-	WaitFade
-	CameronPhoto 59
-	LockAll
-	FadeScreen 6, 1, 1, RGB_BLACK
-	WaitFade
-	ClearFlag FLAG_UNK_189
-	GetStdMsgNaix 2, VAR_SPECIAL_RESULT
-	MsgBoxExtern VAR_SPECIAL_RESULT, 2
-	WaitButton
-	CloseMsg
-	ReleaseAll
-	End
+	setflag FLAG_UNK_189
+	fade_screen 6, 1, 0, RGB_BLACK
+	wait_fade
+	cameron_photo 59
+	lockall
+	fade_screen 6, 1, 1, RGB_BLACK
+	wait_fade
+	clearflag FLAG_UNK_189
+	get_std_msg_naix 2, VAR_SPECIAL_RESULT
+	msgbox_extern VAR_SPECIAL_RESULT, 2
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
 
 _01B1:
-	GetStdMsgNaix 2, VAR_SPECIAL_RESULT
-	MsgBoxExtern VAR_SPECIAL_RESULT, 5
-	WaitButton
-	CloseMsg
-	ReleaseAll
-	End
+	get_std_msg_naix 2, VAR_SPECIAL_RESULT
+	msgbox_extern VAR_SPECIAL_RESULT, 5
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
 
 _01C5:
-	GetStdMsgNaix 2, VAR_SPECIAL_RESULT
-	MsgBoxExtern VAR_SPECIAL_RESULT, 3
-	WaitButton
-	CloseMsg
-	ReleaseAll
-	End
+	get_std_msg_naix 2, VAR_SPECIAL_RESULT
+	msgbox_extern VAR_SPECIAL_RESULT, 3
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
 
 	.balign 4, 0
 _01DC:
-	WalkNormalEast
-	WalkNormalNorth 2
-	WalkNormalWest
-	WalkNormalNorth 3
-	WalkOnSpotNormalSouth
-	EndMovement
+	step 15, 1
+	step 12, 2
+	step 14, 1
+	step 12, 3
+	step 33, 1
+	step_end
 
 	.balign 4, 0
 _01F4:
-	WalkNormalNorth 3
-	WalkOnSpotNormalSouth
-	EndMovement
+	step 12, 3
+	step 33, 1
+	step_end
 
 	.balign 4, 0
 _0200:
-	WalkNormalNorth
-	WalkNormalWest
-	WalkNormalNorth 3
-	WalkOnSpotNormalSouth
-	EndMovement
+	step 12, 1
+	step 14, 1
+	step 12, 3
+	step 33, 1
+	step_end
 
 	.balign 4, 0
 _0214:
-	WalkNormalNorth
-	WalkNormalEast
-	WalkNormalNorth 3
-	WalkOnSpotNormalSouth
-	EndMovement
+	step 12, 1
+	step 15, 1
+	step 12, 3
+	step 33, 1
+	step_end
 
 	.balign 4, 0
 _0228:
-	Delay8
-	WalkOnSpotNormalNorth
-	EndMovement
+	step 63, 1
+	step 32, 1
+	step_end
 
 	.balign 4, 0
 _0234:
-	WalkNormalEast
-	WalkNormalNorth
-	FaceSouth
-	EndMovement
+	step 15, 1
+	step 12, 1
+	step 1, 1
+	step_end
 
 scr_seq_R12_005:
-	PlaySE SEQ_SE_DP_SELECT
-	LockAll
-	RadioMusicIsPlaying 5, VAR_SPECIAL_RESULT
-	Compare VAR_SPECIAL_RESULT, 1
-	GoToIfEq _0268
-	NPCMsg msg_0348_R12_00002
-	WaitButton
-	CloseMsg
-	ReleaseAll
-	End
+	play_se SEQ_SE_DP_SELECT
+	lockall
+	radio_music_is_playing 5, VAR_SPECIAL_RESULT
+	compare VAR_SPECIAL_RESULT, 1
+	goto_if_eq _0268
+	npc_msg msg_0348_R12_00002
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
 
 _0268:
-	PlayCry SPECIES_SNORLAX, 0
-	NPCMsg msg_0348_R12_00003
-	WaitCry
-	CloseMsg
-	SetFlag FLAG_ENGAGING_STATIC_POKEMON
-	WildBattle SPECIES_SNORLAX, 50, 0
-	ClearFlag FLAG_ENGAGING_STATIC_POKEMON
-	CheckBattleWon VAR_SPECIAL_RESULT
-	Compare VAR_SPECIAL_RESULT, 0
-	GoToIfEq _02AE
-	GetStaticEncounterOutcome VAR_TEMP_x4005
-	Compare VAR_TEMP_x4005, 4
-	CallIfEq _02B4
-	SetFlag FLAG_SNORLAX_MEET
-	ReleaseAll
-	End
+	play_cry SPECIES_SNORLAX, 0
+	npc_msg msg_0348_R12_00003
+	wait_cry
+	closemsg
+	setflag FLAG_ENGAGING_STATIC_POKEMON
+	wild_battle SPECIES_SNORLAX, 50, 0
+	clearflag FLAG_ENGAGING_STATIC_POKEMON
+	check_battle_won VAR_SPECIAL_RESULT
+	compare VAR_SPECIAL_RESULT, 0
+	goto_if_eq _02AE
+	get_static_encounter_outcome VAR_TEMP_x4005
+	compare VAR_TEMP_x4005, 4
+	call_if_eq _02B4
+	setflag FLAG_SNORLAX_MEET
+	releaseall
+	end
 
 _02AE:
-	WhiteOut
-	ReleaseAll
-	End
+	white_out
+	releaseall
+	end
 
 _02B4:
-	SetFlag FLAG_CAUGHT_SNORLAX
-	Return
+	setflag FLAG_CAUGHT_SNORLAX
+	return
 
 _02BA:
-	ReleaseAll
-	End
+	releaseall
+	end
 
 scr_seq_R12_002:
-	DirectionSignpostEx 1, 3, msg_0348_R12_00000
-	End
+	direction_signpost msg_0348_R12_00000, 1, 3, VAR_SPECIAL_RESULT
+	scrcmd_057 3
+	scrcmd_058
+	scrcmd_060 VAR_SPECIAL_RESULT
+	callstd std_signpost
+	end
 
 scr_seq_R12_003:
-	TrainerTipsEx 2, msg_0348_R12_00001
-	End
+	scrcmd_055 2, 0
+	scrcmd_057 3
+	scrcmd_058
+	trainer_tips msg_0348_R12_00001, VAR_SPECIAL_RESULT
+	callstd std_signpost
+	end
 	.balign 4, 0

@@ -26,7 +26,7 @@
 	</row>
 	<row id="msg_0529_T11_00006" index="6">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">This is Silph Co., famous for\nPokémon merchandise.\rIn the past, Team Rocket wanted the\ncompany because of that.</language>
+		<language name="English">Silph Co.’s the biggest name in\nPokémon tech.\rHalf this city works for them--the\nother half wishes it did.</language>
 	</row>
 	<row id="msg_0529_T11_00007" index="7">
 		<attribute name="window_context_name">used</attribute>
@@ -50,7 +50,7 @@
 	</row>
 	<row id="msg_0529_T11_00012" index="12">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">Saffron City Pokémon Gym\nLeader: Sabrina\fThe Mistress of Psychic-Type Pokémon!</language>
+		<language name="English">SAFFRON CITY POKéMON GYM\rCLOSED FOR THE SEASON</language>
 	</row>
 	<row id="msg_0529_T11_00013" index="13">
 		<attribute name="window_context_name">used</attribute>

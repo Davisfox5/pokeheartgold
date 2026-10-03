@@ -5,55 +5,55 @@
 
 	.rodata
 
-	ScrDef scr_seq_D25R0103_000
-	ScrDef scr_seq_D25R0103_001
-	ScrDef scr_seq_D25R0103_002
-	ScrDefEnd
+	scrdef scr_seq_D25R0103_000
+	scrdef scr_seq_D25R0103_001
+	scrdef scr_seq_D25R0103_002
+	scrdef_end
 
 scr_seq_D25R0103_002:
-	GoToIfSet FLAG_DAILY_CAUGHT_LAPRAS, _003A
-	GetWeekday VAR_TEMP_x4000
-	Compare VAR_TEMP_x4000, 5
-	GoToIfNe _0034
-	ClearFlag FLAG_HIDE_UNION_CAVE_LAPRAS
-	GoTo _0038
+	goto_if_set FLAG_DAILY_CAUGHT_LAPRAS, _003A
+	get_weekday VAR_TEMP_x4000
+	compare VAR_TEMP_x4000, 5
+	goto_if_ne _0034
+	clearflag FLAG_HIDE_UNION_CAVE_LAPRAS
+	goto _0038
 
 _0034:
-	SetFlag FLAG_HIDE_UNION_CAVE_LAPRAS
+	setflag FLAG_HIDE_UNION_CAVE_LAPRAS
 _0038:
-	End
+	end
 
 _003A:
-	SetFlag FLAG_HIDE_UNION_CAVE_LAPRAS
-	End
+	setflag FLAG_HIDE_UNION_CAVE_LAPRAS
+	end
 
 scr_seq_D25R0103_001:
-	GoToIfSet FLAG_ENGAGING_STATIC_POKEMON, _004D
-	End
+	goto_if_set FLAG_ENGAGING_STATIC_POKEMON, _004D
+	end
 
 _004D:
-	SetFlag FLAG_HIDE_UNION_CAVE_LAPRAS
-	HidePerson obj_D25R0103_rapurasu
-	End
+	setflag FLAG_HIDE_UNION_CAVE_LAPRAS
+	hide_person obj_D25R0103_rapurasu
+	end
 
 scr_seq_D25R0103_000:
-	PlaySE SEQ_SE_DP_SELECT
-	LockAll
-	FacePlayer
-	PlayCry SPECIES_LAPRAS, 0
-	WaitCry
-	SetFlag FLAG_ENGAGING_STATIC_POKEMON
-	WildBattle SPECIES_LAPRAS, 20, 0
-	ClearFlag FLAG_ENGAGING_STATIC_POKEMON
-	CheckBattleWon VAR_SPECIAL_RESULT
-	Compare VAR_SPECIAL_RESULT, 0
-	GoToIfEq _008F
-	SetFlag FLAG_DAILY_CAUGHT_LAPRAS
-	ReleaseAll
-	End
+	play_se SEQ_SE_DP_SELECT
+	lockall
+	faceplayer
+	play_cry SPECIES_LAPRAS, 0
+	wait_cry
+	setflag FLAG_ENGAGING_STATIC_POKEMON
+	wild_battle SPECIES_LAPRAS, 20, 0
+	clearflag FLAG_ENGAGING_STATIC_POKEMON
+	check_battle_won VAR_SPECIAL_RESULT
+	compare VAR_SPECIAL_RESULT, 0
+	goto_if_eq _008F
+	setflag FLAG_DAILY_CAUGHT_LAPRAS
+	releaseall
+	end
 
 _008F:
-	WhiteOut
-	ReleaseAll
-	End
+	white_out
+	releaseall
+	end
 	.balign 4, 0

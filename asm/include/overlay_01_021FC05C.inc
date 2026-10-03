@@ -1,8 +1,8 @@
 #include <nitro/fs/overlay.h>
 #pragma once
 .public PlaySE
-.public Heap_Alloc
-.public Heap_Free
+.public AllocFromHeap
+.public FreeToHeap
 .public SetBgPriority
 .public BG_LoadCharTilesData
 .public BG_FillCharDataRange
@@ -16,8 +16,8 @@
 .public TaskManager_GetFieldSystem
 .public TaskManager_GetEnvironment
 .public GetMetatileBehavior
-.public PlayerAvatar_GetXCoord
-.public PlayerAvatar_GetZCoord
+.public GetPlayerXCoord
+.public GetPlayerZCoord
 .public G2x_SetBlendAlpha_
 .public memset
 .public _s32_div_f
@@ -27,5 +27,5 @@
 .public ov01_021EB31C
 .public GetHoneySweetScentWorkSize
 .public Task_HoneyOrSweetScent
-.public FieldSystem_PerformSweetScentEncounterCheck
-.public FieldSystem_CanGenerateStepEncounter
+.public ov02_02247170
+.public ov02_02247F9C

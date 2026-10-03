@@ -5,40 +5,40 @@
 
 	.rodata
 
-	ScrDef scr_seq_T02PC0101_000
-	ScrDef scr_seq_T02PC0101_001
-	ScrDef scr_seq_T02PC0101_002
-	ScrDef scr_seq_T02PC0101_003
-	ScrDefEnd
+	scrdef scr_seq_T02PC0101_000
+	scrdef scr_seq_T02PC0101_001
+	scrdef scr_seq_T02PC0101_002
+	scrdef scr_seq_T02PC0101_003
+	scrdef_end
 
 scr_seq_T02PC0101_000:
-	SetVar VAR_SPECIAL_x8007, 0
-	CallStd std_nurse_joy
-	End
+	setvar VAR_SPECIAL_x8007, 0
+	callstd std_nurse_joy
+	end
 
 scr_seq_T02PC0101_001:
-	PlaySE SEQ_SE_DP_SELECT
-	LockAll
-	FacePlayer
-	GoToIfUnset FLAG_UNK_129, _003C
-	NPCMsg msg_0455_T02PC0101_00001
-	WaitButton
-	CloseMsg
-	ReleaseAll
-	End
+	play_se SEQ_SE_DP_SELECT
+	lockall
+	faceplayer
+	goto_if_unset FLAG_UNK_129, _003C
+	npc_msg msg_0455_T02PC0101_00001
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
 
 _003C:
-	NPCMsg msg_0455_T02PC0101_00000
-	WaitButton
-	CloseMsg
-	ReleaseAll
-	End
+	npc_msg msg_0455_T02PC0101_00000
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
 
 scr_seq_T02PC0101_002:
-	SimpleNPCMsg msg_0455_T02PC0101_00002
-	End
+	simple_npc_msg msg_0455_T02PC0101_00002
+	end
 
 scr_seq_T02PC0101_003:
-	SimpleNPCMsg msg_0455_T02PC0101_00003
-	End
+	simple_npc_msg msg_0455_T02PC0101_00003
+	end
 	.balign 4, 0

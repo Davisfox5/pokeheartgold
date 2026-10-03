@@ -1,7 +1,5 @@
-#include "CsvFile.h"
-
 #include <sstream>
-#include <stdexcept>
+#include "CsvFile.h"
 
 void CsvFile::ParseRow(std::string &line, std::vector<std::string> &row, bool resize) {
     std::string entry, qbuf;
@@ -49,9 +47,6 @@ void CsvFile::ParseRow(std::string &line, std::vector<std::string> &row, bool re
 
 void CsvFile::FromFile(const fs::path &filename, bool has_header) {
     std::ifstream handle(filename);
-    if (!handle.is_open()) {
-        throw std::runtime_error("unable to open file \"" + filename.string() + "\"");
-    }
     std::string line;
     std::stringstream filebuf;
 

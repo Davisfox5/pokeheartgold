@@ -1,0 +1,131 @@
+{
+  "header": "fielddata/script/scr_seq/event_EVERYWHERE.h",
+  "bgs": [
+    {
+      "scriptId": 81,
+      "type": 1,
+      "x": 107,
+      "z": 893,
+      "y": 0,
+      "dir": 0
+    }
+  ],
+  "objects": [
+    {
+      "id": 0,
+      "spriteId": "SPRITE_GSWOMAN2",
+      "movement": 3,
+      "type": 0,
+      "eventFlag": 0,
+      "scriptId": 4,
+      "facingDirection": 2,
+      "param0": 0,
+      "param1": 0,
+      "param2": 0,
+      "xRange": 1,
+      "yRange": 1,
+      "x": 119,
+      "z": 878,
+      "y": 0
+    },
+    {
+      "id": 1,
+      "spriteId": "SPRITE_MANIA",
+      "movement": 2,
+      "type": 0,
+      "eventFlag": 0,
+      "scriptId": 5,
+      "facingDirection": 0,
+      "param0": 0,
+      "param1": 0,
+      "param2": 0,
+      "xRange": 0,
+      "yRange": 0,
+      "x": 108,
+      "z": 889,
+      "y": 0
+    },
+    {
+      "id": 2,
+      "spriteId": "SPRITE_GANG",
+      "movement": 0,
+      "type": 0,
+      "eventFlag": 0,
+      "scriptId": 5,
+      "facingDirection": 0,
+      "param0": 0,
+      "param1": 0,
+      "param2": 0,
+      "xRange": 0,
+      "yRange": 0,
+      "x": 108,
+      "z": 869,
+      "y": 0
+    },
+    {
+      "id": 3,
+      "spriteId": "SPRITE_MIDDLEMAN1",
+      "movement": 0,
+      "type": 0,
+      "eventFlag": 0,
+      "scriptId": 5,
+      "facingDirection": 0,
+      "param0": 0,
+      "param1": 0,
+      "param2": 0,
+      "xRange": 0,
+      "yRange": 0,
+      "x": 114,
+      "z": 885,
+      "y": 0
+    },
+    {
+      "id": 4,
+      "spriteId": "SPRITE_MIDDLEMAN1",
+      "movement": 0,
+      "type": 0,
+      "eventFlag": 0,
+      "scriptId": 5,
+      "facingDirection": 0,
+      "param0": 0,
+      "param1": 0,
+      "param2": 0,
+      "xRange": 0,
+      "yRange": 0,
+      "x": 109,
+      "z": 875,
+      "y": 0
+    }
+  ],
+  "warps": [
+    {
+      "x": 105,
+      "z": 875,
+      "header": "MAP_APOC_SIN_H00_TWINLEAF_TOWN",
+      "anchor": 0,
+      "y": 0
+    },
+    {
+      "x": 116,
+      "z": 885,
+      "header": "MAP_APOC_SIN_H01_TWINLEAF_TOWN",
+      "anchor": 0,
+      "y": 0
+    },
+    {
+      "x": 116,
+      "z": 875,
+      "header": "MAP_APOC_SIN_H02_TWINLEAF_TOWN",
+      "anchor": 0,
+      "y": 0
+    },
+    {
+      "x": 106,
+      "z": 885,
+      "header": "MAP_APOC_SIN_H03_TWINLEAF_TOWN",
+      "anchor": 0,
+      "y": 0
+    }
+  ],
+  "coords": []
+}

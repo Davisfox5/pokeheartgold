@@ -3,7 +3,7 @@
   "bgs": [
     {
       "scriptId": "_EV_scr_seq_T20R0201_002 + 1",
-      "type": 0,
+      "type": -1,
       "x": 5,
       "z": 3,
       "y": 0,
@@ -11,7 +11,7 @@
     },
     {
       "scriptId": "_EV_scr_seq_T20R0201_002 + 1",
-      "type": 0,
+      "type": 1,
       "x": 6,
       "z": 3,
       "y": 0,
@@ -48,16 +48,101 @@
       "spriteId": "SPRITE_GSMAMA",
       "movement": 0,
       "type": 0,
-      "eventFlag": "FLAG_NOTHING",
+      "eventFlag": "FLAG_GOT_POKEGEAR",
       "scriptId": "_EV_scr_seq_T20R0201_001 + 1",
-      "facingDirection": 3,
+      "facingDirection": 0,
+      "param0": 0,
+      "param1": 0,
+      "param2": 0,
+      "xRange": 0,
+      "yRange": 0,
+      "x": 3,
+      "z": 10,
+      "y": 0
+    },
+    {
+      "id": "obj_T20R0201_box1",
+      "spriteId": "SPRITE_CARDBOARDBOX",
+      "movement": 0,
+      "type": 0,
+      "eventFlag": "FLAG_NOTHING",
+      "scriptId": "_EV_scr_seq_T20R0201_003 + 1",
+      "facingDirection": 1,
+      "param0": 0,
+      "param1": 0,
+      "param2": 0,
+      "xRange": 0,
+      "yRange": 0,
+      "x": 10,
+      "z": 7,
+      "y": 0
+    },
+    {
+      "id": "obj_T20R0201_box2",
+      "spriteId": "SPRITE_CARDBOARDBOX",
+      "movement": 0,
+      "type": 0,
+      "eventFlag": "FLAG_NOTHING",
+      "scriptId": "_EV_scr_seq_T20R0201_003 + 1",
+      "facingDirection": 1,
       "param0": 0,
       "param1": 0,
       "param2": 0,
       "xRange": 0,
       "yRange": 0,
       "x": 6,
-      "z": 7,
+      "z": 6,
+      "y": 0
+    },
+    {
+      "id": "obj_T20R0201_box3",
+      "spriteId": "SPRITE_CARDBOARDBOX",
+      "movement": 0,
+      "type": 0,
+      "eventFlag": "FLAG_NOTHING",
+      "scriptId": "_EV_scr_seq_T20R0201_003 + 1",
+      "facingDirection": 1,
+      "param0": 0,
+      "param1": 0,
+      "param2": 0,
+      "xRange": 0,
+      "yRange": 0,
+      "x": 5,
+      "z": 5,
+      "y": 0
+    },
+    {
+      "id": "obj_T20R0201_box4",
+      "spriteId": "SPRITE_CARDBOARDBOX",
+      "movement": 0,
+      "type": 0,
+      "eventFlag": "FLAG_NOTHING",
+      "scriptId": "_EV_scr_seq_T20R0201_003 + 1",
+      "facingDirection": 1,
+      "param0": 0,
+      "param1": 0,
+      "param2": 0,
+      "xRange": 0,
+      "yRange": 0,
+      "x": 7,
+      "z": 10,
+      "y": 0
+    },
+    {
+      "id": "obj_T20R0201_gsmama2",
+      "spriteId": "SPRITE_GSMAMA",
+      "movement": 3,
+      "type": 0,
+      "eventFlag": "FLAG_HIDE_ROCKET_HIDEOUT_B2F_MURKROW_1",
+      "scriptId": "_EV_scr_seq_T20R0201_001 + 1",
+      "facingDirection": 3,
+      "param0": 0,
+      "param1": 0,
+      "param2": 0,
+      "xRange": 3,
+      "yRange": 3,
+      "x": 3,
+      "z": 10,
       "y": 0
     }
   ],
@@ -65,8 +150,8 @@
     {
       "x": 3,
       "z": 10,
-      "header": "MAP_NEW_BARK",
-      "anchor": 1,
+      "header": "MAP_CHERRYGROVE",
+      "anchor": 2,
       "y": 0
     },
     {
@@ -75,6 +160,18 @@
       "header": "MAP_NEW_BARK_PLAYER_HOUSE_2F",
       "anchor": 0,
       "y": 0
+    }
+  ],
+  "coords": [
+    {
+      "scriptId": "_EV_scr_seq_T20R0201_008 + 1",
+      "x": 3,
+      "z": 10,
+      "w": 1,
+      "h": 1,
+      "y": 0,
+      "val": 1,
+      "var": "VAR_SCENE_PLAYERS_HOUSE_1F"
     }
   ]
 }

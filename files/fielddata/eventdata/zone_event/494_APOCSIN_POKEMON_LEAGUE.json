@@ -1,0 +1,137 @@
+{
+  "header": "fielddata/script/scr_seq/event_EVERYWHERE.h",
+  "bgs": [
+    {
+      "scriptId": 47,
+      "type": 1,
+      "x": 842,
+      "z": 580,
+      "y": 0,
+      "dir": 0
+    },
+    {
+      "scriptId": 47,
+      "type": 1,
+      "x": 842,
+      "z": 577,
+      "y": 0,
+      "dir": 0
+    },
+    {
+      "scriptId": 47,
+      "type": 1,
+      "x": 843,
+      "z": 577,
+      "y": 0,
+      "dir": 0
+    },
+    {
+      "scriptId": 47,
+      "type": 1,
+      "x": 851,
+      "z": 577,
+      "y": 0,
+      "dir": 0
+    },
+    {
+      "scriptId": 47,
+      "type": 1,
+      "x": 852,
+      "z": 577,
+      "y": 0,
+      "dir": 0
+    },
+    {
+      "scriptId": 47,
+      "type": 1,
+      "x": 837,
+      "z": 561,
+      "y": 0,
+      "dir": 0
+    },
+    {
+      "scriptId": 47,
+      "type": 1,
+      "x": 838,
+      "z": 561,
+      "y": 0,
+      "dir": 0
+    },
+    {
+      "scriptId": 47,
+      "type": 1,
+      "x": 856,
+      "z": 561,
+      "y": 0,
+      "dir": 0
+    },
+    {
+      "scriptId": 47,
+      "type": 1,
+      "x": 857,
+      "z": 561,
+      "y": 0,
+      "dir": 0
+    }
+  ],
+  "objects": [],
+  "warps": [
+    {
+      "x": 842,
+      "z": 598,
+      "header": "MAP_APOC_SIN_PC_POKEMON_LEAGUE",
+      "anchor": 0,
+      "y": 0
+    },
+    {
+      "x": 847,
+      "z": 559,
+      "header": "MAP_APOC_SIN_H01_POKEMON_LEAGUE",
+      "anchor": 0,
+      "y": 0
+    },
+    {
+      "x": 851,
+      "z": 597,
+      "header": "MAP_APOC_SIN_H02_POKEMON_LEAGUE",
+      "anchor": 0,
+      "y": 0
+    },
+    {
+      "x": 853,
+      "z": 582,
+      "header": "MAP_APOC_SIN_H03_POKEMON_LEAGUE",
+      "anchor": 0,
+      "y": 0
+    },
+    {
+      "x": 850,
+      "z": 597,
+      "header": "MAP_APOC_SIN_H04_POKEMON_LEAGUE",
+      "anchor": 0,
+      "y": 0
+    },
+    {
+      "x": 852,
+      "z": 597,
+      "header": "MAP_APOC_SIN_H05_POKEMON_LEAGUE",
+      "anchor": 0,
+      "y": 0
+    },
+    {
+      "x": 853,
+      "z": 581,
+      "header": "MAP_APOC_SIN_H06_POKEMON_LEAGUE",
+      "anchor": 0,
+      "y": 0
+    },
+    {
+      "x": 853,
+      "z": 583,
+      "header": "MAP_APOC_SIN_H07_POKEMON_LEAGUE",
+      "anchor": 0,
+      "y": 0
+    }
+  ],
+  "coords": []
+}

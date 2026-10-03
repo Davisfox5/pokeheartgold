@@ -56,11 +56,11 @@ sub_02074E5C: ; 0x02074E5C
 	bne _02074EB6
 	mov r0, #5
 	mov r1, #8
-	bl Heap_Alloc
+	bl AllocFromHeap
 	add r4, r0, #0
 	mov r0, #5
 	mov r1, #8
-	bl Heap_Alloc
+	bl AllocFromHeap
 	add r6, r0, #0
 	ldr r0, _02074EB8 ; =_020FFE30
 	mov r1, #0xc
@@ -273,7 +273,7 @@ sub_02074F9C: ; 0x02074F9C
 	mov r1, #4
 	str r2, [sp, #8]
 	add r7, r3, #0
-	bl Heap_Alloc
+	bl AllocFromHeap
 	add r6, r0, #0
 	ldr r0, [sp]
 	bl BattleSystem_GetSendBufferPtr
@@ -331,7 +331,7 @@ _0207500C:
 	blt _0207500C
 _0207501E:
 	add r0, r6, #0
-	bl Heap_Free
+	bl FreeToHeap
 	add sp, #0xc
 	pop {r4, r5, r6, r7, pc}
 	thumb_func_end sub_02074F9C
@@ -715,7 +715,7 @@ _020752A8:
 _020752C2:
 	add r0, r6, #0
 	add r1, r7, #0
-	bl Heap_Alloc
+	bl AllocFromHeap
 	str r0, [r5, #0x10]
 	add r4, r4, #1
 	add r5, r5, #4
@@ -985,7 +985,7 @@ _02075488:
 	pop {r3, r4, r5, r6, r7, pc}
 _020754B0:
 	add r0, r5, #0
-	bl Heap_Free
+	bl FreeToHeap
 	ldr r0, [sp]
 	bl SysTask_Destroy
 _020754BC:
@@ -1045,7 +1045,7 @@ _02075502:
 	pop {r3, r4, r5, r6, r7, pc}
 _02075526:
 	add r0, r5, #0
-	bl Heap_Free
+	bl FreeToHeap
 	ldr r0, [sp]
 	bl SysTask_Destroy
 _02075532:

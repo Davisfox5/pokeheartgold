@@ -253,7 +253,7 @@ _02258980:
 	add r0, #0x30
 	bl ov90_02259084
 	add r0, r5, #0
-	bl Heap_Free
+	bl FreeToHeap
 	pop {r4, r5, r6, pc}
 	.balign 4, 0
 _022589B8: .word 0x000005EC
@@ -372,7 +372,7 @@ _02258A40:
 	strh r1, [r0]
 	bl GF_DestroyVramTransferManager
 	add r0, r5, #0
-	bl Heap_Free
+	bl FreeToHeap
 	pop {r4, r5, r6, pc}
 	.balign 4, 0
 _02258A90: .word 0x00000644
@@ -582,7 +582,7 @@ ov90_02258BD4: ; 0x02258BD4
 	add r6, r0, #0
 	add r0, r5, #0
 	lsl r1, r1, #2
-	bl Heap_Alloc
+	bl AllocFromHeap
 	mov r2, #0x73
 	add r4, r0, #0
 	mov r1, #0
@@ -646,7 +646,7 @@ _02258C54:
 	ldr r0, [r4, #0xc]
 	bl NARC_Delete
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	pop {r4, pc}
 	.balign 4, 0
 	thumb_func_end ov90_02258C38
@@ -867,7 +867,7 @@ _02258DDC:
 	mul r4, r0
 	add r0, r7, #0
 	add r1, r4, #0
-	bl Heap_Alloc
+	bl AllocFromHeap
 	ldr r1, [sp]
 	add r2, r4, #0
 	str r0, [r1, #0x10]
@@ -913,7 +913,7 @@ _02258E3C:
 	cmp r6, #4
 	blt _02258E3C
 	ldr r0, [r5, #0x10]
-	bl Heap_Free
+	bl FreeToHeap
 	pop {r4, r5, r6, pc}
 	.balign 4, 0
 	thumb_func_end ov90_02258E10
@@ -1056,7 +1056,7 @@ _02258EF6:
 	bl AddCellOrAnimResObjFromOpenNarc
 	str r0, [r4, #0x10]
 	ldr r0, [r4, #4]
-	bl SpriteTransfer_CreateCharTransferTask_AllocAtEnd
+	bl sub_0200ADA4
 	cmp r0, #0
 	bne _02258F66
 	bl GF_AssertFail
@@ -1064,7 +1064,7 @@ _02258F66:
 	ldr r0, [r4, #4]
 	bl sub_0200A740
 	ldr r0, [r4, #8]
-	bl SpriteTransfer_CreatePlttTransferTask
+	bl sub_0200B00C
 	cmp r0, #0
 	bne _02258F7A
 	bl GF_AssertFail
@@ -1113,9 +1113,9 @@ _02258FC8:
 	mov r0, #0
 	str r0, [r4]
 	ldr r0, [r4, #4]
-	bl SpriteTransfer_DeleteCharTransferTask
+	bl sub_0200AEB0
 	ldr r0, [r4, #8]
-	bl SpriteTransfer_DeletePlttTransferTask
+	bl sub_0200B0A8
 	mov r6, #0
 _02258FDA:
 	ldr r0, [r5]
@@ -1229,7 +1229,7 @@ _0225909E:
 	blo _0225909E
 _022590B6:
 	ldr r0, [r5]
-	bl Heap_Free
+	bl FreeToHeap
 	pop {r4, r5, r6, pc}
 	.balign 4, 0
 	thumb_func_end ov90_02259084
@@ -1900,7 +1900,7 @@ ov90_02259588: ; 0x02259588
 	bl Sound_SetSceneAndPlayBGM
 	ldr r1, _022596A0 ; =0x000005F4
 	add r0, r5, #0
-	bl Heap_Alloc
+	bl AllocFromHeap
 	ldr r2, _022596A0 ; =0x000005F4
 	mov r1, #0
 	add r4, r0, #0
@@ -2007,7 +2007,7 @@ _02259688:
 	ldrb r1, [r4, #0x13]
 	cmp r1, #0
 	beq _0225969A
-	mov r1, #0x27 ; SCORE_EVENT_WIFI_PLAZA_MINIGAME
+	mov r1, #0x27
 	bl GameStats_AddScore
 _0225969A:
 	add r0, r4, #0
@@ -2118,11 +2118,11 @@ _02259780: .word 0x00001388
 ov90_02259784: ; 0x02259784
 	mov r1, #0x7f
 	lsl r1, r1, #2
-	ldr r3, _02259790 ; =Heap_Free
+	ldr r3, _02259790 ; =FreeToHeap
 	ldr r0, [r0, r1]
 	bx r3
 	nop
-_02259790: .word Heap_Free
+_02259790: .word FreeToHeap
 	thumb_func_end ov90_02259784
 
 	thumb_func_start ov90_02259794
@@ -4108,7 +4108,7 @@ ov90_0225A6B4: ; 0x0225A6B4
 	ldr r1, _0225A820 ; =0x00000664
 	add r0, r5, #0
 	str r2, [sp, #4]
-	bl Heap_Alloc
+	bl AllocFromHeap
 	ldr r2, _0225A820 ; =0x00000664
 	mov r1, #0
 	add r4, r0, #0
@@ -4419,7 +4419,7 @@ ov90_0225A960: ; 0x0225A960
 	mov r0, #0x95
 	lsl r0, r0, #2
 	ldr r0, [r4, r0]
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r4, #0
 	bl ov90_0225B330
 	pop {r4, pc}
@@ -5717,12 +5717,12 @@ _0225B32C: .word 0x00000658
 	thumb_func_start ov90_0225B330
 ov90_0225B330: ; 0x0225B330
 	ldr r1, _0225B338 ; =0x00000654
-	ldr r3, _0225B33C ; =Heap_Free
+	ldr r3, _0225B33C ; =FreeToHeap
 	ldr r0, [r0, r1]
 	bx r3
 	.balign 4, 0
 _0225B338: .word 0x00000654
-_0225B33C: .word Heap_Free
+_0225B33C: .word FreeToHeap
 	thumb_func_end ov90_0225B330
 
 	thumb_func_start ov90_0225B340
@@ -6186,7 +6186,7 @@ _0225B698:
 	cmp r4, #0xf
 	blt _0225B698
 	ldr r0, [r6]
-	bl Heap_Free
+	bl FreeToHeap
 	pop {r4, r5, r6, pc}
 	.balign 4, 0
 	thumb_func_end ov90_0225B690

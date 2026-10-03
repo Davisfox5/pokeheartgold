@@ -1,18 +1,18 @@
 #include "constants/scrcmd.h"
 #include "fielddata/script/scr_seq/event_D52R0103.h"
-#include "constants/init_script_types.h"
-	.include "asm/macros/script.inc"
-
 	.rodata
 	.option alignment off
 
-	InitScriptEntry_OnFrameTable scr_seq_D52R0103_map_scripts_2
-	InitScriptEntry_OnLoad _EV_scr_seq_D52R0103_002 + 1
-	InitScriptEntry_OnTransition _EV_scr_seq_D52R0103_003 + 1
-	InitScriptEntryEnd
+	.byte 1
+	.word scr_seq_D52R0103_map_scripts_2-.-4
+	.byte 4
+	.short _EV_scr_seq_D52R0103_002 + 1, 0
+	.byte 2
+	.short _EV_scr_seq_D52R0103_003 + 1, 0
+	.byte 0
 
 scr_seq_D52R0103_map_scripts_2:
-	InitScriptGoToIfEqual VAR_SCENE_EMBEDDED_TOWER, 5, _EV_scr_seq_D52R0103_001 + 1
-	InitScriptFrameTableEnd
+	.short VAR_SCENE_EMBEDDED_TOWER, 5, _EV_scr_seq_D52R0103_001 + 1
+	.short 0
 
-	InitScriptEnd
+	.balign 4, 0

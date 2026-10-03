@@ -5,20 +5,20 @@
 
 	.rodata
 
-	ScrDef scr_seq_D27R0101_000
-	ScrDef scr_seq_D27R0101_001
-	ScrDef scr_seq_D27R0101_002
-	ScrDefEnd
+	scrdef scr_seq_D27R0101_000
+	scrdef scr_seq_D27R0101_001
+	scrdef scr_seq_D27R0101_002
+	scrdef_end
 
 scr_seq_D27R0101_002:
-	SetVar VAR_UNK_4125, 0
-	End
+	setvar VAR_UNK_4125, 0
+	end
 
 scr_seq_D27R0101_000:
-	SimpleNPCMsg msg_0093_D27R0101_00000
-	End
+	simple_npc_msg msg_0093_D27R0101_00000
+	end
 
 scr_seq_D27R0101_001:
-	SimpleNPCMsg msg_0093_D27R0101_00001
-	End
+	simple_npc_msg msg_0093_D27R0101_00001
+	end
 	.balign 4, 0

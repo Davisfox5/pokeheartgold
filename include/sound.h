@@ -25,10 +25,6 @@ enum SoundHandleNo {
     SND_HANDLE_MAX,
 };
 
-enum SoundScene {
-    SOUND_SCENE_NONE = 0,
-};
-
 SND_WORK *GetSoundDataPointer(void);
 void GF_SndHeapGetFreeSize(void);
 void GF_SndSetMonoFlag(int flag);

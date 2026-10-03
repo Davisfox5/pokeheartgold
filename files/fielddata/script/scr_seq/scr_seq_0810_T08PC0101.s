@@ -5,84 +5,84 @@
 
 	.rodata
 
-	ScrDef scr_seq_T08PC0101_000
-	ScrDef scr_seq_T08PC0101_001
-	ScrDef scr_seq_T08PC0101_002
-	ScrDef scr_seq_T08PC0101_003
-	ScrDefEnd
+	scrdef scr_seq_T08PC0101_000
+	scrdef scr_seq_T08PC0101_001
+	scrdef scr_seq_T08PC0101_002
+	scrdef scr_seq_T08PC0101_003
+	scrdef_end
 
 scr_seq_T08PC0101_000:
-	SetVar VAR_SPECIAL_x8007, 0
-	CallStd std_nurse_joy
-	End
+	setvar VAR_SPECIAL_x8007, 0
+	callstd std_nurse_joy
+	end
 
 scr_seq_T08PC0101_001:
-	SimpleNPCMsg msg_0515_T08PC0101_00000
-	End
+	simple_npc_msg msg_0515_T08PC0101_00000
+	end
 
 scr_seq_T08PC0101_002:
-	SimpleNPCMsg msg_0515_T08PC0101_00001
-	End
+	simple_npc_msg msg_0515_T08PC0101_00001
+	end
 
 scr_seq_T08PC0101_003:
-	PlaySE SEQ_SE_DP_SELECT
-	LockAll
-	FacePlayer
-	NPCMsg msg_0515_T08PC0101_00002
-	GetPlayerFacing VAR_SPECIAL_RESULT
-	Compare VAR_SPECIAL_RESULT, 0
-	GoToIfNe _006E
-	ApplyMovement obj_T08PC0101_gsgirl1, _009C
-	GoTo _0091
+	play_se SEQ_SE_DP_SELECT
+	lockall
+	faceplayer
+	npc_msg msg_0515_T08PC0101_00002
+	get_player_facing VAR_SPECIAL_RESULT
+	compare VAR_SPECIAL_RESULT, 0
+	goto_if_ne _006E
+	apply_movement obj_T08PC0101_gsgirl1, _009C
+	goto _0091
 
 _006E:
-	Compare VAR_SPECIAL_RESULT, 2
-	GoToIfNe _0089
-	ApplyMovement obj_T08PC0101_gsgirl1, _00C0
-	GoTo _0091
+	compare VAR_SPECIAL_RESULT, 2
+	goto_if_ne _0089
+	apply_movement obj_T08PC0101_gsgirl1, _00C0
+	goto _0091
 
 _0089:
-	ApplyMovement obj_T08PC0101_gsgirl1, _00E4
+	apply_movement obj_T08PC0101_gsgirl1, _00E4
 _0091:
-	NPCMsg msg_0515_T08PC0101_00003
-	WaitButton
-	CloseMsg
-	ReleaseAll
-	End
+	npc_msg msg_0515_T08PC0101_00003
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
 
 	.balign 4, 0
 _009C:
-	FaceEast
-	FaceNorth
-	FaceWest
-	FaceSouth
-	FaceEast
-	FaceNorth
-	FaceWest
-	FaceSouth
-	EndMovement
+	step 3, 1
+	step 0, 1
+	step 2, 1
+	step 1, 1
+	step 3, 1
+	step 0, 1
+	step 2, 1
+	step 1, 1
+	step_end
 
 	.balign 4, 0
 _00C0:
-	FaceNorth
-	FaceWest
-	FaceSouth
-	FaceEast
-	FaceNorth
-	FaceWest
-	FaceSouth
-	FaceEast
-	EndMovement
+	step 0, 1
+	step 2, 1
+	step 1, 1
+	step 3, 1
+	step 0, 1
+	step 2, 1
+	step 1, 1
+	step 3, 1
+	step_end
 
 	.balign 4, 0
 _00E4:
-	FaceSouth
-	FaceEast
-	FaceNorth
-	FaceWest
-	FaceSouth
-	FaceEast
-	FaceNorth
-	FaceWest
-	EndMovement
+	step 1, 1
+	step 3, 1
+	step 0, 1
+	step 2, 1
+	step 1, 1
+	step 3, 1
+	step 0, 1
+	step 2, 1
+	step_end
 	.balign 4, 0

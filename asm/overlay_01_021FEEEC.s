@@ -198,13 +198,13 @@ ov01_021FF070: ; 0x021FF070
 	bl ov01_021F146C
 	add r4, r0, #0
 	add r0, r5, #0
-	bl MapObject_GetXCoord
+	bl MapObject_GetCurrentX
 	str r0, [sp, #8]
 	add r0, r5, #0
-	bl MapObject_GetYCoord
+	bl MapObject_GetCurrentY
 	str r0, [sp, #0xc]
 	add r0, r5, #0
-	bl MapObject_GetZCoord
+	bl MapObject_GetCurrentZ
 	str r0, [sp, #0x10]
 	mov r1, #0
 	add r0, sp, #8
@@ -254,16 +254,16 @@ ov01_021FF0E4: ; 0x021FF0E4
 	add r7, r0, #0
 	add r0, r5, #0
 	str r4, [sp, #0xc]
-	bl MapObject_GetYCoord
+	bl MapObject_GetCurrentY
 	str r0, [sp, #0x10]
 	add r0, r5, #0
 	str r6, [sp, #0x14]
-	bl MapObject_GetXCoord
+	bl MapObject_GetCurrentX
 	sub r1, r0, r4
 	add r0, sp, #0xc
 	strh r1, [r0, #0x1c]
 	add r0, r5, #0
-	bl MapObject_GetZCoord
+	bl MapObject_GetCurrentZ
 	sub r1, r0, r6
 	add r0, sp, #0xc
 	strh r1, [r0, #0x1e]
@@ -510,12 +510,12 @@ _021FF2F2:
 	pop {r3, r4, r5, r6, r7, pc}
 _021FF30C:
 	add r0, r6, #0
-	bl MapObject_GetXCoord
+	bl MapObject_GetCurrentX
 	mov r1, #0x34
 	ldrsh r1, [r4, r1]
 	sub r7, r0, r1
 	add r0, r6, #0
-	bl MapObject_GetZCoord
+	bl MapObject_GetCurrentZ
 	mov r1, #0x36
 	ldrsh r1, [r4, r1]
 	sub r1, r0, r1

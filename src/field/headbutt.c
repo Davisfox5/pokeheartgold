@@ -2,20 +2,19 @@
 
 #include "global.h"
 
-#include "field/encounter_check.h"
-
 #include "assert.h"
 #include "encounter.h"
+#include "fieldmap.h"
 #include "filesystem.h"
 #include "follow_mon.h"
 #include "heap.h"
 #include "map_object.h"
 #include "overlay_01_021EDAFC.h"
 #include "overlay_01_02204ED8.h"
+#include "overlay_02.h"
 #include "player_data.h"
 #include "scrcmd.h"
 #include "script.h"
-#include "script_manager.h"
 #include "task.h"
 #include "unk_0205CB48.h"
 #include "unk_0205FD20.h"
@@ -104,7 +103,7 @@ typedef struct TaskData_TryHeadbuttEncounter {
 } TaskData_TryHeadbuttEncounter;
 
 void FieldSystem_TryHeadbuttEncounter(FieldSystem *fieldSystem, u16 *varPointer) {
-    TaskData_TryHeadbuttEncounter *didHeadbuttStartBattle = Heap_AllocAtEnd(HEAP_ID_FIELD2, sizeof(didHeadbuttStartBattle));
+    TaskData_TryHeadbuttEncounter *didHeadbuttStartBattle = AllocFromHeapAtEnd(HEAP_ID_FIELD, sizeof(didHeadbuttStartBattle));
     didHeadbuttStartBattle->resultPtr = varPointer;
     *varPointer = FALSE;
     TaskManager_Call(fieldSystem->taskman, Task_TryHeadbuttEncounter, didHeadbuttStartBattle);
@@ -114,7 +113,7 @@ static BOOL Task_TryHeadbuttEncounter(TaskManager *taskManager) {
     HeadbuttEncounterData *headbuttTable;
     FieldSystem *fieldSystem = TaskManager_GetFieldSystem(taskManager);
     TaskData_TryHeadbuttEncounter *didHeadbuttStartBattle = TaskManager_GetEnvironment(taskManager);
-    headbuttTable = AllocAtEndAndReadWholeNarcMemberByIdPair(NARC_arc_headbutt, fieldSystem->location->mapId, HEAP_ID_FIELD2);
+    headbuttTable = AllocAtEndAndReadWholeNarcMemberByIdPair(NARC_arc_headbutt, fieldSystem->location->mapId, HEAP_ID_FIELD);
     if (headbuttTable->numRegularTrees != 0 || headbuttTable->numSecretTrees != 0) {
         BattleSetup *setup;
         u32 x;
@@ -123,8 +122,8 @@ static BOOL Task_TryHeadbuttEncounter(TaskManager *taskManager) {
         u32 trainerId = PlayerProfile_GetTrainerID(Save_PlayerData_GetProfile(fieldSystem->saveData));
         enum TreeType treeType = (enum TreeType)Headbutt_GetTreeTypeFromTable(headbuttTable->numRegularTrees, headbuttTable->numSecretTrees, trainerId, x, y, headbuttTable->treeCoords);
         if (treeType == TREETYPE_NONE) {
-            Heap_Free(headbuttTable);
-            Heap_Free(didHeadbuttStartBattle);
+            FreeToHeap(headbuttTable);
+            FreeToHeap(didHeadbuttStartBattle);
             return TRUE;
         }
         HeadbuttSlot *headbuttEncounterSlots;
@@ -136,20 +135,20 @@ static BOOL Task_TryHeadbuttEncounter(TaskManager *taskManager) {
             headbuttEncounterSlots = headbuttTable->secret;
         } else {
             GF_ASSERT(FALSE);
-            Heap_Free(headbuttTable);
-            Heap_Free(didHeadbuttStartBattle);
+            FreeToHeap(headbuttTable);
+            FreeToHeap(didHeadbuttStartBattle);
             return TRUE;
         }
-        if (FieldSystem_PerformHeadbuttEncounterCheck(fieldSystem, &setup, headbuttEncounterSlots)) {
+        if (FieldSystem_ChooseHeadbuttEncounter(fieldSystem, &setup, headbuttEncounterSlots)) {
             *didHeadbuttStartBattle->resultPtr = TRUE;
-            Heap_Free(headbuttTable);
-            Heap_Free(didHeadbuttStartBattle);
+            FreeToHeap(headbuttTable);
+            FreeToHeap(didHeadbuttStartBattle);
             FieldSystem_StartForcedWildBattle(fieldSystem, taskManager, setup);
             return FALSE;
         }
     }
-    Heap_Free(headbuttTable);
-    Heap_Free(didHeadbuttStartBattle);
+    FreeToHeap(headbuttTable);
+    FreeToHeap(didHeadbuttStartBattle);
     return TRUE;
 }
 
@@ -199,8 +198,8 @@ static void GetCoordsOfFacingTree(FieldSystem *fieldSystem, u32 *x, u32 *y) {
     PlayerAvatar_GetCoordsInFront(fieldSystem->playerAvatar, &inFrontX, &inFrontY);
     if (FollowMon_IsActive(fieldSystem)) {
         LocalMapObject *object = FollowMon_GetMapObject(fieldSystem);
-        u32 followingMonX = MapObject_GetXCoord(object);
-        u32 followingMonZ = MapObject_GetZCoord(object);
+        u32 followingMonX = MapObject_GetCurrentX(object);
+        u32 followingMonZ = MapObject_GetCurrentZ(object);
         if (inFrontX == followingMonX && inFrontY == followingMonZ) {
             u8 dir = MapObject_GetFacingDirection(object);
             inFrontX = GetDeltaXByFacingDirection(dir) + followingMonX;

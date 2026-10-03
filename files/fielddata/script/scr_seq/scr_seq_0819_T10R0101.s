@@ -5,376 +5,376 @@
 
 	.rodata
 
-	ScrDef scr_seq_T10R0101_000
-	ScrDef scr_seq_T10R0101_001
-	ScrDef scr_seq_T10R0101_002
-	ScrDef scr_seq_T10R0101_003
-	ScrDef scr_seq_T10R0101_004
-	ScrDef scr_seq_T10R0101_005
-	ScrDef scr_seq_T10R0101_006
-	ScrDef scr_seq_T10R0101_007
-	ScrDef scr_seq_T10R0101_008
-	ScrDefEnd
+	scrdef scr_seq_T10R0101_000
+	scrdef scr_seq_T10R0101_001
+	scrdef scr_seq_T10R0101_002
+	scrdef scr_seq_T10R0101_003
+	scrdef scr_seq_T10R0101_004
+	scrdef scr_seq_T10R0101_005
+	scrdef scr_seq_T10R0101_006
+	scrdef scr_seq_T10R0101_007
+	scrdef scr_seq_T10R0101_008
+	scrdef_end
 
 scr_seq_T10R0101_005:
-	SetFlag FLAG_HIDE_WILLS_ROOM_RETREAT
-	SetFlag FLAG_HIDE_KOGAS_ROOM_RETREAT
-	SetFlag FLAG_HIDE_BRUNOS_ROOM_RETREAT
-	SetFlag FLAG_HIDE_KARENS_ROOM_RETREAT
-	ClearFlag FLAG_HIDE_WILLS_ROOM_EXIT
-	ClearFlag FLAG_HIDE_KOGAS_ROOM_EXIT
-	ClearFlag FLAG_HIDE_BRUNOS_ROOM_EXIT
-	ClearFlag FLAG_HIDE_KARENS_ROOM_EXIT
-	ClearFlag FLAG_DEFEATED_WILL
-	ClearFlag FLAG_DEFEATED_KOGA
-	ClearFlag FLAG_DEFEATED_BRUNO
-	ClearFlag FLAG_DEFEATED_KAREN
-	Compare VAR_UNK_40FC, 1
-	GoToIfLe _00AC
-	GoToIfSet FLAG_UNK_AA9, _00AC
-	GetWeekday VAR_TEMP_x4000
-	Compare VAR_TEMP_x4000, 1
-	GoToIfNe _008B
-	SetVar VAR_UNK_4119, 1
-	GoTo _00AA
+	setflag FLAG_HIDE_WILLS_ROOM_RETREAT
+	setflag FLAG_HIDE_KOGAS_ROOM_RETREAT
+	setflag FLAG_HIDE_BRUNOS_ROOM_RETREAT
+	setflag FLAG_HIDE_KARENS_ROOM_RETREAT
+	clearflag FLAG_HIDE_WILLS_ROOM_EXIT
+	clearflag FLAG_HIDE_KOGAS_ROOM_EXIT
+	clearflag FLAG_HIDE_BRUNOS_ROOM_EXIT
+	clearflag FLAG_HIDE_KARENS_ROOM_EXIT
+	clearflag FLAG_DEFEATED_WILL
+	clearflag FLAG_DEFEATED_KOGA
+	clearflag FLAG_DEFEATED_BRUNO
+	clearflag FLAG_DEFEATED_KAREN
+	compare VAR_UNK_40FC, 1
+	goto_if_le _00AC
+	goto_if_set FLAG_UNK_AA9, _00AC
+	get_weekday VAR_TEMP_x4000
+	compare VAR_TEMP_x4000, 1
+	goto_if_ne _008B
+	setvar VAR_UNK_4119, 1
+	goto _00AA
 
 _008B:
-	Compare VAR_TEMP_x4000, 3
-	GoToIfNe _00A4
-	SetVar VAR_UNK_4119, 1
-	GoTo _00AA
+	compare VAR_TEMP_x4000, 3
+	goto_if_ne _00A4
+	setvar VAR_UNK_4119, 1
+	goto _00AA
 
 _00A4:
-	SetVar VAR_UNK_4119, 0
+	setvar VAR_UNK_4119, 0
 _00AA:
-	End
+	end
 
 _00AC:
-	End
+	end
 
 scr_seq_T10R0101_001:
-	SimpleNPCMsg msg_0522_T10R0101_00000
-	End
+	simple_npc_msg msg_0522_T10R0101_00000
+	end
 
 scr_seq_T10R0101_002:
-	SimpleNPCMsg msg_0522_T10R0101_00001
-	End
+	simple_npc_msg msg_0522_T10R0101_00001
+	end
 
 scr_seq_T10R0101_003:
-	PlaySE SEQ_SE_DP_SELECT
-	LockAll
-	FacePlayer
-	PlayCry SPECIES_ABRA, 0
-	NPCMsg msg_0522_T10R0101_00002
-	WaitCry
-	WaitButton
-	CloseMsg
-	ReleaseAll
-	End
+	play_se SEQ_SE_DP_SELECT
+	lockall
+	faceplayer
+	play_cry SPECIES_ABRA, 0
+	npc_msg msg_0522_T10R0101_00002
+	wait_cry
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
 
 scr_seq_T10R0101_006:
-	ScrCmd_609
-	LockAll
-	FadeOutBGM 0, 3
-	ApplyMovement obj_player, _01DC
-	WaitMovement
-	CallStd std_play_rival_intro_music
-	GetPlayerCoords VAR_SPECIAL_x8000, VAR_SPECIAL_x8001
-	ClearFlag FLAG_HIDE_INDIGO_PLATEAU_RIVAL
-	ShowPerson obj_T10R0101_gsrivel
-	MovePersonFacing obj_T10R0101_gsrivel, VAR_SPECIAL_x8000, 0, 23, DIR_NORTH
-	ToggleFollowingPokemonMovement 0
-	WaitFollowingPokemonMovement
-	FollowingPokemonMovement 55
-	ApplyMovement obj_T10R0101_gsrivel, _0208
-	ApplyMovement obj_player, _01E8
-	WaitMovement
-	WaitFollowingPokemonMovement
-	ToggleFollowingPokemonMovement 1
-	FollowingPokemonMovement 48
-	BufferRivalsName 0
-	NPCMsg msg_0522_T10R0101_00003
-	CloseMsg
-	GetStarterChoice VAR_SPECIAL_RESULT
-	Compare VAR_SPECIAL_RESULT, 152
-	GoToIfNe _016E
-	TrainerBattle TRAINER_RIVAL_SILVER_20, 0, 0, 0
-	GoTo _0191
+	scrcmd_609
+	lockall
+	fade_out_bgm 0, 3
+	apply_movement obj_player, _01DC
+	wait_movement
+	callstd std_play_rival_intro_music
+	get_player_coords VAR_SPECIAL_x8000, VAR_SPECIAL_x8001
+	clearflag FLAG_HIDE_INDIGO_PLATEAU_RIVAL
+	show_person obj_T10R0101_gsrivel
+	move_person_facing obj_T10R0101_gsrivel, VAR_SPECIAL_x8000, 0, 23, DIR_NORTH
+	toggle_following_pokemon_movement 0
+	wait_following_pokemon_movement
+	following_pokemon_movement 55
+	apply_movement obj_T10R0101_gsrivel, _0208
+	apply_movement obj_player, _01E8
+	wait_movement
+	wait_following_pokemon_movement
+	toggle_following_pokemon_movement 1
+	following_pokemon_movement 48
+	buffer_rivals_name 0
+	npc_msg msg_0522_T10R0101_00003
+	closemsg
+	get_starter_choice VAR_SPECIAL_RESULT
+	compare VAR_SPECIAL_RESULT, 152
+	goto_if_ne _016E
+	trainer_battle TRAINER_RIVAL_SILVER_20, 0, 0, 0
+	goto _0191
 
 _016E:
-	Compare VAR_SPECIAL_RESULT, 155
-	GoToIfNe _0189
-	TrainerBattle TRAINER_RIVAL_SILVER_21, 0, 0, 0
-	GoTo _0191
+	compare VAR_SPECIAL_RESULT, 155
+	goto_if_ne _0189
+	trainer_battle TRAINER_RIVAL_SILVER_21, 0, 0, 0
+	goto _0191
 
 _0189:
-	TrainerBattle TRAINER_RIVAL_SILVER_19, 0, 0, 0
+	trainer_battle TRAINER_RIVAL_SILVER_19, 0, 0, 0
 _0191:
-	CheckBattleWon VAR_SPECIAL_RESULT
-	Compare VAR_SPECIAL_RESULT, 0
-	GoToIfEq _01CE
-	CallStd std_play_rival_outro_music
-	BufferRivalsName 0
-	NPCMsg msg_0522_T10R0101_00004
-	CloseMsg
-	ApplyMovement obj_T10R0101_gsrivel, _0210
-	WaitMovement
-	SetVar VAR_UNK_4119, 0
-	SetFlag FLAG_UNK_AA9
-	HidePerson obj_T10R0101_gsrivel
-	CallStd std_fade_end_rival_outro_music
-	ReleaseAll
-	End
+	check_battle_won VAR_SPECIAL_RESULT
+	compare VAR_SPECIAL_RESULT, 0
+	goto_if_eq _01CE
+	callstd std_play_rival_outro_music
+	buffer_rivals_name 0
+	npc_msg msg_0522_T10R0101_00004
+	closemsg
+	apply_movement obj_T10R0101_gsrivel, _0210
+	wait_movement
+	setvar VAR_UNK_4119, 0
+	setflag FLAG_UNK_AA9
+	hide_person obj_T10R0101_gsrivel
+	callstd std_fade_end_rival_outro_music
+	releaseall
+	end
 
 _01CE:
-	HidePerson obj_T10R0101_gsrivel
-	SetFlag FLAG_HIDE_INDIGO_PLATEAU_RIVAL
-	WhiteOut
-	ReleaseAll
-	End
+	hide_person obj_T10R0101_gsrivel
+	setflag FLAG_HIDE_INDIGO_PLATEAU_RIVAL
+	white_out
+	releaseall
+	end
 
 	.balign 4, 0
 _01DC:
-	EmoteExclamationMark
-	Delay8
-	EndMovement
+	step 75, 1
+	step 63, 1
+	step_end
 
 	.balign 4, 0
 _01E8:
-	Delay8 2
-	WalkNormalSouth
-	EndMovement
+	step 63, 2
+	step 13, 1
+	step_end
 
 	.balign 4, 0
 _01F4:
-	Delay8 2
-	WalkNormalEast
-	WalkNormalNorth
-	WalkOnSpotNormalSouth
-	EndMovement
+	step 63, 2
+	step 15, 1
+	step 12, 1
+	step 33, 1
+	step_end
 
 	.balign 4, 0
 _0208:
-	WalkNormalNorth 7
-	EndMovement
+	step 12, 7
+	step_end
 
 	.balign 4, 0
 _0210:
-	WalkOnSpotNormalSouth
-	WalkNormalSouth 7
-	EndMovement
+	step 33, 1
+	step 13, 7
+	step_end
 
 scr_seq_T10R0101_000:
-	SetVar VAR_SPECIAL_x8007, 0
-	CallStd std_nurse_joy
-	End
+	setvar VAR_SPECIAL_x8007, 0
+	callstd std_nurse_joy
+	end
 
 scr_seq_T10R0101_004:
-	PlaySE SEQ_SE_DP_SELECT
-	LockAll
-	FacePlayer
-	CallStd std_mart_intro
-	HoldMsg
-	SetVar VAR_SPECIAL_x8004, 13
-	CallStd std_special_mart
-	ReleaseAll
-	End
+	play_se SEQ_SE_DP_SELECT
+	lockall
+	faceplayer
+	callstd std_mart_intro
+	holdmsg
+	setvar VAR_SPECIAL_x8004, 13
+	callstd std_special_mart
+	releaseall
+	end
 
 scr_seq_T10R0101_008:
-	PlaySE SEQ_SE_DP_SELECT
-	LockAll
-	FacePlayer
-	Compare VAR_TEMP_x4005, 1
-	GoToIfGe _0293
-	NPCMsg msg_0522_T10R0101_00005
-	CloseMsg
-	GetPlayerFacing VAR_TEMP_x4000
-	Compare VAR_TEMP_x4000, 2
-	GoToIfNe _027D
-	ApplyMovement obj_T10R0101_counterm, _02A0
-	GoTo _0287
+	play_se SEQ_SE_DP_SELECT
+	lockall
+	faceplayer
+	compare VAR_TEMP_x4005, 1
+	goto_if_ge _0293
+	npc_msg msg_0522_T10R0101_00005
+	closemsg
+	get_player_facing VAR_TEMP_x4000
+	compare VAR_TEMP_x4000, 2
+	goto_if_ne _027D
+	apply_movement obj_T10R0101_counterm, _02A0
+	goto _0287
 
 _027D:
-	ApplyMovement obj_T10R0101_counterm, _02B0
-	WaitMovement
+	apply_movement obj_T10R0101_counterm, _02B0
+	wait_movement
 _0287:
-	WaitMovement
-	SetVar VAR_TEMP_x4005, 1
-	ReleaseAll
-	End
+	wait_movement
+	setvar VAR_TEMP_x4005, 1
+	releaseall
+	end
 
 _0293:
-	NPCMsg msg_0522_T10R0101_00006
-	WaitButton
-	CloseMsg
-	ReleaseAll
-	End
+	npc_msg msg_0522_T10R0101_00006
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
 
 	.balign 4, 0
 _02A0:
-	LockDir
-	WalkNormalWest
-	UnlockDir
-	EndMovement
+	step 71, 1
+	step 14, 1
+	step 72, 1
+	step_end
 
 	.balign 4, 0
 _02B0:
-	LockDir
-	WalkNormalEast
-	UnlockDir
-	EndMovement
+	step 71, 1
+	step 15, 1
+	step 72, 1
+	step_end
 
 scr_seq_T10R0101_007:
-	PlaySE SEQ_SE_DP_SELECT
-	LockAll
-	FacePlayer
-	NPCMsg msg_0522_T10R0101_00007
-	TouchscreenMenuHide
+	play_se SEQ_SE_DP_SELECT
+	lockall
+	faceplayer
+	npc_msg msg_0522_T10R0101_00007
+	touchscreen_menu_hide
 _02CD:
-	MenuInit 1, 1, 0, 1, VAR_SPECIAL_RESULT
-	MenuItemAdd msg_0522_T10R0101_00008, 255, 0
-	MenuItemAdd msg_0522_T10R0101_00009, 255, 1
-	MenuItemAdd msg_0522_T10R0101_00010, 255, 2
-	MenuExec
-	Switch VAR_SPECIAL_RESULT
-	Case 0, _0317
-	Case 1, _0456
-	GoTo _058C
-	End
+	menu_init 1, 1, 0, 1, VAR_SPECIAL_RESULT
+	menu_item_add msg_0522_T10R0101_00008, 255, 0
+	menu_item_add msg_0522_T10R0101_00009, 255, 1
+	menu_item_add msg_0522_T10R0101_00010, 255, 2
+	menu_exec
+	switch VAR_SPECIAL_RESULT
+	case 0, _0317
+	case 1, _0456
+	goto _058C
+	end
 
 _0317:
-	Compare VAR_UNK_40E6, 0
-	GoToIfEq _037A
-	NPCMsg msg_0522_T10R0101_00011
-	MenuInit 1, 1, 0, 1, VAR_SPECIAL_RESULT
-	MenuItemAdd msg_0522_T10R0101_00012, 255, 0
-	MenuItemAdd msg_0522_T10R0101_00013, 255, 1
-	MenuItemAdd msg_0522_T10R0101_00014, 255, 2
-	MenuExec
-	Switch VAR_SPECIAL_RESULT
-	Case 0, _037A
-	Case 1, _03F1
-	GoTo _0371
-	End
+	compare VAR_UNK_40E6, 0
+	goto_if_eq _037A
+	npc_msg msg_0522_T10R0101_00011
+	menu_init 1, 1, 0, 1, VAR_SPECIAL_RESULT
+	menu_item_add msg_0522_T10R0101_00012, 255, 0
+	menu_item_add msg_0522_T10R0101_00013, 255, 1
+	menu_item_add msg_0522_T10R0101_00014, 255, 2
+	menu_exec
+	switch VAR_SPECIAL_RESULT
+	case 0, _037A
+	case 1, _03F1
+	goto _0371
+	end
 
 _0371:
-	NPCMsg msg_0522_T10R0101_00007
-	GoTo _02CD
+	npc_msg msg_0522_T10R0101_00007
+	goto _02CD
 
 _037A:
-	NPCMsg msg_0522_T10R0101_00015
-	MenuInit 1, 1, 0, 1, VAR_SPECIAL_RESULT
-	MenuItemAdd msg_0522_T10R0101_00016, 255, 0
-	MenuItemAdd msg_0522_T10R0101_00017, 255, 1
-	MenuItemAdd msg_0522_T10R0101_00018, 255, 2
-	MenuItemAdd msg_0522_T10R0101_00019, 255, 3
-	MenuItemAdd msg_0522_T10R0101_00026, 255, 4
-	MenuExec
-	Compare VAR_SPECIAL_RESULT, 4
-	GoToIfEq _03CF
-	CloseMsg
-	ViewRankings RANKINGS_SCOPE_GROUP, RANKINGS_PAGE_POKEMON, VAR_SPECIAL_RESULT
-	NPCMsg msg_0522_T10R0101_00007
-	TouchscreenMenuHide
-	GoTo _02CD
+	npc_msg msg_0522_T10R0101_00015
+	menu_init 1, 1, 0, 1, VAR_SPECIAL_RESULT
+	menu_item_add msg_0522_T10R0101_00016, 255, 0
+	menu_item_add msg_0522_T10R0101_00017, 255, 1
+	menu_item_add msg_0522_T10R0101_00018, 255, 2
+	menu_item_add msg_0522_T10R0101_00019, 255, 3
+	menu_item_add msg_0522_T10R0101_00026, 255, 4
+	menu_exec
+	compare VAR_SPECIAL_RESULT, 4
+	goto_if_eq _03CF
+	closemsg
+	view_rankings RANKINGS_SCOPE_GROUP, RANKINGS_PAGE_POKEMON, VAR_SPECIAL_RESULT
+	npc_msg msg_0522_T10R0101_00007
+	touchscreen_menu_hide
+	goto _02CD
 
 _03CF:
-	Compare VAR_UNK_40E6, 0
-	GoToIfNe _03EB
-	NPCMsg msg_0522_T10R0101_00007
-	GoTo _02CD
+	compare VAR_UNK_40E6, 0
+	goto_if_ne _03EB
+	npc_msg msg_0522_T10R0101_00007
+	goto _02CD
 
 _03E5:
-	GoTo _03F1
+	goto _03F1
 
 _03EB:
-	GoTo _0317
+	goto _0317
 
 _03F1:
-	NPCMsg msg_0522_T10R0101_00015
-	MenuInit 1, 1, 0, 1, VAR_SPECIAL_RESULT
-	MenuItemAdd msg_0522_T10R0101_00020, 255, 0
-	MenuItemAdd msg_0522_T10R0101_00021, 255, 1
-	MenuItemAdd msg_0522_T10R0101_00022, 255, 2
-	MenuItemAdd msg_0522_T10R0101_00023, 255, 3
-	MenuItemAdd msg_0522_T10R0101_00024, 255, 4
-	MenuItemAdd msg_0522_T10R0101_00025, 255, 5
-	MenuItemAdd msg_0522_T10R0101_00026, 255, 6
-	MenuExec
-	Compare VAR_SPECIAL_RESULT, 6
-	GoToIfEq _03CF
-	CloseMsg
-	ViewRankings RANKINGS_SCOPE_GROUP, RANKINGS_PAGE_BATTLE_TOWER, VAR_SPECIAL_RESULT
-	NPCMsg msg_0522_T10R0101_00007
-	TouchscreenMenuHide
-	GoTo _02CD
+	npc_msg msg_0522_T10R0101_00015
+	menu_init 1, 1, 0, 1, VAR_SPECIAL_RESULT
+	menu_item_add msg_0522_T10R0101_00020, 255, 0
+	menu_item_add msg_0522_T10R0101_00021, 255, 1
+	menu_item_add msg_0522_T10R0101_00022, 255, 2
+	menu_item_add msg_0522_T10R0101_00023, 255, 3
+	menu_item_add msg_0522_T10R0101_00024, 255, 4
+	menu_item_add msg_0522_T10R0101_00025, 255, 5
+	menu_item_add msg_0522_T10R0101_00026, 255, 6
+	menu_exec
+	compare VAR_SPECIAL_RESULT, 6
+	goto_if_eq _03CF
+	closemsg
+	view_rankings RANKINGS_SCOPE_GROUP, RANKINGS_PAGE_BATTLE_TOWER, VAR_SPECIAL_RESULT
+	npc_msg msg_0522_T10R0101_00007
+	touchscreen_menu_hide
+	goto _02CD
 
 _0456:
-	Compare VAR_UNK_40E6, 0
-	GoToIfEq _04B0
-	NPCMsg msg_0522_T10R0101_00011
-	MenuInit 1, 1, 0, 1, VAR_SPECIAL_RESULT
-	MenuItemAdd msg_0522_T10R0101_00012, 255, 0
-	MenuItemAdd msg_0522_T10R0101_00013, 255, 1
-	MenuItemAdd msg_0522_T10R0101_00014, 255, 2
-	MenuExec
-	Switch VAR_SPECIAL_RESULT
-	Case 0, _04B0
-	Case 1, _0527
-	GoTo _02CD
-	End
+	compare VAR_UNK_40E6, 0
+	goto_if_eq _04B0
+	npc_msg msg_0522_T10R0101_00011
+	menu_init 1, 1, 0, 1, VAR_SPECIAL_RESULT
+	menu_item_add msg_0522_T10R0101_00012, 255, 0
+	menu_item_add msg_0522_T10R0101_00013, 255, 1
+	menu_item_add msg_0522_T10R0101_00014, 255, 2
+	menu_exec
+	switch VAR_SPECIAL_RESULT
+	case 0, _04B0
+	case 1, _0527
+	goto _02CD
+	end
 
 _04B0:
-	NPCMsg msg_0522_T10R0101_00015
-	MenuInit 1, 1, 0, 1, VAR_SPECIAL_RESULT
-	MenuItemAdd msg_0522_T10R0101_00016, 255, 0
-	MenuItemAdd msg_0522_T10R0101_00017, 255, 1
-	MenuItemAdd msg_0522_T10R0101_00018, 255, 2
-	MenuItemAdd msg_0522_T10R0101_00019, 255, 3
-	MenuItemAdd msg_0522_T10R0101_00026, 255, 4
-	MenuExec
-	Compare VAR_SPECIAL_RESULT, 4
-	GoToIfEq _0505
-	CloseMsg
-	ViewRankings RANKINGS_SCOPE_GLOBAL, RANKINGS_PAGE_POKEMON, VAR_SPECIAL_RESULT
-	NPCMsg msg_0522_T10R0101_00007
-	TouchscreenMenuHide
-	GoTo _02CD
+	npc_msg msg_0522_T10R0101_00015
+	menu_init 1, 1, 0, 1, VAR_SPECIAL_RESULT
+	menu_item_add msg_0522_T10R0101_00016, 255, 0
+	menu_item_add msg_0522_T10R0101_00017, 255, 1
+	menu_item_add msg_0522_T10R0101_00018, 255, 2
+	menu_item_add msg_0522_T10R0101_00019, 255, 3
+	menu_item_add msg_0522_T10R0101_00026, 255, 4
+	menu_exec
+	compare VAR_SPECIAL_RESULT, 4
+	goto_if_eq _0505
+	closemsg
+	view_rankings RANKINGS_SCOPE_GLOBAL, RANKINGS_PAGE_POKEMON, VAR_SPECIAL_RESULT
+	npc_msg msg_0522_T10R0101_00007
+	touchscreen_menu_hide
+	goto _02CD
 
 _0505:
-	Compare VAR_UNK_40E6, 0
-	GoToIfNe _0521
-	NPCMsg msg_0522_T10R0101_00007
-	GoTo _02CD
+	compare VAR_UNK_40E6, 0
+	goto_if_ne _0521
+	npc_msg msg_0522_T10R0101_00007
+	goto _02CD
 
 _051B:
-	GoTo _0527
+	goto _0527
 
 _0521:
-	GoTo _0456
+	goto _0456
 
 _0527:
-	NPCMsg msg_0522_T10R0101_00015
-	MenuInit 1, 1, 0, 1, VAR_SPECIAL_RESULT
-	MenuItemAdd msg_0522_T10R0101_00020, 255, 0
-	MenuItemAdd msg_0522_T10R0101_00021, 255, 1
-	MenuItemAdd msg_0522_T10R0101_00022, 255, 2
-	MenuItemAdd msg_0522_T10R0101_00023, 255, 3
-	MenuItemAdd msg_0522_T10R0101_00024, 255, 4
-	MenuItemAdd msg_0522_T10R0101_00025, 255, 5
-	MenuItemAdd msg_0522_T10R0101_00026, 255, 6
-	MenuExec
-	Compare VAR_SPECIAL_RESULT, 6
-	GoToIfEq _0505
-	CloseMsg
-	ViewRankings RANKINGS_SCOPE_GLOBAL, RANKINGS_PAGE_BATTLE_TOWER, VAR_SPECIAL_RESULT
-	NPCMsg msg_0522_T10R0101_00007
-	TouchscreenMenuHide
-	GoTo _02CD
+	npc_msg msg_0522_T10R0101_00015
+	menu_init 1, 1, 0, 1, VAR_SPECIAL_RESULT
+	menu_item_add msg_0522_T10R0101_00020, 255, 0
+	menu_item_add msg_0522_T10R0101_00021, 255, 1
+	menu_item_add msg_0522_T10R0101_00022, 255, 2
+	menu_item_add msg_0522_T10R0101_00023, 255, 3
+	menu_item_add msg_0522_T10R0101_00024, 255, 4
+	menu_item_add msg_0522_T10R0101_00025, 255, 5
+	menu_item_add msg_0522_T10R0101_00026, 255, 6
+	menu_exec
+	compare VAR_SPECIAL_RESULT, 6
+	goto_if_eq _0505
+	closemsg
+	view_rankings RANKINGS_SCOPE_GLOBAL, RANKINGS_PAGE_BATTLE_TOWER, VAR_SPECIAL_RESULT
+	npc_msg msg_0522_T10R0101_00007
+	touchscreen_menu_hide
+	goto _02CD
 
 _058C:
-	TouchscreenMenuShow
-	CloseMsg
-	ReleaseAll
-	End
+	touchscreen_menu_show
+	closemsg
+	releaseall
+	end
 	.balign 4, 0

@@ -15,7 +15,7 @@ ov29_0225D520: ; 0x0225D520
 	mov r1, #8
 	lsl r2, r0, #0xf
 	add r5, r3, #0
-	bl Heap_Create
+	bl CreateHeap
 	ldr r0, _0225D5E0 ; =0x04001050
 	mov r1, #0
 	strh r1, [r0]
@@ -116,7 +116,7 @@ ov29_0225D5EC: ; 0x0225D5EC
 	add r0, r5, #0
 	bl DestroySysTaskAndEnvironment
 	mov r0, #8
-	bl Heap_Destroy
+	bl DestroyHeap
 	pop {r3, r4, r5, pc}
 	thumb_func_end ov29_0225D5EC
 
@@ -454,7 +454,7 @@ ov29_0225D880: ; 0x0225D880
 	mov r3, #0
 	bl AddCharResObjFromOpenNarc
 	str r0, [r5]
-	bl SpriteTransfer_CreateCharTransferTask_AllocAtEnd
+	bl sub_0200ADA4
 	ldr r0, [r5]
 	bl sub_0200A740
 	ldr r0, [sp, #0x34]
@@ -471,7 +471,7 @@ ov29_0225D880: ; 0x0225D880
 	mov r3, #0
 	bl AddPlttResObjFromOpenNarc
 	str r0, [r5, #4]
-	bl SpriteTransfer_CreatePlttTransferTask
+	bl sub_0200B00C
 	ldr r0, [r5, #4]
 	bl sub_0200A740
 	ldr r0, [sp, #0x38]
@@ -775,19 +775,19 @@ _0225DB44:
 	mov r0, #0x59
 	lsl r0, r0, #2
 	ldr r0, [r6, r0]
-	bl SpriteTransfer_DeleteCharTransferTask
+	bl sub_0200AEB0
 	mov r0, #0x5a
 	lsl r0, r0, #2
 	ldr r0, [r6, r0]
-	bl SpriteTransfer_DeletePlttTransferTask
+	bl sub_0200B0A8
 	mov r0, #0x55
 	lsl r0, r0, #2
 	ldr r0, [r6, r0]
-	bl SpriteTransfer_DeleteCharTransferTask
+	bl sub_0200AEB0
 	mov r0, #0x56
 	lsl r0, r0, #2
 	ldr r0, [r6, r0]
-	bl SpriteTransfer_DeletePlttTransferTask
+	bl sub_0200B0A8
 	pop {r3, r4, r5, r6, r7, pc}
 	thumb_func_end ov29_0225DB38
 
@@ -820,7 +820,7 @@ ov29_0225DB9C: ; 0x0225DB9C
 	lsl r0, r0, #4
 	ldr r0, [r5, r0]
 	add r4, r1, #0
-	bl GridInputHandler_GetDpadBox
+	bl sub_0201A018
 	ldrb r1, [r0]
 	lsl r1, r1, #0xc
 	str r1, [sp]
@@ -869,7 +869,7 @@ ov29_0225DBF0: ; 0x0225DBF0
 	ldr r1, _0225DC2C ; =ov29_0225E280
 	ldr r2, _0225DC30 ; =ov29_0225E13C
 	add r3, r4, #0
-	bl GridInputHandler_Create
+	bl sub_02019BA4
 	mov r1, #0x1d
 	lsl r1, r1, #4
 	str r0, [r4, r1]
@@ -890,11 +890,11 @@ _0225DC30: .word ov29_0225E13C
 ov29_0225DC34: ; 0x0225DC34
 	mov r1, #0x1d
 	lsl r1, r1, #4
-	ldr r3, _0225DC40 ; =GridInputHandler_Free
+	ldr r3, _0225DC40 ; =sub_02019BDC
 	ldr r0, [r0, r1]
 	bx r3
 	nop
-_0225DC40: .word GridInputHandler_Free
+_0225DC40: .word sub_02019BDC
 	thumb_func_end ov29_0225DC34
 
 	thumb_func_start ov29_0225DC44
@@ -1049,7 +1049,7 @@ _0225DD42:
 	lsl r0, r0, #4
 	ldr r0, [r4, r0]
 	mov r1, #0xb
-	bl GridInputHandler_SetNextInput
+	bl sub_02019F7C
 	add r0, r4, #0
 	mov r1, #0xb
 	bl ov29_0225DB9C
@@ -1071,7 +1071,7 @@ _0225DD80:
 	mov r0, #0x1d
 	lsl r0, r0, #4
 	ldr r0, [r4, r0]
-	bl GridInputHandler_HandleInput_AllowHold
+	bl sub_02019D18
 	add r5, r0, #0
 	cmp r5, #0xc
 	bls _0225DD92

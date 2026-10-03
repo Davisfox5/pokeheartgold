@@ -4,10 +4,10 @@
 
 #include "battle/battle_input.h"
 #include "battle/battle_system.h"
+#include "battle/overlay_12_02266024.h"
 
 #include "filesystem_files_def.h"
 #include "gf_gfx_planes.h"
-#include "poke_overlay.h"
 #include "render_text.h"
 #include "sound_02004A44.h"
 #include "system.h"
@@ -47,7 +47,7 @@ BOOL Battle_Run(OverlayManager *man, int *state) {
 
     switch (*state) {
     case BSTATE_INIT:
-        Heap_Create(HEAP_ID_3, HEAP_ID_BATTLE, 0xB0000);
+        CreateHeap(HEAP_ID_3, HEAP_ID_BATTLE, 0xB0000);
         if ((setup->battleType & BATTLE_TYPE_LINK) && !(setup->battleSpecial & BATTLE_SPECIAL_RECORDING)) {
             *state = BSTATE_LINK_INIT;
         } else {
@@ -58,12 +58,12 @@ BOOL Battle_Run(OverlayManager *man, int *state) {
         ov12_022399D4(man, setup);
         sub_02039F68(setup->wifiHistory);
         if (!sub_02039998()) {
-            GameStats_Inc(setup->gameStats, GAME_STAT_LOCAL_LINK_BATTLES);
+            GameStats_Inc(setup->gameStats, GAME_STAT_UNK21);
             if (setup->battleType != 0x8F) {
                 sub_02005BEC(1);
             }
         } else {
-            GameStats_Inc(setup->gameStats, GAME_STAT_WIFI_BATTLES);
+            GameStats_Inc(setup->gameStats, GAME_STAT_UNK26);
         }
         *state = BSTATE_LINK_MAIN;
         break;
@@ -121,14 +121,14 @@ BOOL Battle_Run(OverlayManager *man, int *state) {
         if (ov12_0223A3F0(man) == TRUE) {
             *state = BSTATE_END_MAIN;
         } else {
-            Heap_Destroy(HEAP_ID_BATTLE);
+            DestroyHeap(HEAP_ID_BATTLE);
             *state = BSTATE_EVOLUTION_INIT;
         }
         break;
     case BSTATE_END_MAIN:
         if (ov12_0223A5E4(man) == TRUE) {
             UnloadOverlayByID(FS_OVERLAY_ID(OVY_5));
-            Heap_Destroy(HEAP_ID_BATTLE);
+            DestroyHeap(HEAP_ID_BATTLE);
             *state = BSTATE_END_WAIT;
         }
         break;
@@ -144,7 +144,7 @@ BOOL Battle_Run(OverlayManager *man, int *state) {
         evolutionSpecies = BattleSystem_CheckEvolution(setup, &selectedMonIndex, &evolutionCondition);
 
         if (evolutionSpecies) {
-            Heap_Create(HEAP_ID_3, HEAP_ID_EVOLUTION, 0x30000);
+            CreateHeap(HEAP_ID_3, HEAP_ID_EVOLUTION, 0x30000);
             mon = Party_GetMonByIndex(setup->party[BATTLER_PLAYER], selectedMonIndex);
             setup->evolutionTaskData = sub_02075A7C(setup->party[BATTLER_PLAYER], mon, evolutionSpecies, setup->options, setup->unk_164, setup->pokedex, setup->bag, setup->gameStats, evolutionCondition, 3, HEAP_ID_EVOLUTION);
             *state = BSTATE_EVOLUTION_MAIN;
@@ -157,7 +157,7 @@ BOOL Battle_Run(OverlayManager *man, int *state) {
         void *data = setup->evolutionTaskData;
         if (sub_02075D3C(data) == TRUE) {
             sub_02075D4C(data);
-            Heap_Destroy(HEAP_ID_EVOLUTION);
+            DestroyHeap(HEAP_ID_EVOLUTION);
             *state = BSTATE_EVOLUTION_INIT;
         }
         break;
@@ -168,14 +168,14 @@ BOOL Battle_Run(OverlayManager *man, int *state) {
     return FALSE;
 }
 
-void ov12_02237B0C(BattleSystem *battleSystem) {
-    BattleInput_Free(battleSystem->battleInput);
-    BgConfig_CleanupBattleMenuBackgrounds(battleSystem->bgConfig);
-    battleSystem->unk240E_F = 1;
+void ov12_02237B0C(BattleSystem *bsys) {
+    ov12_0226631C(bsys->unk19C);
+    ov12_022660A8(bsys->bgConfig);
+    bsys->unk240E_F = 1;
     FontID_Release(4);
-    ov12_0223BBF0(battleSystem, 3);
+    ov12_0223BBF0(bsys, 3);
 
-    if (battleSystem->unk2445 == 0) {
+    if (bsys->unk2445 == 0) {
         UnloadOverlayByID(FS_OVERLAY_ID(OVY_7));
     } else {
         UnloadOverlayByID(FS_OVERLAY_ID(OVY_10));
@@ -183,64 +183,64 @@ void ov12_02237B0C(BattleSystem *battleSystem) {
     HandleLoadOverlay(FS_OVERLAY_ID(OVY_8), OVY_LOAD_ASYNC);
 }
 
-void ov12_02237B6C(BattleSystem *battleSystem) {
+void ov12_02237B6C(BattleSystem *bsys) {
     Main_SetVBlankIntrCB(NULL, NULL);
-    BattleInput_Free(battleSystem->battleInput);
-    RemoveWindow(battleSystem->window);
-    ov12_02238A30(battleSystem->bgConfig);
-    ov12_02238A64(battleSystem);
-    SpriteSystem_FreeResourcesAndManager(battleSystem->spriteRenderer, battleSystem->gfxHandler);
-    SpriteSystem_Free(battleSystem->spriteRenderer);
+    ov12_0226631C(bsys->unk19C);
+    RemoveWindow(bsys->window);
+    ov12_02238A30(bsys->bgConfig);
+    ov12_02238A64(bsys);
+    SpriteSystem_FreeResourcesAndManager(bsys->spriteRenderer, bsys->gfxHandler);
+    SpriteSystem_Free(bsys->spriteRenderer);
     GF_DestroyVramTransferManager();
     FontID_Release(4);
 }
 
-void ov12_02237BB8(BattleSystem *battleSystem) {
+void ov12_02237BB8(BattleSystem *bsys) {
     UnloadOverlayByID(FS_OVERLAY_ID(OVY_8));
 
-    if (battleSystem->unk2445 == 0) {
+    if (bsys->unk2445 == 0) {
         HandleLoadOverlay(FS_OVERLAY_ID(OVY_7), OVY_LOAD_ASYNC);
     } else {
         HandleLoadOverlay(FS_OVERLAY_ID(OVY_10), OVY_LOAD_ASYNC);
     }
 
-    ov12_0223BBF0(battleSystem, 0);
+    ov12_0223BBF0(bsys, 0);
 
     int size = sub_02026E9C();
     void *data = GetSubBgPlttAddr();
-    MI_CpuClear16(data, size);
+    MIi_CpuClear16(0, data, size);
 
     NARC *unkNarcA = NARC_New(NARC_a_0_0_7, HEAP_ID_BATTLE);
     NARC *unkNarcB = NARC_New(NARC_a_0_0_8, HEAP_ID_BATTLE);
 
-    battleSystem->battleInput = BattleInput_NewInit(unkNarcA, unkNarcB, battleSystem, BattleSystem_GetTrainerGender(battleSystem, ov12_0223BFC0(battleSystem)), battleSystem->unk1C0);
+    bsys->unk19C = ov12_022660D0(unkNarcA, unkNarcB, bsys, BattleSystem_GetTrainerGender(bsys, ov12_0223BFC0(bsys)), bsys->unk1C0);
 
     FontID_Alloc(4, HEAP_ID_BATTLE);
 
-    battleSystem->unk240F_1 = 1;
+    bsys->unk240F_1 = 1;
 
-    BgConfig_InitBattleMenuBackgrounds(battleSystem->bgConfig);
+    ov12_0226604C(bsys->bgConfig);
     GfGfx_EngineBTogglePlanes(GX_PLANEMASK_OBJ, GF_PLANE_TOGGLE_ON);
-    BattleInput_LoadDefaultResources(battleSystem->battleInput);
-    BattleInput_ChangeMenu(unkNarcA, unkNarcB, battleSystem->battleInput, 0, TRUE, NULL);
-    BattleInput_LoadBallGaugeResources(unkNarcB, battleSystem->battleInput);
+    ov12_02266390(bsys->unk19C);
+    ov12_02266508(unkNarcA, unkNarcB, bsys->unk19C, 0, TRUE, NULL);
+    ov12_02266644(unkNarcB, bsys->unk19C);
 
     NARC_Delete(unkNarcA);
     NARC_Delete(unkNarcB);
 
     TextPrinter_SetDownArrowBaseTile(1);
-    ov12_0223A620(battleSystem);
+    ov12_0223A620(bsys);
 
-    G2dRenderer_SetSubSurfaceCoords(SpriteSystem_GetRenderer(battleSystem->spriteRenderer), 0, FX32_CONST(272));
+    G2dRenderer_SetSubSurfaceCoords(SpriteSystem_GetRenderer(bsys->spriteRenderer), 0, FX32_CONST(272));
 }
 
-void ov12_02237CC4(BattleSystem *battleSystem) {
-    RemoveWindow(battleSystem->window);
+void ov12_02237CC4(BattleSystem *bsys) {
+    RemoveWindow(bsys->window);
 
     GfGfx_EngineATogglePlanes(GX_PLANEMASK_BG0, GF_PLANE_TOGGLE_OFF);
     GfGfx_EngineATogglePlanes(GX_PLANEMASK_BG1, GF_PLANE_TOGGLE_OFF);
-    FreeBgTilemapBuffer(battleSystem->bgConfig, GF_BG_LYR_MAIN_1);
-    FreeBgTilemapBuffer(battleSystem->bgConfig, GF_BG_LYR_MAIN_2);
-    FreeBgTilemapBuffer(battleSystem->bgConfig, GF_BG_LYR_MAIN_3);
-    BattleSystem_SetHpBarDisabled(battleSystem);
+    FreeBgTilemapBuffer(bsys->bgConfig, GF_BG_LYR_MAIN_1);
+    FreeBgTilemapBuffer(bsys->bgConfig, GF_BG_LYR_MAIN_2);
+    FreeBgTilemapBuffer(bsys->bgConfig, GF_BG_LYR_MAIN_3);
+    BattleSystem_SetHpBarDisabled(bsys);
 }

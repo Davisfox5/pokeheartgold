@@ -2,7 +2,7 @@
 <body language="English">
 	<row id="msg_0553_T21R0301_00000" index="0">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">You’re trying to see how good you\nare as a Pokémon Trainer?\rYou better visit the Pokémon Gyms\nall over Johto and collect Badges.</language>
+		<language name="English">You’re trying to see how good you\nare as a Pokémon Trainer?\rReal Badge Gyms are rarer than\nthey used to be, you know.\rAzalea still runs one--that’s\nwhere I’d start.</language>
 	</row>
 	<row id="msg_0553_T21R0301_00001" index="1">
 		<attribute name="window_context_name">used</attribute>

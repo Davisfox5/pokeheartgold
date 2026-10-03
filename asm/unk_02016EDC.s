@@ -59,7 +59,7 @@ sub_02016EDC: ; 0x02016EDC
 	mov r1, #0xc
 	add r6, r0, #0
 	add r7, r2, #0
-	bl Heap_Alloc
+	bl AllocFromHeap
 	add r4, r0, #0
 	strb r7, [r4, #8]
 	mov r0, #0x1d
@@ -70,7 +70,7 @@ sub_02016EDC: ; 0x02016EDC
 	add r0, r6, #0
 	add r1, r7, #0
 	str r6, [r4, #4]
-	bl Heap_Alloc
+	bl AllocFromHeap
 	mov r1, #0
 	add r2, r7, #0
 	str r0, [r4]
@@ -100,9 +100,9 @@ sub_02016F2C: ; 0x02016F2C
 	push {r4, lr}
 	add r4, r0, #0
 	ldr r0, [r4]
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	pop {r4, pc}
 	.balign 4, 0
 	thumb_func_end sub_02016F2C
@@ -304,7 +304,7 @@ sub_02017088: ; 0x02017088
 	ldr r0, [r5]
 	add r0, r0, r4
 	ldr r0, [r0, #8]
-	bl Heap_Free
+	bl FreeToHeap
 _020170C2:
 	pop {r3, r4, r5, pc}
 	thumb_func_end sub_02017088
@@ -336,7 +336,7 @@ _020170DC:
 	mov r0, #0
 	str r0, [r4, #4]
 	ldr r0, [r4, #8]
-	bl Heap_Free
+	bl FreeToHeap
 _020170FA:
 	pop {r3, r4, r5, pc}
 	thumb_func_end sub_020170C4

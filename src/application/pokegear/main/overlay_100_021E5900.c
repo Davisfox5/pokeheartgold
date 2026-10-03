@@ -1,43 +1,40 @@
 #include "global.h"
 
-#include "application/pokegear/pgear_gra.naix"
 #include "application/pokegear/pokegear_internal.h"
 
 #include "map_header.h"
-#include "screen_fade.h"
 #include "system.h"
 #include "touch_hitbox_controller.h"
 #include "unk_02005D10.h"
+#include "unk_0200FA24.h"
 #include "unk_020210A0.h"
 #include "unk_0208805C.h"
 
-static void PokegearApp_DrawAppButtons(PokegearAppData *pokegearApp);
-static BOOL PokegearApp_UpdateAppSwitchButtonBGState(PokegearAppData *pokegearApp, u8 selection, u8 a2);
-static void PokegearApp_InitBGs(PokegearAppData *pokegearApp);
-static void PokegearApp_FreeBGs(PokegearAppData *pokegearApp);
-static void PokegearApp_InitPaletteData(PokegearAppData *pokegearApp);
-static void PokegearApp_FreePaletteData(PokegearAppData *pokegearApp);
-static void PokegearApp_LoadGraphics(PokegearAppData *pokegearApp);
-static void PokegearApp_UnloadGraphics(PokegearAppData *pokegearApp);
+static void ov100_021E5A88(PokegearAppData *pokegearApp);
+static BOOL ov100_021E5B4C(PokegearAppData *pokegearApp, u8 selection, u8 a2);
+static void ov100_021E5FFC(PokegearAppData *pokegearApp);
+static void ov100_021E6094(PokegearAppData *pokegearApp);
+static void ov100_021E60C4(PokegearAppData *pokegearApp);
+static void ov100_021E6134(PokegearAppData *pokegearApp);
+static void ov100_021E616C(PokegearAppData *pokegearApp);
+static void ov100_021E6338(PokegearAppData *pokegearApp);
 static void Pokegear_AddAppSwitchButtons(PokegearAppData *pokegearApp);
 static void Pokegear_RemoveAppSwitchButtons(PokegearAppData *pokegearApp);
 
-// clang-format off
 static const TouchscreenHitbox sTouchscreenButtonHitboxes[] = {
-    { .rect = { 160, 192,   8,  56 } },
-    { .rect = { 160, 192,  56, 104 } },
-    { .rect = { 160, 192, 104, 152 } },
-    { .rect = { 160, 192, 152, 200 } },
-    { .rect = { 160, 192, 206, 254 } },
+    { .rect = { 0xA0, 0xC0, 0x08, 0x38 } },
+    { .rect = { 0xA0, 0xC0, 0x38, 0x68 } },
+    { .rect = { 0xA0, 0xC0, 0x68, 0x98 } },
+    { .rect = { 0xA0, 0xC0, 0x98, 0xC8 } },
+    { .rect = { 0xA0, 0xC0, 0xCE, 0xFE } },
     { .rect = { TOUCHSCREEN_RECTLIST_END } },
 };
-// clang-format on
 
-static const u8 sAppToButtonIndex[][4] = {
-    { 0, 0xFF, 0xFF, 1 },
-    { 0, 0xFF, 1,    2 },
-    { 0, 1,    0xFF, 2 },
-    { 0, 1,    2,    3 },
+static const u8 ov100_021E74B4[][4] = {
+    { 0x00, 0xFF, 0xFF, 0x01 },
+    { 0x00, 0xFF, 0x01, 0x02 },
+    { 0x00, 0x01, 0xFF, 0x02 },
+    { 0x00, 0x01, 0x02, 0x03 },
 };
 
 BOOL PokegearApp_HandleInputModeChangeToButtons(PokegearAppData *pokegearApp) {
@@ -72,7 +69,7 @@ int PokegearApp_HandleTouchInput_SwitchApps(PokegearAppData *pokegearApp) {
     if ((newApp == GEAR_APP_RADIO && !(pokegearApp->registeredCards & GEARCARD_RADIO)) || (newApp == GEAR_APP_MAP && !(pokegearApp->registeredCards & GEARCARD_MAP))) {
         return GEAR_APP_NO_INPUT;
     }
-    PokegearApp_UpdateAppSwitchButtonBGState(pokegearApp, newApp, 1);
+    ov100_021E5B4C(pokegearApp, newApp, 1);
     PlaySE(newApp != GEAR_APP_CANCEL ? SEQ_SE_GS_GEARAPPLICHANGE : SEQ_SE_GS_GEARCANCEL);
     pokegearApp->cursorInAppSwitchZone = 0;
     pokegearApp->menuInputState = MENU_INPUT_STATE_TOUCH;
@@ -85,8 +82,8 @@ int PokegearApp_HandleKeyInput_SwitchApps(PokegearAppData *pokegearApp) {
         return GEAR_APP_CANCEL;
     }
     if (gSystem.newKeys & PAD_BUTTON_A) {
-        PokegearCursorGrid *buttonSpec = &pokegearApp->cursorManager->lastCursor->grid[pokegearApp->cursorManager->lastCursor->cursorPos];
-        PokegearCursorManager_SetCursorSpritesDrawState(pokegearApp->cursorManager, 0, FALSE);
+        PokegearAppSwitchButtonSpec *buttonSpec = &pokegearApp->appSwitch->lastButton->buttonSpec[pokegearApp->appSwitch->lastButton->cursorPos];
+        PokegearAppSwitchCursor_SetCursorSpritesDrawState(pokegearApp->appSwitch, 0, FALSE);
         pokegearApp->cursorInAppSwitchZone = 0;
         PlaySE(buttonSpec->appId != GEAR_APP_CANCEL ? SEQ_SE_GS_GEARAPPLICHANGE : SEQ_SE_GS_GEARCANCEL);
         if (buttonSpec->appId == pokegearApp->app) {
@@ -95,29 +92,25 @@ int PokegearApp_HandleKeyInput_SwitchApps(PokegearAppData *pokegearApp) {
             }
             return GEAR_APP_NO_INPUT;
         }
-        PokegearApp_UpdateAppSwitchButtonBGState(pokegearApp, buttonSpec->appId, 1);
+        ov100_021E5B4C(pokegearApp, buttonSpec->appId, 1);
         return buttonSpec->appId;
     }
     if (gSystem.newKeys & PAD_KEY_LEFT) {
         PlaySE(SEQ_SE_GS_GEARCURSOR);
-        PokegearCursorManager_MoveActiveCursor(pokegearApp->cursorManager, 0);
+        ov100_021E73AC(pokegearApp->appSwitch, 0);
         return GEAR_APP_NO_INPUT;
     }
     if (gSystem.newKeys & PAD_KEY_RIGHT) {
         PlaySE(SEQ_SE_GS_GEARCURSOR);
-        PokegearCursorManager_MoveActiveCursor(pokegearApp->cursorManager, 1);
+        ov100_021E73AC(pokegearApp->appSwitch, 1);
         return GEAR_APP_NO_INPUT;
     }
     return GEAR_APP_NO_INPUT;
 }
 
-static void PokegearApp_DrawAppButtons(PokegearAppData *pokegearApp) {
+static void ov100_021E5A88(PokegearAppData *pokegearApp) {
     u8 registeredCards = pokegearApp->registeredCards;
-
-    // Draw the full picker
     CopyToBgTilemapRect(pokegearApp->bgConfig, GF_BG_LYR_MAIN_0, 0, 20, 32, 4, pokegearApp->unk_0C8->rawData, 0, 0, pokegearApp->unk_0C8->screenWidth / 8, pokegearApp->unk_0C8->screenHeight / 8);
-
-    // Mask out cards that have not yet been unlocked
     if (!(registeredCards & GEARCARD_MAP)) {
         CopyToBgTilemapRect(pokegearApp->bgConfig, GF_BG_LYR_MAIN_0, 13, 20, 6, 4, pokegearApp->unk_0C8->rawData, 0, 8, pokegearApp->unk_0C8->screenWidth / 8, pokegearApp->unk_0C8->screenHeight / 8);
     }
@@ -127,104 +120,101 @@ static void PokegearApp_DrawAppButtons(PokegearAppData *pokegearApp) {
     ScheduleBgTilemapBufferTransfer(pokegearApp->bgConfig, GF_BG_LYR_MAIN_0);
 }
 
-static BOOL PokegearApp_UpdateAppSwitchButtonBGState(PokegearAppData *pokegearApp, u8 selection, u8 selected) {
-    u8 x;
-
-    PokegearApp_DrawAppButtons(pokegearApp);
+static BOOL ov100_021E5B4C(PokegearAppData *pokegearApp, u8 selection, u8 a2) {
+    u8 destX;
+    ov100_021E5A88(pokegearApp);
     if (selection == GEAR_APP_CANCEL) {
-        x = 26;
+        destX = 26;
     } else {
-        x = selection * 6 + 1;
+        destX = selection * 6 + 1;
     }
-    CopyToBgTilemapRect(pokegearApp->bgConfig, GF_BG_LYR_MAIN_0, x, 20, 6, 4, pokegearApp->unk_0C8->rawData, x, selected * 4, pokegearApp->unk_0C8->screenWidth / 8, pokegearApp->unk_0C8->screenHeight / 8);
+    CopyToBgTilemapRect(pokegearApp->bgConfig, GF_BG_LYR_MAIN_0, destX, 20, 6, 4, pokegearApp->unk_0C8->rawData, destX, a2 * 4, pokegearApp->unk_0C8->screenWidth / 8, pokegearApp->unk_0C8->screenHeight / 8);
     ScheduleBgTilemapBufferTransfer(pokegearApp->bgConfig, GF_BG_LYR_MAIN_0);
     return FALSE;
 }
 
-BOOL PokegearApp_UpdateClockSprites(PokegearAppData *pokegearApp, BOOL force) {
+BOOL ov100_021E5BB0(PokegearAppData *pokegearApp, BOOL a1) {
     RTCDate date;
     RTCTime time;
-    u8 digitBuf[4];
+    u8 sp0[4];
 
     GF_RTC_CopyDateTime(&date, &time);
-    if (!force && pokegearApp->time.second == time.second) {
+    if (a1 == 0 && pokegearApp->unk_080.second == time.second) {
         return FALSE;
     }
 
-    digitBuf[0] = time.hour / 10;
-    digitBuf[1] = time.hour % 10;
-    digitBuf[2] = time.minute / 10;
-    digitBuf[3] = time.minute % 10;
+    sp0[0] = time.hour / 10;
+    sp0[1] = time.hour % 10;
+    sp0[2] = time.minute / 10;
+    sp0[3] = time.minute % 10;
     for (u8 i = 0; i < 4; i++) {
-        ManagedSprite_SetAnimationFrame(pokegearApp->uiSprites[i + 5], digitBuf[i]);
+        ManagedSprite_SetAnimationFrame(pokegearApp->unk_098[i + 5].managed, sp0[i]);
     }
-    ManagedSprite_SetAnimationFrame(pokegearApp->uiSprites[4], date.week);
-    pokegearApp->time = time;
-    pokegearApp->needClockUpdate = 0;
+    ManagedSprite_SetAnimationFrame(pokegearApp->unk_098[4].managed, date.week);
+    pokegearApp->unk_080 = time;
+    pokegearApp->unk_007 = 0;
     return TRUE;
 }
 
-PokegearRegion Pokegear_RegionFromCoords(u16 x, u16 y) {
+int ov100_021E5C50(u16 x, u16 y) {
     if (x > 21) {
         if (x == 25 && y == 8) {
-            // Mt. Silver
-            return POKEGEAR_REGION_JOHTO;
+            return 2;
         } else if ((x == 28 && y == 6) || (x == 28 && y > 8 && y < 13)) {
-            // Indigo Plateau or Victory Road
-            return POKEGEAR_REGION_INDIGO;
+            return 1;
         } else {
-            return POKEGEAR_REGION_KANTO;
+            return 0;
         }
     }
 
-    return POKEGEAR_REGION_JOHTO;
+    return 2;
 }
 
-int Pokegear_GetCurrentRegion(PokegearAppData *pokegearApp) {
-    return Pokegear_RegionFromCoords(pokegearApp->args->x / 32, pokegearApp->args->z / 32);
+int ov100_021E5C80(PokegearAppData *pokegearApp) {
+    return ov100_021E5C50(pokegearApp->args->x / 32, pokegearApp->args->y / 32);
 }
 
-void Pokegear_ClearAppBgLayers(PokegearAppData *pokegearApp) {
-    BG_LoadBlankPltt(GF_BG_LYR_MAIN_3, 0x1C0, 0, pokegearApp->heapID);
-    BG_LoadBlankPltt(GF_BG_LYR_SUB_3, 0x180, 0, pokegearApp->heapID);
+void ov100_021E5CA4(PokegearAppData *pokegearApp) {
+    BG_LoadBlankPltt(GF_BG_LYR_MAIN_3, 0x1C0, 0, pokegearApp->heapId);
+    BG_LoadBlankPltt(GF_BG_LYR_SUB_3, 0x180, 0, pokegearApp->heapId);
     for (int i = 0; i < 3; ++i) {
         BgClearTilemapBufferAndCommit(pokegearApp->bgConfig, i + 1);
-        BG_ClearCharDataRange(i + 1, 0x40, 0, pokegearApp->heapID);
+        BG_ClearCharDataRange(i + 1, 0x40, 0, pokegearApp->heapId);
         BgCommitTilemapBufferToVram(pokegearApp->bgConfig, i + 1);
         FreeBgTilemapBuffer(pokegearApp->bgConfig, i + 1);
         BgClearTilemapBufferAndCommit(pokegearApp->bgConfig, i + 5);
-        BG_ClearCharDataRange(i + 5, 0x40, 0, pokegearApp->heapID);
+        BG_ClearCharDataRange(i + 5, 0x40, 0, pokegearApp->heapId);
         BgCommitTilemapBufferToVram(pokegearApp->bgConfig, i + 5);
         FreeBgTilemapBuffer(pokegearApp->bgConfig, i + 5);
     }
 }
 
-BOOL Pokegear_RunFadeLayers123(PokegearAppData *pokegearApp, int direction) {
-    if (pokegearApp->fadeCounter > 16) {
+BOOL ov100_021E5D3C(PokegearAppData *pokegearApp, int a1) {
+    if (pokegearApp->unk_009 > 16) {
         return TRUE;
     }
-    if (direction == 0) {
-        PaletteData_BlendPalette(pokegearApp->plttData, PLTTBUF_MAIN_BG, 0, 0xE0, 16 - pokegearApp->fadeCounter, RGB_BLACK);
-        PaletteData_BlendPalette(pokegearApp->plttData, PLTTBUF_MAIN_OBJ, 0x40, 0xC0, 16 - pokegearApp->fadeCounter, RGB_BLACK);
+    if (a1 == 0) {
+        PaletteData_BlendPalette(pokegearApp->plttData, PLTTBUF_MAIN_BG, 0, 0xE0, 16 - pokegearApp->unk_009, RGB_BLACK);
+        PaletteData_BlendPalette(pokegearApp->plttData, PLTTBUF_MAIN_OBJ, 0x40, 0xC0, 16 - pokegearApp->unk_009, RGB_BLACK);
     } else {
-        PaletteData_BlendPalette(pokegearApp->plttData, PLTTBUF_MAIN_BG, 0, 0xE0, pokegearApp->fadeCounter, RGB_BLACK);
-        PaletteData_BlendPalette(pokegearApp->plttData, PLTTBUF_MAIN_OBJ, 0x40, 0xC0, pokegearApp->fadeCounter, RGB_BLACK);
+        PaletteData_BlendPalette(pokegearApp->plttData, PLTTBUF_MAIN_BG, 0, 0xE0, pokegearApp->unk_009, RGB_BLACK);
+        PaletteData_BlendPalette(pokegearApp->plttData, PLTTBUF_MAIN_OBJ, 0x40, 0xC0, pokegearApp->unk_009, RGB_BLACK);
     }
-    if (pokegearApp->fadeCounter >= 16) {
-        pokegearApp->fadeCounter += 2;
+    if (pokegearApp->unk_009 >= 16) {
+        pokegearApp->unk_009 += 2;
         return TRUE;
     } else {
-        pokegearApp->fadeCounter += 2;
+        pokegearApp->unk_009 += 2;
         return FALSE;
     }
 }
 
-u8 PokegearApp_AppIdToButtonIndex(PokegearAppData *pokegearApp) {
-    return sAppToButtonIndex[pokegearApp->registeredCards][pokegearApp->app];
+u8 ov100_021E5DC8(PokegearAppData *pokegearApp) {
+    return ov100_021E74B4[pokegearApp->registeredCards][pokegearApp->app];
 }
 
-BOOL PokegearApp_LoadGFX(PokegearAppData *pokegearApp) {
-    switch (pokegearApp->substate) {
+BOOL ov100_021E5DDC(PokegearAppData *pokegearApp) {
+    switch (pokegearApp->unk_018) {
     case 0:
         Main_SetVBlankIntrCB(NULL, NULL);
         HBlankInterruptDisable();
@@ -234,62 +224,62 @@ BOOL PokegearApp_LoadGFX(PokegearAppData *pokegearApp) {
         GXS_SetVisiblePlane(0);
         sub_0200FBF4(PM_LCD_TOP, RGB_BLACK);
         sub_0200FBF4(PM_LCD_BOTTOM, RGB_BLACK);
-        ResetVisibleHardwareWindows(PM_LCD_TOP);
-        ResetVisibleHardwareWindows(PM_LCD_BOTTOM);
+        sub_0200FBDC(PM_LCD_TOP);
+        sub_0200FBDC(PM_LCD_BOTTOM);
         sub_020210BC();
         sub_02021148(2);
         break;
     case 1:
-        PokegearApp_InitBGs(pokegearApp);
-        PokegearApp_InitPaletteData(pokegearApp);
+        ov100_021E5FFC(pokegearApp);
+        ov100_021E60C4(pokegearApp);
         break;
     case 2:
-        PokegearApp_LoadGraphics(pokegearApp);
+        ov100_021E616C(pokegearApp);
         Pokegear_AddAppSwitchButtons(pokegearApp);
         break;
     case 3:
         Main_SetVBlankIntrCB(PokegearApp_VBlankCB, pokegearApp);
-        pokegearApp->substate = 0;
+        pokegearApp->unk_018 = 0;
         return TRUE;
     }
-    ++pokegearApp->substate;
+    ++pokegearApp->unk_018;
     return FALSE;
 }
 
-BOOL PokegearApp_UnloadGFX(PokegearAppData *pokegearApp) {
+BOOL ov100_021E5E88(PokegearAppData *pokegearApp) {
     sub_02021238();
     Main_SetVBlankIntrCB(NULL, pokegearApp);
     Pokegear_RemoveAppSwitchButtons(pokegearApp);
-    PokegearApp_UnloadGraphics(pokegearApp);
-    PokegearApp_FreePaletteData(pokegearApp);
-    PokegearApp_FreeBGs(pokegearApp);
+    ov100_021E6338(pokegearApp);
+    ov100_021E6134(pokegearApp);
+    ov100_021E6094(pokegearApp);
     return TRUE;
 }
 
-void PokegearApp_LoadSkinGraphics(PokegearAppData *pokegearApp, u8 skinIdx) {
-    NARC *narc = NARC_New(NARC_application_pokegear_pgear_gra, pokegearApp->heapID);
-    BgConfig_LoadAssetFromOpenNarc(pokegearApp->bgConfig, pokegearApp->heapID, narc, NARC_application_pokegear_pgear_gra, skinIdx + NARC_pgear_gra_pgear_gra_00000048_NCGR, GF_BG_LYR_MAIN_0, GF_BG_GFX_TYPE_CHAR, 0, 0);
-    BgConfig_LoadAssetFromOpenNarc(pokegearApp->bgConfig, pokegearApp->heapID, narc, NARC_application_pokegear_pgear_gra, skinIdx + NARC_pgear_gra_pgear_gra_00000036_NCGR, GF_BG_LYR_SUB_0, GF_BG_GFX_TYPE_CHAR, 0, 0);
-    PaletteData_LoadFromOpenNarc(pokegearApp->plttData, narc, skinIdx + NARC_pgear_gra_pgear_gra_00000030_NCLR, pokegearApp->heapID, PLTTBUF_MAIN_BG, 0x40, 0xE0, 0xE0);
-    PaletteData_LoadFromOpenNarc(pokegearApp->plttData, narc, skinIdx + NARC_pgear_gra_pgear_gra_00000024_NCLR, pokegearApp->heapID, PLTTBUF_SUB_BG, 0x80, 0xC0, 0xC0);
-    PaletteData_LoadFromOpenNarc(pokegearApp->plttData, narc, skinIdx + NARC_pgear_gra_pgear_gra_00000000_NCLR, pokegearApp->heapID, PLTTBUF_MAIN_OBJ, 0x80, 0, 0);
-    PaletteData_LoadFromOpenNarc(pokegearApp->plttData, narc, skinIdx + NARC_pgear_gra_pgear_gra_00000000_NCLR, pokegearApp->heapID, PLTTBUF_SUB_OBJ, 0x80, 0, 0);
+void ov100_021E5EB4(PokegearAppData *pokegearApp, int a1) {
+    NARC *narc = NARC_New(NARC_a_1_4_3, pokegearApp->heapId);
+    sub_0208820C(pokegearApp->bgConfig, pokegearApp->heapId, narc, NARC_a_1_4_3, a1 + 48, GF_BG_LYR_MAIN_0, 0, 0, 0);
+    sub_0208820C(pokegearApp->bgConfig, pokegearApp->heapId, narc, NARC_a_1_4_3, a1 + 36, GF_BG_LYR_SUB_0, 0, 0, 0);
+    PaletteData_LoadFromOpenNarc(pokegearApp->plttData, narc, a1 + 30, pokegearApp->heapId, PLTTBUF_MAIN_BG, 0x40, 0xE0, 0xE0);
+    PaletteData_LoadFromOpenNarc(pokegearApp->plttData, narc, a1 + 24, pokegearApp->heapId, PLTTBUF_SUB_BG, 0x80, 0xC0, 0xC0);
+    PaletteData_LoadFromOpenNarc(pokegearApp->plttData, narc, a1, pokegearApp->heapId, PLTTBUF_MAIN_OBJ, 0x80, 0, 0);
+    PaletteData_LoadFromOpenNarc(pokegearApp->plttData, narc, a1, pokegearApp->heapId, PLTTBUF_SUB_OBJ, 0x80, 0, 0);
 
-    NARC_ReadWholeMember(narc, skinIdx + NARC_pgear_gra_pgear_gra_00000054_NSCR, pokegearApp->unk_0C4);
+    NARC_ReadWholeMember(narc, a1 + 54, pokegearApp->unk_0C4);
     NNS_G2dGetUnpackedScreenData(pokegearApp->unk_0C4, &pokegearApp->unk_0C8);
     if (pokegearApp->app == GEAR_APP_CANCEL) {
-        PokegearApp_UpdateAppSwitchButtonBGState(pokegearApp, 2, 1);
+        ov100_021E5B4C(pokegearApp, 2, 1);
     } else {
-        PokegearApp_UpdateAppSwitchButtonBGState(pokegearApp, pokegearApp->app, 1);
+        ov100_021E5B4C(pokegearApp, pokegearApp->app, 1);
     }
-    BgConfig_LoadAssetFromOpenNarc(pokegearApp->bgConfig, pokegearApp->heapID, narc, NARC_application_pokegear_pgear_gra, skinIdx + NARC_pgear_gra_pgear_gra_00000042_NSCR, GF_BG_LYR_SUB_0, GF_BG_GFX_TYPE_SCRN, 0, 0);
+    sub_0208820C(pokegearApp->bgConfig, pokegearApp->heapId, narc, NARC_a_1_4_3, a1 + 42, GF_BG_LYR_SUB_0, 1, 0, 0);
     NARC_Delete(narc);
     ScheduleBgTilemapBufferTransfer(pokegearApp->bgConfig, GF_BG_LYR_MAIN_0);
     ScheduleBgTilemapBufferTransfer(pokegearApp->bgConfig, GF_BG_LYR_SUB_0);
 }
 
-void PokegearApp_SetGraphicsBanks(void) {
-    GraphicsBanks gfxBanks = {
+void ov100_021E5FDC(void) {
+    GraphicsBanks sp0 = {
         .bg = GX_VRAM_BG_128_A,
         .bgextpltt = GX_VRAM_BGEXTPLTT_NONE,
         .subbg = GX_VRAM_SUB_BG_128_C,
@@ -301,12 +291,12 @@ void PokegearApp_SetGraphicsBanks(void) {
         .tex = GX_VRAM_TEX_NONE,
         .texpltt = GX_VRAM_TEXPLTT_NONE,
     };
-    GfGfx_SetBanks(&gfxBanks);
+    GfGfx_SetBanks(&sp0);
 }
 
-static void PokegearApp_InitBGs(PokegearAppData *pokegearApp) {
-    PokegearApp_SetGraphicsBanks();
-    pokegearApp->bgConfig = BgConfig_Alloc(pokegearApp->heapID);
+static void ov100_021E5FFC(PokegearAppData *pokegearApp) {
+    ov100_021E5FDC();
+    pokegearApp->bgConfig = BgConfig_Alloc(pokegearApp->heapId);
     GX_SetDispSelect(GX_DISP_SELECT_SUB_MAIN);
     {
         GraphicsModes modes = {
@@ -351,11 +341,10 @@ static void PokegearApp_InitBGs(PokegearAppData *pokegearApp) {
              .mosaic = FALSE,
              },
         };
-        // GF_BG_LYR_MAIN_0, GF_BG_LYR_SUB_0
         for (int i = 0; i < 2; ++i) {
             InitBgFromTemplate(pokegearApp->bgConfig, i * 4, &bgTemplates[i], GF_BG_TYPE_TEXT);
             BgClearTilemapBufferAndCommit(pokegearApp->bgConfig, i * 4);
-            BG_ClearCharDataRange(i * 4, 0x20, 0, pokegearApp->heapID);
+            BG_ClearCharDataRange(i * 4, 0x20, 0, pokegearApp->heapId);
         }
     }
 
@@ -363,27 +352,27 @@ static void PokegearApp_InitBGs(PokegearAppData *pokegearApp) {
     ToggleBgLayer(GF_BG_LYR_SUB_0, FALSE);
 }
 
-static void PokegearApp_FreeBGs(PokegearAppData *pokegearApp) {
+static void ov100_021E6094(PokegearAppData *pokegearApp) {
     FreeBgTilemapBuffer(pokegearApp->bgConfig, GF_BG_LYR_SUB_0);
     FreeBgTilemapBuffer(pokegearApp->bgConfig, GF_BG_LYR_MAIN_0);
-    Heap_Free(pokegearApp->bgConfig);
+    FreeToHeap(pokegearApp->bgConfig);
     GX_SetDispSelect(GX_DISP_SELECT_SUB_MAIN);
 }
 
-static void PokegearApp_InitPaletteData(PokegearAppData *pokegearApp) {
-    NARC *narc = NARC_New(NARC_application_pokegear_pgear_gra, pokegearApp->heapID);
-    pokegearApp->plttData = PaletteData_Init(pokegearApp->heapID);
-    PaletteData_AllocBuffers(pokegearApp->plttData, PLTTBUF_MAIN_BG, 0x200, pokegearApp->heapID);
-    PaletteData_AllocBuffers(pokegearApp->plttData, PLTTBUF_MAIN_OBJ, 0x200, pokegearApp->heapID);
-    PaletteData_AllocBuffers(pokegearApp->plttData, PLTTBUF_SUB_BG, 0x200, pokegearApp->heapID);
-    PaletteData_AllocBuffers(pokegearApp->plttData, PLTTBUF_SUB_OBJ, 0x200, pokegearApp->heapID);
-    pokegearApp->unk_0C4 = Heap_Alloc(pokegearApp->heapID, GetNarcMemberSizeByIdPair(NARC_application_pokegear_pgear_gra, NARC_pgear_gra_pgear_gra_00000054_NSCR));
-    PokegearApp_LoadSkinGraphics(pokegearApp, pokegearApp->skin);
+static void ov100_021E60C4(PokegearAppData *pokegearApp) {
+    NARC *narc = NARC_New(NARC_a_1_4_3, pokegearApp->heapId);
+    pokegearApp->plttData = PaletteData_Init(pokegearApp->heapId);
+    PaletteData_AllocBuffers(pokegearApp->plttData, PLTTBUF_MAIN_BG, 0x200, pokegearApp->heapId);
+    PaletteData_AllocBuffers(pokegearApp->plttData, PLTTBUF_MAIN_OBJ, 0x200, pokegearApp->heapId);
+    PaletteData_AllocBuffers(pokegearApp->plttData, PLTTBUF_SUB_BG, 0x200, pokegearApp->heapId);
+    PaletteData_AllocBuffers(pokegearApp->plttData, PLTTBUF_SUB_OBJ, 0x200, pokegearApp->heapId);
+    pokegearApp->unk_0C4 = AllocFromHeap(pokegearApp->heapId, GetNarcMemberSizeByIdPair(NARC_a_1_4_3, 54));
+    ov100_021E5EB4(pokegearApp, pokegearApp->unk_008);
     NARC_Delete(narc); // was never actually used
 }
 
-static void PokegearApp_FreePaletteData(PokegearAppData *pokegearApp) {
-    Heap_Free(pokegearApp->unk_0C4);
+static void ov100_021E6134(PokegearAppData *pokegearApp) {
+    FreeToHeap(pokegearApp->unk_0C4);
     PaletteData_FreeBuffers(pokegearApp->plttData, PLTTBUF_SUB_OBJ);
     PaletteData_FreeBuffers(pokegearApp->plttData, PLTTBUF_SUB_BG);
     PaletteData_FreeBuffers(pokegearApp->plttData, PLTTBUF_MAIN_OBJ);
@@ -392,76 +381,268 @@ static void PokegearApp_FreePaletteData(PokegearAppData *pokegearApp) {
     pokegearApp->plttData = NULL;
 }
 
-static void PokegearApp_LoadGraphics(PokegearAppData *pokegearApp) {
-    PokegearApp_CreateSpriteSystem(pokegearApp);
-    pokegearApp->uiManager = PokegearUIManager_Create(pokegearApp->heapID, 11, 1, pokegearApp->skin, NNS_G2D_VRAM_TYPE_2DBOTH, 2);
+static void ov100_021E616C(PokegearAppData *pokegearApp) {
+    ov100_021E6914(pokegearApp);
+    pokegearApp->unk_094 = ov100_021E69F8(pokegearApp->heapId, 11, 1, pokegearApp->unk_008, 3, 2);
     for (int i = 0; i < 4; ++i) {
-        pokegearApp->uiSprites[i] = PokegearUIManager_CreateSprite(pokegearApp->uiManager, 64, 64, 0, 0, 0, i, i + 4, 0);
+        pokegearApp->unk_098[i].managed = ov100_021E6AC0(pokegearApp->unk_094, 0x40, 0x40, 0, 0, 0, i, i + 4, 0);
     }
-    pokegearApp->uiSprites[4] = PokegearUIManager_CreateSprite(pokegearApp->uiManager, 173, 48, 0, 0, 0, 4, 2, 1);
-    pokegearApp->uiSprites[5] = PokegearUIManager_CreateSprite(pokegearApp->uiManager, 70, 46, 0, 0, 0, 5, 0, 1);
-    pokegearApp->uiSprites[6] = PokegearUIManager_CreateSprite(pokegearApp->uiManager, 86, 46, 0, 0, 0, 6, 0, 1);
-    pokegearApp->uiSprites[7] = PokegearUIManager_CreateSprite(pokegearApp->uiManager, 110, 46, 0, 0, 0, 7, 0, 1);
-    pokegearApp->uiSprites[8] = PokegearUIManager_CreateSprite(pokegearApp->uiManager, 126, 46, 0, 0, 0, 8, 0, 1);
-    pokegearApp->uiSprites[9] = PokegearUIManager_CreateSprite(pokegearApp->uiManager, 98, 46, 0, 0, 0, 9, 1, 1);
-    pokegearApp->uiSprites[10] = PokegearUIManager_CreateSprite(pokegearApp->uiManager, 197, 48, 0, 0, 0, 10, 3, 1);
-    PokegearApp_UpdateClockSprites(pokegearApp, TRUE);
+    pokegearApp->unk_098[4].managed = ov100_021E6AC0(pokegearApp->unk_094, 0xAD, 0x30, 0, 0, 0, 4, 2, 1);
+    pokegearApp->unk_098[5].managed = ov100_021E6AC0(pokegearApp->unk_094, 0x46, 0x2E, 0, 0, 0, 5, 0, 1);
+    pokegearApp->unk_098[6].managed = ov100_021E6AC0(pokegearApp->unk_094, 0x56, 0x2E, 0, 0, 0, 6, 0, 1);
+    pokegearApp->unk_098[7].managed = ov100_021E6AC0(pokegearApp->unk_094, 0x6E, 0x2E, 0, 0, 0, 7, 0, 1);
+    pokegearApp->unk_098[8].managed = ov100_021E6AC0(pokegearApp->unk_094, 0x7E, 0x2E, 0, 0, 0, 8, 0, 1);
+    pokegearApp->unk_098[9].managed = ov100_021E6AC0(pokegearApp->unk_094, 0x62, 0x2E, 0, 0, 0, 9, 1, 1);
+    pokegearApp->unk_098[10].managed = ov100_021E6AC0(pokegearApp->unk_094, 0xC5, 0x30, 0, 0, 0, 10, 3, 1);
+    ov100_021E5BB0(pokegearApp, TRUE);
 
-    ManagedSprite_SetAnimateFlag(pokegearApp->uiSprites[9], TRUE);
+    ManagedSprite_SetAnimateFlag(pokegearApp->unk_098[9].managed, TRUE);
     if (!MapHeader_CanPlacePhoneCalls(pokegearApp->args->mapID)) {
-        ManagedSprite_SetAnimationFrame(pokegearApp->uiSprites[10], 1);
+        ManagedSprite_SetAnimationFrame(pokegearApp->unk_098[10].managed, 1);
     }
 
     for (int i = 0; i <= 3; ++i) {
-        ManagedSprite_SetDrawFlag(pokegearApp->uiSprites[i], FALSE);
-        ManagedSprite_SetAnimateFlag(pokegearApp->uiSprites[i], TRUE);
+        ManagedSprite_SetDrawFlag(pokegearApp->unk_098[i].managed, FALSE);
+        ManagedSprite_SetAnimateFlag(pokegearApp->unk_098[i].managed, TRUE);
     }
 
     for (int i = 4; i < 11; ++i) {
-        ManagedSprite_SetDrawFlag(pokegearApp->uiSprites[i], TRUE);
+        ManagedSprite_SetDrawFlag(pokegearApp->unk_098[i].managed, TRUE);
     }
 }
 
-static void PokegearApp_UnloadGraphics(PokegearAppData *pokegearApp) {
+static void ov100_021E6338(PokegearAppData *pokegearApp) {
     for (int i = 0; i < 11; ++i) {
-        ManagedSprite_SetDrawFlag(pokegearApp->uiSprites[i], FALSE);
-        PokegearUIManager_DeleteSprite(pokegearApp->uiSprites[i]);
+        ManagedSprite_SetDrawFlag(pokegearApp->unk_098[i].managed, FALSE);
+        ov100_021E6C44(pokegearApp->unk_098[i].managed);
     }
-    PokegearUIManager_Delete(pokegearApp->uiManager);
-    PokegearApp_DestroySpriteSystem(pokegearApp);
+    ov100_021E6A3C(pokegearApp->unk_094);
+    ov100_021E6950(pokegearApp);
 }
 
 static void Pokegear_AddAppSwitchButtons(PokegearAppData *pokegearApp) {
     // This data has to be scoped to the function in order to match
-    static const PokegearCursorGrid sAppButtonSpec_NoCards[] = {
-        { GEAR_APP_CONFIGURE, 2, 1, 0xFF, 0xFF, 32,  176, -16, 16, -10, 10 },
-        { GEAR_APP_PHONE,     0, 2, 0xFF, 0xFF, 176, 176, -16, 16, -10, 10 },
-        { GEAR_APP_CANCEL,    1, 0, 0xFF, 0xFF, 230, 176, -16, 16, -10, 10 },
+    static const PokegearAppSwitchButtonSpec sAppButtonSpec_NoCards[] = {
+        {
+         GEAR_APP_CONFIGURE,
+         0x02,
+         0x01,
+         0xFF,
+         0xFF,
+         0x20,
+         0xB0,
+         -0x10,
+         0x10,
+         -0x0A,
+         0x0A,
+         },
+        {
+         GEAR_APP_PHONE,
+         0x00,
+         0x02,
+         0xFF,
+         0xFF,
+         0xB0,
+         0xB0,
+         -0x10,
+         0x10,
+         -0x0A,
+         0x0A,
+         },
+        {
+         GEAR_APP_CANCEL,
+         0x01,
+         0x00,
+         0xFF,
+         0xFF,
+         0xE6,
+         0xB0,
+         -0x10,
+         0x10,
+         -0x0A,
+         0x0A,
+         },
     };
 
-    static const PokegearCursorGrid sAppButtonSpec_MapOnly[] = {
-        { GEAR_APP_CONFIGURE, 3, 1, 0xFF, 0xFF, 32,  176, -16, 16, -10, 10 },
-        { GEAR_APP_MAP,       0, 2, 0xFF, 0xFF, 128, 176, -16, 16, -10, 10 },
-        { GEAR_APP_PHONE,     1, 3, 0xFF, 0xFF, 176, 176, -16, 16, -10, 10 },
-        { GEAR_APP_CANCEL,    2, 0, 0xFF, 0xFF, 230, 176, -16, 16, -10, 10 },
+    static const PokegearAppSwitchButtonSpec sAppButtonSpec_MapOnly[] = {
+        {
+         GEAR_APP_CONFIGURE,
+         0x03,
+         0x01,
+         0xFF,
+         0xFF,
+         0x20,
+         0xB0,
+         -0x10,
+         0x10,
+         -0x0A,
+         0x0A,
+         },
+        {
+         GEAR_APP_MAP,
+         0x00,
+         0x02,
+         0xFF,
+         0xFF,
+         0x80,
+         0xB0,
+         -0x10,
+         0x10,
+         -0x0A,
+         0x0A,
+         },
+        {
+         GEAR_APP_PHONE,
+         0x01,
+         0x03,
+         0xFF,
+         0xFF,
+         0xB0,
+         0xB0,
+         -0x10,
+         0x10,
+         -0x0A,
+         0x0A,
+         },
+        {
+         GEAR_APP_CANCEL,
+         0x02,
+         0x00,
+         0xFF,
+         0xFF,
+         0xE6,
+         0xB0,
+         -0x10,
+         0x10,
+         -0x0A,
+         0x0A,
+         },
     };
 
-    static const PokegearCursorGrid sAppButtonSpec_RadioOnly[] = {
-        { GEAR_APP_CONFIGURE, 3, 1, 0xFF, 0xFF, 32,  176, -16, 16, -10, 10 },
-        { GEAR_APP_RADIO,     0, 2, 0xFF, 0xFF, 80,  176, -16, 16, -10, 10 },
-        { GEAR_APP_PHONE,     1, 3, 0xFF, 0xFF, 176, 176, -16, 16, -10, 10 },
-        { GEAR_APP_CANCEL,    2, 0, 0xFF, 0xFF, 230, 176, -16, 16, -10, 10 },
+    static const PokegearAppSwitchButtonSpec sAppButtonSpec_RadioOnly[] = {
+        {
+         GEAR_APP_CONFIGURE,
+         0x03,
+         0x01,
+         0xFF,
+         0xFF,
+         0x20,
+         0xB0,
+         -0x10,
+         0x10,
+         -0x0A,
+         0x0A,
+         },
+        {
+         GEAR_APP_RADIO,
+         0x00,
+         0x02,
+         0xFF,
+         0xFF,
+         0x50,
+         0xB0,
+         -0x10,
+         0x10,
+         -0x0A,
+         0x0A,
+         },
+        {
+         GEAR_APP_PHONE,
+         0x01,
+         0x03,
+         0xFF,
+         0xFF,
+         0xB0,
+         0xB0,
+         -0x10,
+         0x10,
+         -0x0A,
+         0x0A,
+         },
+        {
+         GEAR_APP_CANCEL,
+         0x02,
+         0x00,
+         0xFF,
+         0xFF,
+         0xE6,
+         0xB0,
+         -0x10,
+         0x10,
+         -0x0A,
+         0x0A,
+         },
     };
 
-    static const PokegearCursorGrid sAppButtonSpec_BothCards[] = {
-        { GEAR_APP_CONFIGURE, 4, 1, 0xFF, 0xFF, 32,  176, -16, 16, -10, 10 },
-        { GEAR_APP_RADIO,     0, 2, 0xFF, 0xFF, 80,  176, -16, 16, -10, 10 },
-        { GEAR_APP_MAP,       1, 3, 0xFF, 0xFF, 128, 176, -16, 16, -10, 10 },
-        { GEAR_APP_PHONE,     2, 4, 0xFF, 0xFF, 176, 176, -16, 16, -10, 10 },
-        { GEAR_APP_CANCEL,    3, 0, 0xFF, 0xFF, 230, 176, -16, 16, -10, 10 },
+    static const PokegearAppSwitchButtonSpec sAppButtonSpec_BothCards[] = {
+        {
+         GEAR_APP_CONFIGURE,
+         0x04,
+         0x01,
+         0xFF,
+         0xFF,
+         0x20,
+         0xB0,
+         -0x10,
+         0x10,
+         -0x0A,
+         0x0A,
+         },
+        {
+         GEAR_APP_RADIO,
+         0x00,
+         0x02,
+         0xFF,
+         0xFF,
+         0x50,
+         0xB0,
+         -0x10,
+         0x10,
+         -0x0A,
+         0x0A,
+         },
+        {
+         GEAR_APP_MAP,
+         0x01,
+         0x03,
+         0xFF,
+         0xFF,
+         0x80,
+         0xB0,
+         -0x10,
+         0x10,
+         -0x0A,
+         0x0A,
+         },
+        {
+         GEAR_APP_PHONE,
+         0x02,
+         0x04,
+         0xFF,
+         0xFF,
+         0xB0,
+         0xB0,
+         -0x10,
+         0x10,
+         -0x0A,
+         0x0A,
+         },
+        {
+         GEAR_APP_CANCEL,
+         0x03,
+         0x00,
+         0xFF,
+         0xFF,
+         0xE6,
+         0xB0,
+         -0x10,
+         0x10,
+         -0x0A,
+         0x0A,
+         },
     };
 
-    static const PokegearCursorGrid *sAppSwitchButtonSpecs[] = {
+    static const PokegearAppSwitchButtonSpec *sAppSwitchButtonSpecs[] = {
         sAppButtonSpec_NoCards,
         sAppButtonSpec_MapOnly,
         sAppButtonSpec_RadioOnly,
@@ -475,16 +656,16 @@ static void Pokegear_AddAppSwitchButtons(PokegearAppData *pokegearApp) {
         NELEMS(sAppButtonSpec_BothCards),
     };
 
-    pokegearApp->cursorManager = PokegearCursorManager_Alloc(4, pokegearApp->heapID);
-    PokegearCursorManager_AddButtons(pokegearApp->cursorManager, sAppSwitchButtonSpecs[pokegearApp->registeredCards], sAppSwitchButtonCounts[pokegearApp->registeredCards], 0, TRUE, pokegearApp->heapID, pokegearApp->uiSprites[0], pokegearApp->uiSprites[1], pokegearApp->uiSprites[2], pokegearApp->uiSprites[3]);
+    pokegearApp->appSwitch = PokegearAppSwitch_Alloc(4, pokegearApp->heapId);
+    PokegearAppSwitch_AddButtons(pokegearApp->appSwitch, sAppSwitchButtonSpecs[pokegearApp->registeredCards], sAppSwitchButtonCounts[pokegearApp->registeredCards], 0, TRUE, pokegearApp->heapId, pokegearApp->unk_098[0], pokegearApp->unk_098[1], pokegearApp->unk_098[2], pokegearApp->unk_098[3]);
     if (pokegearApp->app == GEAR_APP_CANCEL) {
-        PokegearCursorManager_SetSpecIndexAndCursorPos(pokegearApp->cursorManager, 0, 2);
+        PokegearAppSwitch_SetSpecIndexAndCursorPos(pokegearApp->appSwitch, 0, 2);
     } else {
-        PokegearCursorManager_SetSpecIndexAndCursorPos(pokegearApp->cursorManager, 0, PokegearApp_AppIdToButtonIndex(pokegearApp));
+        PokegearAppSwitch_SetSpecIndexAndCursorPos(pokegearApp->appSwitch, 0, ov100_021E5DC8(pokegearApp));
     }
 }
 
 static void Pokegear_RemoveAppSwitchButtons(PokegearAppData *pokegearApp) {
-    PokegearCursorManager_RemoveCursor(pokegearApp->cursorManager, 0);
-    PokegearCursorManager_Free(pokegearApp->cursorManager);
+    PokegearAppSwitch_RemoveButtons(pokegearApp->appSwitch, 0);
+    PokegearAppSwitch_Free(pokegearApp->appSwitch);
 }

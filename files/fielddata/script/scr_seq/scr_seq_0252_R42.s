@@ -5,285 +5,301 @@
 
 	.rodata
 
-	ScrDef scr_seq_R42_000
-	ScrDef scr_seq_R42_001
-	ScrDef scr_seq_R42_002
-	ScrDef scr_seq_R42_003
-	ScrDef scr_seq_R42_004
-	ScrDef scr_seq_R42_005
-	ScrDefEnd
+	scrdef scr_seq_R42_000
+	scrdef scr_seq_R42_001
+	scrdef scr_seq_R42_002
+	scrdef scr_seq_R42_003
+	scrdef scr_seq_R42_004
+	scrdef scr_seq_R42_005
+	scrdef_end
 
 scr_seq_R42_000:
-	ScrCmd_609
-	LockAll
-	ApplyMovement obj_player, _017C
-	WaitMovement
-	GetPlayerCoords VAR_SPECIAL_x8000, VAR_SPECIAL_x8001
-	ClearFlag FLAG_HIDE_ROUTE_42_HIKER
-	ShowPerson obj_R42_mount_2_2
-	Compare VAR_SPECIAL_x8001, 172
-	GoToIfNe _0051
-	ApplyMovement obj_R42_mount_2_2, _0198
-	GoTo _00AA
+	scrcmd_609
+	lockall
+	apply_movement obj_player, _017C
+	wait_movement
+	get_player_coords VAR_SPECIAL_x8000, VAR_SPECIAL_x8001
+	clearflag FLAG_HIDE_ROUTE_42_HIKER
+	show_person obj_R42_mount_2_2
+	compare VAR_SPECIAL_x8001, 172
+	goto_if_ne _0051
+	apply_movement obj_R42_mount_2_2, _0198
+	goto _00AA
 
 _0051:
-	Compare VAR_SPECIAL_x8001, 173
-	GoToIfNe _006C
-	ApplyMovement obj_R42_mount_2_2, _01A4
-	GoTo _00AA
+	compare VAR_SPECIAL_x8001, 173
+	goto_if_ne _006C
+	apply_movement obj_R42_mount_2_2, _01A4
+	goto _00AA
 
 _006C:
-	Compare VAR_SPECIAL_x8001, 174
-	GoToIfNe _0087
-	ApplyMovement obj_R42_mount_2_2, _01B0
-	GoTo _00AA
+	compare VAR_SPECIAL_x8001, 174
+	goto_if_ne _0087
+	apply_movement obj_R42_mount_2_2, _01B0
+	goto _00AA
 
 _0087:
-	Compare VAR_SPECIAL_x8001, 175
-	GoToIfNe _00A2
-	ApplyMovement obj_R42_mount_2_2, _01BC
-	GoTo _00AA
+	compare VAR_SPECIAL_x8001, 175
+	goto_if_ne _00A2
+	apply_movement obj_R42_mount_2_2, _01BC
+	goto _00AA
 
 _00A2:
-	ApplyMovement obj_R42_mount_2_2, _01C8
+	apply_movement obj_R42_mount_2_2, _01C8
 _00AA:
-	WaitMovement
-	PlaySE SEQ_SE_DP_WALL_HIT2
-	ToggleFollowingPokemonMovement 0
-	WaitFollowingPokemonMovement
-	FollowingPokemonMovement 56
-	ApplyMovement obj_player, _0184
-	WaitMovement
-	WaitFollowingPokemonMovement
-	ToggleFollowingPokemonMovement 1
-	FollowingPokemonMovement 48
-	NPCMsg msg_0399_R42_00005
-	CloseMsg
-	ApplyMovement obj_R42_mount_2_2, _01D4
-	WaitMovement
-	GiveItemNoCheck ITEM_HM04, 1
-	NPCMsg msg_0399_R42_00006
-	CloseMsg
-	Compare VAR_SPECIAL_x8001, 172
-	GoToIfNe _010D
-	ApplyMovement obj_R42_mount_2_2, _01DC
-	GoTo _0166
+	wait_movement
+	play_se SEQ_SE_DP_WALL_HIT2
+	toggle_following_pokemon_movement 0
+	wait_following_pokemon_movement
+	following_pokemon_movement 56
+	apply_movement obj_player, _0184
+	wait_movement
+	wait_following_pokemon_movement
+	toggle_following_pokemon_movement 1
+	following_pokemon_movement 48
+	npc_msg msg_0399_R42_00005
+	closemsg
+	apply_movement obj_R42_mount_2_2, _01D4
+	wait_movement
+	giveitem_no_check ITEM_HM04, 1
+	npc_msg msg_0399_R42_00006
+	closemsg
+	compare VAR_SPECIAL_x8001, 172
+	goto_if_ne _010D
+	apply_movement obj_R42_mount_2_2, _01DC
+	goto _0166
 
 _010D:
-	Compare VAR_SPECIAL_x8001, 173
-	GoToIfNe _0128
-	ApplyMovement obj_R42_mount_2_2, _01F0
-	GoTo _0166
+	compare VAR_SPECIAL_x8001, 173
+	goto_if_ne _0128
+	apply_movement obj_R42_mount_2_2, _01F0
+	goto _0166
 
 _0128:
-	Compare VAR_SPECIAL_x8001, 174
-	GoToIfNe _0143
-	ApplyMovement obj_R42_mount_2_2, _0204
-	GoTo _0166
+	compare VAR_SPECIAL_x8001, 174
+	goto_if_ne _0143
+	apply_movement obj_R42_mount_2_2, _0204
+	goto _0166
 
 _0143:
-	Compare VAR_SPECIAL_x8001, 175
-	GoToIfNe _015E
-	ApplyMovement obj_R42_mount_2_2, _0210
-	GoTo _0166
+	compare VAR_SPECIAL_x8001, 175
+	goto_if_ne _015E
+	apply_movement obj_R42_mount_2_2, _0210
+	goto _0166
 
 _015E:
-	ApplyMovement obj_R42_mount_2_2, _0224
+	apply_movement obj_R42_mount_2_2, _0224
 _0166:
-	WaitMovement
-	SetFlag FLAG_HIDE_ROUTE_42_HIKER
-	HidePerson obj_R42_mount_2_2
-	SetVar VAR_UNK_4091, 1
-	ReleaseAll
-	End
+	wait_movement
+	setflag FLAG_HIDE_ROUTE_42_HIKER
+	hide_person obj_R42_mount_2_2
+	setvar VAR_UNK_4091, 1
+	releaseall
+	end
 
 	.balign 4, 0
 _017C:
-	EmoteExclamationMark
-	EndMovement
+	step 75, 1
+	step_end
 
 	.balign 4, 0
 _0184:
-	FaceEast
-	LockDir
-	JumpFarWest
-	UnlockDir
-	EndMovement
+	step 3, 1
+	step 71, 1
+	step 58, 1
+	step 72, 1
+	step_end
 
 	.balign 4, 0
 _0198:
-	WalkFastSouth
-	WalkFastWest
-	EndMovement
+	step 17, 1
+	step 18, 1
+	step_end
 
 	.balign 4, 0
 _01A4:
-	WalkFastSouth 2
-	WalkFastWest
-	EndMovement
+	step 17, 2
+	step 18, 1
+	step_end
 
 	.balign 4, 0
 _01B0:
-	WalkFastSouth 3
-	WalkFastWest
-	EndMovement
+	step 17, 3
+	step 18, 1
+	step_end
 
 	.balign 4, 0
 _01BC:
-	WalkFastSouth 4
-	WalkFastWest
-	EndMovement
+	step 17, 4
+	step 18, 1
+	step_end
 
 	.balign 4, 0
 _01C8:
-	WalkFastSouth 5
-	WalkFastWest
-	EndMovement
+	step 17, 5
+	step 18, 1
+	step_end
 
 	.balign 4, 0
 _01D4:
-	WalkNormalWest 2
-	EndMovement
+	step 14, 2
+	step_end
 
 	.balign 4, 0
 _01DC:
-	WalkNormalSouth
-	WalkNormalWest 5
-	WalkNormalSouth 2
-	WalkNormalWest 5
-	EndMovement
+	step 13, 1
+	step 14, 5
+	step 13, 2
+	step 14, 5
+	step_end
 
 	.balign 4, 0
 _01F0:
-	WalkNormalSouth
-	WalkNormalWest 5
-	WalkNormalSouth
-	WalkNormalWest 5
-	EndMovement
+	step 13, 1
+	step 14, 5
+	step 13, 1
+	step 14, 5
+	step_end
 
 	.balign 4, 0
 _0204:
-	WalkNormalSouth
-	WalkNormalWest 10
-	EndMovement
+	step 13, 1
+	step 14, 10
+	step_end
 
 	.balign 4, 0
 _0210:
-	WalkNormalSouth
-	WalkNormalWest 4
-	WalkNormalNorth
-	WalkNormalWest 5
-	EndMovement
+	step 13, 1
+	step 14, 4
+	step 12, 1
+	step 14, 5
+	step_end
 
 	.balign 4, 0
 _0224:
-	WalkNormalNorth
-	WalkNormalWest 10
-	EndMovement
+	step 12, 1
+	step 14, 10
+	step_end
 
 scr_seq_R42_001:
-	ScrCmd_609
-	LockAll
-	PlayCry SPECIES_SUICUNE, 0
-	Release obj_R42_tsure_poke_static_suicune
-	ScrCmd_523 obj_R42_tsure_poke_static_suicune, 2, 90, 2, 0
-	Lock obj_R42_tsure_poke_static_suicune
-	WaitCry
-	ToggleFollowingPokemonMovement 0
-	WaitFollowingPokemonMovement
-	FollowingPokemonMovement 56
-	ApplyMovement obj_R42_tsure_poke_static_suicune, _02EC
-	ApplyMovement obj_player, _0308
-	WaitMovement
-	WaitFollowingPokemonMovement
-	ToggleFollowingPokemonMovement 1
-	FollowingPokemonMovement 48
-	ClearFlag FLAG_HIDE_ROUTE_42_EUSINE
-	ShowPerson obj_R42_minaki
-	CallStd std_play_eusine_music
-	ApplyMovement obj_R42_minaki, _0324
-	WaitMovement
-	NPCMsg msg_0399_R42_00007
-	CloseMsg
-	ApplyMovement obj_R42_minaki, _0334
-	WaitMovement
-	BufferPlayersName 0
-	NPCMsg msg_0399_R42_00008
-	CloseMsg
-	ApplyMovement obj_R42_minaki, _0348
-	WaitMovement
-	NPCMsg msg_0399_R42_00009
-	CloseMsg
-	ApplyMovement obj_R42_minaki, _0340
-	WaitMovement
-	CallStd std_fade_end_eusine_music
-	HidePerson obj_R42_tsure_poke_static_suicune
-	HidePerson obj_R42_minaki
-	SetFlag FLAG_HIDE_ROUTE_42_SUICUNE
-	SetFlag FLAG_HIDE_ROUTE_42_EUSINE
-	SetVar VAR_UNK_4092, 0
-	SetVar VAR_UNK_4070, 1
-	SetVar VAR_UNK_4071, 1
-	ClearFlag FLAG_HIDE_VERMILION_SUICUNE
-	ReleaseAll
-	End
+	scrcmd_609
+	lockall
+	play_cry SPECIES_SUICUNE, 0
+	release obj_R42_tsure_poke_static_suicune
+	scrcmd_523 obj_R42_tsure_poke_static_suicune, 2, 90, 2, 0
+	lock obj_R42_tsure_poke_static_suicune
+	wait_cry
+	toggle_following_pokemon_movement 0
+	wait_following_pokemon_movement
+	following_pokemon_movement 56
+	apply_movement obj_R42_tsure_poke_static_suicune, _02EC
+	apply_movement obj_player, _0308
+	wait_movement
+	wait_following_pokemon_movement
+	toggle_following_pokemon_movement 1
+	following_pokemon_movement 48
+	clearflag FLAG_HIDE_ROUTE_42_EUSINE
+	show_person obj_R42_minaki
+	callstd std_play_eusine_music
+	apply_movement obj_R42_minaki, _0324
+	wait_movement
+	npc_msg msg_0399_R42_00007
+	closemsg
+	apply_movement obj_R42_minaki, _0334
+	wait_movement
+	buffer_players_name 0
+	npc_msg msg_0399_R42_00008
+	closemsg
+	apply_movement obj_R42_minaki, _0348
+	wait_movement
+	npc_msg msg_0399_R42_00009
+	closemsg
+	apply_movement obj_R42_minaki, _0340
+	wait_movement
+	callstd std_fade_end_eusine_music
+	hide_person obj_R42_tsure_poke_static_suicune
+	hide_person obj_R42_minaki
+	setflag FLAG_HIDE_ROUTE_42_SUICUNE
+	setflag FLAG_HIDE_ROUTE_42_EUSINE
+	setvar VAR_UNK_4092, 0
+	setvar VAR_UNK_4070, 1
+	setvar VAR_UNK_4071, 1
+	clearflag FLAG_HIDE_VERMILION_SUICUNE
+	releaseall
+	end
 
 	.balign 4, 0
 _02EC:
-	Delay4 3
-	WalkFasterWest 2
-	JumpFarWest
-	WalkFasterWest 2
-	JumpFarNorth 2
-	MoveAction_112 1
-	EndMovement
+	step 62, 3
+	step 22, 2
+	step 58, 1
+	step 22, 2
+	step 56, 2
+	step 112, 1
+	step_end
 
 	.balign 4, 0
 _0308:
-	EmoteExclamationMark
-	LockDir
-	WalkFastNorth 4
-	UnlockDir
-	Delay16
-	WalkNormalEast
-	EndMovement
+	step 75, 1
+	step 71, 1
+	step 16, 4
+	step 72, 1
+	step 65, 1
+	step 15, 1
+	step_end
 
 	.balign 4, 0
 _0324:
-	WalkNormalEast 4
-	WalkNormalNorth 3
-	WalkNormalEast 6
-	EndMovement
+	step 15, 4
+	step 12, 3
+	step 15, 6
+	step_end
 
 	.balign 4, 0
 _0334:
-	WalkNormalNorth
-	FaceWest
-	EndMovement
+	step 12, 1
+	step 2, 1
+	step_end
 
 	.balign 4, 0
 _0340:
-	WalkNormalEast 9
-	EndMovement
+	step 15, 9
+	step_end
 
 	.balign 4, 0
 _0348:
-	WalkNormalEast
-	EndMovement
+	step 15, 1
+	step_end
 
 scr_seq_R42_002:
-	DirectionSignpostEx 1, 1, msg_0399_R42_00000
-	End
+	direction_signpost msg_0399_R42_00000, 1, 1, VAR_SPECIAL_RESULT
+	scrcmd_057 3
+	scrcmd_058
+	scrcmd_060 VAR_SPECIAL_RESULT
+	callstd std_signpost
+	end
 
 scr_seq_R42_003:
-	TrainerTipsEx 2, msg_0399_R42_00001
-	End
+	scrcmd_055 2, 0
+	scrcmd_057 3
+	scrcmd_058
+	trainer_tips msg_0399_R42_00001, VAR_SPECIAL_RESULT
+	callstd std_signpost
+	end
 
 scr_seq_R42_004:
-	TrainerTipsEx 2, msg_0399_R42_00002
-	End
+	scrcmd_055 2, 0
+	scrcmd_057 3
+	scrcmd_058
+	trainer_tips msg_0399_R42_00002, VAR_SPECIAL_RESULT
+	callstd std_signpost
+	end
 
 scr_seq_R42_005:
-	DirectionSignpostEx 1, 2, msg_0399_R42_00003
-	End
+	direction_signpost msg_0399_R42_00003, 1, 2, VAR_SPECIAL_RESULT
+	scrcmd_057 3
+	scrcmd_058
+	scrcmd_060 VAR_SPECIAL_RESULT
+	callstd std_signpost
+	end
 	.balign 4, 0

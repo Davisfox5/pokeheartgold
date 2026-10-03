@@ -15,7 +15,7 @@ ov28_0225D520: ; 0x0225D520
 	mov r1, #8
 	lsl r2, r0, #0xf
 	str r3, [sp, #4]
-	bl Heap_Create
+	bl CreateHeap
 	ldr r0, _0225D5E4 ; =0x04001050
 	mov r1, #0
 	strh r1, [r0]
@@ -112,7 +112,7 @@ ov28_0225D5EC: ; 0x0225D5EC
 	add r0, r5, #0
 	bl DestroySysTaskAndEnvironment
 	mov r0, #8
-	bl Heap_Destroy
+	bl DestroyHeap
 	pop {r3, r4, r5, pc}
 	.balign 4, 0
 	thumb_func_end ov28_0225D5EC
@@ -532,7 +532,7 @@ ov28_0225D92C: ; 0x0225D92C
 	mov r3, #1
 	bl AddCharResObjFromOpenNarc
 	str r0, [r5]
-	bl SpriteTransfer_CreateCharTransferTask_AllocAtEnd
+	bl sub_0200ADA4
 	ldr r0, [r5]
 	bl sub_0200A740
 	ldr r0, [sp, #0x34]
@@ -549,7 +549,7 @@ ov28_0225D92C: ; 0x0225D92C
 	mov r3, #0
 	bl AddPlttResObjFromOpenNarc
 	str r0, [r5, #4]
-	bl SpriteTransfer_CreatePlttTransferTask
+	bl sub_0200B00C
 	ldr r0, [r5, #4]
 	bl sub_0200A740
 	ldr r0, [sp, #0x38]
@@ -791,11 +791,11 @@ ov28_0225DB54: ; 0x0225DB54
 	mov r0, #0x16
 	lsl r0, r0, #4
 	ldr r0, [r4, r0]
-	bl SpriteTransfer_DeleteCharTransferTask
+	bl sub_0200AEB0
 	mov r0, #0x59
 	lsl r0, r0, #2
 	ldr r0, [r4, r0]
-	bl SpriteTransfer_DeletePlttTransferTask
+	bl sub_0200B0A8
 	pop {r4, pc}
 	thumb_func_end ov28_0225DB54
 
@@ -875,11 +875,11 @@ _0225DC08:
 	mov r0, #0x17
 	lsl r0, r0, #4
 	ldr r0, [r7, r0]
-	bl SpriteTransfer_DeleteCharTransferTask
+	bl sub_0200AEB0
 	mov r0, #0x5d
 	lsl r0, r0, #2
 	ldr r0, [r7, r0]
-	bl SpriteTransfer_DeletePlttTransferTask
+	bl sub_0200B0A8
 	pop {r3, r4, r5, r6, r7, pc}
 	thumb_func_end ov28_0225DBFC
 
@@ -1020,7 +1020,7 @@ DowsingMchn_FreeHiddenItemLocs: ; 0x0225DD3C
 	ldr r0, [r4, r0]
 	cmp r0, #0
 	beq _0225DD56
-	bl Heap_Free
+	bl FreeToHeap
 	mov r0, #0x81
 	mov r1, #0
 	lsl r0, r0, #2

@@ -8,25 +8,25 @@
 
 #include "gear_phone.h"
 
-struct PhoneBook *AllocAndReadPhoneBook(enum HeapID heapID) {
+struct PhoneBook *AllocAndReadPhoneBook(HeapID heapId) {
     FSFile file;
     struct PhoneBook *ret;
     u32 flen;
 
     FS_InitFile(&file);
     if (!FS_OpenFile(&file, "tel/pmtel_book.dat")) {
-        GF_ASSERT(FALSE);
+        GF_ASSERT(0);
         return NULL;
     }
 
     // This is a waste of space
     // (flen - 4) bytes is allocated twice
     flen = FS_GetLength(&file);
-    ret = Heap_Alloc(heapID, flen);
+    ret = AllocFromHeap(heapId, flen);
     MI_CpuClear8(ret, flen);
 
     FS_ReadFile(&file, &ret->count, sizeof(ret->count));
-    ret->entries = Heap_Alloc(heapID, ret->count * sizeof(struct PhoneBookEntry));
+    ret->entries = AllocFromHeap(heapId, ret->count * sizeof(struct PhoneBookEntry));
     FS_ReadFile(&file, ret->entries, ret->count * sizeof(struct PhoneBookEntry));
     FS_CloseFile(&file);
     return ret;
@@ -34,14 +34,14 @@ struct PhoneBook *AllocAndReadPhoneBook(enum HeapID heapID) {
 
 void FreePhoneBook(struct PhoneBook *phoneBook) {
     MI_CpuClear8(phoneBook->entries, phoneBook->count * sizeof(struct PhoneBookEntry));
-    Heap_Free(phoneBook->entries);
+    FreeToHeap(phoneBook->entries);
 
     MI_CpuClear8(phoneBook, sizeof(struct PhoneBook));
-    Heap_Free(phoneBook);
+    FreeToHeap(phoneBook);
 }
 
-u8 LoadPhoneBookEntryI(u16 idx, struct PhoneBookEntry *dest, enum HeapID heapID) {
-    struct PhoneBook *phoneBook = AllocAndReadPhoneBook(heapID);
+u8 LoadPhoneBookEntryI(u16 idx, struct PhoneBookEntry *dest, HeapID heapId) {
+    struct PhoneBook *phoneBook = AllocAndReadPhoneBook(heapId);
     int i;
 
     for (i = 0; i < phoneBook->count; i++) {

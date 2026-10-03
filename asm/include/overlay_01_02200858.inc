@@ -1,10 +1,10 @@
 #include <nitro/fs/overlay.h>
 #pragma once
 .public sub_02020DA4
-.public MetatileBehavior_IsWarpEntranceEast
-.public MetatileBehavior_IsWarpEntranceWest
-.public MetatileBehavior_IsWarpEntranceNorth
-.public MetatileBehavior_IsWarpEntranceSouth
+.public sub_0205B718
+.public sub_0205B724
+.public sub_0205B730
+.public sub_0205B73C
 .public PlayerAvatar_GetFacingDirection
 .public PlayerAvatar_GetMapObject
 .public MapObject_GetPriorityPlusValue
@@ -12,8 +12,8 @@
 .public MapObject_GetID
 .public MapObject_GetMapID
 .public sub_0205F504
-.public MapObject_GetXCoord
-.public MapObject_GetZCoord
+.public MapObject_GetCurrentX
+.public MapObject_GetCurrentZ
 .public MapObject_CopyPositionVector
 .public GetDeltaXByFacingDirection
 .public GetDeltaYByFacingDirection

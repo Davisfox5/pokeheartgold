@@ -237,6 +237,27 @@
 #define MAPSEC_POKEWALKER       233
 #define MAPSEC_CLIFF_EDGE_GATE  234
 
+// APOC_SINNOH_LIFE MAPSEC BEGIN
+#define MAPSEC_APOC_TWINLEAF_TOWN                235
+#define MAPSEC_APOC_SANDGEM_TOWN                 236
+#define MAPSEC_APOC_JUBILIFE_CITY                237
+#define MAPSEC_APOC_OREBURGH_CITY                238
+#define MAPSEC_APOC_FLOAROMA_TOWN                239
+#define MAPSEC_APOC_ETERNA_CITY                  240
+#define MAPSEC_APOC_HEARTHOME_CITY               241
+#define MAPSEC_APOC_SOLACEON_TOWN                242
+#define MAPSEC_APOC_VEILSTONE_CITY               243
+#define MAPSEC_APOC_PASTORIA_CITY                244
+#define MAPSEC_APOC_CELESTIC_TOWN                245
+#define MAPSEC_APOC_CANALAVE_CITY                246
+#define MAPSEC_APOC_SNOWPOINT_CITY               247
+#define MAPSEC_APOC_SUNYSHORE_CITY               248
+#define MAPSEC_APOC_POKEMON_LEAGUE               249
+#define MAPSEC_APOC_SINNOH_ROUTE                 250
+#define MAPSEC_APOC_SINNOH_LAKEFRONT             251
+#define MAPSEC_APOC_BATTLE_ZONE                  252
+// APOC_SINNOH_LIFE MAPSEC END
+
 #define METLOC_DAY_CARE_COUPLE 2000
 #define METLOC_LINK_TRADE      2001
 #define METLOC_LINK_TRADE_2    2002

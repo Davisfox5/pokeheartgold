@@ -102,7 +102,7 @@ ov80_0223A0C0: ; 0x0223A0C0
 	bl NARC_Delete
 	ldr r1, [r5, #0xc]
 	mov r0, #0x65
-	bl Heap_FreeExplicit
+	bl FreeToHeapExplicit
 	add r0, r4, #0
 	bl DestroySysTaskAndEnvironment
 	pop {r3, r4, r5, pc}
@@ -223,7 +223,7 @@ _0223A194: ; jump table
 _0223A1BA:
 	add r0, r6, #0
 	mov r1, #0x94
-	bl Heap_Alloc
+	bl AllocFromHeap
 	str r0, [r4, #0xc]
 	mov r1, #0
 	mov r2, #0x94
@@ -255,7 +255,7 @@ _0223A1BA:
 	orr r0, r2
 	str r0, [r4, r3]
 	mov r0, #4
-	bl FontSystem_NewInit
+	bl sub_02013534
 	str r0, [r4, #0x30]
 	ldr r2, _0223A510 ; =0x000002D9
 	mov r0, #1
@@ -289,7 +289,7 @@ _0223A1BA:
 	bl ov80_0223A62C
 	ldr r0, [r5, #0x7c]
 	mov r1, #0
-	bl TextOBJ_SetSpritesDrawFlag
+	bl sub_020137C0
 	ldr r0, [sp, #0x24]
 	bl String_Delete
 	ldr r0, [sp, #0x20]
@@ -660,7 +660,7 @@ _0223A534:
 	bl SetBlendBrightness
 	ldr r0, [r5, #0x7c]
 	mov r1, #1
-	bl TextOBJ_SetSpritesDrawFlag
+	bl sub_020137C0
 	ldr r0, [r4]
 	add r0, r0, #1
 	str r0, [r4]
@@ -899,7 +899,7 @@ ov80_0223A748: ; 0x0223A748
 	push {r4, lr}
 	add r4, r0, #0
 	ldr r0, [r4]
-	bl FontOAM_Delete
+	bl sub_02013660
 	add r0, r4, #4
 	bl sub_02021B5C
 	pop {r4, pc}
@@ -1279,7 +1279,7 @@ ov80_0223A938: ; 0x0223A938
 	add r2, #0xe0
 	bl MIi_CpuCopy16
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	ldr r0, _0223AA44 ; =ov80_0223AA4C
 	ldr r2, _0223AA48 ; =0x0000044C
 	add r1, r5, #0

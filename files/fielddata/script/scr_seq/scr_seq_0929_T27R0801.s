@@ -5,87 +5,87 @@
 
 	.rodata
 
-	ScrDef scr_seq_T27R0801_000
-	ScrDef scr_seq_T27R0801_001
-	ScrDefEnd
+	scrdef scr_seq_T27R0801_000
+	scrdef scr_seq_T27R0801_001
+	scrdef_end
 
 scr_seq_T27R0801_000:
-	PlaySE SEQ_SE_DP_SELECT
-	LockAll
-	FacePlayer
-	GoToIfSet FLAG_GOT_DOWSING_MACHINE, _0078
-	NPCMsg msg_0619_T27R0801_00000
-	TouchscreenMenuHide
-	GetMenuChoice VAR_SPECIAL_RESULT
-	TouchscreenMenuShow
-	Compare VAR_SPECIAL_RESULT, 0
-	GoToIfEq _0044
-	Compare VAR_SPECIAL_RESULT, 1
-	GoToIfEq _008D
-	End
+	play_se SEQ_SE_DP_SELECT
+	lockall
+	faceplayer
+	goto_if_set FLAG_GOT_DOWSING_MACHINE, _0078
+	npc_msg msg_0619_T27R0801_00000
+	touchscreen_menu_hide
+	getmenuchoice VAR_SPECIAL_RESULT
+	touchscreen_menu_show
+	compare VAR_SPECIAL_RESULT, 0
+	goto_if_eq _0044
+	compare VAR_SPECIAL_RESULT, 1
+	goto_if_eq _008D
+	end
 
 _0044:
-	NPCMsg msg_0619_T27R0801_00001
-	WaitABPress
-	GoToIfNoItemSpace ITEM_DOWSING_MCHN, 1, _0083
-	CallStd std_give_item_verbose
-	SetFlag FLAG_GOT_DOWSING_MACHINE
-	GoTo _0078
+	npc_msg msg_0619_T27R0801_00001
+	wait_button
+	goto_if_no_item_space ITEM_DOWSING_MCHN, 1, _0083
+	callstd std_give_item_verbose
+	setflag FLAG_GOT_DOWSING_MACHINE
+	goto _0078
 
 _0078:
-	NPCMsg msg_0619_T27R0801_00003
-	WaitButton
-	CloseMsg
-	ReleaseAll
-	End
+	npc_msg msg_0619_T27R0801_00003
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
 
 _0083:
-	CallStd std_bag_is_full
-	CloseMsg
-	ReleaseAll
-	End
+	callstd std_bag_is_full
+	closemsg
+	releaseall
+	end
 
 _008D:
-	NPCMsg msg_0619_T27R0801_00004
-	WaitButton
-	CloseMsg
-	ReleaseAll
-	End
+	npc_msg msg_0619_T27R0801_00004
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
 
 scr_seq_T27R0801_001:
-	PlaySE SEQ_SE_DP_SELECT
-	LockAll
-	FacePlayer
-	NPCMsg msg_0619_T27R0801_00005
-	TouchscreenMenuHide
-	GetMenuChoice VAR_SPECIAL_RESULT
-	TouchscreenMenuShow
-	Compare VAR_SPECIAL_RESULT, 0
-	GoToIfEq _00C7
-	Compare VAR_SPECIAL_RESULT, 1
-	GoToIfEq _00F9
-	End
+	play_se SEQ_SE_DP_SELECT
+	lockall
+	faceplayer
+	npc_msg msg_0619_T27R0801_00005
+	touchscreen_menu_hide
+	getmenuchoice VAR_SPECIAL_RESULT
+	touchscreen_menu_show
+	compare VAR_SPECIAL_RESULT, 0
+	goto_if_eq _00C7
+	compare VAR_SPECIAL_RESULT, 1
+	goto_if_eq _00F9
+	end
 
 _00C7:
-	NPCMsg msg_0619_T27R0801_00006
-	TouchscreenMenuHide
-	GetMenuChoice VAR_SPECIAL_RESULT
-	TouchscreenMenuShow
-	Compare VAR_SPECIAL_RESULT, 0
-	GoToIfEq _00EE
-	Compare VAR_SPECIAL_RESULT, 1
-	GoToIfEq _00F9
-	End
+	npc_msg msg_0619_T27R0801_00006
+	touchscreen_menu_hide
+	getmenuchoice VAR_SPECIAL_RESULT
+	touchscreen_menu_show
+	compare VAR_SPECIAL_RESULT, 0
+	goto_if_eq _00EE
+	compare VAR_SPECIAL_RESULT, 1
+	goto_if_eq _00F9
+	end
 
 _00EE:
-	NPCMsg msg_0619_T27R0801_00007
-	WaitButton
-	CloseMsg
-	ReleaseAll
-	End
+	npc_msg msg_0619_T27R0801_00007
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
 
 _00F9:
-	CloseMsg
-	ReleaseAll
-	End
+	closemsg
+	releaseall
+	end
 	.balign 4, 0

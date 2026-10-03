@@ -5,165 +5,165 @@
 
 	.rodata
 
-	ScrDef scr_seq_D49R0105_000
-	ScrDef scr_seq_D49R0105_001
-	ScrDef scr_seq_D49R0105_002
-	ScrDef scr_seq_D49R0105_003
-	ScrDef scr_seq_D49R0105_004
-	ScrDef scr_seq_D49R0105_005
-	ScrDef scr_seq_D49R0105_006
-	ScrDef scr_seq_D49R0105_007
-	ScrDef scr_seq_D49R0105_008
-	ScrDef scr_seq_D49R0105_009
-	ScrDef scr_seq_D49R0105_010
-	ScrDef scr_seq_D49R0105_011
-	ScrDef scr_seq_D49R0105_012
-	ScrDef scr_seq_D49R0105_013
-	ScrDefEnd
+	scrdef scr_seq_D49R0105_000
+	scrdef scr_seq_D49R0105_001
+	scrdef scr_seq_D49R0105_002
+	scrdef scr_seq_D49R0105_003
+	scrdef scr_seq_D49R0105_004
+	scrdef scr_seq_D49R0105_005
+	scrdef scr_seq_D49R0105_006
+	scrdef scr_seq_D49R0105_007
+	scrdef scr_seq_D49R0105_008
+	scrdef scr_seq_D49R0105_009
+	scrdef scr_seq_D49R0105_010
+	scrdef scr_seq_D49R0105_011
+	scrdef scr_seq_D49R0105_012
+	scrdef scr_seq_D49R0105_013
+	scrdef_end
 
 scr_seq_D49R0105_012:
-	GoToIfSet FLAG_UNK_0F0, _004D
-	SetVar VAR_TEMP_x400C, 0
-	End
+	goto_if_set FLAG_UNK_0F0, _004D
+	setvar VAR_TEMP_x400C, 0
+	end
 
 _004D:
-	SetVar VAR_TEMP_x400C, 1
-	End
+	setvar VAR_TEMP_x400C, 1
+	end
 
 scr_seq_D49R0105_011:
-	Compare VAR_TEMP_x400C, 1
-	GoToIfNe _0074
-	MovePersonFacing obj_D49R0105_pcwoman2_2, 2, 1, 3, DIR_EAST
-	SetVar VAR_TEMP_x400C, 0
+	compare VAR_TEMP_x400C, 1
+	goto_if_ne _0074
+	move_person_facing obj_D49R0105_pcwoman2_2, 2, 1, 3, DIR_EAST
+	setvar VAR_TEMP_x400C, 0
 _0074:
-	End
+	end
 
 scr_seq_D49R0105_000:
-	SimpleNPCMsg msg_0141_D49R0105_00000
-	End
+	simple_npc_msg msg_0141_D49R0105_00000
+	end
 
 scr_seq_D49R0105_001:
-	PlaySE SEQ_SE_DP_SELECT
-	LockAll
-	FacePlayer
-	GoToIfSet FLAG_UNK_0F0, _00A7
-	NPCMsg msg_0141_D49R0105_00001
-	WaitButton
-	CloseMsg
-	ReleaseAll
-	End
+	play_se SEQ_SE_DP_SELECT
+	lockall
+	faceplayer
+	goto_if_set FLAG_UNK_0F0, _00A7
+	npc_msg msg_0141_D49R0105_00001
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
 
 _00A7:
-	NPCMsg msg_0141_D49R0105_00002
-	WaitButton
-	CloseMsg
-	ReleaseAll
-	End
+	npc_msg msg_0141_D49R0105_00002
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
 
 scr_seq_D49R0105_002:
-	SimpleNPCMsg msg_0141_D49R0105_00003
-	End
+	simple_npc_msg msg_0141_D49R0105_00003
+	end
 
 scr_seq_D49R0105_003:
-	SimpleNPCMsg msg_0141_D49R0105_00004
-	End
+	simple_npc_msg msg_0141_D49R0105_00004
+	end
 
 scr_seq_D49R0105_004:
-	SimpleNPCMsg msg_0141_D49R0105_00005
-	End
+	simple_npc_msg msg_0141_D49R0105_00005
+	end
 
 scr_seq_D49R0105_005:
-	PlaySE SEQ_SE_DP_SELECT
-	LockAll
-	NPCMsg msg_0141_D49R0105_00014
-	WaitButton
-	CloseMsg
-	ReleaseAll
-	End
+	play_se SEQ_SE_DP_SELECT
+	lockall
+	npc_msg msg_0141_D49R0105_00014
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
 
 scr_seq_D49R0105_006:
-	PlaySE SEQ_SE_DP_SELECT
-	LockAll
-	FacePlayer
-	PlayCry SPECIES_DRATINI, 0
-	NPCMsg msg_0141_D49R0105_00015
-	WaitCry
-	WaitButton
-	CloseMsg
-	ReleaseAll
-	End
+	play_se SEQ_SE_DP_SELECT
+	lockall
+	faceplayer
+	play_cry SPECIES_DRATINI, 0
+	npc_msg msg_0141_D49R0105_00015
+	wait_cry
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
 
 scr_seq_D49R0105_007:
-	PlaySE SEQ_SE_DP_SELECT
-	LockAll
-	FacePlayer
-	BufferPlayersName 0
-	NPCMsg msg_0141_D49R0105_00006
-	CloseMsg
-	FadeScreen 6, 1, 0, RGB_BLACK
-	WaitFade
-	ScrCmd_712 1
-	RestoreOverworld
-	FadeScreen 6, 1, 1, RGB_BLACK
-	WaitFade
-	ReleaseAll
-	End
+	play_se SEQ_SE_DP_SELECT
+	lockall
+	faceplayer
+	buffer_players_name 0
+	npc_msg msg_0141_D49R0105_00006
+	closemsg
+	fade_screen 6, 1, 0, RGB_BLACK
+	wait_fade
+	scrcmd_712 1
+	restore_overworld
+	fade_screen 6, 1, 1, RGB_BLACK
+	wait_fade
+	releaseall
+	end
 
 scr_seq_D49R0105_008:
-	PlaySE SEQ_SE_DP_SELECT
-	LockAll
-	FacePlayer
-	GoToIfUnset FLAG_HIDE_POKEATHLON_CLOTHES_SIGN, _0166
-	NPCMsg msg_0141_D49R0105_00007
-	WaitButton
-	CloseMsg
-	ReleaseAll
-	End
+	play_se SEQ_SE_DP_SELECT
+	lockall
+	faceplayer
+	goto_if_unset FLAG_HIDE_POKEATHLON_CLOTHES_SIGN, _0166
+	npc_msg msg_0141_D49R0105_00007
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
 
 _0166:
-	NPCMsg msg_0141_D49R0105_00008
-	WaitButton
-	CloseMsg
-	ReleaseAll
-	End
+	npc_msg msg_0141_D49R0105_00008
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
 
 scr_seq_D49R0105_009:
-	PlaySE SEQ_SE_DP_SELECT
-	LockAll
-	FacePlayer
-	GoToIfUnset FLAG_HIDE_POKEATHLON_SHOES_SIGN, _018F
-	NPCMsg msg_0141_D49R0105_00009
-	WaitButton
-	CloseMsg
-	ReleaseAll
-	End
+	play_se SEQ_SE_DP_SELECT
+	lockall
+	faceplayer
+	goto_if_unset FLAG_HIDE_POKEATHLON_SHOES_SIGN, _018F
+	npc_msg msg_0141_D49R0105_00009
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
 
 _018F:
-	NPCMsg msg_0141_D49R0105_00010
-	WaitButton
-	CloseMsg
-	ReleaseAll
-	End
+	npc_msg msg_0141_D49R0105_00010
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
 
 scr_seq_D49R0105_010:
-	PlaySE SEQ_SE_DP_SELECT
-	LockAll
-	FacePlayer
-	GoToIfUnset FLAG_HIDE_POKEATHLON_FLAG_SIGN, _01B8
-	NPCMsg msg_0141_D49R0105_00011
-	WaitButton
-	CloseMsg
-	ReleaseAll
-	End
+	play_se SEQ_SE_DP_SELECT
+	lockall
+	faceplayer
+	goto_if_unset FLAG_HIDE_POKEATHLON_FLAG_SIGN, _01B8
+	npc_msg msg_0141_D49R0105_00011
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
 
 _01B8:
-	NPCMsg msg_0141_D49R0105_00012
-	WaitButton
-	CloseMsg
-	ReleaseAll
-	End
+	npc_msg msg_0141_D49R0105_00012
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
 
 scr_seq_D49R0105_013:
-	SimpleNPCMsg msg_0141_D49R0105_00013
-	End
+	simple_npc_msg msg_0141_D49R0105_00013
+	end
 	.balign 4, 0

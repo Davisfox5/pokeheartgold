@@ -668,7 +668,7 @@ _022291D8:
 	mov r1, #5
 	bl FreeBgTilemapBuffer
 	ldr r0, [r4, #4]
-	bl Heap_Free
+	bl FreeToHeap
 	pop {r4, pc}
 	thumb_func_end ov74_02229190
 
@@ -724,7 +724,7 @@ ov74_02229200: ; 0x02229200
 	mov r2, #0x57
 	mov r1, #0x59
 	lsl r2, r2, #4
-	bl Heap_Create
+	bl CreateHeap
 	ldr r1, _02229290 ; =0x0000047E
 	mov r0, #9
 	mov r2, #1
@@ -951,14 +951,14 @@ ov74_02229450: ; 0x02229450
 	push {r4, lr}
 	add r4, r0, #0
 	mov r0, #0x59
-	bl Heap_Destroy
+	bl DestroyHeap
 	ldr r0, _02229474 ; =FS_OVERLAY_ID(intro_title)
 	ldr r1, _02229478 ; =gApplication_TitleScreen
 	bl RegisterMainOverlay
 	add r0, r4, #0
 	bl OverlayManager_FreeData
 	mov r0, #0x53
-	bl Heap_Destroy
+	bl DestroyHeap
 	mov r0, #1
 	pop {r4, pc}
 	nop
@@ -1816,7 +1816,7 @@ ov74_02229B68: ; 0x02229B68
 	mov r1, #0xf5
 	mov r0, #0xf
 	lsl r1, r1, #2
-	bl Heap_Alloc
+	bl AllocFromHeap
 	ldr r1, _02229BB8 ; =ov74_0223D0A4
 	mov r2, #0xf5
 	str r0, [r1]
@@ -2187,7 +2187,7 @@ ov74_02229DF8: ; 0x02229DF8
 	ldr r1, _02229E10 ; =ov74_0223D0A4
 	mov r0, #0xf
 	ldr r1, [r1]
-	bl Heap_FreeExplicit
+	bl FreeToHeapExplicit
 	ldr r0, _02229E10 ; =ov74_0223D0A4
 	mov r1, #0
 	str r1, [r0]
@@ -2316,7 +2316,7 @@ _02229ED2:
 	mov r1, #5
 	bl FreeBgTilemapBuffer
 	ldr r0, [r7]
-	bl Heap_Free
+	bl FreeToHeap
 	pop {r3, r4, r5, r6, r7, pc}
 	thumb_func_end ov74_02229E68
 
@@ -4294,7 +4294,7 @@ ov74_0222AE6C: ; 0x0222AE6C
 	mov r0, #3
 	mov r1, #0x54
 	lsl r2, r0, #0x10
-	bl Heap_Create
+	bl CreateHeap
 	ldr r1, _0222AF14 ; =0x000029F8
 	add r0, r5, #0
 	mov r2, #0x54
@@ -4350,7 +4350,7 @@ _0222AEE8:
 	mov r0, #0
 	mov r1, #0x59
 	lsl r2, r2, #4
-	bl Heap_Create
+	bl CreateHeap
 	mov r0, #1
 	pop {r3, r4, r5, pc}
 	nop
@@ -4481,13 +4481,13 @@ ov74_0222AF28: ; 0x0222AF28
 	bl AddCellOrAnimResObjFromNarc
 	str r0, [r4, #0x7c]
 	ldr r0, [r4, #0x58]
-	bl SpriteTransfer_CreateCharTransferTask
+	bl sub_0200ACF0
 	ldr r0, [r4, #0x70]
-	bl SpriteTransfer_CreateCharTransferTask
+	bl sub_0200ACF0
 	ldr r0, [r4, #0x5c]
-	bl SpriteTransfer_CreatePlttTransferTask
+	bl sub_0200B00C
 	ldr r0, [r4, #0x74]
-	bl SpriteTransfer_CreatePlttTransferTask
+	bl sub_0200B00C
 	mov r0, #0
 	mov r5, #0x4b
 	ldr r2, [r4, #0xc]
@@ -6804,7 +6804,7 @@ _0222C2BC:
 	str r2, [r1]
 	bl SysTask_Destroy
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	pop {r3, r4, r5, r6, r7, pc}
 _0222C2D0:
 	add r0, r4, #0
@@ -7068,7 +7068,7 @@ _0222C4CE:
 	bl ov74_02229F60
 	ldr r1, _0222C660 ; =0x000030A4
 	mov r0, #0x54
-	bl Heap_Alloc
+	bl AllocFromHeap
 	ldr r2, _0222C660 ; =0x000030A4
 	mov r1, #0
 	add r6, r0, #0
@@ -8095,11 +8095,11 @@ _0222CDC0:
 	bl RegisterMainOverlay
 _0222CDCC:
 	mov r0, #0x59
-	bl Heap_Destroy
+	bl DestroyHeap
 	add r0, r5, #0
 	bl OverlayManager_FreeData
 	mov r0, #0x54
-	bl Heap_Destroy
+	bl DestroyHeap
 	ldr r0, _0222CE0C ; =0x000015D4
 	ldr r0, [r4, r0]
 	cmp r0, #2
@@ -8229,7 +8229,7 @@ ov74_0222CEC0: ; 0x0222CEC0
 	bl sub_02034DE0
 	ldr r0, _0222CEDC ; =ov74_0223D0A8
 	ldr r0, [r0, #4]
-	bl Heap_Free
+	bl FreeToHeap
 	bl sub_0203A914
 	ldr r0, _0222CEDC ; =ov74_0223D0A8
 	mov r1, #0
@@ -8320,7 +8320,7 @@ _0222CF68:
 	bl ov74_02236980
 	add r1, r0, #0
 	mov r0, #0x54
-	bl Heap_Alloc
+	bl AllocFromHeap
 	add r2, r0, #0
 	ldr r0, _0222CFEC ; =ov74_0223D0A8
 	ldr r1, _0222CFF0 ; =ov74_0222CE6C
@@ -9824,7 +9824,7 @@ ov74_0222DB30: ; 0x0222DB30
 	add r3, r6, #0
 	bl BG_LoadScreenTilemapData
 	add r0, r7, #0
-	bl Heap_Free
+	bl FreeToHeap
 	add sp, #8
 	pop {r3, r4, r5, r6, r7, pc}
 	nop
@@ -10125,7 +10125,7 @@ _0222DD6A:
 	ldr r0, [r5, r0]
 	bl Sprite_SetPaletteOverride
 	ldr r0, [sp, #0x14]
-	bl Heap_Free
+	bl FreeToHeap
 _0222DDD4:
 	ldr r0, [sp, #0xc]
 	add r4, r4, #2
@@ -10154,7 +10154,7 @@ ov74_0222DDFC: ; 0x0222DDFC
 	mov r0, #3
 	mov r1, #0x55
 	lsl r2, r0, #0x10
-	bl Heap_Create
+	bl CreateHeap
 	ldr r1, _0222DE60 ; =0x00003D54
 	add r0, r4, #0
 	mov r2, #0x55
@@ -10188,7 +10188,7 @@ ov74_0222DDFC: ; 0x0222DDFC
 	mov r0, #0
 	mov r1, #0x59
 	lsl r2, r2, #4
-	bl Heap_Create
+	bl CreateHeap
 	mov r0, #1
 	pop {r4, pc}
 	.balign 4, 0
@@ -11825,16 +11825,16 @@ _0222EBA0:
 	bl FreeBgTilemapBuffer
 	ldr r0, _0222EBFC ; =0x000029FC
 	ldr r0, [r7, r0]
-	bl Heap_Free
+	bl FreeToHeap
 	ldr r0, _0222EC00 ; =FS_OVERLAY_ID(OVY_74)
 	ldr r1, _0222EC04 ; =gApp_MainMenu_SelectOption_MysteryGift
 	bl RegisterMainOverlay
 	mov r0, #0x59
-	bl Heap_Destroy
+	bl DestroyHeap
 	ldr r0, [sp]
 	bl OverlayManager_FreeData
 	mov r0, #0x55
-	bl Heap_Destroy
+	bl DestroyHeap
 	mov r0, #1
 	pop {r3, r4, r5, r6, r7, pc}
 	nop
@@ -11855,7 +11855,7 @@ ov74_0222EC08: ; 0x0222EC08
 	bl ov74_0222FCC4
 	ldr r1, _0222EC54 ; =0x00003D54
 	add r0, r5, #0
-	bl Heap_AllocAtEnd
+	bl AllocFromHeapAtEnd
 	ldr r2, _0222EC54 ; =0x00003D54
 	mov r1, #0
 	add r4, r0, #0
@@ -11877,7 +11877,7 @@ ov74_0222EC08: ; 0x0222EC08
 	mov r1, #1
 	bl ov74_0222D824
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	pop {r3, r4, r5, r6, r7, pc}
 	nop
 _0222EC54: .word 0x00003D54
@@ -12730,7 +12730,7 @@ ov74_0222F2D4: ; 0x0222F2D4
 	add r3, r6, #0
 	bl BG_LoadScreenTilemapData
 	add r0, r7, #0
-	bl Heap_Free
+	bl FreeToHeap
 	add sp, #8
 	pop {r3, r4, r5, r6, r7, pc}
 	nop
@@ -13026,7 +13026,7 @@ _0222F504:
 	ldr r0, [r5, r0]
 	bl Sprite_SetPaletteOverride
 	ldr r0, [sp, #0x14]
-	bl Heap_Free
+	bl FreeToHeap
 _0222F56E:
 	ldr r0, [sp, #0xc]
 	add r4, r4, #2
@@ -13055,7 +13055,7 @@ ov74_0222F598: ; 0x0222F598
 	mov r0, #3
 	mov r1, #0x55
 	lsl r2, r0, #0x10
-	bl Heap_Create
+	bl CreateHeap
 	ldr r1, _0222F5F4 ; =0x00003D0C
 	add r0, r4, #0
 	mov r2, #0x55
@@ -13085,7 +13085,7 @@ ov74_0222F598: ; 0x0222F598
 	mov r0, #0
 	mov r1, #0x59
 	lsl r2, r2, #4
-	bl Heap_Create
+	bl CreateHeap
 	mov r0, #1
 	pop {r4, pc}
 	.balign 4, 0
@@ -13828,16 +13828,16 @@ _0222FBE8:
 	bl FreeBgTilemapBuffer
 	ldr r0, _0222FC44 ; =0x000029FC
 	ldr r0, [r7, r0]
-	bl Heap_Free
+	bl FreeToHeap
 	ldr r0, _0222FC48 ; =FS_OVERLAY_ID(OVY_74)
 	ldr r1, _0222FC4C ; =gApp_MainMenu_SelectOption_MysteryGift
 	bl RegisterMainOverlay
 	mov r0, #0x59
-	bl Heap_Destroy
+	bl DestroyHeap
 	ldr r0, [sp]
 	bl OverlayManager_FreeData
 	mov r0, #0x55
-	bl Heap_Destroy
+	bl DestroyHeap
 	mov r0, #1
 	pop {r3, r4, r5, r6, r7, pc}
 	nop
@@ -13858,7 +13858,7 @@ ov74_0222FC50: ; 0x0222FC50
 	bl ov74_0222FCC4
 	ldr r1, _0222FC98 ; =0x00003D0C
 	add r0, r5, #0
-	bl Heap_AllocAtEnd
+	bl AllocFromHeapAtEnd
 	ldr r2, _0222FC98 ; =0x00003D0C
 	mov r1, #0
 	add r4, r0, #0
@@ -13878,7 +13878,7 @@ ov74_0222FC50: ; 0x0222FC50
 	mov r2, #0
 	bl ov74_0222F024
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	pop {r3, r4, r5, r6, r7, pc}
 	nop
 _0222FC98: .word 0x00003D0C
@@ -17625,11 +17625,11 @@ _022317B8:
 	str r0, [r4]
 	pop {r4, pc}
 _022317BE:
-	mov r0, #VERSION_LEAFGREEN
+	mov r0, #VERSION_LEAF_GREEN
 	str r0, [r4]
 	pop {r4, pc}
 _022317C4:
-	mov r0, #VERSION_FIRERED
+	mov r0, #VERSION_FIRE_RED
 	str r0, [r4]
 	pop {r4, pc}
 _022317CA:
@@ -17680,7 +17680,7 @@ _0223180A:
 	bl ov74_02233F68
 	add r1, r0, #0
 	add r0, r5, #0
-	bl MigratedPokemon_RecordMigration
+	bl sub_0202EC28
 	ldr r0, [r4]
 	add r0, r0, #1
 	str r0, [r4]
@@ -17825,7 +17825,7 @@ ov74_02231930: ; 0x02231930
 	bl ov74_02233F68
 	add r1, r0, #0
 	add r0, r4, #0
-	bl MigratedPokemon_RecordMigration
+	bl sub_0202EC28
 	mov r0, #4
 	bl sub_0201A728
 	ldr r0, [r5, #0x10]
@@ -17870,7 +17870,7 @@ _02231976:
 	ldr r0, [sp]
 	add r1, r6, #0
 	add r2, r4, #0
-	bl MigratedPokemon_CopyBoxPokemonToSlot
+	bl sub_0202EC14
 	add r4, r4, #1
 	add r5, #0xc
 	cmp r4, #6
@@ -18268,11 +18268,11 @@ _02231C36:
 	str r0, [r6, r1]
 	sub r1, #0xc
 	ldr r0, [r6, r1]
-	bl SpriteTransfer_CreateCharTransferTask
+	bl sub_0200ACF0
 	mov r0, #0x17
 	lsl r0, r0, #4
 	ldr r0, [r6, r0]
-	bl SpriteTransfer_CreateExtPlttTransferTask
+	bl sub_0200AF94
 	bl sub_02074490
 	add r1, r0, #0
 	mov r0, #0
@@ -18446,7 +18446,7 @@ ov74_02231E00: ; 0x02231E00
 	add r0, r3, #0
 	lsl r1, r1, #0xc
 	add r7, r2, #0
-	bl Heap_AllocAtEnd
+	bl AllocFromHeapAtEnd
 	add r4, r0, #0
 	beq _02231E34
 	add r1, r5, #0
@@ -18458,7 +18458,7 @@ ov74_02231E00: ; 0x02231E00
 	cmp r0, #0
 	bne _02231E34
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	mov r0, #0
 	pop {r3, r4, r5, r6, r7, pc}
 _02231E34:
@@ -18593,7 +18593,7 @@ ov74_02231EC4: ; 0x02231EC4
 	add r1, #8
 	bl Sprite_SetPaletteOverride
 	add r0, r6, #0
-	bl Heap_Free
+	bl FreeToHeap
 	pop {r3, r4, r5, r6, r7, pc}
 	thumb_func_end ov74_02231EC4
 
@@ -18710,7 +18710,7 @@ ov74_02231FF4: ; 0x02231FF4
 	str r0, [sp, #0x10]
 	mov r0, #0x4c
 	lsl r1, r1, #0xc
-	bl Heap_AllocAtEnd
+	bl AllocFromHeapAtEnd
 	mov r7, #0
 	str r0, [sp, #0x14]
 	str r7, [sp, #0xc]
@@ -18837,7 +18837,7 @@ _0223210A:
 	b _02232016
 _0223211A:
 	ldr r0, [sp, #0x14]
-	bl Heap_Free
+	bl FreeToHeap
 	ldr r0, [sp, #0x10]
 	bl NARC_Delete
 	ldr r1, _0223214C ; =ov74_02231FB0
@@ -20554,11 +20554,11 @@ _02232EB4:
 	mov r0, #0x5b
 	lsl r0, r0, #2
 	ldr r0, [r6, r0]
-	bl SpriteTransfer_DeleteCharTransferTask
+	bl sub_0200AEB0
 	mov r0, #0x17
 	lsl r0, r0, #4
 	ldr r0, [r6, r0]
-	bl SpriteTransfer_DeletePlttTransferTask
+	bl sub_0200B0A8
 	mov r7, #0x55
 	mov r5, #0
 	add r4, r6, #0
@@ -20776,7 +20776,7 @@ _02233092:
 	pop {r4, r5, r6, r7, pc}
 _022330B4:
 	ldr r0, [sp, #8]
-	bl MigratedPokemon_CountPokemon
+	bl sub_0202EC98
 	cmp r0, #0
 	beq _022330C4
 	add sp, #0xc
@@ -20969,7 +20969,7 @@ ov74_02233230: ; 0x02233230
 	mov r0, #3
 	mov r1, #0x4c
 	lsl r2, r2, #0xe
-	bl Heap_Create
+	bl CreateHeap
 	ldr r1, _022332D8 ; =0x00012610
 	add r0, r5, #0
 	mov r2, #0x4c
@@ -21772,14 +21772,14 @@ ov74_022338D4: ; 0x022338D4
 	ldr r0, [r4, r0]
 	bl String_Delete
 	ldr r0, [r4, #0x20]
-	bl Heap_Free
+	bl FreeToHeap
 	ldr r0, _0223391C ; =FS_OVERLAY_ID(intro_title)
 	ldr r1, _02233920 ; =gApplication_TitleScreen
 	bl RegisterMainOverlay
 	add r0, r5, #0
 	bl OverlayManager_FreeData
 	mov r0, #0x4c
-	bl Heap_Destroy
+	bl DestroyHeap
 	mov r0, #0
 	bl ov74_02236034
 	mov r0, #1
@@ -25117,12 +25117,12 @@ _02235134: .word ov74_0223D450
 ov74_02235138: ; 0x02235138
 	add r1, r0, #0
 	ldr r0, _02235144 ; =ov74_0223D450
-	ldr r3, _02235148 ; =Heap_Alloc
+	ldr r3, _02235148 ; =AllocFromHeap
 	ldr r0, [r0]
 	bx r3
 	nop
 _02235144: .word ov74_0223D450
-_02235148: .word Heap_Alloc
+_02235148: .word AllocFromHeap
 	thumb_func_end ov74_02235138
 
 	thumb_func_start ov74_0223514C
@@ -25171,7 +25171,7 @@ _02235182:
 	mov r0, #0
 	bl CTRDG_Enable
 	ldr r0, _022351F0 ; =ov74_02235138
-	ldr r1, _022351F4 ; =Heap_Free
+	ldr r1, _022351F4 ; =FreeToHeap
 	bl CRYPTO_SetAllocator
 	ldr r1, _022351E8 ; =0x000004A8
 	ldr r3, _022351F8 ; =_0223B690
@@ -25203,7 +25203,7 @@ _022351E4: .word ov74_0223CE9C
 _022351E8: .word 0x000004A8
 _022351EC: .word 0x08020000
 _022351F0: .word ov74_02235138
-_022351F4: .word Heap_Free
+_022351F4: .word FreeToHeap
 _022351F8: .word _0223B690
 	thumb_func_end ov74_0223514C
 
@@ -25329,7 +25329,7 @@ ov74_022352D0: ; 0x022352D0
 	add r6, r1, #0
 	mov r0, #3
 	add r2, r3, #0
-	bl Heap_Create
+	bl CreateHeap
 	add r0, r5, #0
 	add r1, r4, #0
 	add r2, r6, #0
@@ -26042,12 +26042,12 @@ _0223580C:
 	add r1, r5, r6
 	lsl r0, r0, #2
 	ldr r0, [r1, r0]
-	bl SpriteTransfer_CreateCharTransferTask
+	bl sub_0200ACF0
 	mov r0, #0x5f
 	add r1, r5, r6
 	lsl r0, r0, #2
 	ldr r0, [r1, r0]
-	bl SpriteTransfer_CreatePlttTransferTask
+	bl sub_0200B00C
 	mov r0, #0
 	mov r2, #0x16
 	str r4, [sp]
@@ -26280,7 +26280,7 @@ _022359DA:
 	ldr r0, [r0, r1]
 	cmp r0, #0
 	beq _022359EA
-	bl SpriteTransfer_DeleteCharTransferTask
+	bl sub_0200AEB0
 _022359EA:
 	mov r1, #0x57
 	ldr r0, _02235A64 ; =ov74_0223D488
@@ -26288,7 +26288,7 @@ _022359EA:
 	ldr r0, [r0, r1]
 	cmp r0, #0
 	beq _022359FA
-	bl SpriteTransfer_DeleteCharTransferTask
+	bl sub_0200AEB0
 _022359FA:
 	mov r1, #0x52
 	ldr r0, _02235A64 ; =ov74_0223D488
@@ -26296,7 +26296,7 @@ _022359FA:
 	ldr r0, [r0, r1]
 	cmp r0, #0
 	beq _02235A0A
-	bl SpriteTransfer_DeletePlttTransferTask
+	bl sub_0200B0A8
 _02235A0A:
 	mov r1, #0x16
 	ldr r0, _02235A64 ; =ov74_0223D488
@@ -26304,7 +26304,7 @@ _02235A0A:
 	ldr r0, [r0, r1]
 	cmp r0, #0
 	beq _02235A1A
-	bl SpriteTransfer_DeletePlttTransferTask
+	bl sub_0200B0A8
 _02235A1A:
 	mov r4, #0
 	mov r7, #0x4b
@@ -26821,7 +26821,7 @@ ov74_02235DC4: ; 0x02235DC4
 	lsl r3, r3, #8
 	bl BG_LoadScreenTilemapData
 	ldr r0, [sp, #0x10]
-	bl Heap_Free
+	bl FreeToHeap
 	mov r0, #0x20
 	str r0, [sp]
 	mov r0, #0x18
@@ -26917,7 +26917,7 @@ ov74_02235ED0: ; 0x02235ED0
 	add r0, r2, #0
 	lsl r1, r1, #8
 	str r2, [sp]
-	bl Heap_Alloc
+	bl AllocFromHeap
 	ldr r1, _02235F50 ; =0x0000A001
 	add r4, r0, #0
 	bl MATHi_CRC16InitTableRev
@@ -26927,7 +26927,7 @@ ov74_02235ED0: ; 0x02235ED0
 	bl MATH_CalcCRC16
 	add r6, r0, #0
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, sp, #4
 	bl OS_GetMacAddress
 	add r0, sp, #4
@@ -26949,7 +26949,7 @@ _02235F12:
 	mov r1, #0x41
 	ldr r0, [sp]
 	lsl r1, r1, #2
-	bl Heap_Alloc
+	bl AllocFromHeap
 	add r1, sp, #4
 	mov r2, #8
 	add r4, r0, #0
@@ -26962,7 +26962,7 @@ _02235F12:
 	add r3, r7, #0
 	bl CRYPTO_RC4Encrypt
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	add sp, #0xc
 	pop {r4, r5, r6, r7, pc}
 	.balign 4, 0
@@ -26980,7 +26980,7 @@ ov74_02235F58: ; 0x02235F58
 	add r0, r2, #0
 	lsl r1, r1, #8
 	str r2, [sp]
-	bl Heap_Alloc
+	bl AllocFromHeap
 	ldr r1, _02235FF0 ; =0x0000A001
 	add r4, r0, #0
 	bl MATHi_CRC16InitTableRev
@@ -26990,7 +26990,7 @@ ov74_02235F58: ; 0x02235F58
 	bl MATH_CalcCRC16
 	add r6, r0, #0
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	mov r0, #0
 	bl sub_02035754
 	ldrb r2, [r0, #4]
@@ -27024,7 +27024,7 @@ _02235FB2:
 	mov r1, #0x41
 	ldr r0, [sp]
 	lsl r1, r1, #2
-	bl Heap_Alloc
+	bl AllocFromHeap
 	add r1, sp, #4
 	mov r2, #8
 	add r4, r0, #0
@@ -27037,7 +27037,7 @@ _02235FB2:
 	add r3, r7, #0
 	bl CRYPTO_RC4Encrypt
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	add sp, #0xc
 	pop {r4, r5, r6, r7, pc}
 	.balign 4, 0
@@ -28349,7 +28349,7 @@ ov74_022369A8: ; 0x022369A8
 	bic r1, r0
 	add r1, #0x20
 	mov r0, #0x54
-	bl Heap_Alloc
+	bl AllocFromHeap
 	add r2, r0, #0
 	add r2, #0x20
 	mov r1, #0x1f
@@ -28367,7 +28367,7 @@ ov74_022369C8: ; 0x022369C8
 	beq _022369D6
 	sub r0, r1, #4
 	ldr r0, [r0]
-	bl Heap_Free
+	bl FreeToHeap
 _022369D6:
 	pop {r3, pc}
 	thumb_func_end ov74_022369C8

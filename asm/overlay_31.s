@@ -15,7 +15,7 @@ ov31_0225D520: ; 0x0225D520
 	mov r1, #8
 	lsl r2, r0, #0xf
 	str r3, [sp, #4]
-	bl Heap_Create
+	bl CreateHeap
 	mov r1, #0x19
 	ldr r0, _0225D5FC ; =ov31_0225D7A0
 	lsl r1, r1, #4
@@ -256,7 +256,7 @@ ov31_0225D710: ; 0x0225D710
 	mov r1, #4
 	bl FreeBgTilemapBuffer
 	mov r0, #8
-	bl Heap_Destroy
+	bl DestroyHeap
 	pop {r4, r5, r6, pc}
 	.balign 4, 0
 	thumb_func_end ov31_0225D710
@@ -600,7 +600,7 @@ _0225D9EA:
 	mov r1, #6
 	bl ScheduleBgTilemapBufferTransfer
 	add r0, r5, #0
-	bl Heap_Free
+	bl FreeToHeap
 	mov r0, #2
 	mov r1, #1
 	bl GfGfx_EngineBTogglePlanes
@@ -630,7 +630,7 @@ _0225DA26:
 	mov r1, #6
 	bl ScheduleBgTilemapBufferTransfer
 	add r0, r5, #0
-	bl Heap_Free
+	bl FreeToHeap
 	add sp, #8
 	pop {r3, r4, r5, pc}
 _0225DA64:
@@ -657,7 +657,7 @@ _0225DA64:
 	mov r1, #6
 	bl ScheduleBgTilemapBufferTransfer
 	add r0, r5, #0
-	bl Heap_Free
+	bl FreeToHeap
 	add sp, #8
 	pop {r3, r4, r5, pc}
 	.balign 4, 0
@@ -1220,7 +1220,7 @@ _0225DEBC:
 	mov r0, #0x5b
 	lsl r0, r0, #2
 	ldr r0, [r5, r0]
-	bl PokeathlonSave_GetAthletePoints
+	bl SavePokeathlon_GetAthletePoints
 	b _0225DF2A
 _0225DF12:
 	mov r0, #0x56
@@ -1472,7 +1472,7 @@ ov31_0225E0E4: ; 0x0225E0E4
 	mov r1, #5
 	bl ScheduleBgTilemapBufferTransfer
 	add r0, r6, #0
-	bl Heap_Free
+	bl FreeToHeap
 	add sp, #8
 	pop {r4, r5, r6, pc}
 	.balign 4, 0
@@ -1489,7 +1489,7 @@ ov31_0225E12C: ; 0x0225E12C
 	bne _0225E14E
 	sub r0, #0x2f
 	ldr r0, [r5, r0]
-	bl PokeathlonSave_GetUnkB7C_AtIndex
+	bl sub_02031AB8
 	cmp r0, #0
 	bne _0225E14A
 	mov r0, #1
@@ -1511,7 +1511,7 @@ _0225E14E:
 	mul r1, r2
 	ldr r0, [r5, r0]
 	add r1, r4, r1
-	bl PokeathlonSave_GetUnkB78_AtIndex
+	bl sub_02031A78
 	cmp r0, #0
 	bne _0225E176
 	mov r0, #1
@@ -2507,7 +2507,7 @@ ov31_0225E95C: ; 0x0225E95C
 	bhi _0225E97A
 	sub r0, #0x2f
 	ldr r0, [r5, r0]
-	bl PokeathlonSave_GetAthletePoints
+	bl SavePokeathlon_GetAthletePoints
 	b _0225E982
 _0225E97A:
 	sub r0, #0x3b

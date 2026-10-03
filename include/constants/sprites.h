@@ -60,6 +60,8 @@
 #define SPRITE_PIKACHU                         71
 #define SPRITE_ROCK                            84
 #define SPRITE_BREAKROCK                       85
+#define SPRITE_CARDBOARDBOX                     1050
+#define SPRITE_KESTRA                           1051
 #define SPRITE_TREE                            86
 #define SPRITE_MONSTARBALL                     87
 #define SPRITE_HEROINE                         97

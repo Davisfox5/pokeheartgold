@@ -5,8 +5,8 @@
 .public SysTask_Destroy
 .public BeginNormalPaletteFade
 .public IsPaletteFadeFinished
-.public Heap_AllocAtEnd
-.public Heap_Free
+.public AllocFromHeapAtEnd
+.public FreeToHeap
 .public PlayerAvatar_GetFacingDirection
 .public PlayerAvatar_SetFacingDirection
 .public PlayerAvatar_GetMapObject

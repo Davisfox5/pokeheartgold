@@ -4,22 +4,20 @@
 
 #include "constants/sprites.h"
 
-#include "pokeathlon/pokeathlon_save.h"
-
 #include "apricorn_tree.h"
+#include "fieldmap.h"
 #include "friend_group.h"
 #include "gf_3d_render.h"
 #include "map_object.h"
 #include "overlay_01.h"
-#include "overlay_01_021F1348.h"
 #include "roamer.h"
 #include "sav_system_info.h"
 #include "save_misc_data.h"
 #include "save_wifi_history.h"
 #include "script.h"
-#include "script_manager.h"
 #include "sys_vars.h"
 #include "unk_0202C730.h"
+#include "unk_02031904.h"
 #include "unk_02031B0C.h"
 #include "unk_02066EDC.h"
 #include "unk_0206D494.h"
@@ -67,14 +65,14 @@ void sub_02055478(FieldSystem *fieldSystem, SysInfo_RTC *sysinfo, RTCDate *date,
     if (minutes <= 0) {
         return;
     }
-    Save_SysInfo_RTC_DecrementPenalty(sysinfo, minutes);
+    Save_SysInfo_RTC_SubField34(sysinfo, minutes);
     sub_020555B4(fieldSystem, minutes, time);
     sysinfo->date = *date;
     sysinfo->time = *time;
 }
 
 void sub_02055508(FieldSystem *fieldSystem, int days) {
-    BOOL hasPenalty = FieldSystem_HasPenalty(fieldSystem);
+    BOOL unkFlag = sub_02055670(fieldSystem);
     ClearDailyFlags(fieldSystem);
     sub_0206759C(fieldSystem->saveData, days); // reset badge shininess..?
     sub_0202C78C(Save_FriendGroup_Get(fieldSystem->saveData), days);
@@ -86,11 +84,11 @@ void sub_02055508(FieldSystem *fieldSystem, int days) {
     WiFiHistory_UpgradeAllLocationsState(Save_WiFiHistory_Get(fieldSystem->saveData));
     sub_020556B8(fieldSystem);
     sub_0202F294(SaveData_GetPhoneCallPersistentState(fieldSystem->saveData), days);
-    if (!hasPenalty) {
+    if (!unkFlag) {
         sub_02031CCC(Save_ApricornBox_Get(fieldSystem->saveData), days);
-        SaveData_SafariZone_CheckAreasWithUpdatedEncounters(fieldSystem->saveData, days);
+        sub_0209730C(fieldSystem->saveData, days);
     }
-    PokeathlonSave_ResetUnkB7C(Save_Pokeathlon_Get(fieldSystem->saveData));
+    sub_02031AE4(Save_Pokeathlon_Get(fieldSystem->saveData));
     Save_VarsFlags_UpdateBuenasPasswordSet(Save_VarsFlags_Get(fieldSystem->saveData));
 }
 
@@ -135,13 +133,13 @@ void FieldSystem_SetGameClearTime(FieldSystem *fieldSystem) {
     sysinfo->seconds_at_game_clear = GF_RTC_DateTimeToSec();
 }
 
-BOOL FieldSystem_HasPenalty(FieldSystem *fieldSystem) {
+BOOL sub_02055670(FieldSystem *fieldSystem) {
     SysInfo_RTC *sysinfo = Save_SysInfo_RTC_Get(fieldSystem->saveData);
-    return Save_SysInfo_RTC_HasPenalty(sysinfo);
+    return sub_02028E1C(sysinfo);
 }
 
-UnkStruct_020556FC *sub_02055680(FieldSystem *fieldSystem, enum HeapID heapID) {
-    UnkStruct_020556FC *unkPtr = Heap_Alloc(heapID, sizeof(UnkStruct_020556FC));
+UnkStruct_020556FC *sub_02055680(FieldSystem *fieldSystem, HeapID heapID) {
+    UnkStruct_020556FC *unkPtr = AllocFromHeap(heapID, sizeof(UnkStruct_020556FC));
     MI_CpuClear8(unkPtr, sizeof(UnkStruct_020556FC));
     unkPtr->heapID = heapID;
     sub_020556C8(fieldSystem, unkPtr);
@@ -150,7 +148,7 @@ UnkStruct_020556FC *sub_02055680(FieldSystem *fieldSystem, enum HeapID heapID) {
 
 void sub_020556A8(UnkStruct_020556FC *unkPtr) {
     sub_020556FC(unkPtr);
-    Heap_Free(unkPtr);
+    FreeToHeap(unkPtr);
 }
 
 void sub_020556B8(FieldSystem *fieldSystem) {
@@ -159,13 +157,13 @@ void sub_020556B8(FieldSystem *fieldSystem) {
 }
 
 void sub_020556C8(FieldSystem *fieldSystem, UnkStruct_020556FC *unkPtrB) {
-    FieldEffectManager *fieldEffectManager = fieldSystem->fieldEffectManager;
-    unkPtrB->unk5c = Heap_Alloc(unkPtrB->heapID, ov01_021F149C(fieldEffectManager, 31));
-    ov01_021F14A8(fieldEffectManager, 31, unkPtrB->unk5c);
+    void *unkB = fieldSystem->unk_44;
+    unkPtrB->unk5c = AllocFromHeap(unkPtrB->heapID, ov01_021F149C(unkB, 31));
+    ov01_021F14A8(unkB, 31, unkPtrB->unk5c);
     GF3dRender_InitObjFromHeader(&unkPtrB->unk4, &unkPtrB->unk58, &unkPtrB->unk5c);
 }
 
-void sub_020556FC(UnkStruct_020556FC *unkPtr) {
+void sub_020556FC(struct UnkStruct_020556FC *unkPtr) {
     ov01_021F1448(unkPtr->unk5c); // function frees unk5c to heap
 }
 

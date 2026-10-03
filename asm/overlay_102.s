@@ -24,12 +24,12 @@ _021E7752:
 	mov r0, #3
 	mov r1, #0x22
 	lsl r2, r2, #0xe
-	bl Heap_Create
+	bl CreateHeap
 	mov r2, #0xa
 	mov r0, #3
 	mov r1, #0x23
 	lsl r2, r2, #0xe
-	bl Heap_Create
+	bl CreateHeap
 	add r0, r5, #0
 	bl ov102_021E7888
 	ldr r0, [r0, #0x14]
@@ -174,9 +174,9 @@ EasyChat_Exit: ; 0x021E7868
 	add r1, r4, #0
 	bl ov102_021E7A24
 	mov r0, #0x22
-	bl Heap_Destroy
+	bl DestroyHeap
 	mov r0, #0x23
-	bl Heap_Destroy
+	bl DestroyHeap
 	mov r0, #1
 	pop {r4, pc}
 	.balign 4, 0
@@ -3542,7 +3542,7 @@ ov102_021E909C: ; 0x021E909C
 	add r5, r0, #0
 	mov r0, #0x23
 	lsl r1, r1, #2
-	bl Heap_Alloc
+	bl AllocFromHeap
 	add r4, r0, #0
 	mov r0, #0
 	add r1, r0, #0
@@ -3640,9 +3640,9 @@ _021E9166:
 	add r0, r6, #0
 	bl ov102_021E91BC
 	ldr r0, [r6, #0x20]
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r6, #0
-	bl Heap_Free
+	bl FreeToHeap
 _021E9196:
 	pop {r4, r5, r6, pc}
 	thumb_func_end ov102_021E9144
@@ -3682,7 +3682,7 @@ ov102_021E91C4: ; 0x021E91C4
 	add r7, r0, #0
 	mov r0, #2
 	mov r1, #0x23
-	bl FontSystem_NewInit
+	bl sub_02013534
 	mov r1, #0x7f
 	lsl r1, r1, #2
 	str r0, [r7, r1]
@@ -3830,7 +3830,7 @@ _021E9308:
 	lsl r1, r1, #8
 	ldr r1, [r7, r1]
 	add r0, sp, #0x30
-	bl TextOBJ_Create
+	bl sub_02013950
 	mov r2, #0x85
 	ldr r1, [sp, #0x14]
 	lsl r2, r2, #2
@@ -3838,13 +3838,13 @@ _021E9308:
 	add r0, r1, #0
 	ldr r0, [r0, r2]
 	mov r1, #1
-	bl TextOBJ_SetSpritesDrawFlag
+	bl sub_020137C0
 	mov r1, #0x85
 	ldr r0, [sp, #0x14]
 	lsl r1, r1, #2
 	ldr r0, [r0, r1]
 	mov r1, #0
-	bl TextOBJ_SetPaletteNum
+	bl sub_02013850
 	mov r1, #0x85
 	ldr r0, [sp, #0x14]
 	lsl r1, r1, #2
@@ -3892,7 +3892,7 @@ _021E938C:
 	mov r0, #0x85
 	lsl r0, r0, #2
 	ldr r0, [r4, r0]
-	bl TextOBJ_Destroy
+	bl sub_020139C8
 	add r0, r5, #0
 	bl sub_02021B5C
 	mov r0, #0x85
@@ -3966,7 +3966,7 @@ ov102_021E940C: ; 0x021E940C
 	bhs _021E945A
 	mov r0, #0x23
 	mov r1, #0x18
-	bl Heap_Alloc
+	bl AllocFromHeap
 	add r1, r0, #0
 	beq _021E945E
 	mov r4, #0
@@ -4066,7 +4066,7 @@ ov102_021E94A4: ; 0x021E94A4
 	add r0, r1, r0
 	str r2, [r0, #8]
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	pop {r4, pc}
 	.balign 4, 0
 	thumb_func_end ov102_021E94A4
@@ -4346,14 +4346,14 @@ _021E971A:
 	ldr r0, [r5, r0]
 	cmp r0, #0
 	beq _021E9728
-	bl Heap_Free
+	bl FreeToHeap
 _021E9728:
 	mov r0, #0x76
 	lsl r0, r0, #2
 	ldr r0, [r5, r0]
 	cmp r0, #0
 	beq _021E9736
-	bl Heap_Free
+	bl FreeToHeap
 _021E9736:
 	add r4, r4, #1
 	add r5, r5, #4
@@ -5886,7 +5886,7 @@ ov102_021EA314: ; 0x021EA314
 	mov r0, #0x23
 	lsl r1, r1, #2
 	add r7, r2, #0
-	bl Heap_Alloc
+	bl AllocFromHeap
 	add r4, r0, #0
 	str r5, [r4]
 	str r6, [r4, #4]
@@ -6000,7 +6000,7 @@ _021EA3E0:
 	ldr r0, [r4, r0]
 	bl YesNoPrompt_Destroy
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	pop {r4, pc}
 	.balign 4, 0
 	thumb_func_end ov102_021EA380
@@ -6534,7 +6534,7 @@ ov102_021EA80C: ; 0x021EA80C
 	lsl r1, r1, #6
 	bl DC_FlushRange
 	add r0, r5, #0
-	bl Heap_Free
+	bl FreeToHeap
 	add sp, #0xc
 	pop {r4, r5, pc}
 	.balign 4, 0
@@ -7763,7 +7763,7 @@ ov102_021EB1A4: ; 0x021EB1A4
 	mov r0, #0x23
 	mov r1, #0x68
 	add r7, r2, #0
-	bl Heap_Alloc
+	bl AllocFromHeap
 	add r4, r0, #0
 	str r5, [r4]
 	str r6, [r4, #4]
@@ -7794,7 +7794,7 @@ ov102_021EB1E0: ; 0x021EB1E0
 	ldr r0, [r4, #0x14]
 	bl DestroyMsgData
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	pop {r4, pc}
 	.balign 4, 0
 	thumb_func_end ov102_021EB1E0
@@ -7903,9 +7903,9 @@ _021EB2BA:
 	cmp r6, #3
 	blt _021EB2BA
 	ldr r0, [r7, #0x58]
-	bl Heap_Free
+	bl FreeToHeap
 	ldr r0, [r7, #0x54]
-	bl Heap_Free
+	bl FreeToHeap
 	ldr r0, [sp]
 	mov r1, #3
 	bl BgCommitTilemapBufferToVram
@@ -8328,7 +8328,7 @@ _021EB602:
 	mov r1, #0
 	str r1, [r0, #0x64]
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r5, #0
 	bl SysTask_Destroy
 _021EB620:
@@ -8345,7 +8345,7 @@ ov102_021EB624: ; 0x021EB624
 	add r4, r0, #0
 	mov r0, #0x23
 	mov r1, #0x1c
-	bl Heap_Alloc
+	bl AllocFromHeap
 	add r1, r0, #0
 	str r5, [r1]
 	mov r0, #0
@@ -8410,7 +8410,7 @@ ov102_021EB694: ; 0x021EB694
 	mov r0, #0x23
 	mov r1, #0x64
 	add r7, r2, #0
-	bl Heap_Alloc
+	bl AllocFromHeap
 	add r4, r0, #0
 	str r5, [r4]
 	str r6, [r4, #4]
@@ -8439,7 +8439,7 @@ ov102_021EB6C8: ; 0x021EB6C8
 	bl Sprite_Delete
 _021EB6D6:
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	pop {r4, pc}
 	.balign 4, 0
 	thumb_func_end ov102_021EB6C8
@@ -9163,7 +9163,7 @@ ov102_021EBC34: ; 0x021EBC34
 	mov r0, #0x23
 	mov r1, #0x98
 	add r7, r2, #0
-	bl Heap_Alloc
+	bl AllocFromHeap
 	add r4, r0, #0
 	str r5, [r4]
 	str r6, [r4, #4]
@@ -9251,7 +9251,7 @@ _021EBCE8:
 	add r0, #0x10
 	bl RemoveWindow
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	pop {r4, pc}
 	thumb_func_end ov102_021EBCBC
 
@@ -9920,7 +9920,7 @@ ov102_021EC20C: ; 0x021EC20C
 	mov r0, #0x23
 	mov r1, #0x30
 	add r7, r2, #0
-	bl Heap_Alloc
+	bl AllocFromHeap
 	add r4, r0, #0
 	str r5, [r4]
 	str r6, [r4, #4]
@@ -9941,10 +9941,10 @@ ov102_021EC20C: ; 0x021EC20C
 
 	thumb_func_start ov102_021EC240
 ov102_021EC240: ; 0x021EC240
-	ldr r3, _021EC244 ; =Heap_Free
+	ldr r3, _021EC244 ; =FreeToHeap
 	bx r3
 	.balign 4, 0
-_021EC244: .word Heap_Free
+_021EC244: .word FreeToHeap
 	thumb_func_end ov102_021EC240
 
 	thumb_func_start ov102_021EC248

@@ -5,25 +5,25 @@
 
 	.rodata
 
-	ScrDef scr_seq_T05R0601_000
-	ScrDef scr_seq_T05R0601_001
-	ScrDef scr_seq_T05R0601_002
-	ScrDef scr_seq_T05R0601_003
-	ScrDefEnd
+	scrdef scr_seq_T05R0601_000
+	scrdef scr_seq_T05R0601_001
+	scrdef scr_seq_T05R0601_002
+	scrdef scr_seq_T05R0601_003
+	scrdef_end
 
 scr_seq_T05R0601_000:
-	SimpleNPCMsg msg_0481_T05R0601_00000
-	End
+	simple_npc_msg msg_0481_T05R0601_00000
+	end
 
 scr_seq_T05R0601_001:
-	SimpleNPCMsg msg_0481_T05R0601_00001
-	End
+	simple_npc_msg msg_0481_T05R0601_00001
+	end
 
 scr_seq_T05R0601_002:
-	SimpleNPCMsg msg_0481_T05R0601_00002
-	End
+	simple_npc_msg msg_0481_T05R0601_00002
+	end
 
 scr_seq_T05R0601_003:
-	SimpleNPCMsg msg_0481_T05R0601_00003
-	End
+	simple_npc_msg msg_0481_T05R0601_00003
+	end
 	.balign 4, 0

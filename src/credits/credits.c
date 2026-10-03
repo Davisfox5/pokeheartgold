@@ -11,17 +11,17 @@
 #include "obj_char_transfer.h"
 #include "obj_pltt_transfer.h"
 #include "overlay_manager.h"
-#include "screen_fade.h"
 #include "sound.h"
 #include "sound_02004A44.h"
 #include "sprite.h"
-#include "sprite_transfer.h"
 #include "sys_task_api.h"
 #include "system.h"
 #include "text.h"
 #include "unk_02009D48.h"
 #include "unk_0200A090.h"
+#include "unk_0200ACF0.h"
 #include "unk_0200B150.h"
+#include "unk_0200FA24.h"
 
 #ifdef HEARTGOLD
 #define GAME_TITLE_MSG_NO 0
@@ -214,7 +214,7 @@ BOOL Credits_Init(OverlayManager *man, int *state) {
 
     switch (*state) {
     case 0:
-        Heap_Create(HEAP_ID_3, HEAP_ID_CREDITS, 0x40000);
+        CreateHeap(HEAP_ID_3, HEAP_ID_CREDITS, 0x40000);
         work = OverlayManager_CreateAndGetData(man, sizeof(CreditsAppWork), HEAP_ID_CREDITS);
         if (work != NULL) {
             MI_CpuFill8(work, 0, sizeof(CreditsAppWork));
@@ -261,7 +261,7 @@ BOOL Credits_Init(OverlayManager *man, int *state) {
         break;
     case 2:
         work = OverlayManager_GetData(man);
-        BeginNormalPaletteFade(FADE_BOTH_SCREENS, FADE_TYPE_BRIGHTNESS_IN, FADE_TYPE_BRIGHTNESS_IN, RGB_BLACK, 30, 1, HEAP_ID_CREDITS);
+        BeginNormalPaletteFade(0, 1, 1, RGB_BLACK, 30, 1, HEAP_ID_CREDITS);
         return TRUE;
     }
     return FALSE;
@@ -282,8 +282,8 @@ BOOL Credits_Exit(OverlayManager *man, int *state) {
         String_Delete(ptr->string);
         FreeBG(work);
         for (u8 i = 0; i < 6; i++) {
-            Heap_Free(work->unk468[i]);
-            Heap_Free(work->unk480[i]);
+            FreeToHeap(work->unk468[i]);
+            FreeToHeap(work->unk480[i]);
         }
         FreePageSysTasks(work);
         *state += 1;
@@ -297,7 +297,7 @@ BOOL Credits_Exit(OverlayManager *man, int *state) {
         break;
     case 3:
         OverlayManager_FreeData(man);
-        Heap_Destroy(HEAP_ID_CREDITS);
+        DestroyHeap(HEAP_ID_CREDITS);
         return TRUE;
     }
     return FALSE;
@@ -317,7 +317,7 @@ BOOL Credits_Main(OverlayManager *man, int *state) {
         // No skipping on first playthrough
         if (work->args->gameCleared && ((gSystem.newKeys & PAD_BUTTON_START) || gSystem.touchNew != 0)) {
             work->skipCredits = TRUE;
-            BeginNormalPaletteFade(FADE_BOTH_SCREENS, FADE_TYPE_BRIGHTNESS_OUT, FADE_TYPE_BRIGHTNESS_OUT, RGB_BLACK, 30, 1, HEAP_ID_CREDITS);
+            BeginNormalPaletteFade(0, 0, 0, RGB_BLACK, 30, 1, HEAP_ID_CREDITS);
             GF_SndStartFadeOutBGM(0, 26);
             *state += 1;
             break;
@@ -330,7 +330,7 @@ BOOL Credits_Main(OverlayManager *man, int *state) {
         if (work->timer < CREDITS_FRAMES) {
             break;
         }
-        BeginNormalPaletteFade(FADE_BOTH_SCREENS, FADE_TYPE_BRIGHTNESS_OUT, FADE_TYPE_BRIGHTNESS_OUT, RGB_BLACK, 30, 1, HEAP_ID_CREDITS);
+        BeginNormalPaletteFade(0, 0, 0, RGB_BLACK, 30, 1, HEAP_ID_CREDITS);
         *state += 1;
         break;
     case CREDITS_STATE_MAIN_FADE_OUT:
@@ -351,7 +351,7 @@ BOOL Credits_Main(OverlayManager *man, int *state) {
             GfGfx_SwapDisplay();
 
             // Start fading into the "The End" screen
-            BeginNormalPaletteFade(FADE_MAIN_ONLY, FADE_TYPE_BRIGHTNESS_IN, FADE_TYPE_BRIGHTNESS_IN, RGB_BLACK, 1, 1, HEAP_ID_CREDITS);
+            BeginNormalPaletteFade(3, 1, 1, RGB_BLACK, 1, 1, HEAP_ID_CREDITS);
             *state += 1;
         }
         break;
@@ -363,7 +363,7 @@ BOOL Credits_Main(OverlayManager *man, int *state) {
         break;
     case CREDITS_STATE_THE_END:
         if ((gSystem.newKeys & (PAD_BUTTON_START | PAD_BUTTON_A)) || gSystem.touchNew != 0) {
-            BeginNormalPaletteFade(FADE_MAIN_ONLY, FADE_TYPE_BRIGHTNESS_OUT, FADE_TYPE_BRIGHTNESS_OUT, RGB_BLACK, 60, 1, HEAP_ID_CREDITS);
+            BeginNormalPaletteFade(3, 0, 0, RGB_BLACK, 60, 1, HEAP_ID_CREDITS);
             *state = CREDITS_STATE_THE_END_FADE_OUT;
             break;
         }
@@ -374,7 +374,7 @@ BOOL Credits_Main(OverlayManager *man, int *state) {
         break;
     case CREDITS_STATE_THE_END_MUSIC_BOX:
         if ((gSystem.newKeys & (PAD_BUTTON_START | PAD_BUTTON_A)) || gSystem.touchNew != 0) {
-            BeginNormalPaletteFade(FADE_MAIN_ONLY, FADE_TYPE_BRIGHTNESS_OUT, FADE_TYPE_BRIGHTNESS_OUT, RGB_BLACK, 60, 1, HEAP_ID_CREDITS);
+            BeginNormalPaletteFade(3, 0, 0, RGB_BLACK, 60, 1, HEAP_ID_CREDITS);
             *state += 1;
         }
         break;
@@ -436,7 +436,7 @@ static void FreeBG(CreditsAppWork *work) {
     FreeBgTilemapBuffer(work->bgConfig, GF_BG_LYR_SUB_1);
     FreeBgTilemapBuffer(work->bgConfig, GF_BG_LYR_SUB_2);
     FreeBgTilemapBuffer(work->bgConfig, GF_BG_LYR_SUB_3);
-    Heap_Free(work->bgConfig);
+    FreeToHeap(work->bgConfig);
 }
 
 static void LoadBgGraphics(CreditsAppWork *work) {
@@ -513,12 +513,12 @@ static void ov76_021E6170(CreditsAppWork *work) {
         work->cutsceneRsrs[i].plttResObj = AddPlttResObjFromOpenNarc(work->gf2dGfxResMan[GF_GFX_RES_TYPE_PLTT], *narc, 149, FALSE, i + 2, NNS_G2D_VRAM_TYPE_2DMAIN, 1, HEAP_ID_CREDITS);
     }
 
-    SpriteTransfer_CreateCharTransferTask(work->gf2dGfxResObj[GF_GFX_RES_TYPE_CHAR]);
-    SpriteTransfer_CreateExtPlttTransferTask(work->gf2dGfxResObj[GF_GFX_RES_TYPE_PLTT]);
+    sub_0200ACF0(work->gf2dGfxResObj[GF_GFX_RES_TYPE_CHAR]);
+    sub_0200AF94(work->gf2dGfxResObj[GF_GFX_RES_TYPE_PLTT]);
 
     for (u8 i = 0; i < UNIQUE_SPRITES_PER_CUTSCENE; i++) {
-        SpriteTransfer_CreateCharTransferTask(work->cutsceneRsrs[i].charResObj);
-        SpriteTransfer_CreateExtPlttTransferTask(work->cutsceneRsrs[i].plttResObj);
+        sub_0200ACF0(work->cutsceneRsrs[i].charResObj);
+        sub_0200AF94(work->cutsceneRsrs[i].plttResObj);
     }
 
     GfGfx_EngineATogglePlanes(GX_PLANEMASK_OBJ, GF_PLANE_TOGGLE_ON);
@@ -526,12 +526,12 @@ static void ov76_021E6170(CreditsAppWork *work) {
 }
 
 static void ov76_021E62B4(CreditsAppWork *work) {
-    SpriteTransfer_DeleteCharTransferTask(work->gf2dGfxResObj[GF_GFX_RES_TYPE_CHAR]);
-    SpriteTransfer_DeletePlttTransferTask(work->gf2dGfxResObj[GF_GFX_RES_TYPE_PLTT]);
+    sub_0200AEB0(work->gf2dGfxResObj[GF_GFX_RES_TYPE_CHAR]);
+    sub_0200B0A8(work->gf2dGfxResObj[GF_GFX_RES_TYPE_PLTT]);
 
     for (u8 i = 0; i < 6; i++) {
-        SpriteTransfer_DeleteCharTransferTask(work->cutsceneRsrs[i].charResObj);
-        SpriteTransfer_DeletePlttTransferTask(work->cutsceneRsrs[i].plttResObj);
+        sub_0200AEB0(work->cutsceneRsrs[i].charResObj);
+        sub_0200B0A8(work->cutsceneRsrs[i].plttResObj);
     }
 }
 
@@ -555,14 +555,14 @@ static void InitSprites(CreditsAppWork *work) {
         }
 
         tmpl.position.y = (yIdx * 80 + 16) * FX32_ONE;
-        tmpl.drawPriority = 1;
+        tmpl.priority = 1;
         ptr->pokemon[i] = Sprite_CreateAffine(&tmpl);
         GF_ASSERT(ptr->pokemon[i] != NULL);
         Sprite_SetAnimActiveFlag(ptr->pokemon[i], TRUE);
         Sprite_SetDrawFlag(ptr->pokemon[i], TRUE);
         Sprite_SetAnimCtrlSeq(ptr->pokemon[i], 6);
 
-        tmpl.drawPriority = 0;
+        tmpl.priority = 0;
         ptr->cloud[i] = Sprite_CreateAffine(&tmpl);
         GF_ASSERT(ptr->cloud[i] != NULL);
         Sprite_SetAnimActiveFlag(ptr->cloud[i], TRUE);
@@ -581,14 +581,14 @@ static void InitSprites(CreditsAppWork *work) {
             tmpl.position.x = 240 * FX32_ONE;
         }
         tmpl.position.y = (yIdx * 80 + 272) * FX32_ONE;
-        tmpl.drawPriority = 1;
+        tmpl.priority = 1;
         u8 idx = i + MONS_PER_SCREEN;
         ptr->pokemon[idx] = Sprite_CreateAffine(&tmpl);
         Sprite_SetAnimActiveFlag(ptr->pokemon[idx], TRUE);
         Sprite_SetDrawFlag(ptr->pokemon[idx], TRUE);
         Sprite_SetAnimCtrlSeq(ptr->pokemon[idx], 6);
 
-        tmpl.drawPriority = 0;
+        tmpl.priority = 0;
         ptr->cloud[idx] = Sprite_CreateAffine(&tmpl);
         Sprite_SetAnimActiveFlag(ptr->cloud[idx], TRUE);
         Sprite_SetDrawFlag(ptr->cloud[idx], FALSE);
@@ -613,9 +613,9 @@ static void InitDancingSpriteResources(int idx, CreditsAppWork *work, int sprtRe
     tmpl->scale.y = FX32_ONE;
     tmpl->scale.z = FX32_ONE;
     tmpl->rotation = 0;
-    tmpl->drawPriority = 0;
+    tmpl->priority = 0;
     tmpl->whichScreen = whichScreen;
-    tmpl->heapID = HEAP_ID_CREDITS;
+    tmpl->heapId = HEAP_ID_CREDITS;
 }
 
 static void InitCutsceneSpriteResources(u8 idx, CreditsAppWork *work, u8 sprtResPriority, NNS_G2D_VRAM_TYPE whichScreen, SpriteTemplate *tmpl, SpriteResourcesHeader *header) {
@@ -640,9 +640,9 @@ static void InitCutsceneSpriteResources(u8 idx, CreditsAppWork *work, u8 sprtRes
     tmpl->scale.y = FX32_ONE;
     tmpl->scale.z = FX32_ONE;
     tmpl->rotation = 0;
-    tmpl->drawPriority = 0;
+    tmpl->priority = 0;
     tmpl->whichScreen = whichScreen;
-    tmpl->heapID = HEAP_ID_CREDITS;
+    tmpl->heapId = HEAP_ID_CREDITS;
 }
 
 static void SetPageSysTasks(CreditsAppWork *work) {
@@ -929,7 +929,7 @@ static void LoadCutsceneSpriteResources(CreditsAppWork *work) {
     for (u8 i = 0; i < UNIQUE_SPRITES_PER_CUTSCENE; i++) {
         SpriteResource *charResObj = work->cutsceneRsrs[i].charResObj;
         SpriteResource *plttResObj = work->cutsceneRsrs[i].plttResObj;
-        NNSG2dImageProxy *imageProxy = SpriteTransfer_GetCharProxy(charResObj);
+        NNSG2dImageProxy *imageProxy = sub_0200AF00(charResObj);
         NNSG2dImagePaletteProxy *plttProxy = SpriteTransfer_GetPaletteProxy(plttResObj, imageProxy);
 
         cutsceneWork->spriteGfx[i].imageProxy = imageProxy;
@@ -987,8 +987,8 @@ static void LoadCutsceneSpriteGfx(CutsceneWork *a0, int spriteId) {
 
     a0->spriteGfx[a0->curSprite].unk2C = GfGfxLoader_GetCellBankFromOpenNarc(a0->narc, sCutsceneSpriteGfxFileIds[spriteId].cellBankFileId, TRUE, &a0->spriteGfx[a0->curSprite].cellDataBank, HEAP_ID_CREDITS);
     a0->spriteGfx[a0->curSprite].unk30 = GfGfxLoader_GetAnimBankFromOpenNarc(a0->narc, sCutsceneSpriteGfxFileIds[spriteId].animBankFileId, TRUE, &a0->spriteGfx[a0->curSprite].animDataBank, HEAP_ID_CREDITS);
-    Heap_Free(charData);
-    Heap_Free(plttData);
+    FreeToHeap(charData);
+    FreeToHeap(plttData);
     a0->curSprite++;
 }
 
@@ -1006,7 +1006,7 @@ static void CreateCutsceneSprite(CreditsAppWork *work, const CutsceneSpriteParam
     // Render on non-primary display screen
     tmpl.position.x = spriteParam->xPos * FX32_ONE;
     tmpl.position.y = (spriteParam->yPos + 256) * FX32_ONE;
-    tmpl.drawPriority = 1;
+    tmpl.priority = 1;
 
     Sprite *sprite = Sprite_CreateAffine(&tmpl);
     cutsceneSprite->sprite = sprite;
@@ -1061,8 +1061,8 @@ static void FreeCutsceneSprites(CreditsAppWork *work) {
 
     sprites->count = 0;
     for (i = 0; i < cutsceneWork->curSprite; i++) {
-        Heap_Free(cutsceneWork->spriteGfx[i].unk2C);
-        Heap_Free(cutsceneWork->spriteGfx[i].unk30);
+        FreeToHeap(cutsceneWork->spriteGfx[i].unk2C);
+        FreeToHeap(cutsceneWork->spriteGfx[i].unk30);
         cutsceneWork->spriteGfx[i].cellDataBank = NULL;
         cutsceneWork->spriteGfx[i].animDataBank = NULL;
     }

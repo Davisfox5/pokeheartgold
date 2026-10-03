@@ -60,7 +60,7 @@ typedef struct BerryPotsAppData_UnkSub20 {
 } BerryPotsAppData_UnkSub20;
 
 typedef struct BerryPotsAppData {
-    enum HeapID heapID;
+    HeapID heapId;
     BerryPotsAppArgs *args;
     void *unk8;
     Bag *bag;
@@ -103,7 +103,7 @@ typedef struct BerryPotsAppData {
     Sprite *sprites[11];
     NARC *itemIconNarc;
     NARC *berryPotsAppNarc;
-    ListMenuItem *listMenuItems[4];
+    LISTMENUITEM *listMenuItems[4];
     TouchscreenListMenu *menu;
 } BerryPotsAppData;
 

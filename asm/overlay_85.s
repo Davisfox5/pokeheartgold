@@ -24,7 +24,7 @@ ov85_021E5900: ; 0x021E5900
 	mov r0, #3
 	mov r1, #0x66
 	lsl r2, r2, #0x12
-	bl Heap_Create
+	bl CreateHeap
 	ldr r1, _021E5A28 ; =0x00000DCC
 	add r0, r5, #0
 	mov r2, #0x66
@@ -176,7 +176,7 @@ _021E5A4A:
 	add r0, r5, #0
 	bl OverlayManager_FreeData
 	mov r0, #0x66
-	bl Heap_Destroy
+	bl DestroyHeap
 	mov r0, #2
 	bl sub_0201A738
 	mov r0, #1
@@ -1742,13 +1742,13 @@ ov85_021E6594: ; 0x021E6594
 	add r4, r0, #0
 	add r0, #0xcc
 	ldr r0, [r0]
-	mov r1, #0x78 ; GAME_STAT_EGGS_SPUN
+	mov r1, #0x78
 	ldr r0, [r0, #0x28]
 	bl GameStats_Inc
 	add r0, r4, #0
 	add r0, #0xcc
 	ldr r0, [r0]
-	mov r1, #0x22 ; SCORE_EVENT_SPIN_TRADE
+	mov r1, #0x22
 	ldr r0, [r0, #0x28]
 	bl GameStats_AddScore
 	add r0, r4, #0
@@ -2478,7 +2478,7 @@ ov85_021E6B68: ; 0x021E6B68
 	ldr r1, [r1, #0xc]
 	bl PaletteData_LoadPalette
 	add r0, r5, #0
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r4, #0
 	mov r1, #0x14
 	mov r2, #0
@@ -2499,7 +2499,7 @@ ov85_021E6B68: ; 0x021E6B68
 	mov r3, #0
 	bl PaletteData_LoadPalette
 	add r0, r5, #0
-	bl Heap_Free
+	bl FreeToHeap
 	mov r0, #0
 	str r0, [sp]
 	ldr r0, _021E6D54 ; =0x00000D9C
@@ -2527,7 +2527,7 @@ ov85_021E6B68: ; 0x021E6B68
 	mov r1, #3
 	bl BG_LoadCharTilesData
 	add r0, r5, #0
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r4, #0
 	mov r1, #0x16
 	mov r2, #0
@@ -2547,7 +2547,7 @@ ov85_021E6B68: ; 0x021E6B68
 	mov r1, #6
 	bl BG_LoadCharTilesData
 	add r0, r5, #0
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r4, #0
 	mov r1, #0x15
 	mov r2, #0
@@ -2567,7 +2567,7 @@ ov85_021E6B68: ; 0x021E6B68
 	mov r1, #7
 	bl BG_LoadCharTilesData
 	add r0, r5, #0
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r4, #0
 	mov r1, #0x13
 	mov r2, #0
@@ -2590,7 +2590,7 @@ ov85_021E6B68: ; 0x021E6B68
 	ldr r0, [r4, r0]
 	bl BgCommitTilemapBufferToVram
 	add r0, r5, #0
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r4, #0
 	mov r1, #0x12
 	mov r2, #0
@@ -2613,7 +2613,7 @@ ov85_021E6B68: ; 0x021E6B68
 	ldr r0, [r4, r0]
 	bl BgCommitTilemapBufferToVram
 	add r0, r5, #0
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r4, #0
 	mov r1, #0x18
 	mov r2, #0
@@ -2636,7 +2636,7 @@ ov85_021E6B68: ; 0x021E6B68
 	ldr r0, [r4, r0]
 	bl BgCommitTilemapBufferToVram
 	add r0, r5, #0
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r4, #0
 	mov r1, #0x17
 	mov r2, #0
@@ -2659,7 +2659,7 @@ ov85_021E6B68: ; 0x021E6B68
 	ldr r0, [r4, r0]
 	bl BgCommitTilemapBufferToVram
 	add r0, r5, #0
-	bl Heap_Free
+	bl FreeToHeap
 	pop {r3, r4, r5, pc}
 	nop
 _021E6D54: .word 0x00000D9C
@@ -2695,7 +2695,7 @@ ov85_021E6D68: ; 0x021E6D68
 	bl FreeBgTilemapBuffer
 	ldr r0, _021E6DA8 ; =0x00000D84
 	ldr r0, [r4, r0]
-	bl Heap_Free
+	bl FreeToHeap
 	pop {r4, pc}
 	.balign 4, 0
 _021E6DA8: .word 0x00000D84
@@ -2725,7 +2725,7 @@ ov85_021E6DAC: ; 0x021E6DAC
 	ldr r0, [r5, r0]
 	bl BgCommitTilemapBufferToVram
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	pop {r3, r4, r5, pc}
 	nop
 _021E6DE8: .word 0x00000D88
@@ -2999,7 +2999,7 @@ ov85_021E6F6C: ; 0x021E6F6C
 	mov r3, #0xe0
 	bl PaletteData_LoadPalette
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	add sp, #0x1c
 	pop {r4, r5, r6, r7, pc}
 	.balign 4, 0
@@ -4501,7 +4501,7 @@ ov85_021E7B40: ; 0x021E7B40
 	mov r0, #0
 	str r0, [r4, #8]
 	mov r0, #0x66
-	bl Heap_AllocAtEnd
+	bl AllocFromHeapAtEnd
 	add r1, r0, #0
 	add r3, r1, #0
 	mov r2, #0x18
@@ -4541,7 +4541,7 @@ _021E7B94:
 	mov r1, #1
 	str r1, [r0, #8]
 	add r0, r5, #0
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r6, #0
 	bl SysTask_Destroy
 _021E7BB8:
@@ -5428,7 +5428,7 @@ _021E81C6:
 	ldr r0, [r4, #0x14]
 	bl Sprite_DeleteAndFreeResources
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r5, #0
 	bl SysTask_Destroy
 _021E81D8:
@@ -5445,7 +5445,7 @@ ov85_021E81E0: ; 0x021E81E0
 	add r5, r0, #0
 	mov r0, #0x66
 	mov r1, #0x18
-	bl Heap_AllocAtEnd
+	bl AllocFromHeapAtEnd
 	add r4, r0, #0
 	add r2, r4, #0
 	mov r1, #0x18
@@ -5865,7 +5865,7 @@ _021E84D0:
 	cmp r4, #1
 	bne _021E84E8
 	add r0, r5, #0
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r6, #0
 	bl SysTask_Destroy
 _021E84E8:
@@ -5886,7 +5886,7 @@ ov85_021E84EC: ; 0x021E84EC
 	str r0, [sp, #4]
 	mov r0, #0x66
 	mov r1, #0xc
-	bl Heap_AllocAtEnd
+	bl AllocFromHeapAtEnd
 	add r1, r0, #0
 	str r5, [r1]
 	lsl r2, r4, #2
@@ -5978,11 +5978,11 @@ ov85_021E8588: ; 0x021E8588
 	cmp r5, #1
 	bne _021E85A8
 	mov r0, #0x66
-	bl Heap_Alloc
+	bl AllocFromHeap
 	b _021E85AE
 _021E85A8:
 	mov r0, #0x66
-	bl Heap_AllocAtEnd
+	bl AllocFromHeapAtEnd
 _021E85AE:
 	add r5, r0, #0
 	mov r0, #0x36
@@ -6484,7 +6484,7 @@ _021E88C8:
 	mov r0, #3
 	mov r1, #0x66
 	lsl r2, r2, #7
-	bl Heap_Create
+	bl CreateHeap
 	mov r0, #0xd9
 	mov r1, #0x66
 	bl NARC_New
@@ -6731,11 +6731,11 @@ ov85_021E8B08: ; 0x021E8B08
 	mov r0, #0x6f
 	lsl r0, r0, #2
 	ldr r0, [r6, r0]
-	bl SpriteTransfer_DeleteCharTransferTask
+	bl sub_0200AEB0
 	mov r0, #7
 	lsl r0, r0, #6
 	ldr r0, [r6, r0]
-	bl SpriteTransfer_DeletePlttTransferTask
+	bl sub_0200B0A8
 	mov r7, #0x63
 	mov r4, #0
 	add r5, r6, #0
@@ -6782,7 +6782,7 @@ _021E8B34:
 	ldr r0, [sp]
 	bl OverlayManager_FreeData
 	mov r0, #0x66
-	bl Heap_Destroy
+	bl DestroyHeap
 	mov r0, #1
 	pop {r3, r4, r5, r6, r7, pc}
 	nop
@@ -7085,11 +7085,11 @@ ov85_021E8E00: ; 0x021E8E00
 	add r6, r0, #0
 	bl ov85_021EA368
 	ldr r0, [r6, #0x28]
-	bl Heap_Free
+	bl FreeToHeap
 	mov r0, #0xee
 	lsl r0, r0, #2
 	ldr r0, [r6, r0]
-	bl Heap_Free
+	bl FreeToHeap
 	mov r4, #0
 	add r5, r6, #0
 _021E8E1C:
@@ -7125,7 +7125,7 @@ ov85_021E8E38: ; 0x021E8E38
 	mov r1, #0
 	bl FreeBgTilemapBuffer
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	pop {r4, pc}
 	.balign 4, 0
 	thumb_func_end ov85_021E8E38
@@ -7375,11 +7375,11 @@ _021E8FD8:
 	str r0, [r6, r1]
 	sub r1, #0xc
 	ldr r0, [r6, r1]
-	bl SpriteTransfer_CreateCharTransferTask
+	bl sub_0200ACF0
 	mov r0, #7
 	lsl r0, r0, #6
 	ldr r0, [r6, r0]
-	bl SpriteTransfer_CreateExtPlttTransferTask
+	bl sub_0200AF94
 	add sp, #0x18
 	pop {r3, r4, r5, r6, r7, pc}
 	.balign 4, 0
@@ -8380,7 +8380,7 @@ ov85_021E9834: ; 0x021E9834
 	mov r1, #1
 	strb r1, [r0, #0xc]
 	ldr r0, [r5, #0xc]
-	mov r1, #0x13 ; SCORE_EVENT_RECORDS_MIXED
+	mov r1, #0x13
 	ldr r0, [r0, #0x28]
 	bl GameStats_AddScore
 	mov r0, #0x3b
@@ -9867,19 +9867,19 @@ ov85_021EA368: ; 0x021EA368
 	mov r0, #0xd1
 	lsl r0, r0, #2
 	ldr r0, [r4, r0]
-	bl Heap_Free
+	bl FreeToHeap
 	mov r0, #0xd2
 	lsl r0, r0, #2
 	ldr r0, [r4, r0]
-	bl Heap_Free
+	bl FreeToHeap
 	mov r0, #0xcd
 	lsl r0, r0, #2
 	ldr r0, [r4, r0]
-	bl Heap_Free
+	bl FreeToHeap
 	mov r0, #0xce
 	lsl r0, r0, #2
 	ldr r0, [r4, r0]
-	bl Heap_Free
+	bl FreeToHeap
 	pop {r4, pc}
 	.balign 4, 0
 	thumb_func_end ov85_021EA368

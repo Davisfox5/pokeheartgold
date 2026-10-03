@@ -5,100 +5,100 @@
 
 	.rodata
 
-	ScrDef scr_seq_W40R0101_000
-	ScrDef scr_seq_W40R0101_001
-	ScrDef scr_seq_W40R0101_002
-	ScrDefEnd
+	scrdef scr_seq_W40R0101_000
+	scrdef scr_seq_W40R0101_001
+	scrdef scr_seq_W40R0101_002
+	scrdef_end
 
 scr_seq_W40R0101_001:
-	Compare VAR_UNK_40E5, 1
-	GoToIfGe _0036
-	GoToIfSet FLAG_GAME_CLEAR, _0028
-	End
+	compare VAR_UNK_40E5, 1
+	goto_if_ge _0036
+	goto_if_set FLAG_GAME_CLEAR, _0028
+	end
 
 _0028:
-	MovePersonFacing obj_W40R0101_gsmiddleman1, 3, 0, 3, DIR_NORTH
-	End
+	move_person_facing obj_W40R0101_gsmiddleman1, 3, 0, 3, DIR_NORTH
+	end
 
 _0036:
-	SetVar VAR_UNK_40E5, 2
-	End
+	setvar VAR_UNK_40E5, 2
+	end
 
 scr_seq_W40R0101_000:
-	PlaySE SEQ_SE_DP_SELECT
-	LockAll
-	GoToIfSet FLAG_UNK_0FB, _00BE
-	GoToIfSet FLAG_GAME_CLEAR, _00B1
-	GetPlayerFacing VAR_TEMP_x4000
-	Compare VAR_TEMP_x4000, 3
-	GoToIfNe _0079
-	ApplyMovement obj_W40R0101_gsmiddleman1, _00E4
-	GoTo _009C
+	play_se SEQ_SE_DP_SELECT
+	lockall
+	goto_if_set FLAG_UNK_0FB, _00BE
+	goto_if_set FLAG_GAME_CLEAR, _00B1
+	get_player_facing VAR_TEMP_x4000
+	compare VAR_TEMP_x4000, 3
+	goto_if_ne _0079
+	apply_movement obj_W40R0101_gsmiddleman1, _00E4
+	goto _009C
 
 _0079:
-	Compare VAR_TEMP_x4000, 2
-	GoToIfNe _0094
-	ApplyMovement obj_W40R0101_gsmiddleman1, _00DC
-	GoTo _009C
+	compare VAR_TEMP_x4000, 2
+	goto_if_ne _0094
+	apply_movement obj_W40R0101_gsmiddleman1, _00DC
+	goto _009C
 
 _0094:
-	ApplyMovement obj_W40R0101_gsmiddleman1, _00D4
+	apply_movement obj_W40R0101_gsmiddleman1, _00D4
 _009C:
-	WaitMovement
-	NPCMsg msg_0745_W40R0101_00000
-	CloseMsg
-	ApplyMovement obj_W40R0101_gsmiddleman1, _00CC
-	WaitMovement
-	ReleaseAll
-	End
+	wait_movement
+	npc_msg msg_0745_W40R0101_00000
+	closemsg
+	apply_movement obj_W40R0101_gsmiddleman1, _00CC
+	wait_movement
+	releaseall
+	end
 
 _00B1:
-	NPCMsg msg_0745_W40R0101_00001
-	CloseMsg
-	ReleaseAll
-	SetFlag FLAG_UNK_0FB
-	End
+	npc_msg msg_0745_W40R0101_00001
+	closemsg
+	releaseall
+	setflag FLAG_UNK_0FB
+	end
 
 _00BE:
-	NPCMsg msg_0745_W40R0101_00002
-	WaitButton
-	CloseMsg
-	ReleaseAll
-	End
+	npc_msg msg_0745_W40R0101_00002
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
 
 	.balign 4, 0
 _00CC:
-	WalkOnSpotNormalNorth
-	EndMovement
+	step 32, 1
+	step_end
 
 	.balign 4, 0
 _00D4:
-	WalkOnSpotNormalSouth
-	EndMovement
+	step 33, 1
+	step_end
 
 	.balign 4, 0
 _00DC:
-	WalkOnSpotNormalEast
-	EndMovement
+	step 35, 1
+	step_end
 
 	.balign 4, 0
 _00E4:
-	WalkOnSpotNormalWest
-	EndMovement
+	step 34, 1
+	step_end
 
 scr_seq_W40R0101_002:
-	PlaySE SEQ_SE_DP_SELECT
-	LockAll
-	FacePlayer
-	GoToIfSet FLAG_GAME_CLEAR, _0108
-	NPCMsg msg_0745_W40R0101_00003
-	GoTo _010B
+	play_se SEQ_SE_DP_SELECT
+	lockall
+	faceplayer
+	goto_if_set FLAG_GAME_CLEAR, _0108
+	npc_msg msg_0745_W40R0101_00003
+	goto _010B
 
 _0108:
-	NPCMsg msg_0745_W40R0101_00004
+	npc_msg msg_0745_W40R0101_00004
 _010B:
-	WaitButton
-	CloseMsg
-	ReleaseAll
-	End
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
 	.balign 4, 0

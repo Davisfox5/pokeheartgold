@@ -657,7 +657,7 @@ sub_02075A7C: ; 0x02075A7C
 	bl FontID_Alloc
 	add r0, r5, #0
 	mov r1, #0xbc
-	bl Heap_Alloc
+	bl AllocFromHeap
 	add r4, r0, #0
 	mov r0, #0
 	add r1, r4, #0
@@ -855,7 +855,7 @@ sub_02075A7C: ; 0x02075A7C
 	str r0, [r4, #0x10]
 	add r0, r5, #0
 	mov r1, #0x3c
-	bl Heap_Alloc
+	bl AllocFromHeap
 	str r0, [r4, #0x3c]
 	ldr r1, [r4, #0x3c]
 	mov r0, #0
@@ -1008,19 +1008,19 @@ sub_02075D4C: ; 0x02075D4C
 	ldr r0, [r4, #0xc]
 	bl MessageFormat_Delete
 	ldr r0, [r4, #0x10]
-	bl Heap_Free
+	bl FreeToHeap
 	ldr r0, [r4, #0x3c]
-	bl Heap_Free
+	bl FreeToHeap
 	ldr r0, [r4, #0x58]
 	bl sub_020164C4
 	ldr r0, [r4]
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r4, #0
 	add r0, #0x84
 	ldr r0, [r0]
 	bl NARC_Delete
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	mov r0, #0
 	bl TextFlags_SetCanABSpeedUpPrint
 	mov r0, #0
@@ -1444,7 +1444,7 @@ _02076136:
 	mov r3, #4
 	bl Pokepic_StartPaletteFade
 	ldr r0, [r4, #0x5c]
-	bl HeapExp_FndGetTotalFreeSize
+	bl GF_ExpHeap_FndGetTotalFreeSize
 	mov r1, #2
 	lsl r1, r1, #0xe
 	cmp r0, r1
@@ -1814,10 +1814,10 @@ _02076478:
 	ldr r1, [r4, #0x28]
 	bl Pokedex_SetMonCaughtFlag
 	ldr r0, [r4, #0x50]
-	mov r1, #0xd ; GAME_STAT_UNIQUE_MONS_CAUGHT
+	mov r1, #0xd
 	bl GameStats_Inc
 	ldr r0, [r4, #0x50]
-	mov r1, #0x15 ; SCORE_EVENT_REGISTER_SPECIES_CAUGHT
+	mov r1, #0x15
 	bl GameStats_AddScore
 	ldr r0, [r4, #0x28]
 	mov r1, #0x4d
@@ -2436,7 +2436,7 @@ _020769BC:
 	ldrb r1, [r1]
 	ldr r0, [r4, #0x28]
 	add r2, #0x66
-	add r1, #MON_DATA_MOVE1_PP_UPS
+	add r1, #MON_DATA_MOVE1PPUP
 	bl SetMonData
 	add r1, r4, #0
 	add r2, r4, #0
@@ -2847,7 +2847,7 @@ _02076D32:
 	str r1, [sp, #4]
 	cmp r1, #0x36
 	blt _02076D32
-	mov r1, #MON_DATA_COOL_RIBBON
+	mov r1, #MON_DATA_HOENN_COOL_RIBBON
 	str r1, [sp, #4]
 	add r6, sp, #0
 _02076D4A:
@@ -2859,7 +2859,7 @@ _02076D4A:
 	str r1, [sp, #4]
 	cmp r1, #0x6e
 	blt _02076D4A
-	mov r1, #MON_DATA_SUPER_COOL_RIBBON
+	mov r1, #MON_DATA_COOL_RIBBON
 	str r1, [sp, #4]
 	add r6, sp, #0
 _02076D62:
@@ -2919,7 +2919,7 @@ _02076D62:
 	add r2, r6, #0
 	bl SetMonData
 	add r0, r6, #0
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r5, #0
 	mov r1, #0xa2
 	add r2, sp, #0
@@ -2943,13 +2943,13 @@ _02076D62:
 	add r1, r5, #0
 	bl Pokedex_SetMonCaughtFlag
 	ldr r0, [r4, #0x50]
-	mov r1, #0xd ; GAME_STAT_UNIQUE_MONS_CAUGHT
+	mov r1, #0xd
 	bl GameStats_Inc
 	ldr r0, [r4, #0x50]
-	mov r1, #0x15 ; SCORE_EVENT_REGISTER_SPECIES_CAUGHT
+	mov r1, #0x15
 	bl GameStats_AddScore
 	add r0, r5, #0
-	bl Heap_Free
+	bl FreeToHeap
 	ldr r0, [r4, #0x4c]
 	ldr r3, [r4, #0x5c]
 	mov r1, #4
@@ -3407,7 +3407,7 @@ sub_020771E8: ; 0x020771E8
 	mov r2, #2
 	bl GetPokemonSpriteCharAndPlttNarcIds
 	add r0, r5, #0
-	bl Heap_Free
+	bl FreeToHeap
 	mov r0, #0
 	str r0, [sp]
 	str r0, [sp, #4]
@@ -3508,7 +3508,7 @@ sub_020772F8: ; 0x020772F8
 	add r2, r5, #0
 	bl StringExpandPlaceholders
 	add r0, r5, #0
-	bl Heap_Free
+	bl FreeToHeap
 	ldr r0, [r4, #4]
 	mov r1, #0xff
 	bl FillWindowPixelBuffer

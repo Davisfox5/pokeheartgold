@@ -5,35 +5,43 @@
 
 	.rodata
 
-	ScrDef scr_seq_W19_000
-	ScrDef scr_seq_W19_001
-	ScrDef scr_seq_W19_002
-	ScrDef scr_seq_W19_003
-	ScrDef scr_seq_W19_004
-	ScrDef scr_seq_W19_005
-	ScrDefEnd
+	scrdef scr_seq_W19_000
+	scrdef scr_seq_W19_001
+	scrdef scr_seq_W19_002
+	scrdef scr_seq_W19_003
+	scrdef scr_seq_W19_004
+	scrdef scr_seq_W19_005
+	scrdef_end
 
 scr_seq_W19_000:
-	SimpleNPCMsg msg_0740_W19_00000
-	End
+	simple_npc_msg msg_0740_W19_00000
+	end
 
 scr_seq_W19_001:
-	SimpleNPCMsg msg_0740_W19_00002
-	End
+	simple_npc_msg msg_0740_W19_00002
+	end
 
 scr_seq_W19_002:
-	SimpleNPCMsg msg_0740_W19_00001
-	End
+	simple_npc_msg msg_0740_W19_00001
+	end
 
 scr_seq_W19_003:
-	SimpleNPCMsg msg_0740_W19_00003
-	End
+	simple_npc_msg msg_0740_W19_00003
+	end
 
 scr_seq_W19_004:
-	DirectionSignpostEx 1, 4, msg_0740_W19_00004
-	End
+	direction_signpost msg_0740_W19_00004, 1, 4, VAR_SPECIAL_RESULT
+	scrcmd_057 3
+	scrcmd_058
+	scrcmd_060 VAR_SPECIAL_RESULT
+	callstd std_signpost
+	end
 
 scr_seq_W19_005:
-	TrainerTipsEx 3, msg_0740_W19_00005
-	End
+	scrcmd_055 3, 0
+	scrcmd_057 3
+	scrcmd_058
+	trainer_tips msg_0740_W19_00005, VAR_SPECIAL_RESULT
+	callstd std_signpost
+	end
 	.balign 4, 0

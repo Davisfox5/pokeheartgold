@@ -5,492 +5,492 @@
 
 	.rodata
 
-	ScrDef scr_seq_R22R0101_000
-	ScrDef scr_seq_R22R0101_001
-	ScrDef scr_seq_R22R0101_002
-	ScrDef scr_seq_R22R0101_003
-	ScrDef scr_seq_R22R0101_004
-	ScrDef scr_seq_R22R0101_005
-	ScrDef scr_seq_R22R0101_006
-	ScrDef scr_seq_R22R0101_007
-	ScrDef scr_seq_R22R0101_008
-	ScrDefEnd
+	scrdef scr_seq_R22R0101_000
+	scrdef scr_seq_R22R0101_001
+	scrdef scr_seq_R22R0101_002
+	scrdef scr_seq_R22R0101_003
+	scrdef scr_seq_R22R0101_004
+	scrdef scr_seq_R22R0101_005
+	scrdef scr_seq_R22R0101_006
+	scrdef scr_seq_R22R0101_007
+	scrdef scr_seq_R22R0101_008
+	scrdef_end
 
 scr_seq_R22R0101_006:
-	GoToIfUnset FLAG_UNLOCKED_WEST_KANTO, _003D
-	MovePersonFacing obj_R22R0101_policeman_3, 15, 0, 8, DIR_SOUTH
+	goto_if_unset FLAG_UNLOCKED_WEST_KANTO, _003D
+	move_person_facing obj_R22R0101_policeman_3, 15, 0, 8, DIR_SOUTH
 _003D:
-	GoToIfUnset FLAG_UNLOCKED_MT_SILVER, _0054
-	MovePersonFacing obj_R22R0101_policeman_2, 7, 0, 8, DIR_SOUTH
+	goto_if_unset FLAG_UNLOCKED_MT_SILVER, _0054
+	move_person_facing obj_R22R0101_policeman_2, 7, 0, 8, DIR_SOUTH
 _0054:
-	End
+	end
 
 scr_seq_R22R0101_007:
-	SetFlag FLAG_SYS_FLYPOINT_VICTORY_ROAD
-	GoToIfUnset FLAG_UNK_189, _006B
-	ClearFlag FLAG_UNK_189
-	End
+	setflag FLAG_SYS_FLYPOINT_VICTORY_ROAD
+	goto_if_unset FLAG_UNK_189, _006B
+	clearflag FLAG_UNK_189
+	end
 
 _006B:
-	CheckRegisteredPhoneNumber PHONE_CONTACT_JANINE, VAR_TEMP_x4001
-	Compare VAR_TEMP_x4001, 1
-	GoToIfEq _00DF
-	CheckBadge BADGE_SOUL, VAR_TEMP_x4002
-	Compare VAR_TEMP_x4002, 0
-	GoToIfNe _009D
-	GoTo _012C
+	check_registered_phone_number PHONE_CONTACT_JANINE, VAR_TEMP_x4001
+	compare VAR_TEMP_x4001, 1
+	goto_if_eq _00DF
+	check_badge BADGE_SOUL, VAR_TEMP_x4002
+	compare VAR_TEMP_x4002, 0
+	goto_if_ne _009D
+	goto _012C
 
 _0097:
-	GoTo _00A3
+	goto _00A3
 
 _009D:
-	GoTo _00A5
+	goto _00A5
 
 _00A3:
-	End
+	end
 
 _00A5:
-	ScrCmd_522 VAR_TEMP_x4000
-	Compare VAR_TEMP_x4000, 16
-	GoToIfNe _00C0
-	ClearFlag FLAG_UNK_270
-	GoTo _00DD
+	scrcmd_522 VAR_TEMP_x4000
+	compare VAR_TEMP_x4000, 16
+	goto_if_ne _00C0
+	clearflag FLAG_UNK_270
+	goto _00DD
 
 _00C0:
-	Compare VAR_TEMP_x4000, 17
-	GoToIfNe _00D7
-	ClearFlag FLAG_UNK_270
-	GoTo _00DD
+	compare VAR_TEMP_x4000, 17
+	goto_if_ne _00D7
+	clearflag FLAG_UNK_270
+	goto _00DD
 
 _00D7:
-	GoTo _012C
+	goto _012C
 
 _00DD:
-	End
+	end
 
 _00DF:
-	GetPhoneBookRematch PHONE_CONTACT_JANINE, VAR_TEMP_x4001
-	Compare VAR_TEMP_x4001, 0
-	GoToIfNe _012C
-	ScrCmd_522 VAR_TEMP_x4000
-	Compare VAR_TEMP_x4000, 18
-	GoToIfNe _010D
-	ClearFlag FLAG_UNK_270
-	GoTo _012A
+	get_phone_book_rematch PHONE_CONTACT_JANINE, VAR_TEMP_x4001
+	compare VAR_TEMP_x4001, 0
+	goto_if_ne _012C
+	scrcmd_522 VAR_TEMP_x4000
+	compare VAR_TEMP_x4000, 18
+	goto_if_ne _010D
+	clearflag FLAG_UNK_270
+	goto _012A
 
 _010D:
-	Compare VAR_TEMP_x4000, 19
-	GoToIfNe _0124
-	ClearFlag FLAG_UNK_270
-	GoTo _012A
+	compare VAR_TEMP_x4000, 19
+	goto_if_ne _0124
+	clearflag FLAG_UNK_270
+	goto _012A
 
 _0124:
-	GoTo _012C
+	goto _012C
 
 _012A:
-	End
+	end
 
 _012C:
-	SetFlag FLAG_UNK_270
-	End
+	setflag FLAG_UNK_270
+	end
 
 scr_seq_R22R0101_000:
-	ScrCmd_609
-	LockAll
-	ApplyMovement obj_R22R0101_policeman, _015C
-	WaitMovement
-	ApplyMovement obj_player, _0164
-	WaitMovement
-	NPCMsg msg_0361_R22R0101_00000
-	WaitButton
-	CloseMsg
-	SetVar VAR_UNK_4110, 1
-	ReleaseAll
-	End
+	scrcmd_609
+	lockall
+	apply_movement obj_R22R0101_policeman, _015C
+	wait_movement
+	apply_movement obj_player, _0164
+	wait_movement
+	npc_msg msg_0361_R22R0101_00000
+	wait_button_or_walk_away
+	closemsg
+	setvar VAR_UNK_4110, 1
+	releaseall
+	end
 
 	.balign 4, 0
 _015C:
-	EmoteExclamationMark
-	EndMovement
+	step 75, 1
+	step_end
 
 	.balign 4, 0
 _0164:
-	WalkOnSpotNormalWest
-	EndMovement
+	step 34, 1
+	step_end
 
 scr_seq_R22R0101_003:
-	SimpleNPCMsg msg_0361_R22R0101_00000
-	End
+	simple_npc_msg msg_0361_R22R0101_00000
+	end
 
 scr_seq_R22R0101_001:
-	ScrCmd_609
-	LockAll
-	GetPlayerCoords VAR_TEMP_x4000, VAR_TEMP_x4001
-	Compare VAR_TEMP_x4001, 8
-	GoToIfNe _01A4
-	ApplyMovement obj_R22R0101_policeman_3, _0264
-	GoTo _01AC
+	scrcmd_609
+	lockall
+	get_player_coords VAR_TEMP_x4000, VAR_TEMP_x4001
+	compare VAR_TEMP_x4001, 8
+	goto_if_ne _01A4
+	apply_movement obj_R22R0101_policeman_3, _0264
+	goto _01AC
 
 _01A4:
-	ApplyMovement obj_R22R0101_policeman_3, _0270
+	apply_movement obj_R22R0101_policeman_3, _0270
 _01AC:
-	WaitMovement
-	Compare VAR_TEMP_x4001, 8
-	GoToIfNe _01C9
-	ApplyMovement obj_R22R0101_policeman_3, _027C
-	GoTo _01EC
+	wait_movement
+	compare VAR_TEMP_x4001, 8
+	goto_if_ne _01C9
+	apply_movement obj_R22R0101_policeman_3, _027C
+	goto _01EC
 
 _01C9:
-	Compare VAR_TEMP_x4001, 10
-	GoToIfNe _01E4
-	ApplyMovement obj_R22R0101_policeman_3, _028C
-	GoTo _01EC
+	compare VAR_TEMP_x4001, 10
+	goto_if_ne _01E4
+	apply_movement obj_R22R0101_policeman_3, _028C
+	goto _01EC
 
 _01E4:
-	ApplyMovement obj_R22R0101_policeman_3, _029C
+	apply_movement obj_R22R0101_policeman_3, _029C
 _01EC:
-	WaitMovement
-	NPCMsg msg_0361_R22R0101_00005
-	CloseMsg
-	ToggleFollowingPokemonMovement 0
-	WaitFollowingPokemonMovement
-	FollowingPokemonMovement 56
-	ApplyMovement obj_R22R0101_policeman_3, _02AC
-	ApplyMovement obj_player, _02B4
-	WaitMovement
-	WaitFollowingPokemonMovement
-	ToggleFollowingPokemonMovement 1
-	FollowingPokemonMovement 48
-	Wait 16, VAR_SPECIAL_RESULT
-	Compare VAR_TEMP_x4001, 8
-	GoToIfNe _023A
-	ApplyMovement obj_R22R0101_policeman_3, _02C4
-	GoTo _025D
+	wait_movement
+	npc_msg msg_0361_R22R0101_00005
+	closemsg
+	toggle_following_pokemon_movement 0
+	wait_following_pokemon_movement
+	following_pokemon_movement 56
+	apply_movement obj_R22R0101_policeman_3, _02AC
+	apply_movement obj_player, _02B4
+	wait_movement
+	wait_following_pokemon_movement
+	toggle_following_pokemon_movement 1
+	following_pokemon_movement 48
+	wait 16, VAR_SPECIAL_RESULT
+	compare VAR_TEMP_x4001, 8
+	goto_if_ne _023A
+	apply_movement obj_R22R0101_policeman_3, _02C4
+	goto _025D
 
 _023A:
-	Compare VAR_TEMP_x4001, 10
-	GoToIfNe _0255
-	ApplyMovement obj_R22R0101_policeman_3, _02D0
-	GoTo _025D
+	compare VAR_TEMP_x4001, 10
+	goto_if_ne _0255
+	apply_movement obj_R22R0101_policeman_3, _02D0
+	goto _025D
 
 _0255:
-	ApplyMovement obj_R22R0101_policeman_3, _02DC
+	apply_movement obj_R22R0101_policeman_3, _02DC
 _025D:
-	WaitMovement
-	ReleaseAll
-	End
+	wait_movement
+	releaseall
+	end
 
 	.balign 4, 0
 _0264:
-	WalkOnSpotNormalNorth
-	EmoteExclamationMark
-	EndMovement
+	step 32, 1
+	step 75, 1
+	step_end
 
 	.balign 4, 0
 _0270:
-	WalkOnSpotNormalSouth
-	EmoteExclamationMark
-	EndMovement
+	step 33, 1
+	step 75, 1
+	step_end
 
 	.balign 4, 0
 _027C:
-	WalkFastEast
-	WalkFastNorth
-	WalkOnSpotFastWest
-	EndMovement
+	step 19, 1
+	step 16, 1
+	step 38, 1
+	step_end
 
 	.balign 4, 0
 _028C:
-	WalkFastEast
-	WalkFastSouth
-	WalkOnSpotFastWest
-	EndMovement
+	step 19, 1
+	step 17, 1
+	step 38, 1
+	step_end
 
 	.balign 4, 0
 _029C:
-	WalkFastEast
-	WalkFastSouth 2
-	WalkOnSpotFastWest
-	EndMovement
+	step 19, 1
+	step 17, 2
+	step 38, 1
+	step_end
 
 	.balign 4, 0
 _02AC:
-	WalkNormalWest
-	EndMovement
+	step 14, 1
+	step_end
 
 	.balign 4, 0
 _02B4:
-	LockDir
-	WalkNormalWest
-	UnlockDir
-	EndMovement
+	step 71, 1
+	step 14, 1
+	step 72, 1
+	step_end
 
 	.balign 4, 0
 _02C4:
-	WalkNormalSouth
-	WalkOnSpotNormalWest
-	EndMovement
+	step 13, 1
+	step 34, 1
+	step_end
 
 	.balign 4, 0
 _02D0:
-	WalkNormalNorth
-	WalkOnSpotNormalWest
-	EndMovement
+	step 12, 1
+	step 34, 1
+	step_end
 
 	.balign 4, 0
 _02DC:
-	WalkNormalNorth 2
-	WalkOnSpotNormalWest
-	EndMovement
+	step 12, 2
+	step 34, 1
+	step_end
 
 scr_seq_R22R0101_004:
-	PlaySE SEQ_SE_DP_SELECT
-	LockAll
-	FacePlayer
-	GoToIfSet FLAG_UNLOCKED_WEST_KANTO, _0306
-	NPCMsg msg_0361_R22R0101_00004
-	WaitButton
-	CloseMsg
-	ReleaseAll
-	End
+	play_se SEQ_SE_DP_SELECT
+	lockall
+	faceplayer
+	goto_if_set FLAG_UNLOCKED_WEST_KANTO, _0306
+	npc_msg msg_0361_R22R0101_00004
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
 
 _0306:
-	NPCMsg msg_0361_R22R0101_00006
-	WaitButton
-	CloseMsg
-	ReleaseAll
-	End
+	npc_msg msg_0361_R22R0101_00006
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
 
 scr_seq_R22R0101_002:
-	ScrCmd_609
-	LockAll
-	GetPlayerCoords VAR_TEMP_x4000, VAR_TEMP_x4001
-	Compare VAR_TEMP_x4001, 8
-	GoToIfNe _0336
-	ApplyMovement obj_R22R0101_policeman_2, _03F8
-	GoTo _033E
+	scrcmd_609
+	lockall
+	get_player_coords VAR_TEMP_x4000, VAR_TEMP_x4001
+	compare VAR_TEMP_x4001, 8
+	goto_if_ne _0336
+	apply_movement obj_R22R0101_policeman_2, _03F8
+	goto _033E
 
 _0336:
-	ApplyMovement obj_R22R0101_policeman_2, _0404
+	apply_movement obj_R22R0101_policeman_2, _0404
 _033E:
-	WaitMovement
-	Compare VAR_TEMP_x4001, 8
-	GoToIfNe _035B
-	ApplyMovement obj_R22R0101_policeman_2, _0410
-	GoTo _037E
+	wait_movement
+	compare VAR_TEMP_x4001, 8
+	goto_if_ne _035B
+	apply_movement obj_R22R0101_policeman_2, _0410
+	goto _037E
 
 _035B:
-	Compare VAR_TEMP_x4001, 10
-	GoToIfNe _0376
-	ApplyMovement obj_R22R0101_policeman_2, _0420
-	GoTo _037E
+	compare VAR_TEMP_x4001, 10
+	goto_if_ne _0376
+	apply_movement obj_R22R0101_policeman_2, _0420
+	goto _037E
 
 _0376:
-	ApplyMovement obj_R22R0101_policeman_2, _0430
+	apply_movement obj_R22R0101_policeman_2, _0430
 _037E:
-	WaitMovement
-	NPCMsg msg_0361_R22R0101_00002
-	CloseMsg
-	ToggleFollowingPokemonMovement 0
-	WaitFollowingPokemonMovement
-	FollowingPokemonMovement 56
-	ApplyMovement obj_R22R0101_policeman_2, _0440
-	ApplyMovement obj_player, _0448
-	WaitMovement
-	WaitFollowingPokemonMovement
-	ToggleFollowingPokemonMovement 1
-	FollowingPokemonMovement 48
-	Wait 16, VAR_SPECIAL_RESULT
-	Compare VAR_TEMP_x4001, 8
-	GoToIfNe _03CC
-	ApplyMovement obj_R22R0101_policeman_2, _0458
-	GoTo _03EF
+	wait_movement
+	npc_msg msg_0361_R22R0101_00002
+	closemsg
+	toggle_following_pokemon_movement 0
+	wait_following_pokemon_movement
+	following_pokemon_movement 56
+	apply_movement obj_R22R0101_policeman_2, _0440
+	apply_movement obj_player, _0448
+	wait_movement
+	wait_following_pokemon_movement
+	toggle_following_pokemon_movement 1
+	following_pokemon_movement 48
+	wait 16, VAR_SPECIAL_RESULT
+	compare VAR_TEMP_x4001, 8
+	goto_if_ne _03CC
+	apply_movement obj_R22R0101_policeman_2, _0458
+	goto _03EF
 
 _03CC:
-	Compare VAR_TEMP_x4001, 10
-	GoToIfNe _03E7
-	ApplyMovement obj_R22R0101_policeman_2, _0464
-	GoTo _03EF
+	compare VAR_TEMP_x4001, 10
+	goto_if_ne _03E7
+	apply_movement obj_R22R0101_policeman_2, _0464
+	goto _03EF
 
 _03E7:
-	ApplyMovement obj_R22R0101_policeman_2, _0470
+	apply_movement obj_R22R0101_policeman_2, _0470
 _03EF:
-	WaitMovement
-	ReleaseAll
-	End
+	wait_movement
+	releaseall
+	end
 
 	.balign 4, 0
 _03F8:
-	WalkOnSpotNormalNorth
-	EmoteExclamationMark
-	EndMovement
+	step 32, 1
+	step 75, 1
+	step_end
 
 	.balign 4, 0
 _0404:
-	WalkOnSpotNormalSouth
-	EmoteExclamationMark
-	EndMovement
+	step 33, 1
+	step 75, 1
+	step_end
 
 	.balign 4, 0
 _0410:
-	WalkFastWest
-	WalkFastNorth
-	WalkOnSpotFastEast
-	EndMovement
+	step 18, 1
+	step 16, 1
+	step 39, 1
+	step_end
 
 	.balign 4, 0
 _0420:
-	WalkFastWest
-	WalkFastSouth
-	WalkOnSpotFastEast
-	EndMovement
+	step 18, 1
+	step 17, 1
+	step 39, 1
+	step_end
 
 	.balign 4, 0
 _0430:
-	WalkFastWest
-	WalkFastSouth 2
-	WalkOnSpotFastEast
-	EndMovement
+	step 18, 1
+	step 17, 2
+	step 39, 1
+	step_end
 
 	.balign 4, 0
 _0440:
-	WalkNormalEast
-	EndMovement
+	step 15, 1
+	step_end
 
 	.balign 4, 0
 _0448:
-	LockDir
-	WalkNormalEast
-	UnlockDir
-	EndMovement
+	step 71, 1
+	step 15, 1
+	step 72, 1
+	step_end
 
 	.balign 4, 0
 _0458:
-	WalkNormalSouth
-	WalkOnSpotNormalEast
-	EndMovement
+	step 13, 1
+	step 35, 1
+	step_end
 
 	.balign 4, 0
 _0464:
-	WalkNormalNorth
-	WalkOnSpotNormalEast
-	EndMovement
+	step 12, 1
+	step 35, 1
+	step_end
 
 	.balign 4, 0
 _0470:
-	WalkNormalNorth 2
-	WalkOnSpotNormalEast
-	EndMovement
+	step 12, 2
+	step 35, 1
+	step_end
 
 scr_seq_R22R0101_005:
-	PlaySE SEQ_SE_DP_SELECT
-	LockAll
-	FacePlayer
-	GoToIfSet FLAG_UNLOCKED_MT_SILVER, _049A
-	NPCMsg msg_0361_R22R0101_00001
-	WaitButton
-	CloseMsg
-	ReleaseAll
-	End
+	play_se SEQ_SE_DP_SELECT
+	lockall
+	faceplayer
+	goto_if_set FLAG_UNLOCKED_MT_SILVER, _049A
+	npc_msg msg_0361_R22R0101_00001
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
 
 _049A:
-	NPCMsg msg_0361_R22R0101_00003
-	WaitButton
-	CloseMsg
-	ReleaseAll
-	End
+	npc_msg msg_0361_R22R0101_00003
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
 
 scr_seq_R22R0101_008:
-	PlaySE SEQ_SE_DP_SELECT
-	LockAll
-	FacePlayer
-	CheckRegisteredPhoneNumber PHONE_CONTACT_JANINE, VAR_TEMP_x4001
-	Compare VAR_TEMP_x4001, 1
-	GoToIfEq _0553
-	Compare VAR_TEMP_x4005, 1
-	GoToIfGe _0548
-	NPCMsg msg_0361_R22R0101_00007
+	play_se SEQ_SE_DP_SELECT
+	lockall
+	faceplayer
+	check_registered_phone_number PHONE_CONTACT_JANINE, VAR_TEMP_x4001
+	compare VAR_TEMP_x4001, 1
+	goto_if_eq _0553
+	compare VAR_TEMP_x4005, 1
+	goto_if_ge _0548
+	npc_msg msg_0361_R22R0101_00007
 _04D0:
-	TouchscreenMenuHide
-	GetMenuChoice VAR_SPECIAL_RESULT
-	TouchscreenMenuShow
-	Compare VAR_SPECIAL_RESULT, 0
-	GoToIfEq _04F4
-	Compare VAR_SPECIAL_RESULT, 1
-	GoToIfGe _0537
-	End
+	touchscreen_menu_hide
+	getmenuchoice VAR_SPECIAL_RESULT
+	touchscreen_menu_show
+	compare VAR_SPECIAL_RESULT, 0
+	goto_if_eq _04F4
+	compare VAR_SPECIAL_RESULT, 1
+	goto_if_ge _0537
+	end
 
 _04F4:
-	BufferPlayersName 0
-	NPCMsg msg_0361_R22R0101_00008
-	PlayFanfare SEQ_ME_POKEGEAR_REGIST
-	WaitFanfare
-	RegisterGearNumber PHONE_CONTACT_JANINE
-	NPCMsg msg_0361_R22R0101_00009
-	WaitButton
-	CloseMsg
-	FadeScreen 6, 1, 0, RGB_BLACK
-	WaitFade
-	SetFlag FLAG_UNK_270
-	HidePerson obj_R22R0101_gsleader13
-	PlaySE SEQ_SE_DP_KAIDAN2
-	WaitSE SEQ_SE_DP_KAIDAN2
-	FadeScreen 6, 1, 1, RGB_BLACK
-	WaitFade
-	ReleaseAll
-	End
+	buffer_players_name 0
+	npc_msg msg_0361_R22R0101_00008
+	play_fanfare SEQ_ME_POKEGEAR_REGIST
+	wait_fanfare
+	register_gear_number PHONE_CONTACT_JANINE
+	npc_msg msg_0361_R22R0101_00009
+	wait_button_or_walk_away
+	closemsg
+	fade_screen 6, 1, 0, RGB_BLACK
+	wait_fade
+	setflag FLAG_UNK_270
+	hide_person obj_R22R0101_gsleader13
+	play_se SEQ_SE_DP_KAIDAN2
+	wait_se SEQ_SE_DP_KAIDAN2
+	fade_screen 6, 1, 1, RGB_BLACK
+	wait_fade
+	releaseall
+	end
 
 _0537:
-	SetVar VAR_TEMP_x4005, 1
-	NPCMsg msg_0361_R22R0101_00010
-	WaitButton
-	CloseMsg
-	ReleaseAll
-	End
+	setvar VAR_TEMP_x4005, 1
+	npc_msg msg_0361_R22R0101_00010
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
 
 _0548:
-	NPCMsg msg_0361_R22R0101_00011
-	GoTo _04D0
-	End
+	npc_msg msg_0361_R22R0101_00011
+	goto _04D0
+	end
 
 _0553:
-	NPCMsg msg_0361_R22R0101_00012
-	TouchscreenMenuHide
-	GetMenuChoice VAR_SPECIAL_RESULT
-	TouchscreenMenuShow
-	Compare VAR_SPECIAL_RESULT, 1
-	GoToIfEq _05B4
-	PhotoAlbumIsFull VAR_SPECIAL_RESULT
-	Compare VAR_SPECIAL_RESULT, 1
-	GoToIfEq _05BF
-	NPCMsg msg_0361_R22R0101_00013
-	CloseMsg
-	SetFlag FLAG_UNK_189
-	FadeScreen 6, 1, 0, RGB_BLACK
-	WaitFade
-	CameronPhoto 70
-	FacePlayer
-	LockAll
-	FadeScreen 6, 1, 1, RGB_BLACK
-	WaitFade
-	ClearFlag FLAG_UNK_189
-	NPCMsg msg_0361_R22R0101_00014
-	WaitButton
-	CloseMsg
-	ReleaseAll
-	End
+	npc_msg msg_0361_R22R0101_00012
+	touchscreen_menu_hide
+	getmenuchoice VAR_SPECIAL_RESULT
+	touchscreen_menu_show
+	compare VAR_SPECIAL_RESULT, 1
+	goto_if_eq _05B4
+	photo_album_is_full VAR_SPECIAL_RESULT
+	compare VAR_SPECIAL_RESULT, 1
+	goto_if_eq _05BF
+	npc_msg msg_0361_R22R0101_00013
+	closemsg
+	setflag FLAG_UNK_189
+	fade_screen 6, 1, 0, RGB_BLACK
+	wait_fade
+	cameron_photo 70
+	faceplayer
+	lockall
+	fade_screen 6, 1, 1, RGB_BLACK
+	wait_fade
+	clearflag FLAG_UNK_189
+	npc_msg msg_0361_R22R0101_00014
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
 
 _05B4:
-	NPCMsg msg_0361_R22R0101_00015
-	WaitButton
-	CloseMsg
-	ReleaseAll
-	End
+	npc_msg msg_0361_R22R0101_00015
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
 
 _05BF:
-	NPCMsg msg_0361_R22R0101_00016
-	WaitButton
-	CloseMsg
-	ReleaseAll
-	End
+	npc_msg msg_0361_R22R0101_00016
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
 	.balign 4, 0

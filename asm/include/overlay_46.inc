@@ -40,9 +40,9 @@
 .public YesNoPrompt_HandleInput
 .public Main_SetVBlankIntrCB
 .public HBlankInterruptDisable
-.public Heap_Create
-.public Heap_Destroy
-.public Heap_Free
+.public CreateHeap
+.public DestroyHeap
+.public FreeToHeap
 .public BgConfig_Alloc
 .public SetBothScreensModesAndDisable
 .public InitBgFromTemplate

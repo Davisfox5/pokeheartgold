@@ -2,7 +2,7 @@
 <body language="English">
 	<row id="msg_0383_R33_00000" index="0">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">Pant, pant...\nI finally got through that cave.\rIt was much bigger than I’d expected.\nI got too tired to explore the whole\fthing, so I came outside.</language>
+		<language name="English">Rain always starts right about\nhere, like the sky’s marking the\fborder.\rAzalea’s just through the trees.\nQuiet town. Good town.\r...Been a strange few days down\nthere, though, from what I hear.\rYou’re headed in anyway?\nMind yourself.</language>
 	</row>
 	<row id="msg_0383_R33_00001" index="1">
 		<attribute name="window_context_name">used</attribute>

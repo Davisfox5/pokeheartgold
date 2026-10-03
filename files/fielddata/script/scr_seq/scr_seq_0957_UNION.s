@@ -5,920 +5,920 @@
 
 	.rodata
 
-	ScrDef scr_seq_UNION_000
-	ScrDef scr_seq_UNION_001
-	ScrDef scr_seq_UNION_002
-	ScrDef scr_seq_UNION_003
-	ScrDef scr_seq_UNION_004
-	ScrDef scr_seq_UNION_005
-	ScrDef scr_seq_UNION_006
-	ScrDef scr_seq_UNION_007
-	ScrDefEnd
+	scrdef scr_seq_UNION_000
+	scrdef scr_seq_UNION_001
+	scrdef scr_seq_UNION_002
+	scrdef scr_seq_UNION_003
+	scrdef scr_seq_UNION_004
+	scrdef scr_seq_UNION_005
+	scrdef scr_seq_UNION_006
+	scrdef scr_seq_UNION_007
+	scrdef_end
 
 scr_seq_UNION_000:
-	End
+	end
 
 scr_seq_UNION_001:
-	End
+	end
 
 scr_seq_UNION_002:
-	ScrCmd_270
-	End
+	scrcmd_270
+	end
 
 scr_seq_UNION_003:
-	PlaySE SEQ_SE_DP_SELECT
-	ScrCmd_609
-	LockAll
-	FacePlayer
-	ScrCmd_268 VAR_SPECIAL_RESULT
-	CopyVar VAR_SPECIAL_x8004, VAR_SPECIAL_RESULT
-	Compare VAR_SPECIAL_RESULT, 5
-	GoToIfEq _0499
-	ScrCmd_264 0
-	Compare VAR_SPECIAL_RESULT, 2
-	GoToIfEq _04AF
-	Compare VAR_SPECIAL_RESULT, 3
-	GoToIfEq _05DB
-	Compare VAR_SPECIAL_RESULT, 4
-	GoToIfEq _0528
-	ScrCmd_274 VAR_SPECIAL_x8004, VAR_SPECIAL_RESULT
-	ScrCmd_268 VAR_SPECIAL_RESULT
-	Compare VAR_SPECIAL_RESULT, 5
-	GoToIfEq _0499
-	NPCMsg msg_0738_UNION_00199
-	ScrCmd_269 VAR_SPECIAL_RESULT
-	Switch VAR_SPECIAL_RESULT
-	Case 3, _07CC
-	Case 2, _0488
-	GoTo _00BC
-	End
+	play_se SEQ_SE_DP_SELECT
+	scrcmd_609
+	lockall
+	faceplayer
+	scrcmd_268 VAR_SPECIAL_RESULT
+	copyvar VAR_SPECIAL_x8004, VAR_SPECIAL_RESULT
+	compare VAR_SPECIAL_RESULT, 5
+	goto_if_eq _0499
+	scrcmd_264 0
+	compare VAR_SPECIAL_RESULT, 2
+	goto_if_eq _04AF
+	compare VAR_SPECIAL_RESULT, 3
+	goto_if_eq _05DB
+	compare VAR_SPECIAL_RESULT, 4
+	goto_if_eq _0528
+	scrcmd_274 VAR_SPECIAL_x8004, VAR_SPECIAL_RESULT
+	scrcmd_268 VAR_SPECIAL_RESULT
+	compare VAR_SPECIAL_RESULT, 5
+	goto_if_eq _0499
+	npc_msg msg_0738_UNION_00199
+	scrcmd_269 VAR_SPECIAL_RESULT
+	switch VAR_SPECIAL_RESULT
+	case 3, _07CC
+	case 2, _0488
+	goto _00BC
+	end
 
 _00BC:
-	ScrCmd_257 100
-	ScrCmd_267 2, VAR_SPECIAL_RESULT
-	ScrCmd_592 VAR_SPECIAL_RESULT
-	GoTo _00EC
-	End
+	scrcmd_257 100
+	scrcmd_267 2, VAR_SPECIAL_RESULT
+	scrcmd_592 VAR_SPECIAL_RESULT
+	goto _00EC
+	end
 
 _00D2:
-	ScrCmd_257 100
-	ScrCmd_261 11
-	ScrCmd_267 22, VAR_SPECIAL_RESULT
-	NonNPCMsgVar VAR_SPECIAL_RESULT
-	GoTo _00EC
-	End
+	scrcmd_257 100
+	scrcmd_261 11
+	scrcmd_267 22, VAR_SPECIAL_RESULT
+	non_npc_msg_var VAR_SPECIAL_RESULT
+	goto _00EC
+	end
 
 _00EC:
-	ScrCmd_064 31, 3, 0, 1, VAR_SPECIAL_RESULT
-	ScrCmd_841 1
-	ScrCmd_066 168, 0
-	ScrCmd_066 59, 1
-	ScrCmd_066 52, 2
-	ScrCmd_066 23, 3
-	ScrCmd_066 142, 4
-	ScrCmd_066 141, 5
-	ScrCmd_066 24, 99
-	ScrCmd_585
-	Switch VAR_SPECIAL_RESULT
-	Case 0, _0184
-	Case 1, _0336
-	Case 2, _0276
-	Case 3, _01ED
-	Case 4, _0396
-	Case 5, _03F6
-	Case 7, _07A0
-	ScrCmd_271 0, 7
-	GoTo _0784
-	End
+	scrcmd_064 31, 3, 0, 1, VAR_SPECIAL_RESULT
+	scrcmd_841 1
+	scrcmd_066 168, 0
+	scrcmd_066 59, 1
+	scrcmd_066 52, 2
+	scrcmd_066 23, 3
+	scrcmd_066 142, 4
+	scrcmd_066 141, 5
+	scrcmd_066 24, 99
+	scrcmd_585
+	switch VAR_SPECIAL_RESULT
+	case 0, _0184
+	case 1, _0336
+	case 2, _0276
+	case 3, _01ED
+	case 4, _0396
+	case 5, _03F6
+	case 7, _07A0
+	scrcmd_271 0, 7
+	goto _0784
+	end
 
 _0184:
-	ScrCmd_271 0, 1
-	ScrCmd_267 9, VAR_SPECIAL_RESULT
-	Compare VAR_SPECIAL_RESULT, 0
-	GoToIfEq _01A1
-	NonNPCMsgVar VAR_SPECIAL_RESULT
+	scrcmd_271 0, 1
+	scrcmd_267 9, VAR_SPECIAL_RESULT
+	compare VAR_SPECIAL_RESULT, 0
+	goto_if_eq _01A1
+	non_npc_msg_var VAR_SPECIAL_RESULT
 _01A1:
-	ScrCmd_272 VAR_SPECIAL_RESULT
-	Compare VAR_SPECIAL_RESULT, 7
-	GoToIfEq _06AE
-	ScrCmd_261 5
-	ScrCmd_267 1, VAR_SPECIAL_RESULT
-	NonNPCMsgVar VAR_SPECIAL_RESULT
-	Wait 30, VAR_SPECIAL_RESULT
-	ScrCmd_257 1
-	CloseMsg
-	FadeScreen 6, 1, 0, RGB_BLACK
-	WaitFade
-	ScrCmd_160
-	RestoreOverworld
-	Call _0BDA
-	NonNPCMsg msg_0738_UNION_00016
-	GoTo _00D2
-	End
+	scrcmd_272 VAR_SPECIAL_RESULT
+	compare VAR_SPECIAL_RESULT, 7
+	goto_if_eq _06AE
+	scrcmd_261 5
+	scrcmd_267 1, VAR_SPECIAL_RESULT
+	non_npc_msg_var VAR_SPECIAL_RESULT
+	wait 30, VAR_SPECIAL_RESULT
+	scrcmd_257 1
+	closemsg
+	fade_screen 6, 1, 0, RGB_BLACK
+	wait_fade
+	scrcmd_160
+	restore_overworld
+	call _0BDA
+	non_npc_msg msg_0738_UNION_00016
+	goto _00D2
+	end
 
 _01ED:
-	PartyCountNotEgg VAR_SPECIAL_RESULT
-	Compare VAR_SPECIAL_RESULT, 2
-	GoToIfLt _0264
-	ScrCmd_271 0, 3
-	ScrCmd_267 9, VAR_SPECIAL_RESULT
-	Compare VAR_SPECIAL_RESULT, 0
-	GoToIfEq _021B
-	NonNPCMsgVar VAR_SPECIAL_RESULT
+	party_count_not_egg VAR_SPECIAL_RESULT
+	compare VAR_SPECIAL_RESULT, 2
+	goto_if_lt _0264
+	scrcmd_271 0, 3
+	scrcmd_267 9, VAR_SPECIAL_RESULT
+	compare VAR_SPECIAL_RESULT, 0
+	goto_if_eq _021B
+	non_npc_msg_var VAR_SPECIAL_RESULT
 _021B:
-	ScrCmd_272 VAR_SPECIAL_RESULT
-	Compare VAR_SPECIAL_RESULT, 7
-	GoToIfEq _06F6
-	ScrCmd_261 7
-	ScrCmd_267 1, VAR_SPECIAL_RESULT
-	NonNPCMsgVar VAR_SPECIAL_RESULT
-	Wait 30, VAR_SPECIAL_RESULT
-	ScrCmd_257 3
-	CloseMsg
-	FadeScreen 6, 1, 0, RGB_BLACK
-	WaitFade
-	ScrCmd_161
-	RestoreOverworld
-	Call _0BDA
-	GoTo _00D2
-	End
+	scrcmd_272 VAR_SPECIAL_RESULT
+	compare VAR_SPECIAL_RESULT, 7
+	goto_if_eq _06F6
+	scrcmd_261 7
+	scrcmd_267 1, VAR_SPECIAL_RESULT
+	non_npc_msg_var VAR_SPECIAL_RESULT
+	wait 30, VAR_SPECIAL_RESULT
+	scrcmd_257 3
+	closemsg
+	fade_screen 6, 1, 0, RGB_BLACK
+	wait_fade
+	scrcmd_161
+	restore_overworld
+	call _0BDA
+	goto _00D2
+	end
 
 _0264:
-	ScrCmd_267 20, VAR_SPECIAL_RESULT
-	NonNPCMsgVar VAR_SPECIAL_RESULT
-	GoTo _00D2
-	End
+	scrcmd_267 20, VAR_SPECIAL_RESULT
+	non_npc_msg_var VAR_SPECIAL_RESULT
+	goto _00D2
+	end
 
 _0276:
-	PartyCountMonsAtOrBelowLevel VAR_SPECIAL_RESULT, 30
-	Compare VAR_SPECIAL_RESULT, 2
-	GoToIfLt _0324
-	ScrCmd_271 0, 2
-	ScrCmd_267 9, VAR_SPECIAL_RESULT
-	Compare VAR_SPECIAL_RESULT, 0
-	GoToIfEq _02A6
-	NonNPCMsgVar VAR_SPECIAL_RESULT
+	party_count_mons_at_or_below_level VAR_SPECIAL_RESULT, 30
+	compare VAR_SPECIAL_RESULT, 2
+	goto_if_lt _0324
+	scrcmd_271 0, 2
+	scrcmd_267 9, VAR_SPECIAL_RESULT
+	compare VAR_SPECIAL_RESULT, 0
+	goto_if_eq _02A6
+	non_npc_msg_var VAR_SPECIAL_RESULT
 _02A6:
-	ScrCmd_272 VAR_SPECIAL_RESULT
-	Compare VAR_SPECIAL_RESULT, 7
-	GoToIfEq _06DE
-	ScrCmd_261 6
-	ScrCmd_267 1, VAR_SPECIAL_RESULT
-	NonNPCMsgVar VAR_SPECIAL_RESULT
-	Wait 30, VAR_SPECIAL_RESULT
-	ScrCmd_257 2
-	CloseMsg
-	FadeScreen 6, 1, 0, RGB_BLACK
-	WaitFade
-	ScrCmd_350
-	RestoreOverworld
-	FadeScreen 6, 1, 1, RGB_BLACK
-	WaitFade
-	NPCMsg msg_0738_UNION_00202
-	ScrCmd_257 102
-	CloseMsg
-	ScrCmd_586 VAR_SPECIAL_RESULT
-	Compare VAR_SPECIAL_RESULT, 1
-	GoToIfEq _0B8B
-	Compare VAR_SPECIAL_RESULT, 2
-	GoToIfEq _0B8B
-	ScrCmd_230
-	Call _0BDA
-	GoTo _00D2
-	End
+	scrcmd_272 VAR_SPECIAL_RESULT
+	compare VAR_SPECIAL_RESULT, 7
+	goto_if_eq _06DE
+	scrcmd_261 6
+	scrcmd_267 1, VAR_SPECIAL_RESULT
+	non_npc_msg_var VAR_SPECIAL_RESULT
+	wait 30, VAR_SPECIAL_RESULT
+	scrcmd_257 2
+	closemsg
+	fade_screen 6, 1, 0, RGB_BLACK
+	wait_fade
+	scrcmd_350
+	restore_overworld
+	fade_screen 6, 1, 1, RGB_BLACK
+	wait_fade
+	npc_msg msg_0738_UNION_00202
+	scrcmd_257 102
+	closemsg
+	scrcmd_586 VAR_SPECIAL_RESULT
+	compare VAR_SPECIAL_RESULT, 1
+	goto_if_eq _0B8B
+	compare VAR_SPECIAL_RESULT, 2
+	goto_if_eq _0B8B
+	scrcmd_230
+	call _0BDA
+	goto _00D2
+	end
 
 _0324:
-	ScrCmd_267 19, VAR_SPECIAL_RESULT
-	NonNPCMsgVar VAR_SPECIAL_RESULT
-	GoTo _00D2
-	End
+	scrcmd_267 19, VAR_SPECIAL_RESULT
+	non_npc_msg_var VAR_SPECIAL_RESULT
+	goto _00D2
+	end
 
 _0336:
-	ScrCmd_271 0, 4
-	ScrCmd_267 9, VAR_SPECIAL_RESULT
-	Compare VAR_SPECIAL_RESULT, 0
-	GoToIfEq _0353
-	NonNPCMsgVar VAR_SPECIAL_RESULT
+	scrcmd_271 0, 4
+	scrcmd_267 9, VAR_SPECIAL_RESULT
+	compare VAR_SPECIAL_RESULT, 0
+	goto_if_eq _0353
+	non_npc_msg_var VAR_SPECIAL_RESULT
 _0353:
-	ScrCmd_272 VAR_SPECIAL_RESULT
-	Compare VAR_SPECIAL_RESULT, 7
-	GoToIfEq _06C6
-	ScrCmd_267 1, VAR_SPECIAL_RESULT
-	NonNPCMsgVar VAR_SPECIAL_RESULT
-	WaitButtonOrDelay 30
-	ScrCmd_257 4
-	CloseMsg
-	FadeScreen 6, 1, 0, RGB_BLACK
-	WaitFade
-	ScrCmd_159
-	RestoreOverworld
-	Call _0BDA
-	GoTo _0478
-	End
+	scrcmd_272 VAR_SPECIAL_RESULT
+	compare VAR_SPECIAL_RESULT, 7
+	goto_if_eq _06C6
+	scrcmd_267 1, VAR_SPECIAL_RESULT
+	non_npc_msg_var VAR_SPECIAL_RESULT
+	wait_button_or_delay 30
+	scrcmd_257 4
+	closemsg
+	fade_screen 6, 1, 0, RGB_BLACK
+	wait_fade
+	scrcmd_159
+	restore_overworld
+	call _0BDA
+	goto _0478
+	end
 
 _0396:
-	ScrCmd_271 0, 5
-	ScrCmd_267 9, VAR_SPECIAL_RESULT
-	Compare VAR_SPECIAL_RESULT, 0
-	GoToIfEq _03B3
-	NonNPCMsgVar VAR_SPECIAL_RESULT
+	scrcmd_271 0, 5
+	scrcmd_267 9, VAR_SPECIAL_RESULT
+	compare VAR_SPECIAL_RESULT, 0
+	goto_if_eq _03B3
+	non_npc_msg_var VAR_SPECIAL_RESULT
 _03B3:
-	ScrCmd_272 VAR_SPECIAL_RESULT
-	Compare VAR_SPECIAL_RESULT, 7
-	GoToIfEq _0726
-	ScrCmd_267 1, VAR_SPECIAL_RESULT
-	NonNPCMsgVar VAR_SPECIAL_RESULT
-	WaitButtonOrDelay 30
-	ScrCmd_257 5
-	CloseMsg
-	FadeScreen 6, 1, 0, RGB_BLACK
-	WaitFade
-	ScrCmd_162
-	RestoreOverworld
-	Call _0BDA
-	GoTo _0478
-	End
+	scrcmd_272 VAR_SPECIAL_RESULT
+	compare VAR_SPECIAL_RESULT, 7
+	goto_if_eq _0726
+	scrcmd_267 1, VAR_SPECIAL_RESULT
+	non_npc_msg_var VAR_SPECIAL_RESULT
+	wait_button_or_delay 30
+	scrcmd_257 5
+	closemsg
+	fade_screen 6, 1, 0, RGB_BLACK
+	wait_fade
+	scrcmd_162
+	restore_overworld
+	call _0BDA
+	goto _0478
+	end
 
 _03F6:
-	PartyCountEgg VAR_SPECIAL_RESULT
-	Compare VAR_SPECIAL_RESULT, 0
-	GoToIfEq _074F
-	ScrCmd_630 VAR_SPECIAL_RESULT
-	Compare VAR_SPECIAL_RESULT, 0
-	GoToIfEq _0761
-	ScrCmd_271 0, 6
-	ScrCmd_267 9, VAR_SPECIAL_RESULT
-	Compare VAR_SPECIAL_RESULT, 0
-	GoToIfEq _0435
-	NonNPCMsgVar VAR_SPECIAL_RESULT
+	party_count_egg VAR_SPECIAL_RESULT
+	compare VAR_SPECIAL_RESULT, 0
+	goto_if_eq _074F
+	scrcmd_630 VAR_SPECIAL_RESULT
+	compare VAR_SPECIAL_RESULT, 0
+	goto_if_eq _0761
+	scrcmd_271 0, 6
+	scrcmd_267 9, VAR_SPECIAL_RESULT
+	compare VAR_SPECIAL_RESULT, 0
+	goto_if_eq _0435
+	non_npc_msg_var VAR_SPECIAL_RESULT
 _0435:
-	ScrCmd_272 VAR_SPECIAL_RESULT
-	Compare VAR_SPECIAL_RESULT, 7
-	GoToIfEq _076C
-	ScrCmd_267 1, VAR_SPECIAL_RESULT
-	NonNPCMsgVar VAR_SPECIAL_RESULT
-	WaitButtonOrDelay 30
-	ScrCmd_257 6
-	CloseMsg
-	FadeScreen 6, 1, 0, RGB_BLACK
-	WaitFade
-	ScrCmd_629
-	RestoreOverworld
-	Call _0BDA
-	GoTo _0478
-	End
+	scrcmd_272 VAR_SPECIAL_RESULT
+	compare VAR_SPECIAL_RESULT, 7
+	goto_if_eq _076C
+	scrcmd_267 1, VAR_SPECIAL_RESULT
+	non_npc_msg_var VAR_SPECIAL_RESULT
+	wait_button_or_delay 30
+	scrcmd_257 6
+	closemsg
+	fade_screen 6, 1, 0, RGB_BLACK
+	wait_fade
+	scrcmd_629
+	restore_overworld
+	call _0BDA
+	goto _0478
+	end
 
 _0478:
-	ReleaseAll
-	End
+	releaseall
+	end
 _047C:
-	ScrCmd_271 0, 1
-	CloseMsg
-	ReleaseAll
-	End
+	scrcmd_271 0, 1
+	closemsg
+	releaseall
+	end
 _0488:
-	NPCMsg msg_0738_UNION_00038
-	Wait 30, VAR_SPECIAL_RESULT
-	CloseMsg
-	ScrCmd_263
-	ReleaseAll
-	End
+	npc_msg msg_0738_UNION_00038
+	wait 30, VAR_SPECIAL_RESULT
+	closemsg
+	scrcmd_263
+	releaseall
+	end
 
 _0499:
-	ScrCmd_262
-	ScrCmd_267 0, VAR_SPECIAL_RESULT
-	NonNPCMsgVar VAR_SPECIAL_RESULT
-	WaitABPress
-	CloseMsg
-	ScrCmd_263
-	ReleaseAll
-	End
+	scrcmd_262
+	scrcmd_267 0, VAR_SPECIAL_RESULT
+	non_npc_msg_var VAR_SPECIAL_RESULT
+	wait_button
+	closemsg
+	scrcmd_263
+	releaseall
+	end
 
 _04AF:
-	ScrCmd_262
-	ScrCmd_267 10, VAR_SPECIAL_RESULT
-	NonNPCMsgVar VAR_SPECIAL_RESULT
-	TouchscreenMenuHide
-	GetMenuChoice VAR_SPECIAL_RESULT
-	TouchscreenMenuShow
-	Compare VAR_SPECIAL_RESULT, 1
-	GoToIfEq _05C3
-	ScrCmd_274 VAR_SPECIAL_x8004, VAR_SPECIAL_RESULT
-	Compare VAR_SPECIAL_RESULT, 5
-	GoToIfEq _0488
-	ScrCmd_269 VAR_SPECIAL_RESULT
-	Compare VAR_SPECIAL_RESULT, 2
-	GoToIfEq _0488
-	ScrCmd_267 13, VAR_SPECIAL_RESULT
-	NonNPCMsgVar VAR_SPECIAL_RESULT
-	Wait 30, VAR_SPECIAL_RESULT
-	CloseMsg
-	FadeScreen 6, 1, 0, RGB_BLACK
-	WaitFade
-	ScrCmd_159
-	RestoreOverworld
-	FadeScreen 6, 1, 1, RGB_BLACK
-	GoTo _0478
-	End
+	scrcmd_262
+	scrcmd_267 10, VAR_SPECIAL_RESULT
+	non_npc_msg_var VAR_SPECIAL_RESULT
+	touchscreen_menu_hide
+	getmenuchoice VAR_SPECIAL_RESULT
+	touchscreen_menu_show
+	compare VAR_SPECIAL_RESULT, 1
+	goto_if_eq _05C3
+	scrcmd_274 VAR_SPECIAL_x8004, VAR_SPECIAL_RESULT
+	compare VAR_SPECIAL_RESULT, 5
+	goto_if_eq _0488
+	scrcmd_269 VAR_SPECIAL_RESULT
+	compare VAR_SPECIAL_RESULT, 2
+	goto_if_eq _0488
+	scrcmd_267 13, VAR_SPECIAL_RESULT
+	non_npc_msg_var VAR_SPECIAL_RESULT
+	wait 30, VAR_SPECIAL_RESULT
+	closemsg
+	fade_screen 6, 1, 0, RGB_BLACK
+	wait_fade
+	scrcmd_159
+	restore_overworld
+	fade_screen 6, 1, 1, RGB_BLACK
+	goto _0478
+	end
 
 _0528:
-	ScrCmd_262
-	ScrCmd_267 12, VAR_SPECIAL_RESULT
-	NonNPCMsgVar VAR_SPECIAL_RESULT
-	TouchscreenMenuHide
-	GetMenuChoice VAR_SPECIAL_RESULT
-	TouchscreenMenuShow
-	Compare VAR_SPECIAL_RESULT, 1
-	GoToIfEq _066C
-	PartyCountEgg VAR_SPECIAL_RESULT
-	Compare VAR_SPECIAL_RESULT, 0
-	GoToIfEq _0698
-	PartyLegalCheck VAR_SPECIAL_RESULT
-	Compare VAR_SPECIAL_RESULT, 1
-	GoToIfEq _0682
-	ScrCmd_274 VAR_SPECIAL_x8004, VAR_SPECIAL_RESULT
-	Compare VAR_SPECIAL_RESULT, 5
-	GoToIfEq _0488
-	ScrCmd_269 VAR_SPECIAL_RESULT
-	Compare VAR_SPECIAL_RESULT, 2
-	GoToIfEq _0488
-	ScrCmd_267 15, VAR_SPECIAL_RESULT
-	NonNPCMsgVar VAR_SPECIAL_RESULT
-	Wait 30, VAR_SPECIAL_RESULT
-	CloseMsg
-	FadeScreen 6, 1, 0, RGB_BLACK
-	WaitFade
-	ScrCmd_629
-	RestoreOverworld
-	FadeScreen 6, 1, 1, RGB_BLACK
-	GoTo _0478
-	End
+	scrcmd_262
+	scrcmd_267 12, VAR_SPECIAL_RESULT
+	non_npc_msg_var VAR_SPECIAL_RESULT
+	touchscreen_menu_hide
+	getmenuchoice VAR_SPECIAL_RESULT
+	touchscreen_menu_show
+	compare VAR_SPECIAL_RESULT, 1
+	goto_if_eq _066C
+	party_count_egg VAR_SPECIAL_RESULT
+	compare VAR_SPECIAL_RESULT, 0
+	goto_if_eq _0698
+	party_legal_check VAR_SPECIAL_RESULT
+	compare VAR_SPECIAL_RESULT, 1
+	goto_if_eq _0682
+	scrcmd_274 VAR_SPECIAL_x8004, VAR_SPECIAL_RESULT
+	compare VAR_SPECIAL_RESULT, 5
+	goto_if_eq _0488
+	scrcmd_269 VAR_SPECIAL_RESULT
+	compare VAR_SPECIAL_RESULT, 2
+	goto_if_eq _0488
+	scrcmd_267 15, VAR_SPECIAL_RESULT
+	non_npc_msg_var VAR_SPECIAL_RESULT
+	wait 30, VAR_SPECIAL_RESULT
+	closemsg
+	fade_screen 6, 1, 0, RGB_BLACK
+	wait_fade
+	scrcmd_629
+	restore_overworld
+	fade_screen 6, 1, 1, RGB_BLACK
+	goto _0478
+	end
 
 _05C3:
-	ScrCmd_267 16, VAR_SPECIAL_RESULT
-	NonNPCMsgVar VAR_SPECIAL_RESULT
-	Wait 30, VAR_SPECIAL_RESULT
-	ScrCmd_263
-	CloseMsg
-	ReleaseAll
-	End
+	scrcmd_267 16, VAR_SPECIAL_RESULT
+	non_npc_msg_var VAR_SPECIAL_RESULT
+	wait 30, VAR_SPECIAL_RESULT
+	scrcmd_263
+	closemsg
+	releaseall
+	end
 
 _05DB:
-	ScrCmd_262
-	ScrCmd_267 11, VAR_SPECIAL_RESULT
-	NonNPCMsgVar VAR_SPECIAL_RESULT
-	TouchscreenMenuHide
-	GetMenuChoice VAR_SPECIAL_RESULT
-	TouchscreenMenuShow
-	Compare VAR_SPECIAL_RESULT, 1
-	GoToIfEq _0654
-	ScrCmd_274 VAR_SPECIAL_x8004, VAR_SPECIAL_RESULT
-	Compare VAR_SPECIAL_RESULT, 5
-	GoToIfEq _0488
-	ScrCmd_269 VAR_SPECIAL_RESULT
-	Compare VAR_SPECIAL_RESULT, 2
-	GoToIfEq _0488
-	ScrCmd_267 14, VAR_SPECIAL_RESULT
-	NonNPCMsgVar VAR_SPECIAL_RESULT
-	Wait 30, VAR_SPECIAL_RESULT
-	CloseMsg
-	FadeScreen 6, 1, 0, RGB_BLACK
-	WaitFade
-	ScrCmd_162
-	RestoreOverworld
-	FadeScreen 6, 1, 1, RGB_BLACK
-	GoTo _0478
-	End
+	scrcmd_262
+	scrcmd_267 11, VAR_SPECIAL_RESULT
+	non_npc_msg_var VAR_SPECIAL_RESULT
+	touchscreen_menu_hide
+	getmenuchoice VAR_SPECIAL_RESULT
+	touchscreen_menu_show
+	compare VAR_SPECIAL_RESULT, 1
+	goto_if_eq _0654
+	scrcmd_274 VAR_SPECIAL_x8004, VAR_SPECIAL_RESULT
+	compare VAR_SPECIAL_RESULT, 5
+	goto_if_eq _0488
+	scrcmd_269 VAR_SPECIAL_RESULT
+	compare VAR_SPECIAL_RESULT, 2
+	goto_if_eq _0488
+	scrcmd_267 14, VAR_SPECIAL_RESULT
+	non_npc_msg_var VAR_SPECIAL_RESULT
+	wait 30, VAR_SPECIAL_RESULT
+	closemsg
+	fade_screen 6, 1, 0, RGB_BLACK
+	wait_fade
+	scrcmd_162
+	restore_overworld
+	fade_screen 6, 1, 1, RGB_BLACK
+	goto _0478
+	end
 
 _0654:
-	ScrCmd_267 17, VAR_SPECIAL_RESULT
-	NonNPCMsgVar VAR_SPECIAL_RESULT
-	Wait 30, VAR_SPECIAL_RESULT
-	CloseMsg
-	ScrCmd_263
-	ReleaseAll
-	End
+	scrcmd_267 17, VAR_SPECIAL_RESULT
+	non_npc_msg_var VAR_SPECIAL_RESULT
+	wait 30, VAR_SPECIAL_RESULT
+	closemsg
+	scrcmd_263
+	releaseall
+	end
 
 _066C:
-	ScrCmd_267 18, VAR_SPECIAL_RESULT
-	NonNPCMsgVar VAR_SPECIAL_RESULT
-	Wait 30, VAR_SPECIAL_RESULT
-	CloseMsg
-	ReleaseAll
-	End
+	scrcmd_267 18, VAR_SPECIAL_RESULT
+	non_npc_msg_var VAR_SPECIAL_RESULT
+	wait 30, VAR_SPECIAL_RESULT
+	closemsg
+	releaseall
+	end
 
 _0682:
-	ScrCmd_267 26, VAR_SPECIAL_RESULT
-	NonNPCMsgVar VAR_SPECIAL_RESULT
-	Wait 30, VAR_SPECIAL_RESULT
-	CloseMsg
-	ReleaseAll
-	End
+	scrcmd_267 26, VAR_SPECIAL_RESULT
+	non_npc_msg_var VAR_SPECIAL_RESULT
+	wait 30, VAR_SPECIAL_RESULT
+	closemsg
+	releaseall
+	end
 
 _0698:
-	ScrCmd_267 21, VAR_SPECIAL_RESULT
-	NonNPCMsgVar VAR_SPECIAL_RESULT
-	Wait 30, VAR_SPECIAL_RESULT
-	CloseMsg
-	ReleaseAll
-	End
+	scrcmd_267 21, VAR_SPECIAL_RESULT
+	non_npc_msg_var VAR_SPECIAL_RESULT
+	wait 30, VAR_SPECIAL_RESULT
+	closemsg
+	releaseall
+	end
 
 _06AE:
-	ScrCmd_267 3, VAR_SPECIAL_RESULT
-	NonNPCMsgVar VAR_SPECIAL_RESULT
-	Wait 30, VAR_SPECIAL_RESULT
-	GoTo _07BC
-	End
+	scrcmd_267 3, VAR_SPECIAL_RESULT
+	non_npc_msg_var VAR_SPECIAL_RESULT
+	wait 30, VAR_SPECIAL_RESULT
+	goto _07BC
+	end
 
 _06C6:
-	ScrCmd_267 4, VAR_SPECIAL_RESULT
-	NonNPCMsgVar VAR_SPECIAL_RESULT
-	Wait 30, VAR_SPECIAL_RESULT
-	GoTo _07BC
-	End
+	scrcmd_267 4, VAR_SPECIAL_RESULT
+	non_npc_msg_var VAR_SPECIAL_RESULT
+	wait 30, VAR_SPECIAL_RESULT
+	goto _07BC
+	end
 
 _06DE:
-	ScrCmd_267 5, VAR_SPECIAL_RESULT
-	NonNPCMsgVar VAR_SPECIAL_RESULT
-	Wait 30, VAR_SPECIAL_RESULT
-	GoTo _07BC
-	End
+	scrcmd_267 5, VAR_SPECIAL_RESULT
+	non_npc_msg_var VAR_SPECIAL_RESULT
+	wait 30, VAR_SPECIAL_RESULT
+	goto _07BC
+	end
 
 _06F6:
-	ScrCmd_267 6, VAR_SPECIAL_RESULT
-	NonNPCMsgVar VAR_SPECIAL_RESULT
-	Wait 30, VAR_SPECIAL_RESULT
-	GoTo _07BC
-	End
+	scrcmd_267 6, VAR_SPECIAL_RESULT
+	non_npc_msg_var VAR_SPECIAL_RESULT
+	wait 30, VAR_SPECIAL_RESULT
+	goto _07BC
+	end
 
 _071E:
-	ScrCmd_267 7, VAR_SPECIAL_RESULT
-	NonNPCMsgVar VAR_SPECIAL_RESULT
-	Wait 30, VAR_SPECIAL_RESULT
-	GoTo _07BC
-	End
+	scrcmd_267 7, VAR_SPECIAL_RESULT
+	non_npc_msg_var VAR_SPECIAL_RESULT
+	wait 30, VAR_SPECIAL_RESULT
+	goto _07BC
+	end
 
 _0726:
-	ScrCmd_267 8, VAR_SPECIAL_RESULT
-	NonNPCMsgVar VAR_SPECIAL_RESULT
-	Wait 30, VAR_SPECIAL_RESULT
-	GoTo _07BC
-	End
+	scrcmd_267 8, VAR_SPECIAL_RESULT
+	non_npc_msg_var VAR_SPECIAL_RESULT
+	wait 30, VAR_SPECIAL_RESULT
+	goto _07BC
+	end
 
 _073E:
-	ScrCmd_271 1, 1
-	NPCMsg msg_0738_UNION_00036
-	GoTo _0BC2
-	End
+	scrcmd_271 1, 1
+	npc_msg msg_0738_UNION_00036
+	goto _0BC2
+	end
 
 _074F:
-	ScrCmd_267 21, VAR_SPECIAL_RESULT
-	NonNPCMsgVar VAR_SPECIAL_RESULT
-	GoTo _00D2
-	End
+	scrcmd_267 21, VAR_SPECIAL_RESULT
+	non_npc_msg_var VAR_SPECIAL_RESULT
+	goto _00D2
+	end
 
 _0761:
-	NPCMsg msg_0738_UNION_00218
-	GoTo _00D2
-	End
+	npc_msg msg_0738_UNION_00218
+	goto _00D2
+	end
 
 _076C:
-	ScrCmd_267 8, VAR_SPECIAL_RESULT
-	NonNPCMsgVar VAR_SPECIAL_RESULT
-	Wait 30, VAR_SPECIAL_RESULT
-	GoTo _07BC
-	End
+	scrcmd_267 8, VAR_SPECIAL_RESULT
+	non_npc_msg_var VAR_SPECIAL_RESULT
+	wait 30, VAR_SPECIAL_RESULT
+	goto _07BC
+	end
 
 _0784:
-	ScrCmd_267 23, VAR_SPECIAL_RESULT
-	NonNPCMsgVar VAR_SPECIAL_RESULT
-	Wait 30, VAR_SPECIAL_RESULT
-	ScrCmd_257 101
-	CloseMsg
-	ScrCmd_266
-	ReleaseAll
-	End
+	scrcmd_267 23, VAR_SPECIAL_RESULT
+	non_npc_msg_var VAR_SPECIAL_RESULT
+	wait 30, VAR_SPECIAL_RESULT
+	scrcmd_257 101
+	closemsg
+	scrcmd_266
+	releaseall
+	end
 
 _07A0:
-	ScrCmd_267 24, VAR_SPECIAL_RESULT
-	NonNPCMsgVar VAR_SPECIAL_RESULT
-	Wait 30, VAR_SPECIAL_RESULT
-	ScrCmd_257 101
-	CloseMsg
-	ScrCmd_266
-	ReleaseAll
-	End
+	scrcmd_267 24, VAR_SPECIAL_RESULT
+	non_npc_msg_var VAR_SPECIAL_RESULT
+	wait 30, VAR_SPECIAL_RESULT
+	scrcmd_257 101
+	closemsg
+	scrcmd_266
+	releaseall
+	end
 
 _07BC:
-	ScrCmd_257 101
-	CloseMsg
-	ScrCmd_266
-	ReleaseAll
-	End
+	scrcmd_257 101
+	closemsg
+	scrcmd_266
+	releaseall
+	end
 
 scr_seq_UNION_004:
-	ScrCmd_609
-	LockAll
+	scrcmd_609
+	lockall
 _07CC:
-	PlaySE SEQ_SE_DP_BUTTON9
-	ScrCmd_264 1
-	ScrCmd_592 7
-	WaitButtonOrDelay 30
-	GoTo _07E4
-	End
+	play_se SEQ_SE_DP_BUTTON9
+	scrcmd_264 1
+	scrcmd_592 7
+	wait_button_or_delay 30
+	goto _07E4
+	end
 
 _07E4:
-	NPCMsg msg_0738_UNION_00009
-	ScrCmd_257 100
-	ScrCmd_261 11
-	ScrCmd_273 VAR_SPECIAL_RESULT
-	Switch VAR_SPECIAL_RESULT
-	Case 1, _0863
-	Case 4, _0B11
-	Case 2, _0974
-	Case 3, _08DB
-	Case 5, _0A44
-	Case 6, _0AA2
-	Case 7, _0BA0
-	Case 8, _0BB1
-	End
+	npc_msg msg_0738_UNION_00009
+	scrcmd_257 100
+	scrcmd_261 11
+	scrcmd_273 VAR_SPECIAL_RESULT
+	switch VAR_SPECIAL_RESULT
+	case 1, _0863
+	case 4, _0B11
+	case 2, _0974
+	case 3, _08DB
+	case 5, _0A44
+	case 6, _0AA2
+	case 7, _0BA0
+	case 8, _0BB1
+	end
 
 _0863:
-	NPCMsg msg_0738_UNION_00011
-	TouchscreenMenuHide
-	GetMenuChoice VAR_SPECIAL_RESULT
-	TouchscreenMenuShow
-	Compare VAR_SPECIAL_RESULT, 1
-	GoToIfEq _08CA
-	ScrCmd_271 1, 0
-	CloseMsg
-	ScrCmd_272 VAR_SPECIAL_RESULT
-	Compare VAR_SPECIAL_RESULT, 7
-	GoToIfEq _0B80
-	ScrCmd_576 VAR_SPECIAL_RESULT
-	NonNPCMsgVar VAR_SPECIAL_RESULT
-	Wait 30, VAR_SPECIAL_RESULT
-	ScrCmd_257 1
-	CloseMsg
-	ScrCmd_261 5
-	FadeScreen 6, 1, 0, RGB_BLACK
-	WaitFade
-	ScrCmd_160
-	RestoreOverworld
-	Call _0BDA
-	GoTo _07E4
-	End
+	npc_msg msg_0738_UNION_00011
+	touchscreen_menu_hide
+	getmenuchoice VAR_SPECIAL_RESULT
+	touchscreen_menu_show
+	compare VAR_SPECIAL_RESULT, 1
+	goto_if_eq _08CA
+	scrcmd_271 1, 0
+	closemsg
+	scrcmd_272 VAR_SPECIAL_RESULT
+	compare VAR_SPECIAL_RESULT, 7
+	goto_if_eq _0B80
+	scrcmd_576 VAR_SPECIAL_RESULT
+	non_npc_msg_var VAR_SPECIAL_RESULT
+	wait 30, VAR_SPECIAL_RESULT
+	scrcmd_257 1
+	closemsg
+	scrcmd_261 5
+	fade_screen 6, 1, 0, RGB_BLACK
+	wait_fade
+	scrcmd_160
+	restore_overworld
+	call _0BDA
+	goto _07E4
+	end
 
 _08CA:
-	ScrCmd_271 1, 1
-	NPCMsg msg_0738_UNION_00017
-	GoTo _0BC2
-	End
+	scrcmd_271 1, 1
+	npc_msg msg_0738_UNION_00017
+	goto _0BC2
+	end
 
 _08DB:
-	NPCMsg msg_0738_UNION_00026
-	TouchscreenMenuHide
-	GetMenuChoice VAR_SPECIAL_RESULT
-	TouchscreenMenuShow
-	Compare VAR_SPECIAL_RESULT, 1
-	GoToIfEq _0952
-	PartyCountNotEgg VAR_SPECIAL_RESULT
-	Compare VAR_SPECIAL_RESULT, 2
-	GoToIfLt _0963
-	ScrCmd_271 1, 0
-	CloseMsg
-	ScrCmd_272 VAR_SPECIAL_RESULT
-	Compare VAR_SPECIAL_RESULT, 7
-	GoToIfEq _0BA0
-	NPCMsg msg_0738_UNION_00027
-	Wait 30, VAR_SPECIAL_RESULT
-	ScrCmd_257 3
-	CloseMsg
-	ScrCmd_261 7
-	FadeScreen 6, 1, 0, RGB_BLACK
-	WaitFade
-	ScrCmd_161
-	RestoreOverworld
-	ScrCmd_261 11
-	Call _0BDA
-	GoTo _07E4
-	End
+	npc_msg msg_0738_UNION_00026
+	touchscreen_menu_hide
+	getmenuchoice VAR_SPECIAL_RESULT
+	touchscreen_menu_show
+	compare VAR_SPECIAL_RESULT, 1
+	goto_if_eq _0952
+	party_count_not_egg VAR_SPECIAL_RESULT
+	compare VAR_SPECIAL_RESULT, 2
+	goto_if_lt _0963
+	scrcmd_271 1, 0
+	closemsg
+	scrcmd_272 VAR_SPECIAL_RESULT
+	compare VAR_SPECIAL_RESULT, 7
+	goto_if_eq _0BA0
+	npc_msg msg_0738_UNION_00027
+	wait 30, VAR_SPECIAL_RESULT
+	scrcmd_257 3
+	closemsg
+	scrcmd_261 7
+	fade_screen 6, 1, 0, RGB_BLACK
+	wait_fade
+	scrcmd_161
+	restore_overworld
+	scrcmd_261 11
+	call _0BDA
+	goto _07E4
+	end
 
 _0952:
-	ScrCmd_271 1, 1
-	NPCMsg msg_0738_UNION_00020
-	GoTo _0BC2
-	End
+	scrcmd_271 1, 1
+	npc_msg msg_0738_UNION_00020
+	goto _0BC2
+	end
 
 _0963:
-	ScrCmd_271 1, 1
-	NPCMsg msg_0738_UNION_00029
-	GoTo _0BC2
-	End
+	scrcmd_271 1, 1
+	npc_msg msg_0738_UNION_00029
+	goto _0BC2
+	end
 
 _0974:
-	NPCMsg msg_0738_UNION_00021
-	TouchscreenMenuHide
-	GetMenuChoice VAR_SPECIAL_RESULT
-	TouchscreenMenuShow
-	Compare VAR_SPECIAL_RESULT, 1
-	GoToIfEq _0A22
-	PartyCountMonsAtOrBelowLevel VAR_SPECIAL_RESULT, 30
-	Compare VAR_SPECIAL_RESULT, 2
-	GoToIfLt _0A33
-	ScrCmd_271 1, 0
-	CloseMsg
-	ScrCmd_272 VAR_SPECIAL_RESULT
-	Compare VAR_SPECIAL_RESULT, 7
-	GoToIfEq _0BA0
-	NPCMsg msg_0738_UNION_00022
-	Wait 30, VAR_SPECIAL_RESULT
-	ScrCmd_257 2
-	CloseMsg
-	ScrCmd_261 6
-	FadeScreen 6, 1, 0, RGB_BLACK
-	WaitFade
-	ScrCmd_350
-	RestoreOverworld
-	FadeScreen 6, 1, 1, RGB_BLACK
-	WaitFade
-	NPCMsg msg_0738_UNION_00202
-	ScrCmd_257 102
-	CloseMsg
-	ScrCmd_586 VAR_SPECIAL_RESULT
-	Compare VAR_SPECIAL_RESULT, 1
-	GoToIfEq _0B8B
-	Compare VAR_SPECIAL_RESULT, 2
-	GoToIfEq _0B8B
-	ScrCmd_230
-	ScrCmd_261 11
-	Call _0BDA
-	GoTo _07E4
-	End
+	npc_msg msg_0738_UNION_00021
+	touchscreen_menu_hide
+	getmenuchoice VAR_SPECIAL_RESULT
+	touchscreen_menu_show
+	compare VAR_SPECIAL_RESULT, 1
+	goto_if_eq _0A22
+	party_count_mons_at_or_below_level VAR_SPECIAL_RESULT, 30
+	compare VAR_SPECIAL_RESULT, 2
+	goto_if_lt _0A33
+	scrcmd_271 1, 0
+	closemsg
+	scrcmd_272 VAR_SPECIAL_RESULT
+	compare VAR_SPECIAL_RESULT, 7
+	goto_if_eq _0BA0
+	npc_msg msg_0738_UNION_00022
+	wait 30, VAR_SPECIAL_RESULT
+	scrcmd_257 2
+	closemsg
+	scrcmd_261 6
+	fade_screen 6, 1, 0, RGB_BLACK
+	wait_fade
+	scrcmd_350
+	restore_overworld
+	fade_screen 6, 1, 1, RGB_BLACK
+	wait_fade
+	npc_msg msg_0738_UNION_00202
+	scrcmd_257 102
+	closemsg
+	scrcmd_586 VAR_SPECIAL_RESULT
+	compare VAR_SPECIAL_RESULT, 1
+	goto_if_eq _0B8B
+	compare VAR_SPECIAL_RESULT, 2
+	goto_if_eq _0B8B
+	scrcmd_230
+	scrcmd_261 11
+	call _0BDA
+	goto _07E4
+	end
 
 _0A22:
-	ScrCmd_271 1, 1
-	NPCMsg msg_0738_UNION_00023
-	GoTo _0BC2
-	End
+	scrcmd_271 1, 1
+	npc_msg msg_0738_UNION_00023
+	goto _0BC2
+	end
 
 _0A33:
-	ScrCmd_271 1, 1
-	NPCMsg msg_0738_UNION_00024
-	GoTo _0BC2
-	End
+	scrcmd_271 1, 1
+	npc_msg msg_0738_UNION_00024
+	goto _0BC2
+	end
 
 _0A44:
-	NPCMsg msg_0738_UNION_00030
-	TouchscreenMenuHide
-	GetMenuChoice VAR_SPECIAL_RESULT
-	TouchscreenMenuShow
-	Compare VAR_SPECIAL_RESULT, 1
-	GoToIfEq _0A22
-	ScrCmd_271 1, 0
-	CloseMsg
-	ScrCmd_272 VAR_SPECIAL_RESULT
-	Compare VAR_SPECIAL_RESULT, 7
-	GoToIfEq _0BA0
-	NPCMsg msg_0738_UNION_00031
-	Wait 30, VAR_SPECIAL_RESULT
-	ScrCmd_257 5
-	CloseMsg
-	ScrCmd_261 2
-	FadeScreen 6, 1, 0, RGB_BLACK
-	WaitFade
-	ScrCmd_162
-	RestoreOverworld
-	Call _0BDA
-	ReleaseAll
-	End
+	npc_msg msg_0738_UNION_00030
+	touchscreen_menu_hide
+	getmenuchoice VAR_SPECIAL_RESULT
+	touchscreen_menu_show
+	compare VAR_SPECIAL_RESULT, 1
+	goto_if_eq _0A22
+	scrcmd_271 1, 0
+	closemsg
+	scrcmd_272 VAR_SPECIAL_RESULT
+	compare VAR_SPECIAL_RESULT, 7
+	goto_if_eq _0BA0
+	npc_msg msg_0738_UNION_00031
+	wait 30, VAR_SPECIAL_RESULT
+	scrcmd_257 5
+	closemsg
+	scrcmd_261 2
+	fade_screen 6, 1, 0, RGB_BLACK
+	wait_fade
+	scrcmd_162
+	restore_overworld
+	call _0BDA
+	releaseall
+	end
 
 _0AA2:
-	NPCMsg msg_0738_UNION_00033
-	TouchscreenMenuHide
-	GetMenuChoice VAR_SPECIAL_RESULT
-	TouchscreenMenuShow
-	Compare VAR_SPECIAL_RESULT, 1
-	GoToIfEq _0A22
-	ScrCmd_271 1, 0
-	CloseMsg
-	PartyCountEgg VAR_SPECIAL_RESULT
-	Compare VAR_SPECIAL_RESULT, 0
-	GoToIfEq _073E
-	ScrCmd_272 VAR_SPECIAL_RESULT
-	Compare VAR_SPECIAL_RESULT, 7
-	GoToIfEq _0BA0
-	NPCMsg msg_0738_UNION_00034
-	Wait 30, VAR_SPECIAL_RESULT
-	ScrCmd_257 6
-	CloseMsg
-	ScrCmd_261 13
-	FadeScreen 6, 1, 0, RGB_BLACK
-	WaitFade
-	ScrCmd_629
-	RestoreOverworld
-	Call _0BDA
-	ReleaseAll
-	End
+	npc_msg msg_0738_UNION_00033
+	touchscreen_menu_hide
+	getmenuchoice VAR_SPECIAL_RESULT
+	touchscreen_menu_show
+	compare VAR_SPECIAL_RESULT, 1
+	goto_if_eq _0A22
+	scrcmd_271 1, 0
+	closemsg
+	party_count_egg VAR_SPECIAL_RESULT
+	compare VAR_SPECIAL_RESULT, 0
+	goto_if_eq _073E
+	scrcmd_272 VAR_SPECIAL_RESULT
+	compare VAR_SPECIAL_RESULT, 7
+	goto_if_eq _0BA0
+	npc_msg msg_0738_UNION_00034
+	wait 30, VAR_SPECIAL_RESULT
+	scrcmd_257 6
+	closemsg
+	scrcmd_261 13
+	fade_screen 6, 1, 0, RGB_BLACK
+	wait_fade
+	scrcmd_629
+	restore_overworld
+	call _0BDA
+	releaseall
+	end
 
 _0B11:
-	NPCMsg msg_0738_UNION_00018
-	TouchscreenMenuHide
-	GetMenuChoice VAR_SPECIAL_RESULT
-	TouchscreenMenuShow
-	Compare VAR_SPECIAL_RESULT, 1
-	GoToIfEq _0B6F
-	ScrCmd_271 1, 0
-	CloseMsg
-	ScrCmd_272 VAR_SPECIAL_RESULT
-	Compare VAR_SPECIAL_RESULT, 7
-	GoToIfEq _0BA0
-	NPCMsg msg_0738_UNION_00019
-	Wait 30, VAR_SPECIAL_RESULT
-	ScrCmd_257 4
-	CloseMsg
-	ScrCmd_261 1
-	FadeScreen 6, 1, 0, RGB_BLACK
-	WaitFade
-	ScrCmd_159
-	RestoreOverworld
-	Call _0BDA
-	ReleaseAll
-	End
+	npc_msg msg_0738_UNION_00018
+	touchscreen_menu_hide
+	getmenuchoice VAR_SPECIAL_RESULT
+	touchscreen_menu_show
+	compare VAR_SPECIAL_RESULT, 1
+	goto_if_eq _0B6F
+	scrcmd_271 1, 0
+	closemsg
+	scrcmd_272 VAR_SPECIAL_RESULT
+	compare VAR_SPECIAL_RESULT, 7
+	goto_if_eq _0BA0
+	npc_msg msg_0738_UNION_00019
+	wait 30, VAR_SPECIAL_RESULT
+	scrcmd_257 4
+	closemsg
+	scrcmd_261 1
+	fade_screen 6, 1, 0, RGB_BLACK
+	wait_fade
+	scrcmd_159
+	restore_overworld
+	call _0BDA
+	releaseall
+	end
 
 _0B6F:
-	ScrCmd_271 1, 1
-	NPCMsg msg_0738_UNION_00028
-	GoTo _0BC2
-	End
+	scrcmd_271 1, 1
+	npc_msg msg_0738_UNION_00028
+	goto _0BC2
+	end
 
 _0B80:
-	NPCMsg msg_0738_UNION_00035
-	GoTo _0BC2
-	End
+	npc_msg msg_0738_UNION_00035
+	goto _0BC2
+	end
 
 _0B8B:
-	ScrCmd_261 11
-	NPCMsg msg_0738_UNION_00025
-	Wait 30, VAR_SPECIAL_RESULT
-	GoTo _0BC2
-	End
+	scrcmd_261 11
+	npc_msg msg_0738_UNION_00025
+	wait 30, VAR_SPECIAL_RESULT
+	goto _0BC2
+	end
 
 _0BA0:
-	NPCMsg msg_0738_UNION_00008
-	Wait 30, VAR_SPECIAL_RESULT
-	GoTo _0BC2
-	End
+	npc_msg msg_0738_UNION_00008
+	wait 30, VAR_SPECIAL_RESULT
+	goto _0BC2
+	end
 
 _0BB1:
-	NPCMsg msg_0738_UNION_00010
-	Wait 30, VAR_SPECIAL_RESULT
-	GoTo _0BC2
-	End
+	npc_msg msg_0738_UNION_00010
+	wait 30, VAR_SPECIAL_RESULT
+	goto _0BC2
+	end
 
 _0BC2:
-	ScrCmd_257 101
-	CloseMsg
-	ScrCmd_266
-	ReleaseAll
-	End
+	scrcmd_257 101
+	closemsg
+	scrcmd_266
+	releaseall
+	end
 
 _0BCE:
-	ScrCmd_271 1, 1
-	CloseMsg
-	ReleaseAll
-	End
+	scrcmd_271 1, 1
+	closemsg
+	releaseall
+	end
 
 _0BDA:
-	ScrCmd_265
-	FadeScreen 6, 1, 1, RGB_BLACK
-	Return
+	scrcmd_265
+	fade_screen 6, 1, 1, RGB_BLACK
+	return
 
 scr_seq_UNION_005:
-	SimpleNPCMsg msg_0738_UNION_00207
-	End
+	simple_npc_msg msg_0738_UNION_00207
+	end
 
 scr_seq_UNION_006:
-	PlaySE SEQ_SE_DP_SELECT
-	ScrCmd_609
-	LockAll
-	FacePlayer
-	GoTo _0499
-	End
+	play_se SEQ_SE_DP_SELECT
+	scrcmd_609
+	lockall
+	faceplayer
+	goto _0499
+	end
 
 scr_seq_UNION_007:
-	PlaySE SEQ_SE_DP_SELECT
-	ScrCmd_609
-	LockAll
-	FacePlayer
-	GoTo _0C1F
-	End
+	play_se SEQ_SE_DP_SELECT
+	scrcmd_609
+	lockall
+	faceplayer
+	goto _0C1F
+	end
 
 _0C1F:
-	ScrCmd_262
-	CallIfSet FLAG_UNK_069, _0C87
-	TouchscreenMenuHide
+	scrcmd_262
+	call_if_set FLAG_UNK_069, _0C87
+	touchscreen_menu_hide
 _0C2E:
-	CallIfUnset FLAG_UNK_069, _0C8C
-	SetFlag FLAG_UNK_069
-	MenuInitStdGmm 21, 11, 0, 1, VAR_SPECIAL_RESULT
-	MenuItemAdd 11, 255, 0
-	MenuItemAdd 169, 255, 1
-	MenuItemAdd 24, 255, 2
-	MenuExec
-	Switch VAR_SPECIAL_RESULT
-	Case 0, _0CAF
-	Case 1, _0C91
-	GoTo _0CA5
-	End
+	call_if_unset FLAG_UNK_069, _0C8C
+	setflag FLAG_UNK_069
+	menu_init_std_gmm 21, 11, 0, 1, VAR_SPECIAL_RESULT
+	menu_item_add 11, 255, 0
+	menu_item_add 169, 255, 1
+	menu_item_add 24, 255, 2
+	menu_exec
+	switch VAR_SPECIAL_RESULT
+	case 0, _0CAF
+	case 1, _0C91
+	goto _0CA5
+	end
 
 _0C87:
-	NPCMsg msg_0738_UNION_00158
-	Return
+	npc_msg msg_0738_UNION_00158
+	return
 
 _0C8C:
-	NPCMsg msg_0738_UNION_00157
-	Return
+	npc_msg msg_0738_UNION_00157
+	return
 
 _0C91:
-	TouchscreenMenuShow
-	ScrCmd_260 VAR_SPECIAL_RESULT
-	NonNPCMsgVar VAR_SPECIAL_RESULT
-	TouchscreenMenuHide
-	GoTo _0C2E
-	End
+	touchscreen_menu_show
+	scrcmd_260 VAR_SPECIAL_RESULT
+	non_npc_msg_var VAR_SPECIAL_RESULT
+	touchscreen_menu_hide
+	goto _0C2E
+	end
 
 _0CA5:
-	TouchscreenMenuShow
-	ScrCmd_263
-	CloseMsg
-	ReleaseAll
-	End
+	touchscreen_menu_show
+	scrcmd_263
+	closemsg
+	releaseall
+	end
 
 _0CAF:
-	NPCMsg msg_0738_UNION_00159
-	MenuInitStdGmm 24, 3, 0, 1, VAR_SPECIAL_RESULT
-	MenuItemAdd 52, 255, 0
-	MenuItemAdd 23, 255, 1
-	MenuItemAdd 142, 255, 2
-	MenuItemAdd 59, 255, 3
-	MenuItemAdd 170, 255, 4
-	MenuItemAdd 141, 255, 5
-	MenuItemAdd 13, 255, 6
-	MenuExec
-	Switch VAR_SPECIAL_RESULT
-	Case 0, _0D50
-	Case 1, _0D5F
-	Case 2, _0D6E
-	Case 3, _0D7D
-	Case 4, _0D8C
-	Case 5, _0D9B
-	GoTo _0C2E
-	End
+	npc_msg msg_0738_UNION_00159
+	menu_init_std_gmm 24, 3, 0, 1, VAR_SPECIAL_RESULT
+	menu_item_add 52, 255, 0
+	menu_item_add 23, 255, 1
+	menu_item_add 142, 255, 2
+	menu_item_add 59, 255, 3
+	menu_item_add 170, 255, 4
+	menu_item_add 141, 255, 5
+	menu_item_add 13, 255, 6
+	menu_exec
+	switch VAR_SPECIAL_RESULT
+	case 0, _0D50
+	case 1, _0D5F
+	case 2, _0D6E
+	case 3, _0D7D
+	case 4, _0D8C
+	case 5, _0D9B
+	goto _0C2E
+	end
 
 _0D50:
-	TouchscreenMenuShow
-	NPCMsg msg_0738_UNION_00160
-	TouchscreenMenuHide
-	GoTo _0CAF
-	End
+	touchscreen_menu_show
+	npc_msg msg_0738_UNION_00160
+	touchscreen_menu_hide
+	goto _0CAF
+	end
 
 _0D5F:
-	TouchscreenMenuShow
-	NPCMsg msg_0738_UNION_00161
-	TouchscreenMenuHide
-	GoTo _0CAF
-	End
+	touchscreen_menu_show
+	npc_msg msg_0738_UNION_00161
+	touchscreen_menu_hide
+	goto _0CAF
+	end
 
 _0D6E:
-	TouchscreenMenuShow
-	NPCMsg msg_0738_UNION_00162
-	TouchscreenMenuHide
-	GoTo _0CAF
-	End
+	touchscreen_menu_show
+	npc_msg msg_0738_UNION_00162
+	touchscreen_menu_hide
+	goto _0CAF
+	end
 
 _0D7D:
-	TouchscreenMenuShow
-	NPCMsg msg_0738_UNION_00164
-	TouchscreenMenuHide
-	GoTo _0CAF
-	End
+	touchscreen_menu_show
+	npc_msg msg_0738_UNION_00164
+	touchscreen_menu_hide
+	goto _0CAF
+	end
 
 _0D8C:
-	TouchscreenMenuShow
-	NPCMsg msg_0738_UNION_00165
-	TouchscreenMenuHide
-	GoTo _0CAF
-	End
+	touchscreen_menu_show
+	npc_msg msg_0738_UNION_00165
+	touchscreen_menu_hide
+	goto _0CAF
+	end
 
 _0D9B:
-	TouchscreenMenuShow
-	NPCMsg msg_0738_UNION_00163
-	TouchscreenMenuHide
-	GoTo _0CAF
-	End
+	touchscreen_menu_show
+	npc_msg msg_0738_UNION_00163
+	touchscreen_menu_hide
+	goto _0CAF
+	end
 
 _0DAA:
-	GoTo _0C2E
-	End
+	goto _0C2E
+	end
 	.balign 4, 0

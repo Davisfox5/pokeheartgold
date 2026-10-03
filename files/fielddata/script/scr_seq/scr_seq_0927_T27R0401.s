@@ -5,18 +5,18 @@
 
 	.rodata
 
-	ScrDef scr_seq_T27R0401_000
-	ScrDef scr_seq_T27R0401_001
-	ScrDefEnd
+	scrdef scr_seq_T27R0401_000
+	scrdef scr_seq_T27R0401_001
+	scrdef_end
 
 _000A:
-	End
+	end
 
 scr_seq_T27R0401_000:
-	SimpleNPCMsg msg_0617_T27R0401_00000
-	End
+	simple_npc_msg msg_0617_T27R0401_00000
+	end
 
 scr_seq_T27R0401_001:
-	SimpleNPCMsg msg_0617_T27R0401_00001
-	End
+	simple_npc_msg msg_0617_T27R0401_00001
+	end
 	.balign 4, 0

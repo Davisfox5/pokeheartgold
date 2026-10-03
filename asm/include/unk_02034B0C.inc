@@ -3,8 +3,8 @@
 .public MailMsg_Init
 .public Sys_SetSleepDisableFlag
 .public Sys_ClearSleepDisableFlag
-.public Heap_Alloc
-.public Heap_Free
+.public AllocFromHeap
+.public FreeToHeap
 .public GF_AssertFail
 .public PlayerProfile_sizeof
 .public PlayerProfile_Copy

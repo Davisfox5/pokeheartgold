@@ -11,7 +11,7 @@ void Save_PlayerData_Init(PLAYERDATA *player) {
 
     Options_Init(&player->options);
     PlayerProfile_Init(&player->profile);
-    Coins_Init(&player->coins);
+    InitCoins(&player->coins);
     InitIGT(&player->igt);
 }
 
@@ -39,8 +39,8 @@ u32 PlayerProfile_sizeof(void) {
     return sizeof(PlayerProfile);
 }
 
-PlayerProfile *PlayerProfile_New(enum HeapID heapID) {
-    PlayerProfile *profile = Heap_Alloc(heapID, sizeof(PlayerProfile));
+PlayerProfile *PlayerProfile_New(HeapID heapId) {
+    PlayerProfile *profile = AllocFromHeap(heapId, sizeof(PlayerProfile));
     PlayerProfile_Init(profile);
 
     return profile;
@@ -84,8 +84,8 @@ void PlayerName_FlatToString(PlayerProfile *profile, String *str) {
     CopyU16ArrayToString(str, profile->name);
 }
 
-String *PlayerProfile_GetPlayerName_NewString(PlayerProfile *profile, enum HeapID heapID) {
-    String *str = String_New(PLAYER_NAME_LENGTH + 1, heapID);
+String *PlayerProfile_GetPlayerName_NewString(PlayerProfile *profile, HeapID heapId) {
+    String *str = String_New(PLAYER_NAME_LENGTH + 1, heapId);
     PlayerName_FlatToString(profile, str);
 
     return str;

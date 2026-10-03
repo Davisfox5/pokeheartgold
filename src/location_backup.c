@@ -7,11 +7,13 @@
 #include "field_system.h"
 #include "save_local_field_data.h"
 
+// APOCRYPHA: new game starts DOWNSTAIRS in the Cherrygrove house (the rewired
+// "New Bark player house" 1F), beside Mom, for the cold-open cutscene.
 static const Location sLocation_PlayerRoom = {
-    .mapId = MAP_NEW_BARK_PLAYER_HOUSE_2F,
+    .mapId = MAP_NEW_BARK_PLAYER_HOUSE_1F,
     .warpId = 0xFFFFFFFF,
-    .x = 0x00000006,
-    .y = 0x00000006,
+    .x = 0x00000005,
+    .y = 0x00000009,
     .direction = 0x00000001,
 };
 

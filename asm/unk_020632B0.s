@@ -28,7 +28,7 @@ sub_020632B0: ; 0x020632B0
 	add r4, r0, #0
 	mov r0, #0xb
 	mov r1, #0x1c
-	bl Heap_AllocAtEnd
+	bl AllocFromHeapAtEnd
 	mov r1, #0
 	mov r2, #0x1c
 	str r0, [r4, #8]
@@ -440,7 +440,7 @@ _02063624:
 	bl PlaySE
 _0206366E:
 	ldr r0, [r4, #8]
-	bl Heap_Free
+	bl FreeToHeap
 	mov r0, #0
 	add sp, #0x14
 	pop {r4, r5, r6, r7, pc}
@@ -1074,20 +1074,20 @@ _02063A90: .word _020FE164
 sub_02063A94: ; 0x02063A94
 	push {r3, r4, r5, lr}
 	add r4, r0, #0
-	bl MapObject_GetXCoord
+	bl MapObject_GetCurrentX
 	add r5, r0, #0
 	add r0, r4, #0
-	bl MapObject_GetPreviousXCoord
+	bl MapObject_GetPreviousX
 	cmp r5, r0
 	beq _02063AAC
 	mov r0, #1
 	pop {r3, r4, r5, pc}
 _02063AAC:
 	add r0, r4, #0
-	bl MapObject_GetZCoord
+	bl MapObject_GetCurrentZ
 	add r5, r0, #0
 	add r0, r4, #0
-	bl MapObject_GetPreviousZCoord
+	bl MapObject_GetPreviousZ
 	cmp r5, r0
 	beq _02063AC2
 	mov r0, #1
@@ -1102,20 +1102,20 @@ _02063AC2:
 sub_02063AC8: ; 0x02063AC8
 	push {r3, r4, r5, lr}
 	add r4, r0, #0
-	bl MapObject_GetXCoord
+	bl MapObject_GetCurrentX
 	add r5, r0, #0
 	add r0, r4, #0
-	bl MapObject_GetPreviousXCoord
+	bl MapObject_GetPreviousX
 	cmp r5, r0
 	beq _02063AE0
 	mov r0, #0
 	pop {r3, r4, r5, pc}
 _02063AE0:
 	add r0, r4, #0
-	bl MapObject_GetZCoord
+	bl MapObject_GetCurrentZ
 	add r5, r0, #0
 	add r0, r4, #0
-	bl MapObject_GetPreviousZCoord
+	bl MapObject_GetPreviousZ
 	cmp r5, r0
 	bne _02063AF6
 	mov r0, #1
@@ -2176,10 +2176,10 @@ sub_020642C4: ; 0x020642C4
 	cmp r0, #1
 	bne _02064332
 	add r0, r4, #0
-	bl PlayerAvatar_GetXCoord
+	bl GetPlayerXCoord
 	add r7, r0, #0
 	add r0, r4, #0
-	bl PlayerAvatar_GetZCoord
+	bl GetPlayerZCoord
 	add r6, r0, #0
 	add r0, r5, #0
 	bl MapObject_GetFacingDirection
@@ -2220,10 +2220,10 @@ _02064332:
 	cmp r0, #2
 	bne _02064394
 	add r0, r4, #0
-	bl PlayerAvatar_GetXCoord
+	bl GetPlayerXCoord
 	str r0, [sp, #0x10]
 	add r0, r4, #0
-	bl PlayerAvatar_GetZCoord
+	bl GetPlayerZCoord
 	add r7, r0, #0
 	add r0, r5, #0
 	mov r1, #0
@@ -2295,11 +2295,11 @@ sub_020643B8: ; 0x020643B8
 	add r5, r1, #0
 	add r6, r2, #0
 	add r4, r3, #0
-	bl MapObject_GetXCoord
+	bl MapObject_GetCurrentX
 	cmp r0, r6
 	bne _020643DE
 	add r0, r7, #0
-	bl MapObject_GetZCoord
+	bl MapObject_GetCurrentZ
 	cmp r4, r0
 	bge _020643DE
 	sub r1, r0, r5
@@ -2320,11 +2320,11 @@ sub_020643E4: ; 0x020643E4
 	add r5, r1, #0
 	add r6, r2, #0
 	add r4, r3, #0
-	bl MapObject_GetXCoord
+	bl MapObject_GetCurrentX
 	cmp r0, r6
 	bne _0206440A
 	add r0, r7, #0
-	bl MapObject_GetZCoord
+	bl MapObject_GetCurrentZ
 	cmp r4, r0
 	ble _0206440A
 	add r1, r0, r5
@@ -2345,11 +2345,11 @@ sub_02064410: ; 0x02064410
 	add r6, r1, #0
 	add r5, r2, #0
 	add r4, r3, #0
-	bl MapObject_GetZCoord
+	bl MapObject_GetCurrentZ
 	cmp r0, r4
 	bne _02064436
 	add r0, r7, #0
-	bl MapObject_GetXCoord
+	bl MapObject_GetCurrentX
 	cmp r5, r0
 	bge _02064436
 	sub r1, r0, r6
@@ -2370,11 +2370,11 @@ sub_0206443C: ; 0x0206443C
 	add r6, r1, #0
 	add r5, r2, #0
 	add r4, r3, #0
-	bl MapObject_GetZCoord
+	bl MapObject_GetCurrentZ
 	cmp r0, r4
 	bne _02064462
 	add r0, r7, #0
-	bl MapObject_GetXCoord
+	bl MapObject_GetCurrentX
 	cmp r5, r0
 	ble _02064462
 	add r1, r0, r6
@@ -2401,13 +2401,13 @@ sub_02064468: ; 0x02064468
 	mov r0, #1
 	pop {r3, r4, r5, r6, r7, pc}
 _0206447C:
-	bl MapObject_GetXCoord
+	bl MapObject_GetCurrentX
 	add r4, r0, #0
 	ldr r0, [sp, #4]
-	bl MapObject_GetZCoord
+	bl MapObject_GetCurrentZ
 	add r7, r0, #0
 	ldr r0, [sp, #4]
-	bl MapObject_GetYCoord
+	bl MapObject_GetCurrentY
 	str r0, [sp, #0xc]
 	add r0, r5, #0
 	bl GetDeltaXByFacingDirection
@@ -2581,7 +2581,7 @@ sub_020645B4: ; 0x020645B4
 	mov r1, #0x30
 	add r7, r2, #0
 	str r3, [sp]
-	bl Heap_AllocAtEnd
+	bl AllocFromHeapAtEnd
 	add r4, r0, #0
 	bne _020645CE
 	bl GF_AssertFail
@@ -2633,7 +2633,7 @@ sub_02064618: ; 0x02064618
 	bl SysTask_GetData
 	add r1, r0, #0
 	mov r0, #4
-	bl Heap_FreeExplicit
+	bl FreeToHeapExplicit
 	add r0, r4, #0
 	bl SysTask_Destroy
 	pop {r4, pc}
@@ -2950,16 +2950,16 @@ sub_02064824: ; 0x02064824
 	ldr r0, [r5, #0x28]
 	bl PlayerAvatar_GetMapObject
 	add r4, r0, #0
-	bl MapObject_GetXCoord
+	bl MapObject_GetCurrentX
 	add r6, r0, #0
 	add r0, r4, #0
-	bl MapObject_GetZCoord
+	bl MapObject_GetCurrentZ
 	add r7, r0, #0
 	ldr r0, [r5, #0x24]
-	bl MapObject_GetXCoord
+	bl MapObject_GetCurrentX
 	str r0, [sp]
 	ldr r0, [r5, #0x24]
-	bl MapObject_GetZCoord
+	bl MapObject_GetCurrentZ
 	add r3, r0, #0
 	ldr r2, [sp]
 	add r0, r6, #0

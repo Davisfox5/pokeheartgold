@@ -18,7 +18,7 @@ FrtCmd_092: ; 0x0222F608
 	add r6, r0, #0
 	ldr r0, [r5]
 	ldr r0, [r0]
-	bl Frontier_GetLaunchArgs
+	bl Frontier_GetLaunchParam
 	lsl r2, r4, #0x18
 	lsl r3, r6, #0x18
 	ldr r0, [r0, #8]
@@ -67,7 +67,7 @@ FrtCmd_095: ; 0x0222F678
 	add r6, r0, #0
 	ldr r0, [r6]
 	ldr r0, [r0]
-	bl Frontier_GetLaunchArgs
+	bl Frontier_GetLaunchParam
 	add r7, r0, #0
 	ldr r0, [r6]
 	ldr r0, [r0]
@@ -75,7 +75,7 @@ FrtCmd_095: ; 0x0222F678
 	add r5, r0, #0
 	mov r0, #0xb
 	mov r1, #0x24
-	bl Heap_Alloc
+	bl AllocFromHeap
 	mov r1, #0
 	mov r2, #0x24
 	add r4, r0, #0
@@ -137,7 +137,7 @@ FrtCmd_097: ; 0x0222F708
 	add r5, r0, #0
 	ldr r0, [r5]
 	ldr r0, [r0]
-	bl Frontier_GetLaunchArgs
+	bl Frontier_GetLaunchParam
 	add r6, r0, #0
 	ldr r0, [r5]
 	ldr r0, [r0]
@@ -168,7 +168,7 @@ FrtCmd_098: ; 0x0222F74C
 	add r6, r0, #0
 	ldr r0, [r6]
 	ldr r0, [r0]
-	bl Frontier_GetLaunchArgs
+	bl Frontier_GetLaunchParam
 	add r7, r0, #0
 	ldr r0, [r6]
 	ldr r0, [r0]
@@ -186,7 +186,7 @@ _0222F76C:
 	blt _0222F76C
 	mov r0, #0xb
 	mov r1, #0x24
-	bl Heap_Alloc
+	bl AllocFromHeap
 	mov r1, #0
 	mov r2, #0x24
 	add r4, r0, #0
@@ -231,7 +231,7 @@ ov80_0222F7CC: ; 0x0222F7CC
 	add r1, r4, #0
 	bl ov80_02230460
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	pop {r4, pc}
 	thumb_func_end ov80_0222F7CC
 
@@ -461,7 +461,7 @@ _0222F954:
 	ldr r1, [sp, #0x18]
 	strh r0, [r1]
 	add r0, r6, #0
-	bl Heap_Free
+	bl FreeToHeap
 	b _0222FBE6
 _0222F98C:
 	ldrb r0, [r4, #4]
@@ -531,7 +531,7 @@ _0222FA04:
 	blt _0222F9BC
 _0222FA12:
 	add r0, r5, #0
-	bl Heap_Free
+	bl FreeToHeap
 	mov r0, #0
 	add r4, sp, #0x24
 	add r5, r0, #0
@@ -848,13 +848,13 @@ FrtCmd_105: ; 0x0222FC50
 FrtCmd_106: ; 0x0222FC80
 	push {r4, lr}
 	add r4, r0, #0
-	bl FrontierScriptContext_ReadHalfWord
+	bl FrontierScript_ReadU16
 	add r1, r4, #0
 	add r1, #0x78
 	strh r0, [r1]
 	ldr r1, _0222FC9C ; =ov80_0222FCA0
 	add r0, r4, #0
-	bl FrontierScriptContext_Pause
+	bl ov80_0222AB84
 	mov r0, #1
 	pop {r4, pc}
 	nop
@@ -893,7 +893,7 @@ FrtCmd_107: ; 0x0222FCD0
 	add r5, r0, #0
 	ldr r0, [r5]
 	ldr r0, [r0]
-	bl Frontier_GetLaunchArgs
+	bl Frontier_GetLaunchParam
 	ldr r1, [r5, #0x1c]
 	add r0, r1, #1
 	str r0, [r5, #0x1c]

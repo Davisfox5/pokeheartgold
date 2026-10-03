@@ -7,11 +7,11 @@
 #include "math_util.h"
 #include "obj_char_transfer.h"
 #include "obj_pltt_transfer.h"
-#include "screen_fade.h"
-#include "sprite_transfer.h"
 #include "sys_task_api.h"
 #include "system.h"
+#include "unk_0200ACF0.h"
 #include "unk_0200B150.h"
+#include "unk_0200FA24.h"
 #include "unk_02026E30.h"
 
 enum IntroScene4State {
@@ -114,7 +114,7 @@ static void IntroMovie_Scene4_Init(IntroMovieOverlayData *data, IntroMovieScene4
     IntroMovie_Scene4_CreateSprites(data, sceneData);
     sceneData->gf3dVramMan = GF_3DVramMan_Create(HEAP_ID_INTRO_MOVIE, 0, 1, 0, 4, IntroMovie_Scene4_3DVRamManInit);
     sub_02014DA0();
-    sceneData->particleHeap = Heap_Alloc(HEAP_ID_INTRO_MOVIE, 0x4800);
+    sceneData->particleHeap = AllocFromHeap(HEAP_ID_INTRO_MOVIE, 0x4800);
     sceneData->particleSystem = sub_02014DB4(IntroMovie_Scene4_TexAlloc, IntroMovie_Scene4_PlttAlloc, sceneData->particleHeap, 0x4800, TRUE, HEAP_ID_INTRO_MOVIE);
     Camera_SetPerspectiveClippingPlane(FX32_CONST(1), FX32_CONST(900), sub_02015524(sceneData->particleSystem));
     sub_0201526C(sceneData->particleSystem, sub_02015264(NARC_a_0_5_9, 4, HEAP_ID_INTRO_MOVIE), 0x0A, TRUE);
@@ -129,7 +129,7 @@ static BOOL IntroMovie_Scene4_Main(IntroMovieOverlayData *data, IntroMovieScene4
     u8 stepTimer = IntroMovie_GetSceneStepTimer(data);
     switch (IntroMovie_GetSceneStep(data)) {
     case INTRO_SCENE4_FADE_IN:
-        BeginNormalPaletteFade(FADE_BOTH_SCREENS, FADE_TYPE_UNK_9, FADE_TYPE_UNK_9, RGB_BLACK, 10, 1, HEAP_ID_INTRO_MOVIE);
+        BeginNormalPaletteFade(0, 9, 9, RGB_BLACK, 10, 1, HEAP_ID_INTRO_MOVIE);
         IntroMovie_AdvanceSceneStep(data);
         break;
     case INTRO_SCENE4_WAIT_FADE_IN:
@@ -238,7 +238,7 @@ static BOOL IntroMovie_Scene4_Main(IntroMovieOverlayData *data, IntroMovieScene4
         break;
     case INTRO_SCENE4_RUN_WATER_PARTICLES:
         if (!sub_020154B0(sceneData->particleSystem)) {
-            BeginNormalPaletteFade(FADE_BOTH_SCREENS, FADE_TYPE_UNK_8, FADE_TYPE_UNK_8, RGB_BLACK, 26, 1, HEAP_ID_INTRO_MOVIE);
+            BeginNormalPaletteFade(0, 8, 8, RGB_BLACK, 26, 1, HEAP_ID_INTRO_MOVIE);
             IntroMovie_AdvanceSceneStep(data);
         }
         break;
@@ -277,7 +277,7 @@ static void IntroMovie_Scene4_Exit(IntroMovieOverlayData *data, IntroMovieScene4
     if (sceneData->needFreeGfx) {
         G2_BlendNone();
         sub_02014EBC(sceneData->particleSystem);
-        Heap_Free(sceneData->particleHeap);
+        FreeToHeap(sceneData->particleHeap);
         GF_3DVramMan_Delete(sceneData->gf3dVramMan);
         IntroMovie_Scene4_DestroySprites(data, sceneData);
         FreeBgTilemapBuffer(bgConfig, GF_BG_LYR_MAIN_1);
@@ -416,8 +416,8 @@ static void IntroMovie_Scene4_LoadSpriteGfx(IntroMovieOverlayData *data, IntroMo
     }
 
     for (i = 0; i < 4; ++i) {
-        SpriteTransfer_CreateCharTransferTask(sceneData->spriteResObjs[i][GF_GFX_RES_TYPE_CHAR]);
-        SpriteTransfer_CreateExtPlttTransferTask(sceneData->spriteResObjs[i][GF_GFX_RES_TYPE_PLTT]);
+        sub_0200ACF0(sceneData->spriteResObjs[i][GF_GFX_RES_TYPE_CHAR]);
+        sub_0200AF94(sceneData->spriteResObjs[i][GF_GFX_RES_TYPE_PLTT]);
     }
 
     GfGfx_EngineATogglePlanes(GX_PLANEMASK_OBJ, GF_PLANE_TOGGLE_ON);
@@ -432,8 +432,8 @@ static void IntroMovie_Scene4_DestroySprites(IntroMovieOverlayData *data, IntroM
         Sprite_Delete(sceneData->starterSprites[i]);
     }
     for (u8 i = 0; i < 4; ++i) {
-        SpriteTransfer_DeleteCharTransferTask(sceneData->spriteResObjs[i][GF_GFX_RES_TYPE_CHAR]);
-        SpriteTransfer_DeletePlttTransferTask(sceneData->spriteResObjs[i][GF_GFX_RES_TYPE_PLTT]);
+        sub_0200AEB0(sceneData->spriteResObjs[i][GF_GFX_RES_TYPE_CHAR]);
+        sub_0200B0A8(sceneData->spriteResObjs[i][GF_GFX_RES_TYPE_PLTT]);
     }
     IntroMovie_DestroySpriteResourceManagers(data);
 }
@@ -553,8 +553,8 @@ static void Task_IntroMovie_Scene4_FlipScreens(SysTask *task, void *pVoid) {
     sceneData->flipScreensTask = NULL;
 }
 
-enum HeapID _deadstrip_04(int idx);
-enum HeapID _deadstrip_04(int idx) {
-    static const enum HeapID sDeadstrippedRodata[1] = { HEAP_ID_INTRO_MOVIE };
+HeapID _deadstrip_04(int idx);
+HeapID _deadstrip_04(int idx) {
+    static const HeapID sDeadstrippedRodata[1] = { HEAP_ID_INTRO_MOVIE };
     return sDeadstrippedRodata[idx];
 }

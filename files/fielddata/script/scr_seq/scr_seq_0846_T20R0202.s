@@ -1,46 +1,63 @@
 #include "constants/scrcmd.h"
+#include "constants/items.h"
 #include "fielddata/script/scr_seq/event_T20R0202.h"
 #include "msgdata/msg/msg_0546_T20R0202.h"
 	.include "asm/macros/script.inc"
 
 	.rodata
 
-	ScrDef scr_seq_T20R0202_000
-	ScrDef scr_seq_T20R0202_001
-	ScrDefEnd
+	scrdef scr_seq_T20R0202_000
+	scrdef scr_seq_T20R0202_001
+	scrdef_end
 
 scr_seq_T20R0202_000:
-	ScrCmd_609
-	LockAll
-	PlaySE SEQ_SE_DP_PC_ON
-	BufferPlayersName 0
-	NPCMsg msg_0546_T20R0202_00000
-	CloseMsg
-	ScrCmd_377 VAR_SPECIAL_RESULT
-	Compare VAR_SPECIAL_RESULT, 0
-	GoToIfEq _004B
-	FadeScreen 6, 1, 0, RGB_BLACK
-	WaitFade
-	ScrCmd_376
-	RestoreOverworld
-	FadeScreen 6, 1, 1, RGB_BLACK
-	WaitFade
-	ReleaseAll
-	End
+	scrcmd_609
+	lockall
+	goto_if_set FLAG_APOC_HOUSE_POTION, _apoc_pc_normal
+	play_se SEQ_SE_DP_PC_ON
+	buffer_players_name 0
+	npc_msg msg_0546_T20R0202_00003
+	giveitem ITEM_POTION, 1, VAR_SPECIAL_RESULT
+	play_fanfare SEQ_ME_ITEM
+	wait_fanfare
+	npc_msg msg_0546_T20R0202_00004
+	setflag FLAG_APOC_HOUSE_POTION
+	; Mark the upstairs trip done so returning to 1F triggers Scene B (Pokegear).
+	setvar VAR_SCENE_PLAYERS_HOUSE_1F, 2
+	closemsg
+	releaseall
+	end
+
+_apoc_pc_normal:
+	play_se SEQ_SE_DP_PC_ON
+	buffer_players_name 0
+	npc_msg msg_0546_T20R0202_00000
+	closemsg
+	scrcmd_377 VAR_SPECIAL_RESULT
+	compare VAR_SPECIAL_RESULT, 0
+	goto_if_eq _004B
+	fade_screen 6, 1, 0, RGB_BLACK
+	wait_fade
+	scrcmd_376
+	restore_overworld
+	fade_screen 6, 1, 1, RGB_BLACK
+	wait_fade
+	releaseall
+	end
 
 _004B:
-	NPCMsg msg_0546_T20R0202_00001
-	WaitButton
-	CloseMsg
-	ReleaseAll
-	End
+	npc_msg msg_0546_T20R0202_00001
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
 
 scr_seq_T20R0202_001:
-	PlaySE SEQ_SE_DP_SELECT
-	LockAll
-	NPCMsg msg_0546_T20R0202_00002
-	WaitButton
-	CloseMsg
-	ReleaseAll
-	End
+	play_se SEQ_SE_DP_SELECT
+	lockall
+	npc_msg msg_0546_T20R0202_00002
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
 	.balign 4, 0

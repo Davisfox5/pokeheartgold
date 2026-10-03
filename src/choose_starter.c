@@ -8,8 +8,8 @@
 #include "launch_application.h"
 #include "map_header.h"
 #include "pokedex.h"
-#include "screen_fade.h"
 #include "task.h"
+#include "unk_0200FA24.h"
 #include "update_dex_received.h"
 
 struct ChooseStarterTaskData {
@@ -20,7 +20,7 @@ struct ChooseStarterTaskData {
 static BOOL CreateStarter(TaskManager *taskManager);
 
 void LaunchStarterChoiceScene(FieldSystem *fieldSystem) {
-    struct ChooseStarterTaskData *env = Heap_AllocAtEnd(HEAP_ID_FIELD2, sizeof(struct ChooseStarterTaskData));
+    struct ChooseStarterTaskData *env = AllocFromHeapAtEnd(HEAP_ID_FIELD, sizeof(struct ChooseStarterTaskData));
     env->state = 0;
     TaskManager_Call(fieldSystem->taskman, CreateStarter, env);
 }
@@ -34,7 +34,7 @@ static BOOL CreateStarter(TaskManager *taskManager) {
 
     switch (env->state) {
     case 0:
-        BeginNormalPaletteFade(FADE_BOTH_SCREENS, FADE_TYPE_BRIGHTNESS_OUT, FADE_TYPE_BRIGHTNESS_OUT, RGB_BLACK, 6, 1, HEAP_ID_FIELD1);
+        BeginNormalPaletteFade(0, 0, 0, RGB_BLACK, 6, 1, HEAP_ID_4);
         env->state = 1;
         break;
     case 1:
@@ -49,7 +49,7 @@ static BOOL CreateStarter(TaskManager *taskManager) {
             };
             mapsec = MapHeader_GetMapSec(fieldSystem->location->mapId); // sp14
 
-            env->args = Heap_AllocAtEnd(HEAP_ID_FIELD2, sizeof(struct ChooseStarterArgs));
+            env->args = AllocFromHeapAtEnd(HEAP_ID_FIELD, sizeof(struct ChooseStarterArgs));
             env->args->cursorPos = 0;
             env->args->options = Save_PlayerData_GetOptionsAddr(fieldSystem->saveData);
             for (i = 0; i < (int)NELEMS(species); i++) {
@@ -57,7 +57,7 @@ static BOOL CreateStarter(TaskManager *taskManager) {
                 PlayerProfile *profile = Save_PlayerData_GetProfile(fieldSystem->saveData);
                 ZeroMonData(mon);
                 CreateMon(mon, species[i], 5, 32, FALSE, 0, OT_ID_PLAYER_ID, 0);
-                sub_020720FC(mon, profile, BALL_POKE, mapsec, 12, HEAP_ID_FIELD2);
+                sub_020720FC(mon, profile, BALL_POKE, mapsec, 12, HEAP_ID_FIELD);
                 {
                     int item = ITEM_NONE;
                     SetMonData(mon, MON_DATA_HELD_ITEM, &item);
@@ -90,15 +90,15 @@ static BOOL CreateStarter(TaskManager *taskManager) {
         if (!sub_020505C8(fieldSystem)) {
             break;
         }
-        BeginNormalPaletteFade(FADE_BOTH_SCREENS, FADE_TYPE_BRIGHTNESS_IN, FADE_TYPE_BRIGHTNESS_IN, RGB_BLACK, 6, 1, HEAP_ID_FIELD1);
+        BeginNormalPaletteFade(0, 1, 1, RGB_BLACK, 6, 1, HEAP_ID_4);
         env->state = 5;
         break;
     case 5:
         if (!IsPaletteFadeFinished()) {
             break;
         }
-        Heap_Free(env->args);
-        Heap_Free(env);
+        FreeToHeap(env->args);
+        FreeToHeap(env);
         return TRUE;
     }
 

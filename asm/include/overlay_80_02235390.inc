@@ -1,14 +1,14 @@
 #include <nitro/fs/overlay.h>
 #pragma once
-.public Sound_SetFieldBGM
+.public sub_02004AC8
 .public PlayBGM
 .public PlaySE
 .public StopSE
 .public IsSEPlaying
 .public PlayFanfare
 .public IsFanfarePlaying
-.public FrontierScriptContext_Pause
-.public FrontierScriptContext_ReadHalfWord
+.public ov80_0222AB84
+.public FrontierScript_ReadU16
 .public FrontierScript_ReadVar
 .public FrtCmd_085
 .public FrtCmd_086

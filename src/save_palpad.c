@@ -33,12 +33,12 @@ static BOOL PalPadEntry_IsEqual(SavePalPad *a, SavePalPad *b) {
     return !StringNotEqual(a->name, b->name) && a->otid == b->otid;
 }
 
-void SavePalPad_Merge(SavePalPad *a, SavePalPad *b, int n, enum HeapID heapID) {
+void SavePalPad_Merge(SavePalPad *a, SavePalPad *b, int n, HeapID heapId) {
     int i, j, k;
     int sp18[5];
     SavePalPad *c;
 
-    c = Heap_Alloc(heapID, sizeof(SavePalPad) * NUM_PALPAD_ENTRIES);
+    c = AllocFromHeap(heapId, sizeof(SavePalPad) * NUM_PALPAD_ENTRIES);
     Save_PalPad_Init(c);
 
     for (i = 0; i < n; i++) {
@@ -67,7 +67,7 @@ void SavePalPad_Merge(SavePalPad *a, SavePalPad *b, int n, enum HeapID heapID) {
         }
     }
     memcpy(a, c, sizeof(SavePalPad) * NUM_PALPAD_ENTRIES);
-    Heap_Free(c);
+    FreeToHeap(c);
 }
 
 int PalPad_PlayerIdIsFriendOrMutual(SavePalPad *palPad, u32 otId) {

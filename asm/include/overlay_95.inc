@@ -105,10 +105,10 @@
 .public sub_02017068
 .public Main_SetVBlankIntrCB
 .public HBlankInterruptDisable
-.public Heap_Create
-.public Heap_Destroy
-.public Heap_Alloc
-.public Heap_Free
+.public CreateHeap
+.public DestroyHeap
+.public AllocFromHeap
+.public FreeToHeap
 .public BgConfig_Alloc
 .public SetBothScreensModesAndDisable
 .public InitBgFromTemplate
@@ -147,7 +147,7 @@
 .public GF_3DVramMan_Delete
 .public Options_GetTextFrameDelay
 .public Options_GetFrame
-.public Field_SetEnvironmentSoundState_None_Unk2
+.public sub_0203E354
 .public GetMonData
 .public SetMonData
 .public GetMonNature

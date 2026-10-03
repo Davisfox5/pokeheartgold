@@ -53,7 +53,7 @@
 .public ClearFrameAndWindow2
 .public BeginNormalPaletteFade
 .public IsPaletteFadeFinished
-.public ResetVisibleHardwareWindows
+.public sub_0200FBDC
 .public YesNoPrompt_Create
 .public YesNoPrompt_Destroy
 .public YesNoPrompt_InitFromTemplate
@@ -61,10 +61,10 @@
 .public YesNoPrompt_Reset
 .public Main_SetVBlankIntrCB
 .public HBlankInterruptDisable
-.public Heap_Create
-.public Heap_Destroy
-.public Heap_Alloc
-.public Heap_Free
+.public CreateHeap
+.public DestroyHeap
+.public AllocFromHeap
+.public FreeToHeap
 .public BgConfig_Alloc
 .public SetBothScreensModesAndDisable
 .public InitBgFromTemplate

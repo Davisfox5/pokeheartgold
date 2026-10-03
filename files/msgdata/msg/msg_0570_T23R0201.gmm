@@ -10,7 +10,7 @@
 	</row>
 	<row id="msg_0570_T23R0201_00002" index="2">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">You chased off Team Rocket and went to\nIlex Forest alone?\rThat takes guts!\nI like that. Come train with us.</language>
+		<language name="English">You went down that well, sent those\nsuits packing, and walked Ilex alone?\rThat takes guts!\nI like that. Come train with us.</language>
 	</row>
 	<row id="msg_0570_T23R0201_00003" index="3">
 		<attribute name="window_context_name">used</attribute>

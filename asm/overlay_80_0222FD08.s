@@ -13,7 +13,7 @@ ov80_0222FD08: ; 0x0222FD08
 	mov r0, #0xb
 	add r7, r2, #0
 	str r3, [sp]
-	bl Heap_Alloc
+	bl AllocFromHeap
 	ldr r1, _0222FED8 ; =_0223DD40
 	ldr r2, _0222FED4 ; =0x00000708
 	str r0, [r1]
@@ -428,7 +428,7 @@ _02230078:
 	add r2, r5, #0
 	bl ov80_0222A3BC
 	add r0, r5, #0
-	bl Heap_Free
+	bl FreeToHeap
 	add r7, r7, #1
 	add r6, #0x38
 	cmp r7, #6
@@ -772,7 +772,7 @@ _02230324:
 	cmp r7, #4
 	blt _02230324
 	add r0, r6, #0
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, sp, #0x28
 	mov r4, #0
 	add r6, sp, #0x40
@@ -856,7 +856,7 @@ _022303DA:
 	cmp r7, #4
 	blt _022303DA
 	add r0, r6, #0
-	bl Heap_Free
+	bl FreeToHeap
 	add sp, #0x19c
 	pop {r4, r5, r6, r7, pc}
 	nop
@@ -877,20 +877,20 @@ ov80_02230424: ; 0x02230424
 	ldr r0, [r4, r0]
 	cmp r0, #0
 	beq _02230436
-	bl Heap_Free
+	bl FreeToHeap
 _02230436:
 	ldr r0, _02230458 ; =0x000004D8
 	ldr r0, [r4, r0]
 	cmp r0, #0
 	beq _02230442
-	bl Heap_Free
+	bl FreeToHeap
 _02230442:
 	ldr r2, _0223045C ; =0x00000708
 	add r0, r4, #0
 	mov r1, #0
 	bl MI_CpuFill8
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 _02230452:
 	pop {r4, pc}
 	.balign 4, 0
@@ -1295,7 +1295,7 @@ ov80_02230794: ; 0x02230794
 	mov r2, #0xb
 	mov r3, #0xcc
 	bl ov80_02229F04
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, sp, #0
 	ldrh r0, [r0, #4]
 	lsl r0, r0, #0x18
@@ -1419,7 +1419,7 @@ _0223087C:
 	blt _0223087C
 _022308A4:
 	add r0, r6, #0
-	bl Heap_Free
+	bl FreeToHeap
 	add sp, #0xc
 	pop {r4, r5, r6, r7, pc}
 	nop
@@ -1597,7 +1597,7 @@ ov80_022309F8: ; 0x022309F8
 	ldr r0, [r4, r1]
 	add r1, #8
 	ldrh r1, [r4, r1]
-	bl Party_SafeCopyMonToSlot_ResetAprijuiceModifiers
+	bl Party_SafeCopyMonToSlot_ResetUnkSub
 	ldr r1, _02230A58 ; =0x000004DE
 	ldrh r0, [r4, r1]
 	lsl r0, r0, #1
@@ -1616,7 +1616,7 @@ ov80_022309F8: ; 0x022309F8
 	ldr r0, _02230A5C ; =0x000004F8
 	ldr r0, [r4, r0]
 	bl Save_GameStats_Get
-	mov r1, #0x41 ; GAME_STAT_UNK65
+	mov r1, #0x41
 	bl GameStats_Inc
 _02230A4C:
 	pop {r4, pc}
@@ -1671,7 +1671,7 @@ _02230A92:
 	blt _02230A92
 _02230ABC:
 	add r0, r7, #0
-	bl Heap_Free
+	bl FreeToHeap
 	mov r5, #0
 	cmp r6, #0
 	ble _02230AD8

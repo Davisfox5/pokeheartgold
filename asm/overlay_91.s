@@ -13,7 +13,7 @@ ov91_0225C540: ; 0x0225C540
 	mov r0, #3
 	mov r1, #0x6a
 	lsl r2, r0, #0x11
-	bl Heap_Create
+	bl CreateHeap
 	add r0, r4, #0
 	mov r1, #0x88
 	mov r2, #0x6a
@@ -606,7 +606,7 @@ _0225CA0A:
 	add r0, r5, #0
 	bl OverlayManager_FreeData
 	mov r0, #0x6a
-	bl Heap_Destroy
+	bl DestroyHeap
 	mov r0, #0
 	mov r1, #1
 	bl sub_020398D4
@@ -919,7 +919,7 @@ ov91_0225CC38: ; 0x0225CC38
 	push {r4, lr}
 	add r4, r0, #0
 	ldr r0, [r4, #0x4c]
-	bl Heap_Free
+	bl FreeToHeap
 	mov r0, #0
 	str r0, [r4, #0x4c]
 	str r0, [r4, #0x48]
@@ -999,7 +999,7 @@ ov91_0225CCC4: ; 0x0225CCC4
 	mov r1, #0x38
 	add r6, r2, #0
 	add r7, r3, #0
-	bl Heap_Alloc
+	bl AllocFromHeap
 	add r4, r0, #0
 	mov r1, #0
 	mov r2, #0x38
@@ -1016,10 +1016,10 @@ ov91_0225CCC4: ; 0x0225CCC4
 
 	thumb_func_start ov91_0225CCEC
 ov91_0225CCEC: ; 0x0225CCEC
-	ldr r3, _0225CCF0 ; =Heap_Free
+	ldr r3, _0225CCF0 ; =FreeToHeap
 	bx r3
 	.balign 4, 0
-_0225CCF0: .word Heap_Free
+_0225CCF0: .word FreeToHeap
 	thumb_func_end ov91_0225CCEC
 
 	thumb_func_start ov91_0225CCF4
@@ -1205,7 +1205,7 @@ ov91_0225CDF4: ; 0x0225CDF4
 	add r5, r0, #0
 	add r7, r2, #0
 	str r3, [sp]
-	bl Heap_Alloc
+	bl AllocFromHeap
 	ldr r2, _0225CE64 ; =0x000087E8
 	mov r1, #0
 	add r4, r0, #0
@@ -1274,7 +1274,7 @@ _0225CE90:
 	add r0, r4, #0
 	bl ov91_0225F66C
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	pop {r4, pc}
 	nop
 _0225CEAC: .word 0x0000878C
@@ -5881,13 +5881,13 @@ ov91_0225F0C0: ; 0x0225F0C0
 	bl AddCellOrAnimResObjFromOpenNarc
 	str r0, [r5, #0xc]
 	ldr r0, [r5]
-	bl SpriteTransfer_CreateCharTransferTask_UpdateMappingTypeFromHW_AllocAtEnd
+	bl sub_0200AE18
 	cmp r0, #0
 	bne _0225F154
 	bl GF_AssertFail
 _0225F154:
 	ldr r0, [r5, #4]
-	bl SpriteTransfer_CreatePlttTransferTask
+	bl sub_0200B00C
 	cmp r0, #0
 	bne _0225F162
 	bl GF_AssertFail
@@ -5963,9 +5963,9 @@ ov91_0225F1E8: ; 0x0225F1E8
 	add r4, r1, #0
 	bl Sprite_Delete
 	ldr r0, [r5]
-	bl SpriteTransfer_DeleteCharTransferTask
+	bl sub_0200AEB0
 	ldr r0, [r5, #4]
-	bl SpriteTransfer_DeletePlttTransferTask
+	bl sub_0200B0A8
 	mov r0, #0x52
 	lsl r0, r0, #2
 	ldr r0, [r4, r0]
@@ -6391,7 +6391,7 @@ ov91_0225F508: ; 0x0225F508
 	mov r2, #0x20
 	add r0, r5, r0
 	add r4, r1, #0
-	bl HeapExp_FndInitAllocator
+	bl GF_ExpHeap_FndInitAllocator
 	bl ov91_0225F414
 	ldr r0, _0225F63C ; =0x00001AB4
 	ldr r1, [r5, #0x10]
@@ -6977,7 +6977,7 @@ ov91_0225FA60: ; 0x0225FA60
 	mov r1, #7
 	bl FreeBgTilemapBuffer
 	ldr r0, [r4]
-	bl Heap_Free
+	bl FreeToHeap
 	pop {r4, pc}
 	thumb_func_end ov91_0225FA60
 
@@ -7048,7 +7048,7 @@ _0225FB16:
 	blt _0225FB16
 	mov r0, #8
 	add r1, r6, #0
-	bl FontSystem_NewInit
+	bl sub_02013534
 	mov r1, #0x63
 	lsl r1, r1, #2
 	str r0, [r7, r1]
@@ -7152,7 +7152,7 @@ ov91_0225FB80: ; 0x0225FB80
 	str r0, [r5, r1]
 	sub r1, #0xc
 	ldr r0, [r5, r1]
-	bl SpriteTransfer_CreateCharTransferTask_UpdateMappingTypeFromHW_AllocAtEnd
+	bl sub_0200AE18
 	cmp r0, #0
 	bne _0225FC14
 	bl GF_AssertFail
@@ -7160,7 +7160,7 @@ _0225FC14:
 	mov r0, #6
 	lsl r0, r0, #6
 	ldr r0, [r5, r0]
-	bl SpriteTransfer_CreatePlttTransferTask
+	bl sub_0200B00C
 	cmp r0, #0
 	bne _0225FC26
 	bl GF_AssertFail
@@ -7218,11 +7218,11 @@ ov91_0225FC84: ; 0x0225FC84
 	mov r0, #0x5f
 	lsl r0, r0, #2
 	ldr r0, [r4, r0]
-	bl SpriteTransfer_DeleteCharTransferTask
+	bl sub_0200AEB0
 	mov r0, #6
 	lsl r0, r0, #6
 	ldr r0, [r4, r0]
-	bl SpriteTransfer_DeletePlttTransferTask
+	bl sub_0200B0A8
 	mov r1, #0x52
 	lsl r1, r1, #2
 	ldr r0, [r4, r1]
@@ -8415,7 +8415,7 @@ _02260508:
 	str r0, [r5, r1]
 	sub r1, #0xc
 	ldr r0, [r5, r1]
-	bl SpriteTransfer_CreateCharTransferTask_UpdateMappingTypeFromHW_AllocAtEnd
+	bl sub_0200AE18
 	cmp r0, #0
 	bne _022605C2
 	bl GF_AssertFail
@@ -8423,7 +8423,7 @@ _022605C2:
 	mov r0, #0x76
 	lsl r0, r0, #4
 	ldr r0, [r5, r0]
-	bl SpriteTransfer_CreatePlttTransferTask
+	bl sub_0200B00C
 	cmp r0, #0
 	bne _022605D4
 	bl GF_AssertFail
@@ -8515,11 +8515,11 @@ _0226067C:
 	blt _0226067C
 	ldr r0, _02260714 ; =0x0000075C
 	ldr r0, [r5, r0]
-	bl SpriteTransfer_DeleteCharTransferTask
+	bl sub_0200AEB0
 	mov r0, #0x76
 	lsl r0, r0, #4
 	ldr r0, [r5, r0]
-	bl SpriteTransfer_DeletePlttTransferTask
+	bl sub_0200B0A8
 	mov r0, #0x52
 	ldr r1, _02260714 ; =0x0000075C
 	lsl r0, r0, #2
@@ -10563,13 +10563,13 @@ ov91_02261580: ; 0x02261580
 	bl AddCellOrAnimResObjFromOpenNarc
 	str r0, [r5, #0xc]
 	ldr r0, [r5]
-	bl SpriteTransfer_CreateCharTransferTask_UpdateMappingTypeFromHW_AllocAtEnd
+	bl sub_0200AE18
 	cmp r0, #0
 	bne _02261608
 	bl GF_AssertFail
 _02261608:
 	ldr r0, [r5, #4]
-	bl SpriteTransfer_CreatePlttTransferTask
+	bl sub_0200B00C
 	cmp r0, #0
 	bne _02261616
 	bl GF_AssertFail
@@ -10671,7 +10671,7 @@ _022616D2:
 	mov r3, #0
 	bl AddPlttResObjFromNarc
 	str r0, [r5, #0x60]
-	bl SpriteTransfer_CreatePlttTransferTask
+	bl sub_0200B00C
 	cmp r0, #0
 	bne _022616FA
 	bl GF_AssertFail
@@ -10708,10 +10708,10 @@ _022616FA:
 	str r6, [sp, #0x58]
 	ldr r1, [r5, #0x4c]
 	add r0, sp, #0x2c
-	bl TextOBJ_Create
+	bl sub_02013950
 	mov r1, #0
 	str r0, [r5, #0x48]
-	bl TextOBJ_SetSpritesDrawFlag
+	bl sub_020137C0
 	add r0, r5, #0
 	add r0, #0x38
 	bl RemoveWindow
@@ -10752,9 +10752,9 @@ ov91_02261790: ; 0x02261790
 	add r5, r0, #0
 	ldr r0, [r5, #0x48]
 	add r4, r1, #0
-	bl TextOBJ_Destroy
+	bl sub_020139C8
 	ldr r0, [r5, #0x60]
-	bl SpriteTransfer_DeletePlttTransferTask
+	bl sub_0200B0A8
 	mov r0, #0x53
 	lsl r0, r0, #2
 	ldr r0, [r4, r0]
@@ -10770,9 +10770,9 @@ ov91_02261790: ; 0x02261790
 	ldr r0, [r5, #0x34]
 	bl Sprite_Delete
 	ldr r0, [r5]
-	bl SpriteTransfer_DeleteCharTransferTask
+	bl sub_0200AEB0
 	ldr r0, [r5, #4]
-	bl SpriteTransfer_DeletePlttTransferTask
+	bl sub_0200B0A8
 	mov r0, #0x52
 	lsl r0, r0, #2
 	ldr r0, [r4, r0]
@@ -10838,13 +10838,13 @@ ov91_02261808: ; 0x02261808
 	ldr r1, [r5, #0x4c]
 	ldr r3, [r3]
 	add r2, #0x38
-	bl TextOBJ_CopyFromBGWindow
+	bl sub_020139D0
 	add r0, r5, #0
 	add r0, #0x38
 	bl RemoveWindow
 	ldr r0, [r5, #0x48]
 	mov r1, #1
-	bl TextOBJ_SetSpritesDrawFlag
+	bl sub_020137C0
 	ldr r0, [r5, #0x34]
 	mov r1, #1
 	bl Sprite_SetDrawFlag
@@ -10928,7 +10928,7 @@ ov91_022618B0: ; 0x022618B0
 	ldr r1, [r5, #0x4c]
 	ldr r3, [r3]
 	add r2, #0x38
-	bl TextOBJ_CopyFromBGWindow
+	bl sub_020139D0
 	add r0, r5, #0
 	add r0, #0x38
 	bl RemoveWindow
@@ -11004,7 +11004,7 @@ _0226198A:
 	add r0, #0x98
 	strh r1, [r0]
 	ldr r0, [r4, #0x48]
-	bl TextOBJ_SetSpritesDrawFlag
+	bl sub_020137C0
 	ldr r0, [r4, #0x34]
 	mov r1, #0
 	bl Sprite_SetDrawFlag

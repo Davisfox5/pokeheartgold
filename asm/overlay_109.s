@@ -21,7 +21,7 @@ _021E5912:
 	mov r0, #3
 	mov r1, #0x60
 	lsl r2, r2, #0x10
-	bl Heap_Create
+	bl CreateHeap
 	mov r1, #0x7d
 	add r0, r6, #0
 	lsl r1, r1, #2
@@ -146,7 +146,7 @@ _021E5A06:
 	add r0, r5, #0
 	bl OverlayManager_FreeData
 	mov r0, #0x60
-	bl Heap_Destroy
+	bl DestroyHeap
 	mov r0, #1
 	pop {r3, r4, r5, pc}
 	thumb_func_end PhotoAlbum_Exit
@@ -177,9 +177,9 @@ ov109_021E5A20: ; 0x021E5A20
 	mov r1, #0
 	bl sub_0200FBF4
 	mov r0, #0
-	bl ResetVisibleHardwareWindows
+	bl sub_0200FBDC
 	mov r0, #1
-	bl ResetVisibleHardwareWindows
+	bl sub_0200FBDC
 	pop {r3, pc}
 	.balign 4, 0
 _021E5A68: .word 0xFFFFE0FF
@@ -292,7 +292,7 @@ ov109_021E5B40: ; 0x021E5B40
 	add r0, r4, #0
 	add r0, #0xc8
 	ldr r0, [r0]
-	bl Heap_Free
+	bl FreeToHeap
 	ldr r0, [r4, #0x10]
 	ldr r1, [r4, #0xc]
 	ldr r0, [r0, #8]
@@ -2389,7 +2389,7 @@ ov109_021E6AFC: ; 0x021E6AFC
 	mov r1, #4
 	bl FreeBgTilemapBuffer
 	ldr r0, [r4, #0x14]
-	bl Heap_Free
+	bl FreeToHeap
 	ldr r2, _021E6B58 ; =0x04000304
 	ldrh r1, [r2]
 	lsr r0, r2, #0xb
@@ -2540,14 +2540,14 @@ ov109_021E6C7C: ; 0x021E6C7C
 	add r4, r0, #0
 	add r0, #0xc0
 	ldr r0, [r0]
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r4, #0
 	add r0, #0xb8
 	ldr r0, [r0]
-	bl Heap_Free
+	bl FreeToHeap
 	add r4, #0xb0
 	ldr r0, [r4]
-	bl Heap_Free
+	bl FreeToHeap
 	pop {r4, pc}
 	thumb_func_end ov109_021E6C7C
 
@@ -2736,9 +2736,9 @@ ov109_021E6DE4: ; 0x021E6DE4
 	mov r3, #3
 	bl SpriteSystem_Init
 	ldr r0, [r4]
-	bl thunk_ClearMainOAM
+	bl sub_0200B2E0
 	ldr r0, [r4]
-	bl thunk_ClearSubOAM
+	bl sub_0200B2E8
 	add r0, r4, #0
 	add r0, #0x90
 	ldr r0, [r0]
@@ -2796,7 +2796,7 @@ ov109_021E6E64: ; 0x021E6E64
 	str r1, [r0]
 	bl GF_DestroyVramTransferManager
 	ldr r0, [r4]
-	bl thunk_ClearMainOAM
+	bl sub_0200B2E0
 	pop {r4, pc}
 	thumb_func_end ov109_021E6E64
 
@@ -3328,7 +3328,7 @@ _021E728A:
 	ldrh r0, [r4, #0x32]
 	ldr r1, [r5]
 	ldr r2, [r5, #0x2c]
-	bl MapID_GetLandmarkName
+	bl sub_02068F98
 	mov r0, #0
 	str r0, [sp]
 	mov r3, #2
@@ -4001,7 +4001,7 @@ ov109_021E77D4: ; 0x021E77D4
 	add r4, r0, #0
 	ldr r0, [r4]
 	mov r1, #8
-	bl Heap_AllocAtEnd
+	bl AllocFromHeapAtEnd
 	mov r1, #0
 	mov r2, #8
 	add r5, r0, #0
@@ -4049,7 +4049,7 @@ ov109_021E7810: ; 0x021E7810
 	mov r2, #8
 	bl MI_CpuFill8
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r5, #0
 	bl SysTask_Destroy
 _021E784C:

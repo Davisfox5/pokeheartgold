@@ -5,34 +5,34 @@
 
 	.rodata
 
-	ScrDef scr_seq_R02R0301_000
-	ScrDef scr_seq_R02R0301_001
-	ScrDefEnd
+	scrdef scr_seq_R02R0301_000
+	scrdef scr_seq_R02R0301_001
+	scrdef_end
 
 scr_seq_R02R0301_000:
-	PlaySE SEQ_SE_DP_SELECT
-	LockAll
-	FacePlayer
-	GoToIfSet FLAG_GOT_SACRED_ASH_FROM_ROUTE_2_LAB_AIDE, _004D
-	BufferPlayersName 0
-	GenderMsgBox msg_0323_R02R0301_00000, msg_0323_R02R0301_00001
-	GoToIfNoItemSpace ITEM_SACRED_ASH, 1, _0058
-	CallStd std_give_item_verbose
-	SetFlag FLAG_GOT_SACRED_ASH_FROM_ROUTE_2_LAB_AIDE
+	play_se SEQ_SE_DP_SELECT
+	lockall
+	faceplayer
+	goto_if_set FLAG_GOT_SACRED_ASH_FROM_ROUTE_2_LAB_AIDE, _004D
+	buffer_players_name 0
+	gender_msgbox msg_0323_R02R0301_00000, msg_0323_R02R0301_00001
+	goto_if_no_item_space ITEM_SACRED_ASH, 1, _0058
+	callstd std_give_item_verbose
+	setflag FLAG_GOT_SACRED_ASH_FROM_ROUTE_2_LAB_AIDE
 _004D:
-	NPCMsg msg_0323_R02R0301_00002
-	WaitButton
-	CloseMsg
-	ReleaseAll
-	End
+	npc_msg msg_0323_R02R0301_00002
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
 
 _0058:
-	CallStd std_bag_is_full
-	CloseMsg
-	ReleaseAll
-	End
+	callstd std_bag_is_full
+	closemsg
+	releaseall
+	end
 
 scr_seq_R02R0301_001:
-	SimpleNPCMsg msg_0323_R02R0301_00003
-	End
+	simple_npc_msg msg_0323_R02R0301_00003
+	end
 	.balign 4, 0

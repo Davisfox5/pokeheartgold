@@ -1,11 +1,11 @@
 #include "overlay_manager.h"
 
-#include "poke_overlay.h"
+#include "global.h"
 
-OverlayManager *OverlayManager_New(const OverlayManagerTemplate *template, void *args, enum HeapID heapID) {
+OverlayManager *OverlayManager_New(const OverlayManagerTemplate *template, void *args, HeapID heapId) {
     OverlayManager *ret;
 
-    ret = Heap_Alloc(heapID, sizeof(OverlayManager));
+    ret = AllocFromHeap(heapId, sizeof(OverlayManager));
     ret->template = *template;
     ret->exec_state = 0;
     ret->proc_state = 0;
@@ -18,12 +18,12 @@ OverlayManager *OverlayManager_New(const OverlayManagerTemplate *template, void 
 }
 
 void OverlayManager_Delete(OverlayManager *man) {
-    Heap_Free(man);
+    FreeToHeap(man);
 }
 
-void *OverlayManager_CreateAndGetData(OverlayManager *man, u32 size, enum HeapID heapID) {
+void *OverlayManager_CreateAndGetData(OverlayManager *man, u32 size, HeapID heapId) {
     void *data;
-    data = Heap_Alloc(heapID, size);
+    data = AllocFromHeap(heapId, size);
     man->data = data;
     return data;
 }
@@ -33,7 +33,7 @@ void *OverlayManager_GetData(OverlayManager *man) {
 }
 
 void OverlayManager_FreeData(OverlayManager *man) {
-    Heap_Free(man->data);
+    FreeToHeap(man->data);
     man->data = NULL;
 }
 

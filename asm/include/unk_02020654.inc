@@ -1,7 +1,7 @@
 #include <nitro/fs/overlay.h>
 #pragma once
-.public Heap_Alloc
-.public Heap_Free
+.public AllocFromHeap
+.public FreeToHeap
 .public GF_CreateNewVramTransferTask
 .public sub_02020654
 .public thunk_UpdateCellTransferStateManager
@@ -17,9 +17,9 @@
 .public sub_02020910
 .public sub_020209AC
 .public sub_020209E0
-.public DpadMenuBox_GetPosition
-.public DpadMenuBox_GetDimensions
-.public DpadMenuBox_GetNeighborInDirection
+.public sub_02020A0C
+.public sub_02020A18
+.public sub_02020A24
 .public sub_02020B3C
 .public sub_02026DE0
 .public NNS_G2dInitCellTransferStateManager

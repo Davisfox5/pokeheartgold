@@ -5,28 +5,39 @@
 
 	.rodata
 
-	ScrDef scr_seq_T11R0501_000
-	ScrDefEnd
+	scrdef scr_seq_T11R0501_000
+	scrdef_end
 
+; ===== APOCRYPHA Ch4: TM29 gift deferred. The give path is gated behind
+; FLAG_APOC_CH4_RESERVED_525 (never set in Ch1-4); until a later chapter
+; sets it, Mr. Psychic senses the player isn't ready and gives nothing. =====
 scr_seq_T11R0501_000:
-	PlaySE SEQ_SE_DP_SELECT
-	LockAll
-	FacePlayer
-	GoToIfSet FLAG_GOT_TM29_FROM_MR_PSYCHIC, _0045
-	NPCMsg msg_0534_T11R0501_00000
-	GoToIfNoItemSpace ITEM_TM29, 1, _0050
-	CallStd std_give_item_verbose
-	SetFlag FLAG_GOT_TM29_FROM_MR_PSYCHIC
+	play_se SEQ_SE_DP_SELECT
+	lockall
+	faceplayer
+	goto_if_set FLAG_GOT_TM29_FROM_MR_PSYCHIC, _0045
+	goto_if_set FLAG_APOC_CH4_RESERVED_525, _T11R0501_give
+	npc_msg msg_0534_T11R0501_00002
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
+
+_T11R0501_give:
+	npc_msg msg_0534_T11R0501_00000
+	goto_if_no_item_space ITEM_TM29, 1, _0050
+	callstd std_give_item_verbose
+	setflag FLAG_GOT_TM29_FROM_MR_PSYCHIC
 _0045:
-	NPCMsg msg_0534_T11R0501_00001
-	WaitButton
-	CloseMsg
-	ReleaseAll
-	End
+	npc_msg msg_0534_T11R0501_00001
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
 
 _0050:
-	CallStd std_bag_is_full
-	CloseMsg
-	ReleaseAll
-	End
+	callstd std_bag_is_full
+	closemsg
+	releaseall
+	end
 	.balign 4, 0

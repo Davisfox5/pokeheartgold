@@ -2,13 +2,12 @@
 #include "constants/items.h"
 #include "constants/seals.h"
 
-#include "pokeathlon/pokeathlon_save.h"
-
 #include "field_system.h"
 #include "mart.h"
 #include "pokedex.h"
 #include "save_vars_flags.h"
 #include "scrcmd.h"
+#include "unk_02031904.h"
 
 struct BadgeMartItems {
     u16 item_id;
@@ -87,7 +86,7 @@ BOOL ScrCmd_MartBuy(ScriptContext *ctx) {
         }
     }
     items[nitems] = 0xFFFF;
-    Mart_Init(ctx->taskman, ctx->fieldSystem, items, 0, 0, 0, 0);
+    InitMartUI(ctx->taskman, ctx->fieldSystem, items, 0, 0, 0, 0);
     return TRUE;
 }
 
@@ -95,7 +94,7 @@ BOOL ScrCmd_MartSell(ScriptContext *ctx) {
     u16 dummy[1];
 
     dummy[0] = 0xFFFF;
-    Mart_Init(ctx->taskman, ctx->fieldSystem, dummy, 0, 1, 0, 0);
+    InitMartUI(ctx->taskman, ctx->fieldSystem, dummy, 0, 1, 0, 0);
     return TRUE;
 }
 
@@ -106,7 +105,11 @@ const u16 _020FBBEA[] = { ITEM_POTION, ITEM_SUPER_POTION, ITEM_HYPER_POTION, ITE
 const u16 _020FBC1A[] = { ITEM_POKE_BALL, ITEM_GREAT_BALL, ITEM_ULTRA_BALL, ITEM_ESCAPE_ROPE, ITEM_POKE_DOLL, ITEM_REPEL, ITEM_SUPER_REPEL, ITEM_MAX_REPEL, ITEM_GRASS_MAIL, ITEM_FLAME_MAIL, ITEM_BUBBLE_MAIL, ITEM_SPACE_MAIL, 0xFFFF };
 const u16 _020FBBB4[] = { ITEM_X_SPEED, ITEM_X_ATTACK, ITEM_X_DEFENSE, ITEM_GUARD_SPEC_, ITEM_DIRE_HIT, ITEM_X_ACCURACY, ITEM_X_SPECIAL, ITEM_X_SP__DEF, 0xFFFF };
 const u16 _020FBAFA[] = { ITEM_PROTEIN, ITEM_IRON, ITEM_CALCIUM, ITEM_ZINC, ITEM_CARBOS, ITEM_HP_UP, 0xFFFF };
-const u16 _020FBC34[] = { ITEM_TM70, ITEM_TM17, ITEM_TM54, ITEM_TM83, ITEM_TM16, ITEM_TM33, ITEM_TM22, ITEM_TM52, ITEM_TM38, ITEM_TM25, ITEM_TM14, ITEM_TM15, 0xFFFF };
+// APOCRYPHA (JOHTO_ITEMS.md Ch4): Dept Store TM racks trimmed to the
+// badge-1 utility tier -- vanilla sold Blizzard/Fire Blast/Thunder/Hyper
+// Beam/Solar Beam/Focus Blast ungated. Coverage/nuke tiers return with the
+// later-chapter Johto reopening (gate on badge count when implemented).
+const u16 _020FBC34[] = { ITEM_TM70, ITEM_TM17, ITEM_TM54, ITEM_TM16, ITEM_TM33, 0xFFFF };
 const u16 _020FBACA[] = { ITEM_HEAL_POWDER, ITEM_ENERGYPOWDER, ITEM_ENERGY_ROOT, ITEM_REVIVAL_HERB, 0xFFFF };
 const u16 _020FBA60[] = { ITEM_AIR_MAIL, ITEM_HEAL_BALL, ITEM_NET_BALL, 0xFFFF };
 const u16 _020FBA88[] = { ITEM_HEART_MAIL, ITEM_HEAL_BALL, ITEM_NET_BALL, 0xFFFF };
@@ -119,7 +122,7 @@ const u16 _020FBA98[] = { ITEM_SNOW_MAIL, ITEM_DUSK_BALL, ITEM_QUICK_BALL, 0xFFF
 const u16 _020FBA5A[] = { ITEM_AIR_MAIL, ITEM_QUICK_BALL, 0xFFFF };
 const u16 _020FBC02[] = { ITEM_POTION, ITEM_SUPER_POTION, ITEM_HYPER_POTION, ITEM_MAX_POTION, ITEM_REVIVE, ITEM_ANTIDOTE, ITEM_PARLYZ_HEAL, ITEM_BURN_HEAL, ITEM_ICE_HEAL, ITEM_AWAKENING, ITEM_FULL_HEAL, 0xFFFF };
 const u16 _020FBC4E[] = { ITEM_POKE_BALL, ITEM_GREAT_BALL, ITEM_ULTRA_BALL, ITEM_ESCAPE_ROPE, ITEM_POKE_DOLL, ITEM_REPEL, ITEM_SUPER_REPEL, ITEM_MAX_REPEL, ITEM_GRASS_MAIL, ITEM_FLAME_MAIL, ITEM_BUBBLE_MAIL, ITEM_SPACE_MAIL, 0xFFFF };
-const u16 _020FBC68[] = { ITEM_TM21, ITEM_TM27, ITEM_TM87, ITEM_TM78, ITEM_TM12, ITEM_TM41, ITEM_TM20, ITEM_TM28, ITEM_TM76, ITEM_TM55, ITEM_TM72, ITEM_TM79, 0xFFFF };
+const u16 _020FBC68[] = { ITEM_TM27, ITEM_TM21, ITEM_TM20, ITEM_TM12, ITEM_TM41, 0xFFFF };
 const u16 _020FBA68[] = { ITEM_AIR_MAIL, ITEM_TUNNEL_MAIL, ITEM_BLOOM_MAIL, 0xFFFF };
 const u16 _020FBBC6[] = { ITEM_X_SPEED, ITEM_X_ATTACK, ITEM_X_DEFENSE, ITEM_GUARD_SPEC_, ITEM_DIRE_HIT, ITEM_X_ACCURACY, ITEM_X_SPECIAL, ITEM_X_SP__DEF, 0xFFFF };
 const u16 _020FBB08[] = { ITEM_PROTEIN, ITEM_IRON, ITEM_CALCIUM, ITEM_ZINC, ITEM_CARBOS, ITEM_HP_UP, 0xFFFF };
@@ -167,7 +170,7 @@ BOOL ScrCmd_SpecialMartBuy(ScriptContext *ctx) {
     u16 which;
 
     which = ScriptGetVar(ctx);
-    Mart_Init(ctx->taskman, ctx->fieldSystem, _0210FA3C[which], 0, 0, 0, NULL);
+    InitMartUI(ctx->taskman, ctx->fieldSystem, _0210FA3C[which], 0, 0, 0, NULL);
     return TRUE;
 }
 
@@ -188,7 +191,7 @@ BOOL ScrCmd_DecorationMart(ScriptContext *ctx) {
     u16 which;
 
     which = ScriptGetVar(ctx);
-    Mart_Init(ctx->taskman, ctx->fieldSystem, _0210F9CC[which], 1, 0, which <= 1 ? 1 : 0, NULL);
+    InitMartUI(ctx->taskman, ctx->fieldSystem, _0210F9CC[which], 1, 0, which <= 1 ? 1 : 0, NULL);
     return TRUE;
 }
 
@@ -214,7 +217,7 @@ BOOL ScrCmd_SealMart(ScriptContext *ctx) {
     u16 which;
 
     which = ScriptGetVar(ctx);
-    Mart_Init(ctx->taskman, ctx->fieldSystem, _0210F9E8[which], 2, 0, 0, NULL);
+    InitMartUI(ctx->taskman, ctx->fieldSystem, _0210F9E8[which], 2, 0, 0, NULL);
     return TRUE;
 }
 
@@ -413,9 +416,9 @@ BOOL ScrCmd_771(ScriptContext *ctx) {
 
     // UB: Possibly illegal access to _0210F9CC between Tuesday and Saturday, inclusive
     if (Pokedex_GetNatDexFlag(Save_Pokedex_Get(ctx->fieldSystem->saveData))) {
-        Mart_Init(ctx->taskman, ctx->fieldSystem, _0210F9CC[date.week], 3, 0, 0, _0210FA04[date.week + 7]);
+        InitMartUI(ctx->taskman, ctx->fieldSystem, _0210F9CC[date.week], 3, 0, 0, _0210FA04[date.week + 7]);
     } else {
-        Mart_Init(ctx->taskman, ctx->fieldSystem, _0210F9CC[date.week], 3, 0, 0, _0210FA04[date.week]);
+        InitMartUI(ctx->taskman, ctx->fieldSystem, _0210F9CC[date.week], 3, 0, 0, _0210FA04[date.week]);
     }
     return TRUE;
 }
@@ -472,22 +475,22 @@ const struct MartItem *_0210F9D4[] = {
 };
 
 BOOL ScrCmd_772(ScriptContext *ctx) {
-    PokeathlonSave *pokeathlon;
+    POKEATHLON_SAV *pokeathlon;
     int i;
 
     pokeathlon = Save_Pokeathlon_Get(ctx->fieldSystem->saveData);
     for (i = 0; i < 27; i++) {
-        if (!PokeathlonSave_GetUnkB78_AtIndex(pokeathlon, i)) {
+        if (!sub_02031A78(pokeathlon, i)) {
             break;
         }
     }
-    Mart_Init(ctx->taskman, ctx->fieldSystem, _0210F9CC[0], 4, 0, 0, _0210F9D4[i / 6]);
+    InitMartUI(ctx->taskman, ctx->fieldSystem, _0210F9CC[0], 4, 0, 0, _0210F9D4[i / 6]);
     return TRUE;
 }
 
 BOOL ScrCmd_834(ScriptContext *ctx) {
     u16 *sp0;
-    PokeathlonSave *pokeathlon;
+    POKEATHLON_SAV *pokeathlon;
     SaveVarsFlags *varsFlags;
     int r6;
     int r4;
@@ -513,7 +516,7 @@ BOOL ScrCmd_834(ScriptContext *ctx) {
         r6++;
     }
     for (i = 0; i < 12; i++) {
-        if (PokeathlonSave_GetUnkB7C_AtIndex(pokeathlon, i)) {
+        if (sub_02031AB8(pokeathlon, i)) {
             r4++;
         }
     }
@@ -528,12 +531,12 @@ BOOL ScrCmd_834(ScriptContext *ctx) {
 BOOL ScrCmd_835(ScriptContext *ctx) {
     u16 *ret_ptr;
     int i;
-    PokeathlonSave *pokeathlon;
+    POKEATHLON_SAV *pokeathlon;
 
     ret_ptr = ScriptGetVarPointer(ctx);
     pokeathlon = Save_Pokeathlon_Get(ctx->fieldSystem->saveData);
     for (i = 0; i < 27; i++) {
-        if (!PokeathlonSave_GetUnkB78_AtIndex(pokeathlon, i)) {
+        if (!sub_02031A78(pokeathlon, i)) {
             break;
         }
     }

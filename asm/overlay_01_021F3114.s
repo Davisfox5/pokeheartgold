@@ -25,28 +25,28 @@ ov01_021F3114: ; 0x021F3114
 	lsl r0, r0, #0x18
 	lsr r4, r0, #0x18
 	add r0, r4, #0
-	bl MetatileBehavior_IsSlideEast
+	bl sub_0205B9DC
 	cmp r0, #1
 	bne _021F3136
 	mov r2, #3
 	b _021F3164
 _021F3136:
 	add r0, r4, #0
-	bl MetatileBehavior_IsSlideWest
+	bl sub_0205B9E8
 	cmp r0, #1
 	bne _021F3144
 	mov r2, #2
 	b _021F3164
 _021F3144:
 	add r0, r4, #0
-	bl MetatileBehavior_IsSlideNorth
+	bl sub_0205B9F4
 	cmp r0, #1
 	bne _021F3152
 	mov r2, #0
 	b _021F3164
 _021F3152:
 	add r0, r4, #0
-	bl MetatileBehavior_IsSlideSouth
+	bl sub_0205BA00
 	cmp r0, #1
 	bne _021F3160
 	mov r2, #1
@@ -189,51 +189,51 @@ _021F3254:
 	str r0, [r4, #4]
 	bne _021F3340
 	add r0, r5, #0
-	bl MetatileBehavior_IsSlideEast
+	bl sub_0205B9DC
 	cmp r0, #1
 	bne _021F3274
 	mov r0, #3
 	str r0, [r4]
 	ldr r0, [r4, #0xc]
 	add r1, r5, #0
-	bl ViridianGymmick_HandleTileAction
+	bl ov04_02256BE4
 	b _021F3300
 _021F3274:
 	add r0, r5, #0
-	bl MetatileBehavior_IsSlideWest
+	bl sub_0205B9E8
 	cmp r0, #1
 	bne _021F328C
 	mov r0, #2
 	str r0, [r4]
 	ldr r0, [r4, #0xc]
 	add r1, r5, #0
-	bl ViridianGymmick_HandleTileAction
+	bl ov04_02256BE4
 	b _021F3300
 _021F328C:
 	add r0, r5, #0
-	bl MetatileBehavior_IsSlideNorth
+	bl sub_0205B9F4
 	cmp r0, #1
 	bne _021F32A4
 	mov r0, #0
 	str r0, [r4]
 	ldr r0, [r4, #0xc]
 	add r1, r5, #0
-	bl ViridianGymmick_HandleTileAction
+	bl ov04_02256BE4
 	b _021F3300
 _021F32A4:
 	add r0, r5, #0
-	bl MetatileBehavior_IsSlideSouth
+	bl sub_0205BA00
 	cmp r0, #1
 	bne _021F32BC
 	mov r0, #1
 	str r0, [r4]
 	ldr r0, [r4, #0xc]
 	add r1, r5, #0
-	bl ViridianGymmick_HandleTileAction
+	bl ov04_02256BE4
 	b _021F3300
 _021F32BC:
 	add r0, r5, #0
-	bl MetatileBehavior_StopSliding
+	bl sub_0205BA0C
 	cmp r0, #1
 	ldr r0, [r4]
 	bne _021F32FA
@@ -300,7 +300,7 @@ ov01_021F3348: ; 0x021F3348
 	add r5, r0, #0
 	mov r0, #4
 	add r1, r5, #0
-	bl Heap_AllocAtEnd
+	bl AllocFromHeapAtEnd
 	add r4, r0, #0
 	bne _021F335C
 	bl GF_AssertFail
@@ -316,10 +316,10 @@ _021F335C:
 
 	thumb_func_start ov01_021F336C
 ov01_021F336C: ; 0x021F336C
-	ldr r3, _021F3374 ; =Heap_FreeExplicit
+	ldr r3, _021F3374 ; =FreeToHeapExplicit
 	add r1, r0, #0
 	mov r0, #4
 	bx r3
 	.balign 4, 0
-_021F3374: .word Heap_FreeExplicit
+_021F3374: .word FreeToHeapExplicit
 	thumb_func_end ov01_021F336C

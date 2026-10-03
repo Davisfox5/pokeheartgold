@@ -18,7 +18,7 @@ sub_020379A0: ; 0x020379A0
 	bne _020379C0
 	mov r1, #0x99
 	lsl r1, r1, #2
-	bl Heap_Alloc
+	bl AllocFromHeap
 	ldr r1, _020379F0 ; =_021D414C
 	mov r2, #0x99
 	str r0, [r1]
@@ -61,7 +61,7 @@ sub_020379F8: ; 0x020379F8
 	push {r3, lr}
 	ldr r0, _02037A0C ; =_021D414C
 	ldr r0, [r0]
-	bl Heap_Free
+	bl FreeToHeap
 	ldr r0, _02037A0C ; =_021D414C
 	mov r1, #0
 	str r1, [r0]

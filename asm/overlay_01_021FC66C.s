@@ -20,7 +20,7 @@ CreateFishingRodTaskEnv: ; 0x021FC66C
 	add r0, r1, #0
 	mov r1, #0x18
 	add r5, r2, #0
-	bl Heap_AllocAtEnd
+	bl AllocFromHeapAtEnd
 	add r4, r0, #0
 	add r2, r4, #0
 	mov r1, #0x18
@@ -63,7 +63,7 @@ _021FC6B6:
 	ldr r1, [r5, #0xc]
 	add r0, r4, #0
 	add r2, #0x10
-	bl FieldSystem_PerformFishEncounterCheck
+	bl ov02_02246F70
 	str r0, [r5, #8]
 	ldr r1, [r5, #0xc]
 	ldr r2, [r5, #8]
@@ -91,14 +91,14 @@ _021FC6E2:
 	bl GearPhoneRingManager_ResetIfActive
 	ldr r0, [r4, #0xc]
 	bl Save_GameStats_Get
-	mov r1, #0xb ; GAME_STAT_FISH_LANDED
+	mov r1, #0xb
 	bl GameStats_Inc
 	ldr r2, [r5, #0x10]
 	add r0, r4, #0
 	add r1, r6, #0
 	bl FieldSystem_StartForcedWildBattle
 	add r0, r5, #0
-	bl Heap_Free
+	bl FreeToHeap
 	mov r0, #0
 	pop {r3, r4, r5, r6, r7, pc}
 _021FC728:
@@ -110,7 +110,7 @@ _021FC732:
 	ldr r0, [r4, #0x3c]
 	bl MapObjectManager_UnpauseAllMovement
 	add r0, r5, #0
-	bl Heap_Free
+	bl FreeToHeap
 	mov r0, #1
 	pop {r3, r4, r5, r6, r7, pc}
 _021FC742:
@@ -162,7 +162,7 @@ ov01_021FC784: ; 0x021FC784
 	push {r4, lr}
 	add r4, r0, #0
 	bl SysTask_GetData
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r4, #0
 	bl SysTask_Destroy
 	pop {r4, pc}
@@ -487,7 +487,7 @@ ov01_021FC9AC: ; 0x021FC9AC
 	ldr r0, [r4, #0x20]
 	ldr r0, [r0, #0xc]
 	bl Save_GameStats_Get
-	mov r1, #0x65 ; GAME_STAT_UNK101
+	mov r1, #0x65
 	bl GameStats_Inc
 	mov r0, #1
 	pop {r4, pc}
@@ -636,7 +636,7 @@ ov01_021FCAC4: ; 0x021FCAC4
 	add r5, r0, #0
 	mov r0, #4
 	add r1, r5, #0
-	bl Heap_AllocAtEnd
+	bl AllocFromHeapAtEnd
 	add r4, r0, #0
 	bne _021FCAD8
 	bl GF_AssertFail
@@ -733,13 +733,13 @@ ov01_021FCB6C: ; 0x021FCB6C
 	ldr r0, [r4, #8]
 	add r1, #0x38
 	mov r2, #3
-	bl DialogBox_AddWindowToLayer3
+	bl sub_0205B514
 	ldr r0, [r4, #0xc]
 	bl Save_PlayerData_GetOptionsAddr
 	add r5, #0x38
 	add r1, r0, #0
 	add r0, r5, #0
-	bl DialogBox_LoadFrame
+	bl sub_0205B564
 	pop {r3, r4, r5, pc}
 	thumb_func_end ov01_021FCB6C
 
@@ -765,7 +765,7 @@ ov01_021FCB90: ; 0x021FCB90
 	ldr r1, [r5, #0x2c]
 	add r0, #0x38
 	mov r3, #1
-	bl DialogBox_PrintMessage
+	bl sub_0205B5B4
 	add r5, #0x28
 	strb r0, [r5]
 	pop {r4, r5, r6, pc}
@@ -778,7 +778,7 @@ ov01_021FCBCC: ; 0x021FCBCC
 	add r4, r0, #0
 	add r0, #0x28
 	ldrb r0, [r0]
-	bl DialogBox_IsPrintFinished
+	bl IsPrintFinished
 	cmp r0, #1
 	bne _021FCBFA
 	bl ov01_021FCAFC

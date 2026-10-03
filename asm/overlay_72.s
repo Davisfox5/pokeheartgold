@@ -764,7 +764,7 @@ _02237E36:
 	mov r0, #3
 	mov r1, #0x43
 	lsl r2, r2, #0x10
-	bl Heap_Create
+	bl CreateHeap
 	bl LoadDwcOverlay
 	bl LoadOVY38
 	mov r0, #0x43
@@ -834,7 +834,7 @@ _02237E36:
 	bl Sound_SetSceneAndPlayBGM
 	ldr r1, _02237F90 ; =0x00020020
 	mov r0, #0x43
-	bl Heap_Alloc
+	bl AllocFromHeap
 	str r0, [r4, #0x24]
 	add r0, #0x1f
 	mov r1, #0x1f
@@ -1009,7 +1009,7 @@ _02238086:
 	mov r0, #4
 	bl FontID_Release
 	ldr r0, [r4, #0x24]
-	bl Heap_Free
+	bl FreeToHeap
 	bl UnloadOVY38
 	bl UnloadDwcOverlay
 	add r0, r4, #0
@@ -1031,14 +1031,14 @@ _02238086:
 	bl ov72_02238160
 	bl sub_02034DE0
 	ldr r0, [r4, #4]
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r5, #0
 	bl OverlayManager_FreeData
 	mov r0, #0
 	add r1, r0, #0
 	bl Main_SetVBlankIntrCB
 	mov r0, #0x43
-	bl Heap_Destroy
+	bl DestroyHeap
 	mov r0, #1
 	pop {r3, r4, r5, pc}
 	.balign 4, 0
@@ -1354,22 +1354,22 @@ _022381EC:
 	str r0, [r5, r1]
 	sub r1, #0x2c
 	ldr r0, [r5, r1]
-	bl SpriteTransfer_CreateCharTransferTask
+	bl sub_0200ACF0
 	ldr r0, _022383C4 ; =0x00000D44
 	ldr r0, [r5, r0]
-	bl SpriteTransfer_CreateCharTransferTask
+	bl sub_0200ACF0
 	ldr r0, _022383D0 ; =0x00000D54
 	ldr r0, [r5, r0]
-	bl SpriteTransfer_CreateCharTransferTask
+	bl sub_0200ACF0
 	ldr r0, _022383BC ; =0x00000D38
 	ldr r0, [r5, r0]
-	bl SpriteTransfer_CreateExtPlttTransferTask
+	bl sub_0200AF94
 	ldr r0, _022383C8 ; =0x00000D48
 	ldr r0, [r5, r0]
-	bl SpriteTransfer_CreateExtPlttTransferTask
+	bl sub_0200AF94
 	ldr r0, _022383D4 ; =0x00000D58
 	ldr r0, [r5, r0]
-	bl SpriteTransfer_CreateExtPlttTransferTask
+	bl sub_0200AF94
 	add r0, r7, #0
 	bl NARC_Delete
 	ldr r0, [sp, #0x14]
@@ -1910,16 +1910,16 @@ ov72_02238800: ; 0x02238800
 	add r6, r0, #0
 	ldr r0, _02238854 ; =0x00000D34
 	ldr r0, [r6, r0]
-	bl SpriteTransfer_DeleteCharTransferTask
+	bl sub_0200AEB0
 	ldr r0, _02238858 ; =0x00000D44
 	ldr r0, [r6, r0]
-	bl SpriteTransfer_DeleteCharTransferTask
+	bl sub_0200AEB0
 	ldr r0, _0223885C ; =0x00000D38
 	ldr r0, [r6, r0]
-	bl SpriteTransfer_DeletePlttTransferTask
+	bl sub_0200B0A8
 	ldr r0, _02238860 ; =0x00000D48
 	ldr r0, [r6, r0]
-	bl SpriteTransfer_DeletePlttTransferTask
+	bl sub_0200B0A8
 	ldr r7, _02238864 ; =0x00000D24
 	mov r4, #0
 	add r5, r6, #0
@@ -2518,7 +2518,7 @@ ov72_02238BEC: ; 0x02238BEC
 	mov r2, #0x80
 	bl MIi_CpuCopy16
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	mov r0, #0
 	str r0, [sp, #0x24]
 	str r0, [sp, #0x28]
@@ -3297,17 +3297,17 @@ ov72_02239370: ; 0x02239370
 	add r5, r0, #0
 	ldr r0, [r5]
 	ldr r0, [r0, #8]
-	bl Save_SysInfo_GetDwcProfileId
+	bl Save_SysInfo_GetField4C
 	cmp r0, #0
 	bne _0223938A
 	ldr r1, [r5]
 	ldr r0, [r1, #8]
 	ldr r1, [r1, #0x1c]
-	bl Save_SysInfo_SetDwcProfileId
+	bl Save_SysInfo_SetField4C
 _0223938A:
 	ldr r0, [r5]
 	ldr r0, [r0, #8]
-	bl Save_SysInfo_GetDwcProfileId
+	bl Save_SysInfo_GetField4C
 	add r4, r0, #0
 	ldr r0, [r5]
 	ldr r0, [r0, #0x14]
@@ -7292,7 +7292,7 @@ _0223B178:
 	ldr r0, [r4]
 	bl BgCommitTilemapBufferToVram
 	ldr r0, [sp, #0x10]
-	bl Heap_Free
+	bl FreeToHeap
 	ldr r0, [sp, #0x14]
 	bl NARC_Delete
 	add r0, r4, #0

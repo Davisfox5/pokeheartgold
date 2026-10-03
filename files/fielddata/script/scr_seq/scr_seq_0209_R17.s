@@ -5,15 +5,15 @@
 
 	.rodata
 
-	ScrDef scr_seq_R17_000
-	ScrDef scr_seq_R17_001
-	ScrDefEnd
+	scrdef scr_seq_R17_000
+	scrdef scr_seq_R17_001
+	scrdef_end
 
 scr_seq_R17_000:
-	SetBikeStateLock 1
-	End
+	set_bike_state_lock 1
+	end
 
 scr_seq_R17_001:
-	SetBikeStateLock 1
-	End
+	set_bike_state_lock 1
+	end
 	.balign 4, 0

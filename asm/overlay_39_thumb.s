@@ -271,7 +271,7 @@ _0222722C:
 	bl ov39_0222A2C0
 	add r1, r0, #0
 	ldr r0, [r4, #4]
-	bl Heap_Alloc
+	bl AllocFromHeap
 	mov r1, #0xed
 	lsl r1, r1, #2
 	str r0, [r5, r1]
@@ -358,12 +358,12 @@ ov39_022272EC: ; 0x022272EC
 	mov r0, #0xed
 	lsl r0, r0, #2
 	ldr r0, [r4, r0]
-	bl Heap_Free
+	bl FreeToHeap
 	bl ov39_02227E3C
 	mov r0, #0x63
 	lsl r0, r0, #2
 	ldr r0, [r4, r0]
-	bl Heap_Free
+	bl FreeToHeap
 	pop {r4, pc}
 	.balign 4, 0
 	thumb_func_end ov39_022272EC
@@ -1839,7 +1839,7 @@ ov39_02227DEC: ; 0x02227DEC
 	push {r4, r5, r6, lr}
 	mov r1, #2
 	lsl r1, r1, #0xc
-	bl Heap_Alloc
+	bl AllocFromHeap
 	add r5, r0, #0
 	mov r6, #2
 	lsl r6, r6, #0xc
@@ -2400,7 +2400,7 @@ ov39_02228140: ; 0x02228140
 	mov r0, #3
 	mov r1, #0x7c
 	lsl r2, r2, #0x10
-	bl Heap_Create
+	bl CreateHeap
 	mov r1, #0xf6
 	add r0, r4, #0
 	lsl r1, r1, #2
@@ -2647,7 +2647,7 @@ _02228394:
 	add r0, r4, #0
 	bl ov39_02228948
 	ldr r0, [r4, #4]
-	bl Heap_Free
+	bl FreeToHeap
 	ldr r0, [r4, #4]
 	bl ov39_022285A8
 	mov r0, #0
@@ -2666,7 +2666,7 @@ _02228394:
 	add r0, r5, #0
 	bl OverlayManager_FreeData
 	mov r0, #0x7c
-	bl Heap_Destroy
+	bl DestroyHeap
 	ldr r0, _02228414 ; =gSystem + 0x60
 	mov r1, #0
 	strb r1, [r0, #9]
@@ -3012,7 +3012,7 @@ ov39_022285CC: ; 0x022285CC
 	mov r2, #0x80
 	bl MIi_CpuCopy16
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	mov r0, #0
 	mov r1, #0x13
 	str r0, [sp, #0x24]
@@ -4010,17 +4010,17 @@ ov39_02228E54: ; 0x02228E54
 	add r0, r6, #0
 	bl sub_0202C08C
 	add r0, r4, #0
-	bl Save_SysInfo_GetDwcProfileId
+	bl Save_SysInfo_GetField4C
 	cmp r0, #0
 	bne _02228E8E
 	add r0, r6, #0
 	bl sub_0203A040
 	add r1, r0, #0
 	add r0, r4, #0
-	bl Save_SysInfo_SetDwcProfileId
+	bl Save_SysInfo_SetField4C
 _02228E8E:
 	add r0, r4, #0
-	bl Save_SysInfo_GetDwcProfileId
+	bl Save_SysInfo_GetField4C
 	mov r0, #9
 	str r0, [r5, #8]
 	ldr r0, [r5]

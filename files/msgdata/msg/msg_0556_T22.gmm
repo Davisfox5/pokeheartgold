@@ -26,11 +26,11 @@
 	</row>
 	<row id="msg_0556_T22_00006" index="6">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">Hey, you’re a Pokémon Trainer?\rIf you beat the Gym Leader here,\nyou’ll be ready for prime time!</language>
+		<language name="English">Hey, you’re a Trainer?\rThe old gym here is a League\npractice hall now. A visiting\finstructor runs pre-badge\nassessments.\fPerfect warm-up before Azalea\ngives you the real thing.</language>
 	</row>
 	<row id="msg_0556_T22_00007" index="7">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">Falkner, from the Violet City Pokémon\nGym, is a fine Trainer!\rHe inherited his father’s Gym and\nhas done a great job with it.</language>
+		<language name="English">Falkner, who led the old Violet\ngym, inherited it from his father.\rHe’s moved on--flown all the way\nto Fortree, if you can believe the\fdistance. The world got small.\rThe arena is the university’s\npractice hall now.</language>
 	</row>
 	<row id="msg_0556_T22_00008" index="8">
 		<attribute name="window_context_name">used</attribute>
@@ -38,11 +38,11 @@
 	</row>
 	<row id="msg_0556_T22_00009" index="9">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">Violet City\nThe City of Nostalgic Scents</language>
+		<language name="English">Violet City\nJohto’s University City</language>
 	</row>
 	<row id="msg_0556_T22_00010" index="10">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">Violet City Pokémon Gym\nLeader: Falkner\fThe Elegant Master of Flying Pokémon</language>
+		<language name="English">League Practice Hall\rVisiting-instructor sessions and\npre-badge assessments today.</language>
 	</row>
 	<row id="msg_0556_T22_00011" index="11">
 		<attribute name="window_context_name">used</attribute>
@@ -50,23 +50,23 @@
 	</row>
 	<row id="msg_0556_T22_00012" index="12">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">Pokémon School\rEarl will show you all\nthere is to Pokémon!</language>
+		<language name="English">Violet University Pokémon School\rDean: Earl\n“Many ways, one craft.”</language>
 	</row>
 	<row id="msg_0556_T22_00013" index="13">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">Me oh my...\nThat Egg must be...!\r</language>
+		<language name="English">KIMONO GIRL: So it is you.\rForgive me. I have been watching\nsince you came up the road.\fWatching is rather what we do.\r</language>
 	</row>
 	<row id="msg_0556_T22_00014" index="14">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">I see...\nSo it was handed from Mr. Pokémon to\fProfessor Elm, then from Professor Elm\fto you.\rNow I get it...\r</language>
+		<language name="English">KIMONO GIRL: Old currents are\nstirring in Johto. The forest\fmurmurs of it. The bells hum it.\rAnd they hush, just a little,\nwhen you pass.\r</language>
 	</row>
 	<row id="msg_0556_T22_00015" index="15">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">That Egg is truly an important Egg.\nPlease do take good care of it for me.\rIs that understood?\r</language>
+		<language name="English">KIMONO GIRL: What that means, I do\nnot yet know. Nor do my sisters.\rSo walk your road with steady\nhands, and let us keep watching.\r</language>
 	</row>
 	<row id="msg_0556_T22_00016" index="16">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">I am counting on you.\r</language>
+		<language name="English">KIMONO GIRL: We will speak again,\nwhere the bells are older.\r</language>
 	</row>
 	<row id="msg_0556_T22_00017" index="17">
 		<attribute name="window_context_name">used</attribute>
@@ -111,5 +111,89 @@
 	<row id="msg_0556_T22_00027" index="27">
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">Did you know that Pokégear allows you\nto put marks and memos on its Map?\rI’d love to have one of those\nPokégears, but my mom won’t let me.</language>
+	</row>
+	<row id="msg_0556_T22_00028" index="28">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">EARL: Hah! New faces, road-dust\nstill on them! Yes! Earl I am!\fDean I am also! Welcome, welcome,\nnew road scholars!</language>
+	</row>
+	<row id="msg_0556_T22_00029" index="29">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">EARL: Once a little school this\nwas. Now? A UNIVERSITY. For\ftraining is a craft, and a craft\ndeserves scholarship!\rViolet teaches many ways. Books\nfor the mind. The court for the\fbody. The tower, for the spirit.\rCenter and Mart, that way--heal,\nrestock, then go and LEARN.</language>
+	</row>
+	<row id="msg_0556_T22_00030" index="30">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">EARL: See the tower first, I\nthink. Old Sprout Tower, where the\fsages train as they have for\ncenturies.\rThen come find me at the practice\nhall. A visitor we have--a real\fgym leader--and she does not stay\nforever.</language>
+	</row>
+	<row id="msg_0556_T22_00031" index="31">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">KESTRA: Did he just say a REAL gym\nleader is here?\rOkay, change of plans, we are\ndoing everything he said in that\fexact order. Tower, then gym lady.\nMove!</language>
+	</row>
+	<row id="msg_0556_T22_00032" index="32">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">SAGE: The whole tower SWAYED!\nDecades of discipline and a CHILD\fset our BELLSPROUT panicking for\na laugh!\rThe doors are shut to university\nstudents until this is made right!</language>
+	</row>
+	<row id="msg_0556_T22_00033" index="33">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">EARL: Ren. REN. Again it is Ren.\nTalent he has, sense he has NOT.\rGo with me on this. Mediate. The\nboy will come--I insist, and I am,\foccasionally, insistent.</language>
+	</row>
+	<row id="msg_0556_T22_00034" index="34">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">REN: It was not vandalism! It\nwas... UNAUTHORIZED FIELD\fPLACEMENT. Of some tags. Around a\ntower. That, in hindsight, sways.</language>
+	</row>
+	<row id="msg_0556_T22_00035" index="35">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">KESTRA: ...Okay, in fairness, I\nDID dare him. But I thought he’d\fchicken out! That’s the whole\npoint of a dare!</language>
+	</row>
+	<row id="msg_0556_T22_00036" index="36">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">REN: She said the tower needed\nmore excitement. I may have\fsupplied too much excitement.\rLook--I’ll fix it. I just don’t\nknow how to fix it POLITELY.\fThat’s not my event.</language>
+	</row>
+	<row id="msg_0556_T22_00037" index="37">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">SAGE: Mediator, are you? Then go\nup. Return what was misplaced,\fand battle us with steadier hands.</language>
+	</row>
+	<row id="msg_0556_T22_00038" index="38">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">SAGE: The tower bends. Today, it\nalso forgives.\rClimb whenever your hands are\nsteady, young one.</language>
+	</row>
+	<row id="msg_0556_T22_00039" index="39">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">REN: So. You smoothed it over.\nWith MONKS. I didn’t think that\fwas a thing a person could do.\rHere--practical stuff, for the\nroad. Berries. They’ll patch a\fstatus when you’re out of fancier\noptions.</language>
+	</row>
+	<row id="msg_0556_T22_00040" index="40">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">REN: You’re not boring. That’s\nrare around here, you have no\fidea.\rGo win your gym. I’ll be off\nfinding the next thing I shouldn’t\fdo. Maybe I’ll even do it QUIETLY\nthis time. ...No. Probably not.</language>
+	</row>
+	<row id="msg_0556_T22_00041" index="41">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">EARL: Yes! Earl I am! Dean I am\nalso!\rBooks for mind, court for body,\ntower for spirit. Go and LEARN!</language>
+	</row>
+	<row id="msg_0556_T22_00042" index="42">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">REN: The Elder said--get this--\n“A trainer who cannot wait will\feventually be taught by\nparalysis.”\rI’m going to be hearing that in my\nsleep. In HIS voice.</language>
+	</row>
+	<row id="msg_0556_T22_00043" index="43">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">KESTRA: I did Roxanne’s thing\nwhile you were busy being a tower\fdiplomat. Passed, obviously.\rWhich means it’s time. You and me.\nFirst official battle.\rNo wild Pokémon, no rescue panic,\nno Gold hovering with a lecture\fface. Just us, {STRVAR_1 3, 0, 0}.</language>
+	</row>
+	<row id="msg_0556_T22_00044" index="44">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">KESTRA: I grabbed CYNDAQUIL back\nin Cherrygrove SPECIFICALLY\fbecause it beats CHIKORITA.\rI’ve been waiting this whole route\nto prove that was smart.\fDon’t you DARE go easy.</language>
+	</row>
+	<row id="msg_0556_T22_00045" index="45">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">KESTRA: I grabbed TOTODILE back\nin Cherrygrove SPECIFICALLY\fbecause it beats CYNDAQUIL.\rI’ve been waiting this whole route\nto prove that was smart.\fDon’t you DARE go easy.</language>
+	</row>
+	<row id="msg_0556_T22_00046" index="46">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">KESTRA: I grabbed CHIKORITA back\nin Cherrygrove SPECIFICALLY\fbecause it beats TOTODILE.\rI’ve been waiting this whole route\nto prove that was smart.\fDon’t you DARE go easy.</language>
+	</row>
+	<row id="msg_0556_T22_00047" index="47">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">KESTRA: Okay. OKAY. You’re better\nthan me today. TODAY.\rThat’s the most fun I’ve had since\nwe met, and I’ve been a Trainer\ffor like a week.\rHow is this our LIFE now,\n{STRVAR_1 3, 0, 0}?</language>
+	</row>
+	<row id="msg_0556_T22_00048" index="48">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">KESTRA: I’m going ahead to Azalea--\nadvance research, very serious,\fabsolutely not a head start.\rRoute 32 south, then Union Cave--\nbring a light and some Potions,\fit’s a real one.\rThere’s an old fishing guru on the\nroute who’ll set you up.\rSee you at the gym, hero.\nDon’t keep me waiting!</language>
 	</row>
 </body>

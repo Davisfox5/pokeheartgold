@@ -48,7 +48,7 @@
 	</row>
 	<row id="msg_0115_D36R0101_00011" index="11">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">What am I doing?\rI’m shaking trees using Headbutt.\rIt’s fun. Here, you try it with your\nPokémon, too! {YESNO 0}</language>
+		<language name="English">Forest’s changed, and I’ll tell\nyou plain how: them little\facorn-things in the branches.\nSEEDOT.\rWeren’t here when I was a boy--\nblew in from somewhere south, and\fnow they’re thick as thieves.\rPushed the radish-ones right out.\nODDISH used to carpet this floor.\fDrifted off toward the Goldenrod\nside, I hear.\rNothing sinister. Ten years is a\nlong time for a forest. You learn\fto let it.\rAnyway--me? I’m shaking trees\nusing Headbutt. It’s fun. Here!</language>
 	</row>
 	<row id="msg_0115_D36R0101_00012" index="12">
 		<attribute name="window_context_name">used</attribute>
@@ -116,7 +116,7 @@
 	</row>
 	<row id="msg_0115_D36R0101_00028" index="28">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">Ilex Forest Shrine...\rIt’s a tribute to the forest’s\nprotector...</language>
+		<language name="English">A small shrine, older than the\ntown, older than the road.\rMoss has nearly swallowed the\ncarving.\rIt is utterly still--and the\nstillness has a weight to it,\flike a held breath.</language>
 	</row>
 	<row id="msg_0115_D36R0101_00029" index="29">
 		<attribute name="window_context_name">used</attribute>
@@ -192,7 +192,7 @@
 	</row>
 	<row id="msg_0115_D36R0101_00047" index="47">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">Kids and Pokémon sometimes disappear\naround this shrine.\rIt is believed that a Pokémon which\nwanders across time does that.\rIt is truly a strange thing...\r</language>
+		<language name="English">My grandma won’t come this deep\nanymore. She says the air by the\fshrine feels HEAVIER than it used\nto. Not bad. Just... like\fsomething’s in the room with you.\rI don’t feel anything. But I\ndon’t argue with Grandma about\fthe woods.</language>
 	</row>
 	<row id="msg_0115_D36R0101_00048" index="48">
 		<attribute name="window_context_name">used</attribute>
@@ -268,10 +268,10 @@
 	</row>
 	<row id="msg_0115_D36R0101_00066" index="66">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">It was all so bizarre.\nBut now that we are safely back to our\ftime and Team Rocket’s terrible design\ffell through, we can say...\fall’s well that ends well, right?\r{STRVAR_1 3, 0, 0}, you never cease to\ninspire great adventures!\rIt sure was an exhausting day, though.\nI better get going.\rSee you!\r</language>
+		<language name="English">-</language>
 	</row>
 	<row id="msg_0115_D36R0101_00067" index="67">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">It was all so bizarre.\nBut now that we are safely back to our\ftime and Team Rocket’s terrible design\ffell through, we can say...\fall’s well that ends well, right?\r{STRVAR_1 3, 0, 0}, you never cease to\ninspire great adventures!\rIt sure was an exhausting day, though.\nI better get going.\rSee you!\r</language>
+		<language name="English">-</language>
 	</row>
 </body>

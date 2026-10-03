@@ -1,7 +1,7 @@
 #include <nitro/fs/overlay.h>
 #pragma once
-.public Heap_Alloc
-.public Heap_Free
+.public AllocFromHeap
+.public FreeToHeap
 .public sub_02030CD8
 .public sub_02030E08
 .public sub_02030E18
@@ -16,9 +16,9 @@
 .public sub_0205C268
 .public SetMonData
 .public Party_GetMonByIndex
-.public Party_SafeCopyMonToSlot_ResetAprijuiceModifiers
+.public Party_SafeCopyMonToSlot_ResetUnkSub
 .public SaveArray_Party_Get
-.public Frontier_GetLaunchArgs
+.public Frontier_GetLaunchParam
 .public Frontier_GetData
 .public Frontier_SetData
 .public Frontier_LaunchApplication
@@ -29,8 +29,8 @@
 .public ov80_0222A474
 .public ov80_0222A52C
 .public FrontierSystem_GetFrontierMap
-.public FrontierScriptContext_Pause
-.public FrontierScriptContext_ReadHalfWord
+.public ov80_0222AB84
+.public FrontierScript_ReadU16
 .public FrontierScript_ReadVarPtr
 .public FrontierScript_ReadVar
 .public ov80_0222BE24

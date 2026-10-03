@@ -16,15 +16,15 @@
 
 	.text
 
-	thumb_func_start FieldEffectManager_New
-FieldEffectManager_New: ; 0x021F1348
+	thumb_func_start ov01_021F1348
+ov01_021F1348: ; 0x021F1348
 	push {r3, r4, r5, r6, r7, lr}
 	add r7, r2, #0
 	add r6, r0, #0
 	add r5, r1, #0
 	add r0, r7, #0
 	mov r1, #0x24
-	bl Heap_Alloc
+	bl AllocFromHeap
 	add r4, r0, #0
 	mov r1, #0
 	mov r2, #0x24
@@ -34,7 +34,7 @@ FieldEffectManager_New: ; 0x021F1348
 	str r6, [r4, #0x10]
 	add r0, r7, #0
 	lsl r1, r5, #3
-	bl Heap_Alloc
+	bl AllocFromHeap
 	str r0, [r4, #0x14]
 	add r0, r4, #0
 	bl ov01_021F14DC
@@ -43,16 +43,16 @@ FieldEffectManager_New: ; 0x021F1348
 	add r0, r4, #0
 	pop {r3, r4, r5, r6, r7, pc}
 	.balign 4, 0
-	thumb_func_end FieldEffectManager_New
+	thumb_func_end ov01_021F1348
 
-	thumb_func_start FieldEffectManager_InitAnimManagerList
-FieldEffectManager_InitAnimManagerList: ; 0x021F1384
+	thumb_func_start ov01_021F1384
+ov01_021F1384: ; 0x021F1384
 	ldr r3, _021F138C ; =ov01_021F15EC
 	str r1, [r0, #8]
 	bx r3
 	nop
 _021F138C: .word ov01_021F15EC
-	thumb_func_end FieldEffectManager_InitAnimManagerList
+	thumb_func_end ov01_021F1384
 
 	thumb_func_start ov01_021F1390
 ov01_021F1390: ; 0x021F1390
@@ -91,8 +91,8 @@ _021F13C4:
 	.balign 4, 0
 	thumb_func_end ov01_021F13B0
 
-	thumb_func_start FieldEffectManager_InitRenderers
-FieldEffectManager_InitRenderers: ; 0x021F13D0
+	thumb_func_start ov01_021F13D0
+ov01_021F13D0: ; 0x021F13D0
 	push {r3, r4, r5, lr}
 	add r4, r1, #0
 	ldr r1, [r4]
@@ -108,18 +108,18 @@ _021F13DC:
 	bne _021F13DC
 _021F13EA:
 	pop {r3, r4, r5, pc}
-	thumb_func_end FieldEffectManager_InitRenderers
+	thumb_func_end ov01_021F13D0
 
-	thumb_func_start FieldEffectManager_Render
-FieldEffectManager_Render: ; 0x021F13EC
+	thumb_func_start ov01_021F13EC
+ov01_021F13EC: ; 0x021F13EC
 	ldr r3, _021F13F0 ; =ov01_021F1610
 	bx r3
 	.balign 4, 0
 _021F13F0: .word ov01_021F1610
-	thumb_func_end FieldEffectManager_Render
+	thumb_func_end ov01_021F13EC
 
-	thumb_func_start FieldEffectManager_Free
-FieldEffectManager_Free: ; 0x021F13F4
+	thumb_func_start ov01_021F13F4
+ov01_021F13F4: ; 0x021F13F4
 	push {r4, lr}
 	add r4, r0, #0
 	bl ov01_021F15FC
@@ -130,11 +130,11 @@ FieldEffectManager_Free: ; 0x021F13F4
 	add r0, r4, #0
 	bl ov01_021F1490
 	ldr r0, [r4, #0x14]
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	pop {r4, pc}
-	thumb_func_end FieldEffectManager_Free
+	thumb_func_end ov01_021F13F4
 
 	thumb_func_start ov01_021F141C
 ov01_021F141C: ; 0x021F141C
@@ -142,10 +142,10 @@ ov01_021F141C: ; 0x021F141C
 	cmp r2, #0
 	ldr r0, [r0]
 	bne _021F142A
-	bl Heap_Alloc
+	bl AllocFromHeap
 	pop {r3, pc}
 _021F142A:
-	bl Heap_AllocAtEnd
+	bl AllocFromHeapAtEnd
 	pop {r3, pc}
 	thumb_func_end ov01_021F141C
 
@@ -165,10 +165,10 @@ ov01_021F1430: ; 0x021F1430
 
 	thumb_func_start ov01_021F1448
 ov01_021F1448: ; 0x021F1448
-	ldr r3, _021F144C ; =Heap_Free
+	ldr r3, _021F144C ; =FreeToHeap
 	bx r3
 	.balign 4, 0
-_021F144C: .word Heap_Free
+_021F144C: .word FreeToHeap
 	thumb_func_end ov01_021F1448
 
 	thumb_func_start ov01_021F1450

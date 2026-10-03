@@ -7,7 +7,7 @@ static BOOL sub_02097754(TaskManager *taskManager);
 
 void sub_02097720(TaskManager *taskManager, u16 *unknownPtr) {
     FieldSystem *fieldSystem = TaskManager_GetFieldSystem(taskManager);
-    UnkStruct_02097720 *data = Heap_AllocAtEnd(HEAP_ID_FIELD2, sizeof(UnkStruct_02097720));
+    UnkStruct_02097720 *data = AllocFromHeapAtEnd(HEAP_ID_FIELD, sizeof(UnkStruct_02097720));
     MI_CpuClear8(data, sizeof(UnkStruct_02097720));
     data->state = 0;
     data->unknown_4 = unknownPtr;
@@ -26,7 +26,7 @@ static BOOL sub_02097754(TaskManager *taskManager) {
     case 1:
         if (FieldSystem_ApplicationIsRunning(fieldSystem) == FALSE) {
             *env->unknown_4 = env->safariDecorationArgs->unk1C;
-            Heap_Free(env->safariDecorationArgs);
+            FreeToHeap(env->safariDecorationArgs);
             env->state++;
         }
         break;
@@ -35,7 +35,7 @@ static BOOL sub_02097754(TaskManager *taskManager) {
         env->state++;
         break;
     case 3:
-        Heap_Free(env);
+        FreeToHeap(env);
         return TRUE;
     }
 

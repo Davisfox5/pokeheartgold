@@ -43,7 +43,7 @@ _020551FC:
 	ldr r0, [r4, #8]
 	bl ov01_021EFC04
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	mov r0, #1
 	pop {r3, r4, r5, pc}
 _02055212:
@@ -60,7 +60,7 @@ sub_02055218: ; 0x02055218
 	mov r0, #0xb
 	mov r1, #0x10
 	add r4, r2, #0
-	bl Heap_AllocAtEnd
+	bl AllocFromHeapAtEnd
 	add r2, r0, #0
 	mov r0, #0
 	str r0, [r2]
