@@ -2,7 +2,7 @@
 <body language="English">
 	<row id="msg_0569_T23R0101_00000" index="0">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">Ilex Forest is big. Be careful!\nDon’t get lost.</language>
+		<language name="English">Heading into Ilex? Stick to the\npath. It’s an easy walk if you\fdon’t wander--and lately folks\nwander, then swear the trees moved\fon them.</language>
 	</row>
 	<row id="msg_0569_T23R0101_00001" index="1">
 		<attribute name="window_context_name">used</attribute>

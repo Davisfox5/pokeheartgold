@@ -271,7 +271,7 @@ _021FB21A:
 	mov r1, #0
 	str r1, [r0]
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r5, #0
 	bl SysTask_Destroy
 	pop {r3, r4, r5, pc}
@@ -303,7 +303,7 @@ ov01_021FB254: ; 0x021FB254
 	push {r3, lr}
 	mov r0, #4
 	mov r1, #0x20
-	bl Heap_Alloc
+	bl AllocFromHeap
 	mov r1, #0
 	str r1, [r0, #0x10]
 	str r1, [r0, #0x14]
@@ -323,7 +323,7 @@ ov01_021FB270: ; 0x021FB270
 	mov r0, #4
 	mov r1, #0x18
 	add r5, r2, #0
-	bl Heap_AllocAtEnd
+	bl AllocFromHeapAtEnd
 	add r4, r0, #0
 	add r0, r6, #0
 	add r1, r4, #0
@@ -359,7 +359,7 @@ ov01_021FB270: ; 0x021FB270
 	add r2, r4, #0
 	bl ov01_021FB164
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	mov r0, #1
 	str r0, [r5, #0x18]
 	pop {r4, r5, r6}
@@ -374,7 +374,7 @@ ov01_021FB2E8: ; 0x021FB2E8
 	push {r3, lr}
 	cmp r0, #0
 	beq _021FB2F2
-	bl Heap_Free
+	bl FreeToHeap
 _021FB2F2:
 	pop {r3, pc}
 	thumb_func_end ov01_021FB2E8
@@ -403,7 +403,7 @@ ov01_021FB308: ; 0x021FB308
 	mov r1, #0x88
 	add r6, r2, #0
 	add r7, r3, #0
-	bl Heap_AllocAtEnd
+	bl AllocFromHeapAtEnd
 	add r1, r0, #0
 	add r2, r1, #0
 	mov r0, #0

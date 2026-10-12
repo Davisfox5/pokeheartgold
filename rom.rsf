@@ -20,8 +20,8 @@ Property
 	MakerCode "01"
 	RemasterVersion 0
 	RomSpeedType 1TROM
-	RomSize 1G
-	RomFootPadding TRUE
+	RomSize 2G
+	RomFootPadding FALSE
 	BannerFile $(BNR)
 }
 

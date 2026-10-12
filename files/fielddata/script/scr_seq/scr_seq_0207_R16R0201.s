@@ -5,67 +5,67 @@
 
 	.rodata
 
-	ScrDef scr_seq_R16R0201_000
-	ScrDef scr_seq_R16R0201_001
-	ScrDef scr_seq_R16R0201_002
-	ScrDef scr_seq_R16R0201_003
-	ScrDefEnd
+	scrdef scr_seq_R16R0201_000
+	scrdef scr_seq_R16R0201_001
+	scrdef scr_seq_R16R0201_002
+	scrdef scr_seq_R16R0201_003
+	scrdef_end
 
 scr_seq_R16R0201_003:
-	GoToIfSet FLAG_UNK_149, _001F
-	End
+	goto_if_set FLAG_UNK_149, _001F
+	end
 
 _001F:
-	SetBikeStateLock 1
-	End
+	set_bike_state_lock 1
+	end
 
 scr_seq_R16R0201_001:
-	ScrCmd_609
-	LockAll
-	PlayerOnBikeCheck VAR_SPECIAL_RESULT
-	Compare VAR_SPECIAL_RESULT, 1
-	GoToIfEq _006A
-	ApplyMovement obj_player, _0084
-	WaitMovement
-	NPCMsg msg_0356_R16R0201_00001
-	CloseMsg
-	ToggleFollowingPokemonMovement 0
-	WaitFollowingPokemonMovement
-	FollowingPokemonMovement 55
-	ApplyMovement obj_player, _008C
-	WaitMovement
-	WaitFollowingPokemonMovement
-	ToggleFollowingPokemonMovement 1
-	FollowingPokemonMovement 48
-	ReleaseAll
-	End
+	scrcmd_609
+	lockall
+	player_on_bike_check VAR_SPECIAL_RESULT
+	compare VAR_SPECIAL_RESULT, 1
+	goto_if_eq _006A
+	apply_movement obj_player, _0084
+	wait_movement
+	npc_msg msg_0356_R16R0201_00001
+	closemsg
+	toggle_following_pokemon_movement 0
+	wait_following_pokemon_movement
+	following_pokemon_movement 55
+	apply_movement obj_player, _008C
+	wait_movement
+	wait_following_pokemon_movement
+	toggle_following_pokemon_movement 1
+	following_pokemon_movement 48
+	releaseall
+	end
 
 _006A:
-	SetBikeStateLock 1
-	SetVar VAR_UNK_4129, 1
-	SetVar VAR_UNK_412A, 1
-	SetFlag FLAG_UNK_149
-	ReleaseAll
-	End
+	set_bike_state_lock 1
+	setvar VAR_UNK_4129, 1
+	setvar VAR_UNK_412A, 1
+	setflag FLAG_UNK_149
+	releaseall
+	end
 
 	.balign 4, 0
 _0084:
-	WalkOnSpotNormalNorth
-	EndMovement
+	step 32, 1
+	step_end
 
 	.balign 4, 0
 _008C:
-	WalkNormalEast
-	EndMovement
+	step 15, 1
+	step_end
 
 scr_seq_R16R0201_002:
-	SetBikeStateLock 0
-	SetVar VAR_UNK_4129, 0
-	SetVar VAR_UNK_412A, 0
-	ClearFlag FLAG_UNK_149
-	End
+	set_bike_state_lock 0
+	setvar VAR_UNK_4129, 0
+	setvar VAR_UNK_412A, 0
+	clearflag FLAG_UNK_149
+	end
 
 scr_seq_R16R0201_000:
-	SimpleNPCMsg msg_0356_R16R0201_00000
-	End
+	simple_npc_msg msg_0356_R16R0201_00000
+	end
 	.balign 4, 0

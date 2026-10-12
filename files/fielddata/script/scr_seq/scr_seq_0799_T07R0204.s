@@ -5,15 +5,15 @@
 
 	.rodata
 
-	ScrDef scr_seq_T07R0204_000
-	ScrDef scr_seq_T07R0204_001
-	ScrDefEnd
+	scrdef scr_seq_T07R0204_000
+	scrdef scr_seq_T07R0204_001
+	scrdef_end
 
 scr_seq_T07R0204_001:
-	SetVar VAR_UNK_4125, 0
-	End
+	setvar VAR_UNK_4125, 0
+	end
 
 scr_seq_T07R0204_000:
-	SimpleNPCMsg msg_0504_T07R0204_00000
-	End
+	simple_npc_msg msg_0504_T07R0204_00000
+	end
 	.balign 4, 0

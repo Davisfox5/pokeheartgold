@@ -14,7 +14,7 @@ ov27_02259F80: ; 0x02259F80
 	ldr r2, _0225A170 ; =0x00018D00
 	mov r0, #3
 	mov r1, #8
-	bl Heap_Create
+	bl CreateHeap
 	mov r0, #0
 	bl GXS_SetGraphicsMode
 	mov r0, #0x80
@@ -243,17 +243,17 @@ ov27_0225A19C: ; 0x0225A19C
 	str r1, [sp, #4]
 	bl SysTask_GetData
 	add r6, r0, #0
-	ldr r1, _0225A2B0 ; =FS_OVERLAY_ID(ds_protect)
+	ldr r1, _0225A2B0 ; =FS_OVERLAY_ID(OVY_123)
 	mov r0, #0
 	bl FS_LoadOverlay
 	ldr r0, _0225A2B4 ; =ov27_0225C238
-	bl DSProt_DetectFlashcart
+	bl ov123_0225F430
 	cmp r0, #0
 	beq _0225A1C8
 	mov r1, #0xfa
 	mov r0, #3
 	lsl r1, r1, #2
-	bl Heap_AllocAtEnd
+	bl AllocFromHeapAtEnd
 _0225A1C8:
 	mov r0, #0x52
 	lsl r0, r0, #4
@@ -271,7 +271,7 @@ _0225A1C8:
 	lsl r7, r7, #2
 _0225A1EA:
 	ldr r0, [r5, r7]
-	bl SpriteTransfer_DeleteCharTransferTask
+	bl sub_0200AEB0
 	add r4, r4, #1
 	add r5, #0x10
 	cmp r4, #0xb
@@ -282,7 +282,7 @@ _0225A1EA:
 	lsl r7, r7, #2
 _0225A200:
 	ldr r0, [r4, r7]
-	bl SpriteTransfer_DeletePlttTransferTask
+	bl sub_0200B0A8
 	add r5, r5, #1
 	add r4, #0x10
 	cmp r5, #0xb
@@ -299,13 +299,13 @@ _0225A216:
 	cmp r5, #4
 	blt _0225A216
 	ldr r0, _0225A2C0 ; =ov27_0225C248
-	bl DSProt_DetectNotEmulator
+	bl ov123_0225F598
 	cmp r0, #0
 	bne _0225A238
 	mov r1, #0xfa
 	mov r0, #3
 	lsl r1, r1, #2
-	bl Heap_AllocAtEnd
+	bl AllocFromHeapAtEnd
 _0225A238:
 	ldr r0, [r6, #0x18]
 	bl SpriteList_Delete
@@ -341,23 +341,23 @@ _0225A246:
 	mov r1, #4
 	bl FreeBgTilemapBuffer
 	mov r0, #8
-	bl Heap_Destroy
+	bl DestroyHeap
 	ldr r0, _0225A2C4 ; =ov27_0225C24C
-	bl DSProt_DetectNotDummy
+	bl ov123_0225F688
 	cmp r0, #0
 	bne _0225A2A4
 	mov r1, #0xfa
 	mov r0, #3
 	lsl r1, r1, #2
-	bl Heap_AllocAtEnd
+	bl AllocFromHeapAtEnd
 _0225A2A4:
-	ldr r1, _0225A2B0 ; =FS_OVERLAY_ID(ds_protect)
+	ldr r1, _0225A2B0 ; =FS_OVERLAY_ID(OVY_123)
 	mov r0, #0
 	bl FS_UnloadOverlay
 	add sp, #8
 	pop {r3, r4, r5, r6, r7, pc}
 	.balign 4, 0
-_0225A2B0: .word FS_OVERLAY_ID(ds_protect)
+_0225A2B0: .word FS_OVERLAY_ID(OVY_123)
 _0225A2B4: .word ov27_0225C238
 _0225A2B8: .word 0x000004A8
 _0225A2BC: .word 0x000004AC
@@ -1856,7 +1856,7 @@ _0225AD52:
 	mov r2, #0x40
 	bl MIi_CpuCopyFast
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	add sp, #0x14
 	pop {r4, r5, r6, r7, pc}
 	.balign 4, 0
@@ -2036,11 +2036,11 @@ _0225AFAC:
 	bl AddPlttResObjFromNarc
 	str r0, [r4, #4]
 	ldr r0, [r4]
-	bl SpriteTransfer_CreateCharTransferTask_AllocAtEnd
+	bl sub_0200ADA4
 	ldr r0, [r4]
 	bl sub_0200A740
 	ldr r0, [r4, #4]
-	bl SpriteTransfer_CreatePlttTransferTask
+	bl sub_0200B00C
 	ldr r0, [r4, #4]
 	bl sub_0200A740
 	add sp, #0x24
@@ -2649,7 +2649,7 @@ ov27_0225B4D8: ; 0x0225B4D8
 	add r5, r0, #0
 	ldr r0, [r5, #0x10]
 	ldr r0, [r0, #0x40]
-	bl PlayerAvatar_GetPlayerMoveState
+	bl sub_0205C6D4
 	cmp r0, #0
 	bne _0225B4F2
 	ldr r0, _0225B624 ; =gSystem
@@ -4111,7 +4111,7 @@ ov27_0225C06C: ; 0x0225C06C
 	push {r4, lr}
 	add r4, r0, #0
 	ldr r0, [r4, #0x10]
-	bl FieldSystem_GetParkBallCount
+	bl PalPark_CountMonsNotCaught
 	add r3, r0, #0
 	mov r1, #0xe
 	lsl r3, r3, #0x10
@@ -4369,13 +4369,13 @@ _0225C236:
 
 	thumb_func_start ov27_0225C238
 ov27_0225C238: ; 0x0225C238
-	ldr r3, _0225C244 ; =Heap_AllocAtEnd
+	ldr r3, _0225C244 ; =AllocFromHeapAtEnd
 	mov r1, #0xfa
 	mov r0, #3
 	lsl r1, r1, #2
 	bx r3
 	nop
-_0225C244: .word Heap_AllocAtEnd
+_0225C244: .word AllocFromHeapAtEnd
 	thumb_func_end ov27_0225C238
 
 	thumb_func_start ov27_0225C248
@@ -4401,7 +4401,7 @@ ov27_0225C250: ; 0x0225C250
 	mov r1, #8
 	lsl r2, r0, #0xf
 	str r3, [sp, #4]
-	bl Heap_Create
+	bl CreateHeap
 	mov r0, #0
 	bl GXS_SetGraphicsMode
 	mov r0, #0x80
@@ -4540,11 +4540,11 @@ ov27_0225C398: ; 0x0225C398
 	mov r0, #0xd5
 	lsl r0, r0, #2
 	ldr r0, [r7, r0]
-	bl SpriteTransfer_DeleteCharTransferTask
+	bl sub_0200AEB0
 	mov r0, #0xd6
 	lsl r0, r0, #2
 	ldr r0, [r7, r0]
-	bl SpriteTransfer_DeletePlttTransferTask
+	bl sub_0200B0A8
 	mov r6, #0xd1
 	mov r4, #0
 	add r5, r7, #0
@@ -4578,7 +4578,7 @@ _0225C3C4:
 	mov r1, #4
 	bl FreeBgTilemapBuffer
 	mov r0, #8
-	bl Heap_Destroy
+	bl DestroyHeap
 	add sp, #8
 	pop {r3, r4, r5, r6, r7, pc}
 	.balign 4, 0
@@ -4727,7 +4727,7 @@ ov27_0225C4AC: ; 0x0225C4AC
 	mov r1, #6
 	bl ScheduleBgTilemapBufferTransfer
 	add r0, r6, #0
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r4, #0
 	bl NARC_Delete
 	add sp, #0x14
@@ -5078,11 +5078,11 @@ _0225C75C:
 	str r0, [r6, r1]
 	sub r1, #0xc
 	ldr r0, [r6, r1]
-	bl SpriteTransfer_CreateCharTransferTask_AllocAtEnd
+	bl sub_0200ADA4
 	mov r0, #0xd6
 	lsl r0, r0, #2
 	ldr r0, [r6, r0]
-	bl SpriteTransfer_CreatePlttTransferTask
+	bl sub_0200B00C
 	add sp, #0x10
 	pop {r3, r4, r5, r6, r7, pc}
 	thumb_func_end ov27_0225C72C

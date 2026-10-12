@@ -5,243 +5,255 @@
 
 	.rodata
 
-	ScrDef scr_seq_T28_000
-	ScrDef scr_seq_T28_001
-	ScrDef scr_seq_T28_002
-	ScrDef scr_seq_T28_003
-	ScrDef scr_seq_T28_004
-	ScrDef scr_seq_T28_005
-	ScrDef scr_seq_T28_006
-	ScrDef scr_seq_T28_007
-	ScrDef scr_seq_T28_008
-	ScrDefEnd
+	scrdef scr_seq_T28_000
+	scrdef scr_seq_T28_001
+	scrdef scr_seq_T28_002
+	scrdef scr_seq_T28_003
+	scrdef scr_seq_T28_004
+	scrdef scr_seq_T28_005
+	scrdef scr_seq_T28_006
+	scrdef scr_seq_T28_007
+	scrdef scr_seq_T28_008
+	scrdef_end
 
 scr_seq_T28_005:
-	SetVar VAR_SCENE_ROCKET_TAKEOVER, 2
-	SetFlag FLAG_UNK_0C5
-	SetFlag FLAG_ROCKET_TAKEOVER_ACTIVE
-	Compare VAR_UNK_40F8, 0
-	GoToIfNe _0047
-	SetVar VAR_UNK_40F8, 2
+	setvar VAR_SCENE_ROCKET_TAKEOVER, 2
+	setflag FLAG_UNK_0C5
+	setflag FLAG_ROCKET_TAKEOVER_ACTIVE
+	compare VAR_UNK_40F8, 0
+	goto_if_ne _0047
+	setvar VAR_UNK_40F8, 2
 _0047:
-	PhoneCall PHONE_CONTACT_PROF__ELM, 2, 2
-	SetVar VAR_MIDGAME_BADGES, 5
-	End
+	phone_call PHONE_CONTACT_PROF__ELM, 2, 2
+	setvar VAR_MIDGAME_BADGES, 5
+	end
 
 scr_seq_T28_000:
-	PlaySE SEQ_SE_DP_SELECT
-	LockAll
-	FacePlayer
-	Compare VAR_SCENE_ROCKET_TAKEOVER, 5
-	GoToIfEq _0117
-	GoToIfSet FLAG_GOT_RAGECANDYBAR, _010C
-	NPCMsg msg_0620_T28_00000
-	TouchscreenMenuHide
-	GetMenuChoice VAR_SPECIAL_RESULT
-	TouchscreenMenuShow
-	Compare VAR_SPECIAL_RESULT, 1
-	GoToIfEq _0101
+	play_se SEQ_SE_DP_SELECT
+	lockall
+	faceplayer
+	compare VAR_SCENE_ROCKET_TAKEOVER, 5
+	goto_if_eq _0117
+	goto_if_set FLAG_GOT_RAGECANDYBAR, _010C
+	npc_msg msg_0620_T28_00000
+	touchscreen_menu_hide
+	getmenuchoice VAR_SPECIAL_RESULT
+	touchscreen_menu_show
+	compare VAR_SPECIAL_RESULT, 1
+	goto_if_eq _0101
 _009D:
-	HasEnoughMoneyImmediate VAR_SPECIAL_RESULT, 200
-	Compare VAR_SPECIAL_RESULT, 0
-	GoToIfEq _00EC
-	GoToIfNoItemSpace ITEM_RAGECANDYBAR, 1, _00F7
-	CallStd std_give_item_verbose
-	SubMoneyImmediate 200
-	NPCMsg msg_0620_T28_00005
-	WaitButton
-	SetFlag FLAG_GOT_RAGECANDYBAR
-	GoTo _014C
+	hasenoughmoneyimmediate VAR_SPECIAL_RESULT, 200
+	compare VAR_SPECIAL_RESULT, 0
+	goto_if_eq _00EC
+	goto_if_no_item_space ITEM_RAGECANDYBAR, 1, _00F7
+	callstd std_give_item_verbose
+	submoneyimmediate 200
+	npc_msg msg_0620_T28_00005
+	wait_button_or_walk_away
+	setflag FLAG_GOT_RAGECANDYBAR
+	goto _014C
 
 _00EC:
-	NPCMsg msg_0620_T28_00007
-	WaitButton
-	GoTo _014C
+	npc_msg msg_0620_T28_00007
+	wait_button_or_walk_away
+	goto _014C
 
 _00F7:
-	CallStd std_bag_is_full
-	GoTo _014C
+	callstd std_bag_is_full
+	goto _014C
 
 _0101:
-	NPCMsg msg_0620_T28_00009
-	WaitButton
-	GoTo _014C
+	npc_msg msg_0620_T28_00009
+	wait_button_or_walk_away
+	goto _014C
 
 _010C:
-	NPCMsg msg_0620_T28_00001
-	WaitButton
-	GoTo _014C
+	npc_msg msg_0620_T28_00001
+	wait_button_or_walk_away
+	goto _014C
 
 _0117:
-	GoToIfSet FLAG_GOT_RAGECANDYBAR, _0147
-	NPCMsg msg_0620_T28_00003
-	TouchscreenMenuHide
-	GetMenuChoice VAR_SPECIAL_RESULT
-	TouchscreenMenuShow
-	Compare VAR_SPECIAL_RESULT, 0
-	GoToIfEq _009D
-	Compare VAR_SPECIAL_RESULT, 1
-	GoToIfEq _0101
+	goto_if_set FLAG_GOT_RAGECANDYBAR, _0147
+	npc_msg msg_0620_T28_00003
+	touchscreen_menu_hide
+	getmenuchoice VAR_SPECIAL_RESULT
+	touchscreen_menu_show
+	compare VAR_SPECIAL_RESULT, 0
+	goto_if_eq _009D
+	compare VAR_SPECIAL_RESULT, 1
+	goto_if_eq _0101
 _0147:
-	NPCMsg msg_0620_T28_00004
-	WaitButton
+	npc_msg msg_0620_T28_00004
+	wait_button_or_walk_away
 _014C:
-	CloseMsg
-	ReleaseAll
-	End
+	closemsg
+	releaseall
+	end
 
 scr_seq_T28_001:
-	ScrCmd_609
-	LockAll
-	ApplyMovement obj_T28_gsmiddleman1, _0278
-	WaitMovement
-	ToggleFollowingPokemonMovement 0
-	WaitFollowingPokemonMovement
-	FollowingPokemonMovement 56
-	GetPlayerCoords VAR_TEMP_x4000, VAR_TEMP_x4001
-	Compare VAR_TEMP_x4001, 176
-	GoToIfNe _0193
-	ApplyMovement obj_T28_gsmiddleman1, _0284
-	ApplyMovement obj_player, _0294
-	GoTo _01A3
+	scrcmd_609
+	lockall
+	apply_movement obj_T28_gsmiddleman1, _0278
+	wait_movement
+	toggle_following_pokemon_movement 0
+	wait_following_pokemon_movement
+	following_pokemon_movement 56
+	get_player_coords VAR_TEMP_x4000, VAR_TEMP_x4001
+	compare VAR_TEMP_x4001, 176
+	goto_if_ne _0193
+	apply_movement obj_T28_gsmiddleman1, _0284
+	apply_movement obj_player, _0294
+	goto _01A3
 
 _0193:
-	ApplyMovement obj_T28_gsmiddleman1, _02A4
-	ApplyMovement obj_player, _02B4
+	apply_movement obj_T28_gsmiddleman1, _02A4
+	apply_movement obj_player, _02B4
 _01A3:
-	WaitMovement
-	WaitFollowingPokemonMovement
-	ToggleFollowingPokemonMovement 1
-	FollowingPokemonMovement 48
-	GoToIfSet FLAG_GOT_RAGECANDYBAR, _026D
-	NPCMsg msg_0620_T28_00000
-	TouchscreenMenuHide
-	GetMenuChoice VAR_SPECIAL_RESULT
-	TouchscreenMenuShow
-	Compare VAR_SPECIAL_RESULT, 0
-	GoToIfEq _01DF
-	Compare VAR_SPECIAL_RESULT, 1
-	GoToIfEq _0257
+	wait_movement
+	wait_following_pokemon_movement
+	toggle_following_pokemon_movement 1
+	following_pokemon_movement 48
+	goto_if_set FLAG_GOT_RAGECANDYBAR, _026D
+	npc_msg msg_0620_T28_00000
+	touchscreen_menu_hide
+	getmenuchoice VAR_SPECIAL_RESULT
+	touchscreen_menu_show
+	compare VAR_SPECIAL_RESULT, 0
+	goto_if_eq _01DF
+	compare VAR_SPECIAL_RESULT, 1
+	goto_if_eq _0257
 _01DF:
-	HasEnoughMoneyImmediate VAR_SPECIAL_RESULT, 300
-	Compare VAR_SPECIAL_RESULT, 0
-	GoToIfEq _0262
-	GoToIfNoItemSpace ITEM_RAGECANDYBAR, 1, _00F7
-	CallStd std_give_item_verbose
-	SubMoneyImmediate 300
-	NPCMsg msg_0620_T28_00006
-	CloseMsg
-	SetFlag FLAG_GOT_RAGECANDYBAR
+	hasenoughmoneyimmediate VAR_SPECIAL_RESULT, 300
+	compare VAR_SPECIAL_RESULT, 0
+	goto_if_eq _0262
+	goto_if_no_item_space ITEM_RAGECANDYBAR, 1, _00F7
+	callstd std_give_item_verbose
+	submoneyimmediate 300
+	npc_msg msg_0620_T28_00006
+	closemsg
+	setflag FLAG_GOT_RAGECANDYBAR
 _0228:
-	GetPlayerCoords VAR_TEMP_x4000, VAR_TEMP_x4001
-	Compare VAR_TEMP_x4001, 176
-	GoToIfNe _0249
-	ApplyMovement obj_T28_gsmiddleman1, _02C4
-	GoTo _0251
+	get_player_coords VAR_TEMP_x4000, VAR_TEMP_x4001
+	compare VAR_TEMP_x4001, 176
+	goto_if_ne _0249
+	apply_movement obj_T28_gsmiddleman1, _02C4
+	goto _0251
 
 _0249:
-	ApplyMovement obj_T28_gsmiddleman1, _02D0
+	apply_movement obj_T28_gsmiddleman1, _02D0
 _0251:
-	WaitMovement
-	ReleaseAll
-	End
+	wait_movement
+	releaseall
+	end
 
 _0257:
-	NPCMsg msg_0620_T28_00010
-	CloseMsg
-	GoTo _0228
+	npc_msg msg_0620_T28_00010
+	closemsg
+	goto _0228
 
 _0262:
-	NPCMsg msg_0620_T28_00008
-	CloseMsg
-	GoTo _0228
+	npc_msg msg_0620_T28_00008
+	closemsg
+	goto _0228
 
 _026D:
-	NPCMsg msg_0620_T28_00002
-	CloseMsg
-	GoTo _0228
+	npc_msg msg_0620_T28_00002
+	closemsg
+	goto _0228
 
 	.balign 4, 0
 _0278:
-	FaceSouth
-	EmoteExclamationMark
-	EndMovement
+	step 1, 1
+	step 75, 1
+	step_end
 
 	.balign 4, 0
 _0284:
-	WalkFastEast
-	WalkFastSouth
-	WalkFastWest
-	EndMovement
+	step 19, 1
+	step 17, 1
+	step 18, 1
+	step_end
 
 	.balign 4, 0
 _0294:
-	Delay4 2
-	WalkFastWest
-	FaceEast
-	EndMovement
+	step 62, 2
+	step 18, 1
+	step 3, 1
+	step_end
 
 	.balign 4, 0
 _02A4:
-	WalkFastEast
-	WalkFastSouth 2
-	WalkFastWest
-	EndMovement
+	step 19, 1
+	step 17, 2
+	step 18, 1
+	step_end
 
 	.balign 4, 0
 _02B4:
-	Delay4 3
-	WalkFastWest
-	FaceEast
-	EndMovement
+	step 62, 3
+	step 18, 1
+	step 3, 1
+	step_end
 
 	.balign 4, 0
 _02C4:
-	WalkNormalNorth
-	FaceSouth
-	EndMovement
+	step 12, 1
+	step 1, 1
+	step_end
 
 	.balign 4, 0
 _02D0:
-	WalkNormalNorth 2
-	FaceSouth
-	EndMovement
+	step 12, 2
+	step 1, 1
+	step_end
 
 scr_seq_T28_002:
-	PlaySE SEQ_SE_DP_SELECT
-	LockAll
-	FacePlayer
-	GoToIfSet FLAG_GOT_RED_SCALE, _02FA
-	NPCMsg msg_0620_T28_00014
-	WaitButton
-	CloseMsg
-	ReleaseAll
-	End
+	play_se SEQ_SE_DP_SELECT
+	lockall
+	faceplayer
+	goto_if_set FLAG_GOT_RED_SCALE, _02FA
+	npc_msg msg_0620_T28_00014
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
 
 _02FA:
-	NPCMsg msg_0620_T28_00015
-	WaitButton
-	CloseMsg
-	ReleaseAll
-	End
+	npc_msg msg_0620_T28_00015
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
 
 scr_seq_T28_003:
-	SimpleNPCMsg msg_0620_T28_00016
-	End
+	simple_npc_msg msg_0620_T28_00016
+	end
 
 scr_seq_T28_004:
-	SimpleNPCMsg msg_0620_T28_00013
-	End
+	simple_npc_msg msg_0620_T28_00013
+	end
 
 scr_seq_T28_006:
-	DirectionSignpostEx 0, 19, msg_0620_T28_00017
-	End
+	direction_signpost msg_0620_T28_00017, 0, 19, VAR_SPECIAL_RESULT
+	scrcmd_057 3
+	scrcmd_058
+	scrcmd_060 VAR_SPECIAL_RESULT
+	callstd std_signpost
+	end
 
 scr_seq_T28_007:
-	TrainerTipsEx 2, msg_0620_T28_00018
-	End
+	scrcmd_055 2, 0
+	scrcmd_057 3
+	scrcmd_058
+	trainer_tips msg_0620_T28_00018, VAR_SPECIAL_RESULT
+	callstd std_signpost
+	end
 
 scr_seq_T28_008:
-	TrainerTipsEx 2, msg_0620_T28_00019
-	End
+	scrcmd_055 2, 0
+	scrcmd_057 3
+	scrcmd_058
+	trainer_tips msg_0620_T28_00019, VAR_SPECIAL_RESULT
+	callstd std_signpost
+	end
 	.balign 4, 0

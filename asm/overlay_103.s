@@ -12,7 +12,7 @@ ov103_021EC940: ; 0x021EC940
 	mov r0, #3
 	mov r1, #0x9c
 	lsl r2, r2, #0x10
-	bl Heap_Create
+	bl CreateHeap
 	add r0, r5, #0
 	mov r1, #0x2c
 	mov r2, #0x9c
@@ -60,7 +60,7 @@ ov103_021EC9A4: ; 0x021EC9A4
 	push {r3, lr}
 	bl OverlayManager_FreeData
 	mov r0, #0x9c
-	bl Heap_Destroy
+	bl DestroyHeap
 	mov r0, #1
 	pop {r3, pc}
 	thumb_func_end ov103_021EC9A4
@@ -341,7 +341,7 @@ ov103_021ECBBC: ; 0x021ECBBC
 	bl FreeBgTilemapBuffer
 	ldr r0, [r4, #0xc]
 	ldr r0, [r0]
-	bl Heap_Free
+	bl FreeToHeap
 	pop {r4, pc}
 	.balign 4, 0
 	thumb_func_end ov103_021ECBBC
@@ -456,7 +456,7 @@ ov103_021ECC1C: ; 0x021ECC1C
 	mov r2, #0x20
 	bl MIi_CpuCopy32
 	add r0, r7, #0
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r4, #0
 	bl NARC_Delete
 	add sp, #0x14
@@ -950,7 +950,7 @@ _021ED0AC:
 	ldr r0, [r6, #0xc]
 	add r0, r0, r5
 	ldr r0, [r0, r7]
-	bl Heap_Free
+	bl FreeToHeap
 	add r4, r4, #1
 	add r5, r5, #4
 	cmp r4, #0x14
@@ -1300,11 +1300,11 @@ ov103_021ED314: ; 0x021ED314
 	mov r0, #3
 	mov r1, #0x9d
 	lsl r2, r0, #0x11
-	bl Heap_Create
+	bl CreateHeap
 	mov r1, #0x2f
 	mov r0, #0x9d
 	lsl r1, r1, #4
-	bl Heap_Alloc
+	bl AllocFromHeap
 	mov r2, #0x2f
 	mov r1, #0
 	lsl r2, r2, #4
@@ -1387,11 +1387,11 @@ ov103_021ED3E8: ; 0x021ED3E8
 	mov r0, #0
 	bl GfGfx_EngineBSetPlanes
 	ldr r0, [r4, #0xc]
-	bl Heap_Free
+	bl FreeToHeap
 	mov r0, #0
 	str r0, [r4, #0xc]
 	mov r0, #0x9d
-	bl Heap_Destroy
+	bl DestroyHeap
 	ldr r0, [r4, #0x28]
 	pop {r4, pc}
 	nop
@@ -1639,7 +1639,7 @@ _021ED60C:
 	ldr r1, [r4, #0xc]
 	lsl r0, r0, #2
 	ldr r0, [r1, r0]
-	bl GridInputHandler_HandleInput_NoHold
+	bl sub_02019BE4
 	mov r1, #2
 	add r5, r0, #0
 	mvn r1, r1
@@ -1725,7 +1725,7 @@ _021ED6B2:
 	ldr r1, [r4, #0xc]
 	lsl r0, r0, #2
 	ldr r0, [r1, r0]
-	bl GridInputHandler_GetNextInput
+	bl sub_02019F74
 	ldr r1, _021ED74C ; =gSystem
 	mov r2, #0x10
 	ldr r1, [r1, #0x4c]
@@ -2014,7 +2014,7 @@ ov103_021ED8F8: ; 0x021ED8F8
 	ldr r1, [r4, #0xc]
 	lsl r0, r0, #2
 	ldr r0, [r1, r0]
-	bl GridInputHandler_GetNextInput
+	bl sub_02019F74
 	add r1, r0, #0
 	add r0, r4, #0
 	bl ov103_021EEAC8
@@ -2148,7 +2148,7 @@ ov103_021ED9D8: ; 0x021ED9D8
 	ldr r1, [r4, #0xc]
 	lsl r0, r0, #2
 	ldr r0, [r1, r0]
-	bl GridInputHandler_GetNextInput
+	bl sub_02019F74
 	add r1, r0, #0
 	add r0, r4, #0
 	bl ov103_021EEAC8
@@ -2494,7 +2494,7 @@ ov103_021EDC68: ; 0x021EDC68
 	mov r1, #0x44
 	add r7, r2, #0
 	str r3, [sp]
-	bl Heap_Alloc
+	bl AllocFromHeap
 	mov r1, #0
 	mov r2, #0x44
 	add r4, r0, #0
@@ -2569,7 +2569,7 @@ ov103_021EDCE0: ; 0x021EDCE0
 	bl sub_02091004
 _021EDD08:
 	ldr r0, [r5, #0x14]
-	bl Heap_Free
+	bl FreeToHeap
 	mov r0, #8
 	pop {r3, r4, r5, pc}
 	.balign 4, 0
@@ -2599,7 +2599,7 @@ ov103_021EDD14: ; 0x021EDD14
 	add r1, #0x20
 	strb r2, [r1]
 	ldr r0, [r0, #0x14]
-	bl Heap_Free
+	bl FreeToHeap
 	mov r0, #0
 	pop {r4, pc}
 	thumb_func_end ov103_021EDD14
@@ -2608,7 +2608,7 @@ ov103_021EDD14: ; 0x021EDD14
 ov103_021EDD48: ; 0x021EDD48
 	push {r3, lr}
 	ldr r0, [r0, #0x14]
-	bl Heap_Free
+	bl FreeToHeap
 	mov r0, #8
 	pop {r3, pc}
 	thumb_func_end ov103_021EDD48
@@ -3313,7 +3313,7 @@ _021EE260:
 	lsl r2, r2, #8
 	bl GXS_LoadOBJ
 	ldr r0, [sp, #0xc]
-	bl Heap_Free
+	bl FreeToHeap
 	ldr r0, [r5, #0xc]
 	add r1, r0, r6
 	mov r0, #0x9a
@@ -4310,7 +4310,7 @@ _021EEA62:
 	ldr r1, _021EEA98 ; =ov103_021EF008
 	ldr r2, _021EEA9C ; =ov103_021EEFC8
 	add r3, r5, #0
-	bl GridInputHandler_Create
+	bl sub_02019BA4
 	mov r1, #0x9e
 	ldr r2, [r5, #0xc]
 	lsl r1, r1, #2
@@ -4332,11 +4332,11 @@ ov103_021EEAA0: ; 0x021EEAA0
 	ldr r1, [r0, #0xc]
 	mov r0, #0x9e
 	lsl r0, r0, #2
-	ldr r3, _021EEAAC ; =GridInputHandler_Free
+	ldr r3, _021EEAAC ; =sub_02019BDC
 	ldr r0, [r1, r0]
 	bx r3
 	.balign 4, 0
-_021EEAAC: .word GridInputHandler_Free
+_021EEAAC: .word sub_02019BDC
 	thumb_func_end ov103_021EEAA0
 
 	thumb_func_start ov103_021EEAB0
@@ -4376,7 +4376,7 @@ ov103_021EEAC8: ; 0x021EEAC8
 	lsl r0, r0, #2
 	ldr r0, [r2, r0]
 	add r4, r1, #0
-	bl GridInputHandler_GetDpadBox
+	bl sub_0201A018
 	add r3, r0, #0
 	ldrb r2, [r3]
 	ldrb r3, [r3, #1]

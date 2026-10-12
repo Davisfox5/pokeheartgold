@@ -18,7 +18,7 @@ sub_020961D8: ; 0x020961D8
 	add r5, r0, #0
 	mov r0, #0x20
 	mov r1, #0x24
-	bl Heap_Alloc
+	bl AllocFromHeap
 	add r4, r0, #0
 	str r5, [r4]
 	mov r0, #0x20
@@ -68,7 +68,7 @@ sub_02096248: ; 0x02096248
 	ldr r0, [r4, #4]
 	bl MessageFormat_Delete
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	pop {r4, pc}
 	thumb_func_end sub_02096248
 
@@ -121,7 +121,7 @@ _020962B8:
 	cmp r0, #0
 	beq _02096314
 	mov r0, #1
-	bl FieldMap_FadeScreen
+	bl ov01_021E636C
 	mov r0, #3
 	str r0, [r4, #0x18]
 	b _02096314

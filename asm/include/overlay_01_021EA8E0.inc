@@ -1,7 +1,7 @@
 #include <nitro/fs/overlay.h>
 #pragma once
-.public Heap_Alloc
-.public Heap_FreeExplicit
+.public AllocFromHeap
+.public FreeToHeapExplicit
 .public NNS_G3dGlbLightVector
 .public NNS_G3dGlbLightColor
 .public NNS_G3dGlbMaterialColorDiffAmb
@@ -22,9 +22,9 @@
 .public NNS_G3dMdlSetMdlFarClipAll
 .public NNS_G3dMdlSetMdlXLDepthUpdateAll
 .public MIi_CpuClear32
-.public ModelAttributes_Init
-.public ModelAttributes_Free
-.public ModelAttributes_ApplyGlobal
+.public ov01_021EA8E0
+.public ov01_021EA8FC
+.public ov01_021EA910
 .public ov01_021EA9B0
 .public ov01_021EAAB8
 .public ov01_021EAAE0
@@ -32,7 +32,7 @@
 .public ov01_021EAB08
 .public ov01_021EAB1C
 .public ov01_021EAB30
-.public ModelAttributes_SetPolygonMode
-.public ModelAttributes_SetCullMode
-.public ModelAttributes_SetAlpha
-.public ModelAttributes_SetMiscAttrEnabled
+.public ov01_021EAB44
+.public ov01_021EAB58
+.public ov01_021EAB6C
+.public ov01_021EAB80

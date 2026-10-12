@@ -3,12 +3,12 @@
 .public GF_SndHandleSetPlayerVolume
 .public sub_0200616C
 .public UnloadOverlayByID
-.public Heap_Create
-.public Heap_Destroy
+.public CreateHeap
+.public DestroyHeap
 .public GfGfx_SwapDisplay
 .public Save_Misc_Get
 .public sub_0202AC0C
-.public Field_SetEnvironmentSoundState_None_Unk2
+.public sub_0203E354
 .public sub_02055198
 .public sub_02087988
 .public sub_02087A78

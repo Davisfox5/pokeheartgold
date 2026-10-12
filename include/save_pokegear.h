@@ -5,7 +5,6 @@
 #include "constants/pokegear_card.h"
 
 #include "save.h"
-#include "unk_0202F370.h"
 
 #define MOMS_BALANCE_GET 0
 #define MOMS_BALANCE_SET 1
@@ -34,18 +33,37 @@ typedef struct PhoneCallPersistentState {
     u8 kenjiActive : 1;
     u8 numSafariAreas;
     u8 safariAreas[6];
-    u8 callTriggerFlags[2];
+    u8 unk_14E[2];
     u8 filler_150[4];
 } PhoneCallPersistentState; // size=0x154
+
+typedef struct UnkPokegearSub8 {
+    u16 unk_0;
+    u16 unk_2_0 : 4;
+    u16 unk_2_4 : 4;
+    u16 unk_2_8 : 4;
+    u16 unk_2_C : 4;
+    u16 unk_4[4];
+} UnkPokegearSub8;
+
+typedef struct UnkPokegearSub8List {
+    UnkPokegearSub8 list[100];
+} UnkPokegearSub8List;
+
+struct UnkStruct_0202F3DC {
+    u32 unk_0;
+    u8 unk_4[4];
+    u16 unk_8[4];
+};
 
 typedef struct SavePokegear {
     u8 lastUsedApp;
     u8 unk_1;
     u8 unk_2;
     u8 unk_3;
-    u32 unlockedSkins : 9;
+    u32 unk_4_0 : 9;
     u32 unk_4_9 : 9;
-    u32 skin : 7;
+    u32 backgroundStyle : 7;
     u32 registeredCards : 2;
     // mapUnlockLevel
     // 0: only Johto
@@ -53,7 +71,7 @@ typedef struct SavePokegear {
     // 2: the rest of Kanto
     u32 mapUnlockLevel : 2;
     u32 unk_4_29 : 3;
-    MapMarkingsSaveArray unk_8;
+    UnkPokegearSub8List unk_8;
     PhoneCallPersistentState callPersistentState;   // 4B8
     PhoneContact phoneContacts[NUM_PHONE_CONTACTS]; // 60C
 } SavePokegear;                                     // size=0x658
@@ -62,29 +80,29 @@ u32 SaveData_Pokegear_sizeof(void);
 SavePokegear *SaveData_Pokegear_Get(SaveData *saveData);
 PhoneCallPersistentState *SaveData_GetPhoneCallPersistentState(SaveData *saveData);
 void SaveData_Pokegear_Init(SavePokegear *pokegear);
-MapMarkingsSaveArray *SavePokegear_GetMapMarkingsArray(SavePokegear *pokegear);
+UnkPokegearSub8List *sub_0202EDF4(SavePokegear *pokegear);
 u8 SavePokegear_GetLastUsedApp(SavePokegear *pokegear);
 void SavePokegear_SetLastUsedApp(SavePokegear *pokegear, u8 appID);
 void SavePokegear_RegisterCard(SavePokegear *pokegear, int card);
 u8 Pokegear_GetRegisteredCardsArray(SavePokegear *pokegear);
 void Pokegear_SetMapUnlockLevel(SavePokegear *pokegear, u8 mapUnlockMenu);
 u8 Pokegear_GetMapUnlockLevel(SavePokegear *pokegear);
-u32 Pokegear_GetSkin(SavePokegear *pokegear);
-void Pokegear_SetSkin(SavePokegear *pokegear, u32 skin);
-u16 Pokegear_GetUnlockedSkins(SavePokegear *pokegear);
-BOOL sub_0202EEA4(SavePokegear *pokegear);
+u32 Pokegear_GetBackgroundStyle(SavePokegear *pokegear);
+void Pokegear_SetBackgroundStyle(SavePokegear *pokegear, u32 a1);
+u16 sub_0202EE98(SavePokegear *pokegear);
+u8 sub_0202EEA4(SavePokegear *pokegear);
 void sub_0202EEA8(SavePokegear *pokegear, u8 a1);
-void Pokegear_SetRadioCursorCoords(SavePokegear *pokegear, u8 x, u8 y);
-void Pokegear_GetRadioCursorCoords(SavePokegear *pokegear, s16 *px, s16 *py);
+void sub_0202EEAC(SavePokegear *pokegear, u16 a1, u16 a2);
+void sub_0202EEB4(SavePokegear *pokegear, u16 *a1, u16 *a2);
 u8 SavePokegear_FindEmptyPhonebookSlot(SavePokegear *pokegear);
 u8 SavePokegear_IsNumberRegistered(SavePokegear *pokegear, u8 contact);
 void SavePokegear_RegisterPhoneNumber(SavePokegear *pokegear, u8 contact);
-PhoneContact *SavePokegear_AllocAndCopyPhonebook(SavePokegear *pokegear, enum HeapID heapID);
+PhoneContact *SavePokegear_AllocAndCopyPhonebook(SavePokegear *pokegear, HeapID heapId);
 void SavePokegear_SetPhonebookFromBuffer(SavePokegear *pokegear, PhoneContact *contacts, u8 num);
 
-void PhoneCallPersistentState_SetCallTriggerFlag(PhoneCallPersistentState *callPersistentState, u8 idx);
-void PhoneCallPersistentState_ClearCallTriggerFlag(PhoneCallPersistentState *callPersistentState, u8 idx);
-BOOL PhoneCallPersistentState_CheckCallTriggerFlag(PhoneCallPersistentState *callPersistentState, u8 idx);
+void sub_0202F01C(PhoneCallPersistentState *callPersistentState, u8 idx);
+void sub_0202F050(PhoneCallPersistentState *callPersistentState, u8 idx);
+BOOL sub_0202F08C(PhoneCallPersistentState *callPersistentState, u8 idx);
 void PhoneCallPersistentState_PhoneRematches_SetSeeking(PhoneCallPersistentState *callPersistentState, u8 idx, BOOL state);
 BOOL PhoneCallPersistentState_PhoneRematches_IsSeeking(PhoneCallPersistentState *callPersistentState, u8 idx);
 void PhoneCallPersistentState_PhoneRematches_GiftItemIdSet(PhoneCallPersistentState *callPersistentState, u8 idx, u16 itemId);
@@ -101,6 +119,17 @@ BOOL PhoneCallPersistentState_BlackBeltKenji_GetActiveFlag(PhoneCallPersistentSt
 int PhoneCallPersistentState_BlackBeltKenji_GetWaitDays(PhoneCallPersistentState *callPersistentState);
 void sub_0202F294(PhoneCallPersistentState *callPersistentState, int a1);
 void PhoneCallPersistentState_SafariZoneArrangement_Set(PhoneCallPersistentState *callPersistentState, u8 *areas, u8 numAreas);
-u8 *PhoneCallPersistentState_SafariZoneArrangement_AllocAndGet(PhoneCallPersistentState *callPersistentState, u8 *numAreasRet, enum HeapID heapID);
+u8 *PhoneCallPersistentState_SafariZoneArrangement_AllocAndGet(PhoneCallPersistentState *callPersistentState, u8 *numAreasRet, HeapID heapId);
+
+BOOL sub_0202F370(UnkPokegearSub8 *unk);
+void sub_0202F388(UnkPokegearSub8 *unk);
+void sub_0202F3DC(struct UnkStruct_0202F3DC *unk);
+BOOL sub_0202F400(struct UnkStruct_0202F3DC *unk);
+void sub_0202F434(struct UnkStruct_0202F3DC *src, UnkPokegearSub8 *dest);
+void sub_0202F4B0(UnkPokegearSub8 *src, struct UnkStruct_0202F3DC *dest);
+BOOL sub_0202F4E8(UnkPokegearSub8List *list, u8 a1);
+void sub_0202F500(UnkPokegearSub8List *list, u8 a1);
+BOOL sub_0202F514(UnkPokegearSub8List *list, struct UnkStruct_0202F3DC *a1, u8 a2);
+BOOL sub_0202F53C(UnkPokegearSub8List *list, struct UnkStruct_0202F3DC *a1, u8 a2, BOOL a3);
 
 #endif // POKEHEARTGOLD_SAVE_GS_PLAYER_MISC_H

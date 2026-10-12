@@ -1,0 +1,264 @@
+make tools
+g++ -O3 -std=c++11 -g -MT o2narc.o -MMD -MP -MF .deps/o2narc.d -c -o o2narc.o o2narc.cpp
+clang++ -std=c++17 -g -O2 -DNDEBUG -MT main.o -MMD -MP -MF .deps/main.d -c -o main.o main.cpp
+clang++ -std=c++17 -g -O2 -DNDEBUG -MT CsvFile.o -MMD -MP -MF .deps/CsvFile.d -c -o CsvFile.o CsvFile.cpp
+gcc -O3 -g -DNDEBUG -DSOURCE_DIR="\"/Users/davisfox/Documents/GitHub/the-omni-hack/disasm/pokeheartgold/tools/gen_fx_consts\"" -MT main.o -MMD -MP -MF .deps/main.d -c -o main.o main.c
+g++ -O3 -std=c++11 -g -MT Options.o -MMD -MP -MF .deps/Options.d -c -o Options.o Options.cpp
+clang++   -g -std=c++17 -MT mod123encry.o -MMD -MP -MF .deps/mod123encry.d -c -o mod123encry.o mod123encry.cpp
+clang++   -g -std=c++17 -MT NtrRom.o -MMD -MP -MF .deps/NtrRom.d -c -o NtrRom.o NtrRom.cpp
+g++ -std=c++17 -O2 -Wall -Wno-switch -Wno-unused-but-set-variable -DNDEBUG -MT msgenc.o -MMD -MP -MF .deps/msgenc.d -c -o msgenc.o msgenc.cpp
+gcc -O3 -fsigned-char -MT component.o -MMD -MP -MF .deps/component.d -c -o component.o component.c
+g++ -std=c++17 -O2 -Wall -Wno-switch -Wno-unused-but-set-variable -DNDEBUG -MT Options.o -MMD -MP -MF .deps/Options.d -c -o Options.o Options.cpp
+gcc -O3 -fsigned-char -MT compress.o -MMD -MP -MF .deps/compress.d -c -o compress.o compress.c
+gcc -O3 -g -DNDEBUG -DSOURCE_DIR="\"/Users/davisfox/Documents/GitHub/the-omni-hack/disasm/pokeheartgold/tools/gen_fx_consts\"" -MT fx_encode.o -MMD -MP -MF .deps/fx_encode.d -c -o fx_encode.o fx_encode.c
+gcc -O3 -g -DNDEBUG -DSOURCE_DIR="\"/Users/davisfox/Documents/GitHub/the-omni-hack/disasm/pokeheartgold/tools/gen_fx_consts\"" -MT fx_data.o -MMD -MP -MF .deps/fx_data.d -c -o fx_data.o fx_data.c
+gcc -O3 -fsigned-char -MT digest.o -MMD -MP -MF .deps/digest.d -c -o digest.o digest.c
+gcc  -o gen_fx_consts main.o fx_encode.o fx_data.o
+gcc -O3 -fsigned-char -MT files.o -MMD -MP -MF .deps/files.d -c -o files.o files.c
+clang++   -g -std=c++17 -MT Decrypt.o -MMD -MP -MF .deps/Decrypt.d -c -o Decrypt.o Decrypt.cpp
+gcc -O3 -fsigned-char -MT main.o -MMD -MP -MF .deps/main.d -c -o main.o main.c
+gcc -O3 -fsigned-char -MT misc.o -MMD -MP -MF .deps/misc.d -c -o misc.o misc.c
+gcc -O3 -fsigned-char -MT overlay_defs.o -MMD -MP -MF .deps/overlay_defs.d -c -o overlay_defs.o overlay_defs.c
+g++ -O3 -std=c++11 -g -MT RelocElfReader.o -MMD -MP -MF .deps/RelocElfReader.d -c -o RelocElfReader.o RelocElfReader.cpp
+gcc -O3 -fsigned-char -MT overlay_modules.o -MMD -MP -MF .deps/overlay_modules.d -c -o overlay_modules.o overlay_modules.c
+gcc -O3 -fsigned-char -MT overlay_table.o -MMD -MP -MF .deps/overlay_table.d -c -o overlay_table.o overlay_table.c
+gcc -O3 -fsigned-char -MT print.o -MMD -MP -MF .deps/print.d -c -o print.o print.c
+g++ -std=c++17 -O2 -Wall -Wno-switch -Wno-unused-but-set-variable -DNDEBUG -MT MessagesConverter.o -MMD -MP -MF .deps/MessagesConverter.d -c -o MessagesConverter.o MessagesConverter.cpp
+gcc -O3 -fsigned-char -MT static_module.o -MMD -MP -MF .deps/static_module.d -c -o static_module.o static_module.c
+gcc -O3 -fsigned-char -MT str.o -MMD -MP -MF .deps/str.d -c -o str.o str.c
+clang++ -std=c++17 -g -O2 -DNDEBUG -MT Manifest.o -MMD -MP -MF .deps/Manifest.d -c -o Manifest.o Manifest.cpp
+clang++   -g -std=c++17 -MT Encrypt.o -MMD -MP -MF .deps/Encrypt.d -c -o Encrypt.o Encrypt.cpp
+gcc  -o compstatic component.o compress.o digest.o files.o main.o misc.o overlay_defs.o overlay_modules.o overlay_table.o print.o static_module.o str.o
+clang++ -std=c++17 -g -O2 -DNDEBUG -MT Options.o -MMD -MP -MF .deps/Options.d -c -o Options.o Options.cpp
+clang++   -g -std=c++17 -MT CryptoRc4.o -MMD -MP -MF .deps/CryptoRc4.d -c -o CryptoRc4.o CryptoRc4.cpp
+g++ -std=c++17 -O2 -Wall -Wno-switch -Wno-unused-but-set-variable -DNDEBUG -MT MessagesDecoder.o -MMD -MP -MF .deps/MessagesDecoder.d -c -o MessagesDecoder.o MessagesDecoder.cpp
+clang++   -g -std=c++17 -MT Overlay.o -MMD -MP -MF .deps/Overlay.d -c -o Overlay.o Overlay.cpp
+cc   -g -MT ntruncompbw.o -MMD -MP -MF .deps/ntruncompbw.d -c -o ntruncompbw.o ntruncompbw.c
+g++ -std=c++17 -O2 -Wall -Wno-switch -Wno-unused-but-set-variable -DNDEBUG -MT MessagesEncoder.o -MMD -MP -MF .deps/MessagesEncoder.d -c -o MessagesEncoder.o MessagesEncoder.cpp
+g++ -std=c++17 -O2 -Wall -Wno-switch -Wno-unused-but-set-variable -DNDEBUG -MT Gmm.o -MMD -MP -MF .deps/Gmm.d -c -o Gmm.o Gmm.cpp
+g++ -std=c++17 -O2 -Wall -Wno-switch -Wno-unused-but-set-variable -DNDEBUG -MT pugixml.o -MMD -MP -MF .deps/pugixml.d -c -o pugixml.o pugixml.cpp
+g++  -o o2narc o2narc.o Options.o RelocElfReader.o
+clang++  -o mod123encry mod123encry.o NtrRom.o Decrypt.o Encrypt.o CryptoRc4.o Overlay.o ntruncompbw.o
+clang++  -o csv2bin main.o CsvFile.o Manifest.o Options.o
+g++  -o msgenc msgenc.o Options.o MessagesConverter.o MessagesDecoder.o MessagesEncoder.o Gmm.o pugixml.o
+make patch_mwasmarm
+/Users/davisfox/Documents/GitHub/the-omni-hack/disasm/pokeheartgold//tools/mwasmarm_patcher/mwasmarm_patcher -q /Users/davisfox/Documents/GitHub/the-omni-hack/disasm/pokeheartgold//tools/mwccarm/2.0/sp2p2/mwasmarm.exe
+make build/heartgold.us/pokeheartgold.us.nds
+files/msgdata/touch_once.sh files/msgdata/headers.done
+g++ -std=c++17 -O2 -Wall -Wno-switch -Wno-unused-but-set-variable -DNDEBUG -MT msgenc.o -MMD -MP -MF .deps/msgenc.d -c -o msgenc.o msgenc.cpp
+g++ -O3 -std=c++11 -g -MT o2narc.o -MMD -MP -MF .deps/o2narc.d -c -o o2narc.o o2narc.cpp
+gcc -O3 -g -DNDEBUG -DSOURCE_DIR="\"/Users/davisfox/Documents/GitHub/the-omni-hack/disasm/pokeheartgold/tools/gen_fx_consts\"" -MT main.o -MMD -MP -MF .deps/main.d -c -o main.o main.c
+clang++ -std=c++17 -g -O2 -DNDEBUG -MT main.o -MMD -MP -MF .deps/main.d -c -o main.o main.cpp
+clang++   -g -std=c++17 -MT mod123encry.o -MMD -MP -MF .deps/mod123encry.d -c -o mod123encry.o mod123encry.cpp
+gcc -O3 -fsigned-char -MT component.o -MMD -MP -MF .deps/component.d -c -o component.o component.c
+gcc -O3 -fsigned-char -MT compress.o -MMD -MP -MF .deps/compress.d -c -o compress.o compress.c
+gcc -O3 -g -DNDEBUG -DSOURCE_DIR="\"/Users/davisfox/Documents/GitHub/the-omni-hack/disasm/pokeheartgold/tools/gen_fx_consts\"" -MT fx_encode.o -MMD -MP -MF .deps/fx_encode.d -c -o fx_encode.o fx_encode.c
+gcc -O3 -g -DNDEBUG -DSOURCE_DIR="\"/Users/davisfox/Documents/GitHub/the-omni-hack/disasm/pokeheartgold/tools/gen_fx_consts\"" -MT fx_data.o -MMD -MP -MF .deps/fx_data.d -c -o fx_data.o fx_data.c
+gcc -O3 -fsigned-char -MT digest.o -MMD -MP -MF .deps/digest.d -c -o digest.o digest.c
+gcc  -o gen_fx_consts main.o fx_encode.o fx_data.o
+gcc -O3 -fsigned-char -MT files.o -MMD -MP -MF .deps/files.d -c -o files.o files.c
+gcc -O3 -fsigned-char -MT main.o -MMD -MP -MF .deps/main.d -c -o main.o main.c
+gcc -O3 -fsigned-char -MT misc.o -MMD -MP -MF .deps/misc.d -c -o misc.o misc.c
+g++ -O3 -std=c++11 -g -MT Options.o -MMD -MP -MF .deps/Options.d -c -o Options.o Options.cpp
+clang++   -g -std=c++17 -MT NtrRom.o -MMD -MP -MF .deps/NtrRom.d -c -o NtrRom.o NtrRom.cpp
+gcc -O3 -fsigned-char -MT overlay_defs.o -MMD -MP -MF .deps/overlay_defs.d -c -o overlay_defs.o overlay_defs.c
+clang++ -std=c++17 -g -O2 -DNDEBUG -MT CsvFile.o -MMD -MP -MF .deps/CsvFile.d -c -o CsvFile.o CsvFile.cpp
+gcc -O3 -fsigned-char -MT overlay_modules.o -MMD -MP -MF .deps/overlay_modules.d -c -o overlay_modules.o overlay_modules.c
+g++ -std=c++17 -O2 -Wall -Wno-switch -Wno-unused-but-set-variable -DNDEBUG -MT Options.o -MMD -MP -MF .deps/Options.d -c -o Options.o Options.cpp
+gcc -O3 -fsigned-char -MT overlay_table.o -MMD -MP -MF .deps/overlay_table.d -c -o overlay_table.o overlay_table.c
+gcc -O3 -fsigned-char -MT print.o -MMD -MP -MF .deps/print.d -c -o print.o print.c
+gcc -O3 -fsigned-char -MT static_module.o -MMD -MP -MF .deps/static_module.d -c -o static_module.o static_module.c
+gcc -O3 -fsigned-char -MT str.o -MMD -MP -MF .deps/str.d -c -o str.o str.c
+gcc  -o compstatic component.o compress.o digest.o files.o main.o misc.o overlay_defs.o overlay_modules.o overlay_table.o print.o static_module.o str.o
+clang++   -g -std=c++17 -MT Decrypt.o -MMD -MP -MF .deps/Decrypt.d -c -o Decrypt.o Decrypt.cpp
+g++ -O3 -std=c++11 -g -MT RelocElfReader.o -MMD -MP -MF .deps/RelocElfReader.d -c -o RelocElfReader.o RelocElfReader.cpp
+g++ -std=c++17 -O2 -Wall -Wno-switch -Wno-unused-but-set-variable -DNDEBUG -MT MessagesConverter.o -MMD -MP -MF .deps/MessagesConverter.d -c -o MessagesConverter.o MessagesConverter.cpp
+clang++   -g -std=c++17 -MT Encrypt.o -MMD -MP -MF .deps/Encrypt.d -c -o Encrypt.o Encrypt.cpp
+clang++   -g -std=c++17 -MT CryptoRc4.o -MMD -MP -MF .deps/CryptoRc4.d -c -o CryptoRc4.o CryptoRc4.cpp
+clang++ -std=c++17 -g -O2 -DNDEBUG -MT Manifest.o -MMD -MP -MF .deps/Manifest.d -c -o Manifest.o Manifest.cpp
+cp files/a/0/7/5.heartgold.us files/a/0/7/5
+g++ -std=c++17 -O2 -Wall -Wno-switch -Wno-unused-but-set-variable -DNDEBUG -MT MessagesDecoder.o -MMD -MP -MF .deps/MessagesDecoder.d -c -o MessagesDecoder.o MessagesDecoder.cpp
+clang++ -std=c++17 -g -O2 -DNDEBUG -MT Options.o -MMD -MP -MF .deps/Options.d -c -o Options.o Options.cpp
+clang++   -g -std=c++17 -MT Overlay.o -MMD -MP -MF .deps/Overlay.d -c -o Overlay.o Overlay.cpp
+cc   -g -MT ntruncompbw.o -MMD -MP -MF .deps/ntruncompbw.d -c -o ntruncompbw.o ntruncompbw.c
+g++ -std=c++17 -O2 -Wall -Wno-switch -Wno-unused-but-set-variable -DNDEBUG -MT MessagesEncoder.o -MMD -MP -MF .deps/MessagesEncoder.d -c -o MessagesEncoder.o MessagesEncoder.cpp
+g++ -std=c++17 -O2 -Wall -Wno-switch -Wno-unused-but-set-variable -DNDEBUG -MT Gmm.o -MMD -MP -MF .deps/Gmm.d -c -o Gmm.o Gmm.cpp
+g++ -std=c++17 -O2 -Wall -Wno-switch -Wno-unused-but-set-variable -DNDEBUG -MT pugixml.o -MMD -MP -MF .deps/pugixml.d -c -o pugixml.o pugixml.cpp
+g++  -o o2narc o2narc.o Options.o RelocElfReader.o
+cp files/application/zukanlist/zukan_data/zukan_enc_gold.narc files/a/1/3/3
+cp files/arc/headbutt.heartgold.us.narc files/a/2/5/2
+clang++  -o mod123encry mod123encry.o NtrRom.o Decrypt.o Encrypt.o CryptoRc4.o Overlay.o ntruncompbw.o
+clang++  -o csv2bin main.o CsvFile.o Manifest.o Options.o
+g++  -o msgenc msgenc.o Options.o MessagesConverter.o MessagesDecoder.o MessagesEncoder.o Gmm.o pugixml.o
+/Users/davisfox/Documents/GitHub/the-omni-hack/disasm/pokeheartgold//tools/gen_fx_consts/gen_fx_consts lib/include/nitro/fx/fx_const.h
+make -C lib/syscall all install INSTALL_PREFIX=/Users/davisfox/Documents/GitHub/the-omni-hack/disasm/pokeheartgold/build/heartgold.us GAME_CODE=IPKE
+make patch_mwasmarm
+make patch_mwasmarm 
+/Users/davisfox/Documents/GitHub/the-omni-hack/disasm/pokeheartgold//tools/mwasmarm_patcher/mwasmarm_patcher -q /Users/davisfox/Documents/GitHub/the-omni-hack/disasm/pokeheartgold//tools/mwccarm/2.0/sp2p3/mwasmarm.exe
+make build/IPKE/libsyscall.a
+/Users/davisfox/Documents/GitHub/the-omni-hack/disasm/pokeheartgold//tools/mwasmarm_patcher/mwasmarm_patcher -q /Users/davisfox/Documents/GitHub/the-omni-hack/disasm/pokeheartgold//tools/mwccarm/2.0/sp2p3/mwasmarm.exe
+make target
+make[3]: 'build/IPKE/libsyscall.a' is up to date.
+cp build/IPKE/libsyscall.a /Users/davisfox/Documents/GitHub/the-omni-hack/disasm/pokeheartgold/build/heartgold.us/lib/
+make build/heartgold.us/main.lcf
+wine /Users/davisfox/Documents/GitHub/the-omni-hack/disasm/pokeheartgold//tools/mwccarm/2.0/sp2p3/mwccarm.exe -DSDK_ARM7 -O4,s -sym on -enum int -lang c99 -Cpp_exceptions off -gccext,on -proc arm7tdmi -msgstyle gcc -gccinc -i ./src -i ./include -i ./include/library -i ../files -I../lib/include -ipa file -interworking -inline on,noauto -char signed -W all -W pedantic -W noimpl_signedunsigned -W noimplicitconv -W nounusedarg -W nomissingreturn -W error -gccdep -MD -c -o build/lib/src/EXI_genPort.o lib/src/EXI_genPort.c
+wine /Users/davisfox/Documents/GitHub/the-omni-hack/disasm/pokeheartgold//tools/mwccarm/2.0/sp2p3/mwccarm.exe -DSDK_ARM7 -O4,s -sym on -enum int -lang c99 -Cpp_exceptions off -gccext,on -proc arm7tdmi -msgstyle gcc -gccinc -i ./src -i ./include -i ./include/library -i ../files -I../lib/include -ipa file -interworking -inline on,noauto -char signed -W all -W pedantic -W noimpl_signedunsigned -W noimplicitconv -W nounusedarg -W nomissingreturn -W error -gccdep -MD -c -o build/lib/src/OS_alarm.o lib/src/OS_alarm.c
+wine /Users/davisfox/Documents/GitHub/the-omni-hack/disasm/pokeheartgold//tools/mwccarm/2.0/sp2p3/mwccarm.exe -DSDK_ARM7 -O4,s -sym on -enum int -lang c99 -Cpp_exceptions off -gccext,on -proc arm7tdmi -msgstyle gcc -gccinc -i ./src -i ./include -i ./include/library -i ../files -I../lib/include -ipa file -interworking -inline on,noauto -char signed -W all -W pedantic -W noimpl_signedunsigned -W noimplicitconv -W nounusedarg -W nomissingreturn -W error -gccdep -MD -c -o build/lib/src/OS_arena.o lib/src/OS_arena.c
+wine /Users/davisfox/Documents/GitHub/the-omni-hack/disasm/pokeheartgold//tools/mwccarm/2.0/sp2p3/mwccarm.exe -DSDK_ARM7 -O4,s -sym on -enum int -lang c99 -Cpp_exceptions off -gccext,on -proc arm7tdmi -msgstyle gcc -gccinc -i ./src -i ./include -i ./include/library -i ../files -I../lib/include -ipa file -interworking -inline on,noauto -char signed -W all -W pedantic -W noimpl_signedunsigned -W noimplicitconv -W nounusedarg -W nomissingreturn -W error -gccdep -MD -c -o build/lib/src/OS_alloc.o lib/src/OS_alloc.c
+wine /Users/davisfox/Documents/GitHub/the-omni-hack/disasm/pokeheartgold//tools/mwccarm/2.0/sp2p3/mwccarm.exe -DSDK_ARM7 -O4,s -sym on -enum int -lang c99 -Cpp_exceptions off -gccext,on -proc arm7tdmi -msgstyle gcc -gccinc -i ./src -i ./include -i ./include/library -i ../files -I../lib/include -ipa file -interworking -inline on,noauto -char signed -W all -W pedantic -W noimpl_signedunsigned -W noimplicitconv -W nounusedarg -W nomissingreturn -W error -gccdep -MD -c -o build/lib/src/OS_reset.o lib/src/OS_reset.c
+wine /Users/davisfox/Documents/GitHub/the-omni-hack/disasm/pokeheartgold//tools/mwccarm/2.0/sp2p3/mwccarm.exe -DSDK_ARM7 -O4,s -sym on -enum int -lang c99 -Cpp_exceptions off -gccext,on -proc arm7tdmi -msgstyle gcc -gccinc -i ./src -i ./include -i ./include/library -i ../files -I../lib/include -ipa file -interworking -inline on,noauto -char signed -W all -W pedantic -W noimpl_signedunsigned -W noimplicitconv -W nounusedarg -W nomissingreturn -W error -gccdep -MD -c -o build/lib/src/OS_spinLock.o lib/src/OS_spinLock.c
+wine /Users/davisfox/Documents/GitHub/the-omni-hack/disasm/pokeheartgold//tools/mwccarm/2.0/sp2p3/mwccarm.exe -DSDK_ARM7 -O4,s -sym on -enum int -lang c99 -Cpp_exceptions off -gccext,on -proc arm7tdmi -msgstyle gcc -gccinc -i ./src -i ./include -i ./include/library -i ../files -I../lib/include -ipa file -interworking -inline on,noauto -char signed -W all -W pedantic -W noimpl_signedunsigned -W noimplicitconv -W nounusedarg -W nomissingreturn -W error -gccdep -MD -c -o build/lib/src/OS_system.o lib/src/OS_system.c
+wine /Users/davisfox/Documents/GitHub/the-omni-hack/disasm/pokeheartgold//tools/mwccarm/2.0/sp2p3/mwccarm.exe -DSDK_ARM7 -O4,s -sym on -enum int -lang c99 -Cpp_exceptions off -gccext,on -proc arm7tdmi -msgstyle gcc -gccinc -i ./src -i ./include -i ./include/library -i ../files -I../lib/include -ipa file -interworking -inline on,noauto -char signed -W all -W pedantic -W noimpl_signedunsigned -W noimplicitconv -W nounusedarg -W nomissingreturn -W error -gccdep -MD -c -o build/lib/src/OS_terminate_proc.o lib/src/OS_terminate_proc.c
+wine /Users/davisfox/Documents/GitHub/the-omni-hack/disasm/pokeheartgold//tools/mwccarm/2.0/sp2p3/mwccarm.exe -DSDK_ARM7 -O4,s -sym on -enum int -lang c99 -Cpp_exceptions off -gccext,on -proc arm7tdmi -msgstyle gcc -gccinc -i ./src -i ./include -i ./include/library -i ../files -I../lib/include -ipa file -interworking -inline on,noauto -char signed -W all -W pedantic -W noimpl_signedunsigned -W noimplicitconv -W nounusedarg -W nomissingreturn -W error -gccdep -MD -c -o build/lib/src/OS_tick.o lib/src/OS_tick.c
+make[2]: 'build/heartgold.us/main.lcf' is up to date.
+make build/heartgold.us/main.response
+wine /Users/davisfox/Documents/GitHub/the-omni-hack/disasm/pokeheartgold//tools/mwccarm/2.0/sp2p3/mwccarm.exe -DSDK_ARM7 -O4,s -sym on -enum int -lang c99 -Cpp_exceptions off -gccext,on -proc arm7tdmi -msgstyle gcc -gccinc -i ./src -i ./include -i ./include/library -i ../files -I../lib/include -ipa file -interworking -inline on,noauto -char signed -W all -W pedantic -W noimpl_signedunsigned -W noimplicitconv -W nounusedarg -W nomissingreturn -W error -gccdep -MD -c -o build/lib/src/OS_timer.o lib/src/OS_timer.c
+wine /Users/davisfox/Documents/GitHub/the-omni-hack/disasm/pokeheartgold//tools/mwccarm/2.0/sp2p3/mwccarm.exe -DSDK_ARM7 -O4,s -sym on -enum int -lang c99 -Cpp_exceptions off -gccext,on -proc arm7tdmi -msgstyle gcc -gccinc -i ./src -i ./include -i ./include/library -i ../files -I../lib/include -ipa file -interworking -inline on,noauto -char signed -W all -W pedantic -W noimpl_signedunsigned -W noimplicitconv -W nounusedarg -W nomissingreturn -W error -gccdep -MD -c -o build/lib/src/OS_valarm.o lib/src/OS_valarm.c
+wine /Users/davisfox/Documents/GitHub/the-omni-hack/disasm/pokeheartgold//tools/mwccarm/2.0/sp2p3/mwccarm.exe -DSDK_ARM7 -O4,s -sym on -enum int -lang c99 -Cpp_exceptions off -gccext,on -proc arm7tdmi -msgstyle gcc -gccinc -i ./src -i ./include -i ./include/library -i ../files -I../lib/include -ipa file -interworking -inline on,noauto -char signed -W all -W pedantic -W noimpl_signedunsigned -W noimplicitconv -W nounusedarg -W nomissingreturn -W error -gccdep -MD -c -o build/lib/src/PAD_xyButton.o lib/src/PAD_xyButton.c
+wine /Users/davisfox/Documents/GitHub/the-omni-hack/disasm/pokeheartgold//tools/mwccarm/2.0/sp2p3/mwccarm.exe -DSDK_ARM7 -O4,s -sym on -enum int -lang c99 -Cpp_exceptions off -gccext,on -proc arm7tdmi -msgstyle gcc -gccinc -i ./src -i ./include -i ./include/library -i ../files -I../lib/include -ipa file -interworking -inline on,noauto -char signed -W all -W pedantic -W noimpl_signedunsigned -W noimplicitconv -W nounusedarg -W nomissingreturn -W error -gccdep -MD -c -o build/lib/src/PXI_fifo.o lib/src/PXI_fifo.c
+make[2]: 'build/heartgold.us/main.response' is up to date.
+cd build/heartgold.us && LM_LICENSE_FILE=../..//Users/davisfox/Documents/GitHub/the-omni-hack/disasm/pokeheartgold//tools/mwccarm/license.dat wine /Users/davisfox/Documents/GitHub/the-omni-hack/disasm/pokeheartgold//tools/mwccarm/2.0/sp2p2/mwldarm.exe -proc arm946e -sym on -nopic -nopid -interworking -map closure,unused -symtab sort -m _start -msgstyle gcc -Llib -lsyscall -nostdlib -o ../../build/heartgold.us/main.elf main.lcf @main.response lib/asm/crt0.o
+make build/ichneumon_sub.lcf
+make[4]: 'build/ichneumon_sub.lcf' is up to date.
+make build/ichneumon_sub.response
+make[4]: 'build/ichneumon_sub.response' is up to date.
+cd build && LM_LICENSE_FILE=..//Users/davisfox/Documents/GitHub/the-omni-hack/disasm/pokeheartgold//tools/mwccarm/license.dat wine /Users/davisfox/Documents/GitHub/the-omni-hack/disasm/pokeheartgold//tools/mwccarm/2.0/sp2p3/mwldarm.exe -proc arm7tdmi -sym on -nopic -nopid -interworking -map closure,unused -symtab sort -m _start -msgstyle gcc  -o ../build/ichneumon_sub.elf ichneumon_sub.lcf @ichneumon_sub.response lib/asm/crt0.o
+mwldarm.exe: warning: Environment variable 'MWLibraries' not found
+mwldarm.exe: warning: Environment variable 'MWLibraryFiles' not found
+cd build/heartgold.us && /Users/davisfox/Documents/GitHub/the-omni-hack/disasm/pokeheartgold//tools/mod123encry/mod123encry encry main OVY_123_enc.sbin 123 && mv OVY_123_enc.sbin OVY_123.sbin
+/Users/davisfox/Documents/GitHub/the-omni-hack/disasm/pokeheartgold//tools/compstatic/compstatic -9 -c -f build/heartgold.us/component.files
+StaticModule = build/heartgold.us/main.sbin
+OverlayDefs = build/heartgold.us/main_defs.sbin
+OverlayTable = build/heartgold.us/main_table.sbin
+OverlayModule[00]. Compressed ...    216448 ->    129740
+OverlayModule[01]. Compressed ...    148064 ->    110488
+OverlayModule[02]. Compressed ...     58016 ->     42956
+OverlayModule[03]. Compressed ...     23168 ->     16968
+OverlayModule[04]. Compressed ...     15712 ->     11824
+OverlayModule[05]. Compressed ...     14464 ->     10004
+OverlayModule[06]. Compressed ...      1056 ->       780
+OverlayModule[07]. Compressed ...    113312 ->     78564
+OverlayModule[08]. Compressed ...     41248 ->     29372
+OverlayModule[09]. Compressed ...        32 ->        20
+OverlayModule[10]. Compressed ...     62560 ->     27668
+OverlayModule[11]. Compressed ...        32 ->        20
+OverlayModule[12]. Compressed ...    226272 ->    162604
+OverlayModule[13]. Compressed ...    178816 ->    110584
+OverlayModule[14]. Compressed ...     80512 ->     51588
+OverlayModule[15]. Compressed ...     33024 ->     22896
+OverlayModule[16]. Compressed ...      1824 ->      1524
+OverlayModule[17]. Compressed ...      9248 ->      6692
+OverlayModule[18]. Compressed ...     91488 ->     59668
+OverlayModule[19]. Compressed ...      2176 ->      1924
+OverlayModule[20]. Compressed ...      1056 ->       916
+OverlayModule[21]. Compressed ...       352 ->       324
+OverlayModule[22]. Compressed ...       704 ->       440
+OverlayModule[23]. Compressed ...      1216 ->      1152
+OverlayModule[24]. Compressed ...      1728 ->      1692
+OverlayModule[25]. Compressed ...      1632 ->      1420
+OverlayModule[26]. Compressed ...      1312 ->      1220
+OverlayModule[27]. Compressed ...     13728 ->     10128
+OverlayModule[28]. Compressed ...      5760 ->      4816
+OverlayModule[29]. Compressed ...      3584 ->      3192
+OverlayModule[30]. Compressed ...      1984 ->      1536
+OverlayModule[31]. Compressed ...      6912 ->      4928
+OverlayModule[32]. Compressed ...      3520 ->      3052
+OverlayModule[33]. Compressed ...      1440 ->      1308
+OverlayModule[34]. Compressed ...      4672 ->      4100
+OverlayModule[35]. Not compressed        64 (enlarged or same size as before)
+OverlayModule[36]. Compressed ...       640 ->       556
+OverlayModule[37]. Compressed ...      9440 ->      7404
+OverlayModule[38]. Compressed ...     42528 ->     26128
+OverlayModule[39]. Compressed ...     15136 ->     10892
+OverlayModule[40]. Compressed ...    108480 ->     74800
+OverlayModule[41]. Compressed ...     25088 ->     20580
+OverlayModule[42]. Compressed ...     11904 ->      8792
+OverlayModule[43]. Compressed ...     21248 ->     15852
+OverlayModule[44]. Compressed ...     51648 ->     33996
+OverlayModule[45]. Compressed ...    186592 ->    108036
+OverlayModule[46]. Compressed ...      3648 ->      2888
+OverlayModule[47]. Compressed ...      6080 ->      4988
+OverlayModule[48]. Compressed ...     11648 ->      9544
+OverlayModule[49]. Compressed ...     74016 ->     55064
+OverlayModule[50]. Compressed ...       448 ->       428
+OverlayModule[51]. Compressed ...      9728 ->      7652
+OverlayModule[52]. Compressed ...      5664 ->      4552
+OverlayModule[53]. Compressed ...     12160 ->      9420
+OverlayModule[54]. Compressed ...      5920 ->      4388
+OverlayModule[55]. Compressed ...       800 ->       784
+OverlayModule[56]. Compressed ...      4864 ->      3928
+OverlayModule[57]. Compressed ...     18048 ->     13884
+OverlayModule[58]. Compressed ...      1152 ->      1056
+OverlayModule[59]. Compressed ...     20064 ->     14976
+OverlayModule[60]. Compressed ...     24448 ->     16900
+OverlayModule[61]. Compressed ...      7104 ->      5972
+OverlayModule[62]. Compressed ...      4064 ->      3088
+OverlayModule[63]. Compressed ...     17856 ->     12204
+OverlayModule[64]. Compressed ...      7040 ->      4864
+OverlayModule[65]. Compressed ...     17280 ->     13076
+OverlayModule[66]. Compressed ...        32 ->        20
+OverlayModule[67]. Compressed ...      6208 ->      4812
+OverlayModule[68]. Compressed ...     10240 ->      7412
+OverlayModule[69]. Compressed ...      7936 ->      6452
+OverlayModule[70]. Compressed ...     61248 ->     42588
+OverlayModule[71]. Compressed ...     22240 ->     16144
+OverlayModule[72]. Compressed ...     16224 ->     11736
+OverlayModule[73]. Compressed ...     20544 ->     15288
+OverlayModule[74]. Compressed ...     90144 ->     67464
+OverlayModule[75]. Compressed ...     12928 ->      9032
+OverlayModule[76]. Compressed ...     11936 ->      7728
+OverlayModule[77]. Compressed ...        32 ->        20
+OverlayModule[78]. Compressed ...      4160 ->      3228
+OverlayModule[79]. Compressed ...        32 ->        20
+OverlayModule[80]. Compressed ...     81504 ->     61592
+OverlayModule[81]. Compressed ...     23296 ->     16404
+OverlayModule[82]. Compressed ...      8672 ->      6992
+OverlayModule[83]. Compressed ...     43264 ->     31552
+OverlayModule[84]. Compressed ...      7360 ->      5832
+OverlayModule[85]. Compressed ...     20928 ->     16340
+OverlayModule[86]. Compressed ...     10912 ->      7768
+OverlayModule[87]. Compressed ...     11232 ->      8576
+OverlayModule[88]. Compressed ...      4736 ->      4116
+OverlayModule[89]. Compressed ...     20096 ->     14088
+OverlayModule[90]. Compressed ...     15680 ->     12680
+OverlayModule[91]. Compressed ...     25216 ->     19224
+OverlayModule[92]. Compressed ...     31776 ->     22032
+OverlayModule[93]. Compressed ...     27648 ->     21696
+OverlayModule[94]. Compressed ...      1056 ->       988
+OverlayModule[95]. Compressed ...      8128 ->      5964
+OverlayModule[96]. Compressed ...    230304 ->    184448
+OverlayModule[97]. Compressed ...      6080 ->      4728
+OverlayModule[98]. Compressed ...      3264 ->      2840
+OverlayModule[99]. Compressed ...     19712 ->     13736
+OverlayModule[100]. Compressed ...      7744 ->      5984
+OverlayModule[101]. Compressed ...     80832 ->     53920
+OverlayModule[102]. Compressed ...     20992 ->     15784
+OverlayModule[103]. Compressed ...     10048 ->      7464
+OverlayModule[104]. Compressed ...      2080 ->      1800
+OverlayModule[105]. Compressed ...      1472 ->      1336
+OverlayModule[106]. Compressed ...     11584 ->      5832
+OverlayModule[107]. Compressed ...        32 ->        20
+OverlayModule[108]. Compressed ...     21600 ->     16688
+OverlayModule[109]. Compressed ...      8768 ->      6464
+OverlayModule[110]. Compressed ...      5920 ->      4716
+OverlayModule[111]. Compressed ...      5216 ->      4260
+OverlayModule[112]. Compressed ...    106720 ->     59328
+OverlayModule[113]. Compressed ...      5248 ->      4048
+OverlayModule[114]. Compressed ...      1248 ->      1052
+OverlayModule[115]. Compressed ...      5344 ->      3840
+OverlayModule[116]. Compressed ...      1120 ->       852
+OverlayModule[117]. Compressed ...      2976 ->      2508
+OverlayModule[118]. Compressed ...       672 ->       580
+OverlayModule[119]. Compressed ...      5920 ->      4060
+OverlayModule[120]. Compressed ...      4928 ->      3724
+OverlayModule[121]. Compressed ...      6304 ->      5020
+OverlayModule[122]. Compressed ...     17088 ->     12316
+OverlayModule[123]. Compressed ...      7136 ->      3968
+OverlayModule[124]. Not compressed       352 (enlarged or same size as before)
+OverlayModule[125]. Compressed ...        32 ->        20
+OverlayModule[126]. Compressed ...        32 ->        20
+OverlayModule[127]. Compressed ...        32 ->        20
+OverlayModule[128]. Compressed ...        32 ->        20
+StaticModule ..... Compressed ...   1129496 ->    764580
+wine /Users/davisfox/Documents/GitHub/the-omni-hack/disasm/pokeheartgold//tools/bin/makerom.exe -DHEARTGOLD -DGAME_REMASTER=0 -DENGLISH -DPM_KEEP_ASSERTS -DSDK_ARM9 -DSDK_CODE_ARM -DSDK_FINALROM  -DBUILD_DIR=build/heartgold.us -DNITROFS_FILES="data/UTF16.dat data/area00light.txt data/area01light.txt data/area02light.txt data/arealight.narc data/battle_win.NSCR data/cell0.NCGR data/cell0.NCLR data/clact_default.NANR data/crystal.nsbmd data/demo_climax.narc data/dp_areawindow.NCGR data/dp_areawindow.NCLR data/dun20_01light.txt data/dun20_02light.txt data/dun_sea.nsbtx data/eoo.dat data/exdata.dat data/farm.dat data/field_cutin.narc data/fldtanime.narc data/fs_kanban.nsbca data/ground0.NCGR data/ground0.NCLR data/ground0.NSCR data/gsbr.dat data/guru2.narc data/kemu_itpconv.dat data/kowaza.narc data/lake_anim.nsbtx data/miniasahamabe.nsbtx data/miniasasea.nsbtx data/minihamabe.nsbtx data/minimum.nsbtx data/minirhana.nsbtx data/nfont.NCGR data/nfont.NCLR data/pc.nsbca data/pl_wifi.ncgr data/pl_wm.ncgr data/pl_wm.nclr data/slot.narc data/smptm_koori.NANR data/smptm_koori.NCER data/smptm_koori.NCGR data/smptm_koori.NCLR data/smptm_nemuri.NANR data/smptm_nemuri.NCER data/smptm_nemuri.NCGR data/smptm_nemuri.NCLR data/str2uni.bin data/t3_fl_b.nsbtx data/t3_fl_p.nsbtx data/t3_fl_r.nsbtx data/t3_fl_y.nsbtx data/test.atr data/tmap_block.dat data/tmap_flags.dat data/tradelist.narc data/trapmark.narc data/ug_anim.narc data/ug_base_cur.nsbmd data/ug_boygirl.NCGR data/ug_boygirl.NCLR data/ug_fossil.narc data/ug_hero.NANR data/ug_hero.NCER data/ug_hole.NANR data/ug_hole.NCER data/ug_hole.NCGR data/ug_parts.narc data/ug_radar.narc data/ug_trap.narc data/ugeffect_obj_graphic.narc data/underg_radar.narc data/utility.bin data/weather_sys.narc data/wifi.ncgr data/wifinote.narc data/wifip2pmatch.narc data/wm.ncgr data/wm.nclr data/wm256k.ncgr data/sound/gs_sound_data.sdat msgdata/scenario/scr_msg.narc fielddata/build_model/bm_field.narc fielddata/build_model/bm_room.narc fielddata/build_model/bm_field_matshp.dat fielddata/build_model/bm_room_matshp.dat poketool/personal/pms.narc fielddata/maptable/mapname.bin tel/pmtel_book.dat data/mushi/mushi_trainer.bin data/mushi/mushi_encount.bin fielddata/wazaoshie/waza_oshie.bin a/0/0/0 a/0/0/1 a/0/0/2 a/0/0/3 a/0/0/4 a/0/0/5 a/0/0/6 a/0/0/7 a/0/0/8 a/0/0/9 a/0/1/0 a/0/1/1 a/0/1/2 a/0/1/3 a/0/1/4 a/0/1/5 a/0/1/6 a/0/1/7 a/0/1/8 a/0/1/9 a/0/2/0 a/0/2/1 a/0/2/2 a/0/2/3 a/0/2/4 a/0/2/5 a/0/2/6 a/0/2/7 a/0/2/8 a/0/2/9 a/0/3/0 a/0/3/1 a/0/3/2 a/0/3/3 a/0/3/4 a/0/3/5 a/0/3/6 a/0/3/7 a/0/3/8 a/0/3/9 a/0/4/0 a/0/4/1 a/0/4/2 a/0/4/3 a/0/4/4 a/0/4/5 a/0/4/6 a/0/4/7 a/0/4/8 a/0/4/9 a/0/5/0 a/0/5/1 a/0/5/2 a/0/5/3 a/0/5/4 a/0/5/5 a/0/5/6 a/0/5/7 a/0/5/8 a/0/5/9 a/0/6/0 a/0/6/1 a/0/6/2 a/0/6/3 a/0/6/4 a/0/6/5 a/0/6/6 a/0/6/7 a/0/6/8 a/0/6/9 a/0/7/0 a/0/7/1 a/0/7/2 a/0/7/3 a/0/7/4 a/0/7/5 a/0/7/6 a/0/7/7 a/0/7/8 a/0/7/9 a/0/8/0 a/0/8/1 a/0/8/2 a/0/8/3 a/0/8/4 a/0/8/5 a/0/8/6 a/0/8/7 a/0/8/8 a/0/8/9 a/0/9/0 a/0/9/1 a/0/9/2 a/0/9/3 a/0/9/4 a/0/9/5 a/0/9/6 a/0/9/7 a/0/9/8 a/0/9/9 a/1/0/0 a/1/0/1 a/1/0/2 a/1/0/3 a/1/0/4 a/1/0/5 a/1/0/6 a/1/0/7 a/1/0/8 a/1/0/9 a/1/1/0 a/1/1/1 a/1/1/2 a/1/1/3 a/1/1/4 a/1/1/5 a/1/1/6 a/1/1/7 a/1/1/8 a/1/1/9 a/1/2/0 a/1/2/1 a/1/2/2 a/1/2/3 a/1/2/4 a/1/2/5 a/1/2/6 a/1/2/7 a/1/2/8 a/1/2/9 a/1/3/0 a/1/3/1 a/1/3/2 a/1/3/3 a/1/3/4 a/1/3/5 a/1/3/6 a/1/3/7 a/1/3/8 a/1/3/9 a/1/4/0 a/1/4/1 a/1/4/2 a/1/4/3 a/1/4/4 a/1/4/5 a/1/4/6 a/1/4/7 a/1/4/8 a/1/4/9 a/1/5/0 a/1/5/1 a/1/5/2 a/1/5/3 a/1/5/4 a/1/5/5 a/1/5/6 a/1/5/7 a/1/5/8 a/1/5/9 a/1/6/0 a/1/6/1 a/1/6/2 a/1/6/3 a/1/6/4 a/1/6/5 a/1/6/6 a/1/6/7 a/1/6/8 a/1/6/9 a/1/7/0 a/1/7/1 a/1/7/2 a/1/7/3 a/1/7/4 a/1/7/5 a/1/7/6 a/1/7/7 a/1/7/8 a/1/7/9 a/1/8/0 a/1/8/1 a/1/8/2 a/1/8/3 a/1/8/4 a/1/8/5 a/1/8/6 a/1/8/7 a/1/8/8 a/1/8/9 a/1/9/0 a/1/9/1 a/1/9/2 a/1/9/3 pbr/pokegra.narc pbr/otherpoke.narc a/1/9/4 a/1/9/5 a/1/9/6 a/1/9/7 a/1/9/8 a/1/9/9 a/2/0/0 a/2/0/1 a/2/0/2 a/2/0/3 a/2/0/4 a/2/0/5 a/2/0/6 a/2/0/7 a/2/0/8 a/2/0/9 a/2/1/0 a/2/1/1 a/2/1/2 a/2/1/3 a/2/1/4 a/2/1/5 a/2/1/6 a/2/1/7 a/2/1/8 a/2/1/9 a/2/2/0 a/2/2/1 a/2/2/2 a/2/2/3 a/2/2/4 a/2/2/5 a/2/2/6 a/2/2/7 a/2/2/8 a/2/2/9 a/2/3/0 a/2/3/1 a/2/3/2 a/2/3/3 a/2/3/4 a/2/3/5 a/2/3/6 a/2/3/7 a/2/3/8 a/2/3/9 a/2/4/0 a/2/4/1 a/2/4/2 a/2/4/3 a/2/4/4 a/2/4/5 a/2/4/6 a/2/4/7 a/2/4/8 a/2/4/9 a/2/5/0 a/2/5/1 a/2/5/2 a/2/5/3 a/2/5/4 a/2/5/5 a/2/5/6 a/2/5/7 a/2/5/8 a/2/5/9 a/2/6/0 a/2/6/1 a/2/6/2 a/2/6/3 a/2/6/4 pbr/b_plist_gra.narc pbr/bag_gra.narc pbr/batt_bg.narc pbr/batt_obj.narc pbr/font.narc pbr/growtbl.narc pbr/item_data.narc pbr/msg.narc pbr/pbr_file.inc pbr/personal.narc pbr/plist_gra.narc pbr/poke_anm.narc pbr/poke_icon.narc pbr/pokeanm.narc pbr/pokezukan.narc pbr/pst_gra.narc pbr/sound_data.sdat pbr/waza_tbl.narc pbr/winframe.narc pbr/poketch.narc pbr/zukan.narc dwc/utility.bin" -DTITLE_NAME="POKEMON HG" -DBNR="build/heartgold.us/pokeheartgold.us.bnr" -DHEADER_TEMPLATE="heartgold.us/rom_header_template.sbin" rom.rsf build/heartgold.us/pokeheartgold.us.nds
+/Users/davisfox/Documents/GitHub/the-omni-hack/disasm/pokeheartgold//tools/fixrom/fixrom build/heartgold.us/pokeheartgold.us.nds --secure-crc 0xA0FF --game-code IPKE

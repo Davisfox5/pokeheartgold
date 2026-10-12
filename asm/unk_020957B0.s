@@ -766,7 +766,7 @@ sub_02095CE0: ; 0x02095CE0
 	add r5, r1, #0
 	mov r1, #0x10
 	add r6, r0, #0
-	bl Heap_Alloc
+	bl AllocFromHeap
 	add r4, r0, #0
 	add r2, r4, #0
 	mov r1, #0x10
@@ -781,7 +781,7 @@ _02095CF4:
 	ldrb r1, [r4, #1]
 	add r0, r6, #0
 	lsl r1, r1, #2
-	bl Heap_Alloc
+	bl AllocFromHeap
 	str r0, [r4, #0xc]
 	ldrb r2, [r4, #1]
 	mov r1, #0
@@ -809,9 +809,9 @@ sub_02095D2C: ; 0x02095D2C
 	push {r4, lr}
 	add r4, r0, #0
 	ldr r0, [r4, #0xc]
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	pop {r4, pc}
 	.balign 4, 0
 	thumb_func_end sub_02095D2C

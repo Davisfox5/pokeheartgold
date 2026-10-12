@@ -15,7 +15,7 @@ PalPad_Init: ; 0x02229EE0
 	mov r0, #3
 	mov r1, #0x33
 	lsl r2, r2, #0x10
-	bl Heap_Create
+	bl CreateHeap
 	ldr r1, _02229FA8 ; =0x000005A4
 	add r0, r5, #0
 	mov r2, #0x33
@@ -285,7 +285,7 @@ PalPad_Exit: ; 0x0222A0AC
 	add r0, r5, #0
 	bl OverlayManager_FreeData
 	mov r0, #0x33
-	bl Heap_Destroy
+	bl DestroyHeap
 	ldr r0, _0222A144 ; =FS_OVERLAY_ID(OVY_42)
 	bl UnloadOverlayByID
 	mov r0, #1
@@ -965,7 +965,7 @@ _0222A672:
 	cmp r4, #7
 	blt _0222A672
 	ldr r0, [r5]
-	bl Heap_Free
+	bl FreeToHeap
 	mov r0, #0
 	str r0, [r5]
 	pop {r3, r4, r5, pc}
@@ -1097,7 +1097,7 @@ _0222A706:
 	add r0, r6, #0
 	add r0, #0xac
 	ldr r0, [r0]
-	bl SpriteTransfer_CreateCharTransferTask_AllocAtEnd
+	bl sub_0200ADA4
 	cmp r0, #0
 	bne _0222A7AC
 	bl GF_AssertFail
@@ -1105,7 +1105,7 @@ _0222A7AC:
 	add r0, r6, #0
 	add r0, #0xb0
 	ldr r0, [r0]
-	bl SpriteTransfer_CreatePlttTransferTask
+	bl sub_0200B00C
 	cmp r0, #0
 	bne _0222A7BE
 	bl GF_AssertFail
@@ -1161,11 +1161,11 @@ ov43_0222A81C: ; 0x0222A81C
 	add r7, r0, #0
 	add r0, #0xac
 	ldr r0, [r0]
-	bl SpriteTransfer_DeleteCharTransferTask
+	bl sub_0200AEB0
 	add r0, r7, #0
 	add r0, #0xb0
 	ldr r0, [r0]
-	bl SpriteTransfer_DeletePlttTransferTask
+	bl sub_0200B0A8
 	mov r6, #0x79
 	mov r4, #0
 	add r5, r7, #0
@@ -1378,7 +1378,7 @@ ov43_0222A9D8: ; 0x0222A9D8
 	lsl r6, r6, #8
 _0222A9E2:
 	ldr r0, [r5, r6]
-	bl Heap_Free
+	bl FreeToHeap
 	add r4, r4, #1
 	add r5, r5, #4
 	cmp r4, #2
@@ -1552,7 +1552,7 @@ ov43_0222AB20: ; 0x0222AB20
 	add r2, r5, #0
 	bl BufferPlayersName
 	add r0, r5, #0
-	bl Heap_Free
+	bl FreeToHeap
 	pop {r3, r4, r5, r6, r7, pc}
 	.balign 4, 0
 	thumb_func_end ov43_0222AB20
@@ -1578,7 +1578,7 @@ ov43_0222AB5C: ; 0x0222AB5C
 	add r2, r4, #0
 	bl BufferPlayersName
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	pop {r3, r4, r5, r6, r7, pc}
 	.balign 4, 0
 	thumb_func_end ov43_0222AB5C
@@ -2131,7 +2131,7 @@ _0222AF88:
 	mov r1, #0
 	bl BufferPlayersName
 	ldr r0, [sp, #0xc]
-	bl Heap_Free
+	bl FreeToHeap
 	ldr r0, [r4, #0x5c]
 	add r1, sp, #0x10
 	bl String_atoi
@@ -2403,7 +2403,7 @@ ov43_0222B1D8: ; 0x0222B1D8
 	add r0, #0x20
 	bl RemoveWindow
 	ldr r0, [r4, #0x18]
-	bl Heap_Free
+	bl FreeToHeap
 	pop {r4, pc}
 	.balign 4, 0
 	thumb_func_end ov43_0222B1D8
@@ -6295,7 +6295,7 @@ ov43_0222D008: ; 0x0222D008
 	add r0, #0x20
 	bl RemoveWindow
 	ldr r0, [r4, #0x30]
-	bl Heap_Free
+	bl FreeToHeap
 	pop {r4, pc}
 	thumb_func_end ov43_0222D008
 
@@ -7574,7 +7574,7 @@ _0222DA0E:
 	mov r1, #0x32
 	ldr r0, [sp, #0x1c]
 	lsl r1, r1, #6
-	bl Heap_Alloc
+	bl AllocFromHeap
 	mov r3, #0
 	add r4, r0, #0
 	str r3, [sp]
@@ -7601,7 +7601,7 @@ _0222DA0E:
 	add r3, r2, #0
 	bl BlitBitmapRectToWindow
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	mov r0, #0x20
 	str r0, [sp]
 	ldr r0, [sp, #0x1c]
@@ -8024,7 +8024,7 @@ ov43_0222DD88: ; 0x0222DD88
 	mov r4, #0
 _0222DD8E:
 	ldr r0, [r5]
-	bl Heap_Free
+	bl FreeToHeap
 	add r4, r4, #1
 	add r5, #8
 	cmp r4, #4

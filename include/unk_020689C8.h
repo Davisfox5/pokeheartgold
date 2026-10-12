@@ -1,8 +1,6 @@
 #ifndef POKEHEARTGOLD_UNK_020689C8_H
 #define POKEHEARTGOLD_UNK_020689C8_H
 
-#include "field_types_def.h"
-
 typedef struct {
     int unk0;
     u8 unk4[0x8];

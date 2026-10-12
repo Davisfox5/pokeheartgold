@@ -5,608 +5,608 @@
 
 	.rodata
 
-	ScrDef scr_seq_D31R0207_000
-	ScrDef scr_seq_D31R0207_001
-	ScrDef scr_seq_D31R0207_002
-	ScrDef scr_seq_D31R0207_003
-	ScrDef scr_seq_D31R0207_004
-	ScrDef scr_seq_D31R0207_005
-	ScrDef scr_seq_D31R0207_006
-	ScrDef scr_seq_D31R0207_007
-	ScrDef scr_seq_D31R0207_008
-	ScrDef scr_seq_D31R0207_009
-	ScrDefEnd
+	scrdef scr_seq_D31R0207_000
+	scrdef scr_seq_D31R0207_001
+	scrdef scr_seq_D31R0207_002
+	scrdef scr_seq_D31R0207_003
+	scrdef scr_seq_D31R0207_004
+	scrdef scr_seq_D31R0207_005
+	scrdef scr_seq_D31R0207_006
+	scrdef scr_seq_D31R0207_007
+	scrdef scr_seq_D31R0207_008
+	scrdef scr_seq_D31R0207_009
+	scrdef_end
 
 scr_seq_D31R0207_006:
-	Compare VAR_UNK_4151, 2
-	GoToIfNe _004C
-	ScrCmd_412 55, 2, VAR_TEMP_x4009
-	Compare VAR_TEMP_x4009, 0
-	GoToIfEq _00EA
+	compare VAR_UNK_4151, 2
+	goto_if_ne _004C
+	scrcmd_412 55, 2, VAR_TEMP_x4009
+	compare VAR_TEMP_x4009, 0
+	goto_if_eq _00EA
 _004C:
-	ClearFlag FLAG_UNK_2AD
+	clearflag FLAG_UNK_2AD
 _0050:
-	Compare VAR_UNK_4151, 2
-	GoToIfNe _0072
-	ScrCmd_412 55, 2, VAR_TEMP_x4009
-	Compare VAR_TEMP_x4009, 1
-	GoToIfEq _00F6
+	compare VAR_UNK_4151, 2
+	goto_if_ne _0072
+	scrcmd_412 55, 2, VAR_TEMP_x4009
+	compare VAR_TEMP_x4009, 1
+	goto_if_eq _00F6
 _0072:
-	ClearFlag FLAG_UNK_2AE
+	clearflag FLAG_UNK_2AE
 _0076:
-	Compare VAR_UNK_4151, 2
-	GoToIfNe _0098
-	ScrCmd_412 55, 2, VAR_TEMP_x4009
-	Compare VAR_TEMP_x4009, 2
-	GoToIfEq _0102
+	compare VAR_UNK_4151, 2
+	goto_if_ne _0098
+	scrcmd_412 55, 2, VAR_TEMP_x4009
+	compare VAR_TEMP_x4009, 2
+	goto_if_eq _0102
 _0098:
-	ClearFlag FLAG_UNK_2AF
+	clearflag FLAG_UNK_2AF
 _009C:
-	Compare VAR_UNK_4151, 2
-	GoToIfNe _00BE
-	ScrCmd_412 55, 2, VAR_TEMP_x4009
-	Compare VAR_TEMP_x4009, 3
-	GoToIfEq _010E
+	compare VAR_UNK_4151, 2
+	goto_if_ne _00BE
+	scrcmd_412 55, 2, VAR_TEMP_x4009
+	compare VAR_TEMP_x4009, 3
+	goto_if_eq _010E
 _00BE:
-	ClearFlag FLAG_UNK_2B0
+	clearflag FLAG_UNK_2B0
 _00C2:
-	Compare VAR_UNK_4151, 2
-	GoToIfNe _00E4
-	ScrCmd_412 55, 2, VAR_TEMP_x4009
-	Compare VAR_TEMP_x4009, 4
-	GoToIfEq _011A
+	compare VAR_UNK_4151, 2
+	goto_if_ne _00E4
+	scrcmd_412 55, 2, VAR_TEMP_x4009
+	compare VAR_TEMP_x4009, 4
+	goto_if_eq _011A
 _00E4:
-	ClearFlag FLAG_UNK_2B1
+	clearflag FLAG_UNK_2B1
 _00E8:
-	End
+	end
 
 _00EA:
-	SetFlag FLAG_UNK_2AD
-	GoTo _0050
-	End
+	setflag FLAG_UNK_2AD
+	goto _0050
+	end
 
 _00F6:
-	SetFlag FLAG_UNK_2AE
-	GoTo _0076
-	End
+	setflag FLAG_UNK_2AE
+	goto _0076
+	end
 
 _0102:
-	SetFlag FLAG_UNK_2AF
-	GoTo _009C
-	End
+	setflag FLAG_UNK_2AF
+	goto _009C
+	end
 
 _010E:
-	SetFlag FLAG_UNK_2B0
-	GoTo _00C2
-	End
+	setflag FLAG_UNK_2B0
+	goto _00C2
+	end
 
 _011A:
-	SetFlag FLAG_UNK_2B1
-	GoTo _00E8
-	End
+	setflag FLAG_UNK_2B1
+	goto _00E8
+	end
 
 scr_seq_D31R0207_007:
-	Compare VAR_UNK_4151, 1
-	CallIfEq _0142
-	Compare VAR_UNK_4151, 2
-	GoToIfEq _0148
-	End
+	compare VAR_UNK_4151, 1
+	call_if_eq _0142
+	compare VAR_UNK_4151, 2
+	goto_if_eq _0148
+	end
 
 _0142:
-	MakeObjectVisible obj_player
-	Return
+	make_object_visible obj_player
+	return
 
 _0148:
-	MovePersonFacing obj_D31R0207_bfsw1, 8, 0, 3, DIR_SOUTH
-	End
+	move_person_facing obj_D31R0207_bfsw1, 8, 0, 3, DIR_SOUTH
+	end
 
 scr_seq_D31R0207_008:
-	ScrCmd_609
-	LockAll
-	SetVar VAR_UNK_4151, 0
-	Call _048B
-	NPCMsg msg_0099_D31R0207_00000
-	CloseMsg
-	ScrCmd_412 56, 0, 0
-	ReleaseAll
-	End
+	scrcmd_609
+	lockall
+	setvar VAR_UNK_4151, 0
+	call _048B
+	npc_msg msg_0099_D31R0207_00000
+	closemsg
+	scrcmd_412 56, 0, 0
+	releaseall
+	end
 
 scr_seq_D31R0207_000:
-	PlaySE SEQ_SE_DP_SELECT
-	LockAll
-	FacePlayer
-	BufferPlayersName 0
-	NPCMsg msg_0099_D31R0207_00001
-	TouchscreenMenuHide
-	GetMenuChoice VAR_SPECIAL_RESULT
-	TouchscreenMenuShow
-	Compare VAR_SPECIAL_RESULT, 0
-	GoToIfEq _01A3
-	NPCMsg msg_0099_D31R0207_00000
-	CloseMsg
-	ReleaseAll
-	End
+	play_se SEQ_SE_DP_SELECT
+	lockall
+	faceplayer
+	buffer_players_name 0
+	npc_msg msg_0099_D31R0207_00001
+	touchscreen_menu_hide
+	getmenuchoice VAR_SPECIAL_RESULT
+	touchscreen_menu_show
+	compare VAR_SPECIAL_RESULT, 0
+	goto_if_eq _01A3
+	npc_msg msg_0099_D31R0207_00000
+	closemsg
+	releaseall
+	end
 
 _01A3:
-	CloseMsg
-	ReleaseAll
-	SetVar VAR_UNK_414B, 3
-	FadeScreen 6, 1, 0, RGB_BLACK
-	WaitFade
-	Warp MAP_BATTLE_TOWER, 0, 11, 6, DIR_NORTH
-	FadeScreen 6, 1, 1, RGB_BLACK
-	WaitFade
-	End
+	closemsg
+	releaseall
+	setvar VAR_UNK_414B, 3
+	fade_screen 6, 1, 0, RGB_BLACK
+	wait_fade
+	warp MAP_BATTLE_TOWER, 0, 11, 6, DIR_NORTH
+	fade_screen 6, 1, 1, RGB_BLACK
+	wait_fade
+	end
 
 scr_seq_D31R0207_009:
-	ScrCmd_609
-	LockAll
-	SetVar VAR_UNK_4151, 0
-	NPCMsg msg_0099_D31R0207_00002
-	CloseMsg
-	Call _04C5
-	SetVar VAR_UNK_414D, 2
-	FadeScreen 6, 1, 0, RGB_BLACK
-	WaitFade
-	Warp MAP_BATTLE_TOWER_ELEVATOR, 0, 3, 6, DIR_NORTH
-	FadeScreen 6, 1, 1, RGB_BLACK
-	WaitFade
-	ReleaseAll
-	End
+	scrcmd_609
+	lockall
+	setvar VAR_UNK_4151, 0
+	npc_msg msg_0099_D31R0207_00002
+	closemsg
+	call _04C5
+	setvar VAR_UNK_414D, 2
+	fade_screen 6, 1, 0, RGB_BLACK
+	wait_fade
+	warp MAP_BATTLE_TOWER_ELEVATOR, 0, 3, 6, DIR_NORTH
+	fade_screen 6, 1, 1, RGB_BLACK
+	wait_fade
+	releaseall
+	end
 
 _0216:
-	ScrCmd_413 VAR_TEMP_x4009, 0, VAR_SPECIAL_x8004, VAR_SPECIAL_x8005
-	BufferSpeciesName 0, VAR_SPECIAL_x8004, 0, 0
-	BufferMoveName 1, VAR_SPECIAL_x8005
-	ScrCmd_413 VAR_TEMP_x4009, 1, VAR_SPECIAL_x8004, VAR_SPECIAL_x8005
-	BufferSpeciesName 2, VAR_SPECIAL_x8004, 0, 0
-	BufferMoveName 3, VAR_SPECIAL_x8005
-	Return
+	scrcmd_413 VAR_TEMP_x4009, 0, VAR_SPECIAL_x8004, VAR_SPECIAL_x8005
+	buffer_species_name 0, VAR_SPECIAL_x8004, 0, 0
+	buffer_move_name 1, VAR_SPECIAL_x8005
+	scrcmd_413 VAR_TEMP_x4009, 1, VAR_SPECIAL_x8004, VAR_SPECIAL_x8005
+	buffer_species_name 2, VAR_SPECIAL_x8004, 0, 0
+	buffer_move_name 3, VAR_SPECIAL_x8005
+	return
 
 scr_seq_D31R0207_001:
-	PlaySE SEQ_SE_DP_SELECT
-	LockAll
-	FacePlayer
-	Compare VAR_UNK_4151, 2
-	GoToIfEq _02A7
-	SetVar VAR_TEMP_x4009, 0
-	ScrCmd_413 VAR_TEMP_x4009, 0, VAR_SPECIAL_x8004, VAR_SPECIAL_x8005
-	BufferSpeciesNameIndef 0, VAR_SPECIAL_x8004, 0, 0
-	BufferMoveName 1, VAR_SPECIAL_x8005
-	ScrCmd_413 VAR_TEMP_x4009, 1, VAR_SPECIAL_x8004, VAR_SPECIAL_x8005
-	BufferSpeciesNameIndef 2, VAR_SPECIAL_x8004, 0, 0
-	BufferMoveName 3, VAR_SPECIAL_x8005
-	NPCMsg msg_0099_D31R0207_00006
-	TouchscreenMenuHide
-	GetMenuChoice VAR_SPECIAL_RESULT
-	TouchscreenMenuShow
-	Compare VAR_SPECIAL_RESULT, 0
-	GoToIfEq _02B2
+	play_se SEQ_SE_DP_SELECT
+	lockall
+	faceplayer
+	compare VAR_UNK_4151, 2
+	goto_if_eq _02A7
+	setvar VAR_TEMP_x4009, 0
+	scrcmd_413 VAR_TEMP_x4009, 0, VAR_SPECIAL_x8004, VAR_SPECIAL_x8005
+	buffer_species_name_indef 0, VAR_SPECIAL_x8004, 0, 0
+	buffer_move_name 1, VAR_SPECIAL_x8005
+	scrcmd_413 VAR_TEMP_x4009, 1, VAR_SPECIAL_x8004, VAR_SPECIAL_x8005
+	buffer_species_name_indef 2, VAR_SPECIAL_x8004, 0, 0
+	buffer_move_name 3, VAR_SPECIAL_x8005
+	npc_msg msg_0099_D31R0207_00006
+	touchscreen_menu_hide
+	getmenuchoice VAR_SPECIAL_RESULT
+	touchscreen_menu_show
+	compare VAR_SPECIAL_RESULT, 0
+	goto_if_eq _02B2
 _02A7:
-	NPCMsg msg_0099_D31R0207_00007
-	WaitButton
-	CloseMsg
-	ReleaseAll
-	End
+	npc_msg msg_0099_D31R0207_00007
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
 
 _02B2:
-	ScrCmd_412 50, VAR_TEMP_x4009, 0
-	SetVar VAR_UNK_4151, 2
-	NPCMsg msg_0099_D31R0207_00008
-	CloseMsg
-	ReleaseAll
-	Lock obj_D31R0207_seven1
-	GoTo _0541
-	End
+	scrcmd_412 50, VAR_TEMP_x4009, 0
+	setvar VAR_UNK_4151, 2
+	npc_msg msg_0099_D31R0207_00008
+	closemsg
+	releaseall
+	lock obj_D31R0207_seven1
+	goto _0541
+	end
 
 scr_seq_D31R0207_002:
-	PlaySE SEQ_SE_DP_SELECT
-	LockAll
-	FacePlayer
-	Compare VAR_UNK_4151, 2
-	GoToIfEq _030F
-	SetVar VAR_TEMP_x4009, 1
-	Call _0216
-	BufferPlayersName 4
-	NPCMsg msg_0099_D31R0207_00015
-	TouchscreenMenuHide
-	GetMenuChoice VAR_SPECIAL_RESULT
-	TouchscreenMenuShow
-	Compare VAR_SPECIAL_RESULT, 0
-	GoToIfEq _031A
+	play_se SEQ_SE_DP_SELECT
+	lockall
+	faceplayer
+	compare VAR_UNK_4151, 2
+	goto_if_eq _030F
+	setvar VAR_TEMP_x4009, 1
+	call _0216
+	buffer_players_name 4
+	npc_msg msg_0099_D31R0207_00015
+	touchscreen_menu_hide
+	getmenuchoice VAR_SPECIAL_RESULT
+	touchscreen_menu_show
+	compare VAR_SPECIAL_RESULT, 0
+	goto_if_eq _031A
 _030F:
-	NPCMsg msg_0099_D31R0207_00016
-	WaitButton
-	CloseMsg
-	ReleaseAll
-	End
+	npc_msg msg_0099_D31R0207_00016
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
 
 _031A:
-	ScrCmd_412 50, VAR_TEMP_x4009, 0
-	SetVar VAR_UNK_4151, 2
-	BufferPlayersName 0
-	NPCMsg msg_0099_D31R0207_00017
-	CloseMsg
-	ReleaseAll
-	Lock obj_D31R0207_seven5
-	GoTo _0586
-	End
+	scrcmd_412 50, VAR_TEMP_x4009, 0
+	setvar VAR_UNK_4151, 2
+	buffer_players_name 0
+	npc_msg msg_0099_D31R0207_00017
+	closemsg
+	releaseall
+	lock obj_D31R0207_seven5
+	goto _0586
+	end
 
 scr_seq_D31R0207_003:
-	PlaySE SEQ_SE_DP_SELECT
-	LockAll
-	FacePlayer
-	Compare VAR_UNK_4151, 2
-	GoToIfEq _0377
-	SetVar VAR_TEMP_x4009, 2
-	Call _0216
-	NPCMsg msg_0099_D31R0207_00003
-	TouchscreenMenuHide
-	GetMenuChoice VAR_SPECIAL_RESULT
-	TouchscreenMenuShow
-	Compare VAR_SPECIAL_RESULT, 0
-	GoToIfEq _0382
+	play_se SEQ_SE_DP_SELECT
+	lockall
+	faceplayer
+	compare VAR_UNK_4151, 2
+	goto_if_eq _0377
+	setvar VAR_TEMP_x4009, 2
+	call _0216
+	npc_msg msg_0099_D31R0207_00003
+	touchscreen_menu_hide
+	getmenuchoice VAR_SPECIAL_RESULT
+	touchscreen_menu_show
+	compare VAR_SPECIAL_RESULT, 0
+	goto_if_eq _0382
 _0377:
-	NPCMsg msg_0099_D31R0207_00004
-	WaitButton
-	CloseMsg
-	ReleaseAll
-	End
+	npc_msg msg_0099_D31R0207_00004
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
 
 _0382:
-	ScrCmd_412 50, VAR_TEMP_x4009, 0
-	SetVar VAR_UNK_4151, 2
-	NPCMsg msg_0099_D31R0207_00005
-	CloseMsg
-	ReleaseAll
-	Lock obj_D31R0207_seven2
-	GoTo _05CB
-	End
+	scrcmd_412 50, VAR_TEMP_x4009, 0
+	setvar VAR_UNK_4151, 2
+	npc_msg msg_0099_D31R0207_00005
+	closemsg
+	releaseall
+	lock obj_D31R0207_seven2
+	goto _05CB
+	end
 
 scr_seq_D31R0207_004:
-	PlaySE SEQ_SE_DP_SELECT
-	LockAll
-	FacePlayer
-	Compare VAR_UNK_4151, 2
-	GoToIfEq _03DC
-	SetVar VAR_TEMP_x4009, 3
-	Call _0216
-	NPCMsg msg_0099_D31R0207_00012
-	TouchscreenMenuHide
-	GetMenuChoice VAR_SPECIAL_RESULT
-	TouchscreenMenuShow
-	Compare VAR_SPECIAL_RESULT, 0
-	GoToIfEq _03E7
+	play_se SEQ_SE_DP_SELECT
+	lockall
+	faceplayer
+	compare VAR_UNK_4151, 2
+	goto_if_eq _03DC
+	setvar VAR_TEMP_x4009, 3
+	call _0216
+	npc_msg msg_0099_D31R0207_00012
+	touchscreen_menu_hide
+	getmenuchoice VAR_SPECIAL_RESULT
+	touchscreen_menu_show
+	compare VAR_SPECIAL_RESULT, 0
+	goto_if_eq _03E7
 _03DC:
-	NPCMsg msg_0099_D31R0207_00013
-	WaitButton
-	CloseMsg
-	ReleaseAll
-	End
+	npc_msg msg_0099_D31R0207_00013
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
 
 _03E7:
-	ScrCmd_412 50, VAR_TEMP_x4009, 0
-	SetVar VAR_UNK_4151, 2
-	NPCMsg msg_0099_D31R0207_00014
-	CloseMsg
-	ReleaseAll
-	Lock obj_D31R0207_seven3
-	GoTo _0610
-	End
+	scrcmd_412 50, VAR_TEMP_x4009, 0
+	setvar VAR_UNK_4151, 2
+	npc_msg msg_0099_D31R0207_00014
+	closemsg
+	releaseall
+	lock obj_D31R0207_seven3
+	goto _0610
+	end
 
 scr_seq_D31R0207_005:
-	PlaySE SEQ_SE_DP_SELECT
-	LockAll
-	FacePlayer
-	Compare VAR_UNK_4151, 2
-	GoToIfEq _0441
-	SetVar VAR_TEMP_x4009, 4
-	Call _0216
-	NPCMsg msg_0099_D31R0207_00009
-	TouchscreenMenuHide
-	GetMenuChoice VAR_SPECIAL_RESULT
-	TouchscreenMenuShow
-	Compare VAR_SPECIAL_RESULT, 0
-	GoToIfEq _044C
+	play_se SEQ_SE_DP_SELECT
+	lockall
+	faceplayer
+	compare VAR_UNK_4151, 2
+	goto_if_eq _0441
+	setvar VAR_TEMP_x4009, 4
+	call _0216
+	npc_msg msg_0099_D31R0207_00009
+	touchscreen_menu_hide
+	getmenuchoice VAR_SPECIAL_RESULT
+	touchscreen_menu_show
+	compare VAR_SPECIAL_RESULT, 0
+	goto_if_eq _044C
 _0441:
-	NPCMsg msg_0099_D31R0207_00010
-	WaitButton
-	CloseMsg
-	ReleaseAll
-	End
+	npc_msg msg_0099_D31R0207_00010
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
 
 _044C:
-	ScrCmd_412 50, VAR_TEMP_x4009, 0
-	SetVar VAR_UNK_4151, 2
-	NPCMsg msg_0099_D31R0207_00011
-	CloseMsg
-	ReleaseAll
-	Lock obj_D31R0207_seven4
-	GoTo _0655
-	End
+	scrcmd_412 50, VAR_TEMP_x4009, 0
+	setvar VAR_UNK_4151, 2
+	npc_msg msg_0099_D31R0207_00011
+	closemsg
+	releaseall
+	lock obj_D31R0207_seven4
+	goto _0655
+	end
 
 _046D:
-	ScrCmd_307 0, 0, 8, 2, 77
-	ScrCmd_310 77
-	ScrCmd_308 77
-	Return
+	scrcmd_307 0, 0, 8, 2, 77
+	scrcmd_310 77
+	scrcmd_308 77
+	return
 
 _0480:
-	ScrCmd_311 77
-	ScrCmd_308 77
-	ScrCmd_309 77
-	Return
+	scrcmd_311 77
+	scrcmd_308 77
+	scrcmd_309 77
+	return
 
 _048B:
-	Call _046D
-	ApplyMovement obj_D31R0207_bfsw1, _06AC
-	WaitMovement
-	ScrCmd_374 obj_player
-	ApplyMovement obj_player, _069C
-	WaitMovement
-	Call _0480
-	ApplyMovement obj_D31R0207_bfsw1, _06BC
-	WaitMovement
-	ApplyMovement obj_player, _06A4
-	WaitMovement
-	Return
+	call _046D
+	apply_movement obj_D31R0207_bfsw1, _06AC
+	wait_movement
+	scrcmd_374 obj_player
+	apply_movement obj_player, _069C
+	wait_movement
+	call _0480
+	apply_movement obj_D31R0207_bfsw1, _06BC
+	wait_movement
+	apply_movement obj_player, _06A4
+	wait_movement
+	return
 
 _04C5:
-	Call _046D
-	ApplyMovement obj_D31R0207_bfsw1, _06F0
-	ApplyMovement obj_player, _06E4
-	WaitMovement
-	Call _0480
-	Return
+	call _046D
+	apply_movement obj_D31R0207_bfsw1, _06F0
+	apply_movement obj_player, _06E4
+	wait_movement
+	call _0480
+	return
 
 _04E5:
-	ApplyMovement VAR_TEMP_x4000, _06FC
-	WaitMovement
-	ApplyMovement obj_D31R0207_bfsw1, _06C8
-	WaitMovement
-	Call _046D
-	ApplyMovement VAR_TEMP_x4000, _0704
-	WaitMovement
-	Call _0480
-	ApplyMovement obj_D31R0207_bfsw1, _06D8
-	WaitMovement
-	FadeScreen 6, 1, 0, RGB_BLACK
-	WaitFade
-	Warp MAP_BATTLE_TOWER_PARTNER_ROOM, 0, 8, 4, DIR_NORTH
-	FadeScreen 6, 1, 1, RGB_BLACK
-	WaitFade
-	ReleaseAll
-	End
+	apply_movement VAR_TEMP_x4000, _06FC
+	wait_movement
+	apply_movement obj_D31R0207_bfsw1, _06C8
+	wait_movement
+	call _046D
+	apply_movement VAR_TEMP_x4000, _0704
+	wait_movement
+	call _0480
+	apply_movement obj_D31R0207_bfsw1, _06D8
+	wait_movement
+	fade_screen 6, 1, 0, RGB_BLACK
+	wait_fade
+	warp MAP_BATTLE_TOWER_PARTNER_ROOM, 0, 8, 4, DIR_NORTH
+	fade_screen 6, 1, 1, RGB_BLACK
+	wait_fade
+	releaseall
+	end
 
 _0541:
-	SetVar VAR_TEMP_x4000, 1
-	GetPlayerCoords VAR_SPECIAL_x8000, VAR_SPECIAL_x8001
-	Compare VAR_SPECIAL_x8000, 12
-	GoToIfEq _0562
-	GoTo _0574
-	End
+	setvar VAR_TEMP_x4000, 1
+	get_player_coords VAR_SPECIAL_x8000, VAR_SPECIAL_x8001
+	compare VAR_SPECIAL_x8000, 12
+	goto_if_eq _0562
+	goto _0574
+	end
 
 _0562:
-	ApplyMovement obj_D31R0207_seven1, _0710
-	WaitMovement
-	GoTo _04E5
-	End
+	apply_movement obj_D31R0207_seven1, _0710
+	wait_movement
+	goto _04E5
+	end
 
 _0574:
-	ApplyMovement obj_D31R0207_seven1, _0724
-	WaitMovement
-	GoTo _04E5
-	End
+	apply_movement obj_D31R0207_seven1, _0724
+	wait_movement
+	goto _04E5
+	end
 
 _0586:
-	SetVar VAR_TEMP_x4000, 2
-	GetPlayerCoords VAR_SPECIAL_x8000, VAR_SPECIAL_x8001
-	Compare VAR_SPECIAL_x8000, 4
-	GoToIfEq _05A7
-	GoTo _05B9
-	End
+	setvar VAR_TEMP_x4000, 2
+	get_player_coords VAR_SPECIAL_x8000, VAR_SPECIAL_x8001
+	compare VAR_SPECIAL_x8000, 4
+	goto_if_eq _05A7
+	goto _05B9
+	end
 
 _05A7:
-	ApplyMovement obj_D31R0207_seven5, _073C
-	WaitMovement
-	GoTo _04E5
-	End
+	apply_movement obj_D31R0207_seven5, _073C
+	wait_movement
+	goto _04E5
+	end
 
 _05B9:
-	ApplyMovement obj_D31R0207_seven5, _074C
-	WaitMovement
-	GoTo _04E5
-	End
+	apply_movement obj_D31R0207_seven5, _074C
+	wait_movement
+	goto _04E5
+	end
 
 _05CB:
-	SetVar VAR_TEMP_x4000, 3
-	GetPlayerCoords VAR_SPECIAL_x8000, VAR_SPECIAL_x8001
-	Compare VAR_SPECIAL_x8001, 7
-	GoToIfEq _05EC
-	GoTo _05FE
-	End
+	setvar VAR_TEMP_x4000, 3
+	get_player_coords VAR_SPECIAL_x8000, VAR_SPECIAL_x8001
+	compare VAR_SPECIAL_x8001, 7
+	goto_if_eq _05EC
+	goto _05FE
+	end
 
 _05EC:
-	ApplyMovement obj_D31R0207_seven2, _0758
-	WaitMovement
-	GoTo _04E5
-	End
+	apply_movement obj_D31R0207_seven2, _0758
+	wait_movement
+	goto _04E5
+	end
 
 _05FE:
-	ApplyMovement obj_D31R0207_seven2, _0768
-	WaitMovement
-	GoTo _04E5
-	End
+	apply_movement obj_D31R0207_seven2, _0768
+	wait_movement
+	goto _04E5
+	end
 
 _0610:
-	SetVar VAR_TEMP_x4000, 4
-	GetPlayerCoords VAR_SPECIAL_x8000, VAR_SPECIAL_x8001
-	Compare VAR_SPECIAL_x8001, 9
-	GoToIfEq _0631
-	GoTo _0643
-	End
+	setvar VAR_TEMP_x4000, 4
+	get_player_coords VAR_SPECIAL_x8000, VAR_SPECIAL_x8001
+	compare VAR_SPECIAL_x8001, 9
+	goto_if_eq _0631
+	goto _0643
+	end
 
 _0631:
-	ApplyMovement obj_D31R0207_seven3, _0774
-	WaitMovement
-	GoTo _04E5
-	End
+	apply_movement obj_D31R0207_seven3, _0774
+	wait_movement
+	goto _04E5
+	end
 
 _0643:
-	ApplyMovement obj_D31R0207_seven3, _0788
-	WaitMovement
-	GoTo _04E5
-	End
+	apply_movement obj_D31R0207_seven3, _0788
+	wait_movement
+	goto _04E5
+	end
 
 _0655:
-	SetVar VAR_TEMP_x4000, 5
-	GetPlayerCoords VAR_SPECIAL_x8000, VAR_SPECIAL_x8001
-	Compare VAR_SPECIAL_x8000, 8
-	GoToIfEq _0676
-	GoTo _0688
-	End
+	setvar VAR_TEMP_x4000, 5
+	get_player_coords VAR_SPECIAL_x8000, VAR_SPECIAL_x8001
+	compare VAR_SPECIAL_x8000, 8
+	goto_if_eq _0676
+	goto _0688
+	end
 
 _0676:
-	ApplyMovement obj_D31R0207_seven4, _079C
-	WaitMovement
-	GoTo _04E5
-	End
+	apply_movement obj_D31R0207_seven4, _079C
+	wait_movement
+	goto _04E5
+	end
 
 _0688:
-	ApplyMovement obj_D31R0207_seven4, _07AC
-	WaitMovement
-	GoTo _04E5
-	End
+	apply_movement obj_D31R0207_seven4, _07AC
+	wait_movement
+	goto _04E5
+	end
 
 	.balign 4, 0
 _069C:
-	WalkNormalSouth 2
-	EndMovement
+	step 13, 2
+	step_end
 
 	.balign 4, 0
 _06A4:
-	FaceNorth
-	EndMovement
+	step 0, 1
+	step_end
 
 	.balign 4, 0
 _06AC:
-	WalkNormalSouth 2
-	WalkNormalWest
-	FaceEast
-	EndMovement
+	step 13, 2
+	step 14, 1
+	step 3, 1
+	step_end
 
 	.balign 4, 0
 _06BC:
-	WalkNormalEast
-	FaceSouth
-	EndMovement
+	step 15, 1
+	step 1, 1
+	step_end
 
 	.balign 4, 0
 _06C8:
-	FaceSouth
-	WalkFastWest
-	FaceEast
-	EndMovement
+	step 1, 1
+	step 18, 1
+	step 3, 1
+	step_end
 
 	.balign 4, 0
 _06D8:
-	WalkFastEast
-	FaceSouth
-	EndMovement
+	step 19, 1
+	step 1, 1
+	step_end
 
 	.balign 4, 0
 _06E4:
-	WalkNormalNorth 2
-	SetInvisible
-	EndMovement
+	step 12, 2
+	step 69, 1
+	step_end
 
 	.balign 4, 0
 _06F0:
-	WalkNormalNorth
-	SetInvisible
-	EndMovement
+	step 12, 1
+	step 69, 1
+	step_end
 
 	.balign 4, 0
 _06FC:
-	FaceNorth
-	EndMovement
+	step 0, 1
+	step_end
 
 	.balign 4, 0
 _0704:
-	WalkFastNorth 2
-	SetInvisible
-	EndMovement
+	step 16, 2
+	step 69, 1
+	step_end
 
 	.balign 4, 0
 _0710:
-	WalkFastSouth
-	WalkFastWest 3
-	WalkFastNorth 7
-	WalkFastWest 2
-	EndMovement
+	step 17, 1
+	step 18, 3
+	step 16, 7
+	step 18, 2
+	step_end
 
 	.balign 4, 0
 _0724:
-	WalkFastWest
-	WalkFastNorth
-	WalkFastWest 2
-	WalkFastNorth 5
-	WalkFastWest 2
-	EndMovement
+	step 18, 1
+	step 16, 1
+	step 18, 2
+	step 16, 5
+	step 18, 2
+	step_end
 
 	.balign 4, 0
 _073C:
-	WalkFastEast
-	WalkFastNorth 2
-	WalkFastEast 3
-	EndMovement
+	step 19, 1
+	step 16, 2
+	step 19, 3
+	step_end
 
 	.balign 4, 0
 _074C:
-	WalkFastNorth 2
-	WalkFastEast 4
-	EndMovement
+	step 16, 2
+	step 19, 4
+	step_end
 
 	.balign 4, 0
 _0758:
-	WalkFastWest
-	WalkFastNorth 4
-	WalkFastWest 2
-	EndMovement
+	step 18, 1
+	step 16, 4
+	step 18, 2
+	step_end
 
 	.balign 4, 0
 _0768:
-	WalkFastNorth 4
-	WalkFastWest 3
-	EndMovement
+	step 16, 4
+	step 18, 3
+	step_end
 
 	.balign 4, 0
 _0774:
-	WalkFastSouth
-	WalkFastEast 4
-	WalkFastNorth 7
-	WalkFastEast 2
-	EndMovement
+	step 17, 1
+	step 19, 4
+	step 16, 7
+	step 19, 2
+	step_end
 
 	.balign 4, 0
 _0788:
-	WalkFastNorth
-	WalkFastEast 4
-	WalkFastNorth 5
-	WalkFastEast 2
-	EndMovement
+	step 16, 1
+	step 19, 4
+	step 16, 5
+	step 19, 2
+	step_end
 
 	.balign 4, 0
 _079C:
-	WalkFastWest
-	WalkFastNorth 5
-	WalkFastEast 2
-	EndMovement
+	step 18, 1
+	step 16, 5
+	step 19, 2
+	step_end
 
 	.balign 4, 0
 _07AC:
-	WalkFastEast 3
-	WalkFastNorth 5
-	WalkFastWest 2
-	EndMovement
+	step 19, 3
+	step 16, 5
+	step 18, 2
+	step_end
 	.balign 4, 0

@@ -13,15 +13,15 @@
 #define LIST_MULTIPLE_SCROLL_DPAD 1
 #define LIST_MULTIPLE_SCROLL_L_R  2
 
-typedef struct ListMenuItem {
+typedef struct LISTMENUITEM {
     String *text;
     s32 value;
-} ListMenuItem;
+} LISTMENUITEM;
 
-ListMenuItem *ListMenuItems_New(u32 n, enum HeapID heapID);
-void ListMenuItems_Delete(ListMenuItem *items);
-void ListMenuItems_AppendFromMsgData(ListMenuItem *items, MsgData *msgData, int msgId, int value);
-void ListMenuItems_AddItem(ListMenuItem *items, String *string, int value);
-void ListMenuItems_DestroyMenuStrings(ListMenuItem *items);
+LISTMENUITEM *ListMenuItems_New(u32 n, HeapID heapId);
+void ListMenuItems_Delete(LISTMENUITEM *items);
+void ListMenuItems_AppendFromMsgData(LISTMENUITEM *items, MsgData *msgData, int msgId, int value);
+void ListMenuItems_AddItem(LISTMENUITEM *items, String *string, int value);
+void ListMenuItems_DestroyMenuStrings(LISTMENUITEM *items);
 
 #endif // POKEHEARTGOLD_LIST_MENU_ITEMS_H

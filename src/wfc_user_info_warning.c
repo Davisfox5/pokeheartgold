@@ -13,9 +13,9 @@
 #include "msgdata.h"
 #include "pm_string.h"
 #include "render_window.h"
-#include "screen_fade.h"
 #include "system.h"
 #include "text.h"
+#include "unk_0200FA24.h"
 
 static const GraphicsBanks sWFCWarningMsgBanksConfig = {
     .bg = GX_VRAM_BG_256_AB,
@@ -63,12 +63,12 @@ static const WindowTemplate sWFCWarningWindowTemplate = {
     .baseTile = 0x23,
 };
 
-void ShowWFCUserInfoWarning(enum HeapID heapID, int a1) {
+void ShowWFCUserInfoWarning(HeapID heapId, int a1) {
 #pragma unused(a1)
     Window window;
 
-    sub_0200FBF4(PM_LCD_TOP, RGB_BLACK);
-    sub_0200FBF4(PM_LCD_BOTTOM, RGB_BLACK);
+    sub_0200FBF4(0, 0);
+    sub_0200FBF4(1, 0);
 
     Main_SetVBlankIntrCB(NULL, NULL);
     Main_SetHBlankIntrCB(NULL, NULL);
@@ -89,18 +89,18 @@ void ShowWFCUserInfoWarning(enum HeapID heapID, int a1) {
     GXS_SetVisibleWnd(0);
     GfGfx_SetBanks(&sWFCWarningMsgBanksConfig);
 
-    BgConfig *bg_config = BgConfig_Alloc(heapID);
+    BgConfig *bg_config = BgConfig_Alloc(heapId);
     SetBothScreensModesAndDisable(&sWFCWarningMsgBgModeSet);
     InitBgFromTemplate(bg_config, 0, &sWFCWarningBgTemplate, GF_BG_TYPE_TEXT);
     BgClearTilemapBufferAndCommit(bg_config, GF_BG_LYR_MAIN_0);
-    LoadUserFrameGfx1(bg_config, GF_BG_LYR_MAIN_0, 0x1F7, 2, 0, heapID);
-    LoadFontPal0(GF_PAL_LOCATION_MAIN_BG, GF_PAL_SLOT_1_OFFSET, heapID);
-    BG_ClearCharDataRange(GF_BG_LYR_MAIN_0, 0x20, 0, heapID);
+    LoadUserFrameGfx1(bg_config, GF_BG_LYR_MAIN_0, 0x1F7, 2, 0, heapId);
+    LoadFontPal0(GF_PAL_LOCATION_MAIN_BG, GF_PAL_SLOT_1_OFFSET, heapId);
+    BG_ClearCharDataRange(GF_BG_LYR_MAIN_0, 0x20, 0, heapId);
     BG_SetMaskColor(GF_BG_LYR_MAIN_0, RGB(1, 1, 27));
     BG_SetMaskColor(GF_BG_LYR_SUB_0, RGB(1, 1, 27));
 
-    MsgData *warnings_msgdata = NewMsgDataFromNarc(MSGDATA_LOAD_LAZY, NARC_msgdata_msg, NARC_msg_msg_0800_bin, heapID);
-    String *warning_string = String_New(384, heapID);
+    MsgData *warnings_msgdata = NewMsgDataFromNarc(MSGDATA_LOAD_LAZY, NARC_msgdata_msg, NARC_msg_msg_0800_bin, heapId);
+    String *warning_string = String_New(384, heapId);
 
     ResetAllTextPrinters();
 
@@ -113,8 +113,8 @@ void ShowWFCUserInfoWarning(enum HeapID heapID, int a1) {
     String_Delete(warning_string);
 
     GfGfx_BothDispOn();
-    SetMasterBrightnessNeutral(PM_LCD_TOP);
-    SetMasterBrightnessNeutral(PM_LCD_BOTTOM);
+    SetMasterBrightnessNeutral(0);
+    SetMasterBrightnessNeutral(1);
     SetBlendBrightness(0, (GXBlendPlaneMask)(GX_BLEND_PLANEMASK_BD | GX_BLEND_PLANEMASK_OBJ | GX_BLEND_PLANEMASK_BG3 | GX_BLEND_PLANEMASK_BG2 | GX_BLEND_PLANEMASK_BG1 | GX_BLEND_PLANEMASK_BG0), SCREEN_MASK_MAIN | SCREEN_MASK_SUB);
 
     while (TRUE) {
@@ -140,5 +140,5 @@ void ShowWFCUserInfoWarning(enum HeapID heapID, int a1) {
     ToggleBgLayer(GF_BG_LYR_SUB_2, GF_PLANE_TOGGLE_OFF);
     ToggleBgLayer(GF_BG_LYR_SUB_3, GF_PLANE_TOGGLE_OFF);
     FreeBgTilemapBuffer(bg_config, GF_BG_LYR_MAIN_0);
-    Heap_Free(bg_config);
+    FreeToHeap(bg_config);
 }

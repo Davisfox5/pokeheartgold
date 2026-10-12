@@ -17,7 +17,6 @@ BOOL EventObjectMovementMan_IsFinish(EventObjectMovementMan *movementMan);
 void EventObjectMovementMan_Delete(EventObjectMovementMan *movementMan);
 BOOL MapObject_AreBitsSetForMovementScriptInit(LocalMapObject *obj);
 BOOL MapObject_ClearHeldMovementIfActive(LocalMapObject *obj);
-void MapObject_ClearHeldMovement(LocalMapObject *obj);
 void MapObject_SetHeldMovement(LocalMapObject *obj, u32 a1);
 BOOL MapObject_IsMovementPaused(LocalMapObject *object);
 

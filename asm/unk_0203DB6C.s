@@ -32,10 +32,10 @@ _GetCoordsOfFacingTile: ; 0x0203DB78
 	bl PlayerAvatar_GetFacingDirection
 	add r7, r0, #0
 	ldr r0, [r6, #0x40]
-	bl PlayerAvatar_GetXCoord
+	bl GetPlayerXCoord
 	str r0, [r4]
 	ldr r0, [r6, #0x40]
-	bl PlayerAvatar_GetZCoord
+	bl GetPlayerZCoord
 	str r0, [r5]
 	cmp r7, #3
 	bhi _0203DBCE
@@ -402,11 +402,11 @@ sub_0203DE04: ; 0x0203DE04
 	ldr r0, [r0, #0x40]
 	str r1, [sp, #4]
 	str r2, [sp, #8]
-	bl PlayerAvatar_GetXCoord
+	bl GetPlayerXCoord
 	add r6, r0, #0
 	ldr r0, [sp]
 	ldr r0, [r0, #0x40]
-	bl PlayerAvatar_GetZCoord
+	bl GetPlayerZCoord
 	add r4, r0, #0
 	ldr r0, [sp, #8]
 	mov r7, #0

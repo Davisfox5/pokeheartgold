@@ -16,9 +16,9 @@
 #include "msgdata.h"
 #include "pm_string.h"
 #include "render_window.h"
-#include "screen_fade.h"
 #include "system.h"
 #include "text.h"
+#include "unk_0200FA24.h"
 
 static const GraphicsBanks sDataWriteErrorBanksConfig = {
     .bg = GX_VRAM_BG_256_AB,
@@ -66,7 +66,7 @@ static const WindowTemplate sDataWriteErrorWindowTemplate = {
     .baseTile = 0x23,
 };
 
-void ShowSaveDataWriteError(enum HeapID heapID, int code) {
+void ShowSaveDataWriteError(HeapID heapId, int code) {
     Window window;
 
     u32 msg_no;
@@ -76,8 +76,8 @@ void ShowSaveDataWriteError(enum HeapID heapID, int code) {
         msg_no = msg_0009_00000;
     }
 
-    sub_0200FBF4(PM_LCD_TOP, RGB_BLACK);
-    sub_0200FBF4(PM_LCD_BOTTOM, RGB_BLACK);
+    sub_0200FBF4(PM_LCD_TOP, 0);
+    sub_0200FBF4(PM_LCD_BOTTOM, 0);
 
     sub_0201A0E0();
 
@@ -100,18 +100,18 @@ void ShowSaveDataWriteError(enum HeapID heapID, int code) {
     GXS_SetVisibleWnd(0);
     GfGfx_SetBanks(&sDataWriteErrorBanksConfig);
 
-    BgConfig *bg_config = BgConfig_Alloc(heapID);
+    BgConfig *bg_config = BgConfig_Alloc(heapId);
     SetBothScreensModesAndDisable(&sDataWriteErrorBgModeSet);
     InitBgFromTemplate(bg_config, 0, &sDataWriteErrorBgTemplate, GF_BG_TYPE_TEXT);
     BgClearTilemapBufferAndCommit(bg_config, GF_BG_LYR_MAIN_0);
-    LoadUserFrameGfx1(bg_config, GF_BG_LYR_MAIN_0, 0x1F7, 2, 0, heapID);
-    LoadFontPal0(GF_PAL_LOCATION_MAIN_BG, GF_PAL_SLOT_1_OFFSET, heapID);
-    BG_ClearCharDataRange(GF_BG_LYR_MAIN_0, 0x20, 0, heapID);
+    LoadUserFrameGfx1(bg_config, GF_BG_LYR_MAIN_0, 0x1F7, 2, 0, heapId);
+    LoadFontPal0(GF_PAL_LOCATION_MAIN_BG, GF_PAL_SLOT_1_OFFSET, heapId);
+    BG_ClearCharDataRange(GF_BG_LYR_MAIN_0, 0x20, 0, heapId);
     BG_SetMaskColor(GF_BG_LYR_MAIN_0, RGB(1, 1, 27));
     BG_SetMaskColor(GF_BG_LYR_SUB_0, RGB(1, 1, 27));
 
-    MsgData *error_msgdata = NewMsgDataFromNarc(MSGDATA_LOAD_LAZY, NARC_msgdata_msg, NARC_msg_msg_0009_bin, heapID);
-    String *error_str = String_New(384, heapID);
+    MsgData *error_msgdata = NewMsgDataFromNarc(MSGDATA_LOAD_LAZY, NARC_msgdata_msg, NARC_msg_msg_0009_bin, heapId);
+    String *error_str = String_New(384, heapId);
 
     ResetAllTextPrinters();
 

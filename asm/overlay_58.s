@@ -34,7 +34,7 @@ ApricornBox_Init: ; 0x022378E4
 	mov r0, #3
 	mov r1, #0x85
 	lsl r2, r2, #0xc
-	bl Heap_Create
+	bl CreateHeap
 	add r0, r5, #0
 	mov r1, #0x20
 	mov r2, #0x85
@@ -135,7 +135,7 @@ ApricornBox_Exit: ; 0x0223799C
 	add r0, r5, #0
 	bl OverlayManager_FreeData
 	mov r0, #0x85
-	bl Heap_Destroy
+	bl DestroyHeap
 	mov r0, #1
 	pop {r3, r4, r5, pc}
 	thumb_func_end ApricornBox_Exit
@@ -184,7 +184,7 @@ _02237A0A:
 	ldr r0, [sp]
 	ldr r2, [sp, #4]
 	add r1, sp, #0xc
-	bl Party_GetMonAprijuiceModifiers
+	bl Party_GetUnkSubSlot
 	add r0, sp, #0xc
 	ldrh r0, [r0, #0xa]
 	lsl r0, r0, #0x10
@@ -308,7 +308,7 @@ _02237B10:
 	ldr r0, [sp]
 	ldr r2, [sp, #4]
 	add r1, sp, #0xc
-	bl Party_SetMonAprijuiceModifiers
+	bl Party_SetUnkSubSlot
 	ldr r0, [sp]
 	ldr r1, [sp, #4]
 	bl Party_GetMonByIndex
@@ -424,7 +424,7 @@ ov58_02237BD4: ; 0x02237BD4
 	add r5, r0, #0
 	ldr r0, [r5]
 	mov r1, #0x44
-	bl Heap_Alloc
+	bl AllocFromHeap
 	mov r1, #0
 	mov r2, #0x44
 	add r4, r0, #0
@@ -490,7 +490,7 @@ _02237C5E:
 	ldrb r4, [r0]
 	strb r4, [r5, #0x1c]
 	ldr r0, [r5, #0x10]
-	bl Heap_Free
+	bl FreeToHeap
 	mov r0, #0
 	str r0, [r5, #0x10]
 	cmp r4, #7
@@ -578,9 +578,9 @@ ov58_02237CCC: ; 0x02237CCC
 	mov r1, #0
 	bl sub_0200FBF4
 	mov r0, #0
-	bl ResetVisibleHardwareWindows
+	bl sub_0200FBDC
 	mov r0, #1
-	bl ResetVisibleHardwareWindows
+	bl sub_0200FBDC
 	pop {r3, pc}
 	.balign 4, 0
 _02237D14: .word 0xFFFFE0FF

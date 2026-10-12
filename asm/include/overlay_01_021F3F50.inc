@@ -17,8 +17,8 @@
 .public LoadUserFrameGfx1
 .public DrawFrameAndWindow1
 .public sub_0200E5D4
-.public Heap_Alloc
-.public Heap_Free
+.public AllocFromHeap
+.public FreeToHeap
 .public AddWindowParameterized
 .public RemoveWindow
 .public CopyWindowToVram
@@ -41,8 +41,8 @@
 .public Save_LocalFieldData_Get
 .public FieldSystem_SyncMapObjectsToSave
 .public PlayerAvatar_GetFacingDirection
-.public PlayerAvatar_GetXCoord
-.public PlayerAvatar_GetZCoord
+.public GetPlayerXCoord
+.public GetPlayerZCoord
 .public Field_SaveStatsPrinter_Print
 .public Field_SaveStatsPrinter_RemoveFromScreen
 .public Field_SaveStatsPrinter_New

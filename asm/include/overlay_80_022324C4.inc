@@ -8,8 +8,8 @@
 .public StringExpandPlaceholders
 .public DrawFrameAndWindow1
 .public sub_0200E5D4
-.public Heap_Alloc
-.public Heap_Free
+.public AllocFromHeap
+.public FreeToHeap
 .public AllocWindows
 .public AddWindowParameterized
 .public WindowArray_Delete

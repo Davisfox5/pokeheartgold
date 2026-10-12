@@ -5,9 +5,9 @@
 
 	.rodata
 
-	ScrDef scr_seq_D22R0201_000
-	ScrDefEnd
+	scrdef scr_seq_D22R0201_000
+	scrdef_end
 
 scr_seq_D22R0201_000:
-	End
+	end
 	.balign 4, 0

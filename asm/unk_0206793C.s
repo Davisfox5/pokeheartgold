@@ -114,11 +114,11 @@ _020679F0:
 	b _02067A16
 _020679FE:
 	ldr r0, [r4, #0x24]
-	bl Heap_Free
+	bl FreeToHeap
 	ldr r0, [r4, #0x28]
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	add sp, #8
 	mov r0, #1
 	pop {r4, r5, r6, pc}
@@ -137,7 +137,7 @@ CallTask_NPCTrade: ; 0x02067A1C
 	mov r1, #0x2c
 	add r6, r2, #0
 	str r3, [sp]
-	bl Heap_Alloc
+	bl AllocFromHeap
 	mov r1, #0
 	mov r2, #0x2c
 	add r4, r0, #0

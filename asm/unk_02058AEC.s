@@ -29,7 +29,7 @@ sub_02058AEC: ; 0x02058AEC
 	str r2, [sp]
 	str r3, [sp, #4]
 	ldr r5, [r6, #0xc]
-	bl Heap_AllocAtEnd
+	bl AllocFromHeapAtEnd
 	mov r1, #0
 	mov r2, #0x3c
 	add r4, r0, #0
@@ -90,7 +90,7 @@ sub_02058B84: ; 0x02058B84
 	add r5, r0, #0
 	add r0, r1, #0
 	mov r1, #0x44
-	bl Heap_Alloc
+	bl AllocFromHeap
 	mov r1, #0
 	mov r2, #0x44
 	add r4, r0, #0
@@ -252,7 +252,7 @@ _02058CBE:
 	add r0, #0x3c
 	strb r1, [r0]
 	ldr r0, [r4, #4]
-	bl Heap_Free
+	bl FreeToHeap
 	mov r0, #0
 	str r0, [r4, #4]
 	mov r0, #1
@@ -276,7 +276,7 @@ _02058CEA:
 	add r0, #0x3c
 	strb r1, [r0]
 	ldr r0, [r4]
-	bl Heap_Free
+	bl FreeToHeap
 	mov r0, #0
 	str r0, [r4]
 	mov r0, #1
@@ -292,7 +292,7 @@ sub_02058D04: ; 0x02058D04
 	cmp r0, #0
 	beq _02058D1E
 	mov r0, #1
-	bl FieldMap_FadeScreen
+	bl ov01_021E636C
 	bl sub_02056E60
 	mov r0, #1
 	pop {r3, pc}
@@ -426,7 +426,7 @@ _02058E08:
 	ldr r0, [r4, #0x30]
 	lsl r0, r0, #0x18
 	lsr r0, r0, #0x18
-	bl DialogBox_IsPrintFinished
+	bl IsPrintFinished
 	cmp r0, #0
 	beq _02058E94
 	mov r0, #0x5d
@@ -500,7 +500,7 @@ _02058E9C:
 	add r0, r4, #0
 	bl sub_02059650
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	add sp, #8
 	mov r0, #1
 	pop {r3, r4, r5, pc}
@@ -508,7 +508,7 @@ _02058EAE:
 	add r0, r4, #0
 	bl sub_02059650
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	bl sub_02057F70
 	add sp, #8
 	mov r0, #1
@@ -579,7 +579,7 @@ _02058F40:
 	ldr r0, [r4, #0x30]
 	lsl r0, r0, #0x18
 	lsr r0, r0, #0x18
-	bl DialogBox_IsPrintFinished
+	bl IsPrintFinished
 	cmp r0, #0
 	beq _02058FB2
 	mov r0, #0xd
@@ -587,7 +587,7 @@ _02058F40:
 	b _02059472
 _02058F54:
 	mov r0, #0
-	bl FieldMap_FadeScreen
+	bl ov01_021E636C
 	mov r0, #0xe
 	str r0, [r4, #0x34]
 	b _02059472
@@ -762,7 +762,7 @@ _020590AA:
 	ldr r0, [r4, #0x30]
 	lsl r0, r0, #0x18
 	lsr r0, r0, #0x18
-	bl DialogBox_IsPrintFinished
+	bl IsPrintFinished
 	cmp r0, #0
 	beq _020590C8
 	mov r0, #0xd
@@ -824,7 +824,7 @@ _0205912A:
 	ldr r0, [r4, #0x30]
 	lsl r0, r0, #0x18
 	lsr r0, r0, #0x18
-	bl DialogBox_IsPrintFinished
+	bl IsPrintFinished
 	cmp r0, #0
 	beq _0205922E
 	bl sub_02058D24
@@ -894,7 +894,7 @@ _020591C2:
 	ldr r0, [r4, #0x30]
 	lsl r0, r0, #0x18
 	lsr r0, r0, #0x18
-	bl DialogBox_IsPrintFinished
+	bl IsPrintFinished
 	cmp r0, #0
 	beq _0205922E
 	add r0, r4, #0
@@ -920,7 +920,7 @@ _020591FA:
 	ldr r0, [r4, #0x30]
 	lsl r0, r0, #0x18
 	lsr r0, r0, #0x18
-	bl DialogBox_IsPrintFinished
+	bl IsPrintFinished
 	cmp r0, #0
 	beq _0205922E
 	add r0, r4, #0
@@ -1003,7 +1003,7 @@ _020592B2:
 	ldr r0, [r4, #0x30]
 	lsl r0, r0, #0x18
 	lsr r0, r0, #0x18
-	bl DialogBox_IsPrintFinished
+	bl IsPrintFinished
 	cmp r0, #0
 	beq _02059348
 	add r0, r4, #0
@@ -1058,7 +1058,7 @@ _020592FC:
 	b _02059472
 _02059334:
 	mov r0, #0
-	bl FieldMap_FadeScreen
+	bl ov01_021E636C
 	mov r0, #0x21
 	str r0, [r4, #0x34]
 	b _02059472
@@ -1109,7 +1109,7 @@ _02059398:
 	ldr r0, [r4, #0x30]
 	lsl r0, r0, #0x18
 	lsr r0, r0, #0x18
-	bl DialogBox_IsPrintFinished
+	bl IsPrintFinished
 	cmp r0, #0
 	beq _02059472
 	mov r0, #2
@@ -1173,7 +1173,7 @@ _02059420:
 	ldr r0, [r4, #0x30]
 	lsl r0, r0, #0x18
 	lsr r0, r0, #0x18
-	bl DialogBox_IsPrintFinished
+	bl IsPrintFinished
 	cmp r0, #0
 	beq _02059472
 	add r0, r4, #0
@@ -1229,17 +1229,17 @@ sub_02059478: ; 0x02059478
 	add r1, r4, #0
 	ldr r0, [r0, #8]
 	mov r2, #3
-	bl DialogBox_AddWindowToLayer3
+	bl sub_0205B514
 	ldr r0, [r5, #0x24]
 	ldr r0, [r0, #0xc]
 	bl Save_PlayerData_GetOptionsAddr
 	add r1, r0, #0
 	add r0, r4, #0
-	bl DialogBox_LoadFrame
+	bl sub_0205B564
 	b _020594B0
 _020594AA:
 	add r0, r4, #0
-	bl DialogBox_Clear
+	bl sub_0205B5A8
 _020594B0:
 	ldr r0, [r5, #0x24]
 	ldr r0, [r0, #0xc]
@@ -1248,7 +1248,7 @@ _020594B0:
 	add r0, r4, #0
 	add r1, r6, #0
 	mov r3, #1
-	bl DialogBox_PrintMessage
+	bl sub_0205B5B4
 	pop {r4, r5, r6, pc}
 	.balign 4, 0
 	thumb_func_end sub_02059478
@@ -1318,7 +1318,7 @@ sub_02059538: ; 0x02059538
 _02059546:
 	mov r0, #0xb
 	mov r1, #0x8c
-	bl Heap_AllocAtEnd
+	bl AllocFromHeapAtEnd
 	add r4, r0, #0
 	mov r1, #0
 	mov r2, #0x8c
@@ -1393,11 +1393,11 @@ _020595F0:
 	add r6, r0, #0
 	mov r0, #0xb
 	add r1, r6, #0
-	bl Heap_AllocAtEnd
+	bl AllocFromHeapAtEnd
 	str r0, [r4, #0x4c]
 	mov r0, #0xb
 	add r1, r6, #0
-	bl Heap_AllocAtEnd
+	bl AllocFromHeapAtEnd
 	str r0, [r4, #0x48]
 	mov r0, #0xb
 	bl SaveArray_Party_Alloc
@@ -1445,17 +1445,17 @@ sub_02059650: ; 0x02059650
 	ldr r0, [r4, #0x50]
 	cmp r0, #0
 	beq _0205965E
-	bl Heap_Free
+	bl FreeToHeap
 _0205965E:
 	ldr r0, [r4, #0x4c]
 	cmp r0, #0
 	beq _02059668
-	bl Heap_Free
+	bl FreeToHeap
 _02059668:
 	ldr r0, [r4, #0x48]
 	cmp r0, #0
 	beq _02059672
-	bl Heap_Free
+	bl FreeToHeap
 _02059672:
 	ldr r0, [r4, #0x2c]
 	bl DestroyMsgData
@@ -2236,13 +2236,13 @@ _02059C10:
 	ldr r0, [r5, #8]
 	add r1, #8
 	mov r2, #3
-	bl DialogBox_AddWindowToLayer3
+	bl sub_0205B514
 	ldr r0, [r5, #0xc]
 	bl Save_PlayerData_GetOptionsAddr
 	add r1, r0, #0
 	add r0, r4, #0
 	add r0, #8
-	bl DialogBox_LoadFrame
+	bl sub_0205B564
 	ldr r0, [r5, #0xc]
 	bl Save_PlayerData_GetOptionsAddr
 	add r2, r0, #0
@@ -2250,7 +2250,7 @@ _02059C10:
 	ldr r1, [r4, #4]
 	add r0, #8
 	mov r3, #1
-	bl DialogBox_PrintMessage
+	bl sub_0205B5B4
 	str r0, [r4, #0x20]
 	ldr r0, [r4, #0x28]
 	add r0, r0, #1
@@ -2260,7 +2260,7 @@ _02059C6C:
 	ldr r0, [r4, #0x20]
 	lsl r0, r0, #0x18
 	lsr r0, r0, #0x18
-	bl DialogBox_IsPrintFinished
+	bl IsPrintFinished
 	cmp r0, #0
 	beq _02059D36
 	ldr r0, _02059D3C ; =gSystem
@@ -2284,7 +2284,7 @@ _02059C6C:
 	add r0, #8
 	bl RemoveWindow
 	mov r0, #0
-	bl FieldMap_FadeScreen
+	bl ov01_021E636C
 	ldr r0, [r4, #0x28]
 	add r0, r0, #1
 	str r0, [r4, #0x28]
@@ -2332,7 +2332,7 @@ _02059D08:
 	cmp r0, #0
 	bne _02059D36
 	mov r0, #1
-	bl FieldMap_FadeScreen
+	bl ov01_021E636C
 	bl sub_02056E60
 	ldr r0, [r4, #0x28]
 	add r0, r0, #1
@@ -2341,7 +2341,7 @@ _02059D08:
 _02059D24:
 	bl sub_02057F70
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	mov r0, #1
 	pop {r4, r5, r6, pc}
 _02059D32:
@@ -2383,7 +2383,7 @@ _02059D66:
 	bne _02059D9C
 	ldr r1, _02059DA8 ; =0x000006A8
 	mov r0, #0xb
-	bl Heap_AllocAtEnd
+	bl AllocFromHeapAtEnd
 	add r2, r0, #0
 	str r4, [r2, #0x24]
 	mov r0, #0
@@ -2424,7 +2424,7 @@ _02059DC8:
 	mov r0, #3
 	mov r1, #0x1f
 	lsl r2, r2, #6
-	bl Heap_CreateAtEnd
+	bl CreateHeapAtEnd
 	add r0, r4, #0
 	bl sub_02059E1C
 	add r5, r0, #0
@@ -2481,7 +2481,7 @@ _02059E2E:
 	mov r1, #0x19
 	mov r0, #0x1f
 	lsl r1, r1, #4
-	bl Heap_Alloc
+	bl AllocFromHeap
 	mov r2, #0x19
 	mov r1, #0
 	lsl r2, r2, #4
@@ -2949,9 +2949,9 @@ sub_0205A1D4: ; 0x0205A1D4
 	ldr r0, [r4, #0xc]
 	bl SysTask_Destroy
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	mov r0, #0x1f
-	bl Heap_Destroy
+	bl DestroyHeap
 _0205A1EC:
 	pop {r4, pc}
 	.balign 4, 0

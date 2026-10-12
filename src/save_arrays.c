@@ -9,7 +9,6 @@
 #include "game_stats.h"
 #include "hall_of_fame.h"
 #include "mystery_gift.h"
-#include "palPark_migration.h"
 #include "photo_album.h"
 #include "pokedex.h"
 #include "pokemon_storage_system.h"
@@ -32,6 +31,7 @@
 #include "save_vars_flags.h"
 #include "save_wifi_history.h"
 #include "unk_0202E41C.h"
+#include "unk_0202EB30.h"
 #include "unk_02030A98.h"
 
 // These macros are temporary. As the respective sources
@@ -48,10 +48,11 @@ DECL_CHUNK(Save_Frontier)
 DECL_CHUNK_EX(sub_0202DB40, sub_0202DB44)
 DECL_CHUNK_EX(sub_0202E41C, sub_0202E424)
 DECL_CHUNK_EX(sub_0202C034, sub_0202C03C)
-DECL_CHUNK_EX(PokeathlonSave_FriendshipRecords_sizeof, PokeathlonSave_FriendshipRecords_Init)
+DECL_CHUNK_EX(sub_0202EB30, sub_0202EB38)
+DECL_CHUNK_EX(sub_02031AF0, sub_02031AF4)
 DECL_CHUNK_EX(sub_0203170C, sub_02031710)
 DECL_CHUNK_EX(sub_020318C8, sub_020318CC)
-DECL_CHUNK(PokeathlonSave)
+DECL_CHUNK(Save_Pokeathlon)
 DECL_CHUNK(Save_ApricornBox)
 
 const struct SaveChunkHeader gSaveChunkHeaders[] = {
@@ -226,14 +227,14 @@ const struct SaveChunkHeader gSaveChunkHeaders[] = {
     {
      SAVE_UNK_28,
      0,
-     (SAVESIZEFN)MigratedPokemon_GetSize,
-     (SAVEINITFN)MigratedPokemon_Init,
+     (SAVESIZEFN)sub_0202EB30,
+     (SAVEINITFN)sub_0202EB38,
      },
     {
      SAVE_POKEATHLON_FRIENDSHIP_RECORDS,
      0,
-     (SAVESIZEFN)PokeathlonSave_FriendshipRecords_sizeof,
-     (SAVEINITFN)PokeathlonSave_FriendshipRecords_Init,
+     (SAVESIZEFN)sub_02031AF0,
+     (SAVEINITFN)sub_02031AF4,
      },
     {
      SAVE_EASY_CHAT,
@@ -280,8 +281,8 @@ const struct SaveChunkHeader gSaveChunkHeaders[] = {
     {
      SAVE_POKEATHLON,
      0,
-     (SAVESIZEFN)PokeathlonSave_sizeof,
-     (SAVEINITFN)PokeathlonSave_Init,
+     (SAVESIZEFN)Save_Pokeathlon_sizeof,
+     (SAVEINITFN)Save_Pokeathlon_Init,
      },
     {
      SAVE_APRICORN_BOX,
@@ -324,7 +325,7 @@ MysteryGiftSave *Save_MysteryGift_Get(SaveData *saveData) {
     return SaveArray_Get(saveData, SAVE_MYSTERY_GIFT);
 }
 
-MigratedPokemon *Save_MigratedPokemon_Get(SaveData *saveData) {
+struct MigratedPokemonSav *Save_MigratedPokemon_Get(SaveData *saveData) {
     return SaveArray_Get(saveData, SAVE_UNK_28);
 }
 
@@ -372,26 +373,26 @@ const struct ExtraSaveChunkHeader gExtraSaveChunkHeaders[] = {
 
 const int gNumExtraSaveChunkHeaders = NELEMS(gExtraSaveChunkHeaders);
 
-HallOfFame *LoadHallOfFame(SaveData *saveData, enum HeapID heapID, int *ret_p) {
-    return ReadExtraSaveChunk(saveData, heapID, 0, ret_p);
+HallOfFame *LoadHallOfFame(SaveData *saveData, HeapID heapId, int *ret_p) {
+    return ReadExtraSaveChunk(saveData, heapId, 0, ret_p);
 }
 
 int SaveHallOfFame(SaveData *saveData, HallOfFame *hallOfFame) {
     return WriteExtraSaveChunk(saveData, 0, hallOfFame);
 }
 
-struct UnkStruct_0202FBCC *sub_0202711C(SaveData *saveData, enum HeapID heapID, int *ret_p, int idx) {
+struct UnkStruct_0202FBCC *sub_0202711C(SaveData *saveData, HeapID heapId, int *ret_p, int idx) {
     int sp4;
-    return sub_020284A4(saveData, heapID, idx + 2, ret_p, &sp4);
+    return sub_020284A4(saveData, heapId, idx + 2, ret_p, &sp4);
 }
 
 int sub_02027134(SaveData *saveData, struct UnkStruct_0202FBCC *data, int idx) {
     return sub_02028230(saveData, idx + 2, data);
 }
 
-struct UnkStruct_02030A98 *sub_02027144(SaveData *saveData, enum HeapID heapID, int *ret_p) {
+struct UnkStruct_02030A98 *sub_02027144(SaveData *saveData, HeapID heapId, int *ret_p) {
     int sp4;
-    return sub_020284A4(saveData, heapID, 1, ret_p, &sp4);
+    return sub_020284A4(saveData, heapId, 1, ret_p, &sp4);
 }
 
 int sub_02027158(SaveData *saveData, struct UnkStruct_02030A98 *data) {

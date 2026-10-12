@@ -17,8 +17,6 @@
 #define BATTLER_TYPE_PLAYER_SIDE_SLOT_2 4
 #define BATTLER_TYPE_ENEMY_SIDE_SLOT_2  5
 
-#define BATTLER_TYPE_IS_ENEMY 1 // All enemy battler positions are odd, so this is often used as shorthand.
-
 // Battler Category
 #define BATTLER_CATEGORY_ALL                0
 #define BATTLER_CATEGORY_ATTACKER           1
@@ -560,6 +558,13 @@ typedef enum Terrain {
 #define AI_DOUBLES (1 << 7)
 #define AI_29      (1 << 29)
 
+// Action Input Consts
+#define BATTLE_INPUT_FIGHT   1
+#define BATTLE_INPUT_ITEM    2
+#define BATTLE_INPUT_POKEMON 3
+#define BATTLE_INPUT_RUN     4
+#define BATTLE_INPUT_CANCEL  0xFF
+
 // Multi hit flags
 #define MULTIHIT_SKIP_OBEDIENCE_CHECK    (1 << 0)
 #define MULTIHIT_SKIP_TYPE_CHART_CHECK   (1 << 1)
@@ -645,9 +650,6 @@ typedef enum ControllerCommand {
 
 // Critical Music Flags
 #define CRITICAL_MUSIC_OFF 2
-
-#define BALL_SHAKE_MAX 4
-#define MOVES_MAX      4
 
 #endif // PM_ASM
 #endif // POKEHEARTGOLD_CONSTANTS_BATTLE_H

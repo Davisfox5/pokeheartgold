@@ -15,7 +15,7 @@
 .public Sprite_GetPositionXY
 .public SpriteSystem_ReplaceCharResObj
 .public SpriteSystem_ReplacePlttResObj
-.public Heap_Free
+.public FreeToHeap
 .public GF_CreateVramTransferManager
 .public GfGfx_EngineATogglePlanes
 .public GfGfx_EngineBTogglePlanes
@@ -38,7 +38,7 @@
 .public Boxmon_GetIconPalette
 .public Pokemon_GetIconPalette
 .public Party_GetMonByIndex
-.public Party_GetMonAprijuiceModifiers
+.public Party_GetUnkSubSlot
 .public sub_02077678
 .public sub_0207769C
 .public sub_020776B4

@@ -173,18 +173,18 @@ ov80_0222ADCC: ; 0x0222ADCC
 	add r4, r1, #0
 	mov r0, #0x65
 	mov r1, #0x20
-	bl Heap_Alloc
+	bl AllocFromHeap
 	str r0, [r4]
 	pop {r4, pc}
 	thumb_func_end ov80_0222ADCC
 
 	thumb_func_start ov80_0222ADDC
 ov80_0222ADDC: ; 0x0222ADDC
-	ldr r3, _0222ADE4 ; =Heap_Free
+	ldr r3, _0222ADE4 ; =FreeToHeap
 	ldr r0, [r1]
 	bx r3
 	nop
-_0222ADE4: .word Heap_Free
+_0222ADE4: .word FreeToHeap
 	thumb_func_end ov80_0222ADDC
 
 	thumb_func_start ov80_0222ADE8

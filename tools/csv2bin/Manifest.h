@@ -110,17 +110,7 @@ public:
         try {
             return constants.at(key);
         } catch (std::out_of_range &e) {
-            try {
-                return std::stoi(key);
-            } catch (std::invalid_argument &e2) {
-                std::string msg = "invalid integer value: \"" + key + "\"";
-                if (!constants.empty()) {
-                    msg += " (not found in constants map with " + std::to_string(constants.size()) + " entries)";
-                }
-                throw std::invalid_argument(msg);
-            } catch (std::out_of_range &e2) {
-                throw std::invalid_argument("integer value out of range: \"" + key + "\"");
-            }
+            return std::stoi(key);
         }
     }
 };

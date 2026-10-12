@@ -1,7 +1,7 @@
 #include <nitro/fs/overlay.h>
 #pragma once
-.public Heap_Alloc
-.public Heap_FreeExplicit
+.public AllocFromHeap
+.public FreeToHeapExplicit
 .public GfGfx_EngineATogglePlanes
 .public GX_SetBankForBG
 .public GX_ResetBankForBG

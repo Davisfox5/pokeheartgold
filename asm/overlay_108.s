@@ -14,7 +14,7 @@ SafariAreaCustomizer_Init: ; 0x021E5900
 	mov r0, #3
 	mov r1, #0x5f
 	lsl r2, r2, #0x10
-	bl Heap_Create
+	bl CreateHeap
 	ldr r1, _021E5944 ; =0x000184EC
 	add r0, r4, #0
 	mov r2, #0x5f
@@ -53,7 +53,7 @@ SafariAreaCustomizer_Exit: ; 0x021E5948
 	add r0, r5, #0
 	bl OverlayManager_FreeData
 	add r0, r4, #0
-	bl Heap_Destroy
+	bl DestroyHeap
 	mov r0, #1
 	pop {r4, r5, r6, pc}
 	nop
@@ -490,9 +490,9 @@ _021E5C68:
 	mov r1, #0
 	bl sub_0200FBF4
 	mov r0, #0
-	bl ResetVisibleHardwareWindows
+	bl sub_0200FBDC
 	mov r0, #1
-	bl ResetVisibleHardwareWindows
+	bl sub_0200FBDC
 	bl sub_020210BC
 	mov r0, #4
 	bl sub_02021148
@@ -2577,7 +2577,7 @@ _021E6D4C:
 	mov r0, #0xd
 	lsl r0, r0, #6
 	ldr r0, [r5, r0]
-	bl Heap_Free
+	bl FreeToHeap
 	ldr r2, _021E6D7C ; =0x04000304
 	ldrh r1, [r2]
 	lsr r0, r2, #0xb
@@ -2614,7 +2614,7 @@ ov108_021E6D80: ; 0x021E6D80
 	ldr r1, [r5]
 	add r2, r4, #0
 	mov r3, #0xa6
-	bl BgConfig_LoadAssetFromOpenNarc
+	bl sub_0208820C
 	mov r0, #6
 	str r0, [sp]
 	mov r0, #4
@@ -2629,7 +2629,7 @@ ov108_021E6D80: ; 0x021E6D80
 	ldr r1, [r5]
 	add r2, r4, #0
 	mov r3, #0xa6
-	bl BgConfig_LoadAssetFromOpenNarc
+	bl sub_0208820C
 	mov r0, #1
 	str r0, [sp]
 	mov r0, #7
@@ -2644,7 +2644,7 @@ ov108_021E6D80: ; 0x021E6D80
 	ldr r1, [r5]
 	add r2, r4, #0
 	mov r3, #0xa6
-	bl BgConfig_LoadAssetFromOpenNarc
+	bl sub_0208820C
 	mov r0, #5
 	str r0, [sp]
 	mov r0, #3
@@ -2660,7 +2660,7 @@ ov108_021E6D80: ; 0x021E6D80
 	ldr r1, [r5]
 	add r2, r4, #0
 	mov r3, #0xa6
-	bl BgConfig_LoadAssetFromOpenNarc
+	bl sub_0208820C
 	mov r1, #0
 	str r1, [sp]
 	mov r0, #7
@@ -2675,7 +2675,7 @@ ov108_021E6D80: ; 0x021E6D80
 	ldr r1, [r5]
 	add r2, r4, #0
 	mov r3, #0xa6
-	bl BgConfig_LoadAssetFromOpenNarc
+	bl sub_0208820C
 	mov r0, #0xa
 	str r0, [sp]
 	mov r0, #2
@@ -2691,7 +2691,7 @@ ov108_021E6D80: ; 0x021E6D80
 	ldr r1, [r5]
 	add r2, r4, #0
 	mov r3, #0xa6
-	bl BgConfig_LoadAssetFromOpenNarc
+	bl sub_0208820C
 	mov r0, #7
 	str r0, [sp]
 	mov r0, #3
@@ -2707,7 +2707,7 @@ ov108_021E6D80: ; 0x021E6D80
 	ldr r1, [r5]
 	add r2, r4, #0
 	mov r3, #0xa6
-	bl BgConfig_LoadAssetFromOpenNarc
+	bl sub_0208820C
 	mov r0, #4
 	str r0, [sp]
 	mov r0, #6
@@ -2723,7 +2723,7 @@ ov108_021E6D80: ; 0x021E6D80
 	ldr r1, [r5]
 	add r2, r4, #0
 	mov r3, #0xa6
-	bl BgConfig_LoadAssetFromOpenNarc
+	bl sub_0208820C
 	ldr r0, _021E6F4C ; =0x000184E3
 	ldrb r0, [r5, r0]
 	cmp r0, #0
@@ -2748,7 +2748,7 @@ _021E6EA6:
 	ldr r1, [r5]
 	add r2, r4, #0
 	mov r3, #0xa6
-	bl BgConfig_LoadAssetFromOpenNarc
+	bl sub_0208820C
 	ldr r0, [r5]
 	ldr r3, _021E6F50 ; =0x000004D8
 	str r0, [sp]
@@ -2818,10 +2818,10 @@ ov108_021E6F58: ; 0x021E6F58
 	mov r0, #0x4d
 	lsl r0, r0, #4
 	ldr r0, [r4, r0]
-	bl Heap_Free
+	bl FreeToHeap
 	ldr r0, _021E6F70 ; =0x000004CC
 	ldr r0, [r4, r0]
-	bl Heap_Free
+	bl FreeToHeap
 	pop {r4, pc}
 	.balign 4, 0
 _021E6F70: .word 0x000004CC
@@ -3262,7 +3262,7 @@ ov108_021E72CC: ; 0x021E72CC
 	str r0, [r4, r1]
 	ldr r1, [r4]
 	mov r0, #1
-	bl FontSystem_NewInit
+	bl sub_02013534
 	mov r1, #0xe7
 	lsl r1, r1, #2
 	str r0, [r4, r1]
@@ -3636,18 +3636,18 @@ ov108_021E756C: ; 0x021E756C
 	str r0, [sp, #0x20]
 	ldr r1, [r5, r1]
 	add r0, sp, #0x10
-	bl TextOBJ_Create
+	bl sub_02013950
 	mov r1, #0xe9
 	lsl r1, r1, #2
 	str r0, [r5, r1]
 	ldr r0, [r5, r1]
 	mov r1, #1
-	bl TextOBJ_SetSpritesDrawFlag
+	bl sub_020137C0
 	mov r0, #0xe9
 	lsl r0, r0, #2
 	ldr r0, [r5, r0]
 	mov r1, #4
-	bl TextOBJ_SetPaletteNum
+	bl sub_02013850
 	add sp, #0x40
 	pop {r4, r5, r6, pc}
 	nop
@@ -3662,7 +3662,7 @@ ov108_021E7650: ; 0x021E7650
 	mov r0, #0xe9
 	lsl r0, r0, #2
 	ldr r0, [r4, r0]
-	bl TextOBJ_Destroy
+	bl sub_020139C8
 	mov r0, #0xea
 	lsl r0, r0, #2
 	add r0, r4, r0
@@ -4336,7 +4336,7 @@ ov108_021E7B74: ; 0x021E7B74
 	lsl r3, r3, #0xc
 	bl BG_LoadCharTilesData
 	add r0, r6, #0
-	bl Heap_Free
+	bl FreeToHeap
 	add sp, #8
 	pop {r4, r5, r6, pc}
 	thumb_func_end ov108_021E7B74
@@ -4613,7 +4613,7 @@ _021E7DD0:
 	ldrb r1, [r6, #2]
 	add r0, sp, #0x24
 	mov r2, #2
-	bl GetSafariObjectConfig
+	bl sub_02097268
 	ldrb r1, [r7, #2]
 	cmp r1, #0
 	bne _021E7DE8
@@ -5346,9 +5346,9 @@ ov108_021E838C: ; 0x021E838C
 	mov r3, #4
 	bl SpriteSystem_Init
 	ldr r0, [r4]
-	bl thunk_ClearMainOAM
+	bl sub_0200B2E0
 	ldr r0, [r4]
-	bl thunk_ClearSubOAM
+	bl sub_0200B2E8
 	pop {r4, pc}
 	nop
 _021E83C0: .word ov108_021EA9A0
@@ -5369,9 +5369,9 @@ ov108_021E83C8: ; 0x021E83C8
 	str r1, [r4, r0]
 	bl GF_DestroyVramTransferManager
 	ldr r0, [r4]
-	bl thunk_ClearMainOAM
+	bl sub_0200B2E0
 	ldr r0, [r4]
-	bl thunk_ClearSubOAM
+	bl sub_0200B2E8
 	pop {r4, pc}
 	thumb_func_end ov108_021E83C8
 
@@ -5485,7 +5485,7 @@ ov108_021E84A4: ; 0x021E84A4
 	add r5, r0, #0
 	add r7, r2, #0
 	str r3, [sp]
-	bl Heap_Alloc
+	bl AllocFromHeap
 	mov r2, #0x59
 	add r4, r0, #0
 	mov r1, #0
@@ -5516,7 +5516,7 @@ ov108_021E84DC: ; 0x021E84DC
 	lsl r2, r2, #2
 	bl MI_CpuFill8
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	pop {r4, pc}
 	thumb_func_end ov108_021E84DC
 
@@ -5542,7 +5542,7 @@ ov108_021E84F8: ; 0x021E84F8
 	mov r2, #0xa6
 	bl ReplaceCharResObjFromNarc
 	add r0, r4, #0
-	bl SpriteTransfer_ReplaceCharData
+	bl sub_0200AE8C
 	add sp, #8
 	pop {r4, pc}
 	.balign 4, 0
@@ -5576,18 +5576,18 @@ ov108_021E8540: ; 0x021E8540
 	ldr r0, [r5]
 	mov r1, #0x10
 	add r7, r2, #0
-	bl Heap_Alloc
+	bl AllocFromHeap
 	mov r1, #0
 	mov r2, #0x10
 	add r4, r0, #0
 	bl MI_CpuFill8
 	ldr r0, [r5]
 	mov r1, #8
-	bl Heap_Alloc
+	bl AllocFromHeap
 	str r0, [r4, #8]
 	ldr r0, [r5]
 	mov r1, #0x24
-	bl Heap_Alloc
+	bl AllocFromHeap
 	ldr r1, [r4, #8]
 	mov r3, #0xe
 	str r0, [r1]
@@ -5811,11 +5811,11 @@ ov108_021E8718: ; 0x021E8718
 	mov r0, #0x55
 	lsl r0, r0, #2
 	ldr r0, [r5, r0]
-	bl SpriteTransfer_DeleteAllCharTransferTasks
+	bl sub_0200AED4
 	mov r0, #0x56
 	lsl r0, r0, #2
 	ldr r0, [r5, r0]
-	bl SpriteTransfer_DeleteAllPlttTransferTasks
+	bl sub_0200B0CC
 	mov r7, #0x55
 	lsl r7, r7, #2
 	add r6, r7, #0
@@ -5879,17 +5879,17 @@ _021E879A:
 _021E87A8:
 	ldr r0, [r6]
 	ldr r0, [r0, r4]
-	bl SpriteTransfer_CreateCharTransferTask_AllocAtEnd
+	bl sub_0200ADA4
 	b _021E87C4
 _021E87B2:
 	ldr r0, [r6]
 	ldr r0, [r0, r4]
-	bl SpriteTransfer_CreateCharTransferTask_UpdateMappingTypeFromHW_AllocAtEnd
+	bl sub_0200AE18
 	b _021E87C4
 _021E87BC:
 	ldr r0, [r6]
 	ldr r0, [r0, r4]
-	bl SpriteTransfer_CreateCharTransferTask_UpdateMappingTypeFromHW
+	bl sub_0200AD64
 _021E87C4:
 	add r7, r7, #1
 	add r4, r4, #4
@@ -5956,7 +5956,7 @@ _021E8806:
 _021E8844:
 	ldr r0, [r4]
 	ldr r0, [r0]
-	bl SpriteTransfer_CreatePlttTransferTask
+	bl sub_0200B00C
 	add sp, #0x10
 	pop {r3, r4, r5, r6, r7, pc}
 	thumb_func_end ov108_021E8758

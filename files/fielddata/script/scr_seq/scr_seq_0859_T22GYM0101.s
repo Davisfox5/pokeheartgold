@@ -5,166 +5,117 @@
 
 	.rodata
 
-	ScrDef scr_seq_T22GYM0101_000
-	ScrDef scr_seq_T22GYM0101_001
-	ScrDef scr_seq_T22GYM0101_002
-	ScrDef scr_seq_T22GYM0101_003
-	ScrDef scr_seq_T22GYM0101_004
-	ScrDef scr_seq_T22GYM0101_005
-	ScrDefEnd
+	scrdef scr_seq_T22GYM0101_000
+	scrdef scr_seq_T22GYM0101_001
+	scrdef scr_seq_T22GYM0101_002
+	scrdef scr_seq_T22GYM0101_003
+	scrdef scr_seq_T22GYM0101_004
+	scrdef scr_seq_T22GYM0101_005
+	scrdef_end
 
+; ===== APOCRYPHA Ch2 (2.5): the old gym is the League practice hall.
+; Roxanne (TEACHER, Falkner's engine slot) runs the practicum: gated on the
+; tower being settled, no badge, TM39 Rock Tomb reward, and her completion
+; arms Kestra's first rival battle outside the doors. =====
 scr_seq_T22GYM0101_000:
-	VioletGymInit
-	GetPhoneBookRematch PHONE_CONTACT_FALKNER, VAR_TEMP_x4001
-	Compare VAR_TEMP_x4001, 0
-	GoToIfNe _00A7
-	CheckRegisteredPhoneNumber PHONE_CONTACT_FALKNER, VAR_TEMP_x4001
-	Compare VAR_TEMP_x4001, 1
-	GoToIfEq _007E
-	CheckBadge BADGE_SOUL, VAR_TEMP_x4001
-	Compare VAR_TEMP_x4001, 1
-	GoToIfEq _005B
-	GoTo _00A1
-
-_005B:
-	GetWeekday VAR_TEMP_x4001
-	Compare VAR_TEMP_x4001, 1
-	GoToIfNe _0076
-	SetFlag FLAG_HIDE_VIOLET_GYM_FALKNER
-	GoTo _007C
-
-_0076:
-	GoTo _00A1
-
-_007C:
-	End
-
-_007E:
-	GetWeekday VAR_TEMP_x4001
-	Compare VAR_TEMP_x4001, 3
-	GoToIfNe _0099
-	SetFlag FLAG_HIDE_VIOLET_GYM_FALKNER
-	GoTo _009F
-
-_0099:
-	GoTo _00A1
-
-_009F:
-	End
-
-_00A1:
-	ClearFlag FLAG_HIDE_VIOLET_GYM_FALKNER
-	End
-
-_00A7:
-	SetFlag FLAG_HIDE_VIOLET_GYM_FALKNER
-	End
+	violet_gym_init
+	clearflag FLAG_HIDE_VIOLET_GYM_FALKNER
+	end
 
 scr_seq_T22GYM0101_001:
-	PlaySE SEQ_SE_DP_SELECT
-	LockAll
-	FacePlayer
-	CheckBadge BADGE_ZEPHYR, VAR_SPECIAL_RESULT
-	Compare VAR_SPECIAL_RESULT, 1
-	GoToIfEq _0168
-	NPCMsg msg_0558_T22GYM0101_00000
-	CloseMsg
-	TrainerBattle TRAINER_LEADER_FALKNER_FALKNER, 0, 0, 0
-	CheckBattleWon VAR_SPECIAL_RESULT
-	Compare VAR_SPECIAL_RESULT, 0
-	GoToIfEq _017E
-	GiveBadge BADGE_ZEPHYR
-	AddSpecialGameStat SCORE_EVENT_BADGE_GET
-	SetTrainerFlag TRAINER_BIRD_KEEPER_GS_ROD
-	SetTrainerFlag TRAINER_BIRD_KEEPER_GS_ABE
-	SetVar VAR_SCENE_VIOLET_CITY_OW, 1
-	SetFlag FLAG_UNK_192
-	SetVar VAR_SCENE_ELMS_LAB, 6
-	SetFlag FLAG_UNK_0F4
-	SetFlag FLAG_HIDE_WIFI_CLUB_CLOSED_LADY
-	NPCMsg msg_0558_T22GYM0101_00001
-	BufferPlayersName 0
-	NPCMsg msg_0558_T22GYM0101_00002
-	PlayFanfare SEQ_ME_BADGE
-	WaitFanfare
-	NPCMsg msg_0558_T22GYM0101_00003
-	GoTo _0126
+	play_se SEQ_SE_DP_SELECT
+	lockall
+	faceplayer
+	goto_if_set FLAG_APOC_CH2_PRACTICUM_DONE, _T22GYM_after
+	goto_if_unset FLAG_APOC_CH2_FLASH_GIVEN, _T22GYM_early
+	npc_msg msg_0558_T22GYM0101_00011
+	npc_msg msg_0558_T22GYM0101_00012
+	npc_msg msg_0558_T22GYM0101_00013
+	closemsg
+	trainer_battle TRAINER_LEADER_FALKNER_FALKNER, 0, 0, 0
+	check_battle_won VAR_SPECIAL_RESULT
+	compare VAR_SPECIAL_RESULT, 0
+	goto_if_eq _T22GYM_lost
+	npc_msg msg_0558_T22GYM0101_00014
+	giveitem_no_check ITEM_TM39, 1
+	npc_msg msg_0558_T22GYM0101_00015
+	npc_msg msg_0558_T22GYM0101_00016
+	wait_button_or_walk_away
+	closemsg
+	setflag FLAG_APOC_CH2_PRACTICUM_DONE
+	settrainerflag TRAINER_BIRD_KEEPER_GS_ROD
+	settrainerflag TRAINER_BIRD_KEEPER_GS_ABE
+	; Kestra is waiting outside the hall (2.6)
+	clearflag FLAG_APOC_CH2_HIDE_KESTRA_GYMFRONT
+	; and the kimono girl takes up her watching spot for the beat after (OW==4)
+	clearflag FLAG_HIDE_VIOLET_KIMONO_GIRL
+	setvar VAR_SCENE_VIOLET_CITY_OW, 3
+	releaseall
+	end
 
-_0126:
-	GoToIfNoItemSpace ITEM_TM51, 1, _015E
-	CallStd std_give_item_verbose
-	SetFlag FLAG_GOT_TM51_FROM_FALKNER
-	ClearFlag FLAG_HIDE_NEW_BARK_FRIENDS_ROOM_FRIEND
-	NPCMsg msg_0558_T22GYM0101_00004
-	WaitButton
-	CloseMsg
-	ReleaseAll
-	End
+_T22GYM_early:
+	npc_msg msg_0558_T22GYM0101_00017
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
 
-_015E:
-	CallStd std_bag_is_full
-	CloseMsg
-	ReleaseAll
-	End
+_T22GYM_after:
+	npc_msg msg_0558_T22GYM0101_00018
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
 
-_0168:
-	GoToIfUnset FLAG_GOT_TM51_FROM_FALKNER, _0126
-	NPCMsg msg_0558_T22GYM0101_00005
-	WaitButton
-	CloseMsg
-	ReleaseAll
-	End
+_T22GYM_lost:
+	white_out
+	releaseall
+	end
 
-_017E:
-	WhiteOut
-	ReleaseAll
-	End
 
 scr_seq_T22GYM0101_002:
-	PlaySE SEQ_SE_DP_SELECT
-	LockAll
-	FacePlayer
-	CheckBadge BADGE_ZEPHYR, VAR_SPECIAL_RESULT
-	Compare VAR_SPECIAL_RESULT, 1
-	GoToIfEq _01AA
-	NPCMsg msg_0558_T22GYM0101_00007
-	WaitButton
-	CloseMsg
-	ReleaseAll
-	End
+	play_se SEQ_SE_DP_SELECT
+	lockall
+	faceplayer
+	; ===== APOCRYPHA: no badge here -- the guide keys off the practicum =====
+	goto_if_set FLAG_APOC_CH2_PRACTICUM_DONE, _01AA
+	npc_msg msg_0558_T22GYM0101_00007
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
 
 _01AA:
-	NPCMsg msg_0558_T22GYM0101_00008
-	WaitButton
-	CloseMsg
-	ReleaseAll
-	End
+	npc_msg msg_0558_T22GYM0101_00008
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
 
 scr_seq_T22GYM0101_005:
-	SimpleNPCMsg msg_0558_T22GYM0101_00006
-	End
+	simple_npc_msg msg_0558_T22GYM0101_00006
+	end
 
 scr_seq_T22GYM0101_003:
-	PlaySE SEQ_SE_DP_SELECT
-	LockAll
-	FacePlayer
-	CheckBadge BADGE_ZEPHYR, VAR_SPECIAL_RESULT
-	BufferPlayersName 0
-	Compare VAR_SPECIAL_RESULT, 0
-	GoToIfNe _01EF
-	NPCMsg msg_0558_T22GYM0101_00009
-	GoTo _01F2
+	play_se SEQ_SE_DP_SELECT
+	lockall
+	faceplayer
+	; ===== APOCRYPHA: statue plaque flips on the practicum, not Zephyr =====
+	buffer_players_name 0
+	goto_if_set FLAG_APOC_CH2_PRACTICUM_DONE, _01EF
+	npc_msg msg_0558_T22GYM0101_00009
+	goto _01F2
 
 _01EF:
-	NPCMsg msg_0558_T22GYM0101_00010
+	npc_msg msg_0558_T22GYM0101_00010
 _01F2:
-	WaitButton
-	CloseMsg
-	ReleaseAll
-	End
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
 
 scr_seq_T22GYM0101_004:
-	SetVar VAR_TEMP_x4000, 0
-	VioletGymElevator
-	End
+	setvar VAR_TEMP_x4000, 0
+	violet_gym_elevator
+	end
 	.balign 4, 0

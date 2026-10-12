@@ -5,10 +5,10 @@
 
 	.rodata
 
-	ScrDef scr_seq_D45R0101_000
-	ScrDefEnd
+	scrdef scr_seq_D45R0101_000
+	scrdef_end
 
 scr_seq_D45R0101_000:
-	MakeObjectVisible obj_D45R0101_stop
-	End
+	make_object_visible obj_D45R0101_stop
+	end
 	.balign 4, 0

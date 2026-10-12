@@ -5,249 +5,265 @@
 
 	.rodata
 
-	ScrDef scr_seq_T02_000
-	ScrDef scr_seq_T02_001
-	ScrDef scr_seq_T02_002
-	ScrDef scr_seq_T02_003
-	ScrDef scr_seq_T02_004
-	ScrDef scr_seq_T02_005
-	ScrDef scr_seq_T02_006
-	ScrDef scr_seq_T02_007
-	ScrDef scr_seq_T02_008
-	ScrDef scr_seq_T02_009
-	ScrDef scr_seq_T02_010
-	ScrDef scr_seq_T02_011
-	ScrDefEnd
+	scrdef scr_seq_T02_000
+	scrdef scr_seq_T02_001
+	scrdef scr_seq_T02_002
+	scrdef scr_seq_T02_003
+	scrdef scr_seq_T02_004
+	scrdef scr_seq_T02_005
+	scrdef scr_seq_T02_006
+	scrdef scr_seq_T02_007
+	scrdef scr_seq_T02_008
+	scrdef scr_seq_T02_009
+	scrdef scr_seq_T02_010
+	scrdef scr_seq_T02_011
+	scrdef_end
 
 scr_seq_T02_008:
-	GoToIfUnset FLAG_UNK_189, _0043
-	ClearFlag FLAG_UNK_189
-	End
+	goto_if_unset FLAG_UNK_189, _0043
+	clearflag FLAG_UNK_189
+	end
 
 _0043:
-	GetWeekday VAR_TEMP_x4000
-	Compare VAR_TEMP_x4000, 3
-	GoToIfNe _005E
-	ClearFlag FLAG_HIDE_CAMERON
-	GoTo _0079
+	get_weekday VAR_TEMP_x4000
+	compare VAR_TEMP_x4000, 3
+	goto_if_ne _005E
+	clearflag FLAG_HIDE_CAMERON
+	goto _0079
 
 _005E:
-	Compare VAR_TEMP_x4000, 5
-	GoToIfNe _0075
-	ClearFlag FLAG_HIDE_CAMERON
-	GoTo _0079
+	compare VAR_TEMP_x4000, 5
+	goto_if_ne _0075
+	clearflag FLAG_HIDE_CAMERON
+	goto _0079
 
 _0075:
-	SetFlag FLAG_HIDE_CAMERON
+	setflag FLAG_HIDE_CAMERON
 _0079:
-	GoToIfSet FLAG_UNLOCKED_WEST_KANTO, _008E
-	SetFlag FLAG_UNLOCKED_WEST_KANTO
-	SetVar VAR_UNK_4121, 1
+	goto_if_set FLAG_UNLOCKED_WEST_KANTO, _008E
+	setflag FLAG_UNLOCKED_WEST_KANTO
+	setvar VAR_UNK_4121, 1
 _008E:
-	End
+	end
 
 scr_seq_T02_011:
-	PhoneCall PHONE_CONTACT_PROF__OAK, 2, 0
-	SetVar VAR_UNK_4096, 2
-	End
+	phone_call PHONE_CONTACT_PROF__OAK, 2, 0
+	setvar VAR_UNK_4096, 2
+	end
 
 scr_seq_T02_000:
-	PlaySE SEQ_SE_DP_SELECT
-	LockAll
-	FacePlayer
-	NPCMsg msg_0452_T02_00000
-	TouchscreenMenuHide
-	GetMenuChoice VAR_SPECIAL_RESULT
-	TouchscreenMenuShow
-	Compare VAR_SPECIAL_RESULT, 0
-	GoToIfNe _00D7
-	NPCMsg msg_0452_T02_00001
-	GoTo _00DA
+	play_se SEQ_SE_DP_SELECT
+	lockall
+	faceplayer
+	npc_msg msg_0452_T02_00000
+	touchscreen_menu_hide
+	getmenuchoice VAR_SPECIAL_RESULT
+	touchscreen_menu_show
+	compare VAR_SPECIAL_RESULT, 0
+	goto_if_ne _00D7
+	npc_msg msg_0452_T02_00001
+	goto _00DA
 
 _00D7:
-	NPCMsg msg_0452_T02_00002
+	npc_msg msg_0452_T02_00002
 _00DA:
-	WaitButton
-	CloseMsg
-	ReleaseAll
-	End
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
 
 scr_seq_T02_001:
-	SimpleNPCMsg msg_0452_T02_00003
-	End
+	simple_npc_msg msg_0452_T02_00003
+	end
 
 scr_seq_T02_010:
-	SimpleNPCMsg msg_0452_T02_00004
-	End
+	simple_npc_msg msg_0452_T02_00004
+	end
 
 scr_seq_T02_002:
-	PlaySE SEQ_SE_DP_SELECT
-	LockAll
-	FacePlayer
-	GoToIfSet FLAG_GOT_TM85_FROM_VIRIDIAN_CITY_MAN, _0147
-	NPCMsg msg_0452_T02_00005
-	GoToIfNoItemSpace ITEM_TM85, 1, _0152
-	CallStd std_give_item_verbose
-	SetFlag FLAG_GOT_TM85_FROM_VIRIDIAN_CITY_MAN
+	play_se SEQ_SE_DP_SELECT
+	lockall
+	faceplayer
+	goto_if_set FLAG_GOT_TM85_FROM_VIRIDIAN_CITY_MAN, _0147
+	npc_msg msg_0452_T02_00005
+	goto_if_no_item_space ITEM_TM85, 1, _0152
+	callstd std_give_item_verbose
+	setflag FLAG_GOT_TM85_FROM_VIRIDIAN_CITY_MAN
 _0147:
-	NPCMsg msg_0452_T02_00006
-	WaitButton
-	CloseMsg
-	ReleaseAll
-	End
+	npc_msg msg_0452_T02_00006
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
 
 _0152:
-	CallStd std_bag_is_full
-	CloseMsg
-	ReleaseAll
-	End
+	callstd std_bag_is_full
+	closemsg
+	releaseall
+	end
 
 scr_seq_T02_009:
-	PlaySE SEQ_SE_DP_SELECT
-	LockAll
-	FacePlayer
-	GetStdMsgNaix 2, VAR_SPECIAL_RESULT
-	MsgBoxExtern VAR_SPECIAL_RESULT, 0
-	TouchscreenMenuHide
-	GetMenuChoice VAR_SPECIAL_RESULT
-	TouchscreenMenuShow
-	Compare VAR_SPECIAL_RESULT, 1
-	GoToIfEq _0284
-	PhotoAlbumIsFull VAR_SPECIAL_RESULT
-	Compare VAR_SPECIAL_RESULT, 1
-	GoToIfEq _0298
-	GetStdMsgNaix 2, VAR_SPECIAL_RESULT
-	MsgBoxExtern VAR_SPECIAL_RESULT, 1
-	CloseMsg
-	ToggleFollowingPokemonMovement 0
-	WaitFollowingPokemonMovement
-	FollowingPokemonMovement 55
-	GetPlayerFacing VAR_SPECIAL_RESULT
-	Compare VAR_SPECIAL_RESULT, 0
-	GoToIfNe _01D5
-	ApplyMovement obj_player, _02AC
-	ApplyMovement obj_T02_gsmiddleman1, _02F8
-	GoTo _0223
+	play_se SEQ_SE_DP_SELECT
+	lockall
+	faceplayer
+	get_std_msg_naix 2, VAR_SPECIAL_RESULT
+	msgbox_extern VAR_SPECIAL_RESULT, 0
+	touchscreen_menu_hide
+	getmenuchoice VAR_SPECIAL_RESULT
+	touchscreen_menu_show
+	compare VAR_SPECIAL_RESULT, 1
+	goto_if_eq _0284
+	photo_album_is_full VAR_SPECIAL_RESULT
+	compare VAR_SPECIAL_RESULT, 1
+	goto_if_eq _0298
+	get_std_msg_naix 2, VAR_SPECIAL_RESULT
+	msgbox_extern VAR_SPECIAL_RESULT, 1
+	closemsg
+	toggle_following_pokemon_movement 0
+	wait_following_pokemon_movement
+	following_pokemon_movement 55
+	get_player_facing VAR_SPECIAL_RESULT
+	compare VAR_SPECIAL_RESULT, 0
+	goto_if_ne _01D5
+	apply_movement obj_player, _02AC
+	apply_movement obj_T02_gsmiddleman1, _02F8
+	goto _0223
 
 _01D5:
-	Compare VAR_SPECIAL_RESULT, 1
-	GoToIfNe _01F0
-	ApplyMovement obj_player, _02C4
-	GoTo _0223
+	compare VAR_SPECIAL_RESULT, 1
+	goto_if_ne _01F0
+	apply_movement obj_player, _02C4
+	goto _0223
 
 _01F0:
-	Compare VAR_SPECIAL_RESULT, 3
-	GoToIfNe _0213
-	ApplyMovement obj_player, _02E4
-	ApplyMovement obj_T02_gsmiddleman1, _02F8
-	GoTo _0223
+	compare VAR_SPECIAL_RESULT, 3
+	goto_if_ne _0213
+	apply_movement obj_player, _02E4
+	apply_movement obj_T02_gsmiddleman1, _02F8
+	goto _0223
 
 _0213:
-	ApplyMovement obj_player, _02D0
-	ApplyMovement obj_T02_gsmiddleman1, _02F8
+	apply_movement obj_player, _02D0
+	apply_movement obj_T02_gsmiddleman1, _02F8
 _0223:
-	WaitMovement
-	WaitFollowingPokemonMovement
-	ToggleFollowingPokemonMovement 1
-	FollowingPokemonMovement 48
-	ScrCmd_729 VAR_SPECIAL_RESULT
-	Compare VAR_SPECIAL_RESULT, 1
-	GoToIfNe _024A
-	ApplyMovement obj_partner_poke, _0304
-	WaitMovement
+	wait_movement
+	wait_following_pokemon_movement
+	toggle_following_pokemon_movement 1
+	following_pokemon_movement 48
+	scrcmd_729 VAR_SPECIAL_RESULT
+	compare VAR_SPECIAL_RESULT, 1
+	goto_if_ne _024A
+	apply_movement obj_partner_poke, _0304
+	wait_movement
 _024A:
-	SetFlag FLAG_UNK_189
-	FadeScreen 6, 1, 0, RGB_BLACK
-	WaitFade
-	CameronPhoto 69
-	LockAll
-	FadeScreen 6, 1, 1, RGB_BLACK
-	WaitFade
-	ClearFlag FLAG_UNK_189
-	GetStdMsgNaix 2, VAR_SPECIAL_RESULT
-	MsgBoxExtern VAR_SPECIAL_RESULT, 2
-	WaitButton
-	CloseMsg
-	ReleaseAll
-	End
+	setflag FLAG_UNK_189
+	fade_screen 6, 1, 0, RGB_BLACK
+	wait_fade
+	cameron_photo 69
+	lockall
+	fade_screen 6, 1, 1, RGB_BLACK
+	wait_fade
+	clearflag FLAG_UNK_189
+	get_std_msg_naix 2, VAR_SPECIAL_RESULT
+	msgbox_extern VAR_SPECIAL_RESULT, 2
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
 
 _0284:
-	GetStdMsgNaix 2, VAR_SPECIAL_RESULT
-	MsgBoxExtern VAR_SPECIAL_RESULT, 5
-	WaitButton
-	CloseMsg
-	ReleaseAll
-	End
+	get_std_msg_naix 2, VAR_SPECIAL_RESULT
+	msgbox_extern VAR_SPECIAL_RESULT, 5
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
 
 _0298:
-	GetStdMsgNaix 2, VAR_SPECIAL_RESULT
-	MsgBoxExtern VAR_SPECIAL_RESULT, 3
-	WaitButton
-	CloseMsg
-	ReleaseAll
-	End
+	get_std_msg_naix 2, VAR_SPECIAL_RESULT
+	msgbox_extern VAR_SPECIAL_RESULT, 3
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
 
 	.balign 4, 0
 _02AC:
-	WalkNormalEast
-	WalkNormalNorth 2
-	WalkNormalWest
-	WalkNormalNorth 3
-	WalkOnSpotNormalSouth
-	EndMovement
+	step 15, 1
+	step 12, 2
+	step 14, 1
+	step 12, 3
+	step 33, 1
+	step_end
 
 	.balign 4, 0
 _02C4:
-	WalkNormalNorth 3
-	WalkOnSpotNormalSouth
-	EndMovement
+	step 12, 3
+	step 33, 1
+	step_end
 
 	.balign 4, 0
 _02D0:
-	WalkNormalNorth
-	WalkNormalWest
-	WalkNormalNorth 3
-	WalkOnSpotNormalSouth
-	EndMovement
+	step 12, 1
+	step 14, 1
+	step 12, 3
+	step 33, 1
+	step_end
 
 	.balign 4, 0
 _02E4:
-	WalkNormalNorth
-	WalkNormalEast
-	WalkNormalNorth 3
-	WalkOnSpotNormalSouth
-	EndMovement
+	step 12, 1
+	step 15, 1
+	step 12, 3
+	step 33, 1
+	step_end
 
 	.balign 4, 0
 _02F8:
-	Delay8
-	WalkOnSpotNormalNorth
-	EndMovement
+	step 63, 1
+	step 32, 1
+	step_end
 
 	.balign 4, 0
 _0304:
-	WalkNormalEast
-	WalkNormalNorth
-	FaceSouth
-	EndMovement
+	step 15, 1
+	step 12, 1
+	step 1, 1
+	step_end
 
 scr_seq_T02_003:
-	SimpleNPCMsg msg_0452_T02_00007
-	End
+	simple_npc_msg msg_0452_T02_00007
+	end
 
 scr_seq_T02_004:
-	DirectionSignpostEx 0, 2, msg_0452_T02_00008
-	End
+	direction_signpost msg_0452_T02_00008, 0, 2, VAR_SPECIAL_RESULT
+	scrcmd_057 3
+	scrcmd_058
+	scrcmd_060 VAR_SPECIAL_RESULT
+	callstd std_signpost
+	end
 
 scr_seq_T02_005:
-	TrainerTipsEx 2, msg_0452_T02_00009
-	End
+	scrcmd_055 2, 0
+	scrcmd_057 3
+	scrcmd_058
+	trainer_tips msg_0452_T02_00009, VAR_SPECIAL_RESULT
+	callstd std_signpost
+	end
 
 scr_seq_T02_006:
-	TrainerTipsEx 2, msg_0452_T02_00010
-	End
+	scrcmd_055 2, 0
+	scrcmd_057 3
+	scrcmd_058
+	trainer_tips msg_0452_T02_00010, VAR_SPECIAL_RESULT
+	callstd std_signpost
+	end
 
 scr_seq_T02_007:
-	TrainerTipsEx 2, msg_0452_T02_00011
-	End
+	scrcmd_055 2, 0
+	scrcmd_057 3
+	scrcmd_058
+	trainer_tips msg_0452_T02_00011, VAR_SPECIAL_RESULT
+	callstd std_signpost
+	end
 	.balign 4, 0

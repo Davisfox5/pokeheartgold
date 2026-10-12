@@ -14,12 +14,12 @@ void Save_Daycare_ResetEggStats(Daycare *dayCare);
 void SetEggStats(Pokemon *mon, int species, u8 metLocation, PlayerProfile *profile, int trainerMemoStrat, int eggLocation);
 void GiveEggToPlayer(Daycare *dayCare, Party *party, PlayerProfile *profile);
 BOOL HandleDaycareStep(Daycare *dayCare, Party *party, FieldSystem *fieldSystem);
-Pokemon *Party_GetMonToHatch(Party *party);
+Pokemon *sub_0206CE44(Party *party);
 void Save_Daycare_BufferStoredMonNicks(Daycare *dayCare, MessageFormat *msgFmt);
 void Save_Daycare_BufferMonStats(Daycare *dayCare, u32 nickname_idx, u32 level_idx, u32 gender_idx, u8 slot, MessageFormat *msgFmt);
 u16 Save_Daycare_BufferTailMonNick(Daycare *dayCare, MessageFormat *msgFmt);
 u8 Save_Daycare_GetState(Daycare *dayCare);
 u8 Save_Daycare_CalcCompatibility(Daycare *dayCare);
-void sub_0206D328(Pokemon *mon, enum HeapID heapID);
+void sub_0206D328(Pokemon *mon, HeapID heapId);
 
 #endif

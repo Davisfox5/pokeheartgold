@@ -17,9 +17,9 @@
 #include "msgdata.h"
 #include "pm_string.h"
 #include "render_window.h"
-#include "screen_fade.h"
 #include "system.h"
 #include "text.h"
+#include "unk_0200FA24.h"
 #include "unk_02035900.h"
 #include "unk_02037C94.h"
 
@@ -69,7 +69,7 @@ static const WindowTemplate sErrorMessageWindowTemplate = {
     .baseTile = 0x23,
 };
 
-static const HeapParam sErrorMessageHeapParams = {
+static const HEAP_PARAM sErrorMessageHeapParams = {
     .size = 0x20000,
     .arena = OS_ARENA_MAIN,
 };
@@ -92,10 +92,10 @@ void PrintErrorMessageAndReset(void) {
 
     OS_SetArenaHi(OS_ARENA_MAIN, OS_GetInitArenaHi(OS_ARENA_MAIN));
     OS_SetArenaLo(OS_ARENA_MAIN, OS_GetInitArenaLo(OS_ARENA_MAIN));
-    Heap_InitSystem(&sErrorMessageHeapParams, 1, 1, 0);
+    InitHeapSystem(&sErrorMessageHeapParams, 1, 1, 0);
 
-    sub_0200FBF4(PM_LCD_TOP, RGB_BLACK);
-    sub_0200FBF4(PM_LCD_BOTTOM, RGB_BLACK);
+    sub_0200FBF4(PM_LCD_TOP, 0);
+    sub_0200FBF4(PM_LCD_BOTTOM, 0);
 
     OS_DisableIrqMask(OS_IE_VBLANK);
     OS_SetIrqFunction(OS_IE_VBLANK, VBlankIntr);
@@ -171,12 +171,12 @@ void PrintErrorMessageAndReset(void) {
         OS_WaitIrq(TRUE, OS_IE_VBLANK);
     }
 
-    sub_0200FBF4(PM_LCD_TOP, RGB_WHITE);
-    sub_0200FBF4(PM_LCD_BOTTOM, RGB_WHITE);
+    sub_0200FBF4(PM_LCD_TOP, 0x7FFF);
+    sub_0200FBF4(PM_LCD_BOTTOM, 0x7FFF);
 
     RemoveWindow(&window);
     DestroyMsgData(error_msgdata);
-    Heap_Free(bg_config);
+    FreeToHeap(bg_config);
 
     OS_ResetSystem(0);
 }

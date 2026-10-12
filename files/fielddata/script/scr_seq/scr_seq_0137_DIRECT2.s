@@ -5,10 +5,10 @@
 
 	.rodata
 
-	ScrDef scr_seq_DIRECT2_000
-	ScrDefEnd
+	scrdef scr_seq_DIRECT2_000
+	scrdef_end
 
 scr_seq_DIRECT2_000:
-	ScrCmd_284
-	End
+	scrcmd_284
+	end
 	.balign 4, 0

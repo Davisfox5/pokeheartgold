@@ -2,8 +2,8 @@
 #pragma once
 .public SysTask_CreateOnMainQueue
 .public SysTask_Destroy
-.public Heap_Alloc
-.public Heap_Free
+.public AllocFromHeap
+.public FreeToHeap
 .public LoadRectToBgTilemapRect
 .public ScheduleBgTilemapBufferTransfer
 .public MI_CpuFill8

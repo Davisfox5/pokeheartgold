@@ -4,19 +4,19 @@
 #include "msgdata/msg/msg_0203.h"
 
 #include "brightness.h"
-#include "field_bgm.h"
 #include "field_warp_tasks.h"
 #include "font.h"
 #include "gf_gfx_loader.h"
 #include "render_window.h"
 #include "save_local_field_data.h"
 #include "scrcmd.h"
-#include "screen_fade.h"
 #include "sound.h"
 #include "system.h"
 #include "text.h"
 #include "unk_0200B150.h"
+#include "unk_0200FA24.h"
 #include "unk_0203BA5C.h"
+#include "unk_02054E00.h"
 #include "unk_020552A4.h"
 #include "unk_0206793C.h"
 #include "use_item_on_mon.h"
@@ -76,25 +76,25 @@ static void Blackout_InitDisplays(BgConfig *bgConfig) {
     GfGfx_SetBanks(&sBlackoutGraphicsBanks);
     SetBothScreensModesAndDisable(&sBlackoutGraphicsModes);
     InitBgFromTemplate(bgConfig, GF_BG_LYR_MAIN_3, &sBlackoutBgTemplate, GF_BG_TYPE_TEXT);
-    GfGfxLoader_GXLoadPal(NARC_graphic_font, 7, GF_PAL_LOCATION_MAIN_BG, GF_PAL_SLOT_13_OFFSET, 0x20, HEAP_ID_FIELD2);
+    GfGfxLoader_GXLoadPal(NARC_graphic_font, 7, GF_PAL_LOCATION_MAIN_BG, GF_PAL_SLOT_13_OFFSET, 0x20, HEAP_ID_FIELD);
     BG_SetMaskColor(GF_BG_LYR_MAIN_3, RGB_WHITE);
 }
 
 static void Blackout_DrawMessage(FieldSystem *fieldSystem, TaskManager *taskManager) {
-    BlackoutScreenEnvironment *env = Heap_Alloc(HEAP_ID_FIELD2, sizeof(BlackoutScreenEnvironment));
+    BlackoutScreenEnvironment *env = AllocFromHeap(HEAP_ID_FIELD, sizeof(BlackoutScreenEnvironment));
 
     GF_ASSERT(env != NULL);
     memset(env, 0, sizeof(BlackoutScreenEnvironment));
     env->state = 0;
     env->fieldSystem = fieldSystem;
-    env->bgConfig = BgConfig_Alloc(HEAP_ID_FIELD2);
-    sub_0200FBF4(PM_LCD_TOP, RGB_WHITE);
+    env->bgConfig = BgConfig_Alloc(HEAP_ID_FIELD);
+    sub_0200FBF4(PM_LCD_TOP, RGB_WHITE); // are RGBs correct here?
     sub_0200FBF4(PM_LCD_BOTTOM, RGB_WHITE);
-    ResetVisibleHardwareWindows(PM_LCD_TOP);
-    ResetVisibleHardwareWindows(PM_LCD_BOTTOM);
+    sub_0200FBDC(0); // PM_LCD_TOP?
+    sub_0200FBDC(1); // PM_LCD_TOP?
     Blackout_InitDisplays(env->bgConfig);
-    env->msgData = NewMsgDataFromNarc(MSGDATA_LOAD_LAZY, NARC_msgdata_msg, NARC_msg_msg_0203_bin, HEAP_ID_FIELD2);
-    env->msgFmt = MessageFormat_New(HEAP_ID_FIELD2);
+    env->msgData = NewMsgDataFromNarc(MSGDATA_LOAD_LAZY, NARC_msgdata_msg, NARC_msg_msg_0203_bin, HEAP_ID_FIELD);
+    env->msgFmt = MessageFormat_New(HEAP_ID_FIELD);
 
     AddWindow(env->bgConfig, &env->window, &sBlackoutWindowTemplate);
 
@@ -122,7 +122,7 @@ static BOOL Task_ShowPrintedBlackoutMessage(TaskManager *taskManager) {
     BlackoutScreenEnvironment *env = TaskManager_GetEnvironment(taskManager);
     switch (env->state) {
     case STATE_SHOW_PRINTED_BLACKOUT_FADE_IN:
-        BeginNormalPaletteFade(FADE_MAIN_ONLY, FADE_TYPE_BRIGHTNESS_IN, FADE_TYPE_UNK_43, RGB_WHITE, 8, 1, HEAP_ID_FIELD3);
+        BeginNormalPaletteFade(3, 1, 43, RGB_WHITE, 8, 1, HEAP_ID_32);
         G2_BlendNone();
         env->state++;
         break;
@@ -133,7 +133,7 @@ static BOOL Task_ShowPrintedBlackoutMessage(TaskManager *taskManager) {
         break;
     case STATE_SHOW_PRINTED_BLACKOUT_FADE_OUT_INPUT:
         if (gSystem.newKeys & PAD_BUTTON_A || gSystem.newKeys & PAD_BUTTON_B || gSystem.touchNew != 0) {
-            BeginNormalPaletteFade(FADE_BOTH_SCREENS, FADE_TYPE_BRIGHTNESS_OUT, FADE_TYPE_BRIGHTNESS_OUT, RGB_BLACK, 8, 1, HEAP_ID_FIELD3);
+            BeginNormalPaletteFade(0, 0, 0, RGB_BLACK, 8, 1, HEAP_ID_32);
             env->state++;
         }
         break;
@@ -149,8 +149,8 @@ static BOOL Task_ShowPrintedBlackoutMessage(TaskManager *taskManager) {
         MessageFormat_Delete(env->msgFmt);
         DestroyMsgData(env->msgData);
         FreeBgTilemapBuffer(env->bgConfig, GF_BG_LYR_MAIN_3);
-        Heap_Free(env->bgConfig);
-        Heap_Free(env);
+        FreeToHeap(env->bgConfig);
+        FreeToHeap(env);
         return TRUE;
     }
 
@@ -158,8 +158,8 @@ static BOOL Task_ShowPrintedBlackoutMessage(TaskManager *taskManager) {
 }
 
 static void Blackout_PrintMessage(BlackoutScreenEnvironment *environment, s32 msgNo, u8 x, u8 y) {
-    String *tmpStr = String_New(1024, HEAP_ID_FIELD2);
-    String *finStr = String_New(1024, HEAP_ID_FIELD2);
+    String *tmpStr = String_New(1024, HEAP_ID_FIELD);
+    String *finStr = String_New(1024, HEAP_ID_FIELD);
 
     FillWindowPixelBuffer(&environment->window, 0);
     ReadMsgDataIntoString(environment->msgData, msgNo, tmpStr);
@@ -210,7 +210,7 @@ BOOL Task_Blackout(TaskManager *taskManager) {
         break;
     case STATE_BLACKOUT_TASK_SOUND_FADE_WAIT:
         if (GF_SndGetFadeTimer() == 0) {
-            FieldBGM_Stop();
+            sub_02054F14();
             (*state)++;
         }
         break;

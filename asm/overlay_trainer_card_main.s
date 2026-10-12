@@ -35,9 +35,9 @@ TrainerCardMainApp_Init: ; 0x021E5AC0
 	mov r1, #0
 	bl sub_0200FBF4
 	mov r0, #0
-	bl ResetVisibleHardwareWindows
+	bl sub_0200FBDC
 	mov r0, #1
-	bl ResetVisibleHardwareWindows
+	bl sub_0200FBDC
 	mov r0, #4
 	mov r1, #8
 	bl SetKeyRepeatTimers
@@ -45,7 +45,7 @@ TrainerCardMainApp_Init: ; 0x021E5AC0
 	mov r0, #3
 	mov r1, #0x19
 	lsl r2, r2, #0x10
-	bl Heap_Create
+	bl CreateHeap
 	ldr r1, _021E5D4C ; =0x00003444
 	add r0, r5, #0
 	mov r2, #0x19
@@ -492,13 +492,13 @@ TrainerCardMainApp_Exit: ; 0x021E5EC8
 	bl ov51_021E7CA4
 	ldr r0, _021E5F50 ; =0x000030EC
 	ldr r0, [r4, r0]
-	bl Heap_Free
+	bl FreeToHeap
 	ldr r0, _021E5F54 ; =0x000033B8
 	ldr r0, [r4, r0]
-	bl Heap_Free
+	bl FreeToHeap
 	ldr r0, _021E5F58 ; =0x000033B0
 	ldr r0, [r4, r0]
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r4, #0
 	bl ov51_021E6EF0
 	ldr r0, [r4]
@@ -522,7 +522,7 @@ TrainerCardMainApp_Exit: ; 0x021E5EC8
 	add r1, r0, #0
 	bl Main_SetVBlankIntrCB
 	mov r0, #0x19
-	bl Heap_Destroy
+	bl DestroyHeap
 	mov r0, #1
 	mov r1, #0x7f
 	bl GF_SndHandleSetPlayerVolume
@@ -837,7 +837,7 @@ _021E61B0:
 	mov r2, #0x20
 	bl GXS_LoadBGPltt
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	add sp, #0x64
 	pop {r4, r5, pc}
 	.balign 4, 0
@@ -869,7 +869,7 @@ ov51_021E6200: ; 0x021E6200
 	mov r2, #0x20
 	bl GXS_LoadBGPltt
 	add r0, r6, #0
-	bl Heap_Free
+	bl FreeToHeap
 	add sp, #4
 	pop {r3, r4, r5, r6, pc}
 	.balign 4, 0
@@ -1025,7 +1025,7 @@ ov51_021E6354: ; 0x021E6354
 	lsl r2, r2, #8
 	bl GXS_LoadBGPltt
 	add r0, r5, #0
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r4, #0
 	add r0, #0xe8
 	ldr r2, [r0]
@@ -1053,7 +1053,7 @@ ov51_021E6354: ; 0x021E6354
 	lsl r2, r2, #8
 	bl GX_LoadBGPltt
 	add r0, r5, #0
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r4, #0
 	add r0, #0xe8
 	ldr r0, [r0]
@@ -1400,7 +1400,7 @@ ov51_021E6644: ; 0x021E6644
 	mov r1, #3
 	bl FreeBgTilemapBuffer
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	pop {r4, pc}
 	thumb_func_end ov51_021E6644
 
@@ -3815,11 +3815,11 @@ _021E79AE:
 	add r0, r1, #0
 	sub r0, #0xc
 	ldr r0, [r4, r0]
-	bl SpriteTransfer_CreateCharTransferTask
+	bl sub_0200ACF0
 	mov r0, #0x15
 	lsl r0, r0, #4
 	ldr r0, [r4, r0]
-	bl SpriteTransfer_CreateExtPlttTransferTask
+	bl sub_0200AF94
 	add r5, r5, #1
 	add r7, r7, #4
 	add r6, r6, #4
@@ -3866,7 +3866,7 @@ _021E7A74:
 	mov r0, #0x8e
 	lsl r0, r0, #2
 	ldr r0, [r5, r0]
-	bl Heap_Free
+	bl FreeToHeap
 	bl GF_AssertFail
 	b _021E7AB2
 _021E7AAE:
@@ -4123,7 +4123,7 @@ _021E7CAE:
 	lsl r0, r4, #2
 	add r0, r5, r0
 	ldr r0, [r0, r6]
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r4, #1
 	lsl r0, r0, #0x18
 	lsr r4, r0, #0x18
@@ -4132,19 +4132,19 @@ _021E7CAE:
 	mov r0, #0x53
 	lsl r0, r0, #2
 	ldr r0, [r5, r0]
-	bl SpriteTransfer_DeleteCharTransferTask
+	bl sub_0200AEB0
 	mov r0, #0x57
 	lsl r0, r0, #2
 	ldr r0, [r5, r0]
-	bl SpriteTransfer_DeleteCharTransferTask
+	bl sub_0200AEB0
 	mov r0, #0x15
 	lsl r0, r0, #4
 	ldr r0, [r5, r0]
-	bl SpriteTransfer_DeletePlttTransferTask
+	bl sub_0200B0A8
 	mov r0, #0x16
 	lsl r0, r0, #4
 	ldr r0, [r5, r0]
-	bl SpriteTransfer_DeletePlttTransferTask
+	bl sub_0200B0A8
 	mov r7, #0x4f
 	mov r4, #0
 	lsl r7, r7, #2
@@ -4223,9 +4223,9 @@ ov51_021E7D68: ; 0x021E7D68
 	bl ObjCharTransfer_ClearBuffers
 	bl ObjPlttTransfer_Reset
 	mov r0, #0x19
-	bl thunk_ClearMainOAM
+	bl sub_0200B2E0
 	mov r0, #0x19
-	bl thunk_ClearSubOAM
+	bl sub_0200B2E8
 	add sp, #0x10
 	pop {r4, pc}
 	.balign 4, 0

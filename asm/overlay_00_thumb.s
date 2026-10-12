@@ -20,7 +20,7 @@ ov00_021E5900: ; 0x021E5900
 _021E5918:
 	ldr r1, _021E5AC8 ; =0x00001108
 	add r0, r5, #0
-	bl Heap_Alloc
+	bl AllocFromHeap
 	ldr r2, _021E5AC8 ; =0x00001108
 	add r6, r0, #0
 	mov r1, #0
@@ -65,7 +65,7 @@ _021E5918:
 	str r4, [r0, r2]
 	add r0, r5, #0
 	add r1, r4, r1
-	bl Heap_Alloc
+	bl AllocFromHeap
 	ldr r3, _021E5AC4 ; =_0221A680
 	mov r1, #0xf9
 	ldr r2, [r3]
@@ -257,7 +257,7 @@ ov00_021E5AE8: ; 0x021E5AE8
 	ldr r1, [r0]
 	ldr r0, _021E5B5C ; =0x00000F98
 	ldr r0, [r1, r0]
-	bl Heap_Free
+	bl FreeToHeap
 	ldr r0, _021E5B58 ; =_0221A680
 	mov r2, #0
 	ldr r1, [r0]
@@ -275,14 +275,14 @@ _021E5B20:
 	ldr r0, [r2, r1]
 	sub r1, #0xf4
 	ldr r1, [r2, r1]
-	bl Heap_FreeExplicit
+	bl FreeToHeapExplicit
 	ldr r0, _021E5B58 ; =_0221A680
 	ldr r1, _021E5B68 ; =0x00000F7C
 	ldr r2, [r0]
 	ldr r0, _021E5B64 ; =0x00001084
 	ldr r1, [r2, r1]
 	ldr r0, [r2, r0]
-	bl Heap_FreeExplicit
+	bl FreeToHeapExplicit
 	ldr r0, _021E5B58 ; =_0221A680
 	mov r1, #0
 	str r1, [r0]
@@ -3222,7 +3222,7 @@ ov00_021E714C: ; 0x021E714C
 	bne _021E7204
 	add r0, r1, #0
 	ldr r1, _021E7210 ; =0x0000F020
-	bl Heap_Alloc
+	bl AllocFromHeap
 	ldr r2, _021E7208 ; =_0221A680
 	ldr r1, _021E7214 ; =0x00000F98
 	ldr r3, [r2]
@@ -3287,7 +3287,7 @@ _021E71E6:
 	ldr r1, [r0]
 	ldr r0, _021E7214 ; =0x00000F98
 	ldr r0, [r1, r0]
-	bl Heap_Free
+	bl FreeToHeap
 	ldr r0, _021E7208 ; =_0221A680
 	mov r2, #0
 	ldr r1, [r0]
@@ -3334,7 +3334,7 @@ ov00_021E7234: ; 0x021E7234
 	cmp r0, #1
 	bne _021E725A
 	add r0, r1, #0
-	bl Heap_Free
+	bl FreeToHeap
 	b _021E7262
 _021E725A:
 	mov r0, #0
@@ -3374,7 +3374,7 @@ ov00_021E727C: ; 0x021E727C
 	cmp r0, #0xb
 	bne _021E72B4
 	sub r1, #0x68
-	bl Heap_Alloc
+	bl AllocFromHeap
 	ldr r2, _021E72F4 ; =_0221A680
 	ldr r1, [r2]
 	add r3, r1, r4
@@ -4061,7 +4061,7 @@ ov00_021E77CC: ; 0x021E77CC
 	add r6, r1, #0
 	add r0, r3, #0
 	add r1, r4, #0
-	bl Heap_Alloc
+	bl AllocFromHeap
 	str r0, [r5]
 	mov r1, #0
 	add r2, r4, #0
@@ -4376,7 +4376,7 @@ ov00_021E7A30: ; 0x021E7A30
 	ldr r0, _021E7AA0 ; =0x000019F4
 	ldr r1, [r2, r1]
 	ldr r0, [r2, r0]
-	bl Heap_FreeExplicit
+	bl FreeToHeapExplicit
 	ldr r0, _021E7A90 ; =_0221A684
 	mov r1, #0x22
 	ldr r2, [r0, #4]
@@ -4384,7 +4384,7 @@ ov00_021E7A30: ; 0x021E7A30
 	lsl r1, r1, #6
 	ldr r0, [r2, r0]
 	ldr r1, [r2, r1]
-	bl Heap_FreeExplicit
+	bl FreeToHeapExplicit
 	mov r1, #0
 	ldr r0, _021E7A90 ; =_0221A684
 	cmp r4, #0

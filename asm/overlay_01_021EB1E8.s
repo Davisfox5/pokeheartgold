@@ -24,13 +24,13 @@ ov01_021EB1E8: ; 0x021EB1E8
 	.balign 4, 0
 	thumb_func_end ov01_021EB1E8
 
-	thumb_func_start WeatherManager_New
-WeatherManager_New: ; 0x021EB1F4
+	thumb_func_start ov01_021EB1F4
+ov01_021EB1F4: ; 0x021EB1F4
 	push {r3, r4, r5, lr}
 	add r5, r0, #0
 	mov r0, #4
 	mov r1, #0x18
-	bl Heap_Alloc
+	bl AllocFromHeap
 	add r4, r0, #0
 	add r2, r4, #0
 	mov r1, #0x18
@@ -56,10 +56,10 @@ _021EB208:
 	bl GfGfx_EngineATogglePlanes
 	add r0, r4, #0
 	pop {r3, r4, r5, pc}
-	thumb_func_end WeatherManager_New
+	thumb_func_end ov01_021EB1F4
 
-	thumb_func_start WeatherManager_Delete
-WeatherManager_Delete: ; 0x021EB234
+	thumb_func_start ov01_021EB234
+ov01_021EB234: ; 0x021EB234
 	push {r4, lr}
 	add r4, r0, #0
 	ldr r0, [r4, #0x14]
@@ -78,13 +78,13 @@ _021EB24E:
 	sub r1, r1, #1
 	bne _021EB24E
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	pop {r4, pc}
 	.balign 4, 0
-	thumb_func_end WeatherManager_Delete
+	thumb_func_end ov01_021EB234
 
-	thumb_func_start WeatherManager_SetWeather
-WeatherManager_SetWeather: ; 0x021EB260
+	thumb_func_start ov01_021EB260
+ov01_021EB260: ; 0x021EB260
 	push {r3, r4, r5, lr}
 	add r5, r0, #0
 	ldr r0, [r5, #0xc]
@@ -127,10 +127,10 @@ _021EB2B2:
 _021EB2B4:
 	pop {r3, r4, r5, pc}
 	.balign 4, 0
-	thumb_func_end WeatherManager_SetWeather
+	thumb_func_end ov01_021EB260
 
-	thumb_func_start WeatherManager_ChangeWeather
-WeatherManager_ChangeWeather: ; 0x021EB2B8
+	thumb_func_start FieldWeatherUpdate_UsedFlash
+FieldWeatherUpdate_UsedFlash: ; 0x021EB2B8
 	push {r3, r4, r5, lr}
 	add r4, r1, #0
 	add r5, r0, #0
@@ -181,7 +181,7 @@ _021EB30E:
 	.balign 4, 0
 _021EB314: .word ov01_021EB320
 _021EB318: .word ov01_021EB3F0
-	thumb_func_end WeatherManager_ChangeWeather
+	thumb_func_end FieldWeatherUpdate_UsedFlash
 
 	thumb_func_start ov01_021EB31C
 ov01_021EB31C: ; 0x021EB31C
@@ -290,7 +290,7 @@ _021EB3D2:
 	cmp r1, #0xe
 	beq _021EB3EE
 	add r0, r4, #0
-	bl WeatherManager_ChangeWeather
+	bl FieldWeatherUpdate_UsedFlash
 	mov r0, #0xe
 	str r0, [r4, #0x10]
 _021EB3EE:
@@ -391,7 +391,7 @@ _021EB490:
 	cmp r1, #0xe
 	beq _021EB4B2
 	add r0, r4, #0
-	bl WeatherManager_ChangeWeather
+	bl FieldWeatherUpdate_UsedFlash
 	mov r0, #0xe
 	str r0, [r4, #0x10]
 _021EB4B2:
@@ -444,7 +444,7 @@ _021EB4EE:
 	add r1, r0, #0
 	mov r0, #4
 	lsl r1, r1, #2
-	bl Heap_Alloc
+	bl AllocFromHeap
 	str r0, [r6, #0x10]
 	mov r1, #0
 	mov r2, #0x39
@@ -514,7 +514,7 @@ ov01_021EB578: ; 0x021EB578
 	mov r2, #4
 	bl GF2DGfxResHeader_Init
 	add r0, r5, #0
-	bl Heap_Free
+	bl FreeToHeap
 	pop {r3, r4, r5, pc}
 	thumb_func_end ov01_021EB578
 
@@ -536,7 +536,7 @@ _021EB5AC:
 	cmp r4, #4
 	blt _021EB5AC
 	ldr r0, [r6, #0x10]
-	bl Heap_Free
+	bl FreeToHeap
 	mov r0, #0
 	str r0, [r6, #0x10]
 	add r0, r6, #0
@@ -612,7 +612,7 @@ ov01_021EB64C: ; 0x021EB64C
 	add r5, r0, #0
 	mov r0, #4
 	lsl r1, r1, #2
-	bl Heap_Alloc
+	bl AllocFromHeap
 	add r4, r0, #0
 	mov r0, #0x41
 	lsl r0, r0, #2
@@ -684,7 +684,7 @@ _021EB69A:
 	bl NARC_Delete
 	ldr r1, [r4]
 	mov r0, #4
-	bl Heap_FreeExplicit
+	bl FreeToHeapExplicit
 	mov r0, #0
 	str r0, [r4]
 _021EB6F6:
@@ -1033,12 +1033,12 @@ ov01_021EB968: ; 0x021EB968
 	ldr r0, [r4]
 	cmp r0, #0
 	beq _021EB97E
-	bl SpriteTransfer_DeleteCharTransferTask
+	bl sub_0200AEB0
 _021EB97E:
 	ldr r0, [r4, #4]
 	cmp r0, #0
 	beq _021EB988
-	bl SpriteTransfer_DeletePlttTransferTask
+	bl sub_0200B0A8
 _021EB988:
 	mov r6, #0
 _021EB98A:
@@ -1083,7 +1083,7 @@ _021EB9C8:
 	cmp r0, #0
 	bne _021EB9E0
 	ldr r0, [r4, #8]
-	bl Heap_Free
+	bl FreeToHeap
 	mov r0, #0
 	str r0, [r4, #8]
 	pop {r3, r4, r5, pc}
@@ -1227,7 +1227,7 @@ _021EBA92:
 	cmp r1, #0
 	ble _021EBAF8
 	mov r0, #4
-	bl Heap_Alloc
+	bl AllocFromHeap
 	ldr r2, [r4, #8]
 	ldr r1, _021EBB38 ; =0x00000F58
 	str r0, [r2, r1]
@@ -1362,7 +1362,7 @@ _021EBBCE:
 	bl ov01_021EB968
 	ldr r1, [r4, #0xc]
 	mov r0, #4
-	bl Heap_FreeExplicit
+	bl FreeToHeapExplicit
 	mov r0, #0
 	str r0, [r4, #0xc]
 	ldr r0, [r4, #0x14]
@@ -1397,7 +1397,7 @@ _021EBC1E:
 	cmp r1, #0
 	beq _021EBC36
 	mov r0, #4
-	bl Heap_FreeExplicit
+	bl FreeToHeapExplicit
 	ldr r1, [r4, #8]
 	ldr r0, _021EBC98 ; =0x00000F58
 	mov r2, #0
@@ -1428,7 +1428,7 @@ _021EBC56:
 _021EBC64:
 	ldr r1, [r4, #8]
 	mov r0, #4
-	bl Heap_FreeExplicit
+	bl FreeToHeapExplicit
 	mov r0, #0
 	str r0, [r4, #8]
 _021EBC70:
@@ -1688,7 +1688,7 @@ _021EBE5C:
 	mov r1, #0xf7
 	mov r0, #4
 	lsl r1, r1, #4
-	bl Heap_Alloc
+	bl AllocFromHeap
 	str r0, [r4, #8]
 	cmp r0, #0
 	bne _021EBE70
@@ -1747,7 +1747,7 @@ ov01_021EBEB8: ; 0x021EBEB8
 _021EBECE:
 	mov r0, #4
 	mov r1, #0x64
-	bl Heap_Alloc
+	bl AllocFromHeap
 	str r0, [r4, #0xc]
 	cmp r0, #0
 	bne _021EBEE0
@@ -1844,7 +1844,7 @@ ov01_021EBF58: ; 0x021EBF58
 	mov r1, #0
 	bl ov01_021EB898
 	str r0, [r4]
-	bl SpriteTransfer_CreateCharTransferTask_AllocAtEnd
+	bl sub_0200ADA4
 	ldr r0, [r4]
 	bl sub_0200A740
 _021EBF8C:
@@ -1875,7 +1875,7 @@ ov01_021EBF94: ; 0x021EBF94
 	ldr r3, [r5, #0xc]
 	bl ov01_021EB898
 	str r0, [r4, #4]
-	bl SpriteTransfer_CreatePlttTransferTask
+	bl sub_0200B00C
 	ldr r0, [r4, #4]
 	bl sub_0200A740
 _021EBFC6:
@@ -2007,7 +2007,7 @@ ov01_021EC078: ; 0x021EC078
 	mov r3, #0xc0
 	bl BG_LoadPlttData
 	ldr r0, [sp]
-	bl Heap_Free
+	bl FreeToHeap
 	mov r0, #0
 	str r0, [sp]
 _021EC0B8:
@@ -2050,7 +2050,7 @@ ov01_021EC0C0: ; 0x021EC0C0
 	mov r1, #2
 	bl BG_LoadCharTilesData
 	ldr r0, [sp, #8]
-	bl Heap_Free
+	bl FreeToHeap
 	mov r0, #0
 	str r0, [sp, #8]
 _021EC10C:
@@ -2131,7 +2131,7 @@ _021EC14A:
 	ldr r0, [r0, #8]
 	bl BgCommitTilemapBufferToVram
 	ldr r0, [sp, #0x14]
-	bl Heap_Free
+	bl FreeToHeap
 	mov r0, #0
 	str r0, [sp, #0x14]
 _021EC1B4:

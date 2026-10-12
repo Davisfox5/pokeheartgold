@@ -14,7 +14,7 @@ ScratchOffCards_Init: ; 0x021E5900
 	mov r0, #3
 	mov r1, #0x7a
 	lsl r2, r2, #0xe
-	bl Heap_Create
+	bl CreateHeap
 	ldr r1, _021E59AC ; =0x000099FC
 	add r0, r5, #0
 	mov r2, #0x7a
@@ -236,7 +236,7 @@ ScratchOffCards_Exit: ; 0x021E5AC0
 	add r1, r0, #0
 	bl Main_SetVBlankIntrCB
 	mov r0, #0x7a
-	bl Heap_Destroy
+	bl DestroyHeap
 	mov r0, #1
 	pop {r3, r4, r5, pc}
 	.balign 4, 0
@@ -1933,11 +1933,11 @@ _021E6816:
 	mov r0, #0xe1
 	lsl r0, r0, #2
 	ldr r0, [r6, r0]
-	bl Heap_Free
+	bl FreeToHeap
 	mov r0, #0xe3
 	lsl r0, r0, #2
 	ldr r0, [r6, r0]
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r6, #0
 	add r0, #0x5c
 	bl ov87_021E80F0
@@ -2346,7 +2346,7 @@ ov87_021E6BB8: ; 0x021E6BB8
 	mov r1, #2
 	bl FreeBgTilemapBuffer
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	pop {r4, pc}
 	thumb_func_end ov87_021E6BB8
 
@@ -2646,7 +2646,7 @@ ov87_021E6E44: ; 0x021E6E44
 	mov r2, #0xa0
 	bl GXS_LoadBGPltt
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	add sp, #4
 	pop {r3, r4, pc}
 	.balign 4, 0
@@ -2674,7 +2674,7 @@ ov87_021E6E78: ; 0x021E6E78
 	lsl r2, r2, #6
 	bl GX_LoadBGPltt
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	add sp, #4
 	pop {r3, r4, pc}
 	.balign 4, 0
@@ -4251,7 +4251,7 @@ ov87_021E7A04: ; 0x021E7A04
 	ldr r1, [r4, r1]
 	mov r0, #0x7a
 	ldr r1, [r1, #0x10]
-	bl Heap_Alloc
+	bl AllocFromHeap
 	mov r1, #0xe3
 	lsl r1, r1, #2
 	str r0, [r4, r1]
@@ -4454,9 +4454,9 @@ _021E7B44:
 	add r6, r7, #4
 _021E7B96:
 	ldr r0, [r5, r7]
-	bl SpriteTransfer_CreateCharTransferTask
+	bl sub_0200ACF0
 	ldr r0, [r5, r6]
-	bl SpriteTransfer_CreateExtPlttTransferTask
+	bl sub_0200AF94
 	add r4, r4, #1
 	add r5, #0x10
 	cmp r4, #5
@@ -4849,9 +4849,9 @@ _021E7EA2:
 	mov r0, #0x4f
 	lsl r0, r0, #2
 	ldr r0, [r6, r0]
-	bl SpriteTransfer_DeleteCharTransferTask
+	bl sub_0200AEB0
 	ldr r0, [r6, r7]
-	bl SpriteTransfer_DeletePlttTransferTask
+	bl sub_0200B0A8
 	add r0, r4, #1
 	lsl r0, r0, #0x18
 	lsr r4, r0, #0x18
@@ -4934,7 +4934,7 @@ _021E7F38:
 	mov r2, #0xcf
 	bl ReplacePlttResObjFromNarc
 	add r0, r6, #0
-	bl SpriteTransfer_ReplacePlttData
+	bl sub_0200B084
 	add sp, #8
 	pop {r4, r5, r6, pc}
 	.balign 4, 0
@@ -4951,7 +4951,7 @@ ov87_021E7F6C: ; 0x021E7F6C
 	mov r1, #0x10
 	add r7, r2, #0
 	str r3, [sp, #8]
-	bl Heap_Alloc
+	bl AllocFromHeap
 	add r4, r0, #0
 	add r2, r4, #0
 	mov r1, #0x10
@@ -4992,7 +4992,7 @@ ov87_021E7FC0: ; 0x021E7FC0
 	ldr r0, [r4, #0xc]
 	bl Sprite_Delete
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	mov r0, #0
 	pop {r4, pc}
 	thumb_func_end ov87_021E7FC0

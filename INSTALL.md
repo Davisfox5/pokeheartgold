@@ -10,8 +10,6 @@ The build system requires the use of the Metrowerks C Compiler versions 2.0/sp2p
 
 In the future, a GCC option will be available so MWCC is not required to build, however it is required for a matching ROM.
 
-(Note: if running the exe's doesn't work, you can run the .bat file. A GUI window should pop up for you to select the license.dat)
-
 ### 2. Install Nitro SDK
 
 As with the compiler, the Nitro SDK is proprietary and cannot be distributed here. Download the "NitroSDK-4_2-071210-jp.7z" file pinned in the PRET discord. Extract and copy the folder `tools/bin` from the Nitro SDK into the folder `tools` in your pokeheartgold clone. At the end of this operation, you should have i.e. the file `tools/bin/makelcf.exe` inside your pokeheartgold clone. Finally, copy include/nitro/specfiles/ARM7-TS.lcf.template into the subdirectory `sub`, and include/nitro/specfiles/ARM9-TS.lcf.template and include/nitro/specfiles/mwldarm.response.template into the project root.
@@ -38,17 +36,22 @@ Currently WSL2 has an issue with mwldarm not being able to locate it's executabl
 
 #### Windows
 
+Before following the respective guides, please install devkitARM and ensure the DEVKITPRO and DEVKITARM variables are added to bashrc such that:
 
-##### devkitARM
-The windows dev environment requires devkitARM. devkitARM is a specialized toolchain used to build the rom. It contains `arm-none-eabi-gcc`, which is a compiler that can compile code for the DS. 
+Msys2:
+```console
+export DEVKITPRO=C:/devkitPro
+export DEVKITARM=${DEVKITPRO}/devkitARM
+```
 
-**Ensure you select the "Nintendo DS" or "NDS" workload during the devkitPro installation.** 
+Cygwin:
+```console
+export DEVKITPRO=/cygdrive/c/devkitPro
+export DEVKITARM=${DEVKITPRO}/devkitARM
+```
 
-##### A linux like environment
-The windows dev environment also uses linux-like automation. Because of this, you will need a linux style terminal. Some popular options are `Cygwin` and `Mysys2`. The environment will provide the manager tools like `make` that co-ordinate the build process.
+You will still require the following packages:
 
-
-The following packages are required:
 * make
 * git
 * build-essentials
@@ -58,37 +61,7 @@ The following packages are required:
 
 Install them using either the Cygwin package manager or using pacman on Msys2.
 
-To install the packages on cygwin, select the following packages in the cygwin package manager
-| Requirement | Cygwin Package Name | Notes |
-| :--- | :--- | :--- |
-| **make** | `make` | The standard GNU version. |
-| **git** | `git` | You might also want `git-completion` for convenience. |
-| **build-essential** | `gcc-g++`, `binutils` | This provides your C/C++ compilers and linker. |
-| **libpng-devel** | `libpng-devel` | Includes headers for PNG manipulation. |
-| **pugixml** | `libpugixml-devel` | The development files for the XML parser. |
-| **pkg-config** | `pkg-config` | Helps your compiler find library paths automatically. |
-
 **NOTE FOR MSYS2:** You will need to compile and install [libpng](https://www.libpng.org/pub/png/libpng.html) from source.
-
-After the packages are installed, add the following variables to your .bashrc to tell your terminal where devkitARM lives:
-
-If using Msys2:
-```console
-export DEVKITPRO=C:/devkitPro
-export DEVKITARM=${DEVKITPRO}/devkitARM
-```
-
-If using Cygwin:
-```console
-export DEVKITPRO=/cygdrive/c/devkitPro
-export DEVKITARM=${DEVKITPRO}/devkitARM
-```
-
-You can verify these are set correctly by running:
-```bash
-echo $DEVKITPRO
-# This should print out the path where devkitPro lives on your windows machine
-```
 
 #### macOS
 

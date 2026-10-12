@@ -5,133 +5,161 @@
 
 	.rodata
 
-	ScrDef scr_seq_T25R0501_000
-	ScrDef scr_seq_T25R0501_001
-	ScrDef scr_seq_T25R0501_002
-	ScrDef scr_seq_T25R0501_003
-	ScrDef scr_seq_T25R0501_004
-	ScrDef scr_seq_T25R0501_005
-	ScrDef scr_seq_T25R0501_006
-	ScrDef scr_seq_T25R0501_007
-	ScrDefEnd
+	scrdef scr_seq_T25R0501_000
+	scrdef scr_seq_T25R0501_001
+	scrdef scr_seq_T25R0501_002
+	scrdef scr_seq_T25R0501_003
+	scrdef scr_seq_T25R0501_004
+	scrdef scr_seq_T25R0501_005
+	scrdef scr_seq_T25R0501_006
+	scrdef scr_seq_T25R0501_007
+	scrdef_end
 
 scr_seq_T25R0501_006:
-	ScrCmd_582 MAP_GOLDENROD, 348, 350
-	GoToIfSet FLAG_RESTORED_POWER, _0037
-	End
+	scrcmd_582 MAP_GOLDENROD, 348, 350
+	goto_if_set FLAG_RESTORED_POWER, _0037
+	end
 
 _0037:
-	SetVar VAR_UNK_410B, 0
-	End
+	setvar VAR_UNK_410B, 0
+	end
 
 scr_seq_T25R0501_005:
-	GoToIfSet FLAG_RESTORED_POWER, _004C
-	End
+	goto_if_set FLAG_RESTORED_POWER, _004C
+	end
 
 _004C:
-	MovePersonFacing obj_T25R0501_policeman, 4, 0, 6, DIR_EAST
-	End
+	move_person_facing obj_T25R0501_policeman, 4, 0, 6, DIR_EAST
+	end
 
+; ===== APOCRYPHA Ch4 (4.5): boarding on Mel's pass. The player has no pass
+; of their own -- that's the one-way gate Chapter 5 resolves. The ride plays
+; as Mel's monologue over the dark of the tunnel, then Saffron. =====
 scr_seq_T25R0501_000:
-	PlaySE SEQ_SE_DP_SELECT
-	LockAll
-	FacePlayer
-	GoToIfSet FLAG_RESTORED_POWER, _0078
-	NPCMsg msg_0587_T25R0501_00000
-	WaitButton
-	CloseMsg
-	ReleaseAll
-	End
+	play_se SEQ_SE_DP_SELECT
+	lockall
+	faceplayer
+	goto_if_set FLAG_APOC_CH4_SAFFRON_ARRIVED, _T25R0501_after
+	goto_if_set FLAG_APOC_CH4_RIVAL_SENDOFF_DONE, _T25R0501_board
+	npc_msg msg_0587_T25R0501_00010
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
+
+_T25R0501_board:
+	npc_msg msg_0587_T25R0501_00011
+	npc_msg msg_0587_T25R0501_00012
+	npc_msg msg_0587_T25R0501_00013
+	closemsg
+	fade_screen 6, 1, 0, RGB_BLACK
+	wait_fade
+	; the ride: Mel talks the whole way
+	npc_msg msg_0587_T25R0501_00014
+	npc_msg msg_0587_T25R0501_00015
+	npc_msg msg_0587_T25R0501_00016
+	npc_msg msg_0587_T25R0501_00017
+	closemsg
+	warp MAP_SAFFRON_MAGNET_TRAIN_STATION_1F, 0, 14, 7, DIR_SOUTH
+	releaseall
+	end
+
+_T25R0501_after:
+	npc_msg msg_0587_T25R0501_00018
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
 
 _0078:
-	GetPlayerFacing VAR_SPECIAL_RESULT
-	Compare VAR_SPECIAL_RESULT, 2
-	GoToIfNe _0096
-	NPCMsg msg_0587_T25R0501_00005
-	WaitButton
-	CloseMsg
-	GoTo _00A5
+	get_player_facing VAR_SPECIAL_RESULT
+	compare VAR_SPECIAL_RESULT, 2
+	goto_if_ne _0096
+	npc_msg msg_0587_T25R0501_00005
+	wait_button_or_walk_away
+	closemsg
+	goto _00A5
 
 _0096:
-	NPCMsg msg_0587_T25R0501_00007
-	CloseMsg
-	ApplyMovement obj_T25R0501_policeman, _00AC
-	WaitMovement
+	npc_msg msg_0587_T25R0501_00007
+	closemsg
+	apply_movement obj_T25R0501_policeman, _00AC
+	wait_movement
 _00A5:
-	ReleaseAll
-	End
+	releaseall
+	end
 
 	.balign 4, 0
 _00AC:
-	FaceEast
-	EndMovement
+	step 3, 1
+	step_end
 
 scr_seq_T25R0501_001:
-	ScrCmd_609
-	LockAll
-	ApplyMovement obj_player, _013C
-	WaitMovement
-	GoToIfSet FLAG_UNK_123, _0118
-	NPCMsg msg_0587_T25R0501_00001
-	CloseMsg
-	SetFlag FLAG_UNK_123
+	scrcmd_609
+	lockall
+	apply_movement obj_player, _013C
+	wait_movement
+	goto_if_set FLAG_UNK_123, _0118
+	npc_msg msg_0587_T25R0501_00001
+	closemsg
+	setflag FLAG_UNK_123
 _00D6:
-	Wait 50, VAR_SPECIAL_x8004
-	HasItem ITEM_PASS, 1, VAR_SPECIAL_RESULT
-	Compare VAR_SPECIAL_RESULT, 1
-	GoToIfGe _0123
-	NPCMsg msg_0587_T25R0501_00002
-	CloseMsg
-	ToggleFollowingPokemonMovement 0
-	WaitFollowingPokemonMovement
-	FollowingPokemonMovement 55
-	ApplyMovement obj_player, _0144
-	WaitMovement
-	WaitFollowingPokemonMovement
-	ToggleFollowingPokemonMovement 1
-	FollowingPokemonMovement 48
-	ReleaseAll
-	End
+	wait 50, VAR_SPECIAL_x8004
+	hasitem ITEM_PASS, 1, VAR_SPECIAL_RESULT
+	compare VAR_SPECIAL_RESULT, 1
+	goto_if_ge _0123
+	npc_msg msg_0587_T25R0501_00002
+	closemsg
+	toggle_following_pokemon_movement 0
+	wait_following_pokemon_movement
+	following_pokemon_movement 55
+	apply_movement obj_player, _0144
+	wait_movement
+	wait_following_pokemon_movement
+	toggle_following_pokemon_movement 1
+	following_pokemon_movement 48
+	releaseall
+	end
 
 _0118:
-	NPCMsg msg_0587_T25R0501_00003
-	CloseMsg
-	GoTo _00D6
+	npc_msg msg_0587_T25R0501_00003
+	closemsg
+	goto _00D6
 
 _0123:
-	NPCMsg msg_0587_T25R0501_00004
-	WaitButton
-	CloseMsg
-	SetVar VAR_UNK_410B, 1
-	SetVar VAR_UNK_411E, 1
-	ReleaseAll
-	End
+	npc_msg msg_0587_T25R0501_00004
+	wait_button_or_walk_away
+	closemsg
+	setvar VAR_UNK_410B, 1
+	setvar VAR_UNK_411E, 1
+	releaseall
+	end
 
 	.balign 4, 0
 _013C:
-	WalkOnSpotNormalWest
-	EndMovement
+	step 34, 1
+	step_end
 
 	.balign 4, 0
 _0144:
-	WalkNormalSouth 2
-	EndMovement
+	step 13, 2
+	step_end
 
 scr_seq_T25R0501_007:
-	PlaySE SEQ_SE_DP_SELECT
-	LockAll
-	NPCMsg msg_0587_T25R0501_00009
-	WaitButton
-	CloseMsg
-	ReleaseAll
-	End
+	play_se SEQ_SE_DP_SELECT
+	lockall
+	npc_msg msg_0587_T25R0501_00009
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
 
 scr_seq_T25R0501_002:
-	End
+	end
 
 scr_seq_T25R0501_003:
-	End
+	end
 
 scr_seq_T25R0501_004:
-	End
+	end
 	.balign 4, 0

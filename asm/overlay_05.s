@@ -2800,7 +2800,7 @@ ov05_0221D054: ; 0x0221D054
 	bl FreeBgTilemapBuffer
 _0221D088:
 	ldr r0, [r4, #0xc]
-	bl Heap_Free
+	bl FreeToHeap
 	pop {r4, pc}
 	.balign 4, 0
 _0221D090: .word 0x00000BA8
@@ -3446,7 +3446,7 @@ ov05_0221D530: ; 0x0221D530
 	str r0, [r4, r6]
 	ldr r0, [r4, r6]
 	mov r1, #0
-	bl TextOBJ_SetPaletteNum
+	bl sub_02013850
 	add r0, r5, #0
 	bl RemoveWindow
 	add sp, #0x40
@@ -3464,7 +3464,7 @@ ov05_0221D5DC: ; 0x0221D5DC
 	ldr r1, [r4]
 	mov r0, #8
 	ldr r1, [r1, #0x24]
-	bl FontSystem_NewInit
+	bl sub_02013534
 	ldr r1, _0221D658 ; =0x00000B44
 	str r0, [r4, r1]
 	ldr r2, [r4]
@@ -3506,11 +3506,11 @@ _0221D62A:
 	ldr r0, _0221D65C ; =0x00000B4C
 	mov r1, #0
 	ldr r0, [r4, r0]
-	bl TextOBJ_SetSpritesDrawFlag
+	bl sub_020137C0
 	ldr r0, _0221D660 ; =0x00000B54
 	mov r1, #0
 	ldr r0, [r4, r0]
-	bl TextOBJ_SetSpritesDrawFlag
+	bl sub_020137C0
 	pop {r4, pc}
 	nop
 _0221D658: .word 0x00000B44
@@ -3557,7 +3557,7 @@ ov05_0221D690: ; 0x0221D690
 	add r5, r7, #0
 _0221D6A4:
 	ldr r0, [r5, r6]
-	bl FontOAM_Delete
+	bl sub_02013660
 	add r4, r4, #1
 	add r5, r5, #4
 	cmp r4, #4
@@ -3990,7 +3990,7 @@ ov05_0221D9F0: ; 0x0221D9F0
 	mov r1, #0x12
 	ldr r0, [r0, #0x24]
 	lsl r1, r1, #0xa
-	bl Heap_Alloc
+	bl AllocFromHeap
 	mov r2, #0xb6
 	lsl r2, r2, #4
 	str r0, [r4, r2]
@@ -4111,7 +4111,7 @@ ov05_0221DB18: ; 0x0221DB18
 	mov r0, #0xb6
 	lsl r0, r0, #4
 	ldr r0, [r4, r0]
-	bl Heap_Free
+	bl FreeToHeap
 	ldr r0, _0221DB48 ; =0x00000B58
 	ldr r0, [r4, r0]
 	bl GF_3DVramMan_Delete
@@ -4253,7 +4253,7 @@ ov05_0221DC34: ; 0x0221DC34
 	mov r1, #1
 	bl FreeBgTilemapBuffer
 	ldr r0, [r4, #0xc]
-	bl Heap_Free
+	bl FreeToHeap
 	pop {r4, pc}
 	thumb_func_end ov05_0221DC34
 
@@ -4314,7 +4314,7 @@ ov05_0221DC60: ; 0x0221DC60
 	mov r2, #0x60
 	bl memcpy
 	add r0, r6, #0
-	bl Heap_Free
+	bl FreeToHeap
 	ldr r0, [r5]
 	mov r2, #0xa9
 	lsl r2, r2, #2

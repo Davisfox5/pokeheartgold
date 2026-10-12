@@ -16,7 +16,7 @@ sub_02096C88: ; 0x02096C88
 	add r5, r0, #0
 	add r0, r6, #0
 	mov r1, #0x58
-	bl Heap_Alloc
+	bl AllocFromHeap
 	add r4, r0, #0
 	bne _02096C9E
 	bl GF_AssertFail
@@ -28,11 +28,11 @@ _02096C9E:
 	ldr r1, _02096CC4 ; =0x00001BD0
 	add r0, r6, #0
 	str r5, [r4]
-	bl Heap_Alloc
+	bl AllocFromHeap
 	str r0, [r4, #0x4c]
 	ldr r1, _02096CC4 ; =0x00001BD0
 	add r0, r6, #0
-	bl Heap_Alloc
+	bl AllocFromHeap
 	str r0, [r4, #0x50]
 	add r0, r4, #0
 	pop {r4, r5, r6, pc}
@@ -45,11 +45,11 @@ sub_02096CC8: ; 0x02096CC8
 	push {r4, lr}
 	add r4, r0, #0
 	ldr r0, [r4, #0x4c]
-	bl Heap_Free
+	bl FreeToHeap
 	ldr r0, [r4, #0x50]
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	pop {r4, pc}
 	thumb_func_end sub_02096CC8
 

@@ -27,7 +27,7 @@
 	</row>
 	<row id="msg_0219_00006" index="6">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">Sorry to keep you waiting!\rWelcome to the world of Pokémon!\rMy name is Professor Oak.\rBut everyone calls me the\nPokémon Professor.\rBefore we go any further, I’d like to\ntell you a few things you should\fknow about this world!\r</language>
+		<language name="English">Sorry to keep you waiting!\rWelcome to the world of\nPokémon Apocrypha!\rMy name is Professor Oak.\rBut everyone calls me the\nPokémon Professor.\rBefore we go any further, I’d like to\ntell you a few things you should\fknow about this world!\r</language>
 	</row>
 	<row id="msg_0219_00007" index="7">
 		<attribute name="window_context_name">used</attribute>
@@ -271,5 +271,13 @@
 	<row id="msg_0219_00062" index="62">
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">{ALN_CENTER}No</language>
+	</row>
+	<row id="msg_0219_00063" index="63">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">...</language>
+	</row>
+	<row id="msg_0219_00064" index="64">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">“...Honey? We’re here.\n\nWake up, sleepyhead -\nyou slept the whole way.”</language>
 	</row>
 </body>

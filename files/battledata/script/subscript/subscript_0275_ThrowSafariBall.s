@@ -3,11 +3,24 @@
     .data
 
 _000:
+    // Apocrypha Ch1 catch demo (TUTORIAL|SAFARI): Gold's bare-handed throw is a
+    // plain Poke Ball, not a Safari Ball (and no safari game-over bookkeeping).
+    CompareVarToValue OPCODE_FLAG_SET, BSCRIPT_VAR_BATTLE_TYPE, BATTLE_TYPE_TUTORIAL, _APOC_TUTORIAL_POKE_BALL
     CompareVarToValue OPCODE_FLAG_SET, BSCRIPT_VAR_BATTLE_TYPE, BATTLE_TYPE_PAL_PARK, _SET_PARK_BALL
     CheckSafariGameDone _NO_PC_SPACE
     // {0} used one {1}!
     PrintMessage msg_0197_00857, TAG_TRNAME_ITEM, BATTLER_CATEGORY_ATTACKER, BATTLER_CATEGORY_MSG_TEMP
-    Wait 
+    Wait
+    ThrowPokeball BATTLER_CATEGORY_PLAYER, GAME_THROW_SAFARI_BALL
+    GoTo _THROW_BALL
+
+_APOC_TUTORIAL_POKE_BALL:
+    // {0} used one {1}!
+    PrintMessage msg_0197_00857, TAG_TRNAME_ITEM, BATTLER_CATEGORY_ATTACKER, BATTLER_CATEGORY_MSG_TEMP
+    Wait
+    // safari THROW variant (trainer winds up bare-handed - there is no sent-out
+    // mon to animate from); the ball itself still renders as a plain Poke Ball
+    // because the catch task takes ItemToBallId(itemTemp) = ITEM_POKE_BALL.
     ThrowPokeball BATTLER_CATEGORY_PLAYER, GAME_THROW_SAFARI_BALL
     GoTo _THROW_BALL
 

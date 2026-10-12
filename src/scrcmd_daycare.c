@@ -192,7 +192,7 @@ static LocalMapObject *CreateDaycareMonSpriteInternal(MapObjectManager *object_m
     FollowMon_SetObjectParams(lmo, species, (u32)form, shiny);
     MapObject_SetXRange(lmo, -1);
     MapObject_SetYRange(lmo, -1);
-    MapObject_SetFlagsBits(lmo, MAPOBJECTFLAG_START_MOVEMENT);
+    MapObject_SetFlagsBits(lmo, MAPOBJECTFLAG_UNK2);
     MapObject_ClearFlagsBits(lmo, MAPOBJECTFLAG_NONE);
     MapObject_SetFlag29(lmo, TRUE);
     ov01_021F9048(lmo);
@@ -218,7 +218,7 @@ BOOL ScrCmd_DaycareSanitizeMon(ScriptContext *ctx) {
     u32 held_item = GetMonData(mon, MON_DATA_HELD_ITEM, NULL);
     if (held_item == ITEM_GRISEOUS_ORB) {
         Bag *bag = Save_Bag_Get(fieldSystem->saveData);
-        if (!Bag_AddItem(bag, ITEM_GRISEOUS_ORB, 1, HEAP_ID_FIELD2)) {
+        if (!Bag_AddItem(bag, ITEM_GRISEOUS_ORB, 1, HEAP_ID_FIELD)) {
             *ret_ptr = 0xFF;
             return FALSE;
         }

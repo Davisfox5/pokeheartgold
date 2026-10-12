@@ -11,7 +11,7 @@ $(DATA_RESDAT_BIN): %.bin: %.json $(DATA_RESDAT_DIR).json.txt | $(WORK_DIR)/incl
 	@$(RM) $*.c $*.o
 
 $(DATA_RESDAT_NARC): $(DATA_RESDAT_BIN)
-	$(NARC) -cf $@ --index-namespace $(DATA_RESDAT_DIR)
+	$(KNARC) -d $(DATA_RESDAT_DIR) -p $@ -i
 
 clean-resdat:
 	$(RM) $(DATA_RESDAT_NARC) $(DATA_RESDAT_BIN)

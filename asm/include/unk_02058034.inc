@@ -3,10 +3,10 @@
 .public SysTask_CreateOnMainQueue
 .public SysTask_Destroy
 .public BeginNormalPaletteFade
-.public ResetVisibleHardwareWindows
+.public sub_0200FBDC
 .public sub_0200FC60
-.public Heap_Alloc
-.public Heap_Free
+.public AllocFromHeap
+.public FreeToHeap
 .public GF_AssertFail
 .public sub_02034434
 .public sub_02034638

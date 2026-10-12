@@ -5,272 +5,272 @@
 
 	.rodata
 
-	ScrDef scr_seq_T07R0203_000
-	ScrDef scr_seq_T07R0203_001
-	ScrDef scr_seq_T07R0203_002
-	ScrDef scr_seq_T07R0203_003
-	ScrDef scr_seq_T07R0203_004
-	ScrDef scr_seq_T07R0203_005
-	ScrDef scr_seq_T07R0203_006
-	ScrDef scr_seq_T07R0203_007
-	ScrDef scr_seq_T07R0203_008
-	ScrDef scr_seq_T07R0203_009
-	ScrDef scr_seq_T07R0203_010
-	ScrDef scr_seq_T07R0203_011
-	ScrDef scr_seq_T07R0203_012
-	ScrDef scr_seq_T07R0203_013
-	ScrDefEnd
+	scrdef scr_seq_T07R0203_000
+	scrdef scr_seq_T07R0203_001
+	scrdef scr_seq_T07R0203_002
+	scrdef scr_seq_T07R0203_003
+	scrdef scr_seq_T07R0203_004
+	scrdef scr_seq_T07R0203_005
+	scrdef scr_seq_T07R0203_006
+	scrdef scr_seq_T07R0203_007
+	scrdef scr_seq_T07R0203_008
+	scrdef scr_seq_T07R0203_009
+	scrdef scr_seq_T07R0203_010
+	scrdef scr_seq_T07R0203_011
+	scrdef scr_seq_T07R0203_012
+	scrdef scr_seq_T07R0203_013
+	scrdef_end
 
 scr_seq_T07R0203_008:
-	GetFriendSprite VAR_OBJ_0
-	SetVar VAR_UNK_4125, 0
-	End
+	get_friend_sprite VAR_OBJ_0
+	setvar VAR_UNK_4125, 0
+	end
 
 scr_seq_T07R0203_011:
-	Compare VAR_UNK_412C, 0
-	GoToIfNe _006B
-	MovePersonFacing obj_T07R0203_var_1, 12, 0, 6, DIR_WEST
-	MovePersonFacing obj_T07R0203_tsure_poke_static_marill, 13, 0, 6, DIR_WEST
+	compare VAR_UNK_412C, 0
+	goto_if_ne _006B
+	move_person_facing obj_T07R0203_var_1, 12, 0, 6, DIR_WEST
+	move_person_facing obj_T07R0203_tsure_poke_static_marill, 13, 0, 6, DIR_WEST
 _006B:
-	End
+	end
 
 scr_seq_T07R0203_010:
-	ScrCmd_609
-	LockAll
-	CallStd std_play_friend_music
-	ApplyMovement obj_T07R0203_var_1, _012C
-	ApplyMovement obj_T07R0203_tsure_poke_static_marill, _0138
-	WaitMovement
-	BufferPlayersName 0
-	GenderMsgBox msg_0503_T07R0203_00012, msg_0503_T07R0203_00013
-	CloseMsg
-	ApplyMovement obj_T07R0203_var_1, _0140
-	ApplyMovement obj_T07R0203_tsure_poke_static_marill, _0148
-	ToggleFollowingPokemonMovement 0
-	WaitFollowingPokemonMovement
-	FollowingPokemonMovement 55
-	ApplyMovement obj_player, _0150
-	WaitMovement
-	WaitFollowingPokemonMovement
-	ToggleFollowingPokemonMovement 1
-	FollowingPokemonMovement 48
-	BufferPlayersName 0
-	GenderMsgBox msg_0503_T07R0203_00014, msg_0503_T07R0203_00015
-	CloseMsg
-	ApplyMovement obj_T07R0203_var_1, _015C
-	ApplyMovement obj_T07R0203_tsure_poke_static_marill, _016C
-	WaitMovement
-	ScrCmd_307 0, 0, 3, 2, 77
-	ScrCmd_310 77
-	ScrCmd_308 77
-	ApplyMovement obj_T07R0203_var_1, _0180
-	ApplyMovement obj_T07R0203_tsure_poke_static_marill, _018C
-	WaitMovement
-	ScrCmd_311 77
-	ScrCmd_308 77
-	ScrCmd_309 77
-	CallStd std_fade_end_friend_music
-	SetVar VAR_UNK_412C, 1
-	MovePersonFacing obj_T07R0203_var_1, 29, 0, 29, DIR_WEST
-	MovePersonFacing obj_T07R0203_tsure_poke_static_marill, 29, 0, 29, DIR_WEST
-	ReleaseAll
-	End
+	scrcmd_609
+	lockall
+	callstd std_play_friend_music
+	apply_movement obj_T07R0203_var_1, _012C
+	apply_movement obj_T07R0203_tsure_poke_static_marill, _0138
+	wait_movement
+	buffer_players_name 0
+	gender_msgbox msg_0503_T07R0203_00012, msg_0503_T07R0203_00013
+	closemsg
+	apply_movement obj_T07R0203_var_1, _0140
+	apply_movement obj_T07R0203_tsure_poke_static_marill, _0148
+	toggle_following_pokemon_movement 0
+	wait_following_pokemon_movement
+	following_pokemon_movement 55
+	apply_movement obj_player, _0150
+	wait_movement
+	wait_following_pokemon_movement
+	toggle_following_pokemon_movement 1
+	following_pokemon_movement 48
+	buffer_players_name 0
+	gender_msgbox msg_0503_T07R0203_00014, msg_0503_T07R0203_00015
+	closemsg
+	apply_movement obj_T07R0203_var_1, _015C
+	apply_movement obj_T07R0203_tsure_poke_static_marill, _016C
+	wait_movement
+	scrcmd_307 0, 0, 3, 2, 77
+	scrcmd_310 77
+	scrcmd_308 77
+	apply_movement obj_T07R0203_var_1, _0180
+	apply_movement obj_T07R0203_tsure_poke_static_marill, _018C
+	wait_movement
+	scrcmd_311 77
+	scrcmd_308 77
+	scrcmd_309 77
+	callstd std_fade_end_friend_music
+	setvar VAR_UNK_412C, 1
+	move_person_facing obj_T07R0203_var_1, 29, 0, 29, DIR_WEST
+	move_person_facing obj_T07R0203_tsure_poke_static_marill, 29, 0, 29, DIR_WEST
+	releaseall
+	end
 
 	.balign 4, 0
 _012C:
-	WalkNormalWest 4
-	EmoteExclamationMark
-	EndMovement
+	step 14, 4
+	step 75, 1
+	step_end
 
 	.balign 4, 0
 _0138:
-	WalkNormalWest 4
-	EndMovement
+	step 14, 4
+	step_end
 
 	.balign 4, 0
 _0140:
-	WalkNormalWest 4
-	EndMovement
+	step 14, 4
+	step_end
 
 	.balign 4, 0
 _0148:
-	WalkNormalWest 4
-	EndMovement
+	step 14, 4
+	step_end
 
 	.balign 4, 0
 _0150:
-	WalkNormalSouth 3
-	WalkOnSpotNormalEast
-	EndMovement
+	step 13, 3
+	step 35, 1
+	step_end
 
 	.balign 4, 0
 _015C:
-	WalkNormalNorth 2
-	WalkNormalWest
-	WalkNormalNorth
-	EndMovement
+	step 12, 2
+	step 14, 1
+	step 12, 1
+	step_end
 
 	.balign 4, 0
 _016C:
-	WalkNormalWest
-	WalkNormalNorth 2
-	WalkNormalWest
-	WalkOnSpotNormalNorth
-	EndMovement
+	step 14, 1
+	step 12, 2
+	step 14, 1
+	step 32, 1
+	step_end
 
 	.balign 4, 0
 _0180:
-	WalkNormalNorth
-	SetInvisible
-	EndMovement
+	step 12, 1
+	step 69, 1
+	step_end
 
 	.balign 4, 0
 _018C:
-	WalkNormalNorth 2
-	SetInvisible
-	EndMovement
+	step 12, 2
+	step 69, 1
+	step_end
 
 scr_seq_T07R0203_000:
-	PlaySE SEQ_SE_DP_SELECT
-	LockAll
-	FacePlayer
-	CheckJohtoDexComplete VAR_SPECIAL_RESULT
-	Compare VAR_SPECIAL_RESULT, 0
-	GoToIfEq _0245
-	GoToIfSet FLAG_SAW_JOHTO_DEX_CERTIFICATE, _01ED
-	NPCMsg msg_0503_T07R0203_00001
-	PlayFanfare SEQ_ME_HYOUKA2
-	WaitFanfare
-	CloseMsg
-	FadeScreen 6, 1, 0, RGB_BLACK
-	WaitFade
-	ShowCertificate 0
-	RestoreOverworld
-	SetFlag FLAG_SAW_JOHTO_DEX_CERTIFICATE
-	AddSpecialGameStat SCORE_EVENT_REGIONAL_DEX_COMPLETE
-	FadeScreen 6, 1, 1, RGB_BLACK
-	WaitFade
+	play_se SEQ_SE_DP_SELECT
+	lockall
+	faceplayer
+	check_johto_dex_complete VAR_SPECIAL_RESULT
+	compare VAR_SPECIAL_RESULT, 0
+	goto_if_eq _0245
+	goto_if_set FLAG_SAW_JOHTO_DEX_CERTIFICATE, _01ED
+	npc_msg msg_0503_T07R0203_00001
+	play_fanfare SEQ_ME_HYOUKA2
+	wait_fanfare
+	closemsg
+	fade_screen 6, 1, 0, RGB_BLACK
+	wait_fade
+	show_certificate 0
+	restore_overworld
+	setflag FLAG_SAW_JOHTO_DEX_CERTIFICATE
+	add_special_game_stat SCORE_EVENT_25
+	fade_screen 6, 1, 1, RGB_BLACK
+	wait_fade
 _01ED:
-	CheckNationalDexComplete VAR_SPECIAL_RESULT
-	Compare VAR_SPECIAL_RESULT, 0
-	GoToIfEq _0245
-	GoToIfSet FLAG_SAW_NATIONAL_DEX_CERTIFICATE, _023A
-	NPCMsg msg_0503_T07R0203_00002
-	PlayFanfare SEQ_ME_HYOUKA2
-	WaitFanfare
-	CloseMsg
-	FadeScreen 6, 1, 0, RGB_BLACK
-	WaitFade
-	ShowCertificate 1
-	RestoreOverworld
-	SetFlag FLAG_SAW_NATIONAL_DEX_CERTIFICATE
-	AddSpecialGameStat SCORE_EVENT_NATIONAL_DEX_COMPLETE
-	FadeScreen 6, 1, 1, RGB_BLACK
-	WaitFade
+	check_national_dex_complete VAR_SPECIAL_RESULT
+	compare VAR_SPECIAL_RESULT, 0
+	goto_if_eq _0245
+	goto_if_set FLAG_SAW_NATIONAL_DEX_CERTIFICATE, _023A
+	npc_msg msg_0503_T07R0203_00002
+	play_fanfare SEQ_ME_HYOUKA2
+	wait_fanfare
+	closemsg
+	fade_screen 6, 1, 0, RGB_BLACK
+	wait_fade
+	show_certificate 1
+	restore_overworld
+	setflag FLAG_SAW_NATIONAL_DEX_CERTIFICATE
+	add_special_game_stat SCORE_EVENT_26
+	fade_screen 6, 1, 1, RGB_BLACK
+	wait_fade
 _023A:
-	NPCMsg msg_0503_T07R0203_00003
-	WaitButton
-	CloseMsg
-	ReleaseAll
-	End
+	npc_msg msg_0503_T07R0203_00003
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
 
 _0245:
-	NPCMsg msg_0503_T07R0203_00000
-	WaitButton
-	CloseMsg
-	ReleaseAll
-	End
+	npc_msg msg_0503_T07R0203_00000
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
 
 scr_seq_T07R0203_009:
-	PlaySE SEQ_SE_DP_SELECT
-	LockAll
-	FacePlayer
-	CheckBadge BADGE_EARTH, VAR_SPECIAL_RESULT
-	Compare VAR_SPECIAL_RESULT, 1
-	GoToIfEq _0276
-	NPCMsg msg_0503_T07R0203_00007
-	WaitButton
-	CloseMsg
-	ReleaseAll
-	End
+	play_se SEQ_SE_DP_SELECT
+	lockall
+	faceplayer
+	check_badge BADGE_EARTH, VAR_SPECIAL_RESULT
+	compare VAR_SPECIAL_RESULT, 1
+	goto_if_eq _0276
+	npc_msg msg_0503_T07R0203_00007
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
 
 _0276:
-	GetItemQuantity ITEM_GB_SOUNDS, VAR_SPECIAL_RESULT
-	Compare VAR_SPECIAL_RESULT, 0
-	GoToIfNe _02A7
-	NPCMsg msg_0503_T07R0203_00008
-	GiveItemNoCheck ITEM_GB_SOUNDS, 1
-	NPCMsg msg_0503_T07R0203_00010
-	WaitButton
-	CloseMsg
-	ReleaseAll
-	End
+	getitemquantity ITEM_GB_SOUNDS, VAR_SPECIAL_RESULT
+	compare VAR_SPECIAL_RESULT, 0
+	goto_if_ne _02A7
+	npc_msg msg_0503_T07R0203_00008
+	giveitem_no_check ITEM_GB_SOUNDS, 1
+	npc_msg msg_0503_T07R0203_00010
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
 
 _02A7:
-	NPCMsg msg_0503_T07R0203_00011
-	WaitButton
-	CloseMsg
-	ReleaseAll
-	End
+	npc_msg msg_0503_T07R0203_00011
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
 
 scr_seq_T07R0203_001:
-	SimpleNPCMsg msg_0503_T07R0203_00004
-	End
+	simple_npc_msg msg_0503_T07R0203_00004
+	end
 
 scr_seq_T07R0203_002:
-	SimpleNPCMsg msg_0503_T07R0203_00005
-	End
+	simple_npc_msg msg_0503_T07R0203_00005
+	end
 
 scr_seq_T07R0203_003:
-	SimpleNPCMsg msg_0503_T07R0203_00006
-	End
+	simple_npc_msg msg_0503_T07R0203_00006
+	end
 
 scr_seq_T07R0203_004:
-	PlaySE SEQ_SE_DP_SELECT
-	LockAll
-	NPCMsg msg_0503_T07R0203_00016
-	WaitButton
-	CloseMsg
-	ReleaseAll
-	End
+	play_se SEQ_SE_DP_SELECT
+	lockall
+	npc_msg msg_0503_T07R0203_00016
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
 
 scr_seq_T07R0203_013:
-	PlaySE SEQ_SE_DP_SELECT
-	LockAll
-	NPCMsg msg_0503_T07R0203_00017
-	WaitButton
-	CloseMsg
-	ReleaseAll
-	End
+	play_se SEQ_SE_DP_SELECT
+	lockall
+	npc_msg msg_0503_T07R0203_00017
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
 
 scr_seq_T07R0203_005:
-	PlaySE SEQ_SE_DP_SELECT
-	LockAll
-	NPCMsg msg_0503_T07R0203_00018
-	WaitButton
-	CloseMsg
-	ReleaseAll
-	End
+	play_se SEQ_SE_DP_SELECT
+	lockall
+	npc_msg msg_0503_T07R0203_00018
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
 
 scr_seq_T07R0203_006:
-	PlaySE SEQ_SE_DP_SELECT
-	LockAll
-	NPCMsg msg_0503_T07R0203_00019
-	WaitButton
-	CloseMsg
-	ReleaseAll
-	End
+	play_se SEQ_SE_DP_SELECT
+	lockall
+	npc_msg msg_0503_T07R0203_00019
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
 
 scr_seq_T07R0203_007:
-	PlaySE SEQ_SE_DP_SELECT
-	LockAll
-	NPCMsg msg_0503_T07R0203_00020
-	WaitButton
-	CloseMsg
-	ReleaseAll
-	End
+	play_se SEQ_SE_DP_SELECT
+	lockall
+	npc_msg msg_0503_T07R0203_00020
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
 
 scr_seq_T07R0203_012:
-	SimpleNPCMsg msg_0503_T07R0203_00021
-	End
+	simple_npc_msg msg_0503_T07R0203_00021
+	end
 	.balign 4, 0

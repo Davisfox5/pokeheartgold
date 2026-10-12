@@ -1400,7 +1400,7 @@ sub_02006838: ; 0x02006838
 	bl sub_020068F8
 	add r0, r4, #0
 	mov r1, #8
-	bl Heap_Alloc
+	bl AllocFromHeap
 	add r4, r0, #0
 	bne _0200685C
 	bl GF_AssertFail
@@ -1496,7 +1496,7 @@ sub_020068F8: ; 0x020068F8
 	ldr r0, [r4]
 	bl SysTask_Destroy
 	add r0, r5, #0
-	bl Heap_Free
+	bl FreeToHeap
 _0200691A:
 	mov r0, #0
 	str r0, [r4]

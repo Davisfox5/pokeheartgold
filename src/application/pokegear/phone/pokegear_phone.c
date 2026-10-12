@@ -5,8 +5,8 @@
 #include "brightness.h"
 #include "pokegear_apps.h"
 #include "render_text.h"
-#include "screen_fade.h"
 #include "sound_02004A44.h"
+#include "unk_0200FA24.h"
 
 static void PokegearPhone_LoadContactsAndInitFromArgs(PokegearPhoneAppData *phoneApp);
 static void PokegearPhone_UnloadContactsAndDeregisterCallbacks(PokegearPhoneAppData *phoneApp);
@@ -27,11 +27,11 @@ int PokegearPhone_MainState_WipeOutForAppSwitch(PokegearPhoneAppData *phoneApp);
 
 BOOL PokegearPhone_Init(OverlayManager *man, int *state) {
     PokegearAppData *pokegearApp = OverlayManager_GetArgs(man);
-    Heap_Create(HEAP_ID_3, HEAP_ID_POKEGEAR_APP, 0x30000);
-    PokegearPhoneAppData *phoneApp = OverlayManager_CreateAndGetData(man, sizeof(PokegearPhoneAppData), HEAP_ID_POKEGEAR_APP);
+    CreateHeap(HEAP_ID_3, HEAP_ID_PHONE, 0x30000);
+    PokegearPhoneAppData *phoneApp = OverlayManager_CreateAndGetData(man, sizeof(PokegearPhoneAppData), HEAP_ID_PHONE);
     memset(phoneApp, 0, sizeof(PokegearPhoneAppData));
     phoneApp->pokegear = pokegearApp;
-    phoneApp->heapID = HEAP_ID_POKEGEAR_APP;
+    phoneApp->heapId = HEAP_ID_PHONE;
     Sound_SetSceneAndPlayBGM(55, 0, 0);
     PokegearPhone_LoadContactsAndInitFromArgs(phoneApp);
     return TRUE;
@@ -95,38 +95,38 @@ BOOL PokegearPhone_Exit(OverlayManager *man, int *state) {
 
     PokegearPhone_UnloadContactsAndDeregisterCallbacks(phoneApp);
     phoneApp->pokegear->isSwitchApp = TRUE;
-    enum HeapID heapID = phoneApp->heapID;
+    HeapID heapId = phoneApp->heapId;
     OverlayManager_FreeData(man);
-    Heap_Destroy(heapID);
+    DestroyHeap(heapId);
     return TRUE;
 }
 
 static void PokegearPhone_LoadContactsAndInitFromArgs(PokegearPhoneAppData *phoneApp) {
     phoneApp->pokegear->childAppdata = phoneApp;
     phoneApp->pokegear->reselectAppCB = PokegearPhone_OnReselectApp;
-    phoneApp->skin = Pokegear_GetSkin(phoneApp->pokegear->savePokegear);
-    phoneApp->saveContacts = SavePokegear_AllocAndCopyPhonebook(phoneApp->pokegear->savePokegear, phoneApp->heapID);
+    phoneApp->backgroundStyle = Pokegear_GetBackgroundStyle(phoneApp->pokegear->savePokegear);
+    phoneApp->saveContacts = SavePokegear_AllocAndCopyPhonebook(phoneApp->pokegear->savePokegear, phoneApp->heapId);
     phoneApp->numContacts = SavePokegear_FindEmptyPhonebookSlot(phoneApp->pokegear->savePokegear);
     PokegearPhone_ContactList_CreateLinkedList(phoneApp);
-    if (phoneApp->pokegear->args->isScriptedLaunch == 1) {
+    if (phoneApp->pokegear->args->incomingPhoneCall == 1) {
         phoneApp->isIncomingCall = TRUE;
         phoneApp->callerID = phoneApp->pokegear->args->callerId;
-        phoneApp->callScriptType = phoneApp->pokegear->args->isScriptedCall;
+        phoneApp->isScriptedCall = phoneApp->pokegear->args->unk05;
         phoneApp->callScriptID = phoneApp->pokegear->args->callScriptID;
         phoneApp->pokegear->cursorInAppSwitchZone = 0;
     } else {
         phoneApp->isIncomingCall = FALSE;
         phoneApp->callerID = 0;
-        phoneApp->callScriptType = 0;
+        phoneApp->isScriptedCall = 0;
         phoneApp->callScriptID = 0;
     }
 }
 
 static void PokegearPhone_UnloadContactsAndDeregisterCallbacks(PokegearPhoneAppData *phoneApp) {
     PokegearPhone_ContactList_FlushAndDestroyLinkedList(phoneApp);
-    Heap_Free(phoneApp->saveContacts);
+    FreeToHeap(phoneApp->saveContacts);
     phoneApp->pokegear->reselectAppCB = NULL;
-    phoneApp->pokegear->deselectAppCB = NULL;
+    phoneApp->pokegear->unk_060 = NULL;
 }
 
 int PokegearPhone_MainTask_Setup(PokegearPhoneAppData *phoneApp) {
@@ -237,7 +237,7 @@ int PokegearPhone_MainTask_FadeInFromGearOpen(PokegearPhoneAppData *phoneApp) {
 int PokegearPhone_MainTask_FadeOutForGearClose(PokegearPhoneAppData *phoneApp) {
     switch (phoneApp->subtaskState) {
     case 0:
-        BeginNormalPaletteFade(FADE_BOTH_SCREENS, FADE_TYPE_BRIGHTNESS_OUT, FADE_TYPE_BRIGHTNESS_OUT, RGB_BLACK, 6, 1, phoneApp->heapID);
+        BeginNormalPaletteFade(0, 0, 0, RGB_BLACK, 6, 1, phoneApp->heapId);
         ++phoneApp->subtaskState;
         break;
     case 1:
@@ -262,17 +262,17 @@ int PokegearPhone_MainTask_WipeInFromAppSwitch(PokegearPhoneAppData *phoneApp) {
             ToggleBgLayer(i + 1, TRUE);
             ToggleBgLayer(i + 5, TRUE);
         }
-        phoneApp->pokegear->fadeCounter = 0;
+        phoneApp->pokegear->unk_009 = 0;
         ++phoneApp->subtaskState;
         break;
     case 1:
-        if (Pokegear_RunFadeLayers123(phoneApp->pokegear, 0)) {
+        if (ov100_021E5D3C(phoneApp->pokegear, 0)) {
             ++phoneApp->subtaskState;
         }
         break;
     case 2:
         PaletteData_SetAutoTransparent(phoneApp->pokegear->plttData, FALSE);
-        phoneApp->pokegear->fadeCounter = 0;
+        phoneApp->pokegear->unk_009 = 0;
         phoneApp->subtaskState = 0;
         return PHONE_MAIN_STATE_INPUT_LOOP;
     }
@@ -283,17 +283,17 @@ int PokegearPhone_MainState_WipeOutForAppSwitch(PokegearPhoneAppData *phoneApp) 
     switch (phoneApp->subtaskState) {
     case 0:
         PaletteData_SetAutoTransparent(phoneApp->pokegear->plttData, TRUE);
-        phoneApp->pokegear->fadeCounter = 0;
+        phoneApp->pokegear->unk_009 = 0;
         ++phoneApp->subtaskState;
         break;
     case 1:
-        if (Pokegear_RunFadeLayers123(phoneApp->pokegear, 1)) {
+        if (ov100_021E5D3C(phoneApp->pokegear, 1)) {
             ++phoneApp->subtaskState;
         }
         break;
     case 2:
-        PaletteData_BlendPalette(phoneApp->pokegear->plttData, PLTTBUF_MAIN_BG, 0, 0xE0, 16, RGB_BLACK);
-        PaletteData_BlendPalette(phoneApp->pokegear->plttData, PLTTBUF_MAIN_OBJ, 0x40, 0xC0, 16, RGB_BLACK);
+        PaletteData_BlendPalette(phoneApp->pokegear->plttData, PLTTBUF_MAIN_BG, 0, 0xE0, 16, 0);
+        PaletteData_BlendPalette(phoneApp->pokegear->plttData, PLTTBUF_MAIN_OBJ, 0x40, 0xC0, 16, 0);
         PaletteData_PushTransparentBuffers(phoneApp->pokegear->plttData);
         for (int i = 0; i < 3; ++i) {
             ToggleBgLayer(i + 1, FALSE);
@@ -303,7 +303,7 @@ int PokegearPhone_MainState_WipeOutForAppSwitch(PokegearPhoneAppData *phoneApp) 
         break;
     case 3:
         PaletteData_SetAutoTransparent(phoneApp->pokegear->plttData, FALSE);
-        phoneApp->pokegear->fadeCounter = 0;
+        phoneApp->pokegear->unk_009 = 0;
         phoneApp->subtaskState = 0;
         return PHONE_MAIN_STATE_TEARDOWN;
     }

@@ -1,0 +1,226 @@
+{
+  "header": "fielddata/script/scr_seq/event_EVERYWHERE.h",
+  "bgs": [
+    {
+      "scriptId": 72,
+      "type": 1,
+      "x": 855,
+      "z": 759,
+      "y": 0,
+      "dir": 0
+    },
+    {
+      "scriptId": 72,
+      "type": 1,
+      "x": 889,
+      "z": 792,
+      "y": 0,
+      "dir": 0
+    }
+  ],
+  "objects": [
+    {
+      "id": 0,
+      "spriteId": "SPRITE_SEAMAN",
+      "movement": 3,
+      "type": 0,
+      "eventFlag": 0,
+      "scriptId": 17,
+      "facingDirection": 0,
+      "param0": 0,
+      "param1": 0,
+      "param2": 0,
+      "xRange": 1,
+      "yRange": 1,
+      "x": 883,
+      "z": 770,
+      "y": 0
+    },
+    {
+      "id": 1,
+      "spriteId": "SPRITE_MIDDLEWOMAN1",
+      "movement": 3,
+      "type": 0,
+      "eventFlag": 0,
+      "scriptId": 5,
+      "facingDirection": 1,
+      "param0": 0,
+      "param1": 0,
+      "param2": 0,
+      "xRange": 1,
+      "yRange": 2,
+      "x": 856,
+      "z": 782,
+      "y": 0
+    },
+    {
+      "id": 2,
+      "spriteId": "SPRITE_GSWOMAN2",
+      "movement": 3,
+      "type": 0,
+      "eventFlag": 0,
+      "scriptId": 3,
+      "facingDirection": 3,
+      "param0": 0,
+      "param1": 0,
+      "param2": 0,
+      "xRange": 4,
+      "yRange": 1,
+      "x": 848,
+      "z": 785,
+      "y": 0
+    },
+    {
+      "id": 3,
+      "spriteId": "SPRITE_WORKMAN",
+      "movement": 5,
+      "type": 0,
+      "eventFlag": 0,
+      "scriptId": 3,
+      "facingDirection": 1,
+      "param0": 0,
+      "param1": 0,
+      "param2": 0,
+      "xRange": 1,
+      "yRange": 0,
+      "x": 881,
+      "z": 793,
+      "y": 0
+    },
+    {
+      "id": 4,
+      "spriteId": "SPRITE_SEAMAN",
+      "movement": 3,
+      "type": 0,
+      "eventFlag": 0,
+      "scriptId": 2,
+      "facingDirection": 1,
+      "param0": 0,
+      "param1": 0,
+      "param2": 0,
+      "xRange": 1,
+      "yRange": 5,
+      "x": 854,
+      "z": 754,
+      "y": 0
+    },
+    {
+      "id": 5,
+      "spriteId": "SPRITE_MIDDLEMAN1",
+      "movement": 0,
+      "type": 0,
+      "eventFlag": 0,
+      "scriptId": 4,
+      "facingDirection": 3,
+      "param0": 0,
+      "param1": 0,
+      "param2": 0,
+      "xRange": 0,
+      "yRange": 0,
+      "x": 857,
+      "z": 741,
+      "y": 0
+    }
+  ],
+  "warps": [
+    {
+      "x": 849,
+      "z": 762,
+      "header": "MAP_APOC_SIN_H00_SUNYSHORE_CITY",
+      "anchor": 0,
+      "y": 0
+    },
+    {
+      "x": 883,
+      "z": 743,
+      "header": "MAP_APOC_SIN_H01_SUNYSHORE_CITY",
+      "anchor": 0,
+      "y": 0
+    },
+    {
+      "x": 845,
+      "z": 768,
+      "header": "MAP_APOC_SIN_H02_SUNYSHORE_CITY",
+      "anchor": 0,
+      "y": 0
+    },
+    {
+      "x": 832,
+      "z": 790,
+      "header": "MAP_APOC_SIN_H03_SUNYSHORE_CITY",
+      "anchor": 0,
+      "y": 0
+    },
+    {
+      "x": 875,
+      "z": 743,
+      "header": "MAP_APOC_SIN_H04_SUNYSHORE_CITY",
+      "anchor": 0,
+      "y": 0
+    },
+    {
+      "x": 853,
+      "z": 768,
+      "header": "MAP_APOC_SIN_MART_SUNYSHORE_CITY",
+      "anchor": 0,
+      "y": 0
+    },
+    {
+      "x": 832,
+      "z": 791,
+      "header": "MAP_APOC_SIN_H06_SUNYSHORE_CITY",
+      "anchor": 0,
+      "y": 0
+    },
+    {
+      "x": 832,
+      "z": 751,
+      "header": "MAP_APOC_SIN_H07_SUNYSHORE_CITY",
+      "anchor": 0,
+      "y": 0
+    },
+    {
+      "x": 832,
+      "z": 750,
+      "header": "MAP_APOC_SIN_H08_SUNYSHORE_CITY",
+      "anchor": 0,
+      "y": 0
+    },
+    {
+      "x": 888,
+      "z": 771,
+      "header": "MAP_APOC_SIN_H09_SUNYSHORE_CITY",
+      "anchor": 0,
+      "y": 0
+    },
+    {
+      "x": 886,
+      "z": 790,
+      "header": "MAP_APOC_SIN_H10_SUNYSHORE_CITY",
+      "anchor": 0,
+      "y": 0
+    },
+    {
+      "x": 860,
+      "z": 784,
+      "header": "MAP_APOC_SIN_PC_SUNYSHORE_CITY",
+      "anchor": 0,
+      "y": 0
+    },
+    {
+      "x": 845,
+      "z": 747,
+      "header": "MAP_APOC_SIN_H12_SUNYSHORE_CITY",
+      "anchor": 0,
+      "y": 0
+    },
+    {
+      "x": 850,
+      "z": 762,
+      "header": "MAP_APOC_SIN_H13_SUNYSHORE_CITY",
+      "anchor": 0,
+      "y": 0
+    }
+  ],
+  "coords": []
+}

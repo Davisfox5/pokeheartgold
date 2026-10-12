@@ -17,10 +17,10 @@
 .public SpriteSystem_FreeResourcesAndManager
 .public Main_SetVBlankIntrCB
 .public HBlankInterruptDisable
-.public Heap_Create
-.public Heap_Destroy
-.public Heap_Alloc
-.public Heap_Free
+.public CreateHeap
+.public DestroyHeap
+.public AllocFromHeap
+.public FreeToHeap
 .public BgConfig_Alloc
 .public InitBgFromTemplate
 .public FreeBgTilemapBuffer

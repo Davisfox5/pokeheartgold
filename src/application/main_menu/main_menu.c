@@ -22,8 +22,6 @@
 #include "save.h"
 #include "save_arrays.h"
 #include "save_data_read_error.h"
-#include "screen_fade.h"
-#include "sound.h"
 #include "sound_02004A44.h"
 #include "sprite.h"
 #include "system.h"
@@ -32,6 +30,7 @@
 #include "touchscreen.h"
 #include "unk_02005D10.h"
 #include "unk_0200B150.h"
+#include "unk_0200FA24.h"
 #include "vram_transfer_manager.h"
 
 typedef enum MainMenu_AppOption {
@@ -135,9 +134,9 @@ extern u32 sub_02038D80(void);
 extern u32 PmAgbCartridgeGetOffsets(u32 a0);
 extern u32 PmAgbCartridge_GetVersionInternal(void);
 extern u32 PmAgbCartridge_GetLanguage(void);
-extern void ov74_0223512C(enum HeapID heapID);
+extern void ov74_0223512C(HeapID heapId);
 extern u32 ov74_02235230(void);
-extern void ov74_022352A0(enum HeapID heapID);
+extern void ov74_022352A0(HeapID heapId);
 extern void ov74_02235308(BgConfig *bgConfig, u8 bgId, u32 screenSize, u32 screenBase, u32 charBase);
 extern void ov74_02235390(u32 a0);
 extern void ov74_0223539C(u32 a0, u32 newState, int *state, u32 waitingState);
@@ -542,10 +541,10 @@ static void DetectInsertedGBACart(MainMenuAppData *data) {
         version = VERSION_SAPPHIRE;
         break;
     case 2:
-        version = VERSION_LEAFGREEN;
+        version = VERSION_LEAF_GREEN;
         break;
     case 3:
-        version = VERSION_FIRERED;
+        version = VERSION_FIRE_RED;
         break;
     case 4:
         version = VERSION_EMERALD;
@@ -1301,7 +1300,7 @@ static void MainMenu_FreeGraphics(OverlayManager *manager) {
 
     GX_SetDispSelect(GX_DISP_SELECT_MAIN_SUB);
 
-    Heap_Free(data->bgConfig);
+    FreeToHeap(data->bgConfig);
     Main_SetVBlankIntrCB(NULL, NULL);
 }
 
@@ -1354,15 +1353,15 @@ static void MainMenu_OnVBlank(BgConfig *bgConfig) {
 }
 
 BOOL MainMenuApp_Init(OverlayManager *manager, int *state) {
-    Heap_Create(HEAP_ID_3, HEAP_ID_MAIN_MENU, 0x40000);
+    CreateHeap(HEAP_ID_3, HEAP_ID_MAIN_MENU, 0x40000);
 
     MainMenuAppData *data = OverlayManager_CreateAndGetData(manager, sizeof(MainMenuAppData), HEAP_ID_MAIN_MENU);
     memset(data, 0, sizeof(MainMenuAppData));
 
     data->bgConfig = BgConfig_Alloc(HEAP_ID_MAIN_MENU);
 
-    sub_0200FBF4(PM_LCD_TOP, RGB_BLACK);
-    sub_0200FBF4(PM_LCD_BOTTOM, RGB_BLACK);
+    sub_0200FBF4(PM_LCD_TOP, 0);
+    sub_0200FBF4(PM_LCD_BOTTOM, 0);
 
     UnkStruct_02111868_sub *args = OverlayManager_GetArgs(manager);
     data->saveData = args->saveData;
@@ -1382,7 +1381,7 @@ BOOL MainMenuApp_Init(OverlayManager *manager, int *state) {
         data->dontHaveSavedata = TRUE;
     }
     sub_02005AF8(0);
-    Sound_SetScene(SOUND_SCENE_NONE);
+    sub_02004AD8(0);
 
     return TRUE;
 }
@@ -1526,7 +1525,7 @@ BOOL MainMenuApp_Exit(OverlayManager *manager, int *state) {
     MainMenu_QueueSelectedApp(data);
 
     OverlayManager_FreeData(manager);
-    Heap_Destroy(HEAP_ID_MAIN_MENU);
+    DestroyHeap(HEAP_ID_MAIN_MENU);
 
     ov74_02236034(FALSE);
 

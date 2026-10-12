@@ -5,35 +5,35 @@
 
 	.rodata
 
-	ScrDef scr_seq_D39R0103_000
-	ScrDef scr_seq_D39R0103_001
-	ScrDef scr_seq_D39R0103_002
-	ScrDefEnd
+	scrdef scr_seq_D39R0103_000
+	scrdef scr_seq_D39R0103_001
+	scrdef scr_seq_D39R0103_002
+	scrdef_end
 
 scr_seq_D39R0103_000:
-	PlaySE SEQ_SE_GS_RAKKA01
-	ApplyMovement obj_player, _0050
-	Wait 1, VAR_SPECIAL_RESULT
-	ScrCmd_374 obj_player
-	WaitMovement
-	ScreenShake 0, 1, 1, 8
-	PlaySE SEQ_SE_DP_SUTYA2
-	SetVar VAR_UNK_40AB, 0
-	End
+	play_se SEQ_SE_GS_RAKKA01
+	apply_movement obj_player, _0050
+	wait 1, VAR_SPECIAL_RESULT
+	scrcmd_374 obj_player
+	wait_movement
+	screen_shake 0, 1, 1, 8
+	play_se SEQ_SE_DP_SUTYA2
+	setvar VAR_UNK_40AB, 0
+	end
 
 scr_seq_D39R0103_001:
-	Compare VAR_UNK_40AB, 1
-	GoToIfNe _004D
-	MakeObjectVisible obj_player
+	compare VAR_UNK_40AB, 1
+	goto_if_ne _004D
+	make_object_visible obj_player
 _004D:
-	End
+	end
 
 	.balign 4, 0
 _0050:
-	WarpIn
-	EndMovement
+	step 68, 1
+	step_end
 
 scr_seq_D39R0103_002:
-	SimpleNPCMsg msg_0123_D39R0103_00000
-	End
+	simple_npc_msg msg_0123_D39R0103_00000
+	end
 	.balign 4, 0

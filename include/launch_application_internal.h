@@ -36,7 +36,7 @@ typedef enum WirelessTradeState {
 } WirelessTradeState;
 
 typedef struct UnkStruct_0203E6D4 {
-    enum HeapID heapID;
+    HeapID heapId;
     PartyMenuArgs *partyMenu;
     u8 unk8[0x4];
 } UnkStruct_0203E6D4;
@@ -130,7 +130,7 @@ typedef struct UnkStruct_0203F844 {
     Party *party;
     PCStorage *pcStorage;
     Pokedex *pokedex;
-    WiFiList *unk14;
+    UnkStruct_021D2230 *unk14;
     SaveWiFiHistory *wifiHistory;
     PlayerProfile *profile;
     SaveData *saveData;
@@ -138,7 +138,7 @@ typedef struct UnkStruct_0203F844 {
     GameStats *gameStats;
     Bag *bag;
     BOOL natDexEnabled;
-    int unk34;
+    void *unk34;
     u32 unk38;
     int unk3C;
 } UnkStruct_0203F844;
@@ -149,7 +149,7 @@ typedef struct UnkStruct_0203E644 {
 } UnkStruct_0203E644;
 
 typedef struct PartyMenuMoveSelectData {
-    enum HeapID heapID;
+    HeapID heapId;
     UnkStruct_0203E644 *unk4;
     PokemonSummaryArgs *pokemonSummary;
 } PartyMenuMoveSelectData;

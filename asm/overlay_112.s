@@ -3938,7 +3938,7 @@ ov112_021E76CC: ; 0x021E76CC
 	mov r0, #3
 	mov r1, #0x9a
 	lsl r2, r2, #0x10
-	bl Heap_Create
+	bl CreateHeap
 	ldr r1, _021E7764 ; =0x0001F378
 	add r0, r4, #0
 	mov r2, #0x9a
@@ -4182,7 +4182,7 @@ ov112_021E7910: ; 0x021E7910
 	add r1, r0, #0
 	bl Main_SetVBlankIntrCB
 	mov r0, #0x9a
-	bl Heap_Destroy
+	bl DestroyHeap
 	mov r0, #0x10
 	bl sub_0201A738
 	ldr r0, _021E7954 ; =FS_OVERLAY_ID(intro_title)
@@ -4386,7 +4386,7 @@ ov112_021E7AC8: ; 0x021E7AC8
 	bl FreeBgTilemapBuffer
 	mov r0, #0x9a
 	add r1, r4, #0
-	bl Heap_FreeExplicit
+	bl FreeToHeapExplicit
 	pop {r4, pc}
 	.balign 4, 0
 	thumb_func_end ov112_021E7AC8
@@ -4741,7 +4741,7 @@ ov112_021E7DFC: ; 0x021E7DFC
 	add r4, r1, #0
 	add r1, r0, #0
 	add r1, #0xe6
-	bl Heap_Alloc
+	bl AllocFromHeap
 	mov r3, #0
 	add r6, r0, #0
 	str r3, [sp]
@@ -5959,7 +5959,7 @@ _021E88D8:
 	add r0, r4, r0
 	bl ov112_021F0D48
 	add r0, r6, #0
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, sp, #0x14
 	bl RemoveWindow
 	add sp, #0x24
@@ -6203,7 +6203,7 @@ ov112_021E8CB8: ; 0x021E8CB8
 	mov r0, #0x9a
 	add r1, r0, #0
 	add r1, #0xe6
-	bl Heap_Alloc
+	bl AllocFromHeap
 	str r0, [sp, #0x24]
 	mov r0, #0
 	ldr r6, _021E9020 ; =ov112_021F5578
@@ -6409,7 +6409,7 @@ _021E8E6C:
 	lsl r2, r2, #6
 	bl MI_CpuCopy8
 	ldr r0, [sp, #0x30]
-	bl Heap_Free
+	bl FreeToHeap
 	mov r0, #6
 	lsl r0, r0, #6
 	add r4, r4, r0
@@ -6442,7 +6442,7 @@ _021E8E6C:
 	lsl r2, r2, #8
 	bl MI_CpuCopy8
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	mov r0, #0
 	str r0, [sp, #0x18]
 	add r4, r0, #0
@@ -6550,7 +6550,7 @@ _021E8F3A:
 	lsl r2, r2, #6
 	bl MI_CpuCopy8
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	ldr r0, _021E9024 ; =0x0001D77C
 	ldrh r0, [r5, r0]
 	cmp r0, #0
@@ -6614,7 +6614,7 @@ _021E9060:
 	lsl r2, r2, #8
 	bl MI_CpuCopy8
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	mov r0, #0
 	str r0, [sp]
 	str r0, [sp, #4]
@@ -6673,7 +6673,7 @@ _021E90DC:
 	cmp r5, #0xf
 	blo _021E90DC
 	ldr r0, [sp, #0x24]
-	bl Heap_Free
+	bl FreeToHeap
 	add sp, #0x130
 	pop {r3, r4, r5, r6, r7, pc}
 	.balign 4, 0
@@ -10034,7 +10034,7 @@ ov112_021EAB78: ; 0x021EAB78
 	bl ov112_021EABE8
 	ldr r0, _021EABE0 ; =0x0001EA60
 	ldr r0, [r5, r0]
-	bl Heap_Free
+	bl FreeToHeap
 	add sp, #8
 	pop {r3, r4, r5, r6, r7, pc}
 	nop
@@ -10417,7 +10417,7 @@ _021EAEAE:
 	mov r1, #7
 	bl ov112_021EA670
 	add r0, r6, #0
-	bl Heap_Free
+	bl FreeToHeap
 	b _021EAF1E
 _021EAF04:
 	add r0, r5, #0
@@ -16656,7 +16656,7 @@ _021EE030:
 	mov r6, #0
 _021EE032:
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r6, #0
 	pop {r3, r4, r5, r6, r7, pc}
 	.balign 4, 0
@@ -17777,7 +17777,7 @@ _021EE854:
 	bl Pokedex_SetMonCaughtFlag
 _021EE890:
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	add sp, #0x14
 	pop {r4, r5, r6, r7, pc}
 	nop
@@ -18274,7 +18274,7 @@ _021EECB2:
 	ldr r0, [sp, #0xc]
 	bl String_Delete
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	add sp, #0x28
 	pop {r3, r4, r5, r6, r7, pc}
 	nop
@@ -18847,7 +18847,7 @@ ov112_021EF100: ; 0x021EF100
 	bl ObjCharTransfer_Destroy
 	bl ObjPlttTransfer_Destroy
 	ldr r0, [r4, #0x18]
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r4, #0
 	bl ov112_021E7768
 	ldr r0, _021EF158 ; =0x0001D778
@@ -21228,7 +21228,7 @@ ov112_021F039C: ; 0x021F039C
 	mov r1, #0x96
 	lsl r1, r1, #2
 	add r5, r0, #0
-	bl Heap_Alloc
+	bl AllocFromHeap
 	mov r2, #0x96
 	mov r1, #0
 	lsl r2, r2, #2
@@ -21456,11 +21456,11 @@ _021F057E:
 	mov r0, #0x52
 	lsl r0, r0, #2
 	ldr r0, [r6, r0]
-	bl SpriteTransfer_DeleteCharTransferTask
+	bl sub_0200AEB0
 	mov r0, #0x53
 	lsl r0, r0, #2
 	ldr r0, [r6, r0]
-	bl SpriteTransfer_DeletePlttTransferTask
+	bl sub_0200B0A8
 	add r0, r4, #1
 	lsl r0, r0, #0x18
 	lsr r4, r0, #0x18
@@ -21482,7 +21482,7 @@ _021F05A8:
 	ldr r0, [r5, #4]
 	bl SpriteList_Delete
 	add r0, r7, #0
-	bl Heap_Free
+	bl FreeToHeap
 	pop {r3, r4, r5, r6, r7, pc}
 	.balign 4, 0
 	thumb_func_end ov112_021F051C
@@ -21509,7 +21509,7 @@ _021F05D8:
 	mov r0, #0x6e
 	lsl r0, r0, #2
 	ldr r0, [r7, r0]
-	bl Heap_Free
+	bl FreeToHeap
 	pop {r3, r4, r5, r6, r7, pc}
 	thumb_func_end ov112_021F05CC
 
@@ -22048,11 +22048,11 @@ _021F09E6:
 	str r0, [r5, r1]
 	sub r1, #0xc
 	ldr r0, [r5, r1]
-	bl SpriteTransfer_CreateCharTransferTask_AllocAtEnd
+	bl sub_0200ADA4
 	mov r0, #0x53
 	lsl r0, r0, #2
 	ldr r0, [r5, r0]
-	bl SpriteTransfer_CreateExtPlttTransferTask
+	bl sub_0200AF94
 	mov r0, #2
 	str r0, [sp]
 	str r0, [sp, #4]
@@ -22115,11 +22115,11 @@ _021F09E6:
 	str r0, [r5, r1]
 	sub r1, #0xc
 	ldr r0, [r5, r1]
-	bl SpriteTransfer_CreateCharTransferTask_AllocAtEnd
+	bl sub_0200ADA4
 	mov r0, #0x59
 	lsl r0, r0, #2
 	ldr r0, [r5, r0]
-	bl SpriteTransfer_CreateExtPlttTransferTask
+	bl sub_0200AF94
 	add sp, #0x10
 	pop {r3, r4, r5, r6, r7, pc}
 	.balign 4, 0
@@ -22173,7 +22173,7 @@ _021F0B36:
 	mov r1, #0x32
 	ldr r0, [r5]
 	lsl r1, r1, #6
-	bl Heap_Alloc
+	bl AllocFromHeap
 	mov r1, #0x6e
 	lsl r1, r1, #2
 	str r0, [r5, r1]
@@ -22284,7 +22284,7 @@ ov112_021F0C50: ; 0x021F0C50
 	ldr r4, [r5, r0]
 	sub r0, r0, #4
 	ldr r0, [r5, r0]
-	bl SpriteTransfer_GetCharProxy
+	bl sub_0200AF00
 	add r6, r0, #0
 	add r0, r4, #0
 	add r1, r6, #0
@@ -22358,7 +22358,7 @@ _021F0CEA:
 	mov r2, #0x20
 	bl MIi_CpuCopy16
 	add r0, r5, #0
-	bl Heap_Free
+	bl FreeToHeap
 	add sp, #0x24
 	pop {r4, r5, pc}
 	thumb_func_end ov112_021F0C8C
@@ -23833,7 +23833,7 @@ _021F181C:
 	cmp r4, #5
 	blt _021F181C
 	ldr r0, [r6, #0x14]
-	bl Heap_Free
+	bl FreeToHeap
 	pop {r4, r5, r6, pc}
 	.balign 4, 0
 _021F1834: .word ov112_021FF4C0
@@ -25013,7 +25013,7 @@ _021F2142:
 	str r0, [sp, #0x18]
 	add r0, r7, #0
 	add r1, r5, #0
-	bl Heap_AllocAtEnd
+	bl AllocFromHeapAtEnd
 	mov r7, #0
 	add r6, r0, #0
 	add r4, r7, #0
@@ -25038,7 +25038,7 @@ _021F2172:
 	cmp r7, #8
 	blt _021F2172
 	add r0, r6, #0
-	bl Heap_Free
+	bl FreeToHeap
 	ldr r0, [sp, #0x1c]
 	bl Sprite_GetVramType
 	ldr r0, [sp, #0x20]
@@ -25062,7 +25062,7 @@ _021F21B8:
 	mov r2, #0x20
 	bl GX_LoadOBJPltt
 	ldr r0, [sp, #0x24]
-	bl Heap_Free
+	bl FreeToHeap
 	ldr r0, [sp, #0x28]
 	bl NARC_Delete
 	ldr r0, [sp, #0x1c]
@@ -26684,7 +26684,7 @@ _021F2DF4:
 	mov r0, #3
 	mov r1, #0x9b
 	lsl r2, r0, #0x11
-	bl Heap_Create
+	bl CreateHeap
 	mov r1, #0x15
 	add r0, r4, #0
 	lsl r1, r1, #4
@@ -26717,9 +26717,9 @@ _021F2DF4:
 	add r0, r4, #0
 	bl ov112_021F196C
 	mov r0, #0
-	bl ResetVisibleHardwareWindows
+	bl sub_0200FBDC
 	mov r0, #1
-	bl ResetVisibleHardwareWindows
+	bl sub_0200FBDC
 	ldr r0, _021F2E6C ; =ov112_021F2EB0
 	add r1, r4, #0
 	bl Main_SetVBlankIntrCB
@@ -26750,7 +26750,7 @@ ov112_021F2E70: ; 0x021F2E70
 	add r0, r4, #0
 	bl OverlayManager_FreeData
 	mov r0, #0x9b
-	bl Heap_Destroy
+	bl DestroyHeap
 	pop {r3, r4, r5, pc}
 	.balign 4, 0
 _021F2EAC: .word gSystem + 0x60

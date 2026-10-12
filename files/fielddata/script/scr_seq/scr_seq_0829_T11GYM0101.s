@@ -5,177 +5,152 @@
 
 	.rodata
 
-	ScrDef scr_seq_T11GYM0101_000
-	ScrDef scr_seq_T11GYM0101_001
-	ScrDef scr_seq_T11GYM0101_002
-	ScrDef scr_seq_T11GYM0101_003
-	ScrDef scr_seq_T11GYM0101_004
-	ScrDefEnd
+	scrdef scr_seq_T11GYM0101_000
+	scrdef scr_seq_T11GYM0101_001
+	scrdef scr_seq_T11GYM0101_002
+	scrdef scr_seq_T11GYM0101_003
+	scrdef scr_seq_T11GYM0101_004
+	scrdef_end
 
+; ===== APOCRYPHA Ch4: the gym is "closed for the season" -- Sabrina is
+; unconditionally absent until a later chapter reopens Kanto's League circuit.
+; The vanilla schedule logic (phone rematch / weekday windows) is removed;
+; the gym trainer objects are hidden via FLAG_APOC_ALWAYS_HIDDEN in the
+; zone_event JSON. =====
 scr_seq_T11GYM0101_004:
-	GetPhoneBookRematch PHONE_CONTACT_SABRINA, VAR_TEMP_x4001
-	Compare VAR_TEMP_x4001, 0
-	GoToIfNe _0089
-	CheckRegisteredPhoneNumber PHONE_CONTACT_SABRINA, VAR_TEMP_x4001
-	Compare VAR_TEMP_x4001, 1
-	GoToIfEq _006C
-	CheckBadge BADGE_MARSH, VAR_TEMP_x4000
-	Compare VAR_TEMP_x4000, 1
-	GoToIfEq _0055
-	GoTo _0083
-
-_0055:
-	GetWeekday VAR_TEMP_x4000
-	Compare VAR_TEMP_x4000, 5
-	GoToIfNe _0083
-	SetFlag FLAG_HIDE_SAFFRON_GYM_SABRINA
-	End
-
-_006C:
-	GetWeekday VAR_TEMP_x4000
-	Compare VAR_TEMP_x4000, 1
-	GoToIfNe _0083
-	SetFlag FLAG_HIDE_SAFFRON_GYM_SABRINA
-	End
-
-_0083:
-	ClearFlag FLAG_HIDE_SAFFRON_GYM_SABRINA
-	End
-
-_0089:
-	SetFlag FLAG_HIDE_SAFFRON_GYM_SABRINA
-	End
+	setflag FLAG_HIDE_SAFFRON_GYM_SABRINA
+	end
 
 scr_seq_T11GYM0101_000:
-	PlaySE SEQ_SE_DP_SELECT
-	LockAll
-	FacePlayer
-	CheckBadge BADGE_MARSH, VAR_SPECIAL_RESULT
-	Compare VAR_SPECIAL_RESULT, 1
-	GoToIfEq _0140
-	NPCMsg msg_0531_T11GYM0101_00000
-	CloseMsg
-	TrainerBattle TRAINER_LEADER_SABRINA_SABRINA, 0, 0, 0
-	CheckBattleWon VAR_SPECIAL_RESULT
-	Compare VAR_SPECIAL_RESULT, 0
-	GoToIfEq _0156
-	GiveBadge BADGE_MARSH
-	AddVar VAR_UNK_4135, 1
-	AddSpecialGameStat SCORE_EVENT_BADGE_GET
-	SetFlag FLAG_UNK_998
-	SetTrainerFlag TRAINER_PSYCHIC_M_FRANKLIN
-	SetTrainerFlag TRAINER_PSYCHIC_M_JARED
-	SetTrainerFlag TRAINER_MEDIUM_REBECCA
-	SetTrainerFlag TRAINER_MEDIUM_DARCY
-	NPCMsg msg_0531_T11GYM0101_00001
-	BufferPlayersName 0
-	NPCMsg msg_0531_T11GYM0101_00002
-	PlayFanfare SEQ_ME_BADGE
-	WaitFanfare
-	NPCMsg msg_0531_T11GYM0101_00003
-	GoTo _0102
+	play_se SEQ_SE_DP_SELECT
+	lockall
+	faceplayer
+	check_badge BADGE_MARSH, VAR_SPECIAL_RESULT
+	compare VAR_SPECIAL_RESULT, 1
+	goto_if_eq _0140
+	npc_msg msg_0531_T11GYM0101_00000
+	closemsg
+	trainer_battle TRAINER_LEADER_SABRINA_SABRINA, 0, 0, 0
+	check_battle_won VAR_SPECIAL_RESULT
+	compare VAR_SPECIAL_RESULT, 0
+	goto_if_eq _0156
+	give_badge BADGE_MARSH
+	addvar VAR_UNK_4135, 1
+	add_special_game_stat SCORE_EVENT_BADGE_GET
+	setflag FLAG_UNK_998
+	settrainerflag TRAINER_PSYCHIC_M_FRANKLIN
+	settrainerflag TRAINER_PSYCHIC_M_JARED
+	settrainerflag TRAINER_MEDIUM_REBECCA
+	settrainerflag TRAINER_MEDIUM_DARCY
+	npc_msg msg_0531_T11GYM0101_00001
+	buffer_players_name 0
+	npc_msg msg_0531_T11GYM0101_00002
+	play_fanfare SEQ_ME_BADGE
+	wait_fanfare
+	npc_msg msg_0531_T11GYM0101_00003
+	goto _0102
 
 _0102:
-	GoToIfNoItemSpace ITEM_TM48, 1, _0136
-	CallStd std_give_item_verbose
-	SetFlag FLAG_GOT_TM48_FROM_SABRINA
-	NPCMsg msg_0531_T11GYM0101_00004
-	WaitButton
-	CloseMsg
-	ReleaseAll
-	End
+	goto_if_no_item_space ITEM_TM48, 1, _0136
+	callstd std_give_item_verbose
+	setflag FLAG_GOT_TM48_FROM_SABRINA
+	npc_msg msg_0531_T11GYM0101_00004
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
 
 _0136:
-	CallStd std_bag_is_full
-	CloseMsg
-	ReleaseAll
-	End
+	callstd std_bag_is_full
+	closemsg
+	releaseall
+	end
 
 _0140:
-	GoToIfUnset FLAG_GOT_TM48_FROM_SABRINA, _0102
-	NPCMsg msg_0531_T11GYM0101_00005
-	WaitButton
-	CloseMsg
-	ReleaseAll
-	End
+	goto_if_unset FLAG_GOT_TM48_FROM_SABRINA, _0102
+	npc_msg msg_0531_T11GYM0101_00005
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
 
 _0156:
-	WhiteOut
-	ReleaseAll
-	End
+	white_out
+	releaseall
+	end
 
 scr_seq_T11GYM0101_001:
-	PlaySE SEQ_SE_DP_SELECT
-	LockAll
-	FacePlayer
-	CheckBadge BADGE_MARSH, VAR_SPECIAL_RESULT
-	Compare VAR_SPECIAL_RESULT, 1
-	GoToIfEq _0182
-	NPCMsg msg_0531_T11GYM0101_00006
-	WaitButton
-	CloseMsg
-	ReleaseAll
-	End
+	play_se SEQ_SE_DP_SELECT
+	lockall
+	faceplayer
+	check_badge BADGE_MARSH, VAR_SPECIAL_RESULT
+	compare VAR_SPECIAL_RESULT, 1
+	goto_if_eq _0182
+	npc_msg msg_0531_T11GYM0101_00006
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
 
 _0182:
-	NPCMsg msg_0531_T11GYM0101_00007
-	WaitButton
-	CloseMsg
-	ReleaseAll
-	End
+	npc_msg msg_0531_T11GYM0101_00007
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
 
 scr_seq_T11GYM0101_002:
-	PlaySE SEQ_SE_DP_SELECT
-	LockAll
-	FacePlayer
-	CheckBadge BADGE_MARSH, VAR_SPECIAL_RESULT
-	BufferPlayersName 0
-	Compare VAR_SPECIAL_RESULT, 0
-	GoToIfNe _01B4
-	NPCMsg msg_0531_T11GYM0101_00008
-	GoTo _01B7
+	play_se SEQ_SE_DP_SELECT
+	lockall
+	faceplayer
+	check_badge BADGE_MARSH, VAR_SPECIAL_RESULT
+	buffer_players_name 0
+	compare VAR_SPECIAL_RESULT, 0
+	goto_if_ne _01B4
+	npc_msg msg_0531_T11GYM0101_00008
+	goto _01B7
 
 _01B4:
-	NPCMsg msg_0531_T11GYM0101_00009
+	npc_msg msg_0531_T11GYM0101_00009
 _01B7:
-	WaitButton
-	CloseMsg
-	ReleaseAll
-	End
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
 
 scr_seq_T11GYM0101_003:
-	ScrCmd_609
-	LockAll
-	ScrCmd_600
-	PlaySE SEQ_SE_PL_BOWABOWA
-	ApplyMovement obj_player, _01FC
-	WaitMovement
-	FadeScreen 6, 1, 0, RGB_BLACK
-	WaitFade
-	Warp MAP_SAFFRON_GYM, 0, 15, 23, DIR_SOUTH
-	FadeScreen 6, 1, 1, RGB_BLACK
-	WaitFade
-	ReleaseAll
-	End
+	scrcmd_609
+	lockall
+	scrcmd_600
+	play_se SEQ_SE_PL_BOWABOWA
+	apply_movement obj_player, _01FC
+	wait_movement
+	fade_screen 6, 1, 0, RGB_BLACK
+	wait_fade
+	warp MAP_SAFFRON_GYM, 0, 15, 23, DIR_SOUTH
+	fade_screen 6, 1, 1, RGB_BLACK
+	wait_fade
+	releaseall
+	end
 
 	.balign 4, 0
 _01FC:
-	FaceSouth 2
-	FaceWest 2
-	FaceNorth 2
-	FaceEast 2
-	FaceSouth 2
-	FaceWest 2
-	FaceNorth 2
-	FaceEast 2
-	FaceSouth 2
-	FaceWest 2
-	FaceNorth 2
-	FaceEast 2
-	FaceSouth 2
-	FaceWest 2
-	FaceNorth 2
-	FaceEast
-	SetInvisible 0
-	EndMovement
+	step 1, 2
+	step 2, 2
+	step 0, 2
+	step 3, 2
+	step 1, 2
+	step 2, 2
+	step 0, 2
+	step 3, 2
+	step 1, 2
+	step 2, 2
+	step 0, 2
+	step 3, 2
+	step 1, 2
+	step 2, 2
+	step 0, 2
+	step 3, 1
+	step 69, 0
+	step_end
 	.balign 4, 0

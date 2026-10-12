@@ -38,7 +38,7 @@ _021E5916:
 	mov r0, #3
 	mov r1, #0x27
 	lsl r2, r2, #6
-	bl Heap_Create
+	bl CreateHeap
 	ldr r1, _021E5A74 ; =0x0000940C
 	add r0, r6, #0
 	mov r2, #0x27
@@ -328,19 +328,19 @@ _021E5BC4:
 	mov r0, #0x17
 	lsl r0, r0, #4
 	ldr r0, [r6, r0]
-	bl SpriteTransfer_DeleteCharTransferTask
+	bl sub_0200AEB0
 	mov r0, #6
 	lsl r0, r0, #6
 	ldr r0, [r6, r0]
-	bl SpriteTransfer_DeleteCharTransferTask
+	bl sub_0200AEB0
 	mov r0, #0x5d
 	lsl r0, r0, #2
 	ldr r0, [r6, r0]
-	bl SpriteTransfer_DeletePlttTransferTask
+	bl sub_0200B0A8
 	mov r0, #0x61
 	lsl r0, r0, #2
 	ldr r0, [r6, r0]
-	bl SpriteTransfer_DeletePlttTransferTask
+	bl sub_0200B0A8
 	mov r4, #0
 	add r5, r6, #0
 _021E5BF8:
@@ -412,14 +412,14 @@ _021E5C8E:
 	add r0, r6, #0
 	bl ov37_021E5F20
 	ldr r0, [r6, #8]
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r4, #0
 	bl OverlayManager_FreeData
 	mov r0, #0
 	add r1, r0, #0
 	bl Main_SetVBlankIntrCB
 	mov r0, #0x27
-	bl Heap_Destroy
+	bl DestroyHeap
 	mov r0, #2
 	bl sub_02038C1C
 	mov r0, #1
@@ -687,7 +687,7 @@ _021E5E46:
 	mov r1, #0xf
 	mov r0, #0x27
 	lsl r1, r1, #0xa
-	bl Heap_Alloc
+	bl AllocFromHeap
 	ldr r1, _021E5F18 ; =0x000043C8
 	str r0, [r7, r1]
 	mov r0, #0x27
@@ -716,7 +716,7 @@ ov37_021E5F20: ; 0x021E5F20
 	add r6, r0, #0
 	ldr r0, _021E5F54 ; =0x000043C8
 	ldr r0, [r6, r0]
-	bl Heap_Free
+	bl FreeToHeap
 	ldr r0, _021E5F58 ; =0x000093F0
 	ldr r0, [r6, r0]
 	bl YesNoPrompt_Destroy
@@ -761,7 +761,7 @@ ov37_021E5F5C: ; 0x021E5F5C
 	mov r1, #0
 	bl FreeBgTilemapBuffer
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	pop {r4, pc}
 	.balign 4, 0
 	thumb_func_end ov37_021E5F5C
@@ -1072,19 +1072,19 @@ _021E6104:
 	str r0, [r5, r1]
 	sub r1, #0x1c
 	ldr r0, [r5, r1]
-	bl SpriteTransfer_CreateCharTransferTask
+	bl sub_0200ACF0
 	mov r0, #6
 	lsl r0, r0, #6
 	ldr r0, [r5, r0]
-	bl SpriteTransfer_CreateCharTransferTask
+	bl sub_0200ACF0
 	mov r0, #0x5d
 	lsl r0, r0, #2
 	ldr r0, [r5, r0]
-	bl SpriteTransfer_CreateExtPlttTransferTask
+	bl sub_0200AF94
 	mov r0, #0x61
 	lsl r0, r0, #2
 	ldr r0, [r5, r0]
-	bl SpriteTransfer_CreateExtPlttTransferTask
+	bl sub_0200AF94
 	add sp, #0x14
 	pop {r4, r5, r6, r7, pc}
 	thumb_func_end ov37_021E60C0

@@ -67,7 +67,7 @@ u8 ov101_021F3D34(PokegearPhoneCallContext *ctx) {
     count = 0;
     unlockLevel = Pokegear_GetMapUnlockLevel(SaveData_Pokegear_Get(ctx->saveData));
     sp0[0] = 1;
-    if (Save_VarsFlags_FlypointFlagAction(ctx->saveVarsFlags, FLAG_ACTION_CHECK, FLYPOINT_UNK25)) {
+    if (Save_VarsFlags_FlypointFlagAction(ctx->saveVarsFlags, FLAG_ACTION_CHECK, FLAG_UNK_9C9 - FLAG_SYS_FLYPOINT_PALLET)) {
         sp0[1] = 1; // 2D 2E 48
     } // UB: else, sp0[1] is undefined
     if (unlockLevel != 0) {
@@ -77,7 +77,7 @@ u8 ov101_021F3D34(PokegearPhoneCallContext *ctx) {
         sp0[3] = 1; // 00-17 1A 2F-37 39
     } // UB: else, sp0[3] is undefined
 
-    ptr = Heap_AllocAtEnd(ctx->heapID, 73);
+    ptr = AllocFromHeapAtEnd(ctx->heapId, 73);
     MI_CpuClear8(ptr, 73);
     for (i = 0; i < 73; ++i) {
         if (sp0[ov101_021F8760[i]]) {
@@ -85,7 +85,7 @@ u8 ov101_021F3D34(PokegearPhoneCallContext *ctx) {
         }
     }
     count = ptr[LCRandom() % count];
-    Heap_Free(ptr);
+    FreeToHeap(ptr);
     return count + msg_0662_00086;
 }
 

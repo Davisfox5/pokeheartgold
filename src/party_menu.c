@@ -1,5 +1,7 @@
 #include "party_menu.h"
 
+#include "global.h"
+
 #include "constants/maps.h"
 #include "constants/moves.h"
 
@@ -9,6 +11,7 @@
 
 #include "bag.h"
 #include "battle_regulation.h"
+#include "field_system.h"
 #include "font.h"
 #include "gf_gfx_loader.h"
 #include "menu_input_state.h"
@@ -17,13 +20,12 @@
 #include "party_menu_items.h"
 #include "party_menu_list_items.h"
 #include "party_menu_sprites.h"
-#include "poke_overlay.h"
 #include "render_text.h"
 #include "save_link_ruleset.h"
-#include "screen_fade.h"
 #include "sound_02004A44.h"
 #include "system.h"
 #include "unk_02005D10.h"
+#include "unk_0200FA24.h"
 #include "unk_020210A0.h"
 #include "unk_0203A3B0.h"
 #include "unk_02066EDC.h"
@@ -62,7 +64,7 @@ static void sub_02079700(void);
 static void sub_02079720(BgConfig *bgConfig);
 static void sub_02079758(BgConfig *bgConfig);
 static void sub_020798C4(BgConfig *bgConfig);
-static GF3DVramMan *Create3dVramManForPartyMenu(enum HeapID heapID);
+static GF3DVramMan *Create3dVramManForPartyMenu(HeapID heapId);
 static void Init3dVramManForPartyMenu(void);
 static void Delete3dVramManForPartyMenu(GF3DVramMan *gf3dVramMan);
 static void sub_02079A14(PartyMenu *partyMenu, NARC *narc);
@@ -155,7 +157,7 @@ static const UnkStruct_0207A22C _0210150C[2][6] = {
      }
 };
 
-static const DpadMenuBox _0210140C[8] = {
+static const UnkStruct_02020654 _0210140C[8] = {
     { 0x40, 0x19, 0x00, 0x00, 0x07, 0x02, 0x07, 0x01 },
     { 0xC0, 0x21, 0x00, 0x00, 0x07, 0x03, 0x00, 0x02 },
     { 0x40, 0x49, 0x00, 0x00, 0x00, 0x04, 0x01, 0x03 },
@@ -166,7 +168,7 @@ static const DpadMenuBox _0210140C[8] = {
     { 0xE0, 0xA8, 0x00, 0x00, 0x05, 0x01, 0x05, 0x00 },
 };
 
-static const DpadMenuBox _0210144C[8] = {
+static const UnkStruct_02020654 _0210144C[8] = {
     { 0x40, 0x19, 0x00, 0x00, 0x04, 0x02, 0x01, 0x01 },
     { 0xC0, 0x19, 0x00, 0x00, 0x07, 0x03, 0x00, 0x00 },
     { 0x40, 0x49, 0x00, 0x00, 0x00, 0x04, 0x03, 0x03 },
@@ -177,7 +179,7 @@ static const DpadMenuBox _0210144C[8] = {
     { 0xE0, 0xA8, 0x00, 0x00, 0x05, 0x01, 0xFF, 0xFF },
 };
 
-static const DpadMenuBox _0210148C[8] = {
+static const UnkStruct_02020654 _0210148C[8] = {
     { 0x40, 0x19, 0x00, 0x00, 0x07, 0x02, 0x07, 0x01 },
     { 0xC0, 0x21, 0x00, 0x00, 0x07, 0x03, 0x00, 0x02 },
     { 0x40, 0x49, 0x00, 0x00, 0x00, 0x04, 0x01, 0x03 },
@@ -188,7 +190,7 @@ static const DpadMenuBox _0210148C[8] = {
     { 0xE0, 0xB8, 0x00, 0x00, 0x06, 0x01, 0x06, 0x00 },
 };
 
-static const DpadMenuBox _021014CC[8] = {
+static const UnkStruct_02020654 _021014CC[8] = {
     { 0x40, 0x19, 0x00, 0x00, 0x05, 0x02, 0x05, 0x01 },
     { 0xC0, 0x21, 0x00, 0x00, 0x05, 0x03, 0x00, 0x02 },
     { 0x40, 0x49, 0x00, 0x00, 0x00, 0x04, 0x01, 0x03 },
@@ -232,18 +234,18 @@ static BOOL PartyMenuApp_Init(OverlayManager *manager, int *pState) {
     G2S_BlendNone();
     GX_SetDispSelect(GX_DISP_SELECT_SUB_MAIN);
     SetKeyRepeatTimers(4, 8);
-    Heap_Create(HEAP_ID_3, HEAP_ID_PARTY_MENU, 0x30000);
+    CreateHeap(HEAP_ID_3, HEAP_ID_PARTY_MENU, 0x30000);
 
     narc = NARC_New(NARC_graphic_plist_gra, HEAP_ID_PARTY_MENU);
     partyMenu = sub_02079BD8(manager);
-    BeginNormalPaletteFade(FADE_SUB_THEN_MAIN, FADE_TYPE_DOWNWARD_IN, FADE_TYPE_DOWNWARD_IN, RGB_BLACK, 6, 1, HEAP_ID_PARTY_MENU);
+    BeginNormalPaletteFade(2, 3, 3, RGB_BLACK, 6, 1, HEAP_ID_PARTY_MENU);
     sub_02079CE4(partyMenu);
     sub_02079700();
     sub_02079758(partyMenu->bgConfig);
     sub_02079A14(partyMenu, narc);
     sub_020210BC();
     sub_02021148(4);
-    Sound_SetSceneAndPlayBGM(57, SEQ_NONE, 0);
+    Sound_SetSceneAndPlayBGM(57, 0, 0);
     PartyMenu_SetContextMenuStaticStrings(partyMenu);
     PartyMenu_AddAllWindows(partyMenu);
     sub_0207EB24(partyMenu);
@@ -635,7 +637,7 @@ static BOOL PartyMenuApp_Exit(OverlayManager *manager, int *pState) {
     }
     FontID_Release(4);
     OverlayManager_FreeData(manager);
-    Heap_Destroy(HEAP_ID_PARTY_MENU);
+    DestroyHeap(HEAP_ID_PARTY_MENU);
     sub_0203A964();
     return TRUE;
 }
@@ -878,7 +880,7 @@ static void sub_020798C4(BgConfig *bgConfig) {
     FreeBgTilemapBuffer(bgConfig, GF_BG_LYR_MAIN_2);
     FreeBgTilemapBuffer(bgConfig, GF_BG_LYR_MAIN_1);
     FreeBgTilemapBuffer(bgConfig, GF_BG_LYR_MAIN_0);
-    Heap_FreeExplicit(HEAP_ID_PARTY_MENU, bgConfig);
+    FreeToHeapExplicit(HEAP_ID_PARTY_MENU, bgConfig);
 }
 
 void PartyMenu_Toggle3dEngine(PartyMenu *partyMenu, PartyMenu3dEngineToggle toggle) {
@@ -896,8 +898,8 @@ void PartyMenu_Toggle3dEngine(PartyMenu *partyMenu, PartyMenu3dEngineToggle togg
     }
 }
 
-static GF3DVramMan *Create3dVramManForPartyMenu(enum HeapID heapID) {
-    return GF_3DVramMan_Create(heapID, GF_3D_TEXALLOC_LNK, 1, GF_3D_PLTTALLOC_LNK, 2, Init3dVramManForPartyMenu);
+static GF3DVramMan *Create3dVramManForPartyMenu(HeapID heapId) {
+    return GF_3DVramMan_Create(heapId, GF_3D_TEXALLOC_LNK, 1, GF_3D_PLTTALLOC_LNK, 2, Init3dVramManForPartyMenu);
 }
 
 static void Init3dVramManForPartyMenu(void) {
@@ -922,13 +924,13 @@ static void sub_02079A14(PartyMenu *partyMenu, NARC *narc) {
     void *nclrFile = NARC_AllocAndReadWholeMember(narc, NARC_plist_gra_plist_gra_00000016_NCLR, HEAP_ID_PARTY_MENU);
     NNSG2dPaletteData *plttData;
     NNS_G2dGetUnpackedPaletteData(nclrFile, &plttData);
-    u16 *plttBuf = Heap_Alloc(HEAP_ID_PARTY_MENU, plttData->szByte);
+    u16 *plttBuf = AllocFromHeap(HEAP_ID_PARTY_MENU, plttData->szByte);
     memcpy(plttBuf, plttData->pRawData, plttData->szByte);
     plttBuf[0] = RGB_BLACK;
     BG_LoadPlttData(GF_PAL_LOCATION_MAIN_OBJEXT, plttBuf, plttData->szByte, 0);
-    Heap_Free(plttBuf);
+    FreeToHeap(plttBuf);
     memcpy(partyMenu->hpBarPalettes, (u8 *)plttData->pRawData + 0x60, 0x100);
-    Heap_Free(nclrFile);
+    FreeToHeap(nclrFile);
     LoadFontPal1(GF_PAL_LOCATION_MAIN_BG, (enum GFPalSlotOffset)0x1A0, HEAP_ID_PARTY_MENU);
     LoadFontPal1(GF_PAL_LOCATION_SUB_BG, (enum GFPalSlotOffset)0x40, HEAP_ID_PARTY_MENU);
     LoadUserFrameGfx1(partyMenu->bgConfig, GF_BG_LYR_MAIN_0, 1, 14, 0, HEAP_ID_PARTY_MENU);
@@ -988,13 +990,13 @@ static void sub_02079CE4(PartyMenu *partyMenu) {
 static void sub_02079D38(PartyMenu *partyMenu) {
     u8 r4 = 3;
     if (partyMenu->args->unk_25 == 2) {
-        partyMenu->dpadMenuBox = _0210144C;
+        partyMenu->unk_948 = _0210144C;
     } else if (partyMenu->args->context == PARTY_MENU_CONTEXT_UNION_ROOM_BATTLE_SELECT || partyMenu->args->context == PARTY_MENU_CONTEXT_17 || partyMenu->args->context == PARTY_MENU_CONTEXT_BATTLE_HALL || partyMenu->args->context == PARTY_MENU_CONTEXT_23) {
-        partyMenu->dpadMenuBox = _0210148C;
+        partyMenu->unk_948 = _0210148C;
     } else if (partyMenu->args->context == PARTY_MENU_CONTEXT_SPIN_TRADE) {
-        partyMenu->dpadMenuBox = _021014CC;
+        partyMenu->unk_948 = _021014CC;
     } else {
-        partyMenu->dpadMenuBox = _0210140C;
+        partyMenu->unk_948 = _0210140C;
     }
     if (partyMenu->args->context != PARTY_MENU_CONTEXT_UNION_ROOM_BATTLE_SELECT && partyMenu->args->context != PARTY_MENU_CONTEXT_17 && partyMenu->args->context != PARTY_MENU_CONTEXT_23 && partyMenu->args->context != PARTY_MENU_CONTEXT_BATTLE_HALL) {
         Sprite_SetDrawFlag(partyMenu->sprites[PARTY_MENU_SPRITE_ID_8], FALSE);
@@ -1034,10 +1036,10 @@ BOOL sub_02079E38(PartyMenu *partyMenu, u8 partySlot) {
     PartyMenu_BufferMonNickname(partyMenu, mon, partySlot);
     partyMenu->monsDrawState[partySlot].species = species;
     partyMenu->monsDrawState[partySlot].hp = (u16)GetMonData(mon, MON_DATA_HP, NULL);
-    partyMenu->monsDrawState[partySlot].maxHp = (u16)GetMonData(mon, MON_DATA_MAX_HP, NULL);
+    partyMenu->monsDrawState[partySlot].maxHp = (u16)GetMonData(mon, MON_DATA_MAXHP, NULL);
     partyMenu->monsDrawState[partySlot].level = (u16)GetMonData(mon, MON_DATA_LEVEL, NULL);
     partyMenu->monsDrawState[partySlot].heldItem = (u16)GetMonData(mon, MON_DATA_HELD_ITEM, NULL);
-    partyMenu->monsDrawState[partySlot].capsule = (u16)GetMonData(mon, MON_DATA_BALL_CAPSULE_ID, NULL);
+    partyMenu->monsDrawState[partySlot].capsule = (u16)GetMonData(mon, MON_DATA_CAPSULE, NULL);
     partyMenu->monsDrawState[partySlot].isEgg = (u8)GetMonData(mon, MON_DATA_IS_EGG, NULL);
     partyMenu->monsDrawState[partySlot].form = (u8)GetMonData(mon, MON_DATA_FORM, NULL);
     if (GetMonData(mon, MON_DATA_NO_PRINT_GENDER, NULL) == TRUE) {
@@ -1079,34 +1081,34 @@ static u32 Pokemon_CountRibbonsByCategory(Pokemon *mon, u8 contestStat) {
     u32 result;
     switch (contestStat) {
     case COOL:
-        result = GetMonData(mon, MON_DATA_SUPER_COOL_RIBBON, NULL);
-        result += GetMonData(mon, MON_DATA_SUPER_COOL_RIBBON_GREAT, NULL);
-        result += GetMonData(mon, MON_DATA_SUPER_COOL_RIBBON_ULTRA, NULL);
-        result += GetMonData(mon, MON_DATA_SUPER_COOL_RIBBON_MASTER, NULL);
+        result = GetMonData(mon, MON_DATA_COOL_RIBBON, NULL);
+        result += GetMonData(mon, MON_DATA_COOL_RIBBON_GREAT, NULL);
+        result += GetMonData(mon, MON_DATA_COOL_RIBBON_ULTRA, NULL);
+        result += GetMonData(mon, MON_DATA_COOL_RIBBON_MASTER, NULL);
         break;
     case BEAUTY:
-        result = GetMonData(mon, MON_DATA_SUPER_BEAUTY_RIBBON, NULL);
-        result += GetMonData(mon, MON_DATA_SUPER_BEAUTY_RIBBON_GREAT, NULL);
-        result += GetMonData(mon, MON_DATA_SUPER_BEAUTY_RIBBON_ULTRA, NULL);
-        result += GetMonData(mon, MON_DATA_SUPER_BEAUTY_RIBBON_MASTER, NULL);
+        result = GetMonData(mon, MON_DATA_BEAUTY_RIBBON, NULL);
+        result += GetMonData(mon, MON_DATA_BEAUTY_RIBBON_GREAT, NULL);
+        result += GetMonData(mon, MON_DATA_BEAUTY_RIBBON_ULTRA, NULL);
+        result += GetMonData(mon, MON_DATA_BEAUTY_RIBBON_MASTER, NULL);
         break;
     case CUTE:
-        result = GetMonData(mon, MON_DATA_SUPER_CUTE_RIBBON, NULL);
-        result += GetMonData(mon, MON_DATA_SUPER_CUTE_RIBBON_GREAT, NULL);
-        result += GetMonData(mon, MON_DATA_SUPER_CUTE_RIBBON_ULTRA, NULL);
-        result += GetMonData(mon, MON_DATA_SUPER_CUTE_RIBBON_MASTER, NULL);
+        result = GetMonData(mon, MON_DATA_CUTE_RIBBON, NULL);
+        result += GetMonData(mon, MON_DATA_CUTE_RIBBON_GREAT, NULL);
+        result += GetMonData(mon, MON_DATA_CUTE_RIBBON_ULTRA, NULL);
+        result += GetMonData(mon, MON_DATA_CUTE_RIBBON_MASTER, NULL);
         break;
     case SMART:
-        result = GetMonData(mon, MON_DATA_SUPER_SMART_RIBBON, NULL);
-        result += GetMonData(mon, MON_DATA_SUPER_SMART_RIBBON_GREAT, NULL);
-        result += GetMonData(mon, MON_DATA_SUPER_SMART_RIBBON_ULTRA, NULL);
-        result += GetMonData(mon, MON_DATA_SUPER_SMART_RIBBON_MASTER, NULL);
+        result = GetMonData(mon, MON_DATA_SMART_RIBBON, NULL);
+        result += GetMonData(mon, MON_DATA_SMART_RIBBON_GREAT, NULL);
+        result += GetMonData(mon, MON_DATA_SMART_RIBBON_ULTRA, NULL);
+        result += GetMonData(mon, MON_DATA_SMART_RIBBON_MASTER, NULL);
         break;
     case TOUGH:
-        result = GetMonData(mon, MON_DATA_SUPER_TOUGH_RIBBON, NULL);
-        result += GetMonData(mon, MON_DATA_SUPER_TOUGH_RIBBON_GREAT, NULL);
-        result += GetMonData(mon, MON_DATA_SUPER_TOUGH_RIBBON_ULTRA, NULL);
-        result += GetMonData(mon, MON_DATA_SUPER_TOUGH_RIBBON_MASTER, NULL);
+        result = GetMonData(mon, MON_DATA_TOUGH_RIBBON, NULL);
+        result += GetMonData(mon, MON_DATA_TOUGH_RIBBON_GREAT, NULL);
+        result += GetMonData(mon, MON_DATA_TOUGH_RIBBON_ULTRA, NULL);
+        result += GetMonData(mon, MON_DATA_TOUGH_RIBBON_MASTER, NULL);
         break;
     }
     return result;
@@ -1290,7 +1292,7 @@ static BOOL sub_0207A880(PartyMenu *partyMenu, u8 partySlot) {
 static void sub_0207A89C(PartyMenu *partyMenu) {
     u8 x;
     u8 y;
-    DpadMenuBox_GetNeighborInDirection(partyMenu->dpadMenuBox, &x, &y, NULL, NULL, partyMenu->partyMonIndex, 4);
+    sub_02020A24(partyMenu->unk_948, &x, &y, 0, 0, partyMenu->partyMonIndex, 4);
     Sprite_SetAnimCtrlSeq(partyMenu->sprites[PARTY_MENU_SPRITE_ID_CURSOR], sub_0207B5EC(partyMenu->args->unk_25, partyMenu->partyMonIndex));
     Sprite_SetPositionXY(partyMenu->sprites[PARTY_MENU_SPRITE_ID_CURSOR], x, y);
 }
@@ -1382,7 +1384,7 @@ static BOOL PartyMenu_HandleDpadInput(PartyMenu *partyMenu) {
 static u8 PartyMenu_GetSelectionInDirection(PartyMenu *partyMenu, u8 *px, u8 *py, u8 direction) {
     u8 result = partyMenu->partyMonIndex;
     while (TRUE) {
-        result = DpadMenuBox_GetNeighborInDirection(partyMenu->dpadMenuBox, px, py, NULL, NULL, result, direction);
+        result = sub_02020A24(partyMenu->unk_948, px, py, 0, 0, result, direction);
         if (result == 6 || result == 7 || result == 0xFF) {
             break;
         }
@@ -1400,12 +1402,12 @@ static u8 PartyMenu_GetNewSelectionFromTable(PartyMenu *partyMenu, u8 *px, u8 *p
             break;
         }
         if (PartyMenu_IsMonDrawStateActive(partyMenu, table[i])) {
-            DpadMenuBox_GetNeighborInDirection(partyMenu->dpadMenuBox, px, py, NULL, NULL, table[i], DIR_MAX);
+            sub_02020A24(partyMenu->unk_948, px, py, 0, 0, table[i], DIR_MAX);
             return table[i];
         }
         ++i;
     }
-    DpadMenuBox_GetNeighborInDirection(partyMenu->dpadMenuBox, px, py, NULL, NULL, 0, DIR_MAX);
+    sub_02020A24(partyMenu->unk_948, px, py, 0, 0, 0, DIR_MAX);
     return 0;
 }
 
@@ -1414,7 +1416,7 @@ void sub_0207AB84(PartyMenu *partyMenu, u8 partySlot) {
         Sprite_SetDrawFlag(partyMenu->sprites[PARTY_MENU_SPRITE_ID_CURSOR], FALSE);
     } else {
         u8 x, y;
-        DpadMenuBox_GetNeighborInDirection(partyMenu->dpadMenuBox, &x, &y, NULL, NULL, partyMenu->partyMonIndex, DIR_MAX);
+        sub_02020A24(partyMenu->unk_948, &x, &y, 0, 0, partyMenu->partyMonIndex, DIR_MAX);
         Sprite_SetAnimCtrlSeq(partyMenu->sprites[PARTY_MENU_SPRITE_ID_CURSOR], sub_0207B5EC(partyMenu->args->unk_25, partySlot));
         Sprite_SetDrawFlag(partyMenu->sprites[PARTY_MENU_SPRITE_ID_CURSOR], TRUE);
         Sprite_SetPositionXY(partyMenu->sprites[PARTY_MENU_SPRITE_ID_CURSOR], x, y);
@@ -1520,7 +1522,7 @@ static u8 PartyMenu_HandleInput(PartyMenu *partyMenu) {
                 // UB: hits "return result;" but result was never initialized
                 break;
             }
-            PartyMenu_MoveCursorSpriteTo(partyMenu, selection, partyMenu->dpadMenuBox[selection].left, partyMenu->dpadMenuBox[selection].top);
+            PartyMenu_MoveCursorSpriteTo(partyMenu, selection, partyMenu->unk_948[selection].unk_0, partyMenu->unk_948[selection].unk_1);
             return sub_0207AC70(partyMenu, MENU_INPUT_STATE_TOUCH);
         case PARTY_MON_SELECTION_CANCEL:
             if (partyMenu->cancelDisabled) {
@@ -1532,22 +1534,22 @@ static u8 PartyMenu_HandleInput(PartyMenu *partyMenu) {
             partyMenu->partyMonIndex = PARTY_MON_SELECTION_CONFIRM;
             sub_0207CB3C(partyMenu, MENU_INPUT_STATE_TOUCH);
             G2_BlendNone();
-            PartyMenu_MoveCursorSpriteTo(partyMenu, 7, partyMenu->dpadMenuBox[7].left, partyMenu->dpadMenuBox[7].top);
+            PartyMenu_MoveCursorSpriteTo(partyMenu, 7, partyMenu->unk_948[7].unk_0, partyMenu->unk_948[7].unk_1);
             PartyMenu_StartContextMenuButtonAnim(partyMenu, PARTY_MENU_SPRITE_ID_9, PARTY_MENU_STATE_3, TRUE);
             return 5;
         case PARTY_MON_SELECTION_CONFIRM:
-            PartyMenu_MoveCursorSpriteTo_WithSfx(partyMenu, 6, partyMenu->dpadMenuBox[6].left, partyMenu->dpadMenuBox[6].top);
+            PartyMenu_MoveCursorSpriteTo_WithSfx(partyMenu, 6, partyMenu->unk_948[6].unk_0, partyMenu->unk_948[6].unk_1);
             PartyMenu_StartContextMenuButtonAnim(partyMenu, PARTY_MENU_SPRITE_ID_8, sub_0207AC70(partyMenu, MENU_INPUT_STATE_TOUCH), TRUE);
             return 5;
         }
     } else {
         if (gSystem.newKeys & PAD_BUTTON_A) {
             if (partyMenu->partyMonIndex == PARTY_MON_SELECTION_CONFIRM) {
-                PartyMenu_MoveCursorSpriteTo(partyMenu, partyMenu->partyMonIndex, partyMenu->dpadMenuBox[partyMenu->partyMonIndex].left, partyMenu->dpadMenuBox[partyMenu->partyMonIndex].top);
+                PartyMenu_MoveCursorSpriteTo(partyMenu, partyMenu->partyMonIndex, partyMenu->unk_948[partyMenu->partyMonIndex].unk_0, partyMenu->unk_948[partyMenu->partyMonIndex].unk_1);
                 PartyMenu_StartContextMenuButtonAnim(partyMenu, PARTY_MENU_SPRITE_ID_9, sub_0207AC70(partyMenu, MENU_INPUT_STATE_BUTTONS), FALSE);
                 return 5;
             } else if (partyMenu->partyMonIndex == PARTY_MON_SELECTION_CANCEL) {
-                PartyMenu_MoveCursorSpriteTo_WithSfx(partyMenu, partyMenu->partyMonIndex, partyMenu->dpadMenuBox[partyMenu->partyMonIndex].left, partyMenu->dpadMenuBox[partyMenu->partyMonIndex].top);
+                PartyMenu_MoveCursorSpriteTo_WithSfx(partyMenu, partyMenu->partyMonIndex, partyMenu->unk_948[partyMenu->partyMonIndex].unk_0, partyMenu->unk_948[partyMenu->partyMonIndex].unk_1);
                 PartyMenu_StartContextMenuButtonAnim(partyMenu, PARTY_MENU_SPRITE_ID_8, sub_0207AC70(partyMenu, MENU_INPUT_STATE_BUTTONS), FALSE);
                 return 5;
             } else {
@@ -1561,7 +1563,7 @@ static u8 PartyMenu_HandleInput(PartyMenu *partyMenu) {
             if (partyMenu->partyMonIndex == PARTY_MON_SELECTION_CONFIRM) {
                 PartyMenu_StartContextMenuButtonAnim(partyMenu, PARTY_MENU_SPRITE_ID_9, PARTY_MENU_STATE_3, FALSE);
             } else {
-                PartyMenu_MoveCursorSpriteTo(partyMenu, 7, partyMenu->dpadMenuBox[7].left, partyMenu->dpadMenuBox[7].top);
+                PartyMenu_MoveCursorSpriteTo(partyMenu, 7, partyMenu->unk_948[7].unk_0, partyMenu->unk_948[7].unk_1);
                 PartyMenu_StartContextMenuButtonAnim(partyMenu, PARTY_MENU_SPRITE_ID_9, PARTY_MENU_STATE_3, TRUE);
             }
             return 5;
@@ -1574,7 +1576,7 @@ static u8 PartyMenu_HandleInput(PartyMenu *partyMenu) {
 
 static void sub_0207AFC4(PartyMenu *partyMenu) {
     ClearFrameAndWindow2(&partyMenu->windows[PARTY_MENU_WINDOW_ID_32], TRUE);
-    u8 *buf = Heap_Alloc(HEAP_ID_PARTY_MENU, 8);
+    u8 *buf = AllocFromHeap(HEAP_ID_PARTY_MENU, 8);
     u8 numItems;
     switch (partyMenu->args->context) {
     case PARTY_MENU_CONTEXT_0:
@@ -1604,7 +1606,7 @@ static void sub_0207AFC4(PartyMenu *partyMenu) {
         break;
     }
     PartyMenu_OpenContextMenu(partyMenu, buf, numItems);
-    Heap_FreeExplicit(HEAP_ID_PARTY_MENU, buf);
+    FreeToHeapExplicit(HEAP_ID_PARTY_MENU, buf);
     sub_0207D1C8(partyMenu);
     PartyMenu_PrintMessageOnWindow33(partyMenu, -1, TRUE);
     thunk_Sprite_SetPaletteOverride(partyMenu->sprites[PARTY_MENU_SPRITE_ID_CURSOR], 1);
@@ -1901,7 +1903,7 @@ static u8 sub_0207B600(PartyMenu *partyMenu) {
                 if (oldSelection != partyMenu->partyMonIndex) {
                     sub_0207B51C(partyMenu, oldSelection, FALSE);
                     sub_0207B51C(partyMenu, partyMenu->partyMonIndex, TRUE);
-                    PartyMenu_MoveCursorSpriteTo(partyMenu, selection, partyMenu->dpadMenuBox[selection].left, partyMenu->dpadMenuBox[selection].top);
+                    PartyMenu_MoveCursorSpriteTo(partyMenu, selection, partyMenu->unk_948[selection].unk_0, partyMenu->unk_948[selection].unk_1);
                 }
                 sub_0207FBC8(partyMenu);
                 return 3;
@@ -1915,7 +1917,7 @@ static u8 sub_0207B600(PartyMenu *partyMenu) {
                 if (oldSelection != partyMenu->partyMonIndex) {
                     sub_0207B51C(partyMenu, partyMenu->partyMonIndex, TRUE);
                 }
-                PartyMenu_MoveCursorSpriteTo(partyMenu, selection, partyMenu->dpadMenuBox[selection].left, partyMenu->dpadMenuBox[selection].top);
+                PartyMenu_MoveCursorSpriteTo(partyMenu, selection, partyMenu->unk_948[selection].unk_0, partyMenu->unk_948[selection].unk_1);
                 sub_0207FC1C(partyMenu);
                 return 0;
             }
@@ -2232,7 +2234,7 @@ static int PartyMenu_Subtask_Softboiled(PartyMenu *partyMenu) {
                 if (selection >= Party_GetCount(partyMenu->args->party)) {
                     break;
                 }
-                PartyMenu_MoveCursorSpriteTo(partyMenu, selection, partyMenu->dpadMenuBox[selection].left, partyMenu->dpadMenuBox[selection].top);
+                PartyMenu_MoveCursorSpriteTo(partyMenu, selection, partyMenu->unk_948[selection].unk_0, partyMenu->unk_948[selection].unk_1);
                 return PartyMenu_SoftboiledTryTargetCheck(partyMenu);
             case PARTY_MON_SELECTION_CANCEL:
                 PlaySE(SEQ_SE_GS_GEARCANCEL);
@@ -2348,7 +2350,7 @@ static u8 PartyMenu_GiveOrUseItemOnMon_HandleInput(PartyMenu *partyMenu) {
         case PARTY_MON_SELECTION_5:
         case PARTY_MON_SELECTION_6:
             if (selection < Party_GetCount(partyMenu->args->party)) {
-                PartyMenu_MoveCursorSpriteTo(partyMenu, selection, partyMenu->dpadMenuBox[selection].left, partyMenu->dpadMenuBox[selection].top);
+                PartyMenu_MoveCursorSpriteTo(partyMenu, selection, partyMenu->unk_948[selection].unk_0, partyMenu->unk_948[selection].unk_1);
                 partyMenu->partyMonIndex = selection;
                 if (!partyMenu->monsDrawState[partyMenu->partyMonIndex].isEgg) {
                     PlaySE(SEQ_SE_DP_SELECT);
@@ -2362,7 +2364,7 @@ static u8 PartyMenu_GiveOrUseItemOnMon_HandleInput(PartyMenu *partyMenu) {
         case PARTY_MON_SELECTION_CANCEL:
             if (!partyMenu->cancelDisabled) {
                 PlaySE(SEQ_SE_GS_GEARCANCEL);
-                PartyMenu_MoveCursorSpriteTo(partyMenu, 7, partyMenu->dpadMenuBox[7].left, partyMenu->dpadMenuBox[7].top);
+                PartyMenu_MoveCursorSpriteTo(partyMenu, 7, partyMenu->unk_948[7].unk_0, partyMenu->unk_948[7].unk_1);
                 PartyMenu_StartContextMenuButtonAnim(partyMenu, PARTY_MENU_SPRITE_ID_9, PARTY_MENU_STATE_3, TRUE);
                 return 5;
             }
@@ -2390,7 +2392,7 @@ static u8 PartyMenu_GiveOrUseItemOnMon_HandleInput(PartyMenu *partyMenu) {
             if (partyMenu->partyMonIndex == PARTY_MON_SELECTION_CONFIRM) {
                 PartyMenu_StartContextMenuButtonAnim(partyMenu, PARTY_MENU_SPRITE_ID_9, PARTY_MENU_STATE_3, FALSE);
             } else {
-                PartyMenu_MoveCursorSpriteTo(partyMenu, 7, partyMenu->dpadMenuBox[7].left, partyMenu->dpadMenuBox[7].top);
+                PartyMenu_MoveCursorSpriteTo(partyMenu, 7, partyMenu->unk_948[7].unk_0, partyMenu->unk_948[7].unk_1);
                 PartyMenu_StartContextMenuButtonAnim(partyMenu, PARTY_MENU_SPRITE_ID_9, PARTY_MENU_STATE_3, TRUE);
             }
             return 5;
@@ -2407,18 +2409,18 @@ static int PartyMenu_HandleUseItemOnMon(PartyMenu *partyMenu) {
 
     if (partyMenu->args->itemId == ITEM_GRACIDEA && Mon_CanUseGracidea(Party_GetMonByIndex(partyMenu->args->party, partyMenu->partyMonIndex)) == TRUE) {
         partyMenu->args->species = SHAYMIN_SKY; // SPECIES_BULBASAUR
-        Heap_Free(itemData);
+        FreeToHeap(itemData);
         PartyMenu_FormChangeScene_Begin(partyMenu);
         return PARTY_MENU_STATE_FORM_CHANGE_ANIM;
     }
 
     if (GetItemAttr_PreloadedItemData(itemData, ITEMATTR_PP_UP) || GetItemAttr_PreloadedItemData(itemData, ITEMATTR_PP_MAX)) {
-        Heap_Free(itemData);
+        FreeToHeap(itemData);
         PartyMenu_SelectMoveForPpRestoreOrPpUp(partyMenu, 0);
         return PARTY_MENU_STATE_SELECT_MOVE;
     }
     if (GetItemAttr_PreloadedItemData(itemData, ITEMATTR_PP_RESTORE) && !GetItemAttr_PreloadedItemData(itemData, ITEMATTR_PP_RESTORE_ALL)) {
-        Heap_Free(itemData);
+        FreeToHeap(itemData);
         PartyMenu_SelectMoveForPpRestoreOrPpUp(partyMenu, 1);
         return PARTY_MENU_STATE_SELECT_MOVE;
     }
@@ -2429,7 +2431,7 @@ static int PartyMenu_HandleUseItemOnMon(PartyMenu *partyMenu) {
             Pokemon *mon = Party_GetMonByIndex(partyMenu->args->party, partyMenu->partyMonIndex);
             partyMenu->args->species = GetMonEvolution(NULL, mon, EVOCTX_ITEM_USE, partyMenu->args->itemId, &partyMenu->args->evoMethod);
             partyMenu->args->selectedAction = PARTY_MENU_ACTION_RETURN_EVO_ITEM_USE;
-            Heap_Free(itemData);
+            FreeToHeap(itemData);
             return PARTY_MENU_STATE_BEGIN_EXIT;
         } else {
             PartyMenu_SetItemUseFuncFromBagSelection(partyMenu);
@@ -2439,7 +2441,7 @@ static int PartyMenu_HandleUseItemOnMon(PartyMenu *partyMenu) {
         partyMenu->partyMonIndex = PARTY_MON_SELECTION_CONFIRM;
         partyMenu->itemUseCallback = PartyMenu_ItemUseFunc_WaitTextPrinterThenExit;
     }
-    Heap_Free(itemData);
+    FreeToHeap(itemData);
     return PARTY_MENU_STATE_ITEM_USE_CB;
 }
 
@@ -2609,9 +2611,6 @@ static int PartyMenu_Subtask_SwitchItemsHandleYesNoInput(PartyMenu *partyMenu) {
         YesNoPrompt_Destroy(partyMenu->yesNoPrompt);
         PartyMenu_DisableMainScreenBlend_AfterYesNo();
         return PartyMenu_SwitchItemsDeclined(partyMenu);
-
-    default:
-        break;
     }
 
     return PARTY_MENU_STATE_YESNO_ASK_SWITCH_ITEMS;
@@ -2690,13 +2689,13 @@ u32 sub_0207CAA8(void) {
     return NARC_plist_gra_plist_gra_00000018_NANR;
 }
 
-void sub_0207CAAC(enum HeapID heapID, u16 *a1, u16 *a2, u16 *a3) {
+void sub_0207CAAC(HeapID heapId, u16 *a1, u16 *a2, u16 *a3) {
     void *pNscrFile;
     NNSG2dScreenData *screenData;
     const u16 *src;
     u32 i;
 
-    pNscrFile = AllocAndReadWholeNarcMemberByIdPair(NARC_graphic_plist_gra, NARC_plist_gra_plist_gra_00000022_NSCR, heapID);
+    pNscrFile = AllocAndReadWholeNarcMemberByIdPair(NARC_graphic_plist_gra, NARC_plist_gra_plist_gra_00000022_NSCR, heapId);
     NNS_G2dGetUnpackedScreenData(pNscrFile, &screenData);
     src = (const u16 *)screenData->rawData;
 
@@ -2705,7 +2704,7 @@ void sub_0207CAAC(enum HeapID heapID, u16 *a1, u16 *a2, u16 *a3) {
         memcpy(&a2[i * 16], &src[(i + 6) * 32], 32);
         memcpy(&a3[i * 16], &src[(i + 12) * 32], 32);
     }
-    Heap_Free(pNscrFile);
+    FreeToHeap(pNscrFile);
 }
 
 void PartyMenu_DeleteContextMenuAndList(PartyMenu *partyMenu) {

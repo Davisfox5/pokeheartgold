@@ -8,7 +8,7 @@
 ov120_0225F020: ; 0x0225F020
 	push {r4, lr}
 	mov r1, #0x34
-	bl Heap_Alloc
+	bl AllocFromHeap
 	mov r1, #0
 	mov r2, #0x34
 	add r4, r0, #0
@@ -20,10 +20,10 @@ ov120_0225F020: ; 0x0225F020
 
 	thumb_func_start ov120_0225F038
 ov120_0225F038: ; 0x0225F038
-	ldr r3, _0225F03C ; =Heap_Free
+	ldr r3, _0225F03C ; =FreeToHeap
 	bx r3
 	.balign 4, 0
-_0225F03C: .word Heap_Free
+_0225F03C: .word FreeToHeap
 	thumb_func_end ov120_0225F038
 
 	thumb_func_start ov120_0225F040
@@ -129,7 +129,7 @@ ov120_0225F0FC: ; 0x0225F0FC
 	push {r4, lr}
 	mov r1, #0x45
 	lsl r1, r1, #2
-	bl Heap_Alloc
+	bl AllocFromHeap
 	mov r2, #0x45
 	mov r1, #0
 	lsl r2, r2, #2
@@ -142,10 +142,10 @@ ov120_0225F0FC: ; 0x0225F0FC
 
 	thumb_func_start ov120_0225F118
 ov120_0225F118: ; 0x0225F118
-	ldr r3, _0225F11C ; =Heap_Free
+	ldr r3, _0225F11C ; =FreeToHeap
 	bx r3
 	.balign 4, 0
-_0225F11C: .word Heap_Free
+_0225F11C: .word FreeToHeap
 	thumb_func_end ov120_0225F118
 
 	thumb_func_start ov120_0225F120
@@ -335,7 +335,7 @@ ov120_0225F268: ; 0x0225F268
 	push {r3, r4, r5, r6, r7, lr}
 	mov r1, #0xcc
 	add r6, r0, #0
-	bl Heap_Alloc
+	bl AllocFromHeap
 	mov r1, #0
 	mov r2, #0xcc
 	add r7, r0, #0
@@ -371,7 +371,7 @@ _0225F2A2:
 	cmp r4, #0x30
 	blt _0225F2A2
 	add r0, r6, #0
-	bl Heap_Free
+	bl FreeToHeap
 	pop {r4, r5, r6, pc}
 	thumb_func_end ov120_0225F294
 
@@ -999,7 +999,7 @@ _0225F73E:
 	mov r1, #0x67
 	mov r0, #4
 	lsl r1, r1, #2
-	bl Heap_Alloc
+	bl AllocFromHeap
 	mov r2, #0x67
 	str r0, [r5, #0xc]
 	mov r1, #0
@@ -1228,7 +1228,7 @@ ov120_0225F90C: ; 0x0225F90C
 	b _0225F964
 _0225F922:
 	ldr r0, [r0, #8]
-	bl HBlankSystem_Stop
+	bl ov01_021FB514
 	mov r0, #0x1c
 	str r0, [sp]
 	mov r0, #1
@@ -1252,7 +1252,7 @@ _0225F946:
 	b _0225F968
 _0225F954:
 	ldr r0, [r0, #8]
-	bl HBlankSystem_Start
+	bl ov01_021FB4F4
 	mov r0, #0
 	str r0, [r4]
 	add sp, #0xc
@@ -1282,7 +1282,7 @@ ov120_0225F970: ; 0x0225F970
 	b _0225F9C8
 _0225F986:
 	ldr r0, [r0, #8]
-	bl HBlankSystem_Stop
+	bl ov01_021FB514
 	mov r0, #0x1c
 	str r0, [sp]
 	mov r0, #1
@@ -1306,7 +1306,7 @@ _0225F9AA:
 	b _0225F9CC
 _0225F9B8:
 	ldr r0, [r0, #8]
-	bl HBlankSystem_Start
+	bl ov01_021FB4F4
 	mov r0, #0
 	str r0, [r4]
 	add sp, #0xc
@@ -1430,7 +1430,7 @@ _0225FA92: ; jump table
 _0225FA9E:
 	mov r0, #4
 	mov r1, #8
-	bl Heap_Alloc
+	bl AllocFromHeap
 	str r0, [r4, #0xc]
 	mov r1, #0
 	strb r1, [r0]
@@ -1603,7 +1603,7 @@ _0225FBE2: ; jump table
 _0225FBEE:
 	mov r0, #4
 	mov r1, #8
-	bl Heap_Alloc
+	bl AllocFromHeap
 	str r0, [r4, #0xc]
 	mov r1, #0
 	strb r1, [r0]
@@ -1809,7 +1809,7 @@ ov120_0225FD2C: ; 0x0225FD2C
 	str r2, [sp, #8]
 	bl BgTilemapRectChangePalette
 	add r0, r6, #0
-	bl Heap_Free
+	bl FreeToHeap
 	lsl r1, r4, #0x18
 	add r0, r5, #0
 	lsr r1, r1, #0x18
@@ -1953,9 +1953,9 @@ _0225FE78:
 	pop {r4, r5, r6, pc}
 _0225FEA4:
 	ldr r0, [r5, #4]
-	bl Heap_Free
+	bl FreeToHeap
 	ldr r0, [r5, #8]
-	bl Heap_Free
+	bl FreeToHeap
 	mov r0, #0
 	str r0, [r5, #0x14]
 	add r0, r6, #0
@@ -2034,7 +2034,7 @@ _0225FF1E: ; jump table
 _0225FF2E:
 	mov r0, #4
 	mov r1, #0x70
-	bl Heap_Alloc
+	bl AllocFromHeap
 	mov r1, #0
 	mov r2, #0x70
 	str r0, [r4, #0xc]

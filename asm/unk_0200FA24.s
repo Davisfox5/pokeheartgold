@@ -282,15 +282,15 @@ _0200FBD4: .word _021D1034
 _0200FBD8: .word _021D0EF4
 	thumb_func_end sub_0200FB70
 
-	thumb_func_start ResetVisibleHardwareWindows
-ResetVisibleHardwareWindows: ; 0x0200FBDC
+	thumb_func_start sub_0200FBDC
+sub_0200FBDC: ; 0x0200FBDC
 	ldr r3, _0200FBE4 ; =sub_020131F4
 	add r1, r0, #0
 	mov r0, #0
 	bx r3
 	.balign 4, 0
 _0200FBE4: .word sub_020131F4
-	thumb_func_end ResetVisibleHardwareWindows
+	thumb_func_end sub_0200FBDC
 
 	thumb_func_start SetMasterBrightnessNeutral
 SetMasterBrightnessNeutral: ; 0x0200FBE8
@@ -822,7 +822,7 @@ sub_0200FF88: ; 0x0200FF88
 	mov r1, #0x10
 	add r6, r2, #0
 	add r7, r3, #0
-	bl Heap_AllocAtEnd
+	bl AllocFromHeapAtEnd
 	add r1, r0, #0
 	str r5, [r1]
 	str r4, [r1, #4]
@@ -844,7 +844,7 @@ sub_0200FFB4: ; 0x0200FFB4
 	add r4, r1, #0
 	add r0, r2, #0
 	mov r1, #8
-	bl Heap_AllocAtEnd
+	bl AllocFromHeapAtEnd
 	add r1, r0, #0
 	mov r2, #1
 	str r5, [r1]
@@ -870,7 +870,7 @@ sub_0200FFD8: ; 0x0200FFD8
 	add r0, r5, #0
 	bl SysTask_Destroy
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	pop {r3, r4, r5, pc}
 	thumb_func_end sub_0200FFD8
 
@@ -885,7 +885,7 @@ sub_0200FFF8: ; 0x0200FFF8
 	add r0, r5, #0
 	bl SysTask_Destroy
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	pop {r3, r4, r5, pc}
 	thumb_func_end sub_0200FFF8
 
@@ -995,7 +995,7 @@ _020100AA:
 	ldr r0, [r4, #0x10]
 	bl sub_0200FBF4
 	ldr r0, [r4, #0x10]
-	bl ResetVisibleHardwareWindows
+	bl sub_0200FBDC
 _020100BC:
 	pop {r4, pc}
 	nop

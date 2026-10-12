@@ -4,10 +4,10 @@
 .public SysTask_CreateOnVBlankQueue
 .public SysTask_CreateOnVWaitQueue
 .public SysTask_Destroy
-.public Heap_Alloc
-.public Heap_AllocAtEnd
-.public Heap_Free
-.public Heap_FreeExplicit
+.public AllocFromHeap
+.public AllocFromHeapAtEnd
+.public FreeToHeap
+.public FreeToHeapExplicit
 .public sub_020237EC
 .public sub_02023874
 .public sub_020238F8
@@ -41,8 +41,8 @@
 .public GF3dGfxRawResObj_GetTex4x4Key
 .public GF3dGfxRawResObj_GetPlttKey
 .public sub_02026E18
-.public MetatileBehavior_IsPuddle
-.public MetatileBehavior_IsReflective
+.public sub_0205B984
+.public sub_0205BA70
 .public sub_0205E38C
 .public sub_0205E420
 .public MapObjectManager_GetNextObjectWithFlagFromIndex

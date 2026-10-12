@@ -15,7 +15,7 @@ ov88_02258800: ; 0x02258800
 	mov r0, #3
 	mov r1, #0x72
 	lsl r2, r2, #0x10
-	bl Heap_Create
+	bl CreateHeap
 	mov r1, #0x27
 	add r0, r4, #0
 	lsl r1, r1, #4
@@ -287,7 +287,7 @@ ov88_022589FC: ; 0x022589FC
 	add r0, r5, #0
 	bl OverlayManager_FreeData
 	mov r0, #0x72
-	bl Heap_Destroy
+	bl DestroyHeap
 	mov r0, #1
 	pop {r3, r4, r5, pc}
 	.balign 4, 0
@@ -556,7 +556,7 @@ _02258C68:
 	cmp r4, #5
 	blt _02258C68
 	ldr r0, [r6]
-	bl Heap_Free
+	bl FreeToHeap
 	ldr r0, _02258C94 ; =gSystem + 0x60
 	mov r1, #0
 	strb r1, [r0, #9]
@@ -680,11 +680,11 @@ ov88_02258D64: ; 0x02258D64
 
 	thumb_func_start ov88_02258D84
 ov88_02258D84: ; 0x02258D84
-	ldr r3, _02258D8C ; =Heap_Free
+	ldr r3, _02258D8C ; =FreeToHeap
 	ldr r0, [r0]
 	bx r3
 	nop
-_02258D8C: .word Heap_Free
+_02258D8C: .word FreeToHeap
 	thumb_func_end ov88_02258D84
 
 	thumb_func_start ov88_02258D90
@@ -1557,7 +1557,7 @@ ov88_022593D0: ; 0x022593D0
 	add r5, r0, #0
 	add r0, #0x94
 	ldr r0, [r0]
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r5, #0
 	add r0, #0x90
 	ldr r0, [r0]

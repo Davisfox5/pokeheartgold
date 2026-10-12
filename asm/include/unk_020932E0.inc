@@ -20,10 +20,10 @@
 .public AddCharResObjFromNarc
 .public AddPlttResObjFromNarc
 .public AddCellOrAnimResObjFromNarc
-.public SpriteTransfer_CreateCharTransferTask_AllocAtEnd
-.public SpriteTransfer_DeleteCharTransferTask
-.public SpriteTransfer_CreateExtPlttTransferTask
-.public SpriteTransfer_DeletePlttTransferTask
+.public sub_0200ADA4
+.public sub_0200AEB0
+.public sub_0200AF94
+.public sub_0200B0A8
 .public OamManager_ApplyAndResetBuffers
 .public NewMsgDataFromNarc
 .public DestroyMsgData
@@ -34,9 +34,9 @@
 .public YesNoPrompt_InitFromTemplate
 .public YesNoPrompt_HandleInput
 .public YesNoPrompt_Reset
-.public Heap_Alloc
-.public Heap_AllocAtEnd
-.public Heap_Free
+.public AllocFromHeap
+.public AllocFromHeapAtEnd
+.public FreeToHeap
 .public InitBgFromTemplate
 .public FreeBgTilemapBuffer
 .public BgCommitTilemapBufferToVram

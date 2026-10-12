@@ -2,7 +2,7 @@
 
 #include "math_util.h"
 
-void Task_AntipiracyMath(SysTask *task_unused, void *data_unused) { // Intentionally lags the game.
+fx32 sub_02096594(void) {
     u16 vcount = GX_GetVCount();
-    GF_SinDegNoWrap(vcount);
+    return GF_SinDegNoWrap(vcount);
 }

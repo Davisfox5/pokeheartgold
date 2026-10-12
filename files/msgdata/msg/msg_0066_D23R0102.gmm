@@ -18,7 +18,7 @@
 	</row>
 	<row id="msg_0066_D23R0102_00004" index="4">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">Sorry. Authorized personnel only\nbeyond this point.\rIt wasn’t that way before. There’s\nsomething wrong with the Director...</language>
+		<language name="English">Broadcast floors above.\nAuthorized staff only--\fthe live studios are up there.</language>
 	</row>
 	<row id="msg_0066_D23R0102_00005" index="5">
 		<attribute name="window_context_name">used</attribute>

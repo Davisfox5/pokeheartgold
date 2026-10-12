@@ -1,0 +1,85 @@
+{
+  "header": "fielddata/script/scr_seq/event_EVERYWHERE.h",
+  "bgs": [
+    {
+      "scriptId": 40,
+      "type": 1,
+      "x": 285,
+      "z": 520,
+      "y": 0,
+      "dir": 0
+    }
+  ],
+  "objects": [
+    {
+      "id": 0,
+      "spriteId": "SPRITE_FISHING",
+      "movement": 0,
+      "type": 0,
+      "eventFlag": 0,
+      "scriptId": 3,
+      "facingDirection": 3,
+      "param0": 0,
+      "param1": 0,
+      "param2": 0,
+      "xRange": 0,
+      "yRange": 0,
+      "x": 274,
+      "z": 531,
+      "y": 0
+    },
+    {
+      "id": 1,
+      "spriteId": "SPRITE_FISHING",
+      "movement": 0,
+      "type": 0,
+      "eventFlag": 0,
+      "scriptId": 10,
+      "facingDirection": 1,
+      "param0": 0,
+      "param1": 0,
+      "param2": 0,
+      "xRange": 0,
+      "yRange": 0,
+      "x": 270,
+      "z": 532,
+      "y": 0
+    },
+    {
+      "id": 2,
+      "spriteId": "SPRITE_FISHING",
+      "movement": 0,
+      "type": 0,
+      "eventFlag": 0,
+      "scriptId": 10,
+      "facingDirection": 1,
+      "param0": 0,
+      "param1": 0,
+      "param2": 0,
+      "xRange": 0,
+      "yRange": 0,
+      "x": 277,
+      "z": 535,
+      "y": 0
+    },
+    {
+      "id": 3,
+      "spriteId": "SPRITE_FISHING",
+      "movement": 0,
+      "type": 0,
+      "eventFlag": 0,
+      "scriptId": 3,
+      "facingDirection": 1,
+      "param0": 0,
+      "param1": 0,
+      "param2": 0,
+      "xRange": 0,
+      "yRange": 0,
+      "x": 267,
+      "z": 532,
+      "y": 0
+    }
+  ],
+  "warps": [],
+  "coords": []
+}

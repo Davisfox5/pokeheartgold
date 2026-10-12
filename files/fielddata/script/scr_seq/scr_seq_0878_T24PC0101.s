@@ -5,101 +5,101 @@
 
 	.rodata
 
-	ScrDef scr_seq_T24PC0101_000
-	ScrDef scr_seq_T24PC0101_001
-	ScrDef scr_seq_T24PC0101_002
-	ScrDef scr_seq_T24PC0101_003
-	ScrDefEnd
+	scrdef scr_seq_T24PC0101_000
+	scrdef scr_seq_T24PC0101_001
+	scrdef scr_seq_T24PC0101_002
+	scrdef scr_seq_T24PC0101_003
+	scrdef_end
 
 scr_seq_T24PC0101_000:
-	SetVar VAR_SPECIAL_x8007, 3
-	CallStd std_nurse_joy
-	End
+	setvar VAR_SPECIAL_x8007, 3
+	callstd std_nurse_joy
+	end
 
 scr_seq_T24PC0101_001:
-	SimpleNPCMsg msg_0575_T24PC0101_00000
-	End
+	simple_npc_msg msg_0575_T24PC0101_00000
+	end
 
 scr_seq_T24PC0101_002:
-	PlaySE SEQ_SE_DP_SELECT
-	LockAll
-	FacePlayer
-	CountPCEmptySpace VAR_SPECIAL_RESULT
-	Compare VAR_SPECIAL_RESULT, 540
-	GoToIfNe _0056
-	GoTo _005C
+	play_se SEQ_SE_DP_SELECT
+	lockall
+	faceplayer
+	count_pc_empty_space VAR_SPECIAL_RESULT
+	compare VAR_SPECIAL_RESULT, 540
+	goto_if_ne _0056
+	goto _005C
 
 _0050:
-	GoTo _005C
+	goto _005C
 
 _0056:
-	GoTo _00E4
+	goto _00E4
 
 _005C:
-	GetPartyCount VAR_SPECIAL_RESULT
-	Compare VAR_SPECIAL_RESULT, 1
-	GoToIfNe _0079
-	GoTo _007F
+	get_party_count VAR_SPECIAL_RESULT
+	compare VAR_SPECIAL_RESULT, 1
+	goto_if_ne _0079
+	goto _007F
 
 _0073:
-	GoTo _007F
+	goto _007F
 
 _0079:
-	GoTo _00E4
+	goto _00E4
 
 _007F:
-	NPCMsg msg_0575_T24PC0101_00004
-	BufferPlayersName 0
-	NPCMsg msg_0575_T24PC0101_00005
-	PlayFanfare SEQ_ME_POKEGET
-	WaitFanfare
-	GiveMon SPECIES_TENTACOOL, 15, 0, 0, 0, VAR_SPECIAL_RESULT
-	NPCMsg msg_0575_T24PC0101_00006
-	TouchscreenMenuHide
-	GetMenuChoice VAR_SPECIAL_RESULT
-	Compare VAR_SPECIAL_RESULT, 1
-	GoToIfNe _00BC
-	TouchscreenMenuShow
-	CloseMsg
-	GoTo _00E0
+	npc_msg msg_0575_T24PC0101_00004
+	buffer_players_name 0
+	npc_msg msg_0575_T24PC0101_00005
+	play_fanfare SEQ_ME_POKEGET
+	wait_fanfare
+	give_mon SPECIES_TENTACOOL, 15, 0, 0, 0, VAR_SPECIAL_RESULT
+	npc_msg msg_0575_T24PC0101_00006
+	touchscreen_menu_hide
+	getmenuchoice VAR_SPECIAL_RESULT
+	compare VAR_SPECIAL_RESULT, 1
+	goto_if_ne _00BC
+	touchscreen_menu_show
+	closemsg
+	goto _00E0
 
 _00BC:
-	CloseMsg
-	ScrCmd_815 0
-	FadeScreen 6, 1, 0, RGB_BLACK
-	WaitFade
-	NicknameInput 1, VAR_SPECIAL_RESULT
-	FadeScreen 6, 1, 1, RGB_BLACK
-	WaitFade
+	closemsg
+	scrcmd_815 0
+	fade_screen 6, 1, 0, RGB_BLACK
+	wait_fade
+	nickname_input 1, VAR_SPECIAL_RESULT
+	fade_screen 6, 1, 1, RGB_BLACK
+	wait_fade
 _00E0:
-	ReleaseAll
-	End
+	releaseall
+	end
 
 _00E4:
-	NPCMsg msg_0575_T24PC0101_00001
-	WaitButton
-	CloseMsg
-	ReleaseAll
-	End
+	npc_msg msg_0575_T24PC0101_00001
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
 
 scr_seq_T24PC0101_003:
-	PlaySE SEQ_SE_DP_SELECT
-	LockAll
-	FacePlayer
-	CheckBadge BADGE_STORM, VAR_SPECIAL_RESULT
-	Compare VAR_SPECIAL_RESULT, 1
-	GoToIfEq _0115
-	NPCMsg msg_0575_T24PC0101_00002
-	WaitButton
-	CloseMsg
-	ReleaseAll
-	End
+	play_se SEQ_SE_DP_SELECT
+	lockall
+	faceplayer
+	check_badge BADGE_STORM, VAR_SPECIAL_RESULT
+	compare VAR_SPECIAL_RESULT, 1
+	goto_if_eq _0115
+	npc_msg msg_0575_T24PC0101_00002
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
 
 _0115:
-	BufferPlayersName 0
-	NPCMsg msg_0575_T24PC0101_00003
-	WaitButton
-	CloseMsg
-	ReleaseAll
-	End
+	buffer_players_name 0
+	npc_msg msg_0575_T24PC0101_00003
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
 	.balign 4, 0

@@ -900,11 +900,11 @@ void PartyMenu_LevelUpPrintStatsChange(PartyMenu *partyMenu) {
     Pokemon *mon;
 
     mon = Party_GetMonByIndex(partyMenu->args->party, partyMenu->partyMonIndex);
-    stats[0] = GetMonData(mon, MON_DATA_MAX_HP, NULL);
+    stats[0] = GetMonData(mon, MON_DATA_MAXHP, NULL);
     stats[1] = GetMonData(mon, MON_DATA_ATK, NULL);
     stats[2] = GetMonData(mon, MON_DATA_DEF, NULL);
-    stats[3] = GetMonData(mon, MON_DATA_SP_ATK, NULL);
-    stats[4] = GetMonData(mon, MON_DATA_SP_DEF, NULL);
+    stats[3] = GetMonData(mon, MON_DATA_SPATK, NULL);
+    stats[4] = GetMonData(mon, MON_DATA_SPDEF, NULL);
     stats[5] = GetMonData(mon, MON_DATA_SPEED, NULL);
     AddWindowParameterized(partyMenu->bgConfig, &partyMenu->levelUpStatsWindow[0], GF_BG_LYR_MAIN_0, 1, 1, 14, 12, 0, 0x260);
     DrawFrameAndWindow1(&partyMenu->levelUpStatsWindow[0], TRUE, 1, 14);
@@ -1089,8 +1089,8 @@ void sub_0207E54C(PartyMenu *partyMenu, int numItems, int selection, int state) 
     }
 }
 
-PartyMenuContextMenuCursor *PartyMenu_CreateContextMenuCursor(PartyMenu *partyMenu, const PartyMenuContextMenu *template, int selection, enum HeapID heapID, int state) {
-    PartyMenuContextMenuCursor *ret = Heap_Alloc(heapID, sizeof(PartyMenuContextMenuCursor));
+PartyMenuContextMenuCursor *PartyMenu_CreateContextMenuCursor(PartyMenu *partyMenu, const PartyMenuContextMenu *template, int selection, HeapID heapId, int state) {
+    PartyMenuContextMenuCursor *ret = AllocFromHeap(heapId, sizeof(PartyMenuContextMenuCursor));
     ret->menu = *template;
     ret->numItems = ret->menu.numItems;
     ret->prevSelection = selection;
@@ -1108,7 +1108,7 @@ PartyMenuContextMenuCursor *PartyMenu_CreateContextMenuCursor(PartyMenu *partyMe
 
 void PartyMenu_CloseContextMenu(PartyMenu *partyMenu, PartyMenuContextMenuCursor *cursor) {
     PartyMenu_HideContextMenu(partyMenu, cursor->numItems, cursor->state);
-    Heap_Free(cursor);
+    FreeToHeap(cursor);
     if (partyMenu->args->context == PARTY_MENU_CONTEXT_4 || partyMenu->args->context == PARTY_MENU_CONTEXT_SPIN_TRADE) {
         Sprite_SetDrawFlag(partyMenu->sprites[PARTY_MENU_SPRITE_ID_9], FALSE);
     } else {

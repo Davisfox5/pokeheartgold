@@ -45,8 +45,8 @@
 .public DestroyListMenuCursorObj
 .public ListMenuCursorSetColor
 .public ListMenuUpdateCursorObj
-.public Heap_Alloc
-.public Heap_Free
+.public AllocFromHeap
+.public FreeToHeap
 .public CopyWindowPixelsToVram_TextMode
 .public AddTextPrinterParameterizedWithColor
 .public Camera_New

@@ -8,4 +8,8 @@
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">I take my guard job seriously.\nHey! You have a Pokédex.\fOK. You can go through.</language>
 	</row>
+	<row id="msg_0337_R07R0101_00002" index="2">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Hold on--the routes out of Saffron\nare closed while the League runs\fsafety inspections.\rCity’s open; the roads aren’t.\nSorry!</language>
+	</row>
 </body>

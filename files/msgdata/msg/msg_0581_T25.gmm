@@ -2,7 +2,7 @@
 <body language="English">
 	<row id="msg_0581_T25_00000" index="0">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">They built the new Radio Tower to\nreplace the old, creaky one.</language>
+		<language name="English">Did you SEE her? The radio lady?\nShe’s doing a LIVE one today.\rMy mom says she’s gonna get\nherself in trouble one day and my\fdad says good, somebody should.\rI think she’s the coolest person\nalive.</language>
 	</row>
 	<row id="msg_0581_T25_00001" index="1">
 		<attribute name="window_context_name">used</attribute>
@@ -10,7 +10,7 @@
 	</row>
 	<row id="msg_0581_T25_00002" index="2">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">I know there’s a new Bike Shop,\nbut I can’t find it anywhere.</language>
+		<language name="English">I’ve watched this city my whole\nlife, dear. It used to end at the\friver. Now it doesn’t end at all.\rTrains, the radio, that great\nglass trading hall--the whole\fworld pours through here now.\rI don’t mind it. Loud is just\nquiet with people in it.</language>
 	</row>
 	<row id="msg_0581_T25_00003" index="3">
 		<attribute name="window_context_name">used</attribute>
@@ -18,7 +18,7 @@
 	</row>
 	<row id="msg_0581_T25_00004" index="4">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">Is that man in black dressed up\nlike a Team Rocket member?\fHow silly!</language>
+		<language name="English">I came for the Department Store\nand I am NOT leaving until I’ve\fbeen to every floor. Six floors!\nDo you understand?\rWhere I’m from we have a shop.\nONE shop.</language>
 	</row>
 	<row id="msg_0581_T25_00005" index="5">
 		<attribute name="window_context_name">used</attribute>
@@ -26,7 +26,7 @@
 	</row>
 	<row id="msg_0581_T25_00006" index="6">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The Radio Tower in Goldenrod City is\na landmark.\rThey’re running a promotional campaign\nright now.\rThey’ll modify your Pokégear so it can\nalso serve as a radio.</language>
+		<language name="English">Excuse me--no--sorry, I’m late.\rEveryone here is always late and\nalways going somewhere.\rYou’ll get used to it or you’ll\nleave.</language>
 	</row>
 	<row id="msg_0581_T25_00007" index="7">
 		<attribute name="window_context_name">used</attribute>
@@ -114,7 +114,7 @@
 	</row>
 	<row id="msg_0581_T25_00028" index="28">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The Gym Leader, Whitney, went flying by\nsaying, “I have got to\fget a Radio Card!”</language>
+		<language name="English">That reporter from the Radio Tower\nstopped half the street for\finterviews this morning!</language>
 	</row>
 	<row id="msg_0581_T25_00029" index="29">
 		<attribute name="window_context_name">used</attribute>
@@ -154,7 +154,7 @@
 	</row>
 	<row id="msg_0581_T25_00038" index="38">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">Goldenrod City Pokémon Gym\nLeader: Whitney\fThe Incredibly Pretty Girl!</language>
+		<language name="English">Goldenrod City Pokémon Gym\rCLOSED--Leader away on\nLeague business.</language>
 	</row>
 	<row id="msg_0581_T25_00039" index="39">
 		<attribute name="window_context_name">used</attribute>
@@ -187,5 +187,25 @@
 	<row id="msg_0581_T25_00046" index="46">
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">Goldenrod Flower Shop\rA Small Shop Providing\nLots of Beauty</language>
+	</row>
+	<row id="msg_0581_T25_00047" index="47">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">KESTRA: There you ARE!\rDo you know how big this city is?\nI’ve been here four days and I\fSTILL get lost in the Underground.\rI’ve been to the top of the\nDepartment Store twice. I beat the\fslots once and lost it all back in\nlike a minute.\rIt’s incredible. I love it here.</language>
+	</row>
+	<row id="msg_0581_T25_00048" index="48">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">KESTRA: Okay, no, listen, you have\nto come with me, RIGHT now--the\fRadio Tower. There’s a live show\ntoday.\rThe radio lady? MEL? She’s\nfamous, she’s kind of a big deal,\fmy landlady says she’s a menace\nwhich means she’s definitely\fcool--</language>
+	</row>
+	<row id="msg_0581_T25_00049" index="49">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">KESTRA: --and TODAY she’s doing\nthe AZALEA thing. The Slowpoke\fWell. The thing that actually\nhappened.\rIt’s all anybody’s talking\nabout.</language>
+	</row>
+	<row id="msg_0581_T25_00050" index="50">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">KESTRA: Come on. LIVE.\nWe can’t miss it!</language>
+	</row>
+	<row id="msg_0581_T25_00051" index="51">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">KESTRA: Radio Tower! Big one!\nYou can’t miss it!\rHurry, we’re gonna miss the good\npart!</language>
 	</row>
 </body>

@@ -5,632 +5,632 @@
 
 	.rodata
 
-	ScrDef scr_seq_D32R0601_000
-	ScrDef scr_seq_D32R0601_001
-	ScrDef scr_seq_D32R0601_002
-	ScrDef scr_seq_D32R0601_003
-	ScrDef scr_seq_D32R0601_004
-	ScrDef scr_seq_D32R0601_005
-	ScrDef scr_seq_D32R0601_006
-	ScrDef scr_seq_D32R0601_007
-	ScrDef scr_seq_D32R0601_008
-	ScrDef scr_seq_D32R0601_009
-	ScrDef scr_seq_D32R0601_010
-	ScrDef scr_seq_D32R0601_011
-	ScrDef scr_seq_D32R0601_012
-	ScrDef scr_seq_D32R0601_013
-	ScrDef scr_seq_D32R0601_014
-	ScrDef scr_seq_D32R0601_015
-	ScrDef scr_seq_D32R0601_016
-	ScrDefEnd
+	scrdef scr_seq_D32R0601_000
+	scrdef scr_seq_D32R0601_001
+	scrdef scr_seq_D32R0601_002
+	scrdef scr_seq_D32R0601_003
+	scrdef scr_seq_D32R0601_004
+	scrdef scr_seq_D32R0601_005
+	scrdef scr_seq_D32R0601_006
+	scrdef scr_seq_D32R0601_007
+	scrdef scr_seq_D32R0601_008
+	scrdef scr_seq_D32R0601_009
+	scrdef scr_seq_D32R0601_010
+	scrdef scr_seq_D32R0601_011
+	scrdef scr_seq_D32R0601_012
+	scrdef scr_seq_D32R0601_013
+	scrdef scr_seq_D32R0601_014
+	scrdef scr_seq_D32R0601_015
+	scrdef scr_seq_D32R0601_016
+	scrdef_end
 
 scr_seq_D32R0601_014:
-	End
+	end
 
 scr_seq_D32R0601_000:
-	PlaySE SEQ_SE_DP_SELECT
-	LockAll
-	FacePlayer
-	SetVar VAR_TEMP_x4003, 0
-	SetVar VAR_TEMP_x4004, 0
-	GoTo _0080
-	End
+	play_se SEQ_SE_DP_SELECT
+	lockall
+	faceplayer
+	setvar VAR_TEMP_x4003, 0
+	setvar VAR_TEMP_x4004, 0
+	goto _0080
+	end
 
 scr_seq_D32R0601_005:
-	PlaySE SEQ_SE_DP_SELECT
-	LockAll
-	FacePlayer
-	SetVar VAR_TEMP_x4003, 0
-	SetVar VAR_TEMP_x4004, 1
-	GoTo _0080
-	End
+	play_se SEQ_SE_DP_SELECT
+	lockall
+	faceplayer
+	setvar VAR_TEMP_x4003, 0
+	setvar VAR_TEMP_x4004, 1
+	goto _0080
+	end
 
 _0080:
-	ScrCmd_682 0
-	Compare VAR_TEMP_x4004, 0
-	CallIfEq _06A0
-	Compare VAR_TEMP_x4004, 1
-	CallIfEq _06A5
-	GoTo _00A6
-	End
+	scrcmd_682 0
+	compare VAR_TEMP_x4004, 0
+	call_if_eq _06A0
+	compare VAR_TEMP_x4004, 1
+	call_if_eq _06A5
+	goto _00A6
+	end
 
 _00A6:
-	Compare VAR_TEMP_x4004, 0
-	CallIfEq _06AA
-	Compare VAR_TEMP_x4004, 1
-	CallIfEq _06C9
-	MenuItemAdd 41, 255, 2
-	MenuItemAdd 42, 255, 3
-	MenuExec
-	Compare VAR_SPECIAL_RESULT, 0
-	GoToIfEq _014B
-	Compare VAR_SPECIAL_RESULT, 1
-	GoToIfEq _0178
-	Compare VAR_SPECIAL_RESULT, 2
-	GoToIfEq _0110
-	Compare VAR_SPECIAL_RESULT, 4
-	GoToIfEq _01A5
-	TouchscreenMenuShow
-	GoTo _0132
-	End
+	compare VAR_TEMP_x4004, 0
+	call_if_eq _06AA
+	compare VAR_TEMP_x4004, 1
+	call_if_eq _06C9
+	menu_item_add 41, 255, 2
+	menu_item_add 42, 255, 3
+	menu_exec
+	compare VAR_SPECIAL_RESULT, 0
+	goto_if_eq _014B
+	compare VAR_SPECIAL_RESULT, 1
+	goto_if_eq _0178
+	compare VAR_SPECIAL_RESULT, 2
+	goto_if_eq _0110
+	compare VAR_SPECIAL_RESULT, 4
+	goto_if_eq _01A5
+	touchscreen_menu_show
+	goto _0132
+	end
 
 _0110:
-	Compare VAR_TEMP_x4004, 0
-	CallIfEq _06E0
-	Compare VAR_TEMP_x4004, 1
-	CallIfEq _06E5
-	GoTo _00A6
-	End
+	compare VAR_TEMP_x4004, 0
+	call_if_eq _06E0
+	compare VAR_TEMP_x4004, 1
+	call_if_eq _06E5
+	goto _00A6
+	end
 
 _0132:
-	GoTo _013A
-	End
+	goto _013A
+	end
 
 _013A:
-	SetVar VAR_UNK_414A, 0
-	NPCMsg msg_0110_D32R0601_00006
-	WaitButton
-	CloseMsg
-	ReleaseAll
-	End
+	setvar VAR_UNK_414A, 0
+	npc_msg msg_0110_D32R0601_00006
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
 
 _014B:
-	SetVar VAR_UNK_4149, 0
-	ScrCmd_643 0, 3, VAR_SPECIAL_RESULT
-	BufferInt 0, 3
-	BufferInt 1, 3
-	Compare VAR_SPECIAL_RESULT, 0
-	GoToIfEq _01D2
-	GoTo _01FC
-	End
+	setvar VAR_UNK_4149, 0
+	scrcmd_643 0, 3, VAR_SPECIAL_RESULT
+	buffer_int 0, 3
+	buffer_int 1, 3
+	compare VAR_SPECIAL_RESULT, 0
+	goto_if_eq _01D2
+	goto _01FC
+	end
 
 _0178:
-	SetVar VAR_UNK_4149, 1
-	ScrCmd_643 0, 3, VAR_SPECIAL_RESULT
-	BufferInt 0, 3
-	BufferInt 1, 3
-	Compare VAR_SPECIAL_RESULT, 0
-	GoToIfEq _01D2
-	GoTo _01FC
-	End
+	setvar VAR_UNK_4149, 1
+	scrcmd_643 0, 3, VAR_SPECIAL_RESULT
+	buffer_int 0, 3
+	buffer_int 1, 3
+	compare VAR_SPECIAL_RESULT, 0
+	goto_if_eq _01D2
+	goto _01FC
+	end
 
 _01A5:
-	SetVar VAR_UNK_4149, 2
-	ScrCmd_643 0, 2, VAR_SPECIAL_RESULT
-	BufferInt 0, 2
-	BufferInt 1, 2
-	Compare VAR_SPECIAL_RESULT, 0
-	GoToIfEq _01E7
-	GoTo _01FC
-	End
+	setvar VAR_UNK_4149, 2
+	scrcmd_643 0, 2, VAR_SPECIAL_RESULT
+	buffer_int 0, 2
+	buffer_int 1, 2
+	compare VAR_SPECIAL_RESULT, 0
+	goto_if_eq _01E7
+	goto _01FC
+	end
 
 _01D2:
-	NPCMsg msg_0110_D32R0601_00008
-	ScrCmd_444 9, 3, 0, 0
-	TouchscreenMenuShow
-	GoTo _0132
-	End
+	npc_msg msg_0110_D32R0601_00008
+	scrcmd_444 9, 3, 0, 0
+	touchscreen_menu_show
+	goto _0132
+	end
 
 _01E7:
-	NPCMsg msg_0110_D32R0601_00008
-	ScrCmd_444 9, 2, 0, 0
-	TouchscreenMenuShow
-	GoTo _0132
-	End
+	npc_msg msg_0110_D32R0601_00008
+	scrcmd_444 9, 2, 0, 0
+	touchscreen_menu_show
+	goto _0132
+	end
 
 _01FC:
-	NPCMsg msg_0110_D32R0601_00007
-	CloseMsg
-	FadeScreen 6, 1, 0, RGB_BLACK
-	WaitFade
-	ScrCmd_643 4, VAR_UNK_4149, VAR_SPECIAL_RESULT
-	ScrCmd_645 VAR_TEMP_x4002, VAR_TEMP_x4005, VAR_TEMP_x4006
-	Compare VAR_TEMP_x4002, 255
-	GoToIfNe _022E
-	ScrCmd_815 0
+	npc_msg msg_0110_D32R0601_00007
+	closemsg
+	fade_screen 6, 1, 0, RGB_BLACK
+	wait_fade
+	scrcmd_643 4, VAR_UNK_4149, VAR_SPECIAL_RESULT
+	scrcmd_645 VAR_TEMP_x4002, VAR_TEMP_x4005, VAR_TEMP_x4006
+	compare VAR_TEMP_x4002, 255
+	goto_if_ne _022E
+	scrcmd_815 0
 _022E:
-	RestoreOverworld
-	FadeScreen 6, 1, 1, RGB_BLACK
-	WaitFade
-	Compare VAR_TEMP_x4002, 255
-	GoToIfEq _0132
-	DaycareSanitizeMon VAR_TEMP_x4002, VAR_SPECIAL_RESULT
-	Compare VAR_SPECIAL_RESULT, 255
-	GoToIfEq _0607
-	DaycareSanitizeMon VAR_TEMP_x4005, VAR_SPECIAL_RESULT
-	Compare VAR_SPECIAL_RESULT, 255
-	GoToIfEq _0607
-	Compare VAR_UNK_4149, 2
-	GoToIfEq _028F
-	DaycareSanitizeMon VAR_TEMP_x4006, VAR_SPECIAL_RESULT
-	Compare VAR_SPECIAL_RESULT, 255
-	GoToIfEq _0607
+	restore_overworld
+	fade_screen 6, 1, 1, RGB_BLACK
+	wait_fade
+	compare VAR_TEMP_x4002, 255
+	goto_if_eq _0132
+	day_care_sanitize_mon VAR_TEMP_x4002, VAR_SPECIAL_RESULT
+	compare VAR_SPECIAL_RESULT, 255
+	goto_if_eq _0607
+	day_care_sanitize_mon VAR_TEMP_x4005, VAR_SPECIAL_RESULT
+	compare VAR_SPECIAL_RESULT, 255
+	goto_if_eq _0607
+	compare VAR_UNK_4149, 2
+	goto_if_eq _028F
+	day_care_sanitize_mon VAR_TEMP_x4006, VAR_SPECIAL_RESULT
+	compare VAR_SPECIAL_RESULT, 255
+	goto_if_eq _0607
 _028F:
-	GetPartyMonSpecies VAR_TEMP_x4002, VAR_TEMP_x4001
-	Compare VAR_TEMP_x4001, 0
-	GoToIfNe _02AA
-	TouchscreenMenuShow
-	GoTo _0132
+	get_partymon_species VAR_TEMP_x4002, VAR_TEMP_x4001
+	compare VAR_TEMP_x4001, 0
+	goto_if_ne _02AA
+	touchscreen_menu_show
+	goto _0132
 
 _02AA:
-	GoTo _02B2
-	End
+	goto _02B2
+	end
 
 _02B2:
-	GoTo _02BA
-	End
+	goto _02BA
+	end
 
 _02BA:
-	Compare VAR_UNK_4149, 0
-	CallIfEq _0476
-	Compare VAR_UNK_4149, 1
-	CallIfEq _0476
-	SetVar VAR_TEMP_x4000, 0
-	HealParty
-	CallStd std_prompt_save
-	CopyVar VAR_SPECIAL_RESULT, VAR_TEMP_x4000
-	Compare VAR_SPECIAL_RESULT, 0
-	GoToIfEq _0132
-	TouchscreenMenuShow
-	Compare VAR_UNK_4149, 2
-	GoToIfEq _030A
-	GoTo _04D7
-	End
+	compare VAR_UNK_4149, 0
+	call_if_eq _0476
+	compare VAR_UNK_4149, 1
+	call_if_eq _0476
+	setvar VAR_TEMP_x4000, 0
+	heal_party
+	callstd std_prompt_save
+	copyvar VAR_SPECIAL_RESULT, VAR_TEMP_x4000
+	compare VAR_SPECIAL_RESULT, 0
+	goto_if_eq _0132
+	touchscreen_menu_show
+	compare VAR_UNK_4149, 2
+	goto_if_eq _030A
+	goto _04D7
+	end
 
 _030A:
-	NPCMsg msg_0110_D32R0601_00043
-	TouchscreenMenuHide
-	MenuInitStdGmm 1, 1, 0, 1, VAR_SPECIAL_RESULT
-	MenuItemAdd 14, 255, 0
-	MenuItemAdd 15, 255, 1
-	MenuItemAdd 5, 255, 2
-	MenuExec
-	Switch VAR_SPECIAL_RESULT
-	Case 0, _035B
-	Case 1, _03B3
-	TouchscreenMenuShow
-	GoTo _0132
-	End
+	npc_msg msg_0110_D32R0601_00043
+	touchscreen_menu_hide
+	menu_init_std_gmm 1, 1, 0, 1, VAR_SPECIAL_RESULT
+	menu_item_add 14, 255, 0
+	menu_item_add 15, 255, 1
+	menu_item_add 5, 255, 2
+	menu_exec
+	switch VAR_SPECIAL_RESULT
+	case 0, _035B
+	case 1, _03B3
+	touchscreen_menu_show
+	goto _0132
+	end
 
 _035B:
-	NPCMsg msg_0110_D32R0601_00044
-	GetMenuChoice VAR_SPECIAL_RESULT
-	Compare VAR_SPECIAL_RESULT, 1
-	GoToIfEq _030A
-	TouchscreenMenuShow
-	CloseMsg
-	ScrCmd_226 32, 0, 0, VAR_SPECIAL_RESULT
-	TouchscreenMenuShow
-	Compare VAR_SPECIAL_RESULT, 1
-	GoToIfEq _03A1
-	Compare VAR_SPECIAL_RESULT, 3
-	GoToIfEq _03A9
-	GoTo _040B
-	End
+	npc_msg msg_0110_D32R0601_00044
+	getmenuchoice VAR_SPECIAL_RESULT
+	compare VAR_SPECIAL_RESULT, 1
+	goto_if_eq _030A
+	touchscreen_menu_show
+	closemsg
+	scrcmd_226 32, 0, 0, VAR_SPECIAL_RESULT
+	touchscreen_menu_show
+	compare VAR_SPECIAL_RESULT, 1
+	goto_if_eq _03A1
+	compare VAR_SPECIAL_RESULT, 3
+	goto_if_eq _03A9
+	goto _040B
+	end
 
 _03A1:
-	GoTo _030A
-	End
+	goto _030A
+	end
 
 _03A9:
-	ScrCmd_283
-	GoTo _030A
-	End
+	scrcmd_283
+	goto _030A
+	end
 
 _03B3:
-	NPCMsg msg_0110_D32R0601_00044
-	GetMenuChoice VAR_SPECIAL_RESULT
-	Compare VAR_SPECIAL_RESULT, 1
-	GoToIfEq _030A
-	TouchscreenMenuShow
-	CloseMsg
-	ScrCmd_227 32, 0, 0, VAR_SPECIAL_RESULT
-	TouchscreenMenuShow
-	Compare VAR_SPECIAL_RESULT, 1
-	GoToIfEq _03F9
-	Compare VAR_SPECIAL_RESULT, 3
-	GoToIfEq _0401
-	GoTo _040B
-	End
+	npc_msg msg_0110_D32R0601_00044
+	getmenuchoice VAR_SPECIAL_RESULT
+	compare VAR_SPECIAL_RESULT, 1
+	goto_if_eq _030A
+	touchscreen_menu_show
+	closemsg
+	scrcmd_227 32, 0, 0, VAR_SPECIAL_RESULT
+	touchscreen_menu_show
+	compare VAR_SPECIAL_RESULT, 1
+	goto_if_eq _03F9
+	compare VAR_SPECIAL_RESULT, 3
+	goto_if_eq _0401
+	goto _040B
+	end
 
 _03F9:
-	GoTo _030A
-	End
+	goto _030A
+	end
 
 _0401:
-	ScrCmd_283
-	GoTo _030A
-	End
+	scrcmd_283
+	goto _030A
+	end
 
 _040B:
-	ScrCmd_258
-	ScrCmd_257 154
-	GetPartyMonSpecies VAR_TEMP_x4002, VAR_SPECIAL_x8000
-	GetPartyMonSpecies VAR_TEMP_x4005, VAR_SPECIAL_x8001
-	ScrCmd_644 VAR_SPECIAL_x8000, VAR_SPECIAL_x8001, VAR_SPECIAL_RESULT
-	Switch VAR_SPECIAL_RESULT
-	Case 1, _047E
-	Case 2, _0494
-	Case 3, _04AA
-	ScrCmd_258
-	ScrCmd_257 156
-	NPCMsg msg_0110_D32R0601_00045
-	Compare VAR_UNK_4149, 2
-	CallIfEq _0476
-	Call _0711
-	GoTo _04D7
-	End
+	scrcmd_258
+	scrcmd_257 154
+	get_partymon_species VAR_TEMP_x4002, VAR_SPECIAL_x8000
+	get_partymon_species VAR_TEMP_x4005, VAR_SPECIAL_x8001
+	scrcmd_644 VAR_SPECIAL_x8000, VAR_SPECIAL_x8001, VAR_SPECIAL_RESULT
+	switch VAR_SPECIAL_RESULT
+	case 1, _047E
+	case 2, _0494
+	case 3, _04AA
+	scrcmd_258
+	scrcmd_257 156
+	npc_msg msg_0110_D32R0601_00045
+	compare VAR_UNK_4149, 2
+	call_if_eq _0476
+	call _0711
+	goto _04D7
+	end
 
 _0476:
-	SetVar VAR_UNK_414A, 255
-	Return
+	setvar VAR_UNK_414A, 255
+	return
 
 _047E:
-	Call _04CD
-	BufferMonSpeciesName 0, VAR_TEMP_x4002
-	NPCMsg msg_0110_D32R0601_00029
-	GoTo _04C5
-	End
+	call _04CD
+	buffer_mon_species_name 0, VAR_TEMP_x4002
+	npc_msg msg_0110_D32R0601_00029
+	goto _04C5
+	end
 
 _0494:
-	Call _04CD
-	BufferMonSpeciesName 0, VAR_TEMP_x4005
-	NPCMsg msg_0110_D32R0601_00029
-	GoTo _04C5
-	End
+	call _04CD
+	buffer_mon_species_name 0, VAR_TEMP_x4005
+	npc_msg msg_0110_D32R0601_00029
+	goto _04C5
+	end
 
 _04AA:
-	Call _04CD
-	BufferMonSpeciesName 0, VAR_TEMP_x4002
-	BufferMonSpeciesName 1, VAR_TEMP_x4005
-	NPCMsg msg_0110_D32R0601_00030
-	GoTo _04C5
-	End
+	call _04CD
+	buffer_mon_species_name 0, VAR_TEMP_x4002
+	buffer_mon_species_name 1, VAR_TEMP_x4005
+	npc_msg msg_0110_D32R0601_00030
+	goto _04C5
+	end
 
 _04C5:
-	GoTo _0132
-	End
+	goto _0132
+	end
 
 _04CD:
-	ScrCmd_258
-	ScrCmd_257 157
-	ScrCmd_283
-	Return
+	scrcmd_258
+	scrcmd_257 157
+	scrcmd_283
+	return
 
 _04D7:
-	Compare VAR_UNK_4149, 0
-	CallIfEq _056F
-	Compare VAR_UNK_4149, 1
-	CallIfEq _058A
-	Compare VAR_UNK_4149, 2
-	CallIfEq _05A5
-	PlaySE SEQ_SE_DP_KAIDAN2
-	GoTo _050A
-	End
+	compare VAR_UNK_4149, 0
+	call_if_eq _056F
+	compare VAR_UNK_4149, 1
+	call_if_eq _058A
+	compare VAR_UNK_4149, 2
+	call_if_eq _05A5
+	play_se SEQ_SE_DP_KAIDAN2
+	goto _050A
+	end
 
 _050A:
-	FadeScreen 6, 1, 0, RGB_BLACK
-	WaitFade
-	ScrCmd_815 0
-	Compare VAR_UNK_4149, 0
-	CallIfEq _05CB
-	Compare VAR_UNK_4149, 1
-	CallIfEq _05DF
-	Compare VAR_UNK_4149, 2
-	CallIfEq _05F3
-	ScrCmd_420 59
-	ScrCmd_436
-	ScrCmd_627 15
-	Compare VAR_UNK_4149, 2
-	CallIfEq _056B
-	RestoreOverworld
-	FadeScreen 6, 1, 1, RGB_BLACK
-	WaitFade
-	ScrCmd_682 1
-	End
+	fade_screen 6, 1, 0, RGB_BLACK
+	wait_fade
+	scrcmd_815 0
+	compare VAR_UNK_4149, 0
+	call_if_eq _05CB
+	compare VAR_UNK_4149, 1
+	call_if_eq _05DF
+	compare VAR_UNK_4149, 2
+	call_if_eq _05F3
+	scrcmd_420 59
+	scrcmd_436
+	scrcmd_627 15
+	compare VAR_UNK_4149, 2
+	call_if_eq _056B
+	restore_overworld
+	fade_screen 6, 1, 1, RGB_BLACK
+	wait_fade
+	scrcmd_682 1
+	end
 
 _056B:
-	ScrCmd_283
-	Return
+	scrcmd_283
+	return
 
 _056F:
-	NPCMsg msg_0110_D32R0601_00032
-	WaitABPress
-	CloseMsg
-	ApplyMovement obj_player, _0618
-	ApplyMovement VAR_SPECIAL_LAST_TALKED, _0638
-	WaitMovement
-	Return
+	npc_msg msg_0110_D32R0601_00032
+	wait_button
+	closemsg
+	apply_movement obj_player, _0618
+	apply_movement VAR_SPECIAL_LAST_TALKED, _0638
+	wait_movement
+	return
 
 _058A:
-	NPCMsg msg_0110_D32R0601_00032
-	WaitABPress
-	CloseMsg
-	ApplyMovement obj_player, _0618
-	ApplyMovement VAR_SPECIAL_LAST_TALKED, _0638
-	WaitMovement
-	Return
+	npc_msg msg_0110_D32R0601_00032
+	wait_button
+	closemsg
+	apply_movement obj_player, _0618
+	apply_movement VAR_SPECIAL_LAST_TALKED, _0638
+	wait_movement
+	return
 
 _05A5:
-	NPCMsgVar msg_0110_D32R0601_00032
-	Wait 10, VAR_SPECIAL_RESULT
-	ScrCmd_258
-	ScrCmd_257 155
-	CloseMsg
-	ApplyMovement obj_player, _062C
-	ApplyMovement VAR_SPECIAL_LAST_TALKED, _064C
-	WaitMovement
-	Return
+	npc_msg_var msg_0110_D32R0601_00032
+	wait 10, VAR_SPECIAL_RESULT
+	scrcmd_258
+	scrcmd_257 155
+	closemsg
+	apply_movement obj_player, _062C
+	apply_movement VAR_SPECIAL_LAST_TALKED, _064C
+	wait_movement
+	return
 
 _05CB:
-	ApplyMovement obj_player, _0658
-	ApplyMovement VAR_SPECIAL_LAST_TALKED, _0680
-	WaitMovement
-	Return
+	apply_movement obj_player, _0658
+	apply_movement VAR_SPECIAL_LAST_TALKED, _0680
+	wait_movement
+	return
 
 _05DF:
-	ApplyMovement obj_player, _0658
-	ApplyMovement VAR_SPECIAL_LAST_TALKED, _0680
-	WaitMovement
-	Return
+	apply_movement obj_player, _0658
+	apply_movement VAR_SPECIAL_LAST_TALKED, _0680
+	wait_movement
+	return
 
 _05F3:
-	ApplyMovement obj_player, _0670
-	ApplyMovement VAR_SPECIAL_LAST_TALKED, _0694
-	WaitMovement
-	Return
+	apply_movement obj_player, _0670
+	apply_movement VAR_SPECIAL_LAST_TALKED, _0694
+	wait_movement
+	return
 
 _0607:
-	TouchscreenMenuShow
-	SetVar VAR_UNK_414A, 0
-	CallStd std_bag_is_full_griseous_orb
-	End
+	touchscreen_menu_show
+	setvar VAR_UNK_414A, 0
+	callstd std_bag_is_full_griseous_orb
+	end
 
 	.balign 4, 0
 _0618:
-	WalkNormalNorth 2
-	WalkNormalEast
-	WalkNormalNorth 2
-	SetInvisible
-	EndMovement
+	step 12, 2
+	step 15, 1
+	step 12, 2
+	step 69, 1
+	step_end
 
 	.balign 4, 0
 _062C:
-	WalkNormalNorth 4
-	SetInvisible
-	EndMovement
+	step 12, 4
+	step 69, 1
+	step_end
 
 	.balign 4, 0
 _0638:
-	WalkNormalNorth
-	WalkNormalEast
-	WalkNormalNorth 2
-	SetInvisible
-	EndMovement
+	step 12, 1
+	step 15, 1
+	step 12, 2
+	step 69, 1
+	step_end
 
 	.balign 4, 0
 _064C:
-	WalkNormalNorth 3
-	SetInvisible
-	EndMovement
+	step 12, 3
+	step 69, 1
+	step_end
 
 	.balign 4, 0
 _0658:
-	WalkFasterSouth 2
-	WalkFasterWest
-	WalkFasterSouth 2
-	FaceNorth
-	SetVisible
-	EndMovement
+	step 21, 2
+	step 22, 1
+	step 21, 2
+	step 0, 1
+	step 70, 1
+	step_end
 
 	.balign 4, 0
 _0670:
-	WalkFasterSouth 4
-	FaceNorth
-	SetVisible
-	EndMovement
+	step 21, 4
+	step 0, 1
+	step 70, 1
+	step_end
 
 	.balign 4, 0
 _0680:
-	WalkFasterSouth
-	WalkFasterWest
-	WalkFasterSouth 2
-	SetVisible
-	EndMovement
+	step 21, 1
+	step 22, 1
+	step 21, 2
+	step 70, 1
+	step_end
 
 	.balign 4, 0
 _0694:
-	WalkFasterSouth 3
-	SetVisible
-	EndMovement
+	step 21, 3
+	step 70, 1
+	step_end
 
 _06A0:
-	NPCMsg msg_0110_D32R0601_00000
-	Return
+	npc_msg msg_0110_D32R0601_00000
+	return
 
 _06A5:
-	NPCMsg msg_0110_D32R0601_00003
-	Return
+	npc_msg msg_0110_D32R0601_00003
+	return
 
 _06AA:
-	NPCMsg msg_0110_D32R0601_00001
-	TouchscreenMenuHide
-	MenuInit 1, 1, 0, 1, VAR_SPECIAL_RESULT
-	MenuItemAdd 38, 255, 0
-	MenuItemAdd 39, 255, 1
-	Return
+	npc_msg msg_0110_D32R0601_00001
+	touchscreen_menu_hide
+	menu_init 1, 1, 0, 1, VAR_SPECIAL_RESULT
+	menu_item_add 38, 255, 0
+	menu_item_add 39, 255, 1
+	return
 
 _06C9:
-	NPCMsg msg_0110_D32R0601_00004
-	TouchscreenMenuHide
-	MenuInit 1, 1, 0, 1, VAR_SPECIAL_RESULT
-	MenuItemAdd 40, 255, 4
-	Return
+	npc_msg msg_0110_D32R0601_00004
+	touchscreen_menu_hide
+	menu_init 1, 1, 0, 1, VAR_SPECIAL_RESULT
+	menu_item_add 40, 255, 4
+	return
 
 _06E0:
-	NPCMsg msg_0110_D32R0601_00002
-	Return
+	npc_msg msg_0110_D32R0601_00002
+	return
 
 _06E5:
-	NPCMsg msg_0110_D32R0601_00005
-	Return
+	npc_msg msg_0110_D32R0601_00005
+	return
 
 scr_seq_D32R0601_001:
-	ScrCmd_682 0
-	SetVar VAR_TEMP_x4003, 1
-	SetVar VAR_UNK_414A, 0
-	NPCMsg msg_0110_D32R0601_00033
-	Call _0476
-	Call _0711
-	GoTo _04D7
-	End
+	scrcmd_682 0
+	setvar VAR_TEMP_x4003, 1
+	setvar VAR_UNK_414A, 0
+	npc_msg msg_0110_D32R0601_00033
+	call _0476
+	call _0711
+	goto _04D7
+	end
 
 _0711:
-	AddWaitingIcon
-	SaveGameNormal VAR_SPECIAL_RESULT
-	RemoveWaitingIcon
-	PlaySE SEQ_SE_DP_SAVE
-	WaitSE SEQ_SE_DP_SAVE
-	Return
+	add_waiting_icon
+	save_game_normal VAR_SPECIAL_RESULT
+	remove_waiting_icon
+	play_se SEQ_SE_DP_SAVE
+	wait_se SEQ_SE_DP_SAVE
+	return
 
 scr_seq_D32R0601_002:
-	NPCMsg msg_0110_D32R0601_00034
-	ScrCmd_646 VAR_UNK_4149
-	Compare VAR_BATTLE_ARCADE_PRINT_PROGRESS, 1
-	CallIfEq _074C
-	Compare VAR_BATTLE_ARCADE_PRINT_PROGRESS, 3
-	CallIfEq _0754
-	GoTo _0132
-	End
+	npc_msg msg_0110_D32R0601_00034
+	scrcmd_646 VAR_UNK_4149
+	compare VAR_BATTLE_ARCADE_PRINT_PROGRESS, 1
+	call_if_eq _074C
+	compare VAR_BATTLE_ARCADE_PRINT_PROGRESS, 3
+	call_if_eq _0754
+	goto _0132
+	end
 
 _074C:
-	SetVar VAR_BATTLE_ARCADE_PRINT_PROGRESS, 0
-	Return
+	setvar VAR_BATTLE_ARCADE_PRINT_PROGRESS, 0
+	return
 
 _0754:
-	SetVar VAR_BATTLE_ARCADE_PRINT_PROGRESS, 2
-	Return
+	setvar VAR_BATTLE_ARCADE_PRINT_PROGRESS, 2
+	return
 
 scr_seq_D32R0601_003:
-	Compare VAR_UNK_4149, 0
-	CallIfEq _0798
-	Compare VAR_UNK_4149, 1
-	CallIfEq _0798
-	Compare VAR_BATTLE_ARCADE_PRINT_PROGRESS, 1
-	CallIfEq _079E
-	Compare VAR_BATTLE_ARCADE_PRINT_PROGRESS, 3
-	CallIfEq _07B5
-	GoTo _0132
-	End
+	compare VAR_UNK_4149, 0
+	call_if_eq _0798
+	compare VAR_UNK_4149, 1
+	call_if_eq _0798
+	compare VAR_BATTLE_ARCADE_PRINT_PROGRESS, 1
+	call_if_eq _079E
+	compare VAR_BATTLE_ARCADE_PRINT_PROGRESS, 3
+	call_if_eq _07B5
+	goto _0132
+	end
 
 _0798:
-	AddSpecialGameStat2 SCORE_EVENT_BATTLE_ARCADE_SET_WON
-	Return
+	add_special_game_stat_2 30
+	return
 
 _079E:
-	NPCMsg msg_0110_D32R0601_00035
-	BufferPlayersName 0
-	NPCMsg msg_0110_D32R0601_00037
-	PlayFanfare SEQ_ME_ITEM
-	WaitFanfare
-	SetVar VAR_BATTLE_ARCADE_PRINT_PROGRESS, 2
-	Return
+	npc_msg msg_0110_D32R0601_00035
+	buffer_players_name 0
+	npc_msg msg_0110_D32R0601_00037
+	play_fanfare SEQ_ME_ITEM
+	wait_fanfare
+	setvar VAR_BATTLE_ARCADE_PRINT_PROGRESS, 2
+	return
 
 _07B5:
-	NPCMsg msg_0110_D32R0601_00035
-	BufferPlayersName 0
-	NPCMsg msg_0110_D32R0601_00036
-	PlayFanfare SEQ_ME_ITEM
-	WaitFanfare
-	SetVar VAR_BATTLE_ARCADE_PRINT_PROGRESS, 4
-	CallStd std_frontier_gold_prints_check
-	Return
+	npc_msg msg_0110_D32R0601_00035
+	buffer_players_name 0
+	npc_msg msg_0110_D32R0601_00036
+	play_fanfare SEQ_ME_ITEM
+	wait_fanfare
+	setvar VAR_BATTLE_ARCADE_PRINT_PROGRESS, 4
+	callstd std_frontier_gold_prints_check
+	return
 
 scr_seq_D32R0601_004:
-	GoTo _0132
-	End
+	goto _0132
+	end
 
 	.balign 4, 0
 _07D8:
-	WalkNormalNorth 2
-	Delay8
-	WalkNormalNorth
-	EndMovement
+	step 12, 2
+	step 63, 1
+	step 12, 1
+	step_end
 
 	.balign 4, 0
 _07E8:
-	WalkNormalNorth 2
-	Delay8
-	WalkNormalNorth
-	EndMovement
+	step 12, 2
+	step 63, 1
+	step 12, 1
+	step_end
 
 scr_seq_D32R0601_006:
-	SimpleNPCMsg msg_0110_D32R0601_00046
-	End
+	simple_npc_msg msg_0110_D32R0601_00046
+	end
 
 scr_seq_D32R0601_007:
-	SimpleNPCMsg msg_0110_D32R0601_00047
-	End
+	simple_npc_msg msg_0110_D32R0601_00047
+	end
 
 scr_seq_D32R0601_008:
-	SimpleNPCMsg msg_0110_D32R0601_00048
-	End
+	simple_npc_msg msg_0110_D32R0601_00048
+	end
 
 scr_seq_D32R0601_009:
-	SimpleNPCMsg msg_0110_D32R0601_00049
-	End
+	simple_npc_msg msg_0110_D32R0601_00049
+	end
 
 scr_seq_D32R0601_010:
-	SimpleNPCMsg msg_0110_D32R0601_00050
-	End
+	simple_npc_msg msg_0110_D32R0601_00050
+	end
 
 scr_seq_D32R0601_011:
-	SimpleNPCMsg msg_0110_D32R0601_00051
-	End
+	simple_npc_msg msg_0110_D32R0601_00051
+	end
 
 scr_seq_D32R0601_012:
-	SimpleNPCMsg msg_0110_D32R0601_00052
-	End
+	simple_npc_msg msg_0110_D32R0601_00052
+	end
 
 scr_seq_D32R0601_013:
-	SimpleNPCMsg msg_0110_D32R0601_00053
-	End
+	simple_npc_msg msg_0110_D32R0601_00053
+	end
 
 scr_seq_D32R0601_015:
-	PlaySE SEQ_SE_DP_SELECT
-	LockAll
-	NPCMsg msg_0110_D32R0601_00054
-	WaitButton
-	CloseMsg
-	ReleaseAll
-	End
+	play_se SEQ_SE_DP_SELECT
+	lockall
+	npc_msg msg_0110_D32R0601_00054
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
 
 scr_seq_D32R0601_016:
-	PlaySE SEQ_SE_DP_SELECT
-	LockAll
-	NPCMsg msg_0110_D32R0601_00055
-	WaitButton
-	CloseMsg
-	ReleaseAll
-	End
+	play_se SEQ_SE_DP_SELECT
+	lockall
+	npc_msg msg_0110_D32R0601_00055
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
 	.balign 4, 0

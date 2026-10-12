@@ -5,28 +5,28 @@
 
 	.rodata
 
-	ScrDef scr_seq_T04R0201_000
-	ScrDef scr_seq_T04R0201_001
-	ScrDef scr_seq_T04R0201_002
-	ScrDefEnd
+	scrdef scr_seq_T04R0201_000
+	scrdef scr_seq_T04R0201_001
+	scrdef scr_seq_T04R0201_002
+	scrdef_end
 
 scr_seq_T04R0201_000:
-	SimpleNPCMsg msg_0472_T04R0201_00000
-	End
+	simple_npc_msg msg_0472_T04R0201_00000
+	end
 
 scr_seq_T04R0201_001:
-	SimpleNPCMsg msg_0472_T04R0201_00001
-	End
+	simple_npc_msg msg_0472_T04R0201_00001
+	end
 
 scr_seq_T04R0201_002:
-	PlaySE SEQ_SE_DP_SELECT
-	LockAll
-	FacePlayer
-	PlayCry SPECIES_DIGLETT, 0
-	NPCMsg msg_0472_T04R0201_00002
-	WaitCry
-	WaitButton
-	CloseMsg
-	ReleaseAll
-	End
+	play_se SEQ_SE_DP_SELECT
+	lockall
+	faceplayer
+	play_cry SPECIES_DIGLETT, 0
+	npc_msg msg_0472_T04R0201_00002
+	wait_cry
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
 	.balign 4, 0

@@ -1,7 +1,7 @@
 #include <nitro/fs/overlay.h>
 #pragma once
-.public Heap_Alloc
-.public Heap_Free
+.public AllocFromHeap
+.public FreeToHeap
 .public Camera_History_New
 .public Camera_History_Delete
 .public Camera_New
@@ -15,7 +15,7 @@
 .public GF_AssertFail
 .public MI_CpuFill8
 .public _s32_div_f
-.public FieldCamera_Create
-.public FieldCamera_Delete
+.public ov01_021EABA8
+.public ov01_021EAC30
 .public ov01_021EACBC
 .public ov01_021EAD8C

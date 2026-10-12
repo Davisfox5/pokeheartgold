@@ -5,161 +5,161 @@
 
 	.rodata
 
-	ScrDef scr_seq_T25R1202_000
-	ScrDef scr_seq_T25R1202_001
-	ScrDef scr_seq_T25R1202_002
-	ScrDef scr_seq_T25R1202_003
-	ScrDef scr_seq_T25R1202_004
-	ScrDef scr_seq_T25R1202_005
-	ScrDef scr_seq_T25R1202_006
-	ScrDef scr_seq_T25R1202_007
-	ScrDef scr_seq_T25R1202_008
-	ScrDef scr_seq_T25R1202_009
-	ScrDef scr_seq_T25R1202_010
-	ScrDef scr_seq_T25R1202_011
-	ScrDef scr_seq_T25R1202_012
-	ScrDefEnd
+	scrdef scr_seq_T25R1202_000
+	scrdef scr_seq_T25R1202_001
+	scrdef scr_seq_T25R1202_002
+	scrdef scr_seq_T25R1202_003
+	scrdef scr_seq_T25R1202_004
+	scrdef scr_seq_T25R1202_005
+	scrdef scr_seq_T25R1202_006
+	scrdef scr_seq_T25R1202_007
+	scrdef scr_seq_T25R1202_008
+	scrdef scr_seq_T25R1202_009
+	scrdef scr_seq_T25R1202_010
+	scrdef scr_seq_T25R1202_011
+	scrdef scr_seq_T25R1202_012
+	scrdef_end
 
 scr_seq_T25R1202_000:
-	SimpleNPCMsg msg_0601_T25R1202_00000
-	End
+	simple_npc_msg msg_0601_T25R1202_00000
+	end
 
 scr_seq_T25R1202_001:
-	SimpleNPCMsg msg_0601_T25R1202_00001
-	End
+	simple_npc_msg msg_0601_T25R1202_00001
+	end
 
 scr_seq_T25R1202_002:
-	SimpleNPCMsg msg_0601_T25R1202_00002
-	End
+	simple_npc_msg msg_0601_T25R1202_00002
+	end
 
 scr_seq_T25R1202_003:
-	SimpleNPCMsg msg_0601_T25R1202_00003
-	End
+	simple_npc_msg msg_0601_T25R1202_00003
+	end
 
 scr_seq_T25R1202_004:
-	SimpleNPCMsg msg_0601_T25R1202_00004
-	End
+	simple_npc_msg msg_0601_T25R1202_00004
+	end
 
 scr_seq_T25R1202_005:
-	SimpleNPCMsg msg_0601_T25R1202_00005
-	End
+	simple_npc_msg msg_0601_T25R1202_00005
+	end
 
 scr_seq_T25R1202_006:
-	SimpleNPCMsg msg_0601_T25R1202_00006
-	End
+	simple_npc_msg msg_0601_T25R1202_00006
+	end
 
 scr_seq_T25R1202_007:
-	SimpleNPCMsg msg_0601_T25R1202_00007
-	End
+	simple_npc_msg msg_0601_T25R1202_00007
+	end
 
 scr_seq_T25R1202_008:
-	SimpleNPCMsg msg_0601_T25R1202_00008
-	End
+	simple_npc_msg msg_0601_T25R1202_00008
+	end
 
 scr_seq_T25R1202_009:
-	PlaySE SEQ_SE_DP_SELECT
-	LockAll
-	NPCMsg msg_0601_T25R1202_00009
-	WaitButton
-	CloseMsg
-	ReleaseAll
-	End
+	play_se SEQ_SE_DP_SELECT
+	lockall
+	npc_msg msg_0601_T25R1202_00009
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
 
 scr_seq_T25R1202_010:
-	PlaySE SEQ_SE_DP_SELECT
-	LockAll
-	NPCMsg msg_0601_T25R1202_00010
-	WaitButton
-	CloseMsg
-	ReleaseAll
-	End
+	play_se SEQ_SE_DP_SELECT
+	lockall
+	npc_msg msg_0601_T25R1202_00010
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
 
 scr_seq_T25R1202_011:
-	PlaySE SEQ_SE_DP_SELECT
-	LockAll
-	SetVar VAR_SPECIAL_x8005, 6
-	GoTo _0117
-	End
+	play_se SEQ_SE_DP_SELECT
+	lockall
+	setvar VAR_SPECIAL_x8005, 6
+	goto _0117
+	end
 
 _0117:
-	NPCMsg msg_0601_T25R1202_00013
-	TouchscreenMenuHide
-	MenuInit 21, 11, 0, 1, VAR_SPECIAL_RESULT
-	MenuItemAdd 15, 255, 0
-	MenuItemAdd 16, 255, 1
-	MenuItemAdd 17, 255, 2
-	MenuExec
-	Switch VAR_SPECIAL_RESULT
-	Case 0, _016E
-	Case 1, _0193
-	GoTo _0166
-	End
+	npc_msg msg_0601_T25R1202_00013
+	touchscreen_menu_hide
+	menu_init 21, 11, 0, 1, VAR_SPECIAL_RESULT
+	menu_item_add 15, 255, 0
+	menu_item_add 16, 255, 1
+	menu_item_add 17, 255, 2
+	menu_exec
+	switch VAR_SPECIAL_RESULT
+	case 0, _016E
+	case 1, _0193
+	goto _0166
+	end
 
 _0166:
-	TouchscreenMenuShow
+	touchscreen_menu_show
 _0168:
-	CloseMsg
-	ReleaseAll
-	End
+	closemsg
+	releaseall
+	end
 
 _016E:
-	CallStd std_prompt_save
-	CopyVar VAR_SPECIAL_RESULT, VAR_TEMP_x4000
-	Compare VAR_SPECIAL_RESULT, 0
-	GoToIfEq _0168
-	CloseMsg
-	ScrCmd_815 0
-	CallStd std_enter_global_terminal
-	ReleaseAll
-	End
+	callstd std_prompt_save
+	copyvar VAR_SPECIAL_RESULT, VAR_TEMP_x4000
+	compare VAR_SPECIAL_RESULT, 0
+	goto_if_eq _0168
+	closemsg
+	scrcmd_815 0
+	callstd std_enter_global_terminal
+	releaseall
+	end
 
 _0193:
-	NPCMsg msg_0601_T25R1202_00014
-	GoTo _0117
-	End
+	npc_msg msg_0601_T25R1202_00014
+	goto _0117
+	end
 
 scr_seq_T25R1202_012:
-	PlaySE SEQ_SE_DP_SELECT
-	LockAll
-	SetVar VAR_SPECIAL_x8005, 5
-	GoTo _01B2
-	End
+	play_se SEQ_SE_DP_SELECT
+	lockall
+	setvar VAR_SPECIAL_x8005, 5
+	goto _01B2
+	end
 
 _01B2:
-	NPCMsg msg_0601_T25R1202_00011
-	TouchscreenMenuHide
-	MenuInit 21, 11, 0, 1, VAR_SPECIAL_RESULT
-	MenuItemAdd 15, 255, 0
-	MenuItemAdd 16, 255, 1
-	MenuItemAdd 17, 255, 2
-	MenuExec
-	Switch VAR_SPECIAL_RESULT
-	Case 0, _0209
-	Case 1, _022E
-	GoTo _0201
-	End
+	npc_msg msg_0601_T25R1202_00011
+	touchscreen_menu_hide
+	menu_init 21, 11, 0, 1, VAR_SPECIAL_RESULT
+	menu_item_add 15, 255, 0
+	menu_item_add 16, 255, 1
+	menu_item_add 17, 255, 2
+	menu_exec
+	switch VAR_SPECIAL_RESULT
+	case 0, _0209
+	case 1, _022E
+	goto _0201
+	end
 
 _0201:
-	TouchscreenMenuShow
+	touchscreen_menu_show
 _0203:
-	CloseMsg
-	ReleaseAll
-	End
+	closemsg
+	releaseall
+	end
 
 _0209:
-	CallStd std_prompt_save
-	CopyVar VAR_SPECIAL_RESULT, VAR_TEMP_x4000
-	Compare VAR_SPECIAL_RESULT, 0
-	GoToIfEq _0203
-	CloseMsg
-	ScrCmd_815 0
-	CallStd std_enter_global_terminal
-	ReleaseAll
-	End
+	callstd std_prompt_save
+	copyvar VAR_SPECIAL_RESULT, VAR_TEMP_x4000
+	compare VAR_SPECIAL_RESULT, 0
+	goto_if_eq _0203
+	closemsg
+	scrcmd_815 0
+	callstd std_enter_global_terminal
+	releaseall
+	end
 
 _022E:
-	NPCMsg msg_0601_T25R1202_00012
-	GoTo _01B2
-	End
+	npc_msg msg_0601_T25R1202_00012
+	goto _01B2
+	end
 
 	.balign 4, 0

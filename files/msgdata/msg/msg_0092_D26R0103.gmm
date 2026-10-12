@@ -2,11 +2,11 @@
 <body language="English">
 	<row id="msg_0092_D26R0103_00000" index="0">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">I’m waiting to see SLOWPOKE’s moment\nof evolution. Through observation,\fI made a new discovery.\rA SLOWPOKE with a King’s Rock often\ngets bitten by a SHELLDER.\rHere, I’ll share a King’s Rock with you.</language>
+		<language name="English">A King’s Rock, fitted with\ncircuitry you’ve never seen--fine\fwire, a dead indicator light.\rSomeone built this on purpose.\rOn the dead terminal beside it,\none un-wiped line remains:\f“...stress response higher than\nmodeled. Continue.”</language>
 	</row>
 	<row id="msg_0092_D26R0103_00001" index="1">
 		<attribute name="window_context_name">garbage</attribute>
-		<language name="English"></language>
+		<language name="English">You pocket the modified King’s\nRock.\rSomeone should see this.</language>
 		<language name="日本語">XXXXXXXXXXXXXXXXXXXXXX</language>
 	</row>
 	<row id="msg_0092_D26R0103_00002" index="2">

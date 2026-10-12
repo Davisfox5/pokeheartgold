@@ -12,7 +12,7 @@ sub_0205AC88: ; 0x0205AC88
 	ldr r1, _0205ACF4 ; =0x000004E8
 	add r5, r0, #0
 	mov r0, #0x1f
-	bl Heap_Alloc
+	bl AllocFromHeap
 	add r4, r0, #0
 	ldr r2, _0205ACF4 ; =0x000004E8
 	mov r0, #0
@@ -45,7 +45,7 @@ sub_0205AC88: ; 0x0205AC88
 	ldr r0, [r0, #0x40]
 	str r0, [r4, #8]
 	mov r0, #0xb
-	bl Heap_CreateAtEnd
+	bl CreateHeapAtEnd
 	mov r0, #0x57
 	bl sub_0205B3B8
 	ldr r1, _0205AD08 ; =0x000004DC
@@ -108,9 +108,9 @@ sub_0205AD3C: ; 0x0205AD3C
 	ldr r0, [r4, r0]
 	bl sub_0205B3CC
 	mov r0, #0x57
-	bl Heap_Destroy
+	bl DestroyHeap
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	pop {r4, pc}
 	.balign 4, 0
 _0205AD5C: .word 0x000004DC
@@ -418,11 +418,11 @@ sub_0205AF78: ; 0x0205AF78
 _0205AF8A:
 	ldr r0, [sp]
 	ldr r0, [r0, #8]
-	bl PlayerAvatar_GetXCoord
+	bl GetPlayerXCoord
 	str r0, [sp, #0xc]
 	ldr r0, [sp]
 	ldr r0, [r0, #8]
-	bl PlayerAvatar_GetZCoord
+	bl GetPlayerZCoord
 	ldr r4, [sp]
 	str r0, [sp, #8]
 	add r6, r4, #0
@@ -931,7 +931,7 @@ sub_0205B380: ; 0x0205B380
 	push {r4, lr}
 	add r4, r0, #0
 	ldr r0, [r4]
-	bl Heap_Free
+	bl FreeToHeap
 	ldr r0, [r4, #4]
 	cmp r0, #0
 	beq _0205B394
@@ -966,7 +966,7 @@ sub_0205B3B8: ; 0x0205B3B8
 	push {r4, lr}
 	mov r1, #0x35
 	lsl r1, r1, #4
-	bl Heap_Alloc
+	bl AllocFromHeap
 	add r4, r0, #0
 	bl sub_0205B35C
 	add r0, r4, #0
@@ -979,6 +979,6 @@ sub_0205B3CC: ; 0x0205B3CC
 	add r4, r0, #0
 	bl sub_0205B3A0
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	pop {r4, pc}
 	thumb_func_end sub_0205B3CC

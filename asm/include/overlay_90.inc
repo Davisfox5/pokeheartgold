@@ -30,10 +30,10 @@
 .public sub_0200A740
 .public DestroySingle2DGfxResObj
 .public SpriteResourceCollection_Find
-.public SpriteTransfer_CreateCharTransferTask_AllocAtEnd
-.public SpriteTransfer_DeleteCharTransferTask
-.public SpriteTransfer_CreatePlttTransferTask
-.public SpriteTransfer_DeletePlttTransferTask
+.public sub_0200ADA4
+.public sub_0200AEB0
+.public sub_0200B00C
+.public sub_0200B0A8
 .public SpriteTransfer_GetPlttOffset
 .public OamManager_Create
 .public OamManager_ApplyAndResetBuffers
@@ -74,8 +74,8 @@
 .public YesNoPrompt_Reset
 .public HBlankInterruptDisable
 .public Main_SetHBlankIntrCB
-.public Heap_Alloc
-.public Heap_Free
+.public AllocFromHeap
+.public FreeToHeap
 .public BgConfig_Alloc
 .public SetBothScreensModesAndDisable
 .public InitBgFromTemplate

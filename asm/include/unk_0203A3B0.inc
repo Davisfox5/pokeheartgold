@@ -3,8 +3,8 @@
 .public SysTask_CreateOnVWaitQueue
 .public SysTask_Destroy
 .public sub_0201A3F8
-.public Heap_AllocAtEnd
-.public Heap_Free
+.public AllocFromHeapAtEnd
+.public FreeToHeap
 .public GF_AssertFail
 .public sub_02034DCC
 .public sub_02037454

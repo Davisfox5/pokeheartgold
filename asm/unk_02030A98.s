@@ -1551,7 +1551,7 @@ _0203148E:
 	cmp r6, #0
 	beq _02031498
 	add r0, r6, #0
-	bl Heap_Free
+	bl FreeToHeap
 _02031498:
 	ldr r0, [sp, #0xc]
 	add sp, #0x1c
@@ -1564,7 +1564,7 @@ _020314A0: .word 0x01001001
 sub_020314A4: ; 0x020314A4
 	push {r4, lr}
 	mov r1, #0x80
-	bl Heap_Alloc
+	bl AllocFromHeap
 	mov r1, #0
 	mov r2, #0x80
 	add r4, r0, #0
@@ -1576,10 +1576,10 @@ sub_020314A4: ; 0x020314A4
 
 	thumb_func_start sub_020314BC
 sub_020314BC: ; 0x020314BC
-	ldr r3, _020314C0 ; =Heap_Free
+	ldr r3, _020314C0 ; =FreeToHeap
 	bx r3
 	.balign 4, 0
-_020314C0: .word Heap_Free
+_020314C0: .word FreeToHeap
 	thumb_func_end sub_020314BC
 
 	thumb_func_start sub_020314C4

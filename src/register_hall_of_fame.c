@@ -23,7 +23,6 @@
 #include "overlay_manager.h"
 #include "pokemon.h"
 #include "pokepic.h"
-#include "screen_fade.h"
 #include "sound_02004A44.h"
 #include "sprite_system.h"
 #include "sys_task_api.h"
@@ -31,6 +30,7 @@
 #include "text.h"
 #include "touchscreen.h"
 #include "unk_02005D10.h"
+#include "unk_0200FA24.h"
 #include "unk_02013FDC.h"
 #include "unk_02026E84.h"
 #include "unk_0206D494.h"
@@ -801,7 +801,7 @@ static const ManagedSpriteTemplate sPicTemplates[21] = {
            .y = 480,
            .z = 0,
            .animation = 0,
-           .drawPriority = 0,
+           .spritePriority = 0,
            .pal = 0,
            .vram = NNS_G2D_VRAM_TYPE_2DMAIN,
            .resIdList = {
@@ -812,27 +812,27 @@ static const ManagedSpriteTemplate sPicTemplates[21] = {
             [GF_GFX_RES_TYPE_MCEL] = -1,
             [GF_GFX_RES_TYPE_MANM] = -1 },
            .bgPriority = 2,
-           .vramTransfer = 0                                                                                                                                                                                                                                                                                                                                          },
-    [1] = { .x = 512, .y = 480, .z = 0, .animation = 0, .drawPriority = 1,  .pal = 0, .vram = NNS_G2D_VRAM_TYPE_2DMAIN, .resIdList = { [GF_GFX_RES_TYPE_CHAR] = 55512, [GF_GFX_RES_TYPE_PLTT] = 55513, [GF_GFX_RES_TYPE_CELL] = 55512, [GF_GFX_RES_TYPE_ANIM] = 55512, [GF_GFX_RES_TYPE_MCEL] = -1, [GF_GFX_RES_TYPE_MANM] = -1 }, .bgPriority = 2, .vramTransfer = 0 },
-    [2] = { .x = 512, .y = 480, .z = 0, .animation = 0, .drawPriority = 2,  .pal = 0, .vram = NNS_G2D_VRAM_TYPE_2DMAIN, .resIdList = { [GF_GFX_RES_TYPE_CHAR] = 55513, [GF_GFX_RES_TYPE_PLTT] = 55514, [GF_GFX_RES_TYPE_CELL] = 55513, [GF_GFX_RES_TYPE_ANIM] = 55513, [GF_GFX_RES_TYPE_MCEL] = -1, [GF_GFX_RES_TYPE_MANM] = -1 }, .bgPriority = 3, .vramTransfer = 0 },
-    [3] = { .x = 512, .y = 480, .z = 0, .animation = 0, .drawPriority = 3,  .pal = 0, .vram = NNS_G2D_VRAM_TYPE_2DMAIN, .resIdList = { [GF_GFX_RES_TYPE_CHAR] = 55513, [GF_GFX_RES_TYPE_PLTT] = 55515, [GF_GFX_RES_TYPE_CELL] = 55513, [GF_GFX_RES_TYPE_ANIM] = 55513, [GF_GFX_RES_TYPE_MCEL] = -1, [GF_GFX_RES_TYPE_MANM] = -1 }, .bgPriority = 3, .vramTransfer = 0 },
-    [4] = { .x = 512, .y = 480, .z = 0, .animation = 0, .drawPriority = 4,  .pal = 0, .vram = NNS_G2D_VRAM_TYPE_2DMAIN, .resIdList = { [GF_GFX_RES_TYPE_CHAR] = 55518, [GF_GFX_RES_TYPE_PLTT] = 55518, [GF_GFX_RES_TYPE_CELL] = 55514, [GF_GFX_RES_TYPE_ANIM] = 55514, [GF_GFX_RES_TYPE_MCEL] = -1, [GF_GFX_RES_TYPE_MANM] = -1 }, .bgPriority = 2, .vramTransfer = 0 },
-    [5] = { .x = 512, .y = 480, .z = 0, .animation = 0, .drawPriority = 5,  .pal = 0, .vram = NNS_G2D_VRAM_TYPE_2DMAIN, .resIdList = { [GF_GFX_RES_TYPE_CHAR] = 55518, [GF_GFX_RES_TYPE_PLTT] = 55519, [GF_GFX_RES_TYPE_CELL] = 55514, [GF_GFX_RES_TYPE_ANIM] = 55514, [GF_GFX_RES_TYPE_MCEL] = -1, [GF_GFX_RES_TYPE_MANM] = -1 }, .bgPriority = 2, .vramTransfer = 0 },
-    [6] = { .x = 168, .y = -40, .z = 0, .animation = 0, .drawPriority = 20, .pal = 0, .vram = NNS_G2D_VRAM_TYPE_2DMAIN, .resIdList = { [GF_GFX_RES_TYPE_CHAR] = 55512, [GF_GFX_RES_TYPE_PLTT] = 55512, [GF_GFX_RES_TYPE_CELL] = 55512, [GF_GFX_RES_TYPE_ANIM] = 55512, [GF_GFX_RES_TYPE_MCEL] = -1, [GF_GFX_RES_TYPE_MANM] = -1 }, .bgPriority = 2, .vramTransfer = 0 },
-    [7] = { .x = -92, .y = 88,  .z = 0, .animation = 0, .drawPriority = 21, .pal = 0, .vram = NNS_G2D_VRAM_TYPE_2DMAIN, .resIdList = { [GF_GFX_RES_TYPE_CHAR] = 55513, [GF_GFX_RES_TYPE_PLTT] = 55513, [GF_GFX_RES_TYPE_CELL] = 55512, [GF_GFX_RES_TYPE_ANIM] = 55512, [GF_GFX_RES_TYPE_MCEL] = -1, [GF_GFX_RES_TYPE_MANM] = -1 }, .bgPriority = 2, .vramTransfer = 0 },
-    [8] = { .x = 348, .y = 88,  .z = 0, .animation = 0, .drawPriority = 22, .pal = 0, .vram = NNS_G2D_VRAM_TYPE_2DMAIN, .resIdList = { [GF_GFX_RES_TYPE_CHAR] = 55514, [GF_GFX_RES_TYPE_PLTT] = 55514, [GF_GFX_RES_TYPE_CELL] = 55512, [GF_GFX_RES_TYPE_ANIM] = 55512, [GF_GFX_RES_TYPE_MCEL] = -1, [GF_GFX_RES_TYPE_MANM] = -1 }, .bgPriority = 2, .vramTransfer = 0 },
-    [9] = { .x = 88,  .y = -40, .z = 0, .animation = 0, .drawPriority = 23, .pal = 0, .vram = NNS_G2D_VRAM_TYPE_2DMAIN, .resIdList = { [GF_GFX_RES_TYPE_CHAR] = 55515, [GF_GFX_RES_TYPE_PLTT] = 55515, [GF_GFX_RES_TYPE_CELL] = 55512, [GF_GFX_RES_TYPE_ANIM] = 55512, [GF_GFX_RES_TYPE_MCEL] = -1, [GF_GFX_RES_TYPE_MANM] = -1 }, .bgPriority = 2, .vramTransfer = 0 },
-    [10] = { .x = 336, .y = 0,   .z = 0, .animation = 0, .drawPriority = 24, .pal = 0, .vram = NNS_G2D_VRAM_TYPE_2DMAIN, .resIdList = { [GF_GFX_RES_TYPE_CHAR] = 55516, [GF_GFX_RES_TYPE_PLTT] = 55516, [GF_GFX_RES_TYPE_CELL] = 55512, [GF_GFX_RES_TYPE_ANIM] = 55512, [GF_GFX_RES_TYPE_MCEL] = -1, [GF_GFX_RES_TYPE_MANM] = -1 }, .bgPriority = 2, .vramTransfer = 0 },
-    [11] = { .x = -80, .y = 0,   .z = 0, .animation = 0, .drawPriority = 25, .pal = 0, .vram = NNS_G2D_VRAM_TYPE_2DMAIN, .resIdList = { [GF_GFX_RES_TYPE_CHAR] = 55517, [GF_GFX_RES_TYPE_PLTT] = 55517, [GF_GFX_RES_TYPE_CELL] = 55512, [GF_GFX_RES_TYPE_ANIM] = 55512, [GF_GFX_RES_TYPE_MCEL] = -1, [GF_GFX_RES_TYPE_MANM] = -1 }, .bgPriority = 2, .vramTransfer = 0 },
-    [12] = { .x = 93,  .y = 110, .z = 0, .animation = 0, .drawPriority = 40, .pal = 0, .vram = NNS_G2D_VRAM_TYPE_2DMAIN, .resIdList = { [GF_GFX_RES_TYPE_CHAR] = 55512, [GF_GFX_RES_TYPE_PLTT] = 55521, [GF_GFX_RES_TYPE_CELL] = 55512, [GF_GFX_RES_TYPE_ANIM] = 55512, [GF_GFX_RES_TYPE_MCEL] = -1, [GF_GFX_RES_TYPE_MANM] = -1 }, .bgPriority = 3, .vramTransfer = 0 },
-    [13] = { .x = 157, .y = 110, .z = 0, .animation = 0, .drawPriority = 40, .pal = 0, .vram = NNS_G2D_VRAM_TYPE_2DMAIN, .resIdList = { [GF_GFX_RES_TYPE_CHAR] = 55513, [GF_GFX_RES_TYPE_PLTT] = 55521, [GF_GFX_RES_TYPE_CELL] = 55512, [GF_GFX_RES_TYPE_ANIM] = 55512, [GF_GFX_RES_TYPE_MCEL] = -1, [GF_GFX_RES_TYPE_MANM] = -1 }, .bgPriority = 3, .vramTransfer = 0 },
-    [14] = { .x = 53,  .y = 96,  .z = 0, .animation = 0, .drawPriority = 40, .pal = 0, .vram = NNS_G2D_VRAM_TYPE_2DMAIN, .resIdList = { [GF_GFX_RES_TYPE_CHAR] = 55514, [GF_GFX_RES_TYPE_PLTT] = 55521, [GF_GFX_RES_TYPE_CELL] = 55512, [GF_GFX_RES_TYPE_ANIM] = 55512, [GF_GFX_RES_TYPE_MCEL] = -1, [GF_GFX_RES_TYPE_MANM] = -1 }, .bgPriority = 3, .vramTransfer = 0 },
-    [15] = { .x = 197, .y = 96,  .z = 0, .animation = 0, .drawPriority = 40, .pal = 0, .vram = NNS_G2D_VRAM_TYPE_2DMAIN, .resIdList = { [GF_GFX_RES_TYPE_CHAR] = 55515, [GF_GFX_RES_TYPE_PLTT] = 55521, [GF_GFX_RES_TYPE_CELL] = 55512, [GF_GFX_RES_TYPE_ANIM] = 55512, [GF_GFX_RES_TYPE_MCEL] = -1, [GF_GFX_RES_TYPE_MANM] = -1 }, .bgPriority = 3, .vramTransfer = 0 },
-    [16] = { .x = 37,  .y = 72,  .z = 0, .animation = 0, .drawPriority = 40, .pal = 0, .vram = NNS_G2D_VRAM_TYPE_2DMAIN, .resIdList = { [GF_GFX_RES_TYPE_CHAR] = 55516, [GF_GFX_RES_TYPE_PLTT] = 55521, [GF_GFX_RES_TYPE_CELL] = 55512, [GF_GFX_RES_TYPE_ANIM] = 55512, [GF_GFX_RES_TYPE_MCEL] = -1, [GF_GFX_RES_TYPE_MANM] = -1 }, .bgPriority = 3, .vramTransfer = 0 },
-    [17] = { .x = 213, .y = 72,  .z = 0, .animation = 0, .drawPriority = 40, .pal = 0, .vram = NNS_G2D_VRAM_TYPE_2DMAIN, .resIdList = { [GF_GFX_RES_TYPE_CHAR] = 55517, [GF_GFX_RES_TYPE_PLTT] = 55521, [GF_GFX_RES_TYPE_CELL] = 55512, [GF_GFX_RES_TYPE_ANIM] = 55512, [GF_GFX_RES_TYPE_MCEL] = -1, [GF_GFX_RES_TYPE_MANM] = -1 }, .bgPriority = 3, .vramTransfer = 0 },
-    [18] = { .x = 128, .y = 128, .z = 0, .animation = 0, .drawPriority = 10, .pal = 0, .vram = NNS_G2D_VRAM_TYPE_2DMAIN, .resIdList = { [GF_GFX_RES_TYPE_CHAR] = 55519, [GF_GFX_RES_TYPE_PLTT] = 55520, [GF_GFX_RES_TYPE_CELL] = 55512, [GF_GFX_RES_TYPE_ANIM] = 55512, [GF_GFX_RES_TYPE_MCEL] = -1, [GF_GFX_RES_TYPE_MANM] = -1 }, .bgPriority = 2, .vramTransfer = 0 },
-    [19] = { .x = 125, .y = 120, .z = 0, .animation = 0, .drawPriority = 40, .pal = 0, .vram = NNS_G2D_VRAM_TYPE_2DMAIN, .resIdList = { [GF_GFX_RES_TYPE_CHAR] = 55519, [GF_GFX_RES_TYPE_PLTT] = 55521, [GF_GFX_RES_TYPE_CELL] = 55512, [GF_GFX_RES_TYPE_ANIM] = 55512, [GF_GFX_RES_TYPE_MCEL] = -1, [GF_GFX_RES_TYPE_MANM] = -1 }, .bgPriority = 3, .vramTransfer = 0 },
-    [20] = { .x = 0,   .y = 0,   .z = 0, .animation = 0, .drawPriority = 0,  .pal = 0, .vram = NNS_G2D_VRAM_TYPE_2DMAIN, .resIdList = { [GF_GFX_RES_TYPE_CHAR] = 55520, [GF_GFX_RES_TYPE_PLTT] = 55522, [GF_GFX_RES_TYPE_CELL] = 55515, [GF_GFX_RES_TYPE_ANIM] = 55515, [GF_GFX_RES_TYPE_MCEL] = -1, [GF_GFX_RES_TYPE_MANM] = -1 }, .bgPriority = 2, .vramTransfer = 0 }
+           .vramTransfer = 0                                                                                                                                                                                                                                                                                                                                            },
+    [1] = { .x = 512, .y = 480, .z = 0, .animation = 0, .spritePriority = 1,  .pal = 0, .vram = NNS_G2D_VRAM_TYPE_2DMAIN, .resIdList = { [GF_GFX_RES_TYPE_CHAR] = 55512, [GF_GFX_RES_TYPE_PLTT] = 55513, [GF_GFX_RES_TYPE_CELL] = 55512, [GF_GFX_RES_TYPE_ANIM] = 55512, [GF_GFX_RES_TYPE_MCEL] = -1, [GF_GFX_RES_TYPE_MANM] = -1 }, .bgPriority = 2, .vramTransfer = 0 },
+    [2] = { .x = 512, .y = 480, .z = 0, .animation = 0, .spritePriority = 2,  .pal = 0, .vram = NNS_G2D_VRAM_TYPE_2DMAIN, .resIdList = { [GF_GFX_RES_TYPE_CHAR] = 55513, [GF_GFX_RES_TYPE_PLTT] = 55514, [GF_GFX_RES_TYPE_CELL] = 55513, [GF_GFX_RES_TYPE_ANIM] = 55513, [GF_GFX_RES_TYPE_MCEL] = -1, [GF_GFX_RES_TYPE_MANM] = -1 }, .bgPriority = 3, .vramTransfer = 0 },
+    [3] = { .x = 512, .y = 480, .z = 0, .animation = 0, .spritePriority = 3,  .pal = 0, .vram = NNS_G2D_VRAM_TYPE_2DMAIN, .resIdList = { [GF_GFX_RES_TYPE_CHAR] = 55513, [GF_GFX_RES_TYPE_PLTT] = 55515, [GF_GFX_RES_TYPE_CELL] = 55513, [GF_GFX_RES_TYPE_ANIM] = 55513, [GF_GFX_RES_TYPE_MCEL] = -1, [GF_GFX_RES_TYPE_MANM] = -1 }, .bgPriority = 3, .vramTransfer = 0 },
+    [4] = { .x = 512, .y = 480, .z = 0, .animation = 0, .spritePriority = 4,  .pal = 0, .vram = NNS_G2D_VRAM_TYPE_2DMAIN, .resIdList = { [GF_GFX_RES_TYPE_CHAR] = 55518, [GF_GFX_RES_TYPE_PLTT] = 55518, [GF_GFX_RES_TYPE_CELL] = 55514, [GF_GFX_RES_TYPE_ANIM] = 55514, [GF_GFX_RES_TYPE_MCEL] = -1, [GF_GFX_RES_TYPE_MANM] = -1 }, .bgPriority = 2, .vramTransfer = 0 },
+    [5] = { .x = 512, .y = 480, .z = 0, .animation = 0, .spritePriority = 5,  .pal = 0, .vram = NNS_G2D_VRAM_TYPE_2DMAIN, .resIdList = { [GF_GFX_RES_TYPE_CHAR] = 55518, [GF_GFX_RES_TYPE_PLTT] = 55519, [GF_GFX_RES_TYPE_CELL] = 55514, [GF_GFX_RES_TYPE_ANIM] = 55514, [GF_GFX_RES_TYPE_MCEL] = -1, [GF_GFX_RES_TYPE_MANM] = -1 }, .bgPriority = 2, .vramTransfer = 0 },
+    [6] = { .x = 168, .y = -40, .z = 0, .animation = 0, .spritePriority = 20, .pal = 0, .vram = NNS_G2D_VRAM_TYPE_2DMAIN, .resIdList = { [GF_GFX_RES_TYPE_CHAR] = 55512, [GF_GFX_RES_TYPE_PLTT] = 55512, [GF_GFX_RES_TYPE_CELL] = 55512, [GF_GFX_RES_TYPE_ANIM] = 55512, [GF_GFX_RES_TYPE_MCEL] = -1, [GF_GFX_RES_TYPE_MANM] = -1 }, .bgPriority = 2, .vramTransfer = 0 },
+    [7] = { .x = -92, .y = 88,  .z = 0, .animation = 0, .spritePriority = 21, .pal = 0, .vram = NNS_G2D_VRAM_TYPE_2DMAIN, .resIdList = { [GF_GFX_RES_TYPE_CHAR] = 55513, [GF_GFX_RES_TYPE_PLTT] = 55513, [GF_GFX_RES_TYPE_CELL] = 55512, [GF_GFX_RES_TYPE_ANIM] = 55512, [GF_GFX_RES_TYPE_MCEL] = -1, [GF_GFX_RES_TYPE_MANM] = -1 }, .bgPriority = 2, .vramTransfer = 0 },
+    [8] = { .x = 348, .y = 88,  .z = 0, .animation = 0, .spritePriority = 22, .pal = 0, .vram = NNS_G2D_VRAM_TYPE_2DMAIN, .resIdList = { [GF_GFX_RES_TYPE_CHAR] = 55514, [GF_GFX_RES_TYPE_PLTT] = 55514, [GF_GFX_RES_TYPE_CELL] = 55512, [GF_GFX_RES_TYPE_ANIM] = 55512, [GF_GFX_RES_TYPE_MCEL] = -1, [GF_GFX_RES_TYPE_MANM] = -1 }, .bgPriority = 2, .vramTransfer = 0 },
+    [9] = { .x = 88,  .y = -40, .z = 0, .animation = 0, .spritePriority = 23, .pal = 0, .vram = NNS_G2D_VRAM_TYPE_2DMAIN, .resIdList = { [GF_GFX_RES_TYPE_CHAR] = 55515, [GF_GFX_RES_TYPE_PLTT] = 55515, [GF_GFX_RES_TYPE_CELL] = 55512, [GF_GFX_RES_TYPE_ANIM] = 55512, [GF_GFX_RES_TYPE_MCEL] = -1, [GF_GFX_RES_TYPE_MANM] = -1 }, .bgPriority = 2, .vramTransfer = 0 },
+    [10] = { .x = 336, .y = 0,   .z = 0, .animation = 0, .spritePriority = 24, .pal = 0, .vram = NNS_G2D_VRAM_TYPE_2DMAIN, .resIdList = { [GF_GFX_RES_TYPE_CHAR] = 55516, [GF_GFX_RES_TYPE_PLTT] = 55516, [GF_GFX_RES_TYPE_CELL] = 55512, [GF_GFX_RES_TYPE_ANIM] = 55512, [GF_GFX_RES_TYPE_MCEL] = -1, [GF_GFX_RES_TYPE_MANM] = -1 }, .bgPriority = 2, .vramTransfer = 0 },
+    [11] = { .x = -80, .y = 0,   .z = 0, .animation = 0, .spritePriority = 25, .pal = 0, .vram = NNS_G2D_VRAM_TYPE_2DMAIN, .resIdList = { [GF_GFX_RES_TYPE_CHAR] = 55517, [GF_GFX_RES_TYPE_PLTT] = 55517, [GF_GFX_RES_TYPE_CELL] = 55512, [GF_GFX_RES_TYPE_ANIM] = 55512, [GF_GFX_RES_TYPE_MCEL] = -1, [GF_GFX_RES_TYPE_MANM] = -1 }, .bgPriority = 2, .vramTransfer = 0 },
+    [12] = { .x = 93,  .y = 110, .z = 0, .animation = 0, .spritePriority = 40, .pal = 0, .vram = NNS_G2D_VRAM_TYPE_2DMAIN, .resIdList = { [GF_GFX_RES_TYPE_CHAR] = 55512, [GF_GFX_RES_TYPE_PLTT] = 55521, [GF_GFX_RES_TYPE_CELL] = 55512, [GF_GFX_RES_TYPE_ANIM] = 55512, [GF_GFX_RES_TYPE_MCEL] = -1, [GF_GFX_RES_TYPE_MANM] = -1 }, .bgPriority = 3, .vramTransfer = 0 },
+    [13] = { .x = 157, .y = 110, .z = 0, .animation = 0, .spritePriority = 40, .pal = 0, .vram = NNS_G2D_VRAM_TYPE_2DMAIN, .resIdList = { [GF_GFX_RES_TYPE_CHAR] = 55513, [GF_GFX_RES_TYPE_PLTT] = 55521, [GF_GFX_RES_TYPE_CELL] = 55512, [GF_GFX_RES_TYPE_ANIM] = 55512, [GF_GFX_RES_TYPE_MCEL] = -1, [GF_GFX_RES_TYPE_MANM] = -1 }, .bgPriority = 3, .vramTransfer = 0 },
+    [14] = { .x = 53,  .y = 96,  .z = 0, .animation = 0, .spritePriority = 40, .pal = 0, .vram = NNS_G2D_VRAM_TYPE_2DMAIN, .resIdList = { [GF_GFX_RES_TYPE_CHAR] = 55514, [GF_GFX_RES_TYPE_PLTT] = 55521, [GF_GFX_RES_TYPE_CELL] = 55512, [GF_GFX_RES_TYPE_ANIM] = 55512, [GF_GFX_RES_TYPE_MCEL] = -1, [GF_GFX_RES_TYPE_MANM] = -1 }, .bgPriority = 3, .vramTransfer = 0 },
+    [15] = { .x = 197, .y = 96,  .z = 0, .animation = 0, .spritePriority = 40, .pal = 0, .vram = NNS_G2D_VRAM_TYPE_2DMAIN, .resIdList = { [GF_GFX_RES_TYPE_CHAR] = 55515, [GF_GFX_RES_TYPE_PLTT] = 55521, [GF_GFX_RES_TYPE_CELL] = 55512, [GF_GFX_RES_TYPE_ANIM] = 55512, [GF_GFX_RES_TYPE_MCEL] = -1, [GF_GFX_RES_TYPE_MANM] = -1 }, .bgPriority = 3, .vramTransfer = 0 },
+    [16] = { .x = 37,  .y = 72,  .z = 0, .animation = 0, .spritePriority = 40, .pal = 0, .vram = NNS_G2D_VRAM_TYPE_2DMAIN, .resIdList = { [GF_GFX_RES_TYPE_CHAR] = 55516, [GF_GFX_RES_TYPE_PLTT] = 55521, [GF_GFX_RES_TYPE_CELL] = 55512, [GF_GFX_RES_TYPE_ANIM] = 55512, [GF_GFX_RES_TYPE_MCEL] = -1, [GF_GFX_RES_TYPE_MANM] = -1 }, .bgPriority = 3, .vramTransfer = 0 },
+    [17] = { .x = 213, .y = 72,  .z = 0, .animation = 0, .spritePriority = 40, .pal = 0, .vram = NNS_G2D_VRAM_TYPE_2DMAIN, .resIdList = { [GF_GFX_RES_TYPE_CHAR] = 55517, [GF_GFX_RES_TYPE_PLTT] = 55521, [GF_GFX_RES_TYPE_CELL] = 55512, [GF_GFX_RES_TYPE_ANIM] = 55512, [GF_GFX_RES_TYPE_MCEL] = -1, [GF_GFX_RES_TYPE_MANM] = -1 }, .bgPriority = 3, .vramTransfer = 0 },
+    [18] = { .x = 128, .y = 128, .z = 0, .animation = 0, .spritePriority = 10, .pal = 0, .vram = NNS_G2D_VRAM_TYPE_2DMAIN, .resIdList = { [GF_GFX_RES_TYPE_CHAR] = 55519, [GF_GFX_RES_TYPE_PLTT] = 55520, [GF_GFX_RES_TYPE_CELL] = 55512, [GF_GFX_RES_TYPE_ANIM] = 55512, [GF_GFX_RES_TYPE_MCEL] = -1, [GF_GFX_RES_TYPE_MANM] = -1 }, .bgPriority = 2, .vramTransfer = 0 },
+    [19] = { .x = 125, .y = 120, .z = 0, .animation = 0, .spritePriority = 40, .pal = 0, .vram = NNS_G2D_VRAM_TYPE_2DMAIN, .resIdList = { [GF_GFX_RES_TYPE_CHAR] = 55519, [GF_GFX_RES_TYPE_PLTT] = 55521, [GF_GFX_RES_TYPE_CELL] = 55512, [GF_GFX_RES_TYPE_ANIM] = 55512, [GF_GFX_RES_TYPE_MCEL] = -1, [GF_GFX_RES_TYPE_MANM] = -1 }, .bgPriority = 3, .vramTransfer = 0 },
+    [20] = { .x = 0,   .y = 0,   .z = 0, .animation = 0, .spritePriority = 0,  .pal = 0, .vram = NNS_G2D_VRAM_TYPE_2DMAIN, .resIdList = { [GF_GFX_RES_TYPE_CHAR] = 55520, [GF_GFX_RES_TYPE_PLTT] = 55522, [GF_GFX_RES_TYPE_CELL] = 55515, [GF_GFX_RES_TYPE_ANIM] = 55515, [GF_GFX_RES_TYPE_MCEL] = -1, [GF_GFX_RES_TYPE_MANM] = -1 }, .bgPriority = 2, .vramTransfer = 0 }
 };
 
 BOOL RegisterHallOfFame_Init(OverlayManager *man, int *state) {
@@ -843,7 +843,7 @@ BOOL RegisterHallOfFame_Init(OverlayManager *man, int *state) {
     G2_BlendNone();
     G2S_BlendNone();
     GX_SetDispSelect(GX_DISP_SELECT_MAIN_SUB);
-    Heap_Create(HEAP_ID_3, HEAP_ID_REGISTER_HALL_OF_FAME, 0x50000);
+    CreateHeap(HEAP_ID_3, HEAP_ID_REGISTER_HALL_OF_FAME, 0x50000);
     RegisterHallOfFameData *data = (RegisterHallOfFameData *)OverlayManager_CreateAndGetData(man, sizeof(RegisterHallOfFameData), HEAP_ID_REGISTER_HALL_OF_FAME);
     MI_CpuFill8(data, 0, sizeof(RegisterHallOfFameData));
     data->args = OverlayManager_GetArgs(man);
@@ -875,7 +875,7 @@ BOOL RegisterHallOfFame_Exit(OverlayManager *man, int *state) {
     MessageFormat_Delete(data->msgFormat);
     DestroyMsgData(data->msgData);
     OverlayManager_FreeData(man);
-    Heap_Destroy(HEAP_ID_REGISTER_HALL_OF_FAME);
+    DestroyHeap(HEAP_ID_REGISTER_HALL_OF_FAME);
     return TRUE;
 }
 
@@ -922,7 +922,7 @@ static void RegisterHallOfFame_CreateBgConfig(RegisterHallOfFameData *data) {
 }
 
 static void RegisterHallOfFame_DestroyBgConfig(RegisterHallOfFameData *data) {
-    Heap_Free(data->bgConfig);
+    FreeToHeap(data->bgConfig);
 }
 
 static void RegisterHallOfFame_CreateSpriteGfxHandlers(RegisterHallOfFameData *data) {
@@ -969,13 +969,13 @@ static void RegisterHallOfFame_StartPicAnimSeq(RegisterHallOfFameData *data, u32
 }
 
 static RegisterHallOfFameScene RegisterHallOfFame_FadeFromBlack(RegisterHallOfFameData *data, RegisterHallOfFameScene nextScene) {
-    BeginNormalPaletteFade(FADE_BOTH_SCREENS, FADE_TYPE_BRIGHTNESS_IN, FADE_TYPE_BRIGHTNESS_IN, RGB_BLACK, 6, 1, HEAP_ID_REGISTER_HALL_OF_FAME);
+    BeginNormalPaletteFade(0, 1, 1, RGB_BLACK, 6, 1, HEAP_ID_REGISTER_HALL_OF_FAME);
     data->nextScene = nextScene;
     return REGHOF_SCENE_WAIT_FADE;
 }
 
 static RegisterHallOfFameScene RegisterHallOfFame_FadeToBlack(RegisterHallOfFameData *data, RegisterHallOfFameScene nextScene) {
-    BeginNormalPaletteFade(FADE_BOTH_SCREENS, FADE_TYPE_BRIGHTNESS_OUT, FADE_TYPE_BRIGHTNESS_OUT, RGB_BLACK, 6, 1, HEAP_ID_REGISTER_HALL_OF_FAME);
+    BeginNormalPaletteFade(0, 0, 0, RGB_BLACK, 6, 1, HEAP_ID_REGISTER_HALL_OF_FAME);
     data->nextScene = nextScene;
     return REGHOF_SCENE_WAIT_FADE;
 }
@@ -1351,12 +1351,12 @@ static void RegisterHallOfFame_IndivMonsScene_SetMon3dSpriteTex(RegisterHallOfFa
     fileData = AllocAndReadWholeNarcMemberByIdPair(NARC_data_mmodel_mmodel, fileno, HEAP_ID_REGISTER_HALL_OF_FAME);
     resTex = NNS_G3dGetTex(fileData);
     texData = NNS_G3dGetTexData(resTex);
-    void *buffer = Heap_Alloc(HEAP_ID_REGISTER_HALL_OF_FAME, size);
+    void *buffer = AllocFromHeap(HEAP_ID_REGISTER_HALL_OF_FAME, size);
     for (u8 i = 0; i < 8; ++i) {
         sub_020145B4((const u8 *)texData + size * i, spriteSquareDim, 0, 0, spriteSquareDim, spriteSquareDim, buffer);
         RegisterHallOfFame_ReplaceSpriteChar(buffer, imageLoc + size * i, size);
     }
-    Heap_Free(buffer);
+    FreeToHeap(buffer);
 
     u32 plttLoc = NNS_G2dGetImagePaletteLocation(Sprite_GetPaletteProxy(data->monPics[picIdx]->sprite), NNS_G2D_VRAM_TYPE_2DMAIN);
     const void *loadPos = NNS_G3dGetPlttData(resTex);
@@ -1364,7 +1364,7 @@ static void RegisterHallOfFame_IndivMonsScene_SetMon3dSpriteTex(RegisterHallOfFa
         loadPos = (const u8 *)loadPos + 0x20;
     }
     RegisterHallOfFame_ReplaceSpritePltt(loadPos, plttLoc, 0x20);
-    Heap_Free(fileData);
+    FreeToHeap(fileData);
 }
 
 static void RegisterHallOfFame_IndivMons_InitBgLayers(RegisterHallOfFameData *data) {
@@ -2032,10 +2032,10 @@ static void RegisterHallOfFame_GetPartyDetails(RegisterHallOfFameData *data) {
 static RegisterHallOfFame_MetLocationType RegisterHallOfFame_GetMetLocationType(RegisterHallOfFameData *data, Pokemon *pokemon, PlayerProfile *profile) {
     BOOL encry = AcquireMonLock(pokemon);
     RegisterHallOfFame_MetLocationType ret;
-    int version = GetMonData(pokemon, MON_DATA_MET_GAME, NULL);
+    int version = GetMonData(pokemon, MON_DATA_GAME_VERSION, NULL);
     if (version == VERSION_SAPPHIRE || version == VERSION_RUBY || version == VERSION_EMERALD) {
         ret = REGHOF_METLOC_HOENN;
-    } else if (version == VERSION_FIRERED || version == VERSION_LEAFGREEN) {
+    } else if (version == VERSION_FIRE_RED || version == VERSION_LEAF_GREEN) {
         ret = REGHOF_METLOC_KANTO;
     } else if (version == VERSION_GAMECUBE) {
         ret = REGHOF_METLOC_ORRE;
@@ -2047,16 +2047,16 @@ static RegisterHallOfFame_MetLocationType RegisterHallOfFame_GetMetLocationType(
         ret = REGHOF_METLOC_SHUCKIE;
     } else if (MonIsInGameTradePoke(pokemon, NPC_TRADE_KENYA_SPEAROW) == TRUE) {
         ret = REGHOF_METLOC_KENYA;
-    } else if (PlayerProfile_GetTrainerID(profile) != GetMonData(pokemon, MON_DATA_OT_ID, NULL)) {
+    } else if (PlayerProfile_GetTrainerID(profile) != GetMonData(pokemon, MON_DATA_OTID, NULL)) {
         ret = REGHOF_METLOC_TRADED;
     } else {
         PlayerName_FlatToString(profile, data->strbuf1);
-        GetMonData(pokemon, MON_DATA_OT_NAME_STRING, data->strbuf2);
+        GetMonData(pokemon, MON_DATA_OT_NAME_2, data->strbuf2);
         if (String_Compare(data->strbuf1, data->strbuf2)) {
             ret = REGHOF_METLOC_TRADED;
         } else if (GetMonData(pokemon, MON_DATA_MET_LOCATION, NULL) >= METLOC_DAY_CARE_COUPLE) {
             ret = REGHOF_METLOC_FATEFUL;
-        } else if (GetMonData(pokemon, MON_DATA_EGG_MONTH, NULL) == 0) {
+        } else if (GetMonData(pokemon, MON_DATA_EGG_MET_MONTH, NULL) == 0) {
             ret = REGHOF_METLOC_CAUGHT;
         } else {
             ret = REGHOF_METLOC_HATCHED;
@@ -2070,9 +2070,9 @@ static int RegisterHallOfFame_GetMmodelBySpeciesFormGender(int species, u8 form,
     int ret;
 
     if (species <= 0 || species > SPECIES_ARCEUS) {
-        ret = NARC_mmodel_mmodel_00000001_NSBTX;
+        ret = NARC_mmodel_mmodel_00000001_bin;
     } else {
-        ret = SpeciesToOverworldModelIndexOffset(species) + NARC_mmodel_mmodel_00000297_NSBTX;
+        ret = SpeciesToOverworldModelIndexOffset(species) + NARC_mmodel_mmodel_00000297_bin;
         if (OverworldModelLookupHasFemaleForm(species)) {
             if (gender == MON_FEMALE) {
                 ++ret;
@@ -2088,7 +2088,7 @@ static int RegisterHallOfFame_GetMmodelBySpeciesFormGender(int species, u8 form,
 }
 
 static void RegisterHallOfFame_CreateTask_IndivMonAnimAndCry(RegisterHallOfFameData *data, int monIdx, int picIdx, BOOL startCry, int facing) {
-    RegisterHofTaskData_IndivMonAnimAndCry *taskData = Heap_Alloc(HEAP_ID_REGISTER_HALL_OF_FAME, sizeof(RegisterHofTaskData_IndivMonAnimAndCry));
+    RegisterHofTaskData_IndivMonAnimAndCry *taskData = AllocFromHeap(HEAP_ID_REGISTER_HALL_OF_FAME, sizeof(RegisterHofTaskData_IndivMonAnimAndCry));
     taskData->hofMon = &data->mons[monIdx];
     taskData->startCry = startCry;
     taskData->narc = data->narcA180;
@@ -2121,7 +2121,7 @@ static void Task_RegisterHallOfFame_IndivMonAnimAndCry(SysTask *task, void *task
     if (animStep >= 0) {
         RegisterHallOfFame_ReplaceSpriteChar(showPic->charbuf[animStep], showPic->imageLocation, 3200);
     } else {
-        Heap_Free(showPic);
+        FreeToHeap(showPic);
         SysTask_Destroy(task);
     }
 }
@@ -2251,11 +2251,11 @@ static BOOL RegisterHallOfFame_WholeMonsSceneSubproc(RegisterHallOfFameData *dat
 }
 
 static void RegisterHallOfFame_AfterFullParty_FadeFromWhite(RegisterHallOfFameData *data) {
-    BeginNormalPaletteFade(FADE_MAIN_ONLY, FADE_TYPE_BRIGHTNESS_IN, FADE_TYPE_BRIGHTNESS_IN, RGB_WHITE, data->fadeDuration, 1, HEAP_ID_REGISTER_HALL_OF_FAME);
+    BeginNormalPaletteFade(3, 1, 1, RGB_WHITE, data->fadeDuration, 1, HEAP_ID_REGISTER_HALL_OF_FAME);
 }
 
 static void RegisterHallOfFame_AfterFullParty_FadeToBlack(RegisterHallOfFameData *data) {
-    BeginNormalPaletteFade(FADE_BOTH_SCREENS, FADE_TYPE_BRIGHTNESS_OUT, FADE_TYPE_BRIGHTNESS_OUT, RGB_BLACK, data->fadeDuration, 1, HEAP_ID_REGISTER_HALL_OF_FAME);
+    BeginNormalPaletteFade(0, 0, 0, RGB_BLACK, data->fadeDuration, 1, HEAP_ID_REGISTER_HALL_OF_FAME);
 }
 
 static void VBlankTask_RegisterHallOfFame_WholePartyCongrats(SysTask *task, void *taskData) {
@@ -2394,10 +2394,10 @@ static void RegisterHallOfFame_WholePartyScene_CreateSprites(RegisterHallOfFameD
     } else {
         sub_02070D84(TRAINERCLASS_PKMN_TRAINER_ETHAN, 2, &sp2C);
     }
-    r4 = Heap_Alloc(HEAP_ID_REGISTER_HALL_OF_FAME, 0x1900);
+    r4 = AllocFromHeap(HEAP_ID_REGISTER_HALL_OF_FAME, 0x1900);
     sub_020143E0(sp2C.narcId, sp2C.ncbr_id, HEAP_ID_REGISTER_HALL_OF_FAME, &sp1C, r4);
     RegisterHallOfFame_ReplaceSpriteChar(r4, NNS_G2dGetImageLocation(Sprite_GetImageProxy(data->monPics[REGHOF_PIC_WHOLE_PLAYER]->sprite), NNS_G2D_VRAM_TYPE_2DMAIN), 3200);
-    Heap_Free(r4);
+    FreeToHeap(r4);
 
     GfGfxLoader_GXLoadPal(sp2C.narcId, sp2C.nclr_id, GF_PAL_LOCATION_MAIN_OBJ, (enum GFPalSlotOffset)NNS_G2dGetImagePaletteLocation(Sprite_GetPaletteProxy(data->monPics[REGHOF_PIC_WHOLE_PLAYER]->sprite), NNS_G2D_VRAM_TYPE_2DMAIN), 0x20, HEAP_ID_REGISTER_HALL_OF_FAME);
 
@@ -2477,7 +2477,7 @@ static void RegisterHallOfFame_G3Commit(RegisterHallOfFameData *data) {
 }
 
 static SysTask *RegisterHallOfFame_CreateSpotlightController(RegisterHallOfFameData *data) {
-    RegisterHofSpotlightTaskData *spotlight = Heap_Alloc(HEAP_ID_REGISTER_HALL_OF_FAME, sizeof(RegisterHofSpotlightTaskData));
+    RegisterHofSpotlightTaskData *spotlight = AllocFromHeap(HEAP_ID_REGISTER_HALL_OF_FAME, sizeof(RegisterHofSpotlightTaskData));
     sSpotlightsActive = TRUE;
     sNumSpotlightTasks = 2;
     spotlight->numSpotlights = 0;
@@ -2521,7 +2521,7 @@ static void RegisterHallOfFame_AddSpotlight(SysTask *task, int xOffset, fx32 ang
 }
 
 static SysTask *RegisterHallOfFame_CreateSpotlightTaskEx(RegisterHofSpotlightTaskData *spotlight, int xOffset, fx32 angle, int index) {
-    RegisterHofSpotlightChildTaskData *child = Heap_Alloc(HEAP_ID_REGISTER_HALL_OF_FAME, sizeof(RegisterHofSpotlightChildTaskData));
+    RegisterHofSpotlightChildTaskData *child = AllocFromHeap(HEAP_ID_REGISTER_HALL_OF_FAME, sizeof(RegisterHofSpotlightChildTaskData));
     child->parent = spotlight;
     child->xOffset = xOffset;
     child->color = sSpotlightColors[index];
@@ -2586,9 +2586,9 @@ static void RegisterHallOfFame_DestroySpotlightsTask(SysTask *task) {
         RegisterHofSpotlightTaskData *spotlight = (RegisterHofSpotlightTaskData *)SysTask_GetData(task);
 
         for (int i = 0; i < spotlight->numSpotlights; ++i) {
-            Heap_Free(SysTask_GetData(spotlight->childTasks[i]));
+            FreeToHeap(SysTask_GetData(spotlight->childTasks[i]));
         }
-        Heap_Free(spotlight);
+        FreeToHeap(spotlight);
     }
 }
 
@@ -2597,7 +2597,7 @@ static BOOL RegisterHallOfFame_AreAllSpotlightsFinished(RegisterHallOfFameData *
 }
 
 static SysTask *RegisterHallOfFame_CreateConfettiTask(RegisterHallOfFameData *data) {
-    RegisterHofConfettiEmitterTaskData *confetti = Heap_Alloc(HEAP_ID_REGISTER_HALL_OF_FAME, sizeof(RegisterHofConfettiEmitterTaskData));
+    RegisterHofConfettiEmitterTaskData *confetti = AllocFromHeap(HEAP_ID_REGISTER_HALL_OF_FAME, sizeof(RegisterHofConfettiEmitterTaskData));
     int i;
     int j;
     u32 rand;
@@ -2639,7 +2639,7 @@ static SysTask *RegisterHallOfFame_CreateConfettiTask(RegisterHallOfFameData *da
 
 static void RegisterHallOfFame_EndConfetti(SysTask *task) {
     if (task != NULL) {
-        Heap_Free(SysTask_GetData(task));
+        FreeToHeap(SysTask_GetData(task));
         SysTask_Destroy(task);
     }
 }

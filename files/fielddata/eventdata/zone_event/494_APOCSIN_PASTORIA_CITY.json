@@ -1,0 +1,272 @@
+{
+  "header": "fielddata/script/scr_seq/event_EVERYWHERE.h",
+  "bgs": [
+    {
+      "scriptId": 76,
+      "type": 1,
+      "x": 583,
+      "z": 857,
+      "y": 0,
+      "dir": 0
+    }
+  ],
+  "objects": [
+    {
+      "id": 0,
+      "spriteId": "SPRITE_PICNICGIRL",
+      "movement": 2,
+      "type": 0,
+      "eventFlag": 0,
+      "scriptId": 13,
+      "facingDirection": 3,
+      "param0": 0,
+      "param1": 0,
+      "param2": 0,
+      "xRange": 0,
+      "yRange": 0,
+      "x": 607,
+      "z": 818,
+      "y": 0
+    },
+    {
+      "id": 1,
+      "spriteId": "SPRITE_GSFIGHTER",
+      "movement": 3,
+      "type": 0,
+      "eventFlag": 0,
+      "scriptId": 4,
+      "facingDirection": 2,
+      "param0": 0,
+      "param1": 0,
+      "param2": 0,
+      "xRange": 2,
+      "yRange": 1,
+      "x": 599,
+      "z": 828,
+      "y": 0
+    },
+    {
+      "id": 2,
+      "spriteId": "SPRITE_GSGIRL1",
+      "movement": 0,
+      "type": 0,
+      "eventFlag": 0,
+      "scriptId": 13,
+      "facingDirection": 1,
+      "param0": 0,
+      "param1": 0,
+      "param2": 0,
+      "xRange": 0,
+      "yRange": 0,
+      "x": 597,
+      "z": 840,
+      "y": 0
+    },
+    {
+      "id": 3,
+      "spriteId": "SPRITE_GSMAN3",
+      "movement": 3,
+      "type": 0,
+      "eventFlag": 0,
+      "scriptId": 4,
+      "facingDirection": 1,
+      "param0": 0,
+      "param1": 0,
+      "param2": 0,
+      "xRange": 1,
+      "yRange": 1,
+      "x": 596,
+      "z": 840,
+      "y": 0
+    },
+    {
+      "id": 4,
+      "spriteId": "SPRITE_MANIA",
+      "movement": 0,
+      "type": 0,
+      "eventFlag": 0,
+      "scriptId": 6,
+      "facingDirection": 2,
+      "param0": 0,
+      "param1": 0,
+      "param2": 0,
+      "xRange": 0,
+      "yRange": 0,
+      "x": 613,
+      "z": 836,
+      "y": 0
+    },
+    {
+      "id": 5,
+      "spriteId": "SPRITE_ASSISTANTM",
+      "movement": 3,
+      "type": 0,
+      "eventFlag": 0,
+      "scriptId": 3,
+      "facingDirection": 1,
+      "param0": 0,
+      "param1": 0,
+      "param2": 0,
+      "xRange": 1,
+      "yRange": 1,
+      "x": 595,
+      "z": 847,
+      "y": 0
+    },
+    {
+      "id": 6,
+      "spriteId": "SPRITE_GSWOMAN6",
+      "movement": 3,
+      "type": 0,
+      "eventFlag": 0,
+      "scriptId": 5,
+      "facingDirection": 3,
+      "param0": 0,
+      "param1": 0,
+      "param2": 0,
+      "xRange": 1,
+      "yRange": 3,
+      "x": 623,
+      "z": 814,
+      "y": 0
+    },
+    {
+      "id": 7,
+      "spriteId": "SPRITE_GSBOY1",
+      "movement": 3,
+      "type": 0,
+      "eventFlag": 0,
+      "scriptId": 2,
+      "facingDirection": 3,
+      "param0": 0,
+      "param1": 0,
+      "param2": 0,
+      "xRange": 2,
+      "yRange": 2,
+      "x": 614,
+      "z": 818,
+      "y": 0
+    },
+    {
+      "id": 8,
+      "spriteId": "SPRITE_MANIA",
+      "movement": 3,
+      "type": 0,
+      "eventFlag": 0,
+      "scriptId": 5,
+      "facingDirection": 3,
+      "param0": 0,
+      "param1": 0,
+      "param2": 0,
+      "xRange": 2,
+      "yRange": 1,
+      "x": 607,
+      "z": 833,
+      "y": 0
+    },
+    {
+      "id": 9,
+      "spriteId": "SPRITE_GSMAN3",
+      "movement": 3,
+      "type": 0,
+      "eventFlag": 0,
+      "scriptId": 2,
+      "facingDirection": 3,
+      "param0": 0,
+      "param1": 0,
+      "param2": 0,
+      "xRange": 2,
+      "yRange": 1,
+      "x": 609,
+      "z": 844,
+      "y": 0
+    }
+  ],
+  "warps": [
+    {
+      "x": 589,
+      "z": 827,
+      "header": "MAP_APOC_SIN_H00_PASTORIA_CITY",
+      "anchor": 0,
+      "y": 0
+    },
+    {
+      "x": 601,
+      "z": 835,
+      "header": "MAP_APOC_SIN_H01_PASTORIA_CITY",
+      "anchor": 0,
+      "y": 0
+    },
+    {
+      "x": 601,
+      "z": 844,
+      "header": "MAP_APOC_SIN_MART_PASTORIA_CITY",
+      "anchor": 0,
+      "y": 0
+    },
+    {
+      "x": 600,
+      "z": 824,
+      "header": "MAP_APOC_SIN_H03_PASTORIA_CITY",
+      "anchor": 0,
+      "y": 0
+    },
+    {
+      "x": 611,
+      "z": 835,
+      "header": "MAP_APOC_SIN_H04_PASTORIA_CITY",
+      "anchor": 0,
+      "y": 0
+    },
+    {
+      "x": 624,
+      "z": 819,
+      "header": "MAP_APOC_SIN_H05_PASTORIA_CITY",
+      "anchor": 0,
+      "y": 0
+    },
+    {
+      "x": 589,
+      "z": 844,
+      "header": "MAP_APOC_SIN_H06_PASTORIA_CITY",
+      "anchor": 0,
+      "y": 0
+    },
+    {
+      "x": 610,
+      "z": 809,
+      "header": "MAP_APOC_SIN_H07_PASTORIA_CITY",
+      "anchor": 0,
+      "y": 0
+    },
+    {
+      "x": 611,
+      "z": 809,
+      "header": "MAP_APOC_SIN_H08_PASTORIA_CITY",
+      "anchor": 0,
+      "y": 0
+    },
+    {
+      "x": 600,
+      "z": 815,
+      "header": "MAP_APOC_SIN_PC_PASTORIA_CITY",
+      "anchor": 0,
+      "y": 0
+    },
+    {
+      "x": 639,
+      "z": 812,
+      "header": "MAP_APOC_SIN_H10_PASTORIA_CITY",
+      "anchor": 0,
+      "y": 0
+    },
+    {
+      "x": 639,
+      "z": 813,
+      "header": "MAP_APOC_SIN_H11_PASTORIA_CITY",
+      "anchor": 0,
+      "y": 0
+    }
+  ],
+  "coords": []
+}

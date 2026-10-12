@@ -26,7 +26,7 @@ sub_02058038: ; 0x02058038
 	bl sub_02091574
 	mov r0, #0xf
 	mov r1, #0x44
-	bl Heap_Alloc
+	bl AllocFromHeap
 	ldr r1, _02058090 ; =_021D41C8
 	mov r2, #0x44
 	str r0, [r1]
@@ -77,7 +77,7 @@ _020580AE:
 	ldr r0, [r0, r5]
 	cmp r0, #0
 	beq _020580BA
-	bl Heap_Free
+	bl FreeToHeap
 _020580BA:
 	add r4, r4, #1
 	add r5, r5, #4
@@ -88,11 +88,11 @@ _020580BA:
 	ldr r0, [r0, #0x40]
 	cmp r0, #0
 	beq _020580D0
-	bl Heap_Free
+	bl FreeToHeap
 _020580D0:
 	ldr r0, _020580E0 ; =_021D41C8
 	ldr r0, [r0]
-	bl Heap_Free
+	bl FreeToHeap
 	ldr r0, _020580E0 ; =_021D41C8
 	mov r1, #0
 	str r1, [r0]
@@ -250,7 +250,7 @@ _020581FE:
 	bne _02058212
 	ldr r1, _02058250 ; =0x0000066C
 	add r0, r7, #0
-	bl Heap_Alloc
+	bl AllocFromHeap
 	ldr r1, [r6]
 	str r0, [r1, r5]
 _02058212:
@@ -482,7 +482,7 @@ sub_0205838C: ; 0x0205838C
 	bl sub_02057180
 	add r1, r0, #0
 	mov r0, #0xf
-	bl Heap_Alloc
+	bl AllocFromHeap
 	ldr r1, _020583E4 ; =_021D41C8
 	mov r2, #0
 	ldr r1, [r1]
@@ -540,9 +540,9 @@ _020583FC:
 	add r3, r0, #0
 	bl BeginNormalPaletteFade
 	mov r0, #0
-	bl ResetVisibleHardwareWindows
+	bl sub_0200FBDC
 	mov r0, #1
-	bl ResetVisibleHardwareWindows
+	bl sub_0200FBDC
 	bl sub_02056E60
 	mov r0, #0
 	bl sub_0205701C
@@ -628,7 +628,7 @@ sub_020584BC: ; 0x020584BC
 	bl sub_02057180
 	add r1, r0, #0
 	mov r0, #0xf
-	bl Heap_Alloc
+	bl AllocFromHeap
 	ldr r1, _02058510 ; =_021D41C8
 	mov r2, #0
 	ldr r1, [r1]
@@ -694,9 +694,9 @@ _02058528:
 	add r3, r0, #0
 	bl BeginNormalPaletteFade
 	mov r0, #0
-	bl ResetVisibleHardwareWindows
+	bl sub_0200FBDC
 	mov r0, #1
-	bl ResetVisibleHardwareWindows
+	bl sub_0200FBDC
 	ldr r0, _02058578 ; =sub_020586EC
 	mov r1, #0
 	bl sub_020582F4
@@ -743,7 +743,7 @@ _020585BA:
 	ldr r0, [r0, r5]
 	cmp r0, #0
 	beq _020585CA
-	bl Heap_Free
+	bl FreeToHeap
 	ldr r0, [r6]
 	str r7, [r0, r5]
 _020585CA:
@@ -1016,7 +1016,7 @@ _020587C4:
 	ldr r0, _020587E4 ; =_021D41C8
 	ldr r0, [r0]
 	ldr r0, [r0, #0x40]
-	bl Heap_Free
+	bl FreeToHeap
 	ldr r0, _020587E4 ; =_021D41C8
 	mov r1, #0
 	ldr r0, [r0]

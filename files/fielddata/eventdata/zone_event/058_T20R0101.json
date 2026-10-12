@@ -144,7 +144,7 @@
     },
     {
       "id": "obj_T20R0101_var_1",
-      "spriteId": "SPRITE_VAR_1",
+      "spriteId": "SPRITE_GSGIRL2",
       "movement": 0,
       "type": 0,
       "eventFlag": "FLAG_HIDE_ELMS_LAB_FRIEND",
@@ -156,7 +156,7 @@
       "xRange": 0,
       "yRange": 0,
       "x": 4,
-      "z": 14,
+      "z": 12,
       "y": 0
     }
   ],
@@ -182,9 +182,9 @@
     },
     {
       "scriptId": "_EV_scr_seq_T20R0101_011 + 1",
-      "x": 3,
+      "x": 2,
       "z": 10,
-      "w": 4,
+      "w": 8,
       "h": 1,
       "y": 0,
       "val": 0,

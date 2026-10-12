@@ -47,16 +47,13 @@ export LM_LICENSE_FILE := $(TOOLSDIR)/mwccarm/license.dat
 JSONPROC     := $(TOOLSDIR)/jsonproc/jsonproc$(EXE)
 GFX          := $(TOOLSDIR)/nitrogfx/nitrogfx$(EXE)
 FIXROM       := $(TOOLSDIR)/fixrom/fixrom$(EXE)
-NARC         := $(TOOLSDIR)/nitroarc/nitroarc$(EXE)
+KNARC        := $(TOOLSDIR)/knarc/knarc$(EXE)
 O2NARC       := $(TOOLSDIR)/o2narc/o2narc$(EXE)
 MSGENC       := $(TOOLSDIR)/msgenc/msgenc$(EXE)
 ASPATCH      := $(TOOLSDIR)/mwasmarm_patcher/mwasmarm_patcher$(EXE)
 CSV2BIN      := $(TOOLSDIR)/csv2bin/csv2bin$(EXE)
 MKFXCONST    := $(TOOLSDIR)/gen_fx_consts/gen_fx_consts$(EXE)
-ELFCODER     := $(TOOLSDIR)/elfcoder/elfcoder$(EXE)
-
-# Native libraries
-LIBNARC      := $(TOOLSDIR)/nitroarc/libnitroarc.a
+MOD123ENCRY  := $(TOOLSDIR)/mod123encry/mod123encry$(EXE)
 
 # Decompiled NitroSDK tools
 COMPSTATIC   := $(TOOLSDIR)/compstatic/compstatic$(EXE)
@@ -68,14 +65,14 @@ NATIVE_TOOLS := \
 	$(JSONPROC) \
 	$(GFX) \
 	$(FIXROM) \
-	$(NARC) \
+	$(KNARC) \
 	$(O2NARC) \
 	$(MSGENC) \
 	$(ASPATCH) \
 	$(CSV2BIN) \
 	$(MKFXCONST) \
 	$(COMPSTATIC) \
-	$(ELFCODER)
+	$(MOD123ENCRY)
 
 TOOLDIRS := $(foreach tool,$(NATIVE_TOOLS),$(dir $(tool)))
 
@@ -218,6 +215,7 @@ ifeq ($(PROC),arm946e)
 else
 	$(SED) -i '/\} > check\.WORKRAM/a SDK_SUBPRIV_ARENA_LO = SDK_SUBPRIV_ARENA_LO + SDK_AUTOLOAD.EXT_WRAM.SIZE + SDK_AUTOLOAD.EXT_WRAM.BSS_SIZE;' $@
 endif
+	python3 $(PROJECT_ROOT)tools/patch_lcf_dtcm_bss.py $@
 
 RESPONSE_TEMPLATE    := $(PROJECT_ROOT)/mwldarm.response.template
 RESPONSE_TEMPLATE_NT := $(PROJECT_ROOT_NT)/mwldarm.response.template
@@ -231,6 +229,10 @@ CRT0_OBJ := lib/asm/crt0.o
 .INTERMEDIATE: $(BUILD_DIR)/obj.list
 
 $(SBIN): build/%.sbin: build/%.elf
+ifeq ($(SBIN),$(BUILD_DIR)/main.sbin)
+# Overlay 123 is encrypted in the retail ROM, so we need to reencrypt it after building it
+	cd $(BUILD_DIR) && $(MOD123ENCRY) encry main OVY_123_enc.sbin 123 && mv OVY_123_enc.sbin OVY_123.sbin
+endif
 ifeq ($(COMPARE),1)
 	$(SHA1SUM) --quiet -c $*.sha1
 endif

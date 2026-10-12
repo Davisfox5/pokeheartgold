@@ -1,17 +1,18 @@
 #include "constants/scrcmd.h"
 #include "fielddata/script/scr_seq/event_T22.h"
-#include "constants/init_script_types.h"
-	.include "asm/macros/script.inc"
-
 	.rodata
 	.option alignment off
 
-	InitScriptEntry_OnFrameTable scr_seq_T22_map_scripts_2
-	InitScriptEntryEnd
+	.byte 1
+	.word scr_seq_T22_map_scripts_2-.-4
+	.byte 0
 
 scr_seq_T22_map_scripts_2:
-	InitScriptGoToIfEqual VAR_SCENE_VIOLET_CITY_OW, 1, _EV_scr_seq_T22_000 + 1
-	InitScriptGoToIfEqual VAR_SCENE_VIOLET_CITY_OW, 3, _EV_scr_seq_T22_004 + 1
-	InitScriptFrameTableEnd
+; ===== APOCRYPHA: vanilla OW==1 row (Elm egg phone call) removed -- OW==1 now
+; belongs to the Ch2 tower-commotion coord event (zone_event JSON). The kimono
+; girl's beat moved 3 -> 4: OW==3 is the Kestra battle coord; she plays right
+; after it and parks the var at 5. =====
+	.short VAR_SCENE_VIOLET_CITY_OW, 4, _EV_scr_seq_T22_004 + 1
+	.short 0
 
-	InitScriptEnd
+	.balign 4, 0

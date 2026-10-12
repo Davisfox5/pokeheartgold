@@ -5,15 +5,14 @@
 #include "heap.h"
 
 static GF_VramTransferManager *sVramTransferManager;
-BOOL sub_02020684(NNS_GFD_DST_TYPE type, u32 dstAddr, void *pSrc, u32 szByte);
 
-void GF_CreateVramTransferManager(u32 taskMax, enum HeapID heapID) {
+void GF_CreateVramTransferManager(u32 taskMax, HeapID heapId) {
     GF_ASSERT(sVramTransferManager == NULL);
 
-    sVramTransferManager = Heap_Alloc(heapID, sizeof(GF_VramTransferManager));
+    sVramTransferManager = AllocFromHeap(heapId, sizeof(GF_VramTransferManager));
     GF_ASSERT(sVramTransferManager != NULL);
 
-    sVramTransferManager->tasks = Heap_Alloc(heapID, taskMax * sizeof(NNSGfdVramTransferTask));
+    sVramTransferManager->tasks = AllocFromHeap(heapId, taskMax * sizeof(NNSGfdVramTransferTask));
     sVramTransferManager->nMax = taskMax;
     sVramTransferManager->nCur = 0;
     NNS_GfdInitVramTransferManager(sVramTransferManager->tasks, sVramTransferManager->nMax);
@@ -21,8 +20,8 @@ void GF_CreateVramTransferManager(u32 taskMax, enum HeapID heapID) {
 
 void GF_DestroyVramTransferManager(void) {
     GF_ASSERT(sVramTransferManager != NULL);
-    Heap_Free(sVramTransferManager->tasks);
-    Heap_Free(sVramTransferManager);
+    FreeToHeap(sVramTransferManager->tasks);
+    FreeToHeap(sVramTransferManager);
     sVramTransferManager = NULL;
 }
 
@@ -50,22 +49,4 @@ void GF_RunVramTransferTasks(void) {
 u32 GF_GetNumPendingVramTransferTasks(void) {
     GF_ASSERT(sVramTransferManager != NULL);
     return sVramTransferManager->nCur;
-}
-
-NNSG2dCellTransferState *sub_02020654(int a0, enum HeapID heapID) {
-    NNSG2dCellTransferState *ret = Heap_Alloc(heapID, a0 * sizeof(NNSG2dCellTransferState));
-    NNS_G2dInitCellTransferStateManager(ret, a0, sub_02020684);
-    return ret;
-}
-
-void thunk_UpdateCellTransferStateManager(void) {
-    NNS_G2dUpdateCellTransferStateManager();
-}
-
-void sub_0202067C(NNSG2dCellTransferState *transferStates) {
-    Heap_Free(transferStates);
-}
-
-BOOL sub_02020684(NNS_GFD_DST_TYPE type, u32 dstAddr, void *pSrc, u32 szByte) {
-    return GF_CreateNewVramTransferTask(type, dstAddr, pSrc, szByte);
 }

@@ -1,7 +1,6 @@
 #include "field_move.h"
 
 #include "constants/badge.h"
-#include "constants/field/map_load.h"
 #include "constants/maps.h"
 #include "constants/sprites.h"
 #include "constants/std_script.h"
@@ -11,13 +10,13 @@
 
 #include "alph_checks.h"
 #include "field_move_environment.h"
+#include "field_player_avatar.h"
 #include "launch_application.h"
 #include "map_header.h"
 #include "map_object.h"
 #include "metatile_behavior.h"
 #include "overlay_01.h"
 #include "overlay_02.h"
-#include "player_avatar.h"
 #include "save_local_field_data.h"
 #include "script.h"
 #include "start_menu.h"
@@ -142,8 +141,8 @@ void FieldMove_InitCheckData(FieldSystem *fieldSystem, FieldMoveCheckData *check
         }
     }
 
-    u32 x = PlayerAvatar_GetXCoord(fieldSystem->playerAvatar);
-    u32 z = PlayerAvatar_GetZCoord(fieldSystem->playerAvatar);
+    s32 x = GetPlayerXCoord(fieldSystem->playerAvatar);
+    s32 z = GetPlayerZCoord(fieldSystem->playerAvatar);
     u32 standingTile = GetMetatileBehavior(fieldSystem, x, z);
 
     PlayerAvatar_GetCoordsInFront(fieldSystem->playerAvatar, &x, &z);
@@ -170,7 +169,7 @@ void FieldMove_InitCheckData(FieldSystem *fieldSystem, FieldMoveCheckData *check
 }
 
 static FieldUseMoveEnvironment *FieldMove_CreateUseEnvironment(FieldMoveUseData *useData, const FieldMoveCheckData *checkData) {
-    FieldUseMoveEnvironment *environment = Heap_Alloc(HEAP_ID_FIELD3, sizeof(FieldUseMoveEnvironment));
+    FieldUseMoveEnvironment *environment = AllocFromHeap(HEAP_ID_32, sizeof(FieldUseMoveEnvironment));
     environment->magic = 0x19740205;
     environment->facingObject = checkData->facingObject;
     environment->useData = *useData;
@@ -179,14 +178,16 @@ static FieldUseMoveEnvironment *FieldMove_CreateUseEnvironment(FieldMoveUseData 
 
 static void FieldMove_DeleteUseEnvironment(FieldUseMoveEnvironment *environment) {
     GF_ASSERT(environment->magic == 0x19740205);
-    Heap_Free(environment);
+    FreeToHeap(environment);
 }
 
 static u32 FieldMove_CheckCut(const FieldMoveCheckData *checkData) {
-    if (checkData->fieldSystem->mapLoadType == MAP_LOAD_TYPE_UNION || checkData->fieldSystem->mapLoadType == MAP_LOAD_TYPE_COLOSSEUM) {
+    if (checkData->fieldSystem->unk70 == 2 || checkData->fieldSystem->unk70 == 3) {
         return FIELD_MOVE_RESPONSE_NOT_HERE;
     }
-    if (!PlayerProfile_TestBadgeFlag(Save_PlayerData_GetProfile(checkData->fieldSystem->saveData), BADGE_HIVE)) {
+    // APOCRYPHA: badge gate removed — field moves are usable from
+    // bag HM items (see scr_seq_0146.s); menu use follows suit.
+    if (0 && !PlayerProfile_TestBadgeFlag(Save_PlayerData_GetProfile(checkData->fieldSystem->saveData), BADGE_HIVE)) {
         return FIELD_MOVE_RESPONSE_NEED_BADGE;
     }
     if (FieldMove_CheckFlag(checkData, FIELD_MOVE_CHECK_TREE)) {
@@ -215,10 +216,12 @@ static BOOL Task_UseCutInField(TaskManager *taskManager) {
 }
 
 static u32 FieldMove_CheckFly(const FieldMoveCheckData *checkData) {
-    if (checkData->fieldSystem->mapLoadType == MAP_LOAD_TYPE_UNION || checkData->fieldSystem->mapLoadType == MAP_LOAD_TYPE_COLOSSEUM) {
+    if (checkData->fieldSystem->unk70 == 2 || checkData->fieldSystem->unk70 == 3) {
         return FIELD_MOVE_RESPONSE_NOT_HERE;
     }
-    if (!PlayerProfile_TestBadgeFlag(Save_PlayerData_GetProfile(checkData->fieldSystem->saveData), BADGE_STORM)) {
+    // APOCRYPHA: badge gate removed — field moves are usable from
+    // bag HM items (see scr_seq_0146.s); menu use follows suit.
+    if (0 && !PlayerProfile_TestBadgeFlag(Save_PlayerData_GetProfile(checkData->fieldSystem->saveData), BADGE_STORM)) {
         return FIELD_MOVE_RESPONSE_NEED_BADGE;
     }
     if (!MapHeader_IsFlyAllowed(checkData->mapId)) {
@@ -240,7 +243,7 @@ static u32 FieldMove_CheckFly(const FieldMoveCheckData *checkData) {
 static void FieldMove_UseFly(FieldMoveUseData *useData, const FieldMoveCheckData *checkData) {
     FieldSystem *fieldSystem = TaskManager_GetFieldSystem(useData->taskManager);
     StartMenuTaskData *startMenu = TaskManager_GetEnvironment(useData->taskManager);
-    FieldMoveData *fieldMoveData = Heap_Alloc(HEAP_ID_FIELD2, sizeof(FieldMoveData));
+    FieldMoveData *fieldMoveData = AllocFromHeap(HEAP_ID_FIELD, sizeof(FieldMoveData));
     fieldMoveData->partySlot = useData->partySlot;
     startMenu->exitTaskEnvironment2 = fieldMoveData;
     startMenu->exitTaskEnvironment = PokegearTownMap_LaunchApp(fieldSystem, 0);
@@ -248,10 +251,12 @@ static void FieldMove_UseFly(FieldMoveUseData *useData, const FieldMoveCheckData
 }
 
 static u32 FieldMove_CheckSurf(const FieldMoveCheckData *checkData) {
-    if (checkData->fieldSystem->mapLoadType == MAP_LOAD_TYPE_UNION || checkData->fieldSystem->mapLoadType == MAP_LOAD_TYPE_COLOSSEUM) {
+    if (checkData->fieldSystem->unk70 == 2 || checkData->fieldSystem->unk70 == 3) {
         return FIELD_MOVE_RESPONSE_NOT_HERE;
     }
-    if (!PlayerProfile_TestBadgeFlag(Save_PlayerData_GetProfile(checkData->fieldSystem->saveData), BADGE_FOG)) {
+    // APOCRYPHA: badge gate removed — field moves are usable from
+    // bag HM items (see scr_seq_0146.s); menu use follows suit.
+    if (0 && !PlayerProfile_TestBadgeFlag(Save_PlayerData_GetProfile(checkData->fieldSystem->saveData), BADGE_FOG)) {
         return FIELD_MOVE_RESPONSE_NEED_BADGE;
     }
     if (PlayerAvatar_GetState(checkData->fieldSystem->playerAvatar) == PLAYER_STATE_SURFING) {
@@ -289,10 +294,12 @@ static BOOL Task_UseSurfInField(TaskManager *taskManager) {
 }
 
 static u32 FieldMove_CheckStrength(const FieldMoveCheckData *checkData) {
-    if (checkData->fieldSystem->mapLoadType == MAP_LOAD_TYPE_UNION || checkData->fieldSystem->mapLoadType == MAP_LOAD_TYPE_COLOSSEUM) {
+    if (checkData->fieldSystem->unk70 == 2 || checkData->fieldSystem->unk70 == 3) {
         return FIELD_MOVE_RESPONSE_NOT_HERE;
     }
-    if (!PlayerProfile_TestBadgeFlag(Save_PlayerData_GetProfile(checkData->fieldSystem->saveData), BADGE_PLAIN)) {
+    // APOCRYPHA: badge gate removed — field moves are usable from
+    // bag HM items (see scr_seq_0146.s); menu use follows suit.
+    if (0 && !PlayerProfile_TestBadgeFlag(Save_PlayerData_GetProfile(checkData->fieldSystem->saveData), BADGE_PLAIN)) {
         return FIELD_MOVE_RESPONSE_NEED_BADGE;
     }
     if (checkData->mapId == MAP_ICE_PATH_B2F) {
@@ -324,10 +331,12 @@ static BOOL Task_UseStrengthInField(TaskManager *taskManager) {
 }
 
 static u32 FieldMove_CheckRockSmash(const FieldMoveCheckData *checkData) {
-    if (checkData->fieldSystem->mapLoadType == MAP_LOAD_TYPE_UNION || checkData->fieldSystem->mapLoadType == MAP_LOAD_TYPE_COLOSSEUM) {
+    if (checkData->fieldSystem->unk70 == 2 || checkData->fieldSystem->unk70 == 3) {
         return FIELD_MOVE_RESPONSE_NOT_HERE;
     }
-    if (!PlayerProfile_TestBadgeFlag(Save_PlayerData_GetProfile(checkData->fieldSystem->saveData), BADGE_ZEPHYR)) {
+    // APOCRYPHA: badge gate removed — field moves are usable from
+    // bag HM items (see scr_seq_0146.s); menu use follows suit.
+    if (0 && !PlayerProfile_TestBadgeFlag(Save_PlayerData_GetProfile(checkData->fieldSystem->saveData), BADGE_ZEPHYR)) {
         return FIELD_MOVE_RESPONSE_NEED_BADGE;
     }
     if (FieldMove_CheckFlag(checkData, FIELD_MOVE_CHECK_BREAKROCK)) {
@@ -356,13 +365,15 @@ static BOOL Task_UseRockSmashInField(TaskManager *taskManager) {
 }
 
 static u32 FieldMove_CheckWaterfall(const FieldMoveCheckData *checkData) {
-    if (checkData->fieldSystem->mapLoadType == MAP_LOAD_TYPE_UNION || checkData->fieldSystem->mapLoadType == MAP_LOAD_TYPE_COLOSSEUM) {
+    if (checkData->fieldSystem->unk70 == 2 || checkData->fieldSystem->unk70 == 3) {
         return FIELD_MOVE_RESPONSE_NOT_HERE;
     }
     if (PlayerAvatar_GetState(checkData->fieldSystem->playerAvatar) != PLAYER_STATE_SURFING) {
         return FIELD_MOVE_RESPONSE_NOT_HERE;
     }
-    if (!PlayerProfile_TestBadgeFlag(Save_PlayerData_GetProfile(checkData->fieldSystem->saveData), BADGE_RISING)) {
+    // APOCRYPHA: badge gate removed — field moves are usable from
+    // bag HM items (see scr_seq_0146.s); menu use follows suit.
+    if (0 && !PlayerProfile_TestBadgeFlag(Save_PlayerData_GetProfile(checkData->fieldSystem->saveData), BADGE_RISING)) {
         return FIELD_MOVE_RESPONSE_NEED_BADGE;
     }
     if (FieldMove_CheckFlag(checkData, FIELD_MOVE_CHECK_WATERFALL)) {
@@ -391,10 +402,12 @@ static BOOL Task_UseWaterfallInField(TaskManager *taskManager) {
 }
 
 static u32 FieldMove_CheckRockClimb(const FieldMoveCheckData *checkData) {
-    if (checkData->fieldSystem->mapLoadType == MAP_LOAD_TYPE_UNION || checkData->fieldSystem->mapLoadType == MAP_LOAD_TYPE_COLOSSEUM) {
+    if (checkData->fieldSystem->unk70 == 2 || checkData->fieldSystem->unk70 == 3) {
         return FIELD_MOVE_RESPONSE_NOT_HERE;
     }
-    if (!PlayerProfile_TestBadgeFlag(Save_PlayerData_GetProfile(checkData->fieldSystem->saveData), BADGE_EARTH)) {
+    // APOCRYPHA: badge gate removed — field moves are usable from
+    // bag HM items (see scr_seq_0146.s); menu use follows suit.
+    if (0 && !PlayerProfile_TestBadgeFlag(Save_PlayerData_GetProfile(checkData->fieldSystem->saveData), BADGE_EARTH)) {
         return FIELD_MOVE_RESPONSE_NEED_BADGE;
     }
     if (!FieldMove_CheckFlag(checkData, FIELD_MOVE_CHECK_ROCKCLIMB)) {
@@ -429,7 +442,7 @@ static BOOL Task_UseRockClimbInField(TaskManager *taskManager) {
 }
 
 static u32 FieldMove_CheckFlash(const FieldMoveCheckData *checkData) {
-    if (checkData->fieldSystem->mapLoadType == MAP_LOAD_TYPE_UNION || checkData->fieldSystem->mapLoadType == MAP_LOAD_TYPE_COLOSSEUM) {
+    if (checkData->fieldSystem->unk70 == 2 || checkData->fieldSystem->unk70 == 3) {
         return FIELD_MOVE_RESPONSE_NOT_HERE;
     }
     if (CheckUseFlashInAlphChamber(checkData->fieldSystem)) {
@@ -465,7 +478,7 @@ static BOOL Task_UseFlashInField(TaskManager *taskManager) {
 }
 
 static u32 FieldMove_CheckTeleport(const FieldMoveCheckData *checkData) {
-    if (checkData->fieldSystem->mapLoadType == MAP_LOAD_TYPE_UNION || checkData->fieldSystem->mapLoadType == MAP_LOAD_TYPE_COLOSSEUM) {
+    if (checkData->fieldSystem->unk70 == 2 || checkData->fieldSystem->unk70 == 3) {
         return FIELD_MOVE_RESPONSE_NOT_HERE;
     }
     if (!MapHeader_IsTeleportAllowed(checkData->mapId)) {
@@ -488,8 +501,8 @@ static void FieldMove_UseTeleport(FieldMoveUseData *useData, const FieldMoveChec
     FieldSystem *fieldSystem = TaskManager_GetFieldSystem(useData->taskManager);
     StartMenuTaskData *startMenu = TaskManager_GetEnvironment(useData->taskManager);
     FieldSystem_LoadFieldOverlay(fieldSystem);
-    FieldMoveEnvironment *fieldMoveEnvironment = FieldMove_CreateEnvironment(HEAP_ID_FIELD2, useData->partySlot, fieldSystem->saveData);
-    FieldMoveData *fieldMoveData = Heap_AllocAtEnd(HEAP_ID_FIELD2, sizeof(FieldMoveData));
+    FieldMoveEnvironment *fieldMoveEnvironment = FieldMove_CreateEnvironment(HEAP_ID_FIELD, useData->partySlot, fieldSystem->saveData);
+    FieldMoveData *fieldMoveData = AllocFromHeapAtEnd(HEAP_ID_FIELD, sizeof(FieldMoveData));
     fieldMoveEnvironment->moveData = fieldMoveData;
     fieldMoveData->partySlot = useData->partySlot;
     startMenu->exitTaskFunc = Task_UseTeleportInField;
@@ -500,15 +513,15 @@ static void FieldMove_UseTeleport(FieldMoveUseData *useData, const FieldMoveChec
 static BOOL Task_UseTeleportInField(TaskManager *taskManager) {
     FieldSystem *fieldSystem = TaskManager_GetFieldSystem(taskManager);
     FieldMoveEnvironment *fieldMoveEnvironment = TaskManager_GetEnvironment(taskManager);
-    FieldMoveTaskEnvironment *fieldMoveTaskEnvironment = FieldMoveTask_CreateTeleportEnvironment(fieldSystem, fieldMoveEnvironment->mon, fieldMoveEnvironment->moveData->partySlot, HEAP_ID_FIELD1);
-    Heap_Free(fieldMoveEnvironment->moveData);
-    Heap_Free(fieldMoveEnvironment);
+    FieldMoveTaskEnvironment *fieldMoveTaskEnvironment = FieldMoveTask_CreateTeleportEnvironment(fieldSystem, fieldMoveEnvironment->mon, fieldMoveEnvironment->moveData->partySlot, HEAP_ID_4);
+    FreeToHeap(fieldMoveEnvironment->moveData);
+    FreeToHeap(fieldMoveEnvironment);
     TaskManager_Jump(taskManager, Task_FieldTeleport, fieldMoveTaskEnvironment);
     return FALSE;
 }
 
 static u32 FieldMove_CheckDig(const FieldMoveCheckData *checkData) {
-    if (checkData->fieldSystem->mapLoadType == MAP_LOAD_TYPE_UNION || checkData->fieldSystem->mapLoadType == MAP_LOAD_TYPE_COLOSSEUM) {
+    if (checkData->fieldSystem->unk70 == 2 || checkData->fieldSystem->unk70 == 3) {
         return FIELD_MOVE_RESPONSE_NOT_HERE;
     }
     if (MapHeader_IsCave(checkData->mapId) != TRUE || MapHeader_IsEscapeRopeAllowed(checkData->mapId) != TRUE) {
@@ -528,8 +541,8 @@ static void FieldMove_UseDig(FieldMoveUseData *useData, const FieldMoveCheckData
     FieldSystem *fieldSystem = TaskManager_GetFieldSystem(useData->taskManager);
     StartMenuTaskData *startMenu = TaskManager_GetEnvironment(useData->taskManager);
     FieldSystem_LoadFieldOverlay(fieldSystem);
-    FieldMoveEnvironment *fieldMoveEnvironment = FieldMove_CreateEnvironment(HEAP_ID_FIELD2, useData->partySlot, fieldSystem->saveData);
-    FieldMoveData *fieldMoveData = Heap_AllocAtEnd(HEAP_ID_FIELD2, sizeof(FieldMoveData));
+    FieldMoveEnvironment *fieldMoveEnvironment = FieldMove_CreateEnvironment(HEAP_ID_FIELD, useData->partySlot, fieldSystem->saveData);
+    FieldMoveData *fieldMoveData = AllocFromHeapAtEnd(HEAP_ID_FIELD, sizeof(FieldMoveData));
     fieldMoveEnvironment->moveData = fieldMoveData;
     fieldMoveData->partySlot = useData->partySlot;
     startMenu->exitTaskFunc = Task_UseDigInField;
@@ -540,15 +553,15 @@ static void FieldMove_UseDig(FieldMoveUseData *useData, const FieldMoveCheckData
 static BOOL Task_UseDigInField(TaskManager *taskManager) {
     FieldSystem *fieldSystem = TaskManager_GetFieldSystem(taskManager);
     FieldMoveEnvironment *fieldMoveEnvironment = TaskManager_GetEnvironment(taskManager);
-    FieldMoveTaskEnvironment *fieldMoveTaskEnvironment = FieldMoveTask_CreateDigEnvironment(fieldSystem, fieldMoveEnvironment->mon, fieldMoveEnvironment->moveData->partySlot, HEAP_ID_FIELD2);
-    Heap_Free(fieldMoveEnvironment->moveData);
-    Heap_Free(fieldMoveEnvironment);
+    FieldMoveTaskEnvironment *fieldMoveTaskEnvironment = FieldMoveTask_CreateDigEnvironment(fieldSystem, fieldMoveEnvironment->mon, fieldMoveEnvironment->moveData->partySlot, HEAP_ID_FIELD);
+    FreeToHeap(fieldMoveEnvironment->moveData);
+    FreeToHeap(fieldMoveEnvironment);
     TaskManager_Jump(taskManager, Task_FieldDig, fieldMoveTaskEnvironment);
     return FALSE;
 }
 
 static u32 FieldMove_CheckSweetScent(const FieldMoveCheckData *checkData) {
-    if (checkData->fieldSystem->mapLoadType == MAP_LOAD_TYPE_UNION || checkData->fieldSystem->mapLoadType == MAP_LOAD_TYPE_COLOSSEUM) {
+    if (checkData->fieldSystem->unk70 == 2 || checkData->fieldSystem->unk70 == 3) {
         return FIELD_MOVE_RESPONSE_NOT_HERE;
     }
     if (FieldMove_CheckPalPark(checkData) == TRUE) {
@@ -561,8 +574,8 @@ static u32 FieldMove_CheckSweetScent(const FieldMoveCheckData *checkData) {
 static void FieldMove_UseSweetScent(FieldMoveUseData *useData, const FieldMoveCheckData *checkData) {
     FieldSystem *fieldSystem = TaskManager_GetFieldSystem(useData->taskManager);
     StartMenuTaskData *startMenu = TaskManager_GetEnvironment(useData->taskManager);
-    FieldMoveEnvironment *fieldMoveEnvironment = FieldMove_CreateEnvironment(HEAP_ID_FIELD2, useData->partySlot, fieldSystem->saveData);
-    FieldMoveData *fieldMoveData = Heap_AllocAtEnd(HEAP_ID_FIELD2, sizeof(FieldMoveData));
+    FieldMoveEnvironment *fieldMoveEnvironment = FieldMove_CreateEnvironment(HEAP_ID_FIELD, useData->partySlot, fieldSystem->saveData);
+    FieldMoveData *fieldMoveData = AllocFromHeapAtEnd(HEAP_ID_FIELD, sizeof(FieldMoveData));
     fieldMoveEnvironment->moveData = fieldMoveData;
     fieldMoveData->partySlot = useData->partySlot;
     FieldSystem_LoadFieldOverlay(fieldSystem);
@@ -572,7 +585,7 @@ static void FieldMove_UseSweetScent(FieldMoveUseData *useData, const FieldMoveCh
 }
 
 static u32 FieldMove_CheckChatter(const FieldMoveCheckData *checkData) {
-    if (checkData->fieldSystem->mapLoadType == MAP_LOAD_TYPE_UNION || checkData->fieldSystem->mapLoadType == MAP_LOAD_TYPE_COLOSSEUM) {
+    if (checkData->fieldSystem->unk70 == 2 || checkData->fieldSystem->unk70 == 3) {
         return FIELD_MOVE_RESPONSE_NOT_HERE;
     }
 
@@ -599,13 +612,15 @@ static BOOL Task_UseChatterInField(TaskManager *taskManager) {
 }
 
 static u32 FieldMove_CheckWhirlpool(const FieldMoveCheckData *checkData) {
-    if (checkData->fieldSystem->mapLoadType == MAP_LOAD_TYPE_UNION || checkData->fieldSystem->mapLoadType == MAP_LOAD_TYPE_COLOSSEUM) {
+    if (checkData->fieldSystem->unk70 == 2 || checkData->fieldSystem->unk70 == 3) {
         return FIELD_MOVE_RESPONSE_NOT_HERE;
     }
     if (PlayerAvatar_GetState(checkData->fieldSystem->playerAvatar) != PLAYER_STATE_SURFING) {
         return FIELD_MOVE_RESPONSE_NOT_HERE;
     }
-    if (!PlayerProfile_TestBadgeFlag(Save_PlayerData_GetProfile(checkData->fieldSystem->saveData), BADGE_GLACIER)) {
+    // APOCRYPHA: badge gate removed — field moves are usable from
+    // bag HM items (see scr_seq_0146.s); menu use follows suit.
+    if (0 && !PlayerProfile_TestBadgeFlag(Save_PlayerData_GetProfile(checkData->fieldSystem->saveData), BADGE_GLACIER)) {
         return FIELD_MOVE_RESPONSE_NEED_BADGE;
     }
     if (FieldMove_CheckFlag(checkData, FIELD_MOVE_CHECK_WHIRLPOOL)) {
@@ -634,7 +649,7 @@ static BOOL Task_UseWhirlpoolInField(TaskManager *taskManager) {
 }
 
 static u32 FieldMove_CheckHeadbutt(const FieldMoveCheckData *checkData) {
-    if (checkData->fieldSystem->mapLoadType == MAP_LOAD_TYPE_UNION || checkData->fieldSystem->mapLoadType == MAP_LOAD_TYPE_COLOSSEUM) {
+    if (checkData->fieldSystem->unk70 == 2 || checkData->fieldSystem->unk70 == 3) {
         return FIELD_MOVE_RESPONSE_NOT_HERE;
     }
     if (FieldMove_CheckFlag(checkData, FIELD_MOVE_CHECK_HEADBUTT)) {

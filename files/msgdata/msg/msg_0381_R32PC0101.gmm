@@ -2,7 +2,7 @@
 <body language="English">
 	<row id="msg_0381_R32PC0101_00000" index="0">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">This area is great for fishing.\nLooking at all those people fishing,\fdid you feel like you wanted to try\ffishing, too?\rWould you like one of my Rods? {YESNO 0}</language>
+		<language name="English">You’ve got the look of someone\nwho’s never felt a bite.\rHere--an Old Rod. Cast it anywhere\nthere’s calm water.\rWell? Will you take it? {YESNO 0}</language>
 	</row>
 	<row id="msg_0381_R32PC0101_00001" index="1">
 		<attribute name="window_context_name">garbage</attribute>
@@ -16,7 +16,7 @@
 	</row>
 	<row id="msg_0381_R32PC0101_00003" index="3">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">When you want to go fishing,\nface the water and use the Rod first.\rThen concentrate and look closely\nat the water!\rAn “!” appears when a Pokémon\nhas taken a bite!\rPress the A Button quickly to pull back\non the line.\rYou’ll see what happens next.\rIf there’s water, be it the sea or\na stream, try out your Rod.</language>
+		<language name="English">It won’t pull up monsters.\nIt pulls up POSSIBILITY.\rA team’s not finished till the\nwater’s had its say.\rFace calm water and use the Rod\nfrom your Bag.</language>
 	</row>
 	<row id="msg_0381_R32PC0101_00004" index="4">
 		<attribute name="window_context_name">used</attribute>
@@ -24,7 +24,7 @@
 	</row>
 	<row id="msg_0381_R32PC0101_00005" index="5">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">When you want to go fishing,\nface the water and use the Rod first.\rThen concentrate and look closely\nat the water!\rAn “!” appears when a Pokémon\nhas taken a bite!\rPress the A Button quickly to pull back\non the line.\rYou’ll see what happens next.\n</language>
+		<language name="English">A team’s not finished till the\nwater’s had its say.\rCast away, friend.</language>
 	</row>
 	<row id="msg_0381_R32PC0101_00006" index="6">
 		<attribute name="window_context_name">used</attribute>

@@ -22,13 +22,13 @@ void LinkBattleRuleset_CopyNameToString(const LinkBattleRuleset *rule, String *d
     CopyU16ArrayToStringN(dest, rule->name, 12);
 }
 
-String *LinkBattleRuleset_CreateStringFromName(const LinkBattleRuleset *rule, enum HeapID heapID) {
-    String *ret = String_New(24, heapID);
+String *LinkBattleRuleset_CreateStringFromName(const LinkBattleRuleset *rule, HeapID heapId) {
+    String *ret = String_New(24, heapId);
     CopyU16ArrayToString(ret, rule->name);
     return ret;
 }
 
-int LinkBattleRuleset_GetRuleValue(const LinkBattleRuleset *ruleset, enum LinkBattleRule rule) {
+int LinkBattleRuleset_GetRuleValue(const LinkBattleRuleset *ruleset, LinkBattleRule rule) {
     int ret = 0;
     switch (rule) {
     case LINKBATTLERULE_NONE:

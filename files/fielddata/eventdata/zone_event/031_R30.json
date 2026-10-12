@@ -305,6 +305,74 @@
       "x": 557,
       "z": 366,
       "y": 0
+    },
+    {
+      "id": "obj_R30_kestra",
+      "spriteId": "SPRITE_KESTRA",
+      "movement": 0,
+      "type": 0,
+      "eventFlag": "FLAG_HIDE_ROCKET_HIDEOUT_B3F_MURKROW_1",
+      "scriptId": "_EV_scr_seq_R30_011 + 1",
+      "facingDirection": 1,
+      "param0": 0,
+      "param1": 0,
+      "param2": 0,
+      "xRange": 0,
+      "yRange": 0,
+      "x": 548,
+      "z": 384,
+      "y": 0
+    },
+    {
+      "id": "obj_R30_kestra_rescue",
+      "spriteId": "SPRITE_KESTRA",
+      "movement": 16,
+      "type": 0,
+      "eventFlag": "FLAG_APOC_CATCH_TUT_DONE",
+      "scriptId": "_EV_scr_seq_R30_012 + 1",
+      "facingDirection": 1,
+      "param0": 0,
+      "param1": 0,
+      "param2": 0,
+      "xRange": 0,
+      "yRange": 0,
+      "x": 552,
+      "z": 375,
+      "y": 0
+    },
+    {
+      "id": "obj_R30_gold_rescue",
+      "spriteId": "SPRITE_HEROINE",
+      "movement": 0,
+      "type": 0,
+      "eventFlag": "FLAG_UNK_239",
+      "scriptId": 0,
+      "facingDirection": 0,
+      "param0": 0,
+      "param1": 0,
+      "param2": 0,
+      "xRange": 0,
+      "yRange": 0,
+      "x": 549,
+      "z": 380,
+      "y": 0
+    },
+    {
+      "id": "obj_R30_rattata_rescue",
+      "spriteId": "SPRITE_FOLLOWER_MON_STATIC_RATTATA",
+      "movement": 0,
+      "type": 0,
+      "eventFlag": "FLAG_UNK_234",
+      "scriptId": 0,
+      "facingDirection": 2,
+      "param0": 0,
+      "param1": 0,
+      "param2": 0,
+      "xRange": 0,
+      "yRange": 0,
+      "x": 554,
+      "z": 375,
+      "y": 0
     }
   ],
   "warps": [
@@ -325,6 +393,16 @@
   ],
   "coords": [
     {
+      "scriptId": "_EV_scr_seq_R30_012 + 1",
+      "x": 552,
+      "z": 376,
+      "w": 1,
+      "h": 1,
+      "y": 0,
+      "val": 0,
+      "var": "VAR_SCENE_ROUTE_30_OW"
+    },
+    {
       "scriptId": "_EV_scr_seq_R30_002 + 1",
       "x": 558,
       "z": 354,
@@ -343,6 +421,16 @@
       "y": 0,
       "val": 1,
       "var": "VAR_SCENE_ROUTE_30_PHONE_CALL"
+    },
+    {
+      "scriptId": "_EV_scr_seq_R30_012 + 1",
+      "x": 552,
+      "z": 374,
+      "w": 1,
+      "h": 1,
+      "y": 0,
+      "val": 0,
+      "var": "VAR_SCENE_ROUTE_30_OW"
     }
   ]
 }

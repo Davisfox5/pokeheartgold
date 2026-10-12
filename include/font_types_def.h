@@ -4,7 +4,7 @@
 #include "bg_window.h"
 #include "pm_string.h"
 
-typedef u8 FontID; // TODO: This should be an enum and NOT typedef'd, and should be u32
+typedef u8 FontID;
 struct FontData;
 
 typedef struct GlyphInfo {
@@ -33,7 +33,7 @@ typedef struct TextPrinterTemplate {
     union StrbufForPrint currentChar;
     Window *window;
     u8 padding[1];
-    u8 fontId;
+    FontID fontId;
     u8 x, y;
     u16 currentX, currentY;
     u16 letterSpacing, lineSpacing;

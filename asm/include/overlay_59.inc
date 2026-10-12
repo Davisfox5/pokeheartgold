@@ -26,8 +26,8 @@
 .public Pokepic_StartPaletteFade
 .public Pokepic_ResumePaletteFade
 .public PokepicManager_HandleLoadImgAndOrPltt
-.public thunk_ClearMainOAM
-.public thunk_ClearSubOAM
+.public sub_0200B2E0
+.public sub_0200B2E8
 .public NewMsgDataFromNarc
 .public DestroyMsgData
 .public ReadMsgDataIntoString
@@ -59,7 +59,7 @@
 .public ClearFrameAndWindow2
 .public BeginNormalPaletteFade
 .public IsPaletteFadeFinished
-.public ResetVisibleHardwareWindows
+.public sub_0200FBDC
 .public sub_0200FBF4
 .public ListMenuItems_New
 .public ListMenuItems_Delete
@@ -94,10 +94,10 @@
 .public TouchscreenListMenu_HandleInput
 .public Main_SetVBlankIntrCB
 .public HBlankInterruptDisable
-.public Heap_Create
-.public Heap_Destroy
-.public Heap_Alloc
-.public Heap_Free
+.public CreateHeap
+.public DestroyHeap
+.public AllocFromHeap
+.public FreeToHeap
 .public BgConfig_Alloc
 .public SetBothScreensModesAndDisable
 .public InitBgFromTemplate
@@ -184,7 +184,7 @@
 .public CalcMonPokeathlonStars
 .public Party_GetCount
 .public Party_GetMonByIndex
-.public Party_GetMonAprijuiceModifiers
+.public Party_GetUnkSubSlot
 .public SaveArray_Party_Get
 .public NNS_GfdDoVramTransfer
 .public NNS_G2dSetupSoftwareSpriteCamera

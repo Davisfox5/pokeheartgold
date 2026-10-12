@@ -12,7 +12,7 @@ ov56_021E5C20: ; 0x021E5C20
 	mov r0, #3
 	mov r1, #0x29
 	lsl r2, r2, #0x10
-	bl Heap_Create
+	bl CreateHeap
 	add r0, r5, #0
 	mov r1, #0xc4
 	mov r2, #0x29
@@ -93,7 +93,7 @@ ov56_021E5CB4: ; 0x021E5CB4
 	add r0, r6, #0
 	bl OverlayManager_FreeData
 	add r0, r5, #0
-	bl Heap_Destroy
+	bl DestroyHeap
 	mov r0, #1
 	pop {r4, r5, r6, pc}
 	thumb_func_end ov56_021E5CB4
@@ -859,9 +859,9 @@ _021E624E:
 	mov r1, #0
 	bl sub_0200FBF4
 	mov r0, #0
-	bl ResetVisibleHardwareWindows
+	bl sub_0200FBDC
 	mov r0, #1
-	bl ResetVisibleHardwareWindows
+	bl sub_0200FBDC
 	b _021E639A
 _021E6294:
 	bl ov56_021E647C
@@ -1321,7 +1321,7 @@ ov56_021E660C: ; 0x021E660C
 	orr r0, r1
 	strh r0, [r2]
 	ldr r0, [r4, #0x18]
-	bl Heap_Free
+	bl FreeToHeap
 	pop {r4, pc}
 	nop
 _021E664C: .word 0x04000304
@@ -1368,7 +1368,7 @@ ov56_021E6650: ; 0x021E6650
 	bl NARC_GetMemberSize
 	add r1, r0, #0
 	ldr r0, [r5]
-	bl Heap_AllocAtEnd
+	bl AllocFromHeapAtEnd
 	add r6, r0, #0
 	ldr r1, [sp, #0x1c]
 	add r0, r4, #0
@@ -1394,13 +1394,13 @@ ov56_021E6650: ; 0x021E6650
 	mov r1, #4
 	bl BG_LoadCharTilesData
 	add r0, r6, #0
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r4, #0
 	add r1, r7, #0
 	bl NARC_GetMemberSize
 	add r1, r0, #0
 	ldr r0, [r5]
-	bl Heap_AllocAtEnd
+	bl AllocFromHeapAtEnd
 	add r6, r0, #0
 	add r0, r4, #0
 	add r1, r7, #0
@@ -1527,13 +1527,13 @@ _021E6768:
 	ldr r0, [r5, #0x30]
 	bl PaletteData_PushTransparentBuffers
 	add r0, r6, #0
-	bl Heap_Free
+	bl FreeToHeap
 	ldr r1, [sp, #0x20]
 	add r0, r4, #0
 	bl NARC_GetMemberSize
 	add r1, r0, #0
 	ldr r0, [r5]
-	bl Heap_Alloc
+	bl AllocFromHeap
 	str r0, [r5, #0x3c]
 	ldr r1, [sp, #0x20]
 	ldr r2, [r5, #0x3c]
@@ -1548,7 +1548,7 @@ _021E6768:
 	bl NARC_GetMemberSize
 	add r1, r0, #0
 	ldr r0, [r5]
-	bl Heap_Alloc
+	bl AllocFromHeap
 	str r0, [r5, #0x40]
 	ldr r2, [r5, #0x40]
 	add r0, r4, #0
@@ -1655,9 +1655,9 @@ ov56_021E692C: ; 0x021E692C
 	sub sp, #4
 	add r4, r0, #0
 	ldr r0, [r4, #0x40]
-	bl Heap_Free
+	bl FreeToHeap
 	ldr r0, [r4, #0x3c]
-	bl Heap_Free
+	bl FreeToHeap
 	ldr r0, [r4, #0x30]
 	mov r1, #2
 	bl PaletteData_FreeBuffers
@@ -2033,7 +2033,7 @@ _021E6BC6:
 	add r2, sp, #0x14
 	bl SpriteSystem_InitManagerWithCapacities
 	ldr r0, [r5]
-	bl thunk_ClearMainOAM
+	bl sub_0200B2E0
 	bl sub_02074490
 	mov r1, #0
 	add r3, r0, #0

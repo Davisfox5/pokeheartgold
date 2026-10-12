@@ -77,19 +77,19 @@ static PartyMenuItemType ItemId_GetPartyUseType(u16 itemId) {
     int param;
     ItemData *itemData = LoadItemDataOrGfx(itemId, ITEMNARC_PARAM, HEAP_ID_PARTY_MENU);
     if (GetItemAttr_PreloadedItemData(itemData, ITEMATTR_PARTY_USE) != TRUE) {
-        Heap_Free(itemData);
+        FreeToHeap(itemData);
         return PARTY_MENU_ITEM_TYPE_OTHER;
     }
     if (GetItemAttr_PreloadedItemData(itemData, ITEMATTR_ATK_STAGES) || GetItemAttr_PreloadedItemData(itemData, ITEMATTR_DEF_STAGES) || GetItemAttr_PreloadedItemData(itemData, ITEMATTR_SPATK_STAGES) || GetItemAttr_PreloadedItemData(itemData, ITEMATTR_SPDEF_STAGES) || GetItemAttr_PreloadedItemData(itemData, ITEMATTR_SPEED_STAGES) || GetItemAttr_PreloadedItemData(itemData, ITEMATTR_ACCURACY_STAGES) || GetItemAttr_PreloadedItemData(itemData, ITEMATTR_CRITRATE_STAGES)) {
-        Heap_Free(itemData);
+        FreeToHeap(itemData);
         return PARTY_MENU_ITEM_TYPE_BATTLE_STAT_STAGES;
     }
     if (GetItemAttr_PreloadedItemData(itemData, ITEMATTR_REVIVE_ALL)) {
-        Heap_Free(itemData);
+        FreeToHeap(itemData);
         return PARTY_MENU_ITEM_TYPE_REVIVE_ALL;
     }
     if (GetItemAttr_PreloadedItemData(itemData, ITEMATTR_LEVEL_UP)) {
-        Heap_Free(itemData);
+        FreeToHeap(itemData);
         return PARTY_MENU_ITEM_TYPE_LEVEL_UP;
     }
 
@@ -102,114 +102,114 @@ static PartyMenuItemType ItemId_GetPartyUseType(u16 itemId) {
 
     switch (param) {
     case 1:
-        Heap_Free(itemData);
+        FreeToHeap(itemData);
         return PARTY_MENU_ITEM_TYPE_SLP_HEAL;
     case 2:
-        Heap_Free(itemData);
+        FreeToHeap(itemData);
         return PARTY_MENU_ITEM_TYPE_PSN_HEAL;
     case 4:
-        Heap_Free(itemData);
+        FreeToHeap(itemData);
         return PARTY_MENU_ITEM_TYPE_BRN_HEAL;
     case 8:
-        Heap_Free(itemData);
+        FreeToHeap(itemData);
         return PARTY_MENU_ITEM_TYPE_FRZ_HEAL;
     case 16:
-        Heap_Free(itemData);
+        FreeToHeap(itemData);
         return PARTY_MENU_ITEM_TYPE_PRZ_HEAL;
     case 32:
-        Heap_Free(itemData);
+        FreeToHeap(itemData);
         return PARTY_MENU_ITEM_TYPE_CFS_HEAL;
     case 63:
         if (GetItemAttr_PreloadedItemData(itemData, ITEMATTR_HP_RESTORE)) {
-            Heap_Free(itemData);
+            FreeToHeap(itemData);
             return PARTY_MENU_ITEM_TYPE_HP_RESTORE;
         } else {
-            Heap_Free(itemData);
+            FreeToHeap(itemData);
             return PARTY_MENU_ITEM_TYPE_FULL_HEAL;
         }
     }
 
     if (GetItemAttr_PreloadedItemData(itemData, ITEMATTR_INF_HEAL)) {
-        Heap_Free(itemData);
+        FreeToHeap(itemData);
         return PARTY_MENU_ITEM_TYPE_INF_HEAL;
     }
     if (GetItemAttr_PreloadedItemData(itemData, ITEMATTR_HP_RESTORE)) {
-        Heap_Free(itemData);
+        FreeToHeap(itemData);
         return PARTY_MENU_ITEM_TYPE_HP_RESTORE;
     }
 
     param = GetItemAttr_PreloadedItemData(itemData, ITEMATTR_HP_EV_UP_PARAM);
     if (param > 0) {
-        Heap_Free(itemData);
+        FreeToHeap(itemData);
         return PARTY_MENU_ITEM_TYPE_HP_EV_UP;
     } else if (param < 0) {
-        Heap_Free(itemData);
+        FreeToHeap(itemData);
         return PARTY_MENU_ITEM_TYPE_HP_EV_DOWN;
     }
 
     param = GetItemAttr_PreloadedItemData(itemData, ITEMATTR_ATK_EV_UP_PARAM);
     if (param > 0) {
-        Heap_Free(itemData);
+        FreeToHeap(itemData);
         return PARTY_MENU_ITEM_TYPE_ATK_EV_UP;
     } else if (param < 0) {
-        Heap_Free(itemData);
+        FreeToHeap(itemData);
         return PARTY_MENU_ITEM_TYPE_ATK_EV_DOWN;
     }
 
     param = GetItemAttr_PreloadedItemData(itemData, ITEMATTR_DEF_EV_UP_PARAM);
     if (param > 0) {
-        Heap_Free(itemData);
+        FreeToHeap(itemData);
         return PARTY_MENU_ITEM_TYPE_DEF_EV_UP;
     } else if (param < 0) {
-        Heap_Free(itemData);
+        FreeToHeap(itemData);
         return PARTY_MENU_ITEM_TYPE_DEF_EV_DOWN;
     }
 
     param = GetItemAttr_PreloadedItemData(itemData, ITEMATTR_SPEED_EV_UP_PARAM);
     if (param > 0) {
-        Heap_Free(itemData);
+        FreeToHeap(itemData);
         return PARTY_MENU_ITEM_TYPE_SPEED_EV_UP;
     } else if (param < 0) {
-        Heap_Free(itemData);
+        FreeToHeap(itemData);
         return PARTY_MENU_ITEM_TYPE_SPEED_EV_DOWN;
     }
 
     param = GetItemAttr_PreloadedItemData(itemData, ITEMATTR_SPATK_EV_UP_PARAM);
     if (param > 0) {
-        Heap_Free(itemData);
+        FreeToHeap(itemData);
         return PARTY_MENU_ITEM_TYPE_SPATK_EV_UP;
     } else if (param < 0) {
-        Heap_Free(itemData);
+        FreeToHeap(itemData);
         return PARTY_MENU_ITEM_TYPE_SPATK_EV_DOWN;
     }
 
     param = GetItemAttr_PreloadedItemData(itemData, ITEMATTR_SPDEF_EV_UP_PARAM);
     if (param > 0) {
-        Heap_Free(itemData);
+        FreeToHeap(itemData);
         return PARTY_MENU_ITEM_TYPE_SPDEF_EV_UP;
     } else if (param < 0) {
-        Heap_Free(itemData);
+        FreeToHeap(itemData);
         return PARTY_MENU_ITEM_TYPE_SPDEF_EV_DOWN;
     }
 
     if (GetItemAttr_PreloadedItemData(itemData, ITEMATTR_EVOLVE)) {
-        Heap_Free(itemData);
+        FreeToHeap(itemData);
         return PARTY_MENU_ITEM_TYPE_EVOLVE;
     }
     if (GetItemAttr_PreloadedItemData(itemData, ITEMATTR_PP_UP)) {
-        Heap_Free(itemData);
+        FreeToHeap(itemData);
         return PARTY_MENU_ITEM_TYPE_PP_UP;
     }
     if (GetItemAttr_PreloadedItemData(itemData, ITEMATTR_PP_MAX)) {
-        Heap_Free(itemData);
+        FreeToHeap(itemData);
         return PARTY_MENU_ITEM_TYPE_PP_MAX;
     }
     if (
         GetItemAttr_PreloadedItemData(itemData, ITEMATTR_PP_RESTORE) || GetItemAttr_PreloadedItemData(itemData, ITEMATTR_PP_RESTORE_ALL)) {
-        Heap_Free(itemData);
+        FreeToHeap(itemData);
         return PARTY_MENU_ITEM_TYPE_PP_RESTORE;
     }
-    Heap_Free(itemData);
+    FreeToHeap(itemData);
     return PARTY_MENU_ITEM_TYPE_OTHER;
 }
 
@@ -573,16 +573,16 @@ int PartyMenu_Subtask_SacredAsh(PartyMenu *partyMenu) {
 
 static int PartyMenu_ItemUseFunc_LevelUp(PartyMenu *partyMenu) {
     Pokemon *mon = Party_GetMonByIndex(partyMenu->args->party, partyMenu->partyMonIndex);
-    partyMenu->levelUpStatsTmp[0] = GetMonData(mon, MON_DATA_MAX_HP, NULL);
+    partyMenu->levelUpStatsTmp[0] = GetMonData(mon, MON_DATA_MAXHP, NULL);
     partyMenu->levelUpStatsTmp[1] = GetMonData(mon, MON_DATA_ATK, NULL);
     partyMenu->levelUpStatsTmp[2] = GetMonData(mon, MON_DATA_DEF, NULL);
-    partyMenu->levelUpStatsTmp[3] = GetMonData(mon, MON_DATA_SP_ATK, NULL);
-    partyMenu->levelUpStatsTmp[4] = GetMonData(mon, MON_DATA_SP_DEF, NULL);
+    partyMenu->levelUpStatsTmp[3] = GetMonData(mon, MON_DATA_SPATK, NULL);
+    partyMenu->levelUpStatsTmp[4] = GetMonData(mon, MON_DATA_SPDEF, NULL);
     partyMenu->levelUpStatsTmp[5] = GetMonData(mon, MON_DATA_SPEED, NULL);
     UseItemOnMonInParty(partyMenu->args->party, partyMenu->args->itemId, partyMenu->partyMonIndex, 0, PartyMenu_GetCurrentMapSec(partyMenu), HEAP_ID_PARTY_MENU);
     partyMenu->monsDrawState[partyMenu->partyMonIndex].level = GetMonData(mon, MON_DATA_LEVEL, NULL);
     partyMenu->monsDrawState[partyMenu->partyMonIndex].hp = GetMonData(mon, MON_DATA_HP, NULL);
-    partyMenu->monsDrawState[partyMenu->partyMonIndex].maxHp = GetMonData(mon, MON_DATA_MAX_HP, NULL);
+    partyMenu->monsDrawState[partyMenu->partyMonIndex].maxHp = GetMonData(mon, MON_DATA_MAXHP, NULL);
     String *string = NewString_ReadMsgData(partyMenu->msgData, msg_0300_00177);
     BufferBoxMonNickname(partyMenu->msgFormat, 0, Mon_GetBoxMon(mon));
     BufferIntegerAsString(partyMenu->msgFormat, 1, partyMenu->monsDrawState[partyMenu->partyMonIndex].level, 3, PRINTING_MODE_LEFT_ALIGN, TRUE);
@@ -897,9 +897,9 @@ void PartyMenu_LearnMoveToSlot(PartyMenu *partyMenu, Pokemon *mon, int moveIdx) 
     int data = partyMenu->args->moveId;
     SetMonData(mon, MON_DATA_MOVE1 + moveIdx, &data);
     data = 0;
-    SetMonData(mon, MON_DATA_MOVE1_PP_UPS + moveIdx, &data);
+    SetMonData(mon, MON_DATA_MOVE1PPUP + moveIdx, &data);
     data = GetMoveMaxPP(partyMenu->args->moveId, 0);
-    SetMonData(mon, MON_DATA_MOVE1_PP + moveIdx, &data);
+    SetMonData(mon, MON_DATA_MOVE1PP + moveIdx, &data);
     if (partyMenu->args->itemId != ITEM_NONE) {
         if (!MoveIsHM(partyMenu->args->moveId)) {
             Bag_TakeItem(partyMenu->args->bag, partyMenu->args->itemId, 1, HEAP_ID_PARTY_MENU);

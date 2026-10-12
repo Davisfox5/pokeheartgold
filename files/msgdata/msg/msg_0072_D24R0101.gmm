@@ -44,4 +44,24 @@
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">This is a mysterious hall.\nPlease watch your step.</language>
 	</row>
+	<row id="msg_0072_D24R0101_00011" index="11">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">The Ruins of Alph. Older than\nJohto, older than anything that\fkept records.\rThe UNOWN here aren’t quite\nPokémon and aren’t quite WRITING--\fthey’re both, somehow.\rWe’ve barely scratched it.</language>
+	</row>
+	<row id="msg_0072_D24R0101_00012" index="12">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Silph sponsors the preservation\nequipment here. The ruins are\fdelicate, and the right\ninstruments keep them that way.\rWe’re guests, same as you--just\nbetter funded.\rIf your Pokédex happens to record\nanything unusual down here, the\funiversity would appreciate a\ncopy. So would we.\rNo obligation, of course.</language>
+	</row>
+	<row id="msg_0072_D24R0101_00013" index="13">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">UNOWN react strongly to pattern,\nto sound, to expectation.\rThat third one isn’t in our\nofficial report, naturally--too\fhard to quantify a FEELING.\rFascinating place. We keep finding\nreasons to extend the survey.</language>
+	</row>
+	<row id="msg_0072_D24R0101_00014" index="14">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">The carvings shift at the edge of\nsight. Stare too long and you\fstart reading meaning into them.\rIn a cracked alcove, forgotten by\neveryone but the dust...</language>
+	</row>
+	<row id="msg_0072_D24R0101_00015" index="15">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">The carvings shift at the edge of\nsight. Stare too long and you\fstart reading meaning into them.</language>
+	</row>
 </body>

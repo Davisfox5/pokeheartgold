@@ -16,7 +16,7 @@ sub_02097BE0: ; 0x02097BE0
 	add r7, r1, #0
 	mov r0, #0xb
 	mov r1, #0x54
-	bl Heap_AllocAtEnd
+	bl AllocFromHeapAtEnd
 	add r4, r0, #0
 	ldr r3, [r5, #0x48]
 	add r6, r4, #0
@@ -117,7 +117,7 @@ _02097C9A:
 	str r0, [r4, #0x50]
 	b _02097CB0
 _02097CA8:
-	bl Heap_Free
+	bl FreeToHeap
 	mov r0, #1
 	pop {r4, r5, r6, pc}
 _02097CB0:
@@ -132,7 +132,7 @@ sub_02097CB4: ; 0x02097CB4
 	add r5, r1, #0
 	mov r0, #0xb
 	mov r1, #0xc
-	bl Heap_AllocAtEnd
+	bl AllocFromHeapAtEnd
 	add r2, r0, #0
 	str r5, [r2]
 	mov r0, #0
@@ -186,9 +186,9 @@ _02097D14:
 	b _02097D36
 _02097D26:
 	ldr r0, [r4, #4]
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	mov r0, #1
 	pop {r3, r4, r5, pc}
 _02097D36:

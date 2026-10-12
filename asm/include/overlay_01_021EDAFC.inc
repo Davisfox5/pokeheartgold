@@ -27,8 +27,8 @@
 .public DrawFrameAndWindow1
 .public sub_0200E5D4
 .public IsPaletteFadeFinished
-.public Heap_Alloc
-.public Heap_Free
+.public AllocFromHeap
+.public FreeToHeap
 .public AllocWindows
 .public AddWindowParameterized
 .public RemoveWindow
@@ -44,13 +44,13 @@
 .public Save_PlayerData_GetProfile
 .public Save_PlayerData_GetCoinsAddr
 .public PlayerProfile_GetMoney
-.public Coins_GetValue
+.public CheckCoins
 .public FrontierData_BattlePointAction
 .public Save_FrontierData_Get
 .public SaveData_GetPhoneCallPersistentState
 .public PhoneCallPersistentState_MomSavings_BalanceAction
 .public Save_Pokeathlon_Get
-.public PokeathlonSave_GetAthletePoints
+.public SavePokeathlon_GetAthletePoints
 .public memset
 .public _s32_div_f
 .public gSystem

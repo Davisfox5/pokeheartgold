@@ -4,10 +4,10 @@
 .public SysTask_CreateOnMainQueue
 .public SysTask_Destroy
 .public MailMsg_Init_WithBank
-.public Heap_CreateAtEnd
-.public Heap_Destroy
-.public Heap_Alloc
-.public Heap_Free
+.public CreateHeapAtEnd
+.public DestroyHeap
+.public AllocFromHeap
+.public FreeToHeap
 .public GF_AssertFail
 .public String_New
 .public String_Delete
@@ -25,8 +25,8 @@
 .public sub_0205AD24
 .public sub_0205AD3C
 .public sub_0205B27C
-.public PlayerAvatar_GetXCoord
-.public PlayerAvatar_GetZCoord
+.public GetPlayerXCoord
+.public GetPlayerZCoord
 .public PlayerAvatar_GetMapObject
 .public sub_0205E3AC
 .public MapObjectManager_GetFirstActiveObjectByID

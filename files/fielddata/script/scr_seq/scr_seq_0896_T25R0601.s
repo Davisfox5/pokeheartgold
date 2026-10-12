@@ -5,356 +5,356 @@
 
 	.rodata
 
-	ScrDef scr_seq_T25R0601_000
-	ScrDef scr_seq_T25R0601_001
-	ScrDef scr_seq_T25R0601_002
-	ScrDef scr_seq_T25R0601_003
-	ScrDefEnd
+	scrdef scr_seq_T25R0601_000
+	scrdef scr_seq_T25R0601_001
+	scrdef scr_seq_T25R0601_002
+	scrdef scr_seq_T25R0601_003
+	scrdef_end
 
 scr_seq_T25R0601_002:
-	GoToIfSet FLAG_UNK_15D, _0058
-	GoToIfUnset FLAG_UNK_0B5, _0058
-	GetPartySlotWithFatefulEncounter VAR_TEMP_x4000, 492
-	Compare VAR_TEMP_x4000, 255
-	GoToIfEq _0058
-	GetPartyLeadAlive VAR_TEMP_x4000
-	GetPartyMonSpecies VAR_TEMP_x4000, VAR_TEMP_x4001
-	Compare VAR_TEMP_x4001, 492
-	GoToIfNe _0058
-	SetVar VAR_UNK_4082, 1
+	goto_if_set FLAG_UNK_15D, _0058
+	goto_if_unset FLAG_UNK_0B5, _0058
+	get_party_slot_with_fateful_encounter VAR_TEMP_x4000, 492
+	compare VAR_TEMP_x4000, 255
+	goto_if_eq _0058
+	get_party_lead_alive VAR_TEMP_x4000
+	get_partymon_species VAR_TEMP_x4000, VAR_TEMP_x4001
+	compare VAR_TEMP_x4001, 492
+	goto_if_ne _0058
+	setvar VAR_UNK_4082, 1
 _0058:
-	End
+	end
 
 scr_seq_T25R0601_003:
-	ScrCmd_609
-	LockAll
-	ToggleFollowingPokemonMovement 0
-	WaitFollowingPokemonMovement
-	FollowingPokemonMovement 55
-	ApplyMovement obj_player, _00FC
-	ApplyMovement obj_T25R0601_gsgirl1, _0110
-	WaitMovement
-	WaitFollowingPokemonMovement
-	ToggleFollowingPokemonMovement 1
-	FollowingPokemonMovement 48
-	ApplyMovement obj_T25R0601_gsgirl1, _0120
-	ApplyMovement obj_player, _0108
-	ApplyMovement obj_partner_poke, _014C
-	WaitMovement
-	NPCMsg msg_0589_T25R0601_00005
-	CloseMsg
-	ApplyMovement obj_T25R0601_gsgirl1, _012C
-	WaitMovement
-	NPCMsg msg_0589_T25R0601_00006
-	SetVar VAR_SPECIAL_x8004, 466
-	SetVar VAR_SPECIAL_x8005, 1
-	HasSpaceForItem VAR_SPECIAL_x8004, VAR_SPECIAL_x8005, VAR_TEMP_x4002
-	Compare VAR_TEMP_x4002, 0
-	GoToIfEq _00EA
-	CallStd std_give_item_verbose
-	NPCMsg msg_0589_T25R0601_00007
-	WaitButton
-	CloseMsg
-	SetFlag FLAG_UNK_15D
-	SetVar VAR_UNK_4082, 0
-	ReleaseAll
-	End
+	scrcmd_609
+	lockall
+	toggle_following_pokemon_movement 0
+	wait_following_pokemon_movement
+	following_pokemon_movement 55
+	apply_movement obj_player, _00FC
+	apply_movement obj_T25R0601_gsgirl1, _0110
+	wait_movement
+	wait_following_pokemon_movement
+	toggle_following_pokemon_movement 1
+	following_pokemon_movement 48
+	apply_movement obj_T25R0601_gsgirl1, _0120
+	apply_movement obj_player, _0108
+	apply_movement obj_partner_poke, _014C
+	wait_movement
+	npc_msg msg_0589_T25R0601_00005
+	closemsg
+	apply_movement obj_T25R0601_gsgirl1, _012C
+	wait_movement
+	npc_msg msg_0589_T25R0601_00006
+	setvar VAR_SPECIAL_x8004, 466
+	setvar VAR_SPECIAL_x8005, 1
+	hasspaceforitem VAR_SPECIAL_x8004, VAR_SPECIAL_x8005, VAR_TEMP_x4002
+	compare VAR_TEMP_x4002, 0
+	goto_if_eq _00EA
+	callstd std_give_item_verbose
+	npc_msg msg_0589_T25R0601_00007
+	wait_button_or_walk_away
+	closemsg
+	setflag FLAG_UNK_15D
+	setvar VAR_UNK_4082, 0
+	releaseall
+	end
 
 _00EA:
-	CallStd std_bag_is_full
-	CloseMsg
-	ReleaseAll
-	SetVar VAR_UNK_4082, 0
-	ReleaseAll
-	End
+	callstd std_bag_is_full
+	closemsg
+	releaseall
+	setvar VAR_UNK_4082, 0
+	releaseall
+	end
 
 	.balign 4, 0
 _00FC:
-	WalkNormalNorth
-	Delay8
-	EndMovement
+	step 12, 1
+	step 63, 1
+	step_end
 
 	.balign 4, 0
 _0108:
-	FaceEast
-	EndMovement
+	step 3, 1
+	step_end
 
 	.balign 4, 0
 _0110:
-	Delay8
-	FaceWest
-	EmoteExclamationMark
-	EndMovement
+	step 63, 1
+	step 2, 1
+	step 75, 1
+	step_end
 
 	.balign 4, 0
 _0120:
-	WalkNormalSouth
-	WalkNormalWest
-	EndMovement
+	step 13, 1
+	step 14, 1
+	step_end
 
 	.balign 4, 0
 _012C:
-	WalkOnSpotFastWest 4
-	EndMovement
+	step 38, 4
+	step_end
 
 	.balign 4, 0
 _0134:
-	WalkOnSpotFastSouth 4
-	EndMovement
+	step 37, 4
+	step_end
 
 	.balign 4, 0
 _013C:
-	WalkOnSpotFastNorth 4
-	EndMovement
+	step 36, 4
+	step_end
 
 	.balign 4, 0
 _0144:
-	WalkOnSpotFastEast 4
-	EndMovement
+	step 39, 4
+	step_end
 
 	.balign 4, 0
 _014C:
-	FaceEast
-	EndMovement
+	step 3, 1
+	step_end
 
 scr_seq_T25R0601_000:
-	GoToIfSet FLAG_UNK_0B5, _01E5
-	CheckBadge BADGE_PLAIN, VAR_TEMP_x4000
-	Compare VAR_TEMP_x4000, 1
-	GoToIfEq _0185
-	SimpleNPCMsg msg_0589_T25R0601_00000
-	End
+	goto_if_set FLAG_UNK_0B5, _01E5
+	check_badge BADGE_PLAIN, VAR_TEMP_x4000
+	compare VAR_TEMP_x4000, 1
+	goto_if_eq _0185
+	simple_npc_msg msg_0589_T25R0601_00000
+	end
 
 _0185:
-	PlaySE SEQ_SE_DP_SELECT
-	LockAll
-	FacePlayer
-	HasItem ITEM_SQUIRTBOTTLE, 1, VAR_SPECIAL_RESULT
-	Compare VAR_SPECIAL_RESULT, 1
-	GoToIfEq _01D0
-	NPCMsg msg_0589_T25R0601_00001
-	GoToIfNoItemSpace ITEM_SQUIRTBOTTLE, 1, _01DB
-	CallStd std_give_item_verbose
-	CloseMsg
-	ReleaseAll
-	End
+	play_se SEQ_SE_DP_SELECT
+	lockall
+	faceplayer
+	hasitem ITEM_SQUIRTBOTTLE, 1, VAR_SPECIAL_RESULT
+	compare VAR_SPECIAL_RESULT, 1
+	goto_if_eq _01D0
+	npc_msg msg_0589_T25R0601_00001
+	goto_if_no_item_space ITEM_SQUIRTBOTTLE, 1, _01DB
+	callstd std_give_item_verbose
+	closemsg
+	releaseall
+	end
 
 _01D0:
-	NPCMsg msg_0589_T25R0601_00002
-	WaitButton
-	CloseMsg
-	ReleaseAll
-	End
+	npc_msg msg_0589_T25R0601_00002
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
 
 _01DB:
-	CallStd std_bag_is_full
-	CloseMsg
-	ReleaseAll
-	End
+	callstd std_bag_is_full
+	closemsg
+	releaseall
+	end
 
 _01E5:
-	PlaySE SEQ_SE_DP_SELECT
-	LockAll
-	FacePlayer
-	NPCMsg msg_0589_T25R0601_00003
-	NPCMsg msg_0589_T25R0601_00008
-	TouchscreenMenuHide
-	ShowMoneyBox 20, 2
-	MenuInitStdGmm 1, 1, 0, 1, VAR_SPECIAL_RESULT
-	MenuItemAdd 213, 470, 0
-	MenuItemAdd 214, 472, 1
-	MenuItemAdd 215, 471, 2
-	MenuItemAdd 216, 473, 3
-	MenuItemAdd 217, 474, 4
-	MenuExec
-	CopyVar VAR_SPECIAL_x8000, VAR_SPECIAL_RESULT
-	Switch VAR_SPECIAL_x8000
-	Case 0, _033D
-	Case 1, _0349
-	Case 2, _0355
-	Case 3, _0361
-	NPCMsg msg_0589_T25R0601_00010
-	GoTo _031F
+	play_se SEQ_SE_DP_SELECT
+	lockall
+	faceplayer
+	npc_msg msg_0589_T25R0601_00003
+	npc_msg msg_0589_T25R0601_00008
+	touchscreen_menu_hide
+	show_money_box 20, 2
+	menu_init_std_gmm 1, 1, 0, 1, VAR_SPECIAL_RESULT
+	menu_item_add 213, 470, 0
+	menu_item_add 214, 472, 1
+	menu_item_add 215, 471, 2
+	menu_item_add 216, 473, 3
+	menu_item_add 217, 474, 4
+	menu_exec
+	copyvar VAR_SPECIAL_x8000, VAR_SPECIAL_RESULT
+	switch VAR_SPECIAL_x8000
+	case 0, _033D
+	case 1, _0349
+	case 2, _0355
+	case 3, _0361
+	npc_msg msg_0589_T25R0601_00010
+	goto _031F
 
 _0276:
-	Compare VAR_SPECIAL_x8000, 0
-	CallIfEq _036D
-	Compare VAR_SPECIAL_x8000, 1
-	CallIfEq _0377
-	Compare VAR_SPECIAL_x8000, 2
-	CallIfEq _0381
-	Compare VAR_SPECIAL_x8000, 3
-	CallIfEq _038B
-	Compare VAR_SPECIAL_RESULT, 0
-	GoToIfEq _0334
-	HasSpaceForItem VAR_SPECIAL_x8001, 1, VAR_SPECIAL_RESULT
-	Compare VAR_SPECIAL_RESULT, 0
-	GoToIfEq _032B
-	Compare VAR_SPECIAL_x8000, 0
-	CallIfEq _0395
-	Compare VAR_SPECIAL_x8000, 1
-	CallIfEq _039D
-	Compare VAR_SPECIAL_x8000, 2
-	CallIfEq _03A5
-	Compare VAR_SPECIAL_x8000, 3
-	CallIfEq _03AD
-	UpdateMoneyBox
-	PlaySE SEQ_SE_DP_REGI
-	GiveItem VAR_SPECIAL_x8001, 1, VAR_SPECIAL_RESULT
-	BufferItemName 0, VAR_SPECIAL_x8001
-	NPCMsg msg_0589_T25R0601_00011
-	NPCMsg msg_0589_T25R0601_00009
-	GoTo _031F
+	compare VAR_SPECIAL_x8000, 0
+	call_if_eq _036D
+	compare VAR_SPECIAL_x8000, 1
+	call_if_eq _0377
+	compare VAR_SPECIAL_x8000, 2
+	call_if_eq _0381
+	compare VAR_SPECIAL_x8000, 3
+	call_if_eq _038B
+	compare VAR_SPECIAL_RESULT, 0
+	goto_if_eq _0334
+	hasspaceforitem VAR_SPECIAL_x8001, 1, VAR_SPECIAL_RESULT
+	compare VAR_SPECIAL_RESULT, 0
+	goto_if_eq _032B
+	compare VAR_SPECIAL_x8000, 0
+	call_if_eq _0395
+	compare VAR_SPECIAL_x8000, 1
+	call_if_eq _039D
+	compare VAR_SPECIAL_x8000, 2
+	call_if_eq _03A5
+	compare VAR_SPECIAL_x8000, 3
+	call_if_eq _03AD
+	update_money_box
+	play_se SEQ_SE_DP_REGI
+	giveitem VAR_SPECIAL_x8001, 1, VAR_SPECIAL_RESULT
+	buffer_item_name 0, VAR_SPECIAL_x8001
+	npc_msg msg_0589_T25R0601_00011
+	npc_msg msg_0589_T25R0601_00009
+	goto _031F
 
 _031F:
-	WaitButton
-	CloseMsg
-	TouchscreenMenuShow
-	HideMoneyBox
-	ReleaseAll
-	End
+	wait_button_or_walk_away
+	closemsg
+	touchscreen_menu_show
+	hide_money_box
+	releaseall
+	end
 
 _032B:
-	NPCMsg msg_0589_T25R0601_00012
-	GoTo _031F
+	npc_msg msg_0589_T25R0601_00012
+	goto _031F
 
 _0334:
-	NPCMsg msg_0589_T25R0601_00013
-	GoTo _031F
+	npc_msg msg_0589_T25R0601_00013
+	goto _031F
 
 _033D:
-	SetVar VAR_SPECIAL_x8001, 95
-	GoTo _0276
+	setvar VAR_SPECIAL_x8001, 95
+	goto _0276
 
 _0349:
-	SetVar VAR_SPECIAL_x8001, 96
-	GoTo _0276
+	setvar VAR_SPECIAL_x8001, 96
+	goto _0276
 
 _0355:
-	SetVar VAR_SPECIAL_x8001, 97
-	GoTo _0276
+	setvar VAR_SPECIAL_x8001, 97
+	goto _0276
 
 _0361:
-	SetVar VAR_SPECIAL_x8001, 98
-	GoTo _0276
+	setvar VAR_SPECIAL_x8001, 98
+	goto _0276
 
 _036D:
-	HasEnoughMoneyImmediate VAR_SPECIAL_RESULT, 200
-	Return
+	hasenoughmoneyimmediate VAR_SPECIAL_RESULT, 200
+	return
 
 _0377:
-	HasEnoughMoneyImmediate VAR_SPECIAL_RESULT, 200
-	Return
+	hasenoughmoneyimmediate VAR_SPECIAL_RESULT, 200
+	return
 
 _0381:
-	HasEnoughMoneyImmediate VAR_SPECIAL_RESULT, 200
-	Return
+	hasenoughmoneyimmediate VAR_SPECIAL_RESULT, 200
+	return
 
 _038B:
-	HasEnoughMoneyImmediate VAR_SPECIAL_RESULT, 200
-	Return
+	hasenoughmoneyimmediate VAR_SPECIAL_RESULT, 200
+	return
 
 _0395:
-	SubMoneyImmediate 200
-	Return
+	submoneyimmediate 200
+	return
 
 _039D:
-	SubMoneyImmediate 200
-	Return
+	submoneyimmediate 200
+	return
 
 _03A5:
-	SubMoneyImmediate 200
-	Return
+	submoneyimmediate 200
+	return
 
 _03AD:
-	SubMoneyImmediate 200
-	Return
+	submoneyimmediate 200
+	return
 
 scr_seq_T25R0601_001:
-	PlaySE SEQ_SE_DP_SELECT
-	LockAll
-	FacePlayer
-	GoToIfSet FLAG_UNK_15D, _03FD
-	GetPartySlotWithFatefulEncounter VAR_SPECIAL_RESULT, 492
-	Compare VAR_SPECIAL_RESULT, 255
-	GoToIfEq _03F2
-	GetPartyLeadAlive VAR_TEMP_x4000
-	GetPartyMonSpecies VAR_TEMP_x4000, VAR_TEMP_x4001
-	Compare VAR_TEMP_x4001, 492
-	GoToIfEq _0432
+	play_se SEQ_SE_DP_SELECT
+	lockall
+	faceplayer
+	goto_if_set FLAG_UNK_15D, _03FD
+	get_party_slot_with_fateful_encounter VAR_SPECIAL_RESULT, 492
+	compare VAR_SPECIAL_RESULT, 255
+	goto_if_eq _03F2
+	get_party_lead_alive VAR_TEMP_x4000
+	get_partymon_species VAR_TEMP_x4000, VAR_TEMP_x4001
+	compare VAR_TEMP_x4001, 492
+	goto_if_eq _0432
 _03F2:
-	NPCMsg msg_0589_T25R0601_00004
-	WaitButton
-	CloseMsg
-	ReleaseAll
-	End
+	npc_msg msg_0589_T25R0601_00004
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
 
 _03FD:
-	GetPartySlotWithFatefulEncounter VAR_SPECIAL_RESULT, 492
-	Compare VAR_SPECIAL_RESULT, 255
-	GoToIfEq _03F2
-	GetPartyLeadAlive VAR_TEMP_x4000
-	GetPartyMonSpecies VAR_TEMP_x4000, VAR_TEMP_x4001
-	Compare VAR_TEMP_x4001, 492
-	GoToIfNe _03F2
-	NPCMsg msg_0589_T25R0601_00007
-	WaitButton
-	CloseMsg
-	ReleaseAll
-	End
+	get_party_slot_with_fateful_encounter VAR_SPECIAL_RESULT, 492
+	compare VAR_SPECIAL_RESULT, 255
+	goto_if_eq _03F2
+	get_party_lead_alive VAR_TEMP_x4000
+	get_partymon_species VAR_TEMP_x4000, VAR_TEMP_x4001
+	compare VAR_TEMP_x4001, 492
+	goto_if_ne _03F2
+	npc_msg msg_0589_T25R0601_00007
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
 
 _0432:
-	ApplyMovement obj_T25R0601_gsgirl1, _04F0
-	WaitMovement
-	NPCMsg msg_0589_T25R0601_00005
-	CloseMsg
-	GetPlayerFacing VAR_SPECIAL_RESULT
-	Compare VAR_SPECIAL_RESULT, 0
-	GoToIfNe _0460
-	ApplyMovement obj_T25R0601_gsgirl1, _0134
-	GoTo _049E
+	apply_movement obj_T25R0601_gsgirl1, _04F0
+	wait_movement
+	npc_msg msg_0589_T25R0601_00005
+	closemsg
+	get_player_facing VAR_SPECIAL_RESULT
+	compare VAR_SPECIAL_RESULT, 0
+	goto_if_ne _0460
+	apply_movement obj_T25R0601_gsgirl1, _0134
+	goto _049E
 
 _0460:
-	Compare VAR_SPECIAL_RESULT, 1
-	GoToIfNe _047B
-	ApplyMovement obj_T25R0601_gsgirl1, _013C
-	GoTo _049E
+	compare VAR_SPECIAL_RESULT, 1
+	goto_if_ne _047B
+	apply_movement obj_T25R0601_gsgirl1, _013C
+	goto _049E
 
 _047B:
-	Compare VAR_SPECIAL_RESULT, 2
-	GoToIfNe _0496
-	ApplyMovement obj_T25R0601_gsgirl1, _0144
-	GoTo _049E
+	compare VAR_SPECIAL_RESULT, 2
+	goto_if_ne _0496
+	apply_movement obj_T25R0601_gsgirl1, _0144
+	goto _049E
 
 _0496:
-	ApplyMovement obj_T25R0601_gsgirl1, _012C
+	apply_movement obj_T25R0601_gsgirl1, _012C
 _049E:
-	WaitMovement
-	NPCMsg msg_0589_T25R0601_00006
-	SetVar VAR_SPECIAL_x8004, 466
-	SetVar VAR_SPECIAL_x8005, 1
-	HasSpaceForItem VAR_SPECIAL_x8004, VAR_SPECIAL_x8005, VAR_TEMP_x4002
-	Compare VAR_TEMP_x4002, 0
-	GoToIfEq _04DD
-	CallStd std_give_item_verbose
-	NPCMsg msg_0589_T25R0601_00007
-	WaitButton
-	CloseMsg
-	SetFlag FLAG_UNK_15D
-	SetVar VAR_UNK_4082, 0
-	ReleaseAll
-	End
+	wait_movement
+	npc_msg msg_0589_T25R0601_00006
+	setvar VAR_SPECIAL_x8004, 466
+	setvar VAR_SPECIAL_x8005, 1
+	hasspaceforitem VAR_SPECIAL_x8004, VAR_SPECIAL_x8005, VAR_TEMP_x4002
+	compare VAR_TEMP_x4002, 0
+	goto_if_eq _04DD
+	callstd std_give_item_verbose
+	npc_msg msg_0589_T25R0601_00007
+	wait_button_or_walk_away
+	closemsg
+	setflag FLAG_UNK_15D
+	setvar VAR_UNK_4082, 0
+	releaseall
+	end
 
 _04DD:
-	CallStd std_bag_is_full
-	CloseMsg
-	ReleaseAll
-	SetVar VAR_UNK_4082, 0
-	ReleaseAll
-	End
+	callstd std_bag_is_full
+	closemsg
+	releaseall
+	setvar VAR_UNK_4082, 0
+	releaseall
+	end
 
 	.balign 4, 0
 _04F0:
-	EmoteExclamationMark
-	EndMovement
+	step 75, 1
+	step_end
 	.balign 4, 0

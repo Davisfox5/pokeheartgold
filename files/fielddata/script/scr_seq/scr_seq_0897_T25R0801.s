@@ -5,15 +5,15 @@
 
 	.rodata
 
-	ScrDef scr_seq_T25R0801_000
-	ScrDef scr_seq_T25R0801_001
-	ScrDefEnd
+	scrdef scr_seq_T25R0801_000
+	scrdef scr_seq_T25R0801_001
+	scrdef_end
 
 scr_seq_T25R0801_000:
-	SimpleNPCMsg msg_0590_T25R0801_00000
-	End
+	simple_npc_msg msg_0590_T25R0801_00000
+	end
 
 scr_seq_T25R0801_001:
-	SimpleNPCMsg msg_0590_T25R0801_00001
-	End
+	simple_npc_msg msg_0590_T25R0801_00001
+	end
 	.balign 4, 0

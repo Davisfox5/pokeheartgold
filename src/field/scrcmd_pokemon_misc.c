@@ -4,16 +4,15 @@
 #include "constants/map_sections.h"
 #include "constants/moves.h"
 
-#include "field/field_control.h"
 #include "msgdata/msg.naix"
 #include "msgdata/msg/msg_0066_D23R0102.h"
 #include "msgdata/msg/msg_0096_D31R0201.h"
 #include "overlay_2/overlay_02_02251E74.h"
 #include "overlay_2/overlay_02_gear_phone.h"
-#include "pokeathlon/pokeathlon_save.h"
 
 #include "bag.h"
 #include "bug_contest.h"
+#include "fieldmap.h"
 #include "follow_mon.h"
 #include "friend_group.h"
 #include "get_egg.h"
@@ -24,6 +23,7 @@
 #include "map_object.h"
 #include "map_section.h"
 #include "math_util.h"
+#include "overlay_01_021E6880.h"
 #include "overlay_01_021F72DC.h"
 #include "overlay_01_021F944C.h"
 #include "overlay_02.h"
@@ -33,21 +33,22 @@
 #include "pokedex.h"
 #include "save_wifi_history.h"
 #include "scrcmd.h"
-#include "screen_fade.h"
-#include "script_manager.h"
 #include "sound_02004A44.h"
 #include "sys_vars.h"
 #include "system.h"
 #include "unk_02005D10.h"
+#include "unk_0200FA24.h"
 #include "unk_02023694.h"
 #include "unk_02030A98.h"
+#include "unk_02031904.h"
+#include "unk_02031AF0.h"
 #include "unk_02031B0C.h"
 #include "unk_02037C94.h"
 #include "unk_0205BFF0.h"
 #include "unk_0206D494.h"
 #include "unk_02092BE8.h"
 #include "update_dex_received.h"
-// #include "application/zukanlist/zkn_data/zukan_data.naix"
+// #include "application/zukanlist/zukan_data/zukan_data.naix"
 
 typedef struct UnkStructScr_648 {
     FieldSystem *fieldSystem;
@@ -75,13 +76,13 @@ typedef struct UnkStructScr_648 {
     struct ListMenuTemplate listMenuTemplate;
     struct ListMenu *listMenu_23C;
     u32 unk_240;
-    ListMenuItem items[120];
+    LISTMENUITEM items[120];
     u16 unk_604[120];
     u16 unk_6F4;
 } SCR_648_STRUCT;
 
 static BOOL ov01_02200C6C(ScriptContext *ctx);
-static void *ov01_02200C94(enum HeapID heapID, s32 fileId, int *unkPtr);
+static void *ov01_02200C94(HeapID heapId, s32 fileId, int *unkPtr);
 static void ov01_02200CB4(SCR_648_STRUCT *unkPtr, MsgData *msgdata);
 static void ov01_02200CBC(FieldSystem *fieldSystem, SCR_648_STRUCT *unkPtr, u8 x, u8 y, u8 a4, u8 a5, u16 *input, MessageFormat *msgfmt, Window *window, MsgData *msgdata, u16 *cursorPos, u16 *itemsAbove);
 static SCR_648_STRUCT *ov01_02200D9C(FieldSystem *fieldSystem, u8 x, u8 y, u8 a3, u8 a4, u16 *input, MessageFormat *msgfmt, Window *window, MsgData *msgdata, u16 *cursorPos, u16 *itemsAbove);
@@ -136,7 +137,7 @@ BOOL ScrCmd_648(ScriptContext *ctx) {
 
     ctx->data[0] = unkC;
 
-    msgdata = NewMsgDataFromNarc(MSGDATA_LOAD_DIRECT, NARC_msgdata_msg, 237, HEAP_ID_FIELD3);
+    msgdata = NewMsgDataFromNarc(MSGDATA_LOAD_DIRECT, NARC_msgdata_msg, 237, HEAP_ID_32);
 
     input = GetVarPointer(fieldSystem, unkC);
 
@@ -150,7 +151,7 @@ BOOL ScrCmd_648(ScriptContext *ctx) {
     unkG = sub_020312C4(fieldSystem->saveData, 0xb, &out_1);
 
     if (out_1 == 1) {
-        data = ov01_02200C94(HEAP_ID_FIELD3, ov01_02209AE0[fileIndex], &out_2);
+        data = ov01_02200C94(HEAP_ID_32, ov01_02209AE0[fileIndex], &out_2);
 
         for (i = 0; i < out_2; i++) {
             unkPtr_2 = sub_020312E0(fieldSystem->saveData, unkG, sub_0205C144(unkA), data[i]);
@@ -158,13 +159,13 @@ BOOL ScrCmd_648(ScriptContext *ctx) {
                 ov01_02200DF8(unkPtr, data[i], 0xff, data[i]);
             }
         }
-        Heap_Free(data);
+        FreeToHeap(data);
     }
     if (unkG) {
-        Heap_Free(unkG);
+        FreeToHeap(unkG);
     }
 
-    msgdata2 = NewMsgDataFromNarc(MSGDATA_LOAD_LAZY, NARC_msgdata_msg, NARC_msg_msg_0191_bin, HEAP_ID_FIELD3);
+    msgdata2 = NewMsgDataFromNarc(MSGDATA_LOAD_LAZY, NARC_msgdata_msg, NARC_msg_msg_0191_bin, HEAP_ID_32);
 
     ov01_02200CB4(unkPtr, msgdata2);
     ov01_02200DF8(unkPtr, 0xd, 0xff, 0xfffe);
@@ -184,9 +185,9 @@ static BOOL ov01_02200C6C(ScriptContext *ctx) {
     return *GetVarPointer(ctx->fieldSystem, ctx->data[0]) != 0xEEEE;
 }
 
-static void *ov01_02200C94(enum HeapID heapID, s32 fileId, int *unkPtr) {
+static void *ov01_02200C94(HeapID heapId, s32 fileId, int *unkPtr) {
     u32 size;
-    void *data = GfGfxLoader_LoadFromNarc_GetSizeOut(NARC_application_zukanlist_zkn_data_zukan_data, fileId, FALSE, heapID, FALSE, &size);
+    void *data = GfGfxLoader_LoadFromNarc_GetSizeOut(NARC_application_zukanlist_zukan_data_zukan_data, fileId, FALSE, heapId, FALSE, &size);
     *unkPtr = size / 2;
     return data;
 }
@@ -222,14 +223,14 @@ static void ov01_02200CBC(FieldSystem *fieldSystem, SCR_648_STRUCT *unkPtr, u8 x
     }
 
     for (i = 0; i < 0x78; i++) {
-        unkPtr->stringArr_1C[i] = String_New(0x50, HEAP_ID_FIELD1);
+        unkPtr->stringArr_1C[i] = String_New(0x50, HEAP_ID_4);
     }
 
     *unkPtr->input = 0xEEEE;
 }
 
 static SCR_648_STRUCT *ov01_02200D9C(FieldSystem *fieldSystem, u8 x, u8 y, u8 a3, u8 a4, u16 *input, MessageFormat *msgfmt, Window *window, MsgData *msgdata, u16 *cursorPos, u16 *itemsAbove) {
-    SCR_648_STRUCT *unkPtr = Heap_Alloc(HEAP_ID_FIELD1, sizeof(SCR_648_STRUCT));
+    SCR_648_STRUCT *unkPtr = AllocFromHeap(HEAP_ID_4, sizeof(SCR_648_STRUCT));
     if (!unkPtr) {
         return NULL;
     }
@@ -249,15 +250,15 @@ static void ov01_02200E00(SCR_648_STRUCT *unkPtr) {
     } else {
         AddWindowParameterized(unkPtr->fieldSystem->bgConfig, &unkPtr->window_8, 3, unkPtr->x, unkPtr->y, 11, 2 * unk, 13, 1);
     }
-    LoadUserFrameGfx1(unkPtr->fieldSystem->bgConfig, GF_BG_LYR_MAIN_3, 0x3D9, 11, 0, HEAP_ID_FIELD1);
+    LoadUserFrameGfx1(unkPtr->fieldSystem->bgConfig, GF_BG_LYR_MAIN_3, 0x3D9, 11, 0, HEAP_ID_4);
     DrawFrameAndWindow1(&unkPtr->window_8, TRUE, 0x3D9, 11);
     ov01_02200F54(unkPtr);
-    unkPtr->listMenu_23C = ListMenuInit(&unkPtr->listMenuTemplate, *unkPtr->cursorPos, *unkPtr->itemsAbove, HEAP_ID_FIELD1);
+    unkPtr->listMenu_23C = ListMenuInit(&unkPtr->listMenuTemplate, *unkPtr->cursorPos, *unkPtr->itemsAbove, HEAP_ID_4);
     unkPtr->sysTask = SysTask_CreateOnMainQueue(ov01_022010CC, unkPtr, 0);
 }
 
 static void ov01_02200EC8(SCR_648_STRUCT *unkPtr, int strNo, u16 a2, u32 a3) {
-    String *str = String_New(0x50, HEAP_ID_FIELD1);
+    String *str = String_New(0x50, HEAP_ID_4);
     ReadMsgDataIntoString(unkPtr->msgdata, strNo, str);
     StringExpandPlaceholders(unkPtr->msgfmt, unkPtr->stringArr_1C[unkPtr->totalItems], str);
     unkPtr->items[unkPtr->totalItems].text = unkPtr->stringArr_1C[unkPtr->totalItems];
@@ -290,7 +291,7 @@ static void ov01_02200F54(SCR_648_STRUCT *unkPtr) {
     unkPtr->listMenuTemplate.scrollMultiple = 1;
     unkPtr->listMenuTemplate.fontId = 0;
     unkPtr->listMenuTemplate.cursorKind = 0;
-    unkPtr->listMenuTemplate.data = unkPtr;
+    unkPtr->listMenuTemplate.unk_1C = (u32)unkPtr;
 }
 
 static void ov01_02201064(struct ListMenu *listMenu, s32 a1, u8 unused) {
@@ -303,7 +304,7 @@ static void ov01_02201064(struct ListMenu *listMenu, s32 a1, u8 unused) {
 
 static void ov01_02201088(struct ListMenu *listMenu, s32 unused1, u8 unused2) {
     u16 cursorPos = 0, itemsAbove = 0;
-    SCR_648_STRUCT *unkPtr = (SCR_648_STRUCT *)ListMenuGetTemplateField(listMenu, LISTMENUATTR_DATA);
+    SCR_648_STRUCT *unkPtr = (SCR_648_STRUCT *)ListMenuGetTemplateField(listMenu, LISTMENUATTR_UNK_1C);
     ListMenuGetScrollAndRow(listMenu, &cursorPos, &itemsAbove);
     if (unkPtr->cursorPos != 0 && unkPtr->itemsAbove != 0) {
         *unkPtr->cursorPos = cursorPos;
@@ -361,7 +362,7 @@ static void ov01_0220116C(SCR_648_STRUCT *unkPtr) {
 
     SysTask_Destroy(unkPtr->sysTask);
 
-    Heap_Free(unkPtr);
+    FreeToHeap(unkPtr);
 }
 
 static const u16 sStatJudgeBestStatMsgIdxs[6] = {
@@ -440,7 +441,7 @@ BOOL ScrCmd_CommSanitizeParty(ScriptContext *ctx) {
         }
     }
     if (count > 0) {
-        if (Bag_AddItem(Save_Bag_Get(fieldSystem->saveData), ITEM_GRISEOUS_ORB, count, HEAP_ID_FIELD1) == FALSE) {
+        if (Bag_AddItem(Save_Bag_Get(fieldSystem->saveData), ITEM_GRISEOUS_ORB, count, HEAP_ID_4) == FALSE) {
             *success = 255;
             return FALSE;
         }
@@ -760,7 +761,7 @@ BOOL ScrCmd_724(ScriptContext *ctx) {
     u8 unkVar = ScriptGetVar(ctx);
     u16 *unkPtrA = ScriptGetVarPointer(ctx);
 
-    Pokeathlon_UnkSubStruct_B00 *unkPtrB = PokeathlonSave_GetUnkB00(Save_Pokeathlon_Get(ctx->fieldSystem->saveData));
+    Pokeathlon_UnkSubStruct_B00 *unkPtrB = sub_0203199C(Save_Pokeathlon_Get(ctx->fieldSystem->saveData));
 
     if (unkVar <= 9) {
         *unkPtrA = ov01_02201B2C(unkPtrB->unk44[unkVar]);
@@ -807,7 +808,7 @@ BOOL ScrCmd_725(ScriptContext *ctx) {
     u8 unkA = ScriptReadByte(ctx);
     u32 unkB = ScriptGetVar(ctx);
 
-    Pokeathlon_UnkSubStruct_B00 *unkPtr = PokeathlonSave_GetAgainUnkB00(Save_Pokeathlon_Get(ctx->fieldSystem->saveData));
+    Pokeathlon_UnkSubStruct_B00 *unkPtr = sub_020319F0(Save_Pokeathlon_Get(ctx->fieldSystem->saveData));
 
     if (unkA == 0) {
         val = unkPtr->unk70 + unkB;
@@ -828,8 +829,8 @@ BOOL ScrCmd_725(ScriptContext *ctx) {
     return FALSE;
 }
 
-BOOL ScrCmd_ProcessSoundplate(ScriptContext *ctx) {
-    FieldSystem_ProcessSoundplate(ctx->fieldSystem, TRUE);
+BOOL ScrCmd_726(ScriptContext *ctx) {
+    ov01_021E7F00(ctx->fieldSystem, TRUE);
     return FALSE;
 }
 
@@ -910,10 +911,10 @@ BOOL ScrCmd_741(ScriptContext *ctx) {
     }
     str = sub_020322AC(apricornBox, *unkPtrA, 0x20);
     BufferString(*msgfmt, 0, str, 2, 1, gGameVersion); // buffer owner..?
-    Heap_Free(str);
+    FreeToHeap(str);
     str = sub_02032308(apricornBox, *unkPtrA, 0x20);
     BufferString(*msgfmt, 1, str, 2, 1, gGameVersion); // buffer juice type..?
-    Heap_Free(str);
+    FreeToHeap(str);
 
     unkVar = sub_02031D80(&unkOut);
     *price = (unkOut.unk0 / 10) + 2 * unkVar;
@@ -950,7 +951,7 @@ BOOL ScrCmd_CreatePokeathlonFriendshipRoomStatues(ScriptContext *ctx) {
     u16 species;
     FieldSystem *fieldSystem = ctx->fieldSystem;
 
-    PokeathlonSave_FriendshipRecords *unkPtr = Save_Pokeathlon_FriendshipRecords_Get(fieldSystem->saveData);
+    SavePokeathlonFriendshipRecords *unkPtr = sub_02031B00(fieldSystem->saveData);
 
     for (i = 0; i < 3; i++) {
         LocalMapObject *mapObj = MapObjectManager_GetFirstActiveObjectByID(fieldSystem->mapObjectManager, 0xf6 + i);
@@ -1047,7 +1048,7 @@ BOOL ScrCmd_GiveTogepiEgg(ScriptContext *ctx) {
         return FALSE;
     }
 
-    mon = AllocMonZeroed(HEAP_ID_FIELD2);
+    mon = AllocMonZeroed(HEAP_ID_FIELD);
     ZeroMonData(mon);
 
     SetEggStats(mon, SPECIES_TOGEPI, 1, profile, 3, sub_02017FE4(MAPSECTYPE_GIFT, MAPLOC(METLOC_MR_POKEMON)));
@@ -1065,12 +1066,12 @@ BOOL ScrCmd_GiveTogepiEgg(ScriptContext *ctx) {
     moveData = MOVE_EXTRASENSORY;
     SetMonData(mon, MON_DATA_MOVE1 + i, &moveData);
 
-    pp = GetMonData(mon, MON_DATA_MOVE1_MAX_PP + i, 0);
-    SetMonData(mon, MON_DATA_MOVE1_PP + i, &pp);
+    pp = GetMonData(mon, MON_DATA_MOVE1MAXPP + i, 0);
+    SetMonData(mon, MON_DATA_MOVE1PP + i, &pp);
 
     Party_AddMon(party, mon);
 
-    Heap_Free(mon);
+    FreeToHeap(mon);
 
     SaveMisc_SetTogepiPersonalityGender(Save_Misc_Get(fieldSystem->saveData), GetMonData(mon, MON_DATA_PERSONALITY, 0), GetMonData(mon, MON_DATA_GENDER, 0));
 
@@ -1113,7 +1114,7 @@ BOOL ScrCmd_GiveSpikyEarPichu(ScriptContext *ctx) {
     if (Party_GetCount(party) >= 6) {
         return FALSE;
     }
-    mon = AllocMonZeroed(HEAP_ID_FIELD2);
+    mon = AllocMonZeroed(HEAP_ID_FIELD);
     ZeroMonData(mon);
 
     u32 trId = PlayerProfile_GetTrainerID(profile);
@@ -1125,8 +1126,8 @@ BOOL ScrCmd_GiveSpikyEarPichu(ScriptContext *ctx) {
 
     for (i = 0; i < MAX_MON_MOVES; i++) {
         SetMonData(mon, MON_DATA_MOVE1 + i, &sSpikyEarPichuMoveset[i]);
-        maxPP = GetMonData(mon, MON_DATA_MOVE1_MAX_PP + i, 0);
-        SetMonData(mon, MON_DATA_MOVE1_PP + i, &maxPP);
+        maxPP = GetMonData(mon, MON_DATA_MOVE1MAXPP + i, 0);
+        SetMonData(mon, MON_DATA_MOVE1PP + i, &maxPP);
     }
 
     heldItem = ITEM_ZAP_PLATE;
@@ -1134,11 +1135,11 @@ BOOL ScrCmd_GiveSpikyEarPichu(ScriptContext *ctx) {
 
     u32 unkB = sub_02017FE4(MAPSECTYPE_NORMAL, MapHeader_GetMapSec(ctx->fieldSystem->location->mapId));
 
-    sub_020720FC(mon, profile, 4, unkB, 0x18, HEAP_ID_FIELD2);
+    sub_020720FC(mon, profile, 4, unkB, 0x18, HEAP_ID_FIELD);
 
     Party_AddMon(party, mon);
 
-    Heap_Free(mon);
+    FreeToHeap(mon);
 
     UpdatePokedexWithReceivedSpecies(fieldSystem->saveData, mon);
 
@@ -1194,7 +1195,7 @@ static u32 SlotLuckiness(SaveData *saveData, u8 machineId, u8 city) {
     rngSeed = GetLCRNGSeed();
     SetLCRNGSeed(sub_0202C7DC(friendGroup));
 
-    luckValues = Heap_AllocAtEnd(HEAP_ID_FIELD3, numMachines);
+    luckValues = AllocFromHeapAtEnd(HEAP_ID_32, numMachines);
     MI_CpuFill8(luckValues, 0, numMachines);
 
     for (i = 0; i < NELEMS(sSlotLuckDistribution[city]); ++i) {
@@ -1208,7 +1209,7 @@ static u32 SlotLuckiness(SaveData *saveData, u8 machineId, u8 city) {
 
     luckiness = luckValues[machineId];
 
-    Heap_Free(luckValues);
+    FreeToHeap(luckValues);
     SetLCRNGSeed(rngSeed);
 
     return luckiness;
@@ -1352,7 +1353,7 @@ BOOL ScrCmd_GiveRandomSeal(ScriptContext *ctx) {
 
     sealcase = Save_SealCase_Get(ctx->fieldSystem->saveData);
 
-    sealThresholds = Heap_AllocAtEnd(HEAP_ID_FIELD3, sizeof(u16) * SEAL_MYSTERY);
+    sealThresholds = AllocFromHeapAtEnd(HEAP_ID_32, sizeof(u16) * SEAL_MYSTERY);
 
     MI_CpuFill8(sealThresholds, 0, sizeof(u16) * SEAL_MYSTERY);
     MI_CpuFill8(uniqueSeals, 0, sizeof(u8) * 3);
@@ -1388,7 +1389,7 @@ BOOL ScrCmd_GiveRandomSeal(ScriptContext *ctx) {
         i++;
     }
 
-    Heap_Free(sealThresholds);
+    FreeToHeap(sealThresholds);
 
     *seal1 = uniqueSeals[0];
     *seal2 = uniqueSeals[1];
@@ -1414,10 +1415,10 @@ BOOL ScrCmd_CheckKyogreGroudonInParty(ScriptContext *ctx) {
     for (c = 0; c < partyCount; c++) {
         Pokemon *mon = Party_GetMonByIndex(playerParty, c);
         u16 species = GetMonData(mon, MON_DATA_SPECIES, NULL);
-        u8 gameVer = GetMonData(mon, MON_DATA_MET_GAME, NULL);
+        u8 gameVer = GetMonData(mon, MON_DATA_GAME_VERSION, NULL);
         if (!GetMonData(mon, MON_DATA_IS_EGG, NULL)
             && !GetMonData(mon, MON_DATA_CHECKSUM_FAILED, NULL)
-            && !GetMonData(mon, MON_DATA_EGG_LOCATION, NULL)) {
+            && !GetMonData(mon, MON_DATA_EGG_MET_LOCATION, NULL)) {
 
             switch (species) {
             case SPECIES_KYOGRE:

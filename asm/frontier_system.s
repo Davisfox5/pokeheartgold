@@ -12,7 +12,7 @@ FrontierSystem_Create: ; 0x0222A84C
 	add r0, r5, #0
 	mov r1, #0xbc
 	add r6, r2, #0
-	bl Heap_Alloc
+	bl AllocFromHeap
 	add r4, r0, #0
 	mov r1, #0
 	mov r2, #0xbc
@@ -80,7 +80,7 @@ _0222A8DA:
 	cmp r4, #0
 	beq _0222A8FC
 	add r0, r4, #0
-	bl FrontierScriptContext_Run
+	bl ov80_0222AB98
 	cmp r0, #0
 	bne _0222A8FC
 	ldr r0, [sp]
@@ -130,11 +130,11 @@ _0222A930:
 	ldr r0, [r4, #0x4c]
 	bl String_Delete
 	ldr r0, [r4, #0x40]
-	bl Heap_Free
+	bl FreeToHeap
 	ldr r0, [r4, #0x3c]
 	bl DestroyMsgData
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	pop {r4, pc}
 	.balign 4, 0
 	thumb_func_end ov80_0222A920
@@ -147,7 +147,7 @@ FrontierSystem_AddTask: ; 0x0222A958
 	add r6, r1, #0
 	mov r1, #0x90
 	add r7, r2, #0
-	bl Heap_Alloc
+	bl AllocFromHeap
 	mov r1, #0
 	mov r2, #0x90
 	add r4, r0, #0
@@ -156,7 +156,7 @@ FrontierSystem_AddTask: ; 0x0222A958
 	ldr r1, _0222A9D4 ; =gFrontierCommandTable
 	ldr r2, [r2]
 	add r0, r4, #0
-	bl FrontierScriptContext_Init
+	bl ov80_0222AB40
 	ldr r0, _0222A9D8 ; =0x0000FFFF
 	str r5, [r4]
 	cmp r6, r0
@@ -189,7 +189,7 @@ _0222A9B2:
 	add r1, #0x84
 	ldr r1, [r1]
 	add r0, r4, #0
-	bl FrontierScriptContext_Start
+	bl ov80_0222AB78
 	add r0, r4, #0
 	add r1, r7, #0
 	bl ov80_0222AB14
@@ -251,10 +251,10 @@ _0222AA22:
 	ldr r1, [r5, #0x40]
 	cmp r0, r1
 	beq _0222AA32
-	bl Heap_Free
+	bl FreeToHeap
 _0222AA32:
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	pop {r3, r4, r5, pc}
 	.balign 4, 0
 	thumb_func_end ov80_0222AA0C
@@ -350,7 +350,7 @@ ov80_0222AAD8: ; 0x0222AAD8
 	add r4, r0, #0
 	add r0, r1, #0
 	mov r1, #0x10
-	bl Heap_Alloc
+	bl AllocFromHeap
 	add r4, #0x24
 	add r3, r0, #0
 	mov r2, #8
@@ -378,7 +378,7 @@ _0222AB00:
 	sub r3, r3, #1
 	bne _0222AB00
 	add r0, r1, #0
-	bl Heap_Free
+	bl FreeToHeap
 	pop {r4, pc}
 	thumb_func_end ov80_0222AAF8
 
@@ -390,7 +390,7 @@ ov80_0222AB14: ; 0x0222AB14
 	lsl r1, r1, #2
 	add r1, r2, r1
 	str r1, [r4, #0x1c]
-	bl FrontierScriptContext_ReadWord
+	bl ov80_0222AC70
 	ldr r1, [r4, #0x1c]
 	add r0, r1, r0
 	str r0, [r4, #0x1c]

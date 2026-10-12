@@ -15,7 +15,7 @@ ov47_02258800: ; 0x02258800
 	mov r0, #3
 	mov r1, #0x81
 	lsl r2, r2, #0x10
-	bl Heap_Create
+	bl CreateHeap
 	mov r1, #0xa3
 	add r0, r4, #0
 	lsl r1, r1, #2
@@ -247,7 +247,7 @@ ov47_022589A8: ; 0x022589A8
 	add r0, r5, #0
 	bl OverlayManager_FreeData
 	mov r0, #0x81
-	bl Heap_Destroy
+	bl DestroyHeap
 	mov r0, #0
 	bl sub_0200616C
 	mov r0, #1
@@ -454,7 +454,7 @@ _02258B94:
 	cmp r4, #4
 	blt _02258B94
 	ldr r0, [r6]
-	bl Heap_Free
+	bl FreeToHeap
 	pop {r4, r5, r6, pc}
 	.balign 4, 0
 _02258BB0: .word ov47_02259E68
@@ -708,7 +708,7 @@ ov47_02258D78: ; 0x02258D78
 	add r2, r6, #0
 	bl BufferPlayersName
 	add r0, r6, #0
-	bl Heap_Free
+	bl FreeToHeap
 	pop {r3, r4, r5, r6, r7, pc}
 	thumb_func_end ov47_02258D78
 
@@ -811,13 +811,13 @@ ov47_02258DD0: ; 0x02258DD0
 	bl AddPlttResObjFromOpenNarc
 	str r0, [r5, #0x1c]
 	ldr r0, [r5, #0x18]
-	bl SpriteTransfer_CreateCharTransferTask_AllocAtEnd
+	bl sub_0200ADA4
 	cmp r0, #0
 	bne _02258E6C
 	bl GF_AssertFail
 _02258E6C:
 	ldr r0, [r5, #0x1c]
-	bl SpriteTransfer_CreatePlttTransferTask
+	bl sub_0200B00C
 	cmp r0, #0
 	bne _02258E7A
 	bl GF_AssertFail
@@ -1166,9 +1166,9 @@ ov47_0225912C: ; 0x0225912C
 	ldr r0, [r5, #0x14]
 	bl Sprite_Delete
 	ldr r0, [r5, #0x18]
-	bl SpriteTransfer_DeleteCharTransferTask
+	bl sub_0200AEB0
 	ldr r0, [r5, #0x1c]
-	bl SpriteTransfer_DeletePlttTransferTask
+	bl sub_0200B0A8
 	mov r7, #0x13
 	mov r6, #0
 	lsl r7, r7, #4
@@ -2230,7 +2230,7 @@ ov47_02259968: ; 0x02259968
 	add r0, r5, #0
 	add r0, #0x80
 	ldr r0, [r0]
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r5, #0
 	mov r4, #0
 	add r0, #0x80

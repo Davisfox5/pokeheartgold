@@ -58,11 +58,11 @@
 	</row>
 	<row id="msg_0065_D23R0101_00014" index="14">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">Whitney: Hi!\nMy name is Whitney!\rI heard about the Quiz to win a Radio\nCard, so I came here to get one...\rBut this Quiz is so hard!\r</language>
+		<language name="English">-</language>
 	</row>
 	<row id="msg_0065_D23R0101_00015" index="15">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">Whitney: Wow, you did it!\nI thought the answer to the third\fquestion was surely apricots!\rOops!\nIt’s time to go back to the Gym!\r</language>
+		<language name="English">-</language>
 	</row>
 	<row id="msg_0065_D23R0101_00016" index="16">
 		<attribute name="window_context_name">used</attribute>
@@ -183,5 +183,101 @@
 	<row id="msg_0065_D23R0101_00045" index="45">
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">This is the Pokémon Lottery Corner.\rWould you like to check today’s\nlucky number again? {YESNO 0}</language>
+	</row>
+	<row id="msg_0065_D23R0101_00046" index="46">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">MEL (on air): --and that’s the\nthing, that’s the THING, that’s\fwhat nobody wants to say out loud:\nit’s not one incident.\rAzalea was not one incident.\r(A girl waves you quiet--\nthe show’s on.)</language>
+	</row>
+	<row id="msg_0065_D23R0101_00047" index="47">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">MEL (on air): A well full of\nSLOWPOKE in a town that’s loved\fthose SLOWPOKE for a hundred\nyears, and somebody was down there\fdoing something to them.\rFine. Terrible, but fine, file it,\nmove on--except.\rExcept I’ve got a missing-Pokémon\nreport out of the Ruins of Alph.\fEquipment nobody can identify on a\nroute near Violet.\f“Researchers” at three sites that\ndidn’t ask for any researchers.</language>
+	</row>
+	<row id="msg_0065_D23R0101_00048" index="48">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">MEL (on air): Now I’m not saying\nit’s connected. I would NEVER say\fa thing I can’t prove on air, my\nproducer is making a face at me\fright now.\rI’m just saying--when you’ve\ndone this as long as I have, you\flearn the shape of a thing before\nyou can name it.\rAnd this has a shape. This has a\nvery particular shape.</language>
+	</row>
+	<row id="msg_0065_D23R0101_00049" index="49">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">MEL (on air): Somebody is running\na quiet little operation across\fthis whole region, polite and\nprofessional and gone before\fanyone gets a good look.\rAnd one day somebody is going to\nget a good look. And when they do--\fthey should call ME first.\rWe’re back after this.\r(The on-air light clicks off.)</language>
+	</row>
+	<row id="msg_0065_D23R0101_00050" index="50">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">KESTRA: That was SO good. That was\nincredible.\rOkay, okay--Ms. Mel, hi, I’m a\nhuge fan, but you don’t have to\ftake my word about Azalea being\nreal because--\rbecause THIS one was THERE.\nDown in the Well. While it was\fhappening. My friend went IN.\rSaw the whole thing. Tell her!\nTell her about the--</language>
+	</row>
+	<row id="msg_0065_D23R0101_00051" index="51">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">MEL: In the Well. You were in the\nWell.\rOkay. Okay okay okay. Don’t move,\ndon’t leave, you are the most\finteresting person who has walked\nthrough that door in a YEAR.\rWhat did you see. Start anywhere.\nStart at the worst part.</language>
+	</row>
+	<row id="msg_0065_D23R0101_00052" index="52">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">MEL: How many of them?--no, don’t\ncount, ballpark. What did they\fwear? Were they loud, were they\nscared, did they run?\rPeople who run are amateurs.\nDid they run?</language>
+	</row>
+	<row id="msg_0065_D23R0101_00053" index="53">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">MEL: Equipment. There’s always\nequipment. Cases, tablets,\fsomething with a logo on it--\npeople never stamp the IMPORTANT\fstuff but they ALWAYS stamp the\nEXPENSIVE stuff.\rWas there a name on anything.\nAnything at all. Think.</language>
+	</row>
+	<row id="msg_0065_D23R0101_00054" index="54">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">MEL: A lab coat. On the gear.\nA coat with a stamp on it.\rWhat did the stamp say.\r...Silph. You said SILPH.\nSilph Co.\rSay it once more and don’t think\nabout it, the first answer’s the\ftrue one--what was on the coat.</language>
+	</row>
+	<row id="msg_0065_D23R0101_00055" index="55">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">MEL: Silph. SILPH.\rI have been pulling that thread\nfor a year and a half and every\ftime I get close it goes soft in\nmy hands. Lawyers. “No comment.”\fDoors that lock from the inside.\rAnd you--a KID off the forest\nroad--you just walked in and\fhanded me the one thing I could\nnever get:\fa witness who saw the name in the\ndirt.</language>
+	</row>
+	<row id="msg_0065_D23R0101_00056" index="56">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">MEL: Right. Okay. Here’s what’s\nhappening. The Magnet Train\freopened last week--last WEEK, do\nyou understand what the odds of\fthat are--\rSilph Co. headquarters is in\nSaffron. That’s Kanto. That’s\ftwo hours on the fast rail and I\nhave a pass and you have a face\fthat saw the coat.\rYou’re coming with me. Right now.\nGrab your bag, we are going to go\flook the dragon in the lobby.\rDon’t overthink it. Overthinking\nis just fear wearing a smart coat.\fLet’s GO.</language>
+	</row>
+	<row id="msg_0065_D23R0101_00057" index="57">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">MEL: Station’s the south side of\ntown. Don’t overthink it.\rOverthinking is just fear wearing\na smart coat. GO.</language>
+	</row>
+	<row id="msg_0065_D23R0101_00058" index="58">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">MEL: TRAIN’S NOT GONNA WAIT,\nWITNESS!</language>
+	</row>
+	<row id="msg_0065_D23R0101_00059" index="59">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">KESTRA: Wait. Wait wait wait--\nKanto? You’re going to KANTO?\fWith--with HER? On a TRAIN?\nRight now??</language>
+	</row>
+	<row id="msg_0065_D23R0101_00060" index="60">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">MEL: I’m not taking anyone, kid.\nYour friend’s got legs and a\fstory in their pocket. They can\nsay no.\rThey’re not going to say no.\nNobody interesting ever says no.</language>
+	</row>
+	<row id="msg_0065_D23R0101_00061" index="61">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">KESTRA: ...You’re actually gonna\ngo. Of course you’re gonna go.\fLook at you.\rKanto. With a stranger. On a\ntrain.\rThat is the single most reckless,\nmost CHAMPION thing I have ever\fheard and I HATE that it’s not\nme doing it.</language>
+	</row>
+	<row id="msg_0065_D23R0101_00062" index="62">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">KESTRA: I’m not coming. Don’t--\ndon’t make that face, I’m NOT.\rThis is your crazy thing, not\nmine. I’ve got a city to figure\fout and a team to build and\nsomebody in this dumb friendship\fhas to stay the sensible one for\nONE day.\rGuess it’s my turn.</language>
+	</row>
+	<row id="msg_0065_D23R0101_00063" index="63">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">KESTRA: One battle. Right now.\rIf you’re gonna go do something\nthis stupid, I am NOT letting you\fwalk onto that train soft.\rShow me you’re ready. Show me I\ndon’t have to worry.\fSend it out!</language>
+	</row>
+	<row id="msg_0065_D23R0101_00064" index="64">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">KESTRA: Okay. Okay. You’re really\ndoing this.\rGo look your dragon in the lobby,\nor whatever she said. Be the one\fwho saw it.\rThat’s--that’s actually really\ncool, I’m not gonna pretend it’s\fnot.</language>
+	</row>
+	<row id="msg_0065_D23R0101_00065" index="65">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">KESTRA: But you CALL me. The\nsecond it gets weird. And it’s\fgonna get weird, {STRVAR_1 3, 0, 0}--\nyou’re going to a city built\faround the people you saw in that\nWell.\rOf COURSE it’s gonna get weird.\nSo you call me. Pokégear. Day or\fnight. Promise.</language>
+	</row>
+	<row id="msg_0065_D23R0101_00066" index="66">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">MEL (from the door): TRAIN’S NOT\nGONNA WAIT, WITNESS!</language>
+	</row>
+	<row id="msg_0065_D23R0101_00067" index="67">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">KESTRA: Ugh. GO. Before I change\nmy mind and tackle you onto a\fdifferent train.\r...Smell ya later, {STRVAR_1 3, 0, 0}.</language>
+	</row>
+	<row id="msg_0065_D23R0101_00068" index="68">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">KESTRA: The show’s about to\nstart! Get up front, you’ll miss\fit!</language>
+	</row>
+	<row id="msg_0065_D23R0101_00069" index="69">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">KESTRA: Wait. Wait wait wait--\nKanto? You’re going to KANTO?\fWith--with HER? On a TRAIN?\nRight now??</language>
 	</row>
 </body>

@@ -1,11 +1,11 @@
 #include <nitro/fs/overlay.h>
 #pragma once
-.public Heap_Alloc
-.public Heap_Free
+.public AllocFromHeap
+.public FreeToHeap
 .public GF_AssertFail
-.public DynamicTerrainHeightManager_New
+.public ov01_021FB3A4
 .public ov01_021FB3E4
-.public DynamicTerrainHeightManager_Free
+.public ov01_021FB418
 .public ov01_021FB42C
 .public ov01_021FB474
 .public ov01_021FB4A0

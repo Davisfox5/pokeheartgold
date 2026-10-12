@@ -1,8 +1,8 @@
 #include <nitro/fs/overlay.h>
 #pragma once
 .public Sound_SetSceneAndPlayBGM
-.public Heap_Alloc
-.public Heap_Free
+.public AllocFromHeap
+.public FreeToHeap
 .public GfGfx_EngineATogglePlanes
 .public sub_02030B14
 .public sub_02030BD0
@@ -15,7 +15,7 @@
 .public Party_AddMon
 .public Party_GetMonByIndex
 .public SaveArray_Party_Get
-.public Frontier_GetLaunchArgs
+.public Frontier_GetLaunchParam
 .public Frontier_GetData
 .public Frontier_SetData
 .public Frontier_LaunchApplication
@@ -24,8 +24,8 @@
 .public MI_CpuFill8
 .public gOverlayTemplate_Battle
 .public ov80_0222A474
-.public FrontierScriptContext_Pause
-.public FrontierScriptContext_ReadHalfWord
+.public ov80_0222AB84
+.public FrontierScript_ReadU16
 .public FrontierScript_ReadVarPtr
 .public FrontierScript_ReadVar
 .public ov80_0222BE9C

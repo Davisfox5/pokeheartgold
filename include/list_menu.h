@@ -27,14 +27,14 @@ enum ListMenuAttr {
     LISTMENUATTR_FONTID,
     LISTMENUATTR_CURSORKIND,
     LISTMENUATTR_WINDOW,
-    LISTMENUATTR_DATA,
+    LISTMENUATTR_UNK_1C,
 };
 
 typedef void (*LM_MoveCursorFunc_t)(struct ListMenu *list, s32 index, u8 onInit);
 typedef void (*LM_ItemPrintFunc_t)(struct ListMenu *list, s32 index, u8 y);
 
 typedef struct ListMenuTemplate {
-    /*0x00*/ ListMenuItem *items;
+    /*0x00*/ LISTMENUITEM *items;
     /*0x04*/ LM_MoveCursorFunc_t moveCursorFunc;
     /*0x08*/ LM_ItemPrintFunc_t itemPrintFunc;
     /*0x0C*/ Window *window;
@@ -52,7 +52,7 @@ typedef struct ListMenuTemplate {
     u16 scrollMultiple : 2;
     u16 fontId : 6;
     u16 cursorKind : 1;
-    /*0x1C*/ void *data;
+    /*0x1C*/ u32 unk_1C;
 } ListMenuTemplate;
 
 typedef struct ListMenu {
@@ -73,10 +73,10 @@ typedef struct ListMenu {
     /*0x31*/ u8 unk_31;
     /*0x32*/ u8 taskId;
     /*0x33*/ u8 unk_33;
-    /*0x34*/ u8 heapID;
+    /*0x34*/ u8 heapId;
 } ListMenu;
 
-struct ListMenu *ListMenuInit(const struct ListMenuTemplate *template, u16 cursorPos, u16 itemsAbove, enum HeapID heapID);
+struct ListMenu *ListMenuInit(const struct ListMenuTemplate *template, u16 cursorPos, u16 itemsAbove, HeapID heapId);
 s32 ListMenu_ProcessInput(struct ListMenu *list);
 void DestroyListMenu(struct ListMenu *list, u16 *cursorPos, u16 *itemsAbove);
 void RedrawListMenu(struct ListMenu *list);

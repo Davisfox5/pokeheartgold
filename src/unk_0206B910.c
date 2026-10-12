@@ -4,6 +4,8 @@
 
 #include "assert.h"
 #include "bag.h"
+#include "field_player_avatar.h"
+#include "fieldmap.h"
 #include "heap.h"
 #include "launch_application.h"
 #include "mail.h"
@@ -11,14 +13,12 @@
 #include "overlay_57.h"
 #include "party.h"
 #include "party_menu.h"
-#include "player_avatar.h"
 #include "player_data.h"
 #include "pokemon.h"
 #include "render_text.h"
 #include "save_arrays.h"
 #include "scrcmd.h"
 #include "script.h"
-#include "script_manager.h"
 #include "seal_case.h"
 #include "task.h"
 #include "unk_020379A0.h"
@@ -79,15 +79,15 @@ static void sub_0206BD00(UnkStruct_0206BCD4 *a0);
 
 void sub_0206B910(TaskManager *taskManager, SaveData *saveData) {
     FieldSystem *fieldSystem = TaskManager_GetFieldSystem(taskManager);
-    UnkStruct_0206B910 *r4 = Heap_AllocAtEnd(HEAP_ID_FIELD2, sizeof(UnkStruct_0206B910));
+    UnkStruct_0206B910 *r4 = AllocFromHeapAtEnd(HEAP_ID_FIELD, sizeof(UnkStruct_0206B910));
     memset(r4, 0, sizeof(UnkStruct_0206B910));
     r4->saveData = saveData;
-    r4->unk04 = Heap_Alloc(HEAP_ID_FIELD2, sizeof(UnkStruct_0206B984));
+    r4->unk04 = AllocFromHeap(HEAP_ID_FIELD, sizeof(UnkStruct_0206B984));
     memset(r4->unk04, 0, sizeof(UnkStruct_0206B984));
     r4->unk04->options = Save_PlayerData_GetOptionsAddr(saveData);
     r4->unk04->saveData = saveData;
     r4->unk04->menuInputStatePtr = &fieldSystem->menuInputState;
-    r4->partyMenu = Heap_Alloc(HEAP_ID_FIELD2, sizeof(PartyMenuArgs));
+    r4->partyMenu = AllocFromHeap(HEAP_ID_FIELD, sizeof(PartyMenuArgs));
     memset(r4->partyMenu, 0, sizeof(PartyMenuArgs));
     TaskManager_Call(taskManager, sub_0206B984, r4);
 }
@@ -151,8 +151,8 @@ static BOOL sub_0206B984(TaskManager *taskManager) {
         u32 index = r7->unk04->unk30 + 1;
         if (partyMenu->partySlot != 7) {
             Pokemon *mon = r7->unk04->mons[partyMenu->partySlot];
-            SetMonData(mon, MON_DATA_BALL_CAPSULE_ID, &index);
-            SetMonData(mon, MON_DATA_BALL_CAPSULE, SealCase_GetCapsuleI(r6->sealCase, index - 1));
+            SetMonData(mon, MON_DATA_CAPSULE, &index);
+            SetMonData(mon, MON_DATA_SEAL_COORDS, SealCase_GetCapsuleI(r6->sealCase, index - 1));
             sub_0209106C(SealOnCapsuleGetID(CapsuleGetSealI(SealCase_GetCapsuleI(r6->sealCase, index - 1), 0)));
             sub_020270C4(fieldSystem->saveData);
         }
@@ -164,9 +164,9 @@ static BOOL sub_0206B984(TaskManager *taskManager) {
         r7->state = 6;
         break;
     case 6:
-        Heap_Free(r7->partyMenu);
-        Heap_Free(r7->unk04);
-        Heap_Free(r7);
+        FreeToHeap(r7->partyMenu);
+        FreeToHeap(r7->unk04);
+        FreeToHeap(r7);
         return TRUE;
     }
     return FALSE;
@@ -208,7 +208,7 @@ BOOL ScrCmd_234(ScriptContext *ctx) {
 BOOL ScrCmd_235(ScriptContext *ctx) {
     UnkStruct_0206BCD4 **unkStruct = FieldSysGetAttrAddr(ctx->fieldSystem, SCRIPTENV_MISC_DATA_PTR);
     u16 unused = ScriptGetVar(ctx);
-    u32 unused2 = MapHeader_GetMapSec(ctx->fieldSystem->location->mapId);
+    u16 unused2 = MapHeader_GetMapSec(ctx->fieldSystem->location->mapId);
     sub_0206BD00(*unkStruct);
     return FALSE;
 }
@@ -240,17 +240,17 @@ static BOOL sub_0206BCB4(UnkStruct_0206BCD4 *a0, u8 a1) {
 }
 
 static UnkStruct_0206BCD4 *sub_0206BCD4(void) {
-    UnkStruct_0206BCD4 *unkStruct = Heap_Alloc(HEAP_ID_20, sizeof(UnkStruct_0206BCD4));
+    UnkStruct_0206BCD4 *unkStruct = AllocFromHeap(HEAP_ID_20, sizeof(UnkStruct_0206BCD4));
     MI_CpuFill8(unkStruct, 0, sizeof(UnkStruct_0206BCD4));
     return unkStruct;
 }
 
 static UnkStruct_0206BCD4 *sub_0206BCEC(UnkStruct_0206BCEC *unused) {
-    Heap_Create(HEAP_ID_FIELD2, HEAP_ID_20, 0x4000);
+    CreateHeap(HEAP_ID_FIELD, HEAP_ID_20, 0x4000);
     return sub_0206BCD4();
 }
 
 static void sub_0206BD00(UnkStruct_0206BCD4 *a0) {
-    Heap_Free(a0);
-    Heap_Destroy(HEAP_ID_20);
+    FreeToHeap(a0);
+    DestroyHeap(HEAP_ID_20);
 }

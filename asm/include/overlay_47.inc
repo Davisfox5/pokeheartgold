@@ -31,10 +31,10 @@
 .public AddCellOrAnimResObjFromOpenNarc
 .public sub_0200A740
 .public DestroySingle2DGfxResObj
-.public SpriteTransfer_CreateCharTransferTask_AllocAtEnd
-.public SpriteTransfer_DeleteCharTransferTask
-.public SpriteTransfer_CreatePlttTransferTask
-.public SpriteTransfer_DeletePlttTransferTask
+.public sub_0200ADA4
+.public sub_0200AEB0
+.public sub_0200B00C
+.public sub_0200B0A8
 .public OamManager_Create
 .public OamManager_ApplyAndResetBuffers
 .public OamManager_Free
@@ -55,9 +55,9 @@
 .public IsPaletteFadeFinished
 .public Main_SetVBlankIntrCB
 .public HBlankInterruptDisable
-.public Heap_Create
-.public Heap_Destroy
-.public Heap_Free
+.public CreateHeap
+.public DestroyHeap
+.public FreeToHeap
 .public BgConfig_Alloc
 .public SetBothScreensModesAndDisable
 .public InitBgFromTemplate

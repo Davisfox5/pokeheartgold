@@ -5,33 +5,33 @@
 
 	.rodata
 
-	ScrDef scr_seq_R05R0401_000
-	ScrDef scr_seq_R05R0401_001
-	ScrDefEnd
+	scrdef scr_seq_R05R0401_000
+	scrdef scr_seq_R05R0401_001
+	scrdef_end
 
 scr_seq_R05R0401_000:
-	PlaySE SEQ_SE_DP_SELECT
-	LockAll
-	FacePlayer
-	GoToIfSet FLAG_GOT_CLEANSE_TAG_FROM_ROUTE_5_GRANDMA, _0049
-	NPCMsg msg_0333_R05R0401_00000
-	GoToIfNoItemSpace ITEM_CLEANSE_TAG, 1, _0054
-	CallStd std_give_item_verbose
-	SetFlag FLAG_GOT_CLEANSE_TAG_FROM_ROUTE_5_GRANDMA
+	play_se SEQ_SE_DP_SELECT
+	lockall
+	faceplayer
+	goto_if_set FLAG_GOT_CLEANSE_TAG_FROM_ROUTE_5_GRANDMA, _0049
+	npc_msg msg_0333_R05R0401_00000
+	goto_if_no_item_space ITEM_CLEANSE_TAG, 1, _0054
+	callstd std_give_item_verbose
+	setflag FLAG_GOT_CLEANSE_TAG_FROM_ROUTE_5_GRANDMA
 _0049:
-	NPCMsg msg_0333_R05R0401_00001
-	WaitButton
-	CloseMsg
-	ReleaseAll
-	End
+	npc_msg msg_0333_R05R0401_00001
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
 
 _0054:
-	CallStd std_bag_is_full
-	CloseMsg
-	ReleaseAll
-	End
+	callstd std_bag_is_full
+	closemsg
+	releaseall
+	end
 
 scr_seq_R05R0401_001:
-	SimpleNPCMsg msg_0333_R05R0401_00002
-	End
+	simple_npc_msg msg_0333_R05R0401_00002
+	end
 	.balign 4, 0

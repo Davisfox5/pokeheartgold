@@ -107,3 +107,14 @@ compile_commands.json
 __pycache__
 .venv/
 *.pyc
+
+# Apocrypha scratch build outputs
+_omni_*.out
+
+# Proprietary toolchain archives: never commit (see hub AGENTS.md)
+tools/NitroSDK*.7z
+tools/mwccarm/
+tools/bin/
+files/*.rar
+*.rar
+tools/NitroSDK*.7z

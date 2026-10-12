@@ -64,7 +64,7 @@
 .public IsPaletteFadeFinished
 .public sub_0200FB70
 .public sub_0200FC20
-.public FontSystem_NewInit
+.public sub_02013534
 .public sub_020135AC
 .public sub_02014DA0
 .public sub_02014DB4
@@ -94,12 +94,12 @@
 .public sub_020182C4
 .public Main_SetVBlankIntrCB
 .public SetKeyRepeatTimers
-.public Heap_Create
-.public Heap_Destroy
-.public Heap_Alloc
-.public Heap_Free
-.public HeapExp_FndInitAllocator
-.public Heap_Realloc
+.public CreateHeap
+.public DestroyHeap
+.public AllocFromHeap
+.public FreeToHeap
+.public GF_ExpHeap_FndInitAllocator
+.public ReallocFromHeap
 .public BgConfig_Alloc
 .public SetBothScreensModesAndDisable
 .public InitBgFromTemplate

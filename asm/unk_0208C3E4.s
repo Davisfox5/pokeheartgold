@@ -1621,7 +1621,7 @@ sub_0208D0A4: ; 0x0208D0A4
 	add r2, r7, #0
 	bl sub_0208CFB4
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	b _0208D110
 _0208D102:
 	sub r0, #8

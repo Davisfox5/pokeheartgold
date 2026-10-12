@@ -2,7 +2,6 @@
 
 #include "blackout.h"
 #include "encounter.h"
-#include "field_bgm.h"
 #include "map_header.h"
 #include "map_object.h"
 #include "save_vars_flags.h"
@@ -11,6 +10,7 @@
 #include "sound_02004A44.h"
 #include "sys_flags.h"
 #include "sys_vars.h"
+#include "unk_02054E00.h"
 #include "unk_020632B0.h"
 
 BOOL ScrCmd_GetTrainerPathToPlayer(ScriptContext *ctx) {
@@ -110,7 +110,7 @@ BOOL ScrCmd_TrainerBattle(ScriptContext *ctx) {
         followerTrainerNum = Save_VarsFlags_GetFollowerTrainerNum(Save_VarsFlags_Get(fieldSystem->saveData));
     }
 
-    SetupAndStartTrainerBattle(ctx->taskman, var0, var1, followerTrainerNum, var2, var3, HEAP_ID_FIELD2, winFlag);
+    SetupAndStartTrainerBattle(ctx->taskman, var0, var1, followerTrainerNum, var2, var3, HEAP_ID_FIELD, winFlag);
     return TRUE;
 }
 
@@ -121,7 +121,7 @@ BOOL ScrCmd_MultiBattle(ScriptContext *ctx) {
     u16 var2 = ScriptGetVar(ctx);
     u8 var3 = ScriptReadByte(ctx);
 
-    SetupAndStartTrainerBattle(ctx->taskman, var1, var2, var0, 0, var3, HEAP_ID_FIELD2, winFlag);
+    SetupAndStartTrainerBattle(ctx->taskman, var1, var2, var0, 0, var3, HEAP_ID_FIELD, winFlag);
     return TRUE;
 }
 
@@ -191,9 +191,9 @@ BOOL ScrCmd_TrainerIsDoubleBattle(ScriptContext *ctx) {
 }
 
 BOOL ScrCmd_EncounterMusic(ScriptContext *ctx) {
-    u16 trainerID = ScriptGetVar(ctx);
-    int regionNo = MapHeader_GetRegionNo(ctx->fieldSystem->location->mapId);
-    BGM_SaveStateAndPlayNew(FieldBGM_GetEyesMeetForTrainer(trainerID, regionNo));
+    u16 var0 = ScriptGetVar(ctx);
+    BOOL isKanto = MapHeader_IsInKanto(ctx->fieldSystem->location->mapId);
+    BGM_SaveStateAndPlayNew(Trainer_GetEncounterMusic(var0, isKanto));
     return TRUE;
 }
 
@@ -224,7 +224,7 @@ BOOL ScrCmd_StaticWildWonOrCaughtCheck(ScriptContext *ctx) {
     return TRUE;
 }
 
-BOOL ScrCmd_LatiCaughtCheck(ScriptContext *ctx) {
+BOOL Scrcmd_LatiCaughtCheck(ScriptContext *ctx) {
     u32 *winFlag = FieldSysGetAttrAddr(ctx->fieldSystem, SCRIPTENV_BATTLE_WIN_FLAG);
     u16 *retPtr = ScriptGetVarPointer(ctx);
     *retPtr = IsBattleResultLatiCaught(*winFlag);
@@ -239,7 +239,7 @@ BOOL ScrCmd_PartyCheckForDouble(ScriptContext *ctx) {
 
 BOOL ScrCmd_223(ScriptContext *ctx) {
     u32 *winFlag = FieldSysGetAttrAddr(ctx->fieldSystem, SCRIPTENV_BATTLE_WIN_FLAG);
-    SetupAndStartTrainerBattle(ctx->taskman, 1, 0, 0, 0, 0, HEAP_ID_FIELD2, winFlag);
+    SetupAndStartTrainerBattle(ctx->taskman, 1, 0, 0, 0, 0, HEAP_ID_FIELD, winFlag);
     return TRUE;
 }
 
@@ -250,7 +250,7 @@ BOOL ScrCmd_224(ScriptContext *ctx) {
     return FALSE;
 }
 
-BOOL ScrCmd_GoToIfTrainerDefeated(ScriptContext *ctx) {
+BOOL ScrCmd_GotoIfTrainerDefeated(ScriptContext *ctx) {
     FieldSystem *fieldSystem = ctx->fieldSystem;
     LocalMapObject **lastInteracted = FieldSysGetAttrAddr(ctx->fieldSystem, SCRIPTENV_LAST_INTERACTED);
     u32 offset = ScriptReadWord(ctx);

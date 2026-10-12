@@ -10,8 +10,8 @@
 .public SysTask_CreateOnMainQueue
 .public SysTask_Destroy
 .public ClearFrameAndWindow2
-.public Heap_AllocAtEnd
-.public Heap_Free
+.public AllocFromHeapAtEnd
+.public FreeToHeap
 .public RemoveWindow
 .public SysTask_GetData
 .public LCRandom
@@ -26,10 +26,10 @@
 .public FieldSystem_StartForcedWildBattle
 .public BattleSetup_Delete
 .public GetFirstAliveMonInParty_CrashIfNone
-.public DialogBox_AddWindowToLayer3
-.public DialogBox_LoadFrame
-.public DialogBox_PrintMessage
-.public DialogBox_IsPrintFinished
+.public sub_0205B514
+.public sub_0205B564
+.public sub_0205B5B4
+.public IsPrintFinished
 .public PlayerAvatar_GetMapObject
 .public PlayerAvatar_GetState
 .public PlayerAvatar_GetTransitionBits
@@ -56,4 +56,4 @@
 .public Task_OverworldFish
 .public ov01_02200400
 .public ov01_02200540
-.public FieldSystem_PerformFishEncounterCheck
+.public ov02_02246F70

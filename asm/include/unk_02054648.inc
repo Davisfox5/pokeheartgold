@@ -1,9 +1,9 @@
 #include <nitro/fs/overlay.h>
 #pragma once
-.public Heap_AllocAtEnd
+.public AllocFromHeapAtEnd
 .public GF_AssertFail
 .public MapMatrix_GetWidth
-.public TerrainAttributes_Get
+.public sub_02054550
 .public sub_02054774
 .public sub_02054790
 .public sub_02054874
@@ -22,11 +22,11 @@
 .public sub_02054D10
 .public sub_02054DC8
 .public sub_02054E20
-.public Gymmick_CheckCollision
+.public sub_02064938
 .public _s32_div_f
-.public MapProp_GetTranslation
-.public MapProp_GetBuildModel
-.public MapPropManager_GetMapPropByIndex
+.public ov01_021F3B0C
+.public ov01_021F3B34
+.public ov01_021F3B44
 .public ov01_021F630C
 .public ov01_021F6328
 .public ov01_021F635C

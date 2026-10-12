@@ -72,6 +72,14 @@
       "z": 311,
       "y": 0,
       "dir": 4
+    },
+    {
+      "scriptId": "_EV_scr_seq_D24R0101_011 + 1",
+      "type": 1,
+      "x": 430,
+      "z": 286,
+      "y": 0,
+      "dir": 4
     }
   ],
   "objects": [
@@ -243,6 +251,57 @@
       "yRange": 0,
       "x": 441,
       "z": 285,
+      "y": 0
+    },
+    {
+      "id": "obj_D24R0101_researcher",
+      "spriteId": "SPRITE_ASSISTANTM",
+      "movement": 0,
+      "type": 0,
+      "eventFlag": "FLAG_NOTHING",
+      "scriptId": "_EV_scr_seq_D24R0101_008 + 1",
+      "facingDirection": 1,
+      "param0": 0,
+      "param1": 0,
+      "param2": 0,
+      "xRange": 0,
+      "yRange": 0,
+      "x": 431,
+      "z": 284,
+      "y": 0
+    },
+    {
+      "id": "obj_D24R0101_silph1",
+      "spriteId": "SPRITE_SUIT",
+      "movement": 0,
+      "type": 0,
+      "eventFlag": "FLAG_NOTHING",
+      "scriptId": "_EV_scr_seq_D24R0101_009 + 1",
+      "facingDirection": 1,
+      "param0": 0,
+      "param1": 0,
+      "param2": 0,
+      "xRange": 0,
+      "yRange": 0,
+      "x": 426,
+      "z": 283,
+      "y": 0
+    },
+    {
+      "id": "obj_D24R0101_silph2",
+      "spriteId": "SPRITE_ASSISTANTM",
+      "movement": 0,
+      "type": 0,
+      "eventFlag": "FLAG_NOTHING",
+      "scriptId": "_EV_scr_seq_D24R0101_010 + 1",
+      "facingDirection": 3,
+      "param0": 0,
+      "param1": 0,
+      "param2": 0,
+      "xRange": 0,
+      "yRange": 0,
+      "x": 425,
+      "z": 284,
       "y": 0
     }
   ],

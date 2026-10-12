@@ -100,8 +100,8 @@ _020236E0:
 	.balign 4, 0
 	thumb_func_end sub_020236BC
 
-	thumb_func_start BillboardLists_Create
-BillboardLists_Create: ; 0x02023738
+	thumb_func_start sub_02023738
+sub_02023738: ; 0x02023738
 	push {r3, r4, r5, r6, r7, lr}
 	add r6, r0, #0
 	ldr r0, _02023774 ; =_021D2208
@@ -114,7 +114,7 @@ _0202374A:
 	mov r1, #0xe0
 	add r0, r4, #0
 	mul r1, r6
-	bl Heap_Alloc
+	bl AllocFromHeap
 	ldr r7, _02023774 ; =_021D2208
 	mov r4, #0
 	str r0, [r7]
@@ -134,10 +134,10 @@ _02023772:
 	pop {r3, r4, r5, r6, r7, pc}
 	.balign 4, 0
 _02023774: .word _021D2208
-	thumb_func_end BillboardLists_Create
+	thumb_func_end sub_02023738
 
-	thumb_func_start BillboardLists_Delete
-BillboardLists_Delete: ; 0x02023778
+	thumb_func_start sub_02023778
+sub_02023778: ; 0x02023778
 	push {r4, r5, r6, lr}
 	ldr r6, _020237AC ; =_021D2208
 	mov r4, #0
@@ -157,7 +157,7 @@ _02023786:
 _02023798:
 	ldr r0, _020237AC ; =_021D2208
 	ldr r0, [r0]
-	bl Heap_Free
+	bl FreeToHeap
 	ldr r0, _020237AC ; =_021D2208
 	mov r1, #0
 	str r1, [r0]
@@ -165,10 +165,10 @@ _02023798:
 	pop {r4, r5, r6, pc}
 	nop
 _020237AC: .word _021D2208
-	thumb_func_end BillboardLists_Delete
+	thumb_func_end sub_02023778
 
-	thumb_func_start BillboardLists_Draw
-BillboardLists_Draw: ; 0x020237B0
+	thumb_func_start sub_020237B0
+sub_020237B0: ; 0x020237B0
 	push {r3, r4, r5, r6, r7, lr}
 	ldr r6, _020237E8 ; =_021D2208
 	mov r4, #0
@@ -201,7 +201,7 @@ _020237E4:
 	pop {r3, r4, r5, r6, r7, pc}
 	nop
 _020237E8: .word _021D2208
-	thumb_func_end BillboardLists_Draw
+	thumb_func_end sub_020237B0
 
 	thumb_func_start sub_020237EC
 sub_020237EC: ; 0x020237EC
@@ -221,7 +221,7 @@ _02023800:
 	mov r1, #0xc4
 	ldr r0, [r5, #4]
 	mul r1, r2
-	bl Heap_Alloc
+	bl AllocFromHeap
 	str r0, [r4, #4]
 	ldr r0, [r5]
 	str r0, [r4, #8]
@@ -239,7 +239,7 @@ _02023800:
 	ldr r1, [r5]
 	ldr r0, [r5, #4]
 	lsl r1, r1, #2
-	bl Heap_Alloc
+	bl AllocFromHeap
 	add r1, r4, #0
 	add r1, #0xd0
 	str r0, [r1]
@@ -247,7 +247,7 @@ _02023800:
 	bl sub_02024248
 	ldr r0, [r5, #4]
 	mov r1, #0x10
-	bl Heap_Alloc
+	bl AllocFromHeap
 	add r1, r4, #0
 	add r1, #0xd8
 	str r0, [r1]
@@ -256,7 +256,7 @@ _02023800:
 	ldr r0, [r0]
 	ldr r1, [r5, #4]
 	mov r2, #4
-	bl HeapExp_FndInitAllocator
+	bl GF_ExpHeap_FndInitAllocator
 	ldr r0, [r5]
 	ldr r1, [r5, #4]
 	bl sub_0202068C
@@ -281,15 +281,15 @@ _02023882:
 	beq _020238B6
 	bl sub_020238BC
 	ldr r0, [r4, #4]
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r4, #0
 	add r0, #0xd0
 	ldr r0, [r0]
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r4, #0
 	add r0, #0xd8
 	ldr r0, [r0]
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r4, #0
 	add r0, #0xdc
 	ldr r0, [r0]

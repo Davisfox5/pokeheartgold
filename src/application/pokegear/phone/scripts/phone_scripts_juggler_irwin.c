@@ -70,7 +70,7 @@ u16 ov101_021F42E4(PokegearPhoneCallContext *ctx, PokegearPhoneCallState *state,
         } else {
             return 0xFFFF;
         }
-    } else if (Save_VarsFlags_FlypointFlagAction(ctx->saveVarsFlags, FLAG_ACTION_CHECK, FLYPOINT_VERMILION)) {
+    } else if (Save_VarsFlags_FlypointFlagAction(ctx->saveVarsFlags, FLAG_ACTION_CHECK, FLAG_SYS_FLYPOINT_VERMILION - FLAG_SYS_FLYPOINT_PALLET)) {
         return PHONE_SCRIPT_164;
     } else if (CheckGameClearFlag(ctx->saveVarsFlags)) {
         if (!Save_VarsFlags_CheckFlagInArray(ctx->saveVarsFlags, FLAG_UNK_9A5)) {
@@ -83,7 +83,7 @@ u16 ov101_021F42E4(PokegearPhoneCallContext *ctx, PokegearPhoneCallState *state,
         return PHONE_SCRIPT_162;
     } else if (Save_VarsFlags_CheckFlagInArray(ctx->saveVarsFlags, FLAG_BEAT_RADIO_TOWER_ROCKETS)) {
         return PHONE_SCRIPT_161;
-    } else if (Save_VarsFlags_CheckFlagInArray(ctx->saveVarsFlags, FLAG_ROCKET_HIDEOUT_CLEARED)) {
+    } else if (Save_VarsFlags_CheckFlagInArray(ctx->saveVarsFlags, FLAG_RED_GYARADOS_MEET)) {
         if (!Save_VarsFlags_CheckFlagInArray(ctx->saveVarsFlags, FLAG_UNK_9A0)) {
             Save_VarsFlags_SetFlagInArray(ctx->saveVarsFlags, FLAG_UNK_9A0);
             return PHONE_SCRIPT_160;

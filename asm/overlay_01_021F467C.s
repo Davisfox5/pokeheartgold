@@ -32,7 +32,7 @@ ov01_021F467C: ; 0x021F467C
 	bl GX_ResetBankForBG
 	mov r0, #4
 	add r1, r0, #0
-	bl Heap_Alloc
+	bl AllocFromHeap
 	add r7, r0, #0
 	mov r0, #0
 	add r1, r7, #0
@@ -76,7 +76,7 @@ ov01_021F46DC: ; 0x021F46DC
 	bl GfGfx_EngineATogglePlanes
 	ldr r1, [r4]
 	mov r0, #4
-	bl Heap_FreeExplicit
+	bl FreeToHeapExplicit
 	pop {r4, pc}
 	thumb_func_end ov01_021F46DC
 

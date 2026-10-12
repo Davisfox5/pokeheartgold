@@ -14,8 +14,8 @@
 .public BeginNormalPaletteFade
 .public IsPaletteFadeFinished
 .public sub_0200FBF4
-.public Heap_Alloc
-.public Heap_Free
+.public AllocFromHeap
+.public FreeToHeap
 .public SetBgPriority
 .public ToggleBgLayer
 .public BgSetPosTextAndCommit
@@ -60,8 +60,8 @@
 .public ov01_021F12B4
 .public ov01_021F12D0
 .public ov01_021F1310
-.public HBlankSystem_Start
-.public HBlankSystem_Stop
+.public ov01_021FB4F4
+.public ov01_021FB514
 .public ov117_0225F020
 .public ov117_0225F4D4
 .public ov117_0225F4E4

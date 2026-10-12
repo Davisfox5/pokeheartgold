@@ -20,4 +20,12 @@
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">A Pokémon statue...\rIt looks very distinguished.</language>
 	</row>
+	<row id="msg_0054_D15R0101_00005" index="5">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">A paper training tag is pasted low\non the pillar--type symbols, move\fcategories, and a doodle of a\nsleeping BELLSPROUT.\rIt is very much not supposed to be\nhere.</language>
+	</row>
+	<row id="msg_0054_D15R0101_00006" index="6">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">{STRVAR_1 3, 0, 0} peeled the training\ntag off the pillar!\rOne of Ren’s--the doodle gives it\naway.</language>
+	</row>
 </body>

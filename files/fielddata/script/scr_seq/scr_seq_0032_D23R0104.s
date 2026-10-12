@@ -5,172 +5,172 @@
 
 	.rodata
 
-	ScrDef scr_seq_D23R0104_000
-	ScrDef scr_seq_D23R0104_001
-	ScrDef scr_seq_D23R0104_002
-	ScrDef scr_seq_D23R0104_003
-	ScrDef scr_seq_D23R0104_004
-	ScrDef scr_seq_D23R0104_005
-	ScrDef scr_seq_D23R0104_006
-	ScrDef scr_seq_D23R0104_007
-	ScrDef scr_seq_D23R0104_008
-	ScrDefEnd
+	scrdef scr_seq_D23R0104_000
+	scrdef scr_seq_D23R0104_001
+	scrdef scr_seq_D23R0104_002
+	scrdef scr_seq_D23R0104_003
+	scrdef scr_seq_D23R0104_004
+	scrdef scr_seq_D23R0104_005
+	scrdef scr_seq_D23R0104_006
+	scrdef scr_seq_D23R0104_007
+	scrdef scr_seq_D23R0104_008
+	scrdef_end
 
 scr_seq_D23R0104_000:
-	SetFlag FLAG_HIDE_ROCKET_TAKEOVER_1
-	SetFlag FLAG_HIDE_ROCKET_TAKEOVER_2
-	Compare VAR_SCENE_ROCKET_TAKEOVER, 4
-	GoToIfNe _0045
-	ClearFlag FLAG_HIDE_ROCKET_TAKEOVER_1
-	GoTo _0056
+	setflag FLAG_HIDE_ROCKET_TAKEOVER_1
+	setflag FLAG_HIDE_ROCKET_TAKEOVER_2
+	compare VAR_SCENE_ROCKET_TAKEOVER, 4
+	goto_if_ne _0045
+	clearflag FLAG_HIDE_ROCKET_TAKEOVER_1
+	goto _0056
 
 _0045:
-	Compare VAR_SCENE_ROCKET_TAKEOVER, 5
-	GoToIfNe _0056
-	ClearFlag FLAG_HIDE_ROCKET_TAKEOVER_2
+	compare VAR_SCENE_ROCKET_TAKEOVER, 5
+	goto_if_ne _0056
+	clearflag FLAG_HIDE_ROCKET_TAKEOVER_2
 _0056:
-	End
+	end
 
 scr_seq_D23R0104_008:
-	Compare VAR_SCENE_ROCKET_TAKEOVER, 4
-	GoToIfNe _0089
-	MovePersonFacing obj_D23R0104_kurumi, 18, 1, 12, DIR_EAST
-	MovePersonFacing obj_D23R0104_tsure_poke_static_meowth, 19, 1, 12, DIR_SOUTH
-	MovePersonFacing obj_D23R0104_gsman2, 20, 1, 12, DIR_SOUTH
+	compare VAR_SCENE_ROCKET_TAKEOVER, 4
+	goto_if_ne _0089
+	move_person_facing obj_D23R0104_kurumi, 18, 1, 12, DIR_EAST
+	move_person_facing obj_D23R0104_tsure_poke_static_meowth, 19, 1, 12, DIR_SOUTH
+	move_person_facing obj_D23R0104_gsman2, 20, 1, 12, DIR_SOUTH
 _0089:
-	End
+	end
 
 scr_seq_D23R0104_001:
-	SimpleNPCMsg msg_0068_D23R0104_00008
-	End
+	simple_npc_msg msg_0068_D23R0104_00008
+	end
 
 scr_seq_D23R0104_002:
-	SimpleNPCMsg msg_0068_D23R0104_00009
-	End
+	simple_npc_msg msg_0068_D23R0104_00009
+	end
 
 scr_seq_D23R0104_003:
-	SimpleNPCMsg msg_0068_D23R0104_00000
-	End
+	simple_npc_msg msg_0068_D23R0104_00000
+	end
 
 scr_seq_D23R0104_004:
-	PlaySE SEQ_SE_DP_SELECT
-	LockAll
-	FacePlayer
-	Compare VAR_SCENE_ROCKET_TAKEOVER, 4
-	GoToIfNe _00E2
-	NPCMsg msg_0068_D23R0104_00001
-	GoTo _00E8
+	play_se SEQ_SE_DP_SELECT
+	lockall
+	faceplayer
+	compare VAR_SCENE_ROCKET_TAKEOVER, 4
+	goto_if_ne _00E2
+	npc_msg msg_0068_D23R0104_00001
+	goto _00E8
 
 _00E2:
-	GoTo _00F0
+	goto _00F0
 
 _00E8:
-	WaitButton
-	CloseMsg
-	ReleaseAll
-	End
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
 
 _00F0:
-	GoToIfSet FLAG_GOT_BRIGHTPOWDER_FROM_MARY, _013D
-	NPCMsg msg_0068_D23R0104_00002
-	GoToIfNoItemSpace ITEM_BRIGHTPOWDER, 1, _0132
-	CallStd std_give_item_verbose
-	NPCMsg msg_0068_D23R0104_00004
-	WaitButton
-	CloseMsg
-	ReleaseAll
-	SetFlag FLAG_GOT_BRIGHTPOWDER_FROM_MARY
-	End
+	goto_if_set FLAG_GOT_BRIGHTPOWDER_FROM_MARY, _013D
+	npc_msg msg_0068_D23R0104_00002
+	goto_if_no_item_space ITEM_BRIGHTPOWDER, 1, _0132
+	callstd std_give_item_verbose
+	npc_msg msg_0068_D23R0104_00004
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	setflag FLAG_GOT_BRIGHTPOWDER_FROM_MARY
+	end
 
 _0132:
-	NPCMsg msg_0068_D23R0104_00005
-	WaitButton
-	CloseMsg
-	ReleaseAll
-	End
+	npc_msg msg_0068_D23R0104_00005
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
 
 _013D:
-	NPCMsg msg_0068_D23R0104_00006
-	WaitButton
-	CloseMsg
-	ReleaseAll
-	End
+	npc_msg msg_0068_D23R0104_00006
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
 
 scr_seq_D23R0104_005:
-	PlaySE SEQ_SE_DP_SELECT
-	LockAll
-	FacePlayer
-	PlayCry SPECIES_MEOWTH, 0
-	NPCMsg msg_0068_D23R0104_00007
-	WaitCry
-	WaitButton
-	CloseMsg
-	ReleaseAll
-	End
+	play_se SEQ_SE_DP_SELECT
+	lockall
+	faceplayer
+	play_cry SPECIES_MEOWTH, 0
+	npc_msg msg_0068_D23R0104_00007
+	wait_cry
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
 
 scr_seq_D23R0104_006:
-	PlaySE SEQ_SE_DP_SELECT
-	LockAll
-	FacePlayer
-	Compare VAR_SCENE_ROCKET_TAKEOVER, 4
-	GoToIfNe _0181
-	NPCMsg msg_0068_D23R0104_00010
-	GoTo _0184
+	play_se SEQ_SE_DP_SELECT
+	lockall
+	faceplayer
+	compare VAR_SCENE_ROCKET_TAKEOVER, 4
+	goto_if_ne _0181
+	npc_msg msg_0068_D23R0104_00010
+	goto _0184
 
 _0181:
-	NPCMsg msg_0068_D23R0104_00011
+	npc_msg msg_0068_D23R0104_00011
 _0184:
-	WaitButton
-	CloseMsg
-	ReleaseAll
-	End
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
 
 scr_seq_D23R0104_007:
-	GoToIfDefeated TRAINER_TEAM_ROCKET_F_GRUNT_4, _01F6
-	PlaySE SEQ_SE_DP_SELECT
-	LockAll
-	NPCMsg msg_0068_D23R0104_00012
-	GetPlayerFacing VAR_TEMP_x4000
-	Compare VAR_TEMP_x4000, 2
-	GoToIfNe _01BF
-	ApplyMovement obj_D23R0104_rocketw, _0210
-	GoTo _01C7
+	goto_if_defeated TRAINER_TEAM_ROCKET_F_GRUNT_4, _01F6
+	play_se SEQ_SE_DP_SELECT
+	lockall
+	npc_msg msg_0068_D23R0104_00012
+	get_player_facing VAR_TEMP_x4000
+	compare VAR_TEMP_x4000, 2
+	goto_if_ne _01BF
+	apply_movement obj_D23R0104_rocketw, _0210
+	goto _01C7
 
 _01BF:
-	ApplyMovement obj_D23R0104_rocketw, _021C
+	apply_movement obj_D23R0104_rocketw, _021C
 _01C7:
-	WaitMovement
-	NPCMsg msg_0068_D23R0104_00013
-	CloseMsg
-	TrainerBattle TRAINER_TEAM_ROCKET_F_GRUNT_4, 0, 0, 0
-	CheckBattleWon VAR_SPECIAL_RESULT
-	Compare VAR_SPECIAL_RESULT, 0
-	GoToIfEq _0209
-	SetTrainerFlag TRAINER_TEAM_ROCKET_F_GRUNT_4
-	NPCMsg msg_0068_D23R0104_00014
-	WaitButton
-	CloseMsg
-	ReleaseAll
-	End
+	wait_movement
+	npc_msg msg_0068_D23R0104_00013
+	closemsg
+	trainer_battle TRAINER_TEAM_ROCKET_F_GRUNT_4, 0, 0, 0
+	check_battle_won VAR_SPECIAL_RESULT
+	compare VAR_SPECIAL_RESULT, 0
+	goto_if_eq _0209
+	settrainerflag TRAINER_TEAM_ROCKET_F_GRUNT_4
+	npc_msg msg_0068_D23R0104_00014
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
 
 _01F6:
-	SimpleNPCMsg msg_0068_D23R0104_00014
-	End
+	simple_npc_msg msg_0068_D23R0104_00014
+	end
 
 _0209:
-	WhiteOut
-	ReleaseAll
-	End
+	white_out
+	releaseall
+	end
 
 	.balign 4, 0
 _0210:
-	EmoteExclamationMark
-	WalkOnSpotNormalEast
-	EndMovement
+	step 75, 1
+	step 35, 1
+	step_end
 
 	.balign 4, 0
 _021C:
-	EmoteExclamationMark
-	WalkOnSpotNormalSouth
-	EndMovement
+	step 75, 1
+	step 33, 1
+	step_end
 	.balign 4, 0

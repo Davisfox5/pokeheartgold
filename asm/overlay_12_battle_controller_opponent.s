@@ -721,7 +721,7 @@ ov12_02258D74: ; 0x02258D74
 	mov r1, #0x6b
 	mov r0, #5
 	lsl r1, r1, #2
-	bl Heap_Alloc
+	bl AllocFromHeap
 	add r4, r0, #0
 	mov r2, #0x6b
 	mov r0, #0
@@ -782,7 +782,7 @@ _02258DDC:
 	str r0, [sp, #0xc]
 	add r0, r5, #0
 	str r6, [sp, #0x10]
-	bl BattleSystem_GetSpriteSystem
+	bl BattleSystem_GetSpriteRenderer
 	str r0, [sp, #0x1c]
 	add r0, r5, #0
 	bl BattleSystem_GetPaletteData
@@ -870,7 +870,7 @@ _02258E96:
 	ldr r0, [r4, r0]
 	bl NARC_Delete
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	pop {r4, pc}
 	.balign 4, 0
 	thumb_func_end ov12_02258E7C
@@ -1484,7 +1484,7 @@ ov12_022592D0: ; 0x022592D0
 	bl BattleSystem_GetBattleType
 	add r6, r0, #0
 	add r0, r5, #0
-	bl BattleSystem_GetBattleInput
+	bl ov12_0223A900
 	ldr r2, _02259320 ; =0x00000196
 	ldrb r1, [r4, r2]
 	cmp r1, #0
@@ -1501,7 +1501,7 @@ ov12_022592D0: ; 0x022592D0
 _022592FC:
 	ldr r1, _02259324 ; =0xFFFFF300
 	mov r2, #0
-	bl BattleInput_StartMenuScrollHorizontalTask
+	bl ov12_02266D98
 _02259304:
 	mov r1, #0x65
 	add r2, r4, #0
@@ -1781,7 +1781,7 @@ ov12_02259514: ; 0x02259514
 	bl NARC_New
 	add r7, r0, #0
 	add r0, r5, #0
-	bl BattleSystem_GetBattleInput
+	bl ov12_0223A900
 	str r0, [sp, #8]
 	mov r3, #0
 	str r3, [sp]
@@ -1789,10 +1789,10 @@ ov12_02259514: ; 0x02259514
 	add r0, r6, #0
 	add r1, r7, #0
 	str r3, [sp, #4]
-	bl BattleInput_ChangeMenu
+	bl ov12_02266508
 	ldr r0, [sp, #8]
 	mov r1, #0
-	bl BattleInput_Deadstriped_022698AC
+	bl ov12_022698AC
 	add r0, r6, #0
 	bl NARC_Delete
 	add r0, r7, #0
@@ -1816,7 +1816,7 @@ _02259586:
 	add r0, #0x28
 	bl ov12_02264EB4
 	ldr r0, [sp, #8]
-	bl BattleInput_DisableBallGauge
+	bl ov12_02266B34
 	add r0, r4, #0
 	bl ov12_02262014
 _0225959A:
@@ -1927,17 +1927,17 @@ ov12_02259658: ; 0x02259658
 	push {r3, r4, r5, r6, r7, lr}
 	add r5, r0, #0
 	add r4, r1, #0
-	bl BattleSystem_GetSpriteSystem
+	bl BattleSystem_GetSpriteRenderer
 	add r6, r0, #0
 	add r0, r5, #0
-	bl BattleSystem_GetSpriteManager
+	bl BattleSystem_GetGfxHandler
 	add r7, r0, #0
 	add r0, r5, #0
 	bl BattleSystem_GetPaletteData
 	add r2, r0, #0
 	add r0, r6, #0
 	add r1, r7, #0
-	bl PartyGauge_LoadGraphics
+	bl ov12_0226ADE0
 	mov r1, #0x65
 	lsl r1, r1, #2
 	ldrb r1, [r4, r1]
@@ -1955,8 +1955,8 @@ ov12_02259694: ; 0x02259694
 	push {r3, r4, r5, lr}
 	add r5, r0, #0
 	add r4, r1, #0
-	bl BattleSystem_GetSpriteManager
-	bl PartyGauge_FreeGraphics
+	bl BattleSystem_GetGfxHandler
+	bl ov12_0226AE78
 	mov r1, #0x65
 	lsl r1, r1, #2
 	ldrb r1, [r4, r1]
@@ -2318,7 +2318,7 @@ ov12_02259944: ; 0x02259944
 	add r4, r0, #0
 	mov r0, #5
 	mov r1, #0x18
-	bl Heap_Alloc
+	bl AllocFromHeap
 	add r1, r0, #0
 	str r4, [r1]
 	mov r2, #0
@@ -2339,13 +2339,13 @@ ov12_02259968: ; 0x02259968
 	str r0, [sp, #0x24]
 	add r6, r1, #0
 	add r5, r2, #0
-	bl BattleSystem_GetPokepicManager
+	bl ov12_0223A8D4
 	str r0, [sp, #0x28]
 	ldr r0, [sp, #0x24]
 	bl BattleSystem_GetBattleType
 	mov r0, #5
 	mov r1, #0x30
-	bl Heap_Alloc
+	bl AllocFromHeap
 	add r4, r0, #0
 	mov r2, #0
 	ldr r0, _02259B8C ; =0x00000195
@@ -2612,7 +2612,7 @@ ov12_02259BA8: ; 0x02259BA8
 	bl BattleSystem_GetBattleType
 	mov r0, #5
 	mov r1, #0x9c
-	bl Heap_Alloc
+	bl AllocFromHeap
 	add r4, r0, #0
 	ldr r0, _02259D3C ; =0x00000195
 	ldrb r1, [r6, r0]
@@ -2812,7 +2812,7 @@ ov12_02259D48: ; 0x02259D48
 	bl BattleSystem_GetBattleType
 	mov r0, #5
 	mov r1, #0x9c
-	bl Heap_Alloc
+	bl AllocFromHeap
 	add r5, r0, #0
 	add r1, r5, #0
 	mov r0, #0
@@ -3051,7 +3051,7 @@ ov12_02259F30: ; 0x02259F30
 	mov r0, #5
 	mov r1, #0x78
 	str r2, [sp, #8]
-	bl Heap_Alloc
+	bl AllocFromHeap
 	add r4, r0, #0
 	ldr r0, [sp]
 	add r7, r4, #0
@@ -3168,7 +3168,7 @@ ov12_0225A018: ; 0x0225A018
 	mov r0, #5
 	mov r1, #0x10
 	add r6, r2, #0
-	bl Heap_Alloc
+	bl AllocFromHeap
 	add r4, r0, #0
 	str r7, [r4]
 	ldr r0, [r5, #0x20]
@@ -3218,7 +3218,7 @@ ov12_0225A07C: ; 0x0225A07C
 	mov r0, #5
 	mov r1, #0x24
 	add r7, r2, #0
-	bl Heap_Alloc
+	bl AllocFromHeap
 	add r4, r0, #0
 	mov r2, #0
 	ldr r0, _0225A288 ; =0x00000195
@@ -3385,7 +3385,7 @@ _0225A166:
 	bne _0225A23A
 _0225A1E8:
 	add r0, r6, #0
-	bl BattleSystem_GetPokepicManager
+	bl ov12_0223A8D4
 	str r0, [sp, #0x24]
 	ldrh r0, [r7, #2]
 	ldrb r1, [r4, #0x13]
@@ -3479,7 +3479,7 @@ ov12_0225A2A0: ; 0x0225A2A0
 	mov r0, #5
 	mov r1, #0x1c
 	add r7, r2, #0
-	bl Heap_Alloc
+	bl AllocFromHeap
 	add r4, r0, #0
 	mov r0, #0
 	strb r0, [r4, #0xa]
@@ -3550,7 +3550,7 @@ ov12_0225A334: ; 0x0225A334
 	add r4, r1, #0
 	mov r0, #5
 	mov r1, #0x10
-	bl Heap_Alloc
+	bl AllocFromHeap
 	add r1, r0, #0
 	mov r0, #0
 	strb r0, [r1, #0xa]
@@ -3588,10 +3588,10 @@ ov12_0225A37C: ; 0x0225A37C
 	add r7, r0, #0
 	add r5, r1, #0
 	add r6, r2, #0
-	bl BattleSystem_GetPokepicManager
+	bl ov12_0223A8D4
 	mov r0, #5
 	mov r1, #0x10
-	bl Heap_Alloc
+	bl AllocFromHeap
 	add r4, r0, #0
 	mov r0, #0
 	ldr r1, _0225A400 ; =0x00000195
@@ -3795,7 +3795,7 @@ ov12_0225A524: ; 0x0225A524
 	mov r0, #5
 	mov r1, #0x3c
 	add r7, r2, #0
-	bl Heap_Alloc
+	bl AllocFromHeap
 	add r4, r0, #0
 	mov r0, #0
 	add r1, r4, #0
@@ -3914,7 +3914,7 @@ ov12_0225A604: ; 0x0225A604
 	mov r0, #5
 	mov r1, #0x24
 	add r7, r2, #0
-	bl Heap_Alloc
+	bl AllocFromHeap
 	add r3, r0, #0
 	mov r1, #0x65
 	mov r4, #0
@@ -3974,7 +3974,7 @@ ov12_0225A674: ; 0x0225A674
 	mov r0, #5
 	mov r1, #0x34
 	add r5, r2, #0
-	bl Heap_Alloc
+	bl AllocFromHeap
 	add r6, r0, #0
 	mov r0, #0
 	strb r0, [r6, #0xf]
@@ -4045,15 +4045,15 @@ ov12_0225A700: ; 0x0225A700
 	mov r0, #5
 	mov r1, #0x34
 	str r2, [sp, #4]
-	bl Heap_Alloc
+	bl AllocFromHeap
 	add r4, r0, #0
 	mov r0, #5
 	mov r1, #0x34
-	bl Heap_Alloc
+	bl AllocFromHeap
 	str r0, [r4, #8]
 	mov r0, #5
 	mov r1, #0x38
-	bl Heap_Alloc
+	bl AllocFromHeap
 	ldr r1, [r4, #8]
 	str r0, [r1, #4]
 	mov r0, #5
@@ -4131,7 +4131,7 @@ ov12_0225A7AC: ; 0x0225A7AC
 	mov r0, #5
 	mov r1, #0x34
 	add r7, r2, #0
-	bl Heap_Alloc
+	bl AllocFromHeap
 	add r2, r0, #0
 	mov r3, #0
 	strb r3, [r2, #0xa]
@@ -4189,7 +4189,7 @@ ov12_0225A818: ; 0x0225A818
 	mov r0, #5
 	mov r1, #0x1c
 	add r4, r2, #0
-	bl Heap_Alloc
+	bl AllocFromHeap
 	add r1, r0, #0
 	mov r2, #0
 	strb r2, [r1, #0xe]
@@ -4228,7 +4228,7 @@ ov12_0225A85C: ; 0x0225A85C
 	str r0, [sp]
 	mov r0, #5
 	mov r1, #8
-	bl Heap_Alloc
+	bl AllocFromHeap
 	add r4, r0, #0
 	str r6, [r4]
 	ldrb r0, [r5]
@@ -4273,11 +4273,11 @@ ov12_0225A8C4: ; 0x0225A8C4
 	add r5, r0, #0
 	add r6, r1, #0
 	add r7, r2, #0
-	bl BattleSystem_GetMessageLoader
+	bl BattleSystem_GetMessageData
 	str r0, [sp]
 	mov r0, #5
 	mov r1, #8
-	bl Heap_Alloc
+	bl AllocFromHeap
 	add r4, r0, #0
 	add r0, r6, #0
 	str r5, [r4]
@@ -4313,7 +4313,7 @@ ov12_0225A914: ; 0x0225A914
 	mov r0, #5
 	mov r1, #0x70
 	add r4, r2, #0
-	bl Heap_Alloc
+	bl AllocFromHeap
 	add r6, r0, #0
 	mov r1, #0
 	add r0, #0x6a
@@ -4393,7 +4393,7 @@ ov12_0225A9B0: ; 0x0225A9B0
 	add r4, r1, #0
 	mov r0, #5
 	mov r1, #0xc
-	bl Heap_Alloc
+	bl AllocFromHeap
 	add r1, r0, #0
 	mov r2, #0
 	strb r2, [r1, #9]
@@ -4549,7 +4549,7 @@ ov12_0225AAE0: ; 0x0225AAE0
 	mov r0, #5
 	mov r1, #0x74
 	str r2, [sp]
-	bl Heap_Alloc
+	bl AllocFromHeap
 	add r1, r0, #0
 	ldr r0, _0225ABB0 ; =0x00000195
 	ldrb r2, [r4, r0]
@@ -4687,7 +4687,7 @@ ov12_0225ABE8: ; 0x0225ABE8
 	add r4, r1, #0
 	mov r0, #5
 	mov r1, #8
-	bl Heap_Alloc
+	bl AllocFromHeap
 	add r1, r0, #0
 	mov r2, #0
 	strb r2, [r1, #6]
@@ -4715,7 +4715,7 @@ ov12_0225AC1C: ; 0x0225AC1C
 	mov r0, #5
 	mov r1, #0x68
 	str r2, [sp]
-	bl Heap_Alloc
+	bl AllocFromHeap
 	add r1, r0, #0
 	str r5, [r1]
 	ldr r0, [sp]
@@ -4827,7 +4827,7 @@ ov12_0225ACE8: ; 0x0225ACE8
 	str r0, [sp, #4]
 	mov r0, #5
 	mov r1, #8
-	bl Heap_Alloc
+	bl AllocFromHeap
 	add r4, r0, #0
 	str r6, [r4]
 	ldrb r0, [r7]
@@ -4867,11 +4867,11 @@ ov12_0225AD44: ; 0x0225AD44
 	add r7, r2, #0
 	bl ov12_02261390
 	add r0, r5, #0
-	bl BattleSystem_GetMessageLoader
+	bl BattleSystem_GetMessageData
 	str r0, [sp]
 	mov r0, #5
 	mov r1, #8
-	bl Heap_Alloc
+	bl AllocFromHeap
 	add r4, r0, #0
 	str r5, [r4]
 	ldrb r0, [r7]
@@ -4908,11 +4908,11 @@ ov12_0225AD9C: ; 0x0225AD9C
 	add r7, r2, #0
 	bl ov12_02261464
 	add r0, r5, #0
-	bl BattleSystem_GetMessageLoader
+	bl BattleSystem_GetMessageData
 	str r0, [sp]
 	mov r0, #5
 	mov r1, #8
-	bl Heap_Alloc
+	bl AllocFromHeap
 	add r4, r0, #0
 	str r5, [r4]
 	ldrb r0, [r7]
@@ -4948,11 +4948,11 @@ ov12_0225ADF4: ; 0x0225ADF4
 	add r6, r1, #0
 	bl ov12_02261544
 	add r0, r5, #0
-	bl BattleSystem_GetMessageLoader
+	bl BattleSystem_GetMessageData
 	add r7, r0, #0
 	mov r0, #5
 	mov r1, #8
-	bl Heap_Alloc
+	bl AllocFromHeap
 	add r4, r0, #0
 	str r5, [r4]
 	mov r0, #0x22
@@ -4989,11 +4989,11 @@ ov12_0225AE48: ; 0x0225AE48
 	add r7, r2, #0
 	bl ov12_022615F0
 	add r0, r5, #0
-	bl BattleSystem_GetMessageLoader
+	bl BattleSystem_GetMessageData
 	str r0, [sp]
 	mov r0, #5
 	mov r1, #8
-	bl Heap_Alloc
+	bl AllocFromHeap
 	add r4, r0, #0
 	str r5, [r4]
 	ldrb r0, [r7]
@@ -5027,7 +5027,7 @@ ov12_0225AEA0: ; 0x0225AEA0
 	add r4, r1, #0
 	mov r0, #5
 	mov r1, #0xc
-	bl Heap_Alloc
+	bl AllocFromHeap
 	add r1, r0, #0
 	add r0, r4, #0
 	str r5, [r1]
@@ -5059,11 +5059,11 @@ ov12_0225AED8: ; 0x0225AED8
 	add r6, r0, #0
 	cmp r2, #0
 	bne _0225AF2A
-	bl BattleSystem_GetMessageLoader
+	bl BattleSystem_GetMessageData
 	str r0, [sp]
 	mov r0, #5
 	mov r1, #0xc
-	bl Heap_Alloc
+	bl AllocFromHeap
 	add r7, r0, #0
 	str r6, [r7]
 	ldrb r0, [r4]
@@ -5220,7 +5220,7 @@ ov12_0225B028: ; 0x0225B028
 	mov r0, #5
 	mov r1, #0x10
 	add r4, r2, #0
-	bl Heap_Alloc
+	bl AllocFromHeap
 	add r1, r0, #0
 	mov r2, #0
 	strb r2, [r1, #0xa]
@@ -5250,7 +5250,7 @@ ov12_0225B060: ; 0x0225B060
 	mov r0, #5
 	mov r1, #0x10
 	add r4, r2, #0
-	bl Heap_Alloc
+	bl AllocFromHeap
 	add r1, r0, #0
 	mov r2, #0
 	strb r2, [r1, #0xa]
@@ -5283,7 +5283,7 @@ ov12_0225B0A0: ; 0x0225B0A0
 	mov r0, #5
 	mov r1, #0x10
 	add r4, r2, #0
-	bl Heap_Alloc
+	bl AllocFromHeap
 	add r1, r0, #0
 	mov r0, #0
 	strb r0, [r1, #7]
@@ -5322,7 +5322,7 @@ ov12_0225B0E8: ; 0x0225B0E8
 	mov r0, #5
 	mov r1, #0x10
 	add r6, r2, #0
-	bl Heap_Alloc
+	bl AllocFromHeap
 	add r1, r0, #0
 	mov r2, #0
 	strb r2, [r1, #7]
@@ -5352,7 +5352,7 @@ ov12_0225B120: ; 0x0225B120
 	mov r0, #5
 	mov r1, #0x10
 	add r4, r2, #0
-	bl Heap_Alloc
+	bl AllocFromHeap
 	add r1, r0, #0
 	mov r0, #0
 	strb r0, [r1, #7]
@@ -5392,7 +5392,7 @@ ov12_0225B16C: ; 0x0225B16C
 	mov r0, #5
 	mov r1, #0x10
 	add r6, r2, #0
-	bl Heap_Alloc
+	bl AllocFromHeap
 	add r1, r0, #0
 	mov r2, #0
 	strb r2, [r1, #7]
@@ -5425,7 +5425,7 @@ ov12_0225B1A8: ; 0x0225B1A8
 	ldrb r1, [r4, r1]
 	cmp r1, #0
 	bne _0225B1E6
-	bl BattleSystem_GetMessageLoader
+	bl BattleSystem_GetMessageData
 	add r1, r0, #0
 	ldr r2, _0225B1FC ; =0x0000039B
 	add r0, sp, #0
@@ -5491,7 +5491,7 @@ ov12_0225B234: ; 0x0225B234
 	add r4, r1, #0
 	mov r0, #5
 	mov r1, #0x10
-	bl Heap_Alloc
+	bl AllocFromHeap
 	add r1, r0, #0
 	mov r2, #0
 	strb r2, [r1, #0xe]
@@ -5521,7 +5521,7 @@ ov12_0225B26C: ; 0x0225B26C
 	add r4, r1, #0
 	mov r0, #5
 	mov r1, #0x10
-	bl Heap_Alloc
+	bl AllocFromHeap
 	add r1, r0, #0
 	mov r2, #0
 	strb r2, [r1, #0xe]
@@ -5553,11 +5553,11 @@ ov12_0225B2A4: ; 0x0225B2A4
 	add r6, r1, #0
 	bl ov12_02261928
 	add r0, r5, #0
-	bl BattleSystem_GetMessageLoader
+	bl BattleSystem_GetMessageData
 	add r7, r0, #0
 	mov r0, #5
 	mov r1, #8
-	bl Heap_Alloc
+	bl AllocFromHeap
 	add r4, r0, #0
 	str r5, [r4]
 	mov r0, #0x3b
@@ -5593,11 +5593,11 @@ ov12_0225B2F8: ; 0x0225B2F8
 	add r6, r1, #0
 	bl ov12_022619E4
 	add r0, r5, #0
-	bl BattleSystem_GetMessageLoader
+	bl BattleSystem_GetMessageData
 	add r7, r0, #0
 	mov r0, #5
 	mov r1, #8
-	bl Heap_Alloc
+	bl AllocFromHeap
 	add r4, r0, #0
 	str r5, [r4]
 	mov r0, #0x3c
@@ -5633,11 +5633,11 @@ ov12_0225B34C: ; 0x0225B34C
 	add r6, r1, #0
 	bl ov12_02261AD4
 	add r0, r5, #0
-	bl BattleSystem_GetMessageLoader
+	bl BattleSystem_GetMessageData
 	add r7, r0, #0
 	mov r0, #5
 	mov r1, #8
-	bl Heap_Alloc
+	bl AllocFromHeap
 	add r4, r0, #0
 	str r5, [r4]
 	mov r0, #0x3d
@@ -5767,7 +5767,7 @@ ov12_0225B454: ; 0x0225B454
 	mov r0, #5
 	mov r1, #0xc
 	add r5, r2, #0
-	bl Heap_Alloc
+	bl AllocFromHeap
 	mov r1, #0
 	mov r2, #0xc
 	add r4, r0, #0
@@ -6178,7 +6178,7 @@ _0225B798:
 	ldr r0, [r4]
 	bl ov12_0226430C
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r6, #0
 	bl SysTask_Destroy
 _0225B7B4:
@@ -6383,7 +6383,7 @@ _0225B940:
 	ldr r0, [r4]
 	bl ov12_0226430C
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r6, #0
 	bl SysTask_Destroy
 _0225B95C:
@@ -6558,7 +6558,7 @@ _0225BAA4:
 	strb r1, [r0]
 _0225BAAC:
 	ldr r0, [r4]
-	bl BattleSystem_GetPokepicManager
+	bl ov12_0223A8D4
 	add r2, r4, #0
 	add r3, r4, #0
 	add r5, r0, #0
@@ -6965,7 +6965,7 @@ _0225BDFC:
 	ldr r0, [r4]
 	bl ov12_0226430C
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r5, #0
 	bl SysTask_Destroy
 _0225BE20:
@@ -7096,7 +7096,7 @@ _0225BF10:
 	strb r1, [r0]
 _0225BF18:
 	ldr r0, [r4]
-	bl BattleSystem_GetPokepicManager
+	bl ov12_0223A8D4
 	add r2, r4, #0
 	add r3, r4, #0
 	add r5, r0, #0
@@ -7375,7 +7375,7 @@ _0225C156:
 	ldr r0, [r4]
 	bl ov12_0226430C
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r5, #0
 	bl SysTask_Destroy
 _0225C17A:
@@ -7440,7 +7440,7 @@ _0225C1CC:
 	ldrh r0, [r0]
 	str r0, [sp, #0x68]
 	ldr r0, [r4]
-	bl BattleSystem_GetSpriteSystem
+	bl BattleSystem_GetSpriteRenderer
 	str r0, [sp, #0x74]
 	ldr r0, [r4]
 	bl BattleSystem_GetPaletteData
@@ -7463,7 +7463,7 @@ _0225C214:
 	bl ov07_02233DB8
 	str r0, [r4, #0xc]
 	ldr r0, [r4]
-	bl BattleSystem_GetPokepicManager
+	bl ov12_0223A8D4
 	add r2, r4, #0
 	add r3, r4, #0
 	add r5, r0, #0
@@ -8020,7 +8020,7 @@ _0225C6A6:
 	ldr r0, [r4]
 	bl ov12_0226430C
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r6, #0
 	bl SysTask_Destroy
 _0225C6C4:
@@ -8063,7 +8063,7 @@ _0225C6F0: ; jump table
 	.short _0225C8C0 - _0225C6F0 - 2 ; case 9
 _0225C704:
 	ldr r0, [r4]
-	bl BattleSystem_GetPokepicManager
+	bl ov12_0223A8D4
 	add r2, r4, #0
 	add r3, r4, #0
 	add r5, r0, #0
@@ -8382,7 +8382,7 @@ _0225C98C:
 	ldr r0, [r4]
 	bl ov12_0226430C
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r6, #0
 	bl SysTask_Destroy
 _0225C9AA:
@@ -8544,7 +8544,7 @@ _0225CABE:
 	ldrh r0, [r0]
 	str r0, [sp, #0x60]
 	ldr r0, [r4]
-	bl BattleSystem_GetSpriteSystem
+	bl BattleSystem_GetSpriteRenderer
 	str r0, [sp, #0x6c]
 	ldr r0, [r4]
 	bl BattleSystem_GetPaletteData
@@ -8581,7 +8581,7 @@ _0225CB06:
 	ldrh r0, [r0]
 	str r0, [sp, #0x38]
 	ldr r0, [r4]
-	bl BattleSystem_GetSpriteSystem
+	bl BattleSystem_GetSpriteRenderer
 	str r0, [sp, #0x44]
 	ldr r0, [r4]
 	bl BattleSystem_GetPaletteData
@@ -8703,7 +8703,7 @@ _0225CC24:
 	ldr r0, [r4]
 	bl ov12_0226430C
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r6, #0
 	bl SysTask_Destroy
 _0225CC42:
@@ -8882,7 +8882,7 @@ _0225CD96:
 	ldr r0, [r4]
 	bl ov12_0226430C
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r6, #0
 	bl SysTask_Destroy
 _0225CDB4:
@@ -8939,7 +8939,7 @@ _0225CE10:
 	ldr r0, [r4]
 	bl ov12_0226430C
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r5, #0
 	bl SysTask_Destroy
 _0225CE26:
@@ -9334,7 +9334,7 @@ _0225D11C:
 	ldr r0, [r4]
 	bl ov12_0226430C
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r6, #0
 	bl SysTask_Destroy
 _0225D132:
@@ -9434,7 +9434,7 @@ _0225D1CA:
 	ldrb r0, [r4, #9]
 	str r0, [sp, #0x14]
 	ldr r0, [r4]
-	bl BattleSystem_GetSpriteSystem
+	bl BattleSystem_GetSpriteRenderer
 	str r0, [sp, #0x24]
 	ldr r0, [r4]
 	bl BattleSystem_GetPaletteData
@@ -9555,7 +9555,7 @@ _0225D2E4:
 	b _0225D62E
 _0225D2E6:
 	ldr r0, [r4]
-	bl BattleSystem_GetSpriteManager
+	bl BattleSystem_GetGfxHandler
 	add r5, r0, #0
 	ldr r0, [r4, #4]
 	ldr r0, [r0, #0x18]
@@ -9755,7 +9755,7 @@ _0225D48E:
 	b _0225D62E
 _0225D49C:
 	ldr r0, [r4]
-	bl BattleSystem_GetSpriteManager
+	bl BattleSystem_GetGfxHandler
 	add r5, r0, #0
 	ldr r0, [r4, #4]
 	ldr r0, [r0, #0x18]
@@ -9931,7 +9931,7 @@ _0225D618:
 	ldr r0, [r4]
 	bl ov12_0226430C
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r5, #0
 	bl SysTask_Destroy
 _0225D62E:
@@ -9987,7 +9987,7 @@ _0225D664:
 	b _0225D870
 _0225D694:
 	ldr r0, [r5]
-	bl BattleSystem_GetSpriteManager
+	bl BattleSystem_GetGfxHandler
 	add r4, r0, #0
 	ldr r0, [r5, #4]
 	ldr r0, [r0, #0x18]
@@ -10150,7 +10150,7 @@ _0225D7F2:
 	cmp r1, r0
 	bgt _0225D870
 	ldr r0, [r5]
-	bl BattleSystem_GetSpriteManager
+	bl BattleSystem_GetGfxHandler
 	add r4, r0, #0
 	ldr r0, [r5, #4]
 	ldr r0, [r0, #0x18]
@@ -10195,7 +10195,7 @@ _0225D85A:
 	ldr r0, [r5]
 	bl ov12_0226430C
 	add r0, r5, #0
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r6, #0
 	bl SysTask_Destroy
 _0225D870:
@@ -10275,7 +10275,7 @@ _0225D8DE:
 	pop {r3, r4, r5, r6, pc}
 _0225D90E:
 	ldr r0, [r5]
-	bl BattleSystem_GetSpriteManager
+	bl BattleSystem_GetGfxHandler
 	add r4, r0, #0
 	ldr r0, [r5, #4]
 	ldr r0, [r0, #0x18]
@@ -10316,7 +10316,7 @@ _0225D90E:
 	ldr r0, [r5]
 	bl ov12_0226430C
 	add r0, r5, #0
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r6, #0
 	bl SysTask_Destroy
 _0225D97A:
@@ -10393,7 +10393,7 @@ _0225D9FE:
 	ldr r0, [r4]
 	bl ov12_0226430C
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r5, #0
 	bl SysTask_Destroy
 	pop {r3, r4, r5, pc}
@@ -10511,7 +10511,7 @@ ov12_0225DAD4: ; 0x0225DAD4
 	ldr r0, [r4]
 	bl BattleSystem_GetBgConfig
 	ldr r0, [r4]
-	bl BattleSystem_GetBattleInput
+	bl ov12_0223A900
 	add r6, r0, #0
 	ldrb r1, [r4, #9]
 	ldr r0, [r4]
@@ -10577,18 +10577,18 @@ _0225DB46:
 	cmp r0, #4
 	blt _0225DB46
 	ldr r0, [r4]
-	bl BattleSystem_GetBattleInput
+	bl ov12_0223A900
 	add r1, r4, #0
 	add r1, #0x34
 	ldrb r1, [r1]
 	add r2, sp, #0x40
-	bl BattleInput_LoadFightMenuText
+	bl ov12_0226885C
 	ldrb r0, [r4, #0xa]
 	add r0, r0, #1
 	strb r0, [r4, #0xa]
 _0225DB7C:
 	ldr r0, [r4]
-	bl BattleSystem_GetMessageLoader
+	bl BattleSystem_GetMessageData
 	add r6, r0, #0
 	mov r0, #1
 	lsl r0, r0, #0xa
@@ -10724,7 +10724,7 @@ _0225DC80:
 	strb r0, [r4, #0xa]
 _0225DC92:
 	add r0, r6, #0
-	bl BattleInput_CheckFeedbackDone
+	bl ov12_02266C64
 	cmp r0, #0
 	bne _0225DC9E
 _0225DC9C:
@@ -10773,7 +10773,7 @@ _0225DC9E:
 	beq _0225DDD2
 	add r0, r6, #0
 	mov r1, #1
-	bl BattleInput_Deadstriped_022698AC
+	bl ov12_022698AC
 	ldr r0, [r4]
 	bl BattleSystem_GetBattleSpecial
 	mov r1, #1
@@ -10787,7 +10787,7 @@ _0225DC9E:
 	add r1, r5, #0
 	add r2, r6, #0
 	mov r3, #6
-	bl BattleInput_ChangeMenu
+	bl ov12_02266508
 	b _0225DDC8
 _0225DD20:
 	ldr r0, [r4]
@@ -10804,7 +10804,7 @@ _0225DD20:
 	add r1, r5, #0
 	add r2, r6, #0
 	mov r3, #0xa
-	bl BattleInput_ChangeMenu
+	bl ov12_02266508
 	b _0225DDC8
 _0225DD44:
 	ldr r0, [r4]
@@ -10820,7 +10820,7 @@ _0225DD44:
 	add r1, r5, #0
 	add r2, r6, #0
 	mov r3, #8
-	bl BattleInput_ChangeMenu
+	bl ov12_02266508
 	b _0225DDC8
 _0225DD66:
 	ldr r0, [r4]
@@ -10837,7 +10837,7 @@ _0225DD66:
 	add r1, r5, #0
 	add r2, r6, #0
 	mov r3, #0x14
-	bl BattleInput_ChangeMenu
+	bl ov12_02266508
 	b _0225DDC8
 _0225DD8A:
 	add r0, sp, #0x10
@@ -10857,7 +10857,7 @@ _0225DD8A:
 	add r1, r5, #0
 	add r2, r6, #0
 	mov r3, #4
-	bl BattleInput_ChangeMenu
+	bl ov12_02266508
 	b _0225DDC8
 _0225DDB4:
 	mov r0, #0
@@ -10868,7 +10868,7 @@ _0225DDB4:
 	add r1, r5, #0
 	add r2, r6, #0
 	mov r3, #3
-	bl BattleInput_ChangeMenu
+	bl ov12_02266508
 _0225DDC8:
 	ldr r0, [r4]
 	mov r1, #1
@@ -10888,7 +10888,7 @@ _0225DDD2:
 	add r1, r5, #0
 	add r2, r6, #0
 	mov r3, #5
-	bl BattleInput_ChangeMenu
+	bl ov12_02266508
 	b _0225DE90
 _0225DDF4:
 	ldr r0, [r4]
@@ -10905,7 +10905,7 @@ _0225DDF4:
 	add r1, r5, #0
 	add r2, r6, #0
 	mov r3, #9
-	bl BattleInput_ChangeMenu
+	bl ov12_02266508
 	b _0225DE90
 _0225DE18:
 	ldr r0, [r4]
@@ -10921,7 +10921,7 @@ _0225DE18:
 	add r1, r5, #0
 	add r2, r6, #0
 	mov r3, #7
-	bl BattleInput_ChangeMenu
+	bl ov12_02266508
 	b _0225DE90
 _0225DE3A:
 	ldr r0, [r4]
@@ -10938,7 +10938,7 @@ _0225DE3A:
 	add r1, r5, #0
 	add r2, r6, #0
 	mov r3, #0x13
-	bl BattleInput_ChangeMenu
+	bl ov12_02266508
 	b _0225DE90
 _0225DE5E:
 	add r0, sp, #0x10
@@ -10953,7 +10953,7 @@ _0225DE5E:
 	add r1, r5, #0
 	add r2, r6, #0
 	mov r3, #1
-	bl BattleInput_ChangeMenu
+	bl ov12_02266508
 	b _0225DE90
 _0225DE7C:
 	mov r0, #0
@@ -10964,7 +10964,7 @@ _0225DE7C:
 	add r1, r5, #0
 	add r2, r6, #0
 	mov r3, #2
-	bl BattleInput_ChangeMenu
+	bl ov12_02266508
 _0225DE90:
 	ldr r1, _0225DEE8 ; =0x00000197
 	ldr r0, [sp, #0xc]
@@ -10974,15 +10974,15 @@ _0225DE98:
 	add r1, r4, #0
 	add r0, r6, #0
 	add r1, #0x1c
-	bl BattleInput_SetPartyExpPercents
+	bl ov12_02266A50
 	add r1, r4, #0
 	add r2, r4, #0
 	add r0, r6, #0
 	add r1, #0x10
 	add r2, #0x16
-	bl BattleInput_UpdateBallGaugeAnimation
+	bl ov12_02266A6C
 	add r0, r6, #0
-	bl BattleInput_EnableBallGauge
+	bl ov12_02266AC0
 	add r0, r7, #0
 	bl NARC_Delete
 	add r0, r5, #0
@@ -11029,7 +11029,7 @@ _0225DF04:
 	blt _0225DF04
 _0225DF1E:
 	add r0, r6, #0
-	bl BattleInput_CheckTouch
+	bl ov12_02266B78
 	mov r1, #0
 	mvn r1, r1
 	str r0, [r4, #0xc]
@@ -11045,7 +11045,7 @@ _0225DF1E:
 	pop {r3, r4, r5, r6, r7, pc}
 _0225DF40:
 	add r0, r6, #0
-	bl BattleInput_CheckFeedbackDone
+	bl ov12_02266C64
 	cmp r0, #1
 	beq _0225DF52
 	ldr r0, [r4, #0xc]
@@ -11096,10 +11096,10 @@ _0225DF84:
 	add r1, r7, #0
 	add r2, r6, #0
 	str r3, [sp, #4]
-	bl BattleInput_ChangeMenu
+	bl ov12_02266508
 	add r0, r6, #0
 	mov r1, #0
-	bl BattleInput_Deadstriped_022698AC
+	bl ov12_022698AC
 	ldr r0, [sp, #8]
 	bl ov12_02265D74
 	ldr r0, [r4, #4]
@@ -11126,10 +11126,10 @@ _0225DFD0:
 	add r1, r7, #0
 	add r2, r6, #0
 	str r3, [sp, #4]
-	bl BattleInput_ChangeMenu
+	bl ov12_02266508
 	add r0, r6, #0
 	mov r1, #0
-	bl BattleInput_Deadstriped_022698AC
+	bl ov12_022698AC
 	ldr r0, [sp, #8]
 	bl ov12_02265D74
 	ldr r0, [r4, #4]
@@ -11151,7 +11151,7 @@ _0225E01C:
 	bl NARC_New
 	add r5, r0, #0
 	add r0, r6, #0
-	bl BattleInput_GetCancelRunFlag
+	bl ov12_0226AC64
 	cmp r0, #1
 	bne _0225E044
 	ldr r0, [sp, #8]
@@ -11165,7 +11165,7 @@ _0225E044:
 	add r1, r5, #0
 	add r2, r6, #0
 	str r3, [sp, #4]
-	bl BattleInput_ChangeMenu
+	bl ov12_02266508
 	add r0, r7, #0
 	bl NARC_Delete
 	add r0, r5, #0
@@ -11180,7 +11180,7 @@ _0225E066:
 	pop {r3, r4, r5, r6, r7, pc}
 _0225E06E:
 	add r0, r6, #0
-	bl BattleInput_CheckFeedbackDone
+	bl ov12_02266C64
 	cmp r0, #1
 	bne _0225E0FA
 	mov r0, #7
@@ -11197,10 +11197,10 @@ _0225E06E:
 	add r1, r7, #0
 	add r2, r6, #0
 	str r3, [sp, #4]
-	bl BattleInput_ChangeMenu
+	bl ov12_02266508
 	add r0, r6, #0
 	mov r1, #0
-	bl BattleInput_Deadstriped_022698AC
+	bl ov12_022698AC
 	ldr r0, [sp, #8]
 	bl ov12_02265D74
 	ldr r0, [r4, #4]
@@ -11208,7 +11208,7 @@ _0225E06E:
 	ldr r0, [sp, #0xc]
 	bl ov12_02262014
 	add r0, r6, #0
-	bl BattleInput_DisableBallGauge
+	bl ov12_02266B34
 	mov r0, #8
 	strb r0, [r4, #0xa]
 	add r0, r5, #0
@@ -11231,7 +11231,7 @@ _0225E0D0:
 	ldr r0, [r4]
 	bl ov12_0226430C
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r7, #0
 	bl SysTask_Destroy
 _0225E0FA:
@@ -11258,7 +11258,7 @@ ov12_0225E104: ; 0x0225E104
 	ldr r0, [r4]
 	bl ov12_0226430C
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r5, #0
 	bl SysTask_Destroy
 	pop {r3, r4, r5, pc}
@@ -11274,7 +11274,7 @@ ov12_0225E134: ; 0x0225E134
 	ldr r0, [r4]
 	bl ov12_0226430C
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r5, #0
 	bl SysTask_Destroy
 	pop {r3, r4, r5, pc}
@@ -11329,7 +11329,7 @@ _0225E1B4:
 	ldr r0, [r4]
 	bl ov12_0226430C
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r6, #0
 	bl SysTask_Destroy
 	pop {r4, r5, r6, pc}
@@ -11352,7 +11352,7 @@ ov12_0225E1D4: ; 0x0225E1D4
 	ldr r0, [r4]
 	bl ov12_0226430C
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r5, #0
 	bl SysTask_Destroy
 	pop {r3, r4, r5, pc}
@@ -11394,7 +11394,7 @@ _0225E22C:
 	ldr r0, [r4]
 	bl ov12_0226430C
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r5, #0
 	bl SysTask_Destroy
 	pop {r3, r4, r5, pc}
@@ -11409,7 +11409,7 @@ ov12_0225E250: ; 0x0225E250
 	ldr r0, [r4]
 	bl BattleSystem_GetBgConfig
 	ldr r0, [r4]
-	bl BattleSystem_GetBattleInput
+	bl ov12_0223A900
 	add r7, r0, #0
 	ldrb r1, [r4, #0x1d]
 	ldr r0, [r4]
@@ -11449,13 +11449,13 @@ _0225E2A4: ; jump table
 	.short _0225E3C2 - _0225E2A4 - 2 ; case 3
 _0225E2AC:
 	add r0, r7, #0
-	bl BattleInput_CheckFeedbackDone
+	bl ov12_02266C64
 	cmp r0, #0
 	bne _0225E2B8
 	b _0225E3F8
 _0225E2B8:
 	ldr r0, [r4]
-	bl BattleSystem_GetMessageLoader
+	bl BattleSystem_GetMessageData
 	add r1, r0, #0
 	mov r2, #2
 	add r0, sp, #0x14
@@ -11472,7 +11472,7 @@ _0225E2B8:
 	add r2, sp, #0x28
 	bl BattleSystem_PrintBattleMessage
 	add r0, r7, #0
-	bl BattleInput_EnableBallGauge
+	bl ov12_02266AC0
 	mov r0, #7
 	mov r1, #5
 	bl NARC_New
@@ -11510,7 +11510,7 @@ _0225E300:
 	ldr r0, [sp, #0xc]
 	ldr r1, [sp, #8]
 	mov r3, #0xb
-	bl BattleInput_ChangeMenu
+	bl ov12_02266508
 	ldr r0, [sp, #0xc]
 	bl NARC_Delete
 	ldr r0, [sp, #8]
@@ -11525,7 +11525,7 @@ _0225E300:
 	pop {r4, r5, r6, r7, pc}
 _0225E350:
 	add r0, r7, #0
-	bl BattleInput_CheckTouch
+	bl ov12_02266B78
 	mov r1, #0
 	mvn r1, r1
 	str r0, [r4, #8]
@@ -11552,7 +11552,7 @@ _0225E376:
 	bne _0225E3A2
 	add r0, r7, #0
 	mov r1, #0
-	bl BattleInput_Deadstriped_022698AC
+	bl ov12_022698AC
 	add r0, r5, #0
 	bl ov12_02265D74
 	ldr r0, [r4, #4]
@@ -11561,7 +11561,7 @@ _0225E376:
 	bl ov12_02262014
 _0225E3A2:
 	add r0, r7, #0
-	bl BattleInput_DisableBallGauge
+	bl ov12_02266B34
 _0225E3A8:
 	ldrb r1, [r4, #0x1d]
 	ldr r0, [r4]
@@ -11596,7 +11596,7 @@ _0225E3D0:
 	ldr r0, [r4]
 	bl ov12_0226430C
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r6, #0
 	bl SysTask_Destroy
 _0225E3F8:
@@ -11692,7 +11692,7 @@ _0225E4A2:
 	ldr r0, [r6]
 	bl ov12_0226430C
 	add r0, r6, #0
-	bl Heap_Free
+	bl FreeToHeap
 	ldr r0, [sp, #8]
 	bl SysTask_Destroy
 _0225E4C2:
@@ -11712,7 +11712,7 @@ ov12_0225E4CC: ; 0x0225E4CC
 	ldr r0, [r4]
 	bl ov12_0226430C
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r5, #0
 	bl SysTask_Destroy
 	pop {r3, r4, r5, pc}
@@ -11771,7 +11771,7 @@ _0225E53E:
 	ldr r0, [r5]
 	bl ov12_0226430C
 	add r0, r5, #0
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r6, #0
 	bl SysTask_Destroy
 	add sp, #4
@@ -11793,7 +11793,7 @@ ov12_0225E568: ; 0x0225E568
 	bl BattleSystem_GetOpponentData
 	add r7, r0, #0
 	ldr r0, [r4]
-	bl BattleSystem_GetBattleInput
+	bl ov12_0223A900
 	add r5, r0, #0
 	ldrb r1, [r4, #0xd]
 	ldr r0, [r4]
@@ -11825,7 +11825,7 @@ _0225E5B6: ; jump table
 	.short _0225E696 - _0225E5B6 - 2 ; case 3
 _0225E5BE:
 	add r0, r5, #0
-	bl BattleInput_CheckFeedbackDone
+	bl ov12_02266C64
 	cmp r0, #0
 	bne _0225E5CA
 	b _0225E6F4
@@ -11875,7 +11875,7 @@ _0225E5E6:
 	add r1, r6, #0
 	add r2, r5, #0
 	mov r3, #0xc
-	bl BattleInput_ChangeMenu
+	bl ov12_02266508
 	add r0, r7, #0
 	bl NARC_Delete
 	add r0, r6, #0
@@ -11887,7 +11887,7 @@ _0225E5E6:
 	pop {r4, r5, r6, r7, pc}
 _0225E642:
 	add r0, r5, #0
-	bl BattleInput_CheckTouch
+	bl ov12_02266B78
 	mov r1, #0
 	mvn r1, r1
 	str r0, [r4, #8]
@@ -11917,7 +11917,7 @@ _0225E662:
 	bne _0225E68C
 	add r0, r5, #0
 	mov r1, #0
-	bl BattleInput_Deadstriped_022698AC
+	bl ov12_022698AC
 _0225E68C:
 	ldrb r0, [r4, #0xf]
 	add sp, #0x34
@@ -11965,7 +11965,7 @@ _0225E6D4:
 	ldr r0, [r4]
 	bl ov12_0226430C
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	ldr r0, [sp, #8]
 	bl SysTask_Destroy
 _0225E6F4:
@@ -12001,7 +12001,7 @@ _0225E71E:
 	ldr r0, [r5]
 	bl ov12_0226430C
 	add r0, r5, #0
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r6, #0
 	bl SysTask_Destroy
 	pop {r4, r5, r6, pc}
@@ -12017,7 +12017,7 @@ ov12_0225E740: ; 0x0225E740
 	ldr r0, [r4]
 	bl ov12_0226430C
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r5, #0
 	bl SysTask_Destroy
 	pop {r3, r4, r5, pc}
@@ -12126,7 +12126,7 @@ _0225E80C:
 	ldr r0, [r4]
 	bl ov12_0226430C
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r7, #0
 	bl SysTask_Destroy
 	pop {r3, r4, r5, r6, r7, pc}
@@ -12187,8 +12187,8 @@ _0225E858: ; jump table
 	.short _0225F354 - _0225E858 - 2 ; case 30
 _0225E896:
 	ldr r0, [r4]
-	bl BattleSystem_GetBattleInput
-	bl BattleInput_GetKeyPressed
+	bl ov12_0223A900
+	bl ov12_0226A8E4
 	strb r0, [r4, #0x10]
 	ldr r0, [r4]
 	bl BattleSystem_GetMessageIcon
@@ -12231,7 +12231,7 @@ _0225E8EC:
 	bl ov12_02237B0C
 	mov r0, #5
 	mov r1, #0x34
-	bl Heap_Alloc
+	bl AllocFromHeap
 	str r0, [r4, #4]
 	mov r1, #0
 	mov r2, #0x34
@@ -12545,9 +12545,9 @@ _0225EB6E:
 	ldr r0, [r4]
 	bl ov12_02237BB8
 	ldr r0, [r4]
-	bl BattleSystem_GetBattleInput
+	bl ov12_0223A900
 	ldrb r1, [r4, #0x10]
-	bl BattleInput_SetKeyPressed
+	bl ov12_0226A8EC
 	mov r0, #7
 	str r0, [sp]
 	mov r0, #0
@@ -12837,16 +12837,16 @@ _0225ED8E:
 	ldr r0, [r4, #8]
 	ldr r0, [r0, #4]
 	ldr r0, [r0]
-	bl Heap_Free
+	bl FreeToHeap
 	ldr r0, [r4, #8]
 	ldr r0, [r0, #4]
-	bl Heap_Free
+	bl FreeToHeap
 	ldr r0, [r4, #8]
-	bl Heap_Free
+	bl FreeToHeap
 	ldr r0, [r4, #4]
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r7, #0
 	bl SysTask_Destroy
 	add sp, #0x1fc
@@ -12862,7 +12862,7 @@ _0225EDE0:
 	ldrh r0, [r0, #0x1c]
 	str r0, [sp, #0x90]
 	ldr r0, [r4]
-	bl BattleSystem_GetMessageLoader
+	bl BattleSystem_GetMessageData
 	add r5, r0, #0
 	ldr r0, [r4]
 	bl BattleSystem_GetTextFrameDelay
@@ -13119,7 +13119,7 @@ _0225EFF6:
 	strb r1, [r0, #1]
 _0225EFFE:
 	ldr r0, [r4]
-	bl BattleSystem_GetMessageLoader
+	bl BattleSystem_GetMessageData
 	add r5, r0, #0
 	ldr r0, [r4]
 	bl BattleSystem_GetTextFrameDelay
@@ -13266,7 +13266,7 @@ _0225F128:
 	pop {r3, r4, r5, r6, r7, pc}
 _0225F140:
 	ldr r0, [r4]
-	bl BattleSystem_GetMessageLoader
+	bl BattleSystem_GetMessageData
 	add r5, r0, #0
 	ldr r0, [r4, #8]
 	ldr r1, [r0, #4]
@@ -13494,7 +13494,7 @@ _0225F2F4:
 	strh r1, [r0, #6]
 _0225F2FA:
 	ldr r0, [r4]
-	bl BattleSystem_GetMessageLoader
+	bl BattleSystem_GetMessageData
 	add r5, r0, #0
 	ldr r0, [r4]
 	bl BattleSystem_GetTextFrameDelay
@@ -13589,14 +13589,14 @@ ov12_0225F3A4: ; 0x0225F3A4
 	ldr r0, [r4, #8]
 	ldr r0, [r0, #4]
 	ldr r0, [r0]
-	bl Heap_Free
+	bl FreeToHeap
 	ldr r0, [r4, #8]
 	ldr r0, [r0, #4]
-	bl Heap_Free
+	bl FreeToHeap
 	ldr r0, [r4, #8]
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r5, #0
 	bl SysTask_Destroy
 	add sp, #4
@@ -13616,14 +13616,14 @@ ov12_0225F3FC: ; 0x0225F3FC
 	ldr r0, [r4, #8]
 	ldr r0, [r0, #4]
 	ldr r0, [r0]
-	bl Heap_Free
+	bl FreeToHeap
 	ldr r0, [r4, #8]
 	ldr r0, [r0, #4]
-	bl Heap_Free
+	bl FreeToHeap
 	ldr r0, [r4, #8]
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r5, #0
 	bl SysTask_Destroy
 	pop {r3, r4, r5, pc}
@@ -13696,14 +13696,14 @@ _0225F48A:
 	ldr r0, [r4, #8]
 	ldr r0, [r0, #4]
 	ldr r0, [r0]
-	bl Heap_Free
+	bl FreeToHeap
 	ldr r0, [r4, #8]
 	ldr r0, [r0, #4]
-	bl Heap_Free
+	bl FreeToHeap
 	ldr r0, [r4, #8]
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r5, #0
 	bl SysTask_Destroy
 	add sp, #8
@@ -13743,8 +13743,8 @@ _0225F50A:
 	add r0, r6, #0
 	bl CopyWindowPixelsToVram_TextMode
 	ldr r0, [r4]
-	bl BattleSystem_GetBattleInput
-	bl BattleInput_GetKeyPressed
+	bl ov12_0223A900
+	bl ov12_0226A8E4
 	strb r0, [r4, #0x17]
 	ldr r0, [r4]
 	bl BattleSystem_GetMessageIcon
@@ -13789,7 +13789,7 @@ _0225F57E:
 	bl ov12_02237B0C
 	mov r0, #5
 	mov r1, #0x38
-	bl Heap_Alloc
+	bl AllocFromHeap
 	str r0, [r4, #4]
 	mov r0, #5
 	bl SaveArray_Party_Alloc
@@ -13840,7 +13840,7 @@ _0225F5E6:
 	cmp r5, #6
 	blt _0225F5E6
 	add r0, r6, #0
-	bl Heap_Free
+	bl FreeToHeap
 	ldr r0, [r4]
 	ldr r1, [sp, #0x18]
 	mov r7, #0
@@ -14089,11 +14089,11 @@ _0225F7EA:
 	ldr r0, [r4]
 	bl ov12_02237BB8
 	ldr r0, [r4]
-	bl BattleSystem_GetBattleInput
+	bl ov12_0223A900
 	ldr r1, [r4, #4]
 	add r1, #0x32
 	ldrb r1, [r1]
-	bl BattleInput_SetKeyPressed
+	bl ov12_0226A8EC
 	mov r0, #7
 	str r0, [sp]
 	mov r0, #0
@@ -14155,11 +14155,11 @@ _0225F882:
 	bl ov12_0226430C
 	ldr r0, [r4, #4]
 	ldr r0, [r0]
-	bl Heap_Free
+	bl FreeToHeap
 	ldr r0, [r4, #4]
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r6, #0
 	bl SysTask_Destroy
 _0225F8A6:
@@ -14247,7 +14247,7 @@ _0225F93A:
 	ldr r0, [r5]
 	bl ov12_0226430C
 	add r0, r5, #0
-	bl Heap_Free
+	bl FreeToHeap
 	ldr r0, [sp]
 	bl SysTask_Destroy
 	add sp, #0xc
@@ -14265,7 +14265,7 @@ ov12_0225F960: ; 0x0225F960
 	ldr r0, [r4]
 	bl ov12_0226430C
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r5, #0
 	bl SysTask_Destroy
 	pop {r3, r4, r5, pc}
@@ -14356,7 +14356,7 @@ _0225FA18:
 	ldr r0, [r4]
 	bl ov12_0226430C
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r6, #0
 	bl SysTask_Destroy
 	add sp, #4
@@ -14374,7 +14374,7 @@ ov12_0225FA44: ; 0x0225FA44
 	ldr r0, [r4]
 	bl BattleSystem_GetBgConfig
 	ldr r0, [r4]
-	bl BattleSystem_GetBattleInput
+	bl ov12_0223A900
 	add r5, r0, #0
 	ldrb r1, [r4, #0xd]
 	ldr r0, [r4]
@@ -14411,14 +14411,14 @@ _0225FA92: ; jump table
 	.short _0225FC4C - _0225FA92 - 2 ; case 4
 _0225FA9C:
 	add r0, r5, #0
-	bl BattleInput_CheckFeedbackDone
+	bl ov12_02266C64
 	cmp r0, #0
 	beq _0225FB00
 	ldr r0, [r4, #0x10]
 	cmp r0, #0
 	beq _0225FAE4
 	ldr r0, [r4]
-	bl BattleSystem_GetMessageLoader
+	bl BattleSystem_GetMessageData
 	add r5, r0, #0
 	ldrb r0, [r4, #0xf]
 	cmp r0, #5
@@ -14471,7 +14471,7 @@ _0225FB02:
 	bl NARC_New
 	add r6, r0, #0
 	add r0, r5, #0
-	bl BattleInput_DisableBallGauge
+	bl ov12_02266B34
 	ldrh r1, [r4, #0x18]
 	add r0, sp, #0x10
 	strh r1, [r0]
@@ -14500,7 +14500,7 @@ _0225FB40:
 	add r1, r6, #0
 	add r2, r5, #0
 	mov r3, #0xd
-	bl BattleInput_ChangeMenu
+	bl ov12_02266508
 	b _0225FBB2
 _0225FB56:
 	mov r0, #0
@@ -14511,7 +14511,7 @@ _0225FB56:
 	add r1, r6, #0
 	add r2, r5, #0
 	mov r3, #0xe
-	bl BattleInput_ChangeMenu
+	bl ov12_02266508
 	b _0225FBB2
 _0225FB6C:
 	mov r0, #0
@@ -14522,7 +14522,7 @@ _0225FB6C:
 	add r1, r6, #0
 	add r2, r5, #0
 	mov r3, #0xf
-	bl BattleInput_ChangeMenu
+	bl ov12_02266508
 	b _0225FBB2
 _0225FB82:
 	mov r0, #0
@@ -14533,7 +14533,7 @@ _0225FB82:
 	add r1, r6, #0
 	add r2, r5, #0
 	mov r3, #0x10
-	bl BattleInput_ChangeMenu
+	bl ov12_02266508
 	b _0225FBB2
 _0225FB98:
 	mov r0, #0
@@ -14544,7 +14544,7 @@ _0225FB98:
 	add r1, r6, #0
 	add r2, r5, #0
 	mov r3, #0x11
-	bl BattleInput_ChangeMenu
+	bl ov12_02266508
 	b _0225FBB2
 _0225FBAE:
 	bl GF_AssertFail
@@ -14559,7 +14559,7 @@ _0225FBB2:
 	pop {r3, r4, r5, r6, r7, pc}
 _0225FBC6:
 	add r0, r5, #0
-	bl BattleInput_CheckTouch
+	bl ov12_02266B78
 	mov r1, #0
 	mvn r1, r1
 	str r0, [r4, #8]
@@ -14573,7 +14573,7 @@ _0225FBC6:
 	pop {r3, r4, r5, r6, r7, pc}
 _0225FBE4:
 	add r0, r5, #0
-	bl BattleInput_CheckFeedbackDone
+	bl ov12_02266C64
 	cmp r0, #1
 	bne _0225FC76
 	mov r0, #7
@@ -14591,20 +14591,20 @@ _0225FBE4:
 	add r0, r7, #0
 	bl ov12_02265D74
 	add r0, r5, #0
-	bl BattleInput_DisableBallGauge
+	bl ov12_02266B34
 	mov r3, #0
 	str r3, [sp]
 	ldr r0, [sp, #8]
 	str r3, [sp, #4]
 	add r1, r6, #0
 	add r2, r5, #0
-	bl BattleInput_ChangeMenu
+	bl ov12_02266508
 	ldr r0, [r4, #8]
 	cmp r0, #1
 	bne _0225FC38
 	add r0, r5, #0
 	mov r1, #0
-	bl BattleInput_Deadstriped_022698AC
+	bl ov12_022698AC
 _0225FC38:
 	mov r0, #4
 	strb r0, [r4, #0xe]
@@ -14628,7 +14628,7 @@ _0225FC4C:
 	ldr r0, [r4]
 	bl ov12_0226430C
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r6, #0
 	bl SysTask_Destroy
 _0225FC76:
@@ -14648,7 +14648,7 @@ ov12_0225FC80: ; 0x0225FC80
 	ldr r0, [r4]
 	bl ov12_0226430C
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r5, #0
 	bl SysTask_Destroy
 	pop {r3, r4, r5, pc}
@@ -14665,7 +14665,7 @@ ov12_0225FCA0: ; 0x0225FCA0
 	ldr r0, [r4]
 	bl ov12_0226430C
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r5, #0
 	bl SysTask_Destroy
 	pop {r3, r4, r5, pc}
@@ -14708,7 +14708,7 @@ _0225FCF0:
 	ldr r0, [r4]
 	bl ov12_0226430C
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r5, #0
 	bl SysTask_Destroy
 	pop {r3, r4, r5, pc}
@@ -14851,7 +14851,7 @@ _0225FE1A:
 	cmp r0, #0
 	beq _0225FE30
 	ldr r0, [r4]
-	bl BattleSystem_GetPokepicManager
+	bl ov12_0223A8D4
 	mov r1, #1
 	bl PokepicManager_SetG3UpdateFlagsMask
 _0225FE30:
@@ -14888,7 +14888,7 @@ _0225FE68:
 	cmp r0, #0
 	beq _0225FE7E
 	ldr r0, [r4]
-	bl BattleSystem_GetPokepicManager
+	bl ov12_0223A8D4
 	mov r1, #1
 	bl PokepicManager_ResetG3UpdateFlagsMask
 _0225FE7E:
@@ -14987,7 +14987,7 @@ _0225FF34:
 	ldr r0, [r4]
 	bl ov12_0226430C
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r5, #0
 	bl SysTask_Destroy
 	add sp, #0x1fc
@@ -15055,7 +15055,7 @@ _0225FFBA:
 	mov r2, #0x17
 	bl ov12_0226430C
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r5, #0
 	bl SysTask_Destroy
 	pop {r3, r4, r5, pc}
@@ -15521,7 +15521,7 @@ _02260356:
 	ldr r0, [r4]
 	bl ov12_0226430C
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r6, #0
 	bl SysTask_Destroy
 _02260374:
@@ -15541,7 +15541,7 @@ ov12_0226037C: ; 0x0226037C
 	bl BattleSystem_GetPaletteData
 	add r4, r0, #0
 	ldr r0, [r5]
-	bl BattleSystem_GetPokepicManager
+	bl ov12_0223A8D4
 	add r7, r0, #0
 	ldrb r0, [r5, #6]
 	cmp r0, #0
@@ -15595,7 +15595,7 @@ _022603F8:
 	ldr r0, [r5]
 	bl ov12_0226430C
 	add r0, r5, #0
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r6, #0
 	bl SysTask_Destroy
 _0226040E:
@@ -15779,7 +15779,7 @@ _02260560:
 	ldr r0, [r4]
 	bl ov12_0226430C
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r6, #0
 	bl SysTask_Destroy
 _0226057E:
@@ -15818,7 +15818,7 @@ _022605AC:
 	ldr r0, [r4]
 	bl ov12_0226430C
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r5, #0
 	bl SysTask_Destroy
 _022605C8:
@@ -15852,7 +15852,7 @@ _022605F2:
 	ldr r0, [r4]
 	bl ov12_0226430C
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r5, #0
 	bl SysTask_Destroy
 _02260612:
@@ -15896,7 +15896,7 @@ _0226063C:
 	ldr r0, [r4]
 	bl ov12_0226430C
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r5, #0
 	bl SysTask_Destroy
 _02260666:
@@ -15918,7 +15918,7 @@ ov12_02260668: ; 0x02260668
 	bl BattleSystem_GetTerrainId
 	add r5, r0, #0
 	ldr r0, [r4]
-	bl BattleSystem_GetBackgroundId
+	bl ov12_0223AB54
 	lsl r1, r0, #2
 	ldr r0, _022609DC ; =ov12_0226D18C
 	ldr r0, [r0, r1]
@@ -16197,7 +16197,7 @@ _022608CC:
 	mov r1, #0
 	bl sub_0201649C
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r6, #0
 	bl SysTask_Destroy
 	add sp, #0x18
@@ -16367,7 +16367,7 @@ _02260A44:
 	bl ov12_02237B0C
 	mov r0, #5
 	mov r1, #0x38
-	bl Heap_Alloc
+	bl AllocFromHeap
 	str r0, [r4, #4]
 	ldrb r1, [r4, #9]
 	ldr r0, [r4]
@@ -16459,9 +16459,9 @@ _02260B0C:
 	ldr r0, [r4]
 	bl ov12_0226430C
 	ldr r0, [r4, #4]
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r5, #0
 	bl SysTask_Destroy
 _02260B28:
@@ -16524,7 +16524,7 @@ _02260B86:
 	ldr r0, [r5]
 	bl ov12_0226430C
 	add r0, r5, #0
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r4, #0
 	bl SysTask_Destroy
 _02260B9C:
@@ -16581,10 +16581,10 @@ _02260BEC:
 	ldr r7, [sp, #8]
 _02260BEE:
 	ldr r0, [r5]
-	bl BattleSystem_GetSpriteSystem
+	bl BattleSystem_GetSpriteRenderer
 	add r4, r0, #0
 	ldr r0, [r5]
-	bl BattleSystem_GetSpriteManager
+	bl BattleSystem_GetGfxHandler
 	str r4, [sp]
 	str r0, [sp, #4]
 	add r0, r5, #0
@@ -16592,7 +16592,7 @@ _02260BEE:
 	add r0, #8
 	add r1, r6, #0
 	add r3, r7, #0
-	bl PartyGauge_NewAndShow
+	bl ov12_0226AEE0
 	add r2, r0, #0
 	ldr r0, [r5]
 	add r1, r6, #0
@@ -16606,7 +16606,7 @@ _02260C22:
 	ldr r0, [r5]
 	add r1, r6, #0
 	bl ov12_0223A908
-	bl PartyGauge_IsArrowTaskFinished
+	bl ov12_0226AF48
 	cmp r0, #1
 	bne _02260C52
 	ldrb r0, [r5, #7]
@@ -16620,7 +16620,7 @@ _02260C3C:
 	ldr r0, [r5]
 	bl ov12_0226430C
 	add r0, r5, #0
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r4, #0
 	bl SysTask_Destroy
 _02260C52:
@@ -16665,17 +16665,17 @@ _02260C90:
 _02260C92:
 	add r0, r6, #0
 	add r2, r1, #0
-	bl PartyGauge_StartHideTask
+	bl ov12_0226AF6C
 	ldrb r0, [r5, #7]
 	add r0, r0, #1
 	strb r0, [r5, #7]
 	pop {r3, r4, r5, r6, r7, pc}
 _02260CA2:
-	bl PartyGauge_IsHideTaskFinished
+	bl ov12_0226AFA4
 	cmp r0, #1
 	bne _02260CD8
 	add r0, r6, #0
-	bl PartyGauge_DeleteAndFreeResources
+	bl ov12_0226AFC8
 	ldr r0, [r5]
 	add r1, r4, #0
 	mov r2, #0
@@ -16690,7 +16690,7 @@ _02260CC2:
 	ldr r0, [r5]
 	bl ov12_0226430C
 	add r0, r5, #0
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r7, #0
 	bl SysTask_Destroy
 _02260CD8:
@@ -16730,7 +16730,7 @@ _02260D0E:
 	ldr r0, [r4]
 	bl ov12_0226430C
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r5, #0
 	bl SysTask_Destroy
 	pop {r3, r4, r5, pc}
@@ -16776,7 +16776,7 @@ _02260D56:
 	ldr r0, [r4]
 	bl ov12_0226430C
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r5, #0
 	bl SysTask_Destroy
 	pop {r3, r4, r5, pc}
@@ -16793,7 +16793,7 @@ ov12_02260D84: ; 0x02260D84
 	bl BattleSystem_GetPaletteData
 	add r4, r0, #0
 	ldr r0, [r5]
-	bl BattleSystem_GetPokepicManager
+	bl ov12_0223A8D4
 	add r7, r0, #0
 	ldrb r0, [r5, #6]
 	cmp r0, #0
@@ -16913,7 +16913,7 @@ _02260E84:
 	ldr r0, [r5]
 	bl ov12_0226430C
 	add r0, r5, #0
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r6, #0
 	bl SysTask_Destroy
 _02260E9A:
@@ -17796,16 +17796,16 @@ ov12_02261544: ; 0x02261544
 	beq _0226156A
 	add r0, r7, #0
 	mov r1, #3
-	bl BattleSystem_GetBattlerFromBattlerType
+	bl ov12_0223AAD8
 	add r6, r0, #0
 	add r0, r7, #0
 	mov r1, #5
-	bl BattleSystem_GetBattlerFromBattlerType
+	bl ov12_0223AAD8
 	b _02261574
 _0226156A:
 	add r0, r7, #0
 	mov r1, #1
-	bl BattleSystem_GetBattlerFromBattlerType
+	bl ov12_0223AAD8
 	add r6, r0, #0
 _02261574:
 	mov r1, #4
@@ -18098,21 +18098,21 @@ _0226178E: ; jump table
 _02261796:
 	ldr r0, [sp]
 	mov r1, #4
-	bl BattleSystem_GetBattlerFromBattlerType
+	bl ov12_0223AAD8
 	add r5, r0, #0
 	ldr r0, [sp]
 	mov r1, #2
-	bl BattleSystem_GetBattlerFromBattlerType
+	bl ov12_0223AAD8
 	add r7, r0, #0
 	b _02261832
 _022617AC:
 	ldr r0, [sp]
 	mov r1, #2
-	bl BattleSystem_GetBattlerFromBattlerType
+	bl ov12_0223AAD8
 	add r5, r0, #0
 	ldr r0, [sp]
 	mov r1, #4
-	bl BattleSystem_GetBattlerFromBattlerType
+	bl ov12_0223AAD8
 	add r7, r0, #0
 	b _02261832
 _022617C2:
@@ -18121,17 +18121,17 @@ _022617C2:
 	tst r0, r1
 	beq _022617DE
 	ldr r0, [sp]
-	bl BattleSystem_GetBattlerFromBattlerType
+	bl ov12_0223AAD8
 	add r5, r0, #0
 	ldr r0, [sp]
 	mov r1, #4
-	bl BattleSystem_GetBattlerFromBattlerType
+	bl ov12_0223AAD8
 	add r7, r0, #0
 	b _02261832
 _022617DE:
 	ldr r0, [sp]
 	mov r1, #0
-	bl BattleSystem_GetBattlerFromBattlerType
+	bl ov12_0223AAD8
 	add r5, r0, #0
 	add r7, r5, #0
 	b _02261832
@@ -18158,11 +18158,11 @@ _0226180E:
 	tst r0, r1
 	beq _0226182A
 	ldr r0, [sp]
-	bl BattleSystem_GetBattlerFromBattlerType
+	bl ov12_0223AAD8
 	add r5, r0, #0
 	ldr r0, [sp]
 	mov r1, #4
-	bl BattleSystem_GetBattlerFromBattlerType
+	bl ov12_0223AAD8
 	add r7, r0, #0
 	b _02261832
 _0226182A:
@@ -18307,16 +18307,16 @@ ov12_02261928: ; 0x02261928
 	beq _02261956
 	ldr r0, [sp]
 	mov r1, #3
-	bl BattleSystem_GetBattlerFromBattlerType
+	bl ov12_0223AAD8
 	add r4, r0, #0
 	ldr r0, [sp]
 	mov r1, #5
-	bl BattleSystem_GetBattlerFromBattlerType
+	bl ov12_0223AAD8
 	b _02261960
 _02261956:
 	ldr r0, [sp]
 	mov r1, #1
-	bl BattleSystem_GetBattlerFromBattlerType
+	bl ov12_0223AAD8
 	add r4, r0, #0
 _02261960:
 	cmp r7, #1
@@ -18466,11 +18466,11 @@ _02261A62:
 	strb r0, [r7, #1]
 	add r0, r5, #0
 	mov r1, #3
-	bl BattleSystem_GetBattlerFromBattlerType
+	bl ov12_0223AAD8
 	str r0, [r7, #4]
 	add r0, r5, #0
 	mov r1, #5
-	bl BattleSystem_GetBattlerFromBattlerType
+	bl ov12_0223AAD8
 	str r0, [r7, #8]
 	b _02261ABE
 _02261A8E:
@@ -18485,7 +18485,7 @@ _02261A8E:
 	strb r0, [r7, #1]
 	add r0, r5, #0
 	mov r1, #3
-	bl BattleSystem_GetBattlerFromBattlerType
+	bl ov12_0223AAD8
 	str r0, [r7, #4]
 	b _02261ABE
 _02261AAE:
@@ -18494,7 +18494,7 @@ _02261AAE:
 	strb r0, [r7, #1]
 	add r0, r5, #0
 	mov r1, #1
-	bl BattleSystem_GetBattlerFromBattlerType
+	bl ov12_0223AAD8
 	str r0, [r7, #4]
 _02261ABE:
 	add r0, r5, #0
@@ -18531,13 +18531,13 @@ ov12_02261AD4: ; 0x02261AD4
 	beq _02261B0E
 	add r0, r5, #0
 	mov r1, #4
-	bl BattleSystem_GetBattlerFromBattlerType
+	bl ov12_0223AAD8
 	str r0, [r4, #4]
 	b _02261B22
 _02261B0E:
 	add r0, r5, #0
 	mov r1, #2
-	bl BattleSystem_GetBattlerFromBattlerType
+	bl ov12_0223AAD8
 	str r0, [r4, #4]
 	b _02261B22
 _02261B1A:
@@ -18560,10 +18560,10 @@ ov12_02261B2C: ; 0x02261B2C
 	add r4, r1, #0
 	add r6, r2, #0
 	add r7, r3, #0
-	bl BattleSystem_GetSpriteSystem
+	bl BattleSystem_GetSpriteRenderer
 	str r0, [sp, #0x1c]
 	add r0, r5, #0
-	bl BattleSystem_GetSpriteManager
+	bl BattleSystem_GetGfxHandler
 	str r0, [sp, #0x18]
 	add r0, r5, #0
 	bl BattleSystem_GetPaletteData
@@ -18627,7 +18627,7 @@ _02261BA8:
 	bl BattleSystem_GetPaletteData
 	str r0, [sp, #0x24]
 	ldr r0, [sp]
-	bl BattleSystem_GetSpriteSystem
+	bl BattleSystem_GetSpriteRenderer
 	add r5, sp, #0x1c
 	str r0, [sp, #0x1c]
 	ldr r0, [sp, #0xc]
@@ -18707,14 +18707,14 @@ _02261BCE:
 	mov r0, #7
 	str r0, [sp, #0x88]
 	ldr r0, [sp]
-	bl BattleSystem_GetBackgroundId
+	bl ov12_0223AB54
 	add r0, r0, #3
 	str r0, [sp, #0x8c]
 	ldr r0, [sp]
 	bl ov12_0223B52C
 	add r4, r0, #0
 	ldr r0, [sp]
-	bl BattleSystem_GetBackgroundId
+	bl ov12_0223AB54
 	lsl r1, r0, #1
 	add r0, r0, r1
 	add r0, #0xb0
@@ -18918,7 +18918,7 @@ _02261DE0:
 	strh r0, [r5, #0x16]
 	mov r0, #5
 	mov r1, #8
-	bl Heap_Alloc
+	bl AllocFromHeap
 	add r1, r0, #0
 	add r2, r4, #0
 	str r2, [r1]
@@ -19010,7 +19010,7 @@ _02261EA0:
 	cmp r0, #1
 	bne _02261EB6
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r5, #0
 	bl SysTask_Destroy
 _02261EB6:

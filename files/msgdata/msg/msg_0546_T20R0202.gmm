@@ -2,7 +2,7 @@
 <body language="English">
 	<row id="msg_0546_T20R0202_00000" index="0">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">{STRVAR_1 3, 0, 0} booted up the PC and\nchecked the Mailbox!\r</language>
+		<language name="English">Booted up the PC and checked the\nMailbox!\r</language>
 	</row>
 	<row id="msg_0546_T20R0202_00001" index="1">
 		<attribute name="window_context_name">used</attribute>
@@ -10,6 +10,14 @@
 	</row>
 	<row id="msg_0546_T20R0202_00002" index="2">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">It’s a Wii!\rWii is huge in Johto, too!</language>
+		<language name="English">A brand-new game console, still in\nits box from the move.\rUnpacking that can wait... probably.\r</language>
+	</row>
+	<row id="msg_0546_T20R0202_00003" index="3">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">The PC hums to life.\rThere’s a POTION tucked inside - left\nover from the move.\r</language>
+	</row>
+	<row id="msg_0546_T20R0202_00004" index="4">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Took the POTION!\r</language>
 	</row>
 </body>

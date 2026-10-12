@@ -4,8 +4,8 @@
 .public MessageFormat_Delete
 .public IsPaletteFadeFinished
 .public MailMsg_Init_WithBank
-.public Heap_Alloc
-.public Heap_Free
+.public AllocFromHeap
+.public FreeToHeap
 .public Save_Misc_Get
 .public SaveMisc_GetBattleGreeting
 .public SaveMisc_SetBattleGreeting
@@ -24,4 +24,4 @@
 .public sub_02090D48
 .public sub_02090D60
 .public sub_020961D8
-.public FieldMap_FadeScreen
+.public ov01_021E636C

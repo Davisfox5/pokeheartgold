@@ -16,6 +16,7 @@
 
 #include "assert.h"
 #include "encounter.h"
+#include "fieldmap.h"
 #include "heap.h"
 #include "mail_message.h"
 #include "msgdata.h"
@@ -26,7 +27,6 @@
 #include "save_trainer_house.h"
 #include "scrcmd.h"
 #include "script.h"
-#include "script_manager.h"
 #include "string_util.h"
 #include "unk_020517A4.h"
 #include "unk_0205B3DC.h"
@@ -58,18 +58,18 @@ static const MailMessageTemplate TrainerHouse_DefaultIntroMessage = {
     {                              \
         .language = GAME_LANGUAGE, \
         .nickname = {              \
-                     EOS,                   \
-                     EOS,                   \
-                     EOS,                   \
-                     EOS,                   \
-                     EOS,                   \
-                     EOS,                   \
-                     EOS,                   \
-                     EOS,                   \
-                     EOS,                   \
-                     EOS,                   \
-                     },                         \
-}
+            EOS,                   \
+            EOS,                   \
+            EOS,                   \
+            EOS,                   \
+            EOS,                   \
+            EOS,                   \
+            EOS,                   \
+            EOS,                   \
+            EOS,                   \
+            EOS,                   \
+        },                         \
+    }
 
 static const TrainerHouseSet ov25_02259D9C = {
     .trainer = {
@@ -157,7 +157,7 @@ void TrainerHouse_StartBattle(FieldSystem *fieldSystem, u32 trainerNum) {
     } else {
         setup = TrainerHouse_NewBattleSetup(fieldSystem, &trainerHouse->sets[trainerNum]);
     }
-    fieldSystem->frontierFsys = NULL;
+    fieldSystem->unkA0 = NULL;
     u32 effect = BattleSetup_GetWildTransitionEffect(setup);
     u32 bgm = BattleSetup_GetWildBattleMusic(setup);
     u32 *winFlag = FieldSysGetAttrAddr(fieldSystem, SCRIPTENV_BATTLE_WIN_FLAG);
@@ -166,7 +166,7 @@ void TrainerHouse_StartBattle(FieldSystem *fieldSystem, u32 trainerNum) {
 
 static void TrainerHouse_SetNames(TrainerHouseSet *set) {
     MI_CpuCopy16(&ov25_02259D9C, set, sizeof(TrainerHouseSet));
-    MsgData *messageData = NewMsgDataFromNarc(MSGDATA_LOAD_LAZY, NARC_msgdata_msg, NARC_msg_msg_0726_bin, HEAP_ID_FIELD2);
+    MsgData *messageData = NewMsgDataFromNarc(MSGDATA_LOAD_LAZY, NARC_msgdata_msg, NARC_msg_msg_0726_bin, HEAP_ID_FIELD);
     GF_ASSERT(messageData);
     if (messageData) {
         String *otName = NewString_ReadMsgData(messageData, msg_0726_00003);
@@ -188,7 +188,7 @@ static void TrainerHouse_SetNames(TrainerHouseSet *set) {
         if (trainerHouseMon->species == SPECIES_NONE) {
             continue;
         }
-        String *name = GetSpeciesName(trainerHouseMon->species, HEAP_ID_FIELD2);
+        String *name = GetSpeciesName(trainerHouseMon->species, HEAP_ID_FIELD);
         GF_ASSERT(name);
         if (name) {
             u32 length = String_GetLength(name);
@@ -221,13 +221,13 @@ BOOL ScrCmd_ShowTrainerHouseIntroMessage(ScriptContext *ctx) {
 
 static BattleSetup *TrainerHouse_NewBattleSetup(FieldSystem *fieldSystem, TrainerHouseSet *set) {
     s32 i;
-    BattleSetup *setup = BattleSetup_New(HEAP_ID_FIELD2, BATTLE_TYPE_TRAINER | BATTLE_TYPE_FRONTIER | BATTLE_TYPE_13);
+    BattleSetup *setup = BattleSetup_New(HEAP_ID_FIELD, BATTLE_TYPE_TRAINER | BATTLE_TYPE_FRONTIER | BATTLE_TYPE_13);
     SaveData *saveData = fieldSystem->saveData;
     Party *party = SaveArray_Party_Get(saveData);
     sub_02051D18(setup, fieldSystem, saveData, fieldSystem->location->mapId, fieldSystem->bagCursor, fieldSystem->unkB0);
     setup->battleBg = BATTLE_BG_BUILDING_1;
     setup->terrain = TERRAIN_BUILDING;
-    Pokemon *mon = AllocMonZeroed(HEAP_ID_FIELD2);
+    Pokemon *mon = AllocMonZeroed(HEAP_ID_FIELD);
     s32 partyCount = Party_GetCount(party);
     Party_InitWithMaxSize(setup->party[BATTLER_PLAYER], PARTY_SIZE);
     for (i = 0; i < partyCount; i++) {
@@ -239,7 +239,7 @@ static BattleSetup *TrainerHouse_NewBattleSetup(FieldSystem *fieldSystem, Traine
         }
         BattleSetup_AddMonToParty(setup, mon, BATTLER_PLAYER);
     }
-    Heap_Free(mon);
+    FreeToHeap(mon);
     BattleSetup_SetAllySideBattlersToPlayer(setup);
     TrainerHouse_InitBattleSetup(setup, set, BATTLER_ENEMY);
     for (i = 0; i < BATTLER_MAX; i++) {
@@ -252,10 +252,11 @@ static void TrainerHouse_CopyToPokemon(TrainerHouseMon *trainerHouseMon, Pokemon
     s32 i;
     u8 tempByte;
     ZeroMonData(mon);
-    tempByte = trainerHouseMon->level > MAX_TRAINER_HOUSE_LEVEL
+    u32 level = trainerHouseMon->level > MAX_TRAINER_HOUSE_LEVEL
         ? MAX_TRAINER_HOUSE_LEVEL
         : trainerHouseMon->level;
-    u16 species = trainerHouseMon->species;
+    tempByte = level;
+    u32 species = trainerHouseMon->species;
     u32 ivs = trainerHouseMon->ivsWord & 0x3fffffff;
     u32 pid = trainerHouseMon->pid;
     CreateMonWithFixedIVs(mon, species, tempByte, ivs, pid);
@@ -266,12 +267,12 @@ static void TrainerHouse_CopyToPokemon(TrainerHouseMon *trainerHouseMon, Pokemon
         u16 move = trainerHouseMon->moves[i];
         SetMonData(mon, MON_DATA_MOVE1 + i, &move);
         tempByte = trainerHouseMon->ppUp >> (i * 2) & 3;
-        SetMonData(mon, MON_DATA_MOVE1_PP_UPS + i, &tempByte);
-        u8 pp = GetMonData(mon, MON_DATA_MOVE1_MAX_PP + i, NULL);
-        SetMonData(mon, MON_DATA_MOVE1_PP + i, &pp);
+        SetMonData(mon, MON_DATA_MOVE1PPUP + i, &tempByte);
+        u8 pp = GetMonData(mon, MON_DATA_MOVE1MAXPP + i, NULL);
+        SetMonData(mon, MON_DATA_MOVE1PP + i, &pp);
     }
     u32 otid = trainerHouseMon->otid;
-    SetMonData(mon, MON_DATA_OT_ID, &otid);
+    SetMonData(mon, MON_DATA_OTID, &otid);
     for (i = 0; i < NUM_STATS; i++) {
         tempByte = *(&trainerHouseMon->hpEv + i);
         SetMonData(mon, MON_DATA_HP_EV + i, &tempByte);
@@ -281,8 +282,8 @@ static void TrainerHouse_CopyToPokemon(TrainerHouseMon *trainerHouseMon, Pokemon
     u16 nickname[POKEMON_NAME_LENGTH + 1];
     StringFillEOS(nickname, NELEMS(nickname));
     CopyU16StringArrayN(nickname, trainerHouseMon->nickname, POKEMON_NAME_LENGTH);
-    SetMonData(mon, MON_DATA_NICKNAME, nickname);
-    SetMonData(mon, MON_DATA_LANGUAGE, &(trainerHouseMon->language));
+    SetMonData(mon, MON_DATA_NICKNAME_FLAT, nickname);
+    SetMonData(mon, MON_DATA_GAME_LANGUAGE, &(trainerHouseMon->language));
     CalcMonLevelAndStats(mon);
 }
 
@@ -301,7 +302,7 @@ static void TrainerHouse_InitBattleSetup(BattleSetup *setup, TrainerHouseSet *se
     s32 i;
     TrainerHouse_InitTrainer(set, &setup->trainer[battlerId]);
     setup->trainerId[battlerId] = set->trainer.id;
-    Pokemon *tempMon = AllocMonZeroed(HEAP_ID_FIELD2);
+    Pokemon *tempMon = AllocMonZeroed(HEAP_ID_FIELD);
     Party_InitWithMaxSize(setup->party[battlerId], PARTY_SIZE);
     TrainerHouseMon *trainerHouseMon = set->party;
     for (i = 0; i < PARTY_SIZE; trainerHouseMon++, i++) {
@@ -311,5 +312,5 @@ static void TrainerHouse_InitBattleSetup(BattleSetup *setup, TrainerHouseSet *se
         TrainerHouse_CopyToPokemon(&set->party[i], tempMon);
         BattleSetup_AddMonToParty(setup, tempMon, battlerId);
     }
-    Heap_Free(tempMon);
+    FreeToHeap(tempMon);
 }

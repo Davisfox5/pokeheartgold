@@ -31,7 +31,7 @@ typedef struct Pokedex {
     u8 unownSeenOrder[28];
     u8 unownCaughtOrder[28];
     u8 caughtLanguages[ROUND_UP(NATIONAL_DEX_COUNT, 4)];
-    u8 canDetectForms;
+    u8 unk_334;
     u8 enabledInternational;
     u8 dexEnabled;
     u8 nationalDex;
@@ -43,7 +43,7 @@ typedef struct Pokedex {
 } Pokedex; // size=0x340
 
 u32 Save_Pokedex_sizeof(void);
-Pokedex *Pokedex_New(enum HeapID heapID);
+Pokedex *Pokedex_New(HeapID heapId);
 void Save_Pokedex_Init(Pokedex *pokedex);
 Pokedex *Save_Pokedex_Get(SaveData *saveData);
 BOOL Pokedex_GetNatDexFlag(const Pokedex *pokedex);
@@ -61,14 +61,14 @@ u16 Pokedex_CountDexOwned(Pokedex *pokedex);
 BOOL Pokedex_NationalDexIsComplete(Pokedex *pokedex);
 BOOL Pokedex_JohtoDexIsComplete(Pokedex *pokedex);
 u32 Pokedex_GetSeenSpindaPersonality(Pokedex *pokedex, u32 arg);
-int Pokedex_SpeciesGetLastSeenGender(Pokedex *pokedex, u16 species, u32 idx);
+int Pokedex_SpeciesGetLastSeenGender(Pokedex *pokedex, u16 species, u32 a2);
 int Pokedex_GetSeenFormByIdx_Unown(Pokedex *pokedex, int idx, u32 caught);
 u32 Pokedex_GetSeenFormNum_Unown(Pokedex *pokedex, BOOL caught);
 int Pokedex_GetSeenFormByIdx_Shellos(Pokedex *pokedex, int a1);
 void Pokedex_SetMonSeenFlag(Pokedex *pokedex, Pokemon *mon);
 void Pokedex_SetMonCaughtFlag(Pokedex *pokedex, Pokemon *mon);
 void Pokedex_SetNatDexFlag(Pokedex *pokedex);
-void Pokedex_EnableFormDetection(Pokedex *pokedex);
+void sub_0202A57C(Pokedex *pokedex);
 BOOL Pokedex_HasCaughtMonWithLanguage(Pokedex *pokedex, u32 species, u32 language);
 void Pokedex_SetInternationalViewFlag(Pokedex *pokedex);
 BOOL Pokedex_GetInternationalViewFlag(const Pokedex *pokedex);

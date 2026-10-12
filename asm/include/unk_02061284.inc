@@ -2,8 +2,8 @@
 #pragma once
 .public LCRandom
 .public GF_AssertFail
-.public PlayerAvatar_GetXCoord
-.public PlayerAvatar_GetZCoord
+.public GetPlayerXCoord
+.public GetPlayerZCoord
 .public PlayerAvatar_GetMapObject
 .public FieldSystem_GetPlayerAvatar
 .public sub_0205DE98
@@ -27,11 +27,11 @@
 .public MapObject_GetFieldSystem
 .public MapObject_SetSingleMovement
 .public MapObject_ClearSingleMovement
-.public MapObject_ClearEndMovement
+.public MapObject_ClearFlag3
 .public MapObject_GetInitialX
 .public MapObject_GetInitialZ
-.public MapObject_GetXCoord
-.public MapObject_GetZCoord
+.public MapObject_GetCurrentX
+.public MapObject_GetCurrentZ
 .public MapObject_GetPositionVectorYCoordUInt
 .public sub_02060BB8
 .public GetDeltaXByFacingDirection

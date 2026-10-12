@@ -10,7 +10,7 @@ ov12_0226BEC4: ; 0x0226BEC4
 	add r5, r0, #0
 	mov r0, #5
 	mov r1, #8
-	bl Heap_Alloc
+	bl AllocFromHeap
 	mov r1, #0
 	mov r2, #8
 	add r4, r0, #0
@@ -31,7 +31,7 @@ ov12_0226BEF0: ; 0x0226BEF0
 	push {r4, lr}
 	add r4, r0, #0
 	bl SysTask_GetData
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r4, #0
 	bl SysTask_Destroy
 	pop {r4, pc}
@@ -43,7 +43,7 @@ ov12_0226BF04: ; 0x0226BF04
 	sub sp, #8
 	add r4, r1, #0
 	ldr r0, [r4]
-	bl BattleSystem_GetBattleInput
+	bl ov12_0223A900
 	mov r1, #4
 	ldrsh r1, [r4, r1]
 	add r5, r0, #0
@@ -81,7 +81,7 @@ _0226BF38:
 	add r1, r7, #0
 	add r2, r5, #0
 	mov r3, #0x12
-	bl BattleInput_ChangeMenu
+	bl ov12_02266508
 	add r0, r6, #0
 	bl NARC_Delete
 	add r0, r7, #0
@@ -93,7 +93,7 @@ _0226BF38:
 	strh r0, [r4, #4]
 	pop {r3, r4, r5, r6, r7, pc}
 _0226BF76:
-	bl BattleInput_CheckFeedbackDone
+	bl ov12_02266C64
 	cmp r0, #1
 	bne _0226BFCE
 	mov r0, #4
@@ -108,7 +108,7 @@ _0226BF8A:
 	cmp r0, #1
 	bne _0226BFCE
 	add r0, r5, #0
-	bl BattleInput_CheckTouch
+	bl ov12_02266B78
 	cmp r0, #1
 	bne _0226BFCE
 	ldr r0, _0226BFD4 ; =0x000005DD

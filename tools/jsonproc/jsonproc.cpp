@@ -213,13 +213,13 @@ int main(int argc, char *argv[])
         int num = args.at(0)->get<int>();
         int ndigits = args.at(1)->get<int>();
         int format = args.at(2)->get<int>();
-        std::string buf;
-        buf.reserve(ndigits);
+        char buf[ndigits + 1];
         bool printing_zeros = (format == 2);
         int pow10 = 1;
         for (int i = 1; i < ndigits; i++) {
             pow10 *= 10;
         }
+        char *ptr = buf;
         while (pow10 > 0) {
             div_t div_result = div(num, pow10);
             num = div_result.rem;
@@ -231,16 +231,17 @@ int main(int argc, char *argv[])
                     printing_zeros = true;
                 } else {
                     if (format == 1) {
-                        buf.push_back(' ');
+                        *ptr++ = ' ';
                     }
                     continue;
                 }
             }
             if (div_result.quot != 0 || printing_zeros) {
-                buf.push_back('0' + div_result.quot);
+                *ptr++ = '0' + div_result.quot;
             }
         }
-        return buf;
+        *ptr = 0;
+        return string{buf};
     });
 
     env.add_void_callback("error", 1, [](Arguments& args) {

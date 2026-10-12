@@ -13,7 +13,7 @@ PCBox_Init: ; 0x021E5900
 	mov r0, #3
 	mov r1, #9
 	lsl r2, r2, #0x10
-	bl Heap_Create
+	bl CreateHeap
 	add r0, r5, #0
 	mov r1, #0x38
 	mov r2, #9
@@ -83,7 +83,7 @@ PCBox_Exit: ; 0x021E5988
 	add r0, r4, #0
 	bl OverlayManager_FreeData
 	mov r0, #9
-	bl Heap_Destroy
+	bl DestroyHeap
 	mov r0, #1
 	pop {r4, pc}
 	.balign 4, 0
@@ -413,7 +413,7 @@ ov14_021E5C00: ; 0x021E5C00
 	bl FreeBgTilemapBuffer
 	ldr r0, [r4, #0x34]
 	ldr r0, [r0, #0x14]
-	bl Heap_Free
+	bl FreeToHeap
 	pop {r4, pc}
 	thumb_func_end ov14_021E5C00
 
@@ -939,7 +939,7 @@ ov14_021E6048: ; 0x021E6048
 	add r4, r0, #0
 	ldr r0, [r4, #0x34]
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_IsButtonInputMode
+	bl sub_02019F90
 	cmp r0, #1
 	ldr r0, [r4]
 	bne _021E6064
@@ -1082,7 +1082,7 @@ ov14_021E611C: ; 0x021E611C
 	ldr r0, [r5, #8]
 	ldr r2, [r6]
 	add r1, r7, #0
-	bl Party_SafeCopyMonToSlot_ResetAprijuiceModifiers
+	bl Party_SafeCopyMonToSlot_ResetUnkSub
 	ldr r0, [r4]
 	bl Mon_GetBoxMon
 	add r3, r0, #0
@@ -1184,31 +1184,31 @@ ov14_021E6210: ; 0x021E6210
 	ldr r0, [r5, #8]
 	add r1, #1
 	add r2, r7, #0
-	bl Party_GetMonAprijuiceModifiers
+	bl Party_GetUnkSubSlot
 	ldr r0, [r5, #8]
 	add r1, sp, #0
 	add r2, r4, #0
-	bl Party_GetMonAprijuiceModifiers
+	bl Party_GetUnkSubSlot
 	ldr r0, [r5, #8]
 	add r1, r4, #0
 	bl Party_GetMonByIndex
 	add r2, r0, #0
 	ldr r0, [r5, #8]
 	add r1, r7, #0
-	bl Party_SafeCopyMonToSlot_ResetAprijuiceModifiers
+	bl Party_SafeCopyMonToSlot_ResetUnkSub
 	ldr r0, [r5, #8]
 	ldr r2, [r6]
 	add r1, r4, #0
-	bl Party_SafeCopyMonToSlot_ResetAprijuiceModifiers
+	bl Party_SafeCopyMonToSlot_ResetUnkSub
 	ldr r0, [r5, #8]
 	add r1, sp, #0
 	add r2, r7, #0
-	bl Party_SetMonAprijuiceModifiers
+	bl Party_SetUnkSubSlot
 	add r1, sp, #4
 	ldr r0, [r5, #8]
 	add r1, #1
 	add r2, r4, #0
-	bl Party_SetMonAprijuiceModifiers
+	bl Party_SetUnkSubSlot
 	add sp, #0xc
 	pop {r4, r5, r6, r7, pc}
 	.balign 4, 0
@@ -1230,7 +1230,7 @@ ov14_021E627C: ; 0x021E627C
 	ldr r0, [r5, #8]
 	add r1, sp, #0
 	add r2, r6, #0
-	bl Party_GetMonAprijuiceModifiers
+	bl Party_GetUnkSubSlot
 	ldrb r1, [r5, #0x1f]
 	ldr r2, [r4, #4]
 	add r0, r5, #0
@@ -1243,7 +1243,7 @@ ov14_021E627C: ; 0x021E627C
 	sub r2, r0, #1
 	ldr r0, [r5, #8]
 	add r1, sp, #0
-	bl Party_SetMonAprijuiceModifiers
+	bl Party_SetUnkSubSlot
 	add sp, #8
 	pop {r4, r5, r6, pc}
 	.balign 4, 0
@@ -3253,7 +3253,7 @@ ov14_021E71E8: ; 0x021E71E8
 	add r4, r0, #0
 	mov r0, #0xa
 	mov r1, #0xc
-	bl Heap_AllocAtEnd
+	bl AllocFromHeapAtEnd
 	ldr r2, [r4, #0x34]
 	ldr r1, _021E725C ; =0x000088DC
 	str r0, [r2, r1]
@@ -3314,12 +3314,12 @@ _021E7260: .word 0x00004094
 ov14_021E7264: ; 0x021E7264
 	ldr r1, [r0, #0x34]
 	ldr r0, _021E7270 ; =0x000088DC
-	ldr r3, _021E7274 ; =Heap_Free
+	ldr r3, _021E7274 ; =FreeToHeap
 	ldr r0, [r1, r0]
 	bx r3
 	nop
 _021E7270: .word 0x000088DC
-_021E7274: .word Heap_Free
+_021E7274: .word FreeToHeap
 	thumb_func_end ov14_021E7264
 
 	thumb_func_start ov14_021E7278
@@ -3450,7 +3450,7 @@ ov14_021E7358: ; 0x021E7358
 	beq _021E7460
 	mov r0, #0xa
 	mov r1, #0x1c
-	bl Heap_Alloc
+	bl AllocFromHeap
 	add r6, r0, #0
 	str r7, [r6]
 	add r0, r7, #0
@@ -3572,10 +3572,10 @@ _021E7462:
 
 	thumb_func_start ov14_021E7468
 ov14_021E7468: ; 0x021E7468
-	ldr r3, _021E746C ; =Heap_Free
+	ldr r3, _021E746C ; =FreeToHeap
 	bx r3
 	.balign 4, 0
-_021E746C: .word Heap_Free
+_021E746C: .word FreeToHeap
 	thumb_func_end ov14_021E7468
 
 	thumb_func_start ov14_021E7470
@@ -3898,7 +3898,7 @@ ov14_021E76D0: ; 0x021E76D0
 	mov r3, #0x15
 	bl ov14_021F5718
 	add r0, r6, #0
-	bl Heap_Free
+	bl FreeToHeap
 	add sp, #8
 	pop {r4, r5, r6, pc}
 	thumb_func_end ov14_021E76D0
@@ -4000,7 +4000,7 @@ _021E77BC:
 	cmp r0, #0x14
 	blo _021E776E
 	ldr r0, [sp, #0x28]
-	bl Heap_Free
+	bl FreeToHeap
 	mov r0, #0
 	str r0, [sp]
 	mov r0, #2
@@ -6509,7 +6509,7 @@ ov14_021E89B8: ; 0x021E89B8
 	add r5, r0, #0
 	mov r0, #9
 	mov r1, #0x3c
-	bl Heap_Alloc
+	bl AllocFromHeap
 	str r0, [r5, #0x18]
 	add r4, r0, #0
 	add r0, r5, #0
@@ -6634,7 +6634,7 @@ _021E8AA8:
 	bl PCStorage_SetBoxModified
 _021E8AC0:
 	ldr r0, [r4, #0x18]
-	bl Heap_Free
+	bl FreeToHeap
 	mov r0, #0
 	pop {r4, pc}
 	.balign 4, 0
@@ -6687,7 +6687,7 @@ ov14_021E8B1C: ; 0x021E8B1C
 	bl BagView_GetItemId
 	strh r0, [r4, #0x1c]
 	ldr r0, [r4, #0x18]
-	bl Heap_Free
+	bl FreeToHeap
 	mov r0, #0
 	pop {r4, pc}
 	.balign 4, 0
@@ -7637,13 +7637,13 @@ ov14_021E92AC: ; 0x021E92AC
 	cmp r0, #0x17
 	bne _021E92D8
 	ldr r0, [r1, #0x2c]
-	bl GridInputHandler_IsButtonInputMode
+	bl sub_02019F90
 	cmp r0, #1
 	bne _021E92CC
 	ldr r0, [r5, #0x34]
 	mov r1, #1
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_SetButtonInputMode
+	bl sub_02019F94
 _021E92CC:
 	ldr r1, [r5, #0x34]
 	mov r0, #0
@@ -7730,13 +7730,13 @@ ov14_021E9370: ; 0x021E9370
 	cmp r0, #0x17
 	bne _021E939C
 	ldr r0, [r1, #0x2c]
-	bl GridInputHandler_IsButtonInputMode
+	bl sub_02019F90
 	cmp r0, #1
 	bne _021E9390
 	ldr r0, [r5, #0x34]
 	mov r1, #1
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_SetButtonInputMode
+	bl sub_02019F94
 _021E9390:
 	ldr r1, [r5, #0x34]
 	mov r0, #0
@@ -11415,10 +11415,10 @@ ov14_021EAFAC: ; 0x021EAFAC
 	mov r0, #3
 	mov r1, #0xa
 	lsl r2, r2, #0x12
-	bl Heap_Create
+	bl CreateHeap
 	ldr r1, _021EB0D8 ; =0x000088E0
 	mov r0, #0xa
-	bl Heap_Alloc
+	bl AllocFromHeap
 	ldr r2, _021EB0D8 ; =0x000088E0
 	mov r1, #0
 	str r0, [r4, #0x34]
@@ -11550,9 +11550,9 @@ ov14_021EB0E4: ; 0x021EB0E4
 	mov r0, #0
 	bl GfGfx_EngineBSetPlanes
 	ldr r0, [r4, #0x34]
-	bl Heap_Free
+	bl FreeToHeap
 	mov r0, #0xa
-	bl Heap_Destroy
+	bl DestroyHeap
 	ldr r0, [r4, #0x30]
 	pop {r4, pc}
 	nop
@@ -11915,7 +11915,7 @@ _021EB3F4:
 	ldrb r5, [r0]
 	ldr r0, [r4, #0x34]
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_GetNextInput
+	bl sub_02019F74
 	add r2, r0, #0
 	ldr r0, [r4, #0x34]
 	add r1, r5, #0
@@ -11923,7 +11923,7 @@ _021EB3F4:
 	ldr r0, [r4, #0x34]
 	add r1, r5, #0
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_SetNextInput
+	bl sub_02019F7C
 	mov r0, #0x2f
 	ldr r1, [r4, #0x34]
 	lsl r0, r0, #4
@@ -11959,11 +11959,11 @@ _021EB470:
 	lsl r1, r5, #0x18
 	ldr r0, [r0, #0x2c]
 	lsr r1, r1, #0x18
-	bl GridInputHandler_SetNextInput
+	bl sub_02019F7C
 	ldr r0, [r4, #0x34]
 	mov r1, #1
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_SetButtonInputMode
+	bl sub_02019F94
 	add r0, r4, #0
 	bl ov14_021E765C
 	mov r0, #0xc
@@ -12045,7 +12045,7 @@ _021EB506:
 	ldr r0, [r4, #0x34]
 	mov r1, #0x1e
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_SetNextInput
+	bl sub_02019F7C
 	add r0, r4, #0
 	mov r1, #0xc
 	bl ov14_021F028C
@@ -12062,7 +12062,7 @@ _021EB530:
 	ldr r0, [r4, #0x34]
 	mov r1, #0x1e
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_SetNextInput
+	bl sub_02019F7C
 	add r0, r4, #0
 	mov r1, #0xc
 	bl ov14_021F0314
@@ -12154,7 +12154,7 @@ _021EB606:
 	ldrb r5, [r0]
 	ldr r0, [r4, #0x34]
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_GetNextInput
+	bl sub_02019F74
 	add r2, r0, #0
 	ldr r0, [r4, #0x34]
 	add r1, r5, #0
@@ -12162,7 +12162,7 @@ _021EB606:
 	ldr r0, [r4, #0x34]
 	add r1, r5, #0
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_SetNextInput
+	bl sub_02019F7C
 	add r0, r4, #0
 	mov r1, #0xb
 	mov r2, #0x9c
@@ -12171,7 +12171,7 @@ _021EB606:
 _021EB63A:
 	ldr r0, [r4, #0x34]
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_GetNextInput
+	bl sub_02019F74
 	cmp r0, #0x1e
 	bne _021EB66C
 	ldr r0, _021EB700 ; =gSystem
@@ -12205,7 +12205,7 @@ _021EB66E:
 _021EB684:
 	ldr r0, [r4, #0x34]
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_GetNextInput
+	bl sub_02019F74
 	add r1, r0, #0
 	cmp r1, #0x1e
 	bhs _021EB69A
@@ -12266,7 +12266,7 @@ _021EB704:
 _021EB714:
 	ldr r0, [r4, #0x34]
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_GetNextInput
+	bl sub_02019F74
 	add r1, r0, #0
 	cmp r1, #0x1e
 	bhs _021EB72A
@@ -12311,7 +12311,7 @@ _021EB750:
 	bl ov14_021E7588
 	ldr r0, [r4, #0x34]
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_GetNextInput
+	bl sub_02019F74
 	add r2, r0, #0
 	ldr r0, [r4, #0x34]
 	mov r1, #0x24
@@ -12319,7 +12319,7 @@ _021EB750:
 	ldr r0, [r4, #0x34]
 	mov r1, #0x24
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_SetNextInput
+	bl sub_02019F7C
 	add r0, r4, #0
 	add r1, r5, #0
 	bl ov14_021F0530
@@ -12346,11 +12346,11 @@ ov14_021EB7B0: ; 0x021EB7B0
 	ldr r0, [r4, #0x34]
 	mov r1, #0x24
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_SetNextInput
+	bl sub_02019F7C
 	ldr r0, [r4, #0x34]
 	mov r1, #1
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_SetButtonInputMode
+	bl sub_02019F94
 	mov r0, #0xc
 	pop {r4, pc}
 	nop
@@ -12936,17 +12936,17 @@ _021EBC9C:
 	ldr r0, [r5, #0x34]
 	add r1, r2, #0
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_SetNextInput
+	bl sub_02019F7C
 	add r1, r5, #0
 	ldr r0, [r5, #0x34]
 	add r1, #0x21
 	ldrb r1, [r1]
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_GetDpadBox
+	bl sub_0201A018
 	add r1, sp, #0
 	add r1, #1
 	add r2, sp, #0
-	bl DpadMenuBox_GetPosition
+	bl sub_02020A0C
 	mov r0, #0x32
 	ldr r1, [r5, #0x34]
 	lsl r0, r0, #4
@@ -13162,7 +13162,7 @@ ov14_021EBE68: ; 0x021EBE68
 	add r4, r0, #0
 	ldr r0, [r4, #0x34]
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_HandleInput_AllowHold
+	bl sub_02019D18
 	mov r1, #3
 	mvn r1, r1
 	cmp r0, r1
@@ -13577,11 +13577,11 @@ _021EC1BE:
 	add r1, #0x21
 	ldrb r1, [r1]
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_SetNextInput
+	bl sub_02019F7C
 	ldr r0, [r4, #0x34]
 	mov r1, #1
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_SetButtonInputMode
+	bl sub_02019F94
 	ldr r0, [r4, #0x34]
 	mov r1, #1
 	bl ov14_021F43F4
@@ -13650,11 +13650,11 @@ _021EC254:
 	lsl r1, r1, #0x18
 	ldr r0, [r0, #0x2c]
 	lsr r1, r1, #0x18
-	bl GridInputHandler_SetNextInput
+	bl sub_02019F7C
 	ldr r0, [r4, #0x34]
 	mov r1, #1
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_SetButtonInputMode
+	bl sub_02019F94
 	add r0, r4, #0
 	mov r1, #0xff
 	add r0, #0x21
@@ -13764,7 +13764,7 @@ ov14_021EC344: ; 0x021EC344
 	ldr r0, [r0, #0x34]
 	mov r1, #1
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_SetButtonInputMode
+	bl sub_02019F94
 	mov r0, #0x5b
 	pop {r3, pc}
 	thumb_func_end ov14_021EC344
@@ -13900,7 +13900,7 @@ _021EC44A:
 	lsr r5, r0, #0x18
 	ldr r0, [r4, #0x34]
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_GetNextInput
+	bl sub_02019F74
 	add r2, r0, #0
 	ldr r0, [r4, #0x34]
 	add r1, r5, #0
@@ -13908,7 +13908,7 @@ _021EC44A:
 	ldr r0, [r4, #0x34]
 	add r1, r5, #0
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_SetNextInput
+	bl sub_02019F7C
 	mov r0, #0x2f
 	ldr r1, [r4, #0x34]
 	lsl r0, r0, #4
@@ -13934,11 +13934,11 @@ _021EC4B4:
 	lsl r1, r5, #0x18
 	ldr r0, [r0, #0x2c]
 	lsr r1, r1, #0x18
-	bl GridInputHandler_SetNextInput
+	bl sub_02019F7C
 	ldr r0, [r4, #0x34]
 	mov r1, #1
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_SetButtonInputMode
+	bl sub_02019F94
 	add r0, r4, #0
 	bl ov14_021E765C
 	mov r0, #0x24
@@ -14069,7 +14069,7 @@ _021EC5B8:
 _021EC5CA:
 	ldr r0, [r4, #0x34]
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_GetNextInput
+	bl sub_02019F74
 	add r1, r0, #0
 	cmp r1, #5
 	bhi _021EC5E2
@@ -14118,7 +14118,7 @@ _021EC622:
 	lsr r5, r0, #0x18
 	ldr r0, [r4, #0x34]
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_GetNextInput
+	bl sub_02019F74
 	add r2, r0, #0
 	ldr r0, [r4, #0x34]
 	add r1, r5, #0
@@ -14126,7 +14126,7 @@ _021EC622:
 	ldr r0, [r4, #0x34]
 	add r1, r5, #0
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_SetNextInput
+	bl sub_02019F7C
 	add r0, r4, #0
 	mov r1, #0xb
 	mov r2, #0x9e
@@ -14135,7 +14135,7 @@ _021EC622:
 _021EC65C:
 	ldr r0, [r4, #0x34]
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_GetNextInput
+	bl sub_02019F74
 	add r1, r0, #0
 	cmp r1, #5
 	bhi _021EC674
@@ -14183,7 +14183,7 @@ _021EC69A:
 	bl ov14_021E7588
 	ldr r0, [r4, #0x34]
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_GetNextInput
+	bl sub_02019F74
 	add r2, r0, #0
 	ldr r0, [r4, #0x34]
 	mov r1, #8
@@ -14191,7 +14191,7 @@ _021EC69A:
 	ldr r0, [r4, #0x34]
 	mov r1, #8
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_SetNextInput
+	bl sub_02019F7C
 	add r5, #0x1e
 	add r0, r4, #0
 	add r1, r5, #0
@@ -14336,11 +14336,11 @@ ov14_021EC7D4: ; 0x021EC7D4
 	lsl r1, r1, #0x18
 	ldr r0, [r0, #0x2c]
 	lsr r1, r1, #0x18
-	bl GridInputHandler_SetNextInput
+	bl sub_02019F7C
 	ldr r0, [r5, #0x34]
 	mov r1, #1
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_SetButtonInputMode
+	bl sub_02019F94
 	add r0, r5, #0
 	add r1, r6, #0
 	bl ov14_021E7588
@@ -14348,11 +14348,11 @@ ov14_021EC7D4: ; 0x021EC7D4
 _021EC838:
 	ldr r0, [r0, #0x2c]
 	mov r1, #8
-	bl GridInputHandler_SetNextInput
+	bl sub_02019F7C
 	ldr r0, [r5, #0x34]
 	mov r1, #1
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_SetButtonInputMode
+	bl sub_02019F94
 _021EC84A:
 	mov r0, #0x24
 	pop {r4, r5, r6, pc}
@@ -14470,11 +14470,11 @@ _021EC928:
 	lsl r1, r5, #0x18
 	ldr r0, [r0, #0x2c]
 	lsr r1, r1, #0x18
-	bl GridInputHandler_SetNextInput
+	bl sub_02019F7C
 	ldr r0, [r4, #0x34]
 	mov r1, #1
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_SetButtonInputMode
+	bl sub_02019F94
 	mov r0, #0x2f
 	ldr r1, [r4, #0x34]
 	lsl r0, r0, #4
@@ -14541,11 +14541,11 @@ _021EC9CC:
 	lsl r1, r5, #0x18
 	ldr r0, [r0, #0x2c]
 	lsr r1, r1, #0x18
-	bl GridInputHandler_SetNextInput
+	bl sub_02019F7C
 	ldr r0, [r4, #0x34]
 	mov r1, #1
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_SetButtonInputMode
+	bl sub_02019F94
 	mov r0, #0x2f
 	ldr r1, [r4, #0x34]
 	lsl r0, r0, #4
@@ -14579,7 +14579,7 @@ _021ECA20:
 	bne _021ECA68
 	ldr r0, [r4, #0x34]
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_GetNextInput
+	bl sub_02019F74
 	add r5, r0, #0
 	add r0, r4, #0
 	add r1, r5, #0
@@ -14733,11 +14733,11 @@ _021ECB48:
 	lsl r1, r1, #0x18
 	ldr r0, [r0, #0x2c]
 	lsr r1, r1, #0x18
-	bl GridInputHandler_SetNextInput
+	bl sub_02019F7C
 	ldr r0, [r4, #0x34]
 	mov r1, #1
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_SetButtonInputMode
+	bl sub_02019F94
 	mov r0, #0x2f
 	ldr r1, [r4, #0x34]
 	lsl r0, r0, #4
@@ -14782,11 +14782,11 @@ _021ECBBA:
 	lsl r1, r1, #0x18
 	ldr r0, [r0, #0x2c]
 	lsr r1, r1, #0x18
-	bl GridInputHandler_SetNextInput
+	bl sub_02019F7C
 	ldr r0, [r4, #0x34]
 	mov r1, #1
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_SetButtonInputMode
+	bl sub_02019F94
 	mov r0, #0x2f
 	ldr r1, [r4, #0x34]
 	lsl r0, r0, #4
@@ -14833,7 +14833,7 @@ _021ECC40:
 	lsl r1, r1, #0x18
 	ldr r0, [r0, #0x2c]
 	lsr r1, r1, #0x18
-	bl GridInputHandler_SetNextInput
+	bl sub_02019F7C
 	add r0, r4, #0
 	mov r1, #0xe
 	mov r2, #0xa0
@@ -14842,7 +14842,7 @@ _021ECC40:
 _021ECC6A:
 	ldr r0, [r4, #0x34]
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_GetNextInput
+	bl sub_02019F74
 	add r1, r0, #0
 	cmp r1, #0x25
 	bhs _021ECCC4
@@ -14945,11 +14945,11 @@ _021ECD3C:
 	lsl r1, r1, #0x18
 	ldr r0, [r0, #0x2c]
 	lsr r1, r1, #0x18
-	bl GridInputHandler_SetNextInput
+	bl sub_02019F7C
 	ldr r0, [r4, #0x34]
 	mov r1, #1
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_SetButtonInputMode
+	bl sub_02019F94
 	add r0, r4, #0
 	mov r1, #0x29
 	bl ov14_021F0EE8
@@ -15015,7 +15015,7 @@ _021ECDE0:
 	add r1, #0x21
 	ldrb r1, [r1]
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_SetNextInput
+	bl sub_02019F7C
 	add r0, r5, #0
 	add r0, #0x24
 	ldrb r0, [r0]
@@ -15175,7 +15175,7 @@ _021ECF40:
 	ldr r0, [r5, #0x34]
 	mov r1, #1
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_SetButtonInputMode
+	bl sub_02019F94
 	mov r0, #0x29
 	pop {r3, r4, r5, r6, r7, pc}
 	nop
@@ -15219,7 +15219,7 @@ _021ECF88:
 _021ECF9E:
 	ldr r0, [r5, #0x34]
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_GetNextInput
+	bl sub_02019F74
 	add r4, r0, #0
 	ldr r1, [r5, #0x34]
 	ldr r0, _021ED1A4 ; =0x000088CC
@@ -15258,11 +15258,11 @@ _021ECFC2:
 	add r1, #0x21
 	ldrb r1, [r1]
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_SetNextInput
+	bl sub_02019F7C
 	ldr r0, [r5, #0x34]
 	mov r1, #0
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_SetButtonInputMode
+	bl sub_02019F94
 	ldr r0, [r5, #0x34]
 	mov r1, #9
 	mov r2, #8
@@ -15290,11 +15290,11 @@ _021ED022:
 	add r1, #0x21
 	ldrb r1, [r1]
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_SetNextInput
+	bl sub_02019F7C
 	ldr r0, [r5, #0x34]
 	mov r1, #0
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_SetButtonInputMode
+	bl sub_02019F94
 	ldr r0, [r5, #0x34]
 	mov r1, #9
 	mov r2, #8
@@ -15321,11 +15321,11 @@ _021ED06C:
 	add r1, #0x21
 	ldrb r1, [r1]
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_SetNextInput
+	bl sub_02019F7C
 	ldr r0, [r5, #0x34]
 	mov r1, #0
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_SetButtonInputMode
+	bl sub_02019F94
 	ldr r0, [r5, #0x34]
 	mov r1, #9
 	mov r2, #8
@@ -15392,11 +15392,11 @@ _021ED112:
 	add r1, #0x21
 	ldrb r1, [r1]
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_SetNextInput
+	bl sub_02019F7C
 	ldr r0, [r5, #0x34]
 	mov r1, #0
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_SetButtonInputMode
+	bl sub_02019F94
 	ldr r0, [r5, #0x34]
 	mov r1, #9
 	mov r2, #8
@@ -15413,7 +15413,7 @@ _021ED142:
 	bne _021ED15C
 	ldr r0, [r5, #0x34]
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_GetNextInput
+	bl sub_02019F74
 	add r1, r0, #0
 	add r0, r5, #0
 	bl ov14_021E7588
@@ -15480,7 +15480,7 @@ ov14_021ED1AC: ; 0x021ED1AC
 _021ED1DA:
 	ldr r0, [r0, #0x2c]
 	mov r1, #1
-	bl GridInputHandler_SetButtonInputMode
+	bl sub_02019F94
 	mov r0, #0x29
 	pop {r4, pc}
 	.balign 4, 0
@@ -15558,7 +15558,7 @@ ov14_021ED258: ; 0x021ED258
 	bl ov14_021F6AC0
 	ldr r0, [r4, #0x34]
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_GetNextInput
+	bl sub_02019F74
 	add r1, r0, #0
 	add r0, r4, #0
 	add r1, #0x1e
@@ -15587,7 +15587,7 @@ _021ED2A6:
 _021ED2B0:
 	ldr r0, [r4, #0x34]
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_GetNextInput
+	bl sub_02019F74
 	add r1, r0, #0
 	add r0, r4, #0
 	add r1, #0x1e
@@ -15768,7 +15768,7 @@ ov14_021ED414: ; 0x021ED414
 	add r4, r0, #0
 	ldr r0, [r4, #0x34]
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_HandleInput_AllowHold
+	bl sub_02019D18
 	mov r1, #3
 	mvn r1, r1
 	cmp r0, r1
@@ -16283,7 +16283,7 @@ ov14_021ED820: ; 0x021ED820
 	add r4, r0, #0
 	ldr r0, [r4, #0x34]
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_HandleInput_AllowHold
+	bl sub_02019D18
 	mov r1, #2
 	mvn r1, r1
 	cmp r0, r1
@@ -16630,7 +16630,7 @@ _021EDAB8:
 	ldrb r5, [r0]
 	ldr r0, [r4, #0x34]
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_GetNextInput
+	bl sub_02019F74
 	add r2, r0, #0
 	ldr r0, [r4, #0x34]
 	add r1, r5, #0
@@ -16638,7 +16638,7 @@ _021EDAB8:
 	ldr r0, [r4, #0x34]
 	add r1, r5, #0
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_SetNextInput
+	bl sub_02019F7C
 	mov r0, #0x2f
 	ldr r1, [r4, #0x34]
 	lsl r0, r0, #4
@@ -16664,11 +16664,11 @@ _021EDB1C:
 	lsl r1, r5, #0x18
 	ldr r0, [r0, #0x2c]
 	lsr r1, r1, #0x18
-	bl GridInputHandler_SetNextInput
+	bl sub_02019F7C
 	ldr r0, [r4, #0x34]
 	mov r1, #1
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_SetButtonInputMode
+	bl sub_02019F94
 	add r0, r4, #0
 	bl ov14_021E765C
 	mov r0, #0x51
@@ -16779,7 +16779,7 @@ _021EDBFE:
 	ldrb r5, [r0]
 	ldr r0, [r4, #0x34]
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_GetNextInput
+	bl sub_02019F74
 	add r2, r0, #0
 	ldr r0, [r4, #0x34]
 	add r1, r5, #0
@@ -16787,7 +16787,7 @@ _021EDBFE:
 	ldr r0, [r4, #0x34]
 	add r1, r5, #0
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_SetNextInput
+	bl sub_02019F7C
 	ldr r0, _021EDDBC ; =0x000005DC
 	bl PlaySE
 	add r0, r4, #0
@@ -16818,7 +16818,7 @@ _021EDC4E:
 	ldr r0, [r4, #0x34]
 	mov r1, #0x1e
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_SetNextInput
+	bl sub_02019F7C
 	mov r1, #0
 	add r0, r4, #0
 	add r2, r1, #0
@@ -16840,7 +16840,7 @@ _021EDC84:
 	ldr r0, [r4, #0x34]
 	mov r1, #0x1e
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_SetNextInput
+	bl sub_02019F7C
 	mov r1, #0
 	add r0, r4, #0
 	add r2, r1, #0
@@ -16853,7 +16853,7 @@ _021EDC84:
 _021EDCBA:
 	ldr r0, [r4, #0x34]
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_GetNextInput
+	bl sub_02019F74
 	add r1, r0, #0
 	cmp r1, #0x1e
 	bhs _021EDCD0
@@ -16901,7 +16901,7 @@ _021EDD12:
 _021EDD24:
 	ldr r0, [r4, #0x34]
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_GetNextInput
+	bl sub_02019F74
 	cmp r0, #0x1e
 	bne _021EDE12
 	ldr r0, _021EDDC0 ; =gSystem
@@ -16932,7 +16932,7 @@ _021EDD50:
 _021EDD6C:
 	ldr r0, [r4, #0x34]
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_GetNextInput
+	bl sub_02019F74
 	add r1, r0, #0
 	cmp r1, #0x1e
 	bhs _021EDD82
@@ -16984,7 +16984,7 @@ _021EDDC4:
 	bl ov14_021E7588
 	ldr r0, [r4, #0x34]
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_GetNextInput
+	bl sub_02019F74
 	add r2, r0, #0
 	ldr r0, [r4, #0x34]
 	mov r1, #0x22
@@ -16992,7 +16992,7 @@ _021EDDC4:
 	ldr r0, [r4, #0x34]
 	mov r1, #0x22
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_SetNextInput
+	bl sub_02019F7C
 	add r0, r4, #0
 	add r1, r5, #0
 	bl ov14_021F04D4
@@ -17073,17 +17073,17 @@ ov14_021EDE88: ; 0x021EDE88
 	add r1, #0x21
 	ldrb r1, [r1]
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_SetNextInput
+	bl sub_02019F7C
 	add r1, r4, #0
 	ldr r0, [r4, #0x34]
 	add r1, #0x21
 	ldrb r1, [r1]
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_GetDpadBox
+	bl sub_0201A018
 	add r1, sp, #0
 	add r1, #1
 	add r2, sp, #0
-	bl DpadMenuBox_GetPosition
+	bl sub_02020A0C
 	mov r0, #0x32
 	ldr r1, [r4, #0x34]
 	lsl r0, r0, #4
@@ -17175,11 +17175,11 @@ _021EDF72:
 	lsl r1, r4, #0x18
 	ldr r0, [r0, #0x2c]
 	lsr r1, r1, #0x18
-	bl GridInputHandler_SetNextInput
+	bl sub_02019F7C
 	ldr r0, [r5, #0x34]
 	mov r1, #1
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_SetButtonInputMode
+	bl sub_02019F94
 	mov r0, #0x51
 	pop {r3, r4, r5, pc}
 	.balign 4, 0
@@ -17264,7 +17264,7 @@ _021EE012:
 	lsr r5, r0, #0x18
 	ldr r0, [r4, #0x34]
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_GetNextInput
+	bl sub_02019F74
 	add r2, r0, #0
 	ldr r0, [r4, #0x34]
 	add r1, r5, #0
@@ -17272,7 +17272,7 @@ _021EE012:
 	ldr r0, [r4, #0x34]
 	add r1, r5, #0
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_SetNextInput
+	bl sub_02019F7C
 	add r0, r4, #0
 	mov r1, #0
 	bl ov14_021F5EB4
@@ -17301,11 +17301,11 @@ _021EE084:
 	lsl r1, r5, #0x18
 	ldr r0, [r0, #0x2c]
 	lsr r1, r1, #0x18
-	bl GridInputHandler_SetNextInput
+	bl sub_02019F7C
 	ldr r0, [r4, #0x34]
 	mov r1, #1
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_SetButtonInputMode
+	bl sub_02019F94
 	add r0, r4, #0
 	bl ov14_021E765C
 	mov r0, #0x5b
@@ -17405,7 +17405,7 @@ _021EE150:
 	lsr r5, r0, #0x18
 	ldr r0, [r4, #0x34]
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_GetNextInput
+	bl sub_02019F74
 	add r2, r0, #0
 	ldr r0, [r4, #0x34]
 	add r1, r5, #0
@@ -17413,7 +17413,7 @@ _021EE150:
 	ldr r0, [r4, #0x34]
 	add r1, r5, #0
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_SetNextInput
+	bl sub_02019F7C
 	ldr r0, _021EE268 ; =0x000005DC
 	bl PlaySE
 	add r0, r4, #0
@@ -17424,7 +17424,7 @@ _021EE150:
 _021EE18A:
 	ldr r0, [r4, #0x34]
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_GetNextInput
+	bl sub_02019F74
 	add r1, r0, #0
 	cmp r1, #6
 	bhi _021EE1A0
@@ -17439,7 +17439,7 @@ _021EE1A0:
 _021EE1AA:
 	ldr r0, [r4, #0x34]
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_GetNextInput
+	bl sub_02019F74
 	add r1, r0, #0
 	cmp r1, #6
 	bhi _021EE1C0
@@ -17492,7 +17492,7 @@ _021EE1FA:
 	bl ov14_021E7588
 	ldr r0, [r4, #0x34]
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_GetNextInput
+	bl sub_02019F74
 	add r2, r0, #0
 	ldr r0, [r4, #0x34]
 	mov r1, #7
@@ -17500,7 +17500,7 @@ _021EE1FA:
 	ldr r0, [r4, #0x34]
 	mov r1, #7
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_SetNextInput
+	bl sub_02019F7C
 	add r5, #0x1e
 	add r0, r4, #0
 	add r1, r5, #0
@@ -17690,7 +17690,7 @@ ov14_021EE3C8: ; 0x021EE3C8
 	add r4, r0, #0
 	ldr r0, [r4, #0x34]
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_HandleInput_AllowHold
+	bl sub_02019D18
 	mov r1, #2
 	mvn r1, r1
 	cmp r0, r1
@@ -17992,7 +17992,7 @@ _021EE604:
 	ldr r0, [r4, #0x34]
 	mov r1, #0
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_SetButtonInputMode
+	bl sub_02019F94
 	ldr r1, _021EE65C ; =ov14_021E92AC
 	b _021EE650
 _021EE62E:
@@ -18007,7 +18007,7 @@ _021EE62E:
 	ldr r0, [r4, #0x34]
 	mov r1, #0
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_SetButtonInputMode
+	bl sub_02019F94
 	ldr r1, _021EE660 ; =ov14_021E9370
 _021EE650:
 	add r0, r4, #0
@@ -18150,11 +18150,11 @@ ov14_021EE728: ; 0x021EE728
 	ldr r0, [r5, #0x34]
 	mov r1, #0
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_SetNextInput
+	bl sub_02019F7C
 	ldr r0, [r5, #0x34]
 	mov r1, #1
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_SetButtonInputMode
+	bl sub_02019F94
 	add r0, r5, #0
 	mov r1, #0x1e
 	bl ov14_021E7588
@@ -18167,11 +18167,11 @@ _021EE78E:
 	ldr r0, [r5, #0x34]
 	mov r1, #7
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_SetNextInput
+	bl sub_02019F7C
 	ldr r0, [r5, #0x34]
 	mov r1, #1
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_SetButtonInputMode
+	bl sub_02019F94
 _021EE7AC:
 	mov r0, #0x5b
 	pop {r3, r4, r5, pc}
@@ -18184,7 +18184,7 @@ ov14_021EE7B4: ; 0x021EE7B4
 	push {r3, lr}
 	ldr r0, [r0, #0x34]
 	ldr r0, [r0, #0xc]
-	bl Heap_Free
+	bl FreeToHeap
 	mov r0, #0xc
 	pop {r3, pc}
 	.balign 4, 0
@@ -18195,7 +18195,7 @@ ov14_021EE7C4: ; 0x021EE7C4
 	push {r3, lr}
 	ldr r0, [r0, #0x34]
 	ldr r0, [r0, #0xc]
-	bl Heap_Free
+	bl FreeToHeap
 	mov r0, #0x29
 	pop {r3, pc}
 	.balign 4, 0
@@ -18206,7 +18206,7 @@ ov14_021EE7D4: ; 0x021EE7D4
 	push {r3, lr}
 	ldr r0, [r0, #0x34]
 	ldr r0, [r0, #0xc]
-	bl Heap_Free
+	bl FreeToHeap
 	mov r0, #0x24
 	pop {r3, pc}
 	.balign 4, 0
@@ -18217,7 +18217,7 @@ ov14_021EE7E4: ; 0x021EE7E4
 	push {r3, lr}
 	ldr r0, [r0, #0x34]
 	ldr r0, [r0, #0xc]
-	bl Heap_Free
+	bl FreeToHeap
 	mov r0, #0x5b
 	pop {r3, pc}
 	.balign 4, 0
@@ -18229,7 +18229,7 @@ ov14_021EE7F4: ; 0x021EE7F4
 	add r4, r0, #0
 	ldr r0, [r4, #0x34]
 	ldr r0, [r0, #0xc]
-	bl Heap_Free
+	bl FreeToHeap
 	mov r1, #0
 	add r0, r4, #0
 	add r2, r1, #0
@@ -18244,7 +18244,7 @@ ov14_021EE810: ; 0x021EE810
 	push {r3, lr}
 	ldr r0, [r0, #0x34]
 	ldr r0, [r0, #0xc]
-	bl Heap_Free
+	bl FreeToHeap
 	mov r0, #0x61
 	pop {r3, pc}
 	.balign 4, 0
@@ -18255,7 +18255,7 @@ ov14_021EE820: ; 0x021EE820
 	push {r3, lr}
 	ldr r0, [r0, #0x34]
 	ldr r0, [r0, #0xc]
-	bl Heap_Free
+	bl FreeToHeap
 	mov r0, #0x16
 	pop {r3, pc}
 	.balign 4, 0
@@ -18266,7 +18266,7 @@ ov14_021EE830: ; 0x021EE830
 	push {r3, lr}
 	ldr r0, [r0, #0x34]
 	ldr r0, [r0, #0xc]
-	bl Heap_Free
+	bl FreeToHeap
 	mov r0, #0x3d
 	pop {r3, pc}
 	.balign 4, 0
@@ -18277,7 +18277,7 @@ ov14_021EE840: ; 0x021EE840
 	push {r3, lr}
 	ldr r0, [r0, #0x34]
 	ldr r0, [r0, #0xc]
-	bl Heap_Free
+	bl FreeToHeap
 	mov r0, #0x42
 	pop {r3, pc}
 	.balign 4, 0
@@ -18288,7 +18288,7 @@ ov14_021EE850: ; 0x021EE850
 	push {r3, lr}
 	ldr r0, [r0, #0x34]
 	ldr r0, [r0, #0xc]
-	bl Heap_Free
+	bl FreeToHeap
 	mov r0, #0x51
 	pop {r3, pc}
 	.balign 4, 0
@@ -18300,7 +18300,7 @@ ov14_021EE860: ; 0x021EE860
 	add r4, r0, #0
 	ldr r0, [r4, #0x34]
 	ldr r0, [r0, #0xc]
-	bl Heap_Free
+	bl FreeToHeap
 	mov r1, #0
 	add r0, r4, #0
 	add r2, r1, #0
@@ -18359,7 +18359,7 @@ _021EE8CE:
 	ldrb r5, [r0]
 	ldr r0, [r4, #0x34]
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_GetNextInput
+	bl sub_02019F74
 	add r2, r0, #0
 	ldr r0, [r4, #0x34]
 	add r1, r5, #0
@@ -18367,7 +18367,7 @@ _021EE8CE:
 	ldr r0, [r4, #0x34]
 	add r1, r5, #0
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_SetNextInput
+	bl sub_02019F7C
 	mov r0, #0x2f
 	ldr r1, [r4, #0x34]
 	lsl r0, r0, #4
@@ -18410,11 +18410,11 @@ _021EE956:
 	lsl r1, r5, #0x18
 	ldr r0, [r0, #0x2c]
 	lsr r1, r1, #0x18
-	bl GridInputHandler_SetNextInput
+	bl sub_02019F7C
 	ldr r0, [r4, #0x34]
 	mov r1, #1
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_SetButtonInputMode
+	bl sub_02019F94
 	add r0, r4, #0
 	bl ov14_021E765C
 	mov r0, #0x75
@@ -18498,7 +18498,7 @@ _021EE9EC:
 	ldr r0, [r4, #0x34]
 	mov r1, #0x1e
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_SetNextInput
+	bl sub_02019F7C
 	add r0, r4, #0
 	mov r1, #0x75
 	bl ov14_021F028C
@@ -18519,7 +18519,7 @@ _021EEA20:
 	ldr r0, [r4, #0x34]
 	mov r1, #0x1e
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_SetNextInput
+	bl sub_02019F7C
 	add r0, r4, #0
 	mov r1, #0x75
 	bl ov14_021F0314
@@ -18556,7 +18556,7 @@ _021EEA8A:
 	ldrb r5, [r0]
 	ldr r0, [r4, #0x34]
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_GetNextInput
+	bl sub_02019F74
 	add r2, r0, #0
 	ldr r0, [r4, #0x34]
 	add r1, r5, #0
@@ -18564,7 +18564,7 @@ _021EEA8A:
 	ldr r0, [r4, #0x34]
 	add r1, r5, #0
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_SetNextInput
+	bl sub_02019F7C
 	add r0, r4, #0
 	mov r1, #0xb
 	mov r2, #0xae
@@ -18573,7 +18573,7 @@ _021EEA8A:
 _021EEABE:
 	ldr r0, [r4, #0x34]
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_GetNextInput
+	bl sub_02019F74
 	cmp r0, #0x1e
 	beq _021EEACC
 	b _021EEBD6
@@ -18606,7 +18606,7 @@ _021EEAEC:
 _021EEB08:
 	ldr r0, [r4, #0x34]
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_GetNextInput
+	bl sub_02019F74
 	add r1, r0, #0
 	cmp r1, #0x1e
 	bhs _021EEB1E
@@ -18648,7 +18648,7 @@ _021EEB54:
 _021EEB66:
 	ldr r0, [r4, #0x34]
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_GetNextInput
+	bl sub_02019F74
 	add r1, r0, #0
 	cmp r1, #0x1e
 	bhs _021EEB7C
@@ -18681,7 +18681,7 @@ _021EEB92:
 	bl ov14_021E7588
 	ldr r0, [r4, #0x34]
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_GetNextInput
+	bl sub_02019F74
 	add r2, r0, #0
 	ldr r0, [r4, #0x34]
 	mov r1, #0x24
@@ -18689,7 +18689,7 @@ _021EEB92:
 	ldr r0, [r4, #0x34]
 	mov r1, #0x24
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_SetNextInput
+	bl sub_02019F7C
 	add r0, r4, #0
 	add r1, r5, #0
 	bl ov14_021F1808
@@ -18780,7 +18780,7 @@ ov14_021EEC8C: ; 0x021EEC8C
 	push {r3, lr}
 	ldr r0, [r0, #0x34]
 	ldr r0, [r0, #0xc]
-	bl Heap_Free
+	bl FreeToHeap
 	mov r0, #0x75
 	pop {r3, pc}
 	.balign 4, 0
@@ -18810,15 +18810,15 @@ ov14_021EEC9C: ; 0x021EEC9C
 	lsl r1, r4, #0x18
 	ldr r0, [r0, #0x2c]
 	lsr r1, r1, #0x18
-	bl GridInputHandler_SetNextInput
+	bl sub_02019F7C
 	ldr r0, [r5, #0x34]
 	add r1, r4, #0
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_GetDpadBox
+	bl sub_0201A018
 	add r1, sp, #0
 	add r1, #1
 	add r2, sp, #0
-	bl DpadMenuBox_GetPosition
+	bl sub_02020A0C
 	mov r0, #0x32
 	ldr r1, [r5, #0x34]
 	lsl r0, r0, #4
@@ -18873,15 +18873,15 @@ _021EED48:
 	lsl r1, r4, #0x18
 	ldr r0, [r0, #0x2c]
 	lsr r1, r1, #0x18
-	bl GridInputHandler_SetNextInput
+	bl sub_02019F7C
 	ldr r0, [r5, #0x34]
 	add r1, r4, #0
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_GetDpadBox
+	bl sub_0201A018
 	add r1, sp, #0
 	add r1, #1
 	add r2, sp, #0
-	bl DpadMenuBox_GetPosition
+	bl sub_02020A0C
 	mov r0, #0x32
 	ldr r1, [r5, #0x34]
 	lsl r0, r0, #4
@@ -18960,15 +18960,15 @@ _021EEDF8:
 	lsl r1, r4, #0x18
 	ldr r0, [r0, #0x2c]
 	lsr r1, r1, #0x18
-	bl GridInputHandler_SetNextInput
+	bl sub_02019F7C
 	ldr r0, [r5, #0x34]
 	add r1, r4, #0
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_GetDpadBox
+	bl sub_0201A018
 	add r1, sp, #0
 	add r1, #1
 	add r2, sp, #0
-	bl DpadMenuBox_GetPosition
+	bl sub_02020A0C
 	mov r0, #0x32
 	ldr r1, [r5, #0x34]
 	lsl r0, r0, #4
@@ -19069,15 +19069,15 @@ _021EEEE6:
 	lsl r1, r4, #0x18
 	ldr r0, [r0, #0x2c]
 	lsr r1, r1, #0x18
-	bl GridInputHandler_SetNextInput
+	bl sub_02019F7C
 	ldr r0, [r5, #0x34]
 	add r1, r4, #0
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_GetDpadBox
+	bl sub_0201A018
 	add r1, sp, #0
 	add r1, #1
 	add r2, sp, #0
-	bl DpadMenuBox_GetPosition
+	bl sub_02020A0C
 	mov r0, #0x32
 	ldr r1, [r5, #0x34]
 	lsl r0, r0, #4
@@ -19116,15 +19116,15 @@ _021EEF46:
 	lsl r1, r4, #0x18
 	ldr r0, [r0, #0x2c]
 	lsr r1, r1, #0x18
-	bl GridInputHandler_SetNextInput
+	bl sub_02019F7C
 	ldr r0, [r5, #0x34]
 	add r1, r4, #0
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_GetDpadBox
+	bl sub_0201A018
 	add r1, sp, #0
 	add r1, #1
 	add r2, sp, #0
-	bl DpadMenuBox_GetPosition
+	bl sub_02020A0C
 	mov r0, #0x32
 	ldr r1, [r5, #0x34]
 	lsl r0, r0, #4
@@ -19179,11 +19179,11 @@ _021EEFCA:
 	ldr r0, [r5, #0x34]
 	mov r1, #0x24
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_SetNextInput
+	bl sub_02019F7C
 	ldr r0, [r5, #0x34]
 	mov r1, #1
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_SetButtonInputMode
+	bl sub_02019F94
 	mov r0, #0x75
 	pop {r3, r4, r5, pc}
 _021EEFE2:
@@ -19331,11 +19331,11 @@ _021EF0DE:
 	add r1, #0x21
 	ldrb r1, [r1]
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_SetNextInput
+	bl sub_02019F7C
 	ldr r0, [r5, #0x34]
 	mov r1, #1
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_SetButtonInputMode
+	bl sub_02019F94
 	ldr r1, _021EF184 ; =ov14_021E94BC
 	add r0, r5, #0
 	mov r2, #0x75
@@ -19399,11 +19399,11 @@ ov14_021EF190: ; 0x021EF190
 	add r1, #0x21
 	ldrb r1, [r1]
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_SetNextInput
+	bl sub_02019F7C
 	ldr r0, [r5, #0x34]
 	mov r1, #1
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_SetButtonInputMode
+	bl sub_02019F94
 	add r0, r5, #0
 	ldrh r1, [r4]
 	add r0, #0x21
@@ -19498,11 +19498,11 @@ _021EF28C:
 	lsl r1, r5, #0x18
 	ldr r0, [r0, #0x2c]
 	lsr r1, r1, #0x18
-	bl GridInputHandler_SetNextInput
+	bl sub_02019F7C
 	ldr r0, [r4, #0x34]
 	mov r1, #1
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_SetButtonInputMode
+	bl sub_02019F94
 	mov r0, #0x2f
 	ldr r1, [r4, #0x34]
 	lsl r0, r0, #4
@@ -19561,11 +19561,11 @@ _021EF31C:
 	lsl r1, r5, #0x18
 	ldr r0, [r0, #0x2c]
 	lsr r1, r1, #0x18
-	bl GridInputHandler_SetNextInput
+	bl sub_02019F7C
 	ldr r0, [r4, #0x34]
 	mov r1, #1
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_SetButtonInputMode
+	bl sub_02019F94
 	mov r0, #0x2f
 	ldr r1, [r4, #0x34]
 	lsl r0, r0, #4
@@ -19599,7 +19599,7 @@ _021EF370:
 	bne _021EF3B8
 	ldr r0, [r4, #0x34]
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_GetNextInput
+	bl sub_02019F74
 	add r5, r0, #0
 	add r0, r4, #0
 	add r1, r5, #0
@@ -19753,11 +19753,11 @@ _021EF498:
 	lsl r1, r1, #0x18
 	ldr r0, [r0, #0x2c]
 	lsr r1, r1, #0x18
-	bl GridInputHandler_SetNextInput
+	bl sub_02019F7C
 	ldr r0, [r4, #0x34]
 	mov r1, #1
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_SetButtonInputMode
+	bl sub_02019F94
 	mov r0, #0x2f
 	ldr r1, [r4, #0x34]
 	lsl r0, r0, #4
@@ -19802,11 +19802,11 @@ _021EF50A:
 	lsl r1, r1, #0x18
 	ldr r0, [r0, #0x2c]
 	lsr r1, r1, #0x18
-	bl GridInputHandler_SetNextInput
+	bl sub_02019F7C
 	ldr r0, [r4, #0x34]
 	mov r1, #1
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_SetButtonInputMode
+	bl sub_02019F94
 	mov r0, #0x2f
 	ldr r1, [r4, #0x34]
 	lsl r0, r0, #4
@@ -19846,7 +19846,7 @@ _021EF57A:
 	lsl r1, r1, #0x18
 	ldr r0, [r0, #0x2c]
 	lsr r1, r1, #0x18
-	bl GridInputHandler_SetNextInput
+	bl sub_02019F7C
 	add r0, r4, #0
 	mov r1, #0xe
 	mov r2, #0xaf
@@ -19855,7 +19855,7 @@ _021EF57A:
 _021EF5A6:
 	ldr r0, [r4, #0x34]
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_GetNextInput
+	bl sub_02019F74
 	add r1, r0, #0
 	cmp r1, #0x24
 	bhs _021EF600
@@ -19954,11 +19954,11 @@ _021EF66E:
 	lsl r1, r1, #0x18
 	ldr r0, [r0, #0x2c]
 	lsr r1, r1, #0x18
-	bl GridInputHandler_SetNextInput
+	bl sub_02019F7C
 	ldr r0, [r4, #0x34]
 	mov r1, #1
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_SetButtonInputMode
+	bl sub_02019F94
 	add r0, r4, #0
 	mov r1, #0x82
 	bl ov14_021F0EE8
@@ -19992,7 +19992,7 @@ ov14_021EF6D4: ; 0x021EF6D4
 	push {r3, lr}
 	ldr r0, [r0, #0x34]
 	ldr r0, [r0, #0xc]
-	bl Heap_Free
+	bl FreeToHeap
 	mov r0, #0x82
 	pop {r3, pc}
 	.balign 4, 0
@@ -20048,7 +20048,7 @@ _021EF718:
 	add r1, #0x21
 	ldrb r1, [r1]
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_SetNextInput
+	bl sub_02019F7C
 	ldr r1, [r5, #0x34]
 	ldr r0, _021EF898 ; =0x000088C8
 	ldrh r0, [r1, r0]
@@ -20073,7 +20073,7 @@ _021EF776:
 	ldr r0, [r5, #0x34]
 	mov r1, #1
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_SetButtonInputMode
+	bl sub_02019F94
 	mov r0, #0x82
 	pop {r3, r4, r5, r6, r7, pc}
 _021EF784:
@@ -20124,7 +20124,7 @@ _021EF7DE:
 	lsl r1, r1, #0x18
 	ldr r0, [r0, #0x2c]
 	lsr r1, r1, #0x18
-	bl GridInputHandler_SetNextInput
+	bl sub_02019F7C
 	add r1, r5, #0
 	ldr r0, [r5, #0x34]
 	ldr r3, _021EF898 ; =0x000088C8
@@ -20170,7 +20170,7 @@ _021EF838:
 	ldr r0, [r5, #0x34]
 	mov r1, #1
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_SetButtonInputMode
+	bl sub_02019F94
 	mov r0, #0x82
 	pop {r3, r4, r5, r6, r7, pc}
 _021EF85E:
@@ -20237,7 +20237,7 @@ ov14_021EF8AC: ; 0x021EF8AC
 	ldr r0, [r5, #0x34]
 	mov r1, #0
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_SetButtonInputMode
+	bl sub_02019F94
 	add r0, r5, #0
 	mov r1, #0x25
 	bl ov14_021F6730
@@ -20249,7 +20249,7 @@ _021EF908:
 	ldr r0, [r5, #0x34]
 	mov r1, #1
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_SetButtonInputMode
+	bl sub_02019F94
 	mov r0, #0x82
 	pop {r3, r4, r5, r6, r7, pc}
 	nop
@@ -20267,7 +20267,7 @@ ov14_021EF920: ; 0x021EF920
 	ldr r0, [r4, #0x34]
 	mov r1, #1
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_SetButtonInputMode
+	bl sub_02019F94
 	mov r0, #0x82
 	pop {r4, pc}
 	.balign 4, 0
@@ -20281,7 +20281,7 @@ ov14_021EF93C: ; 0x021EF93C
 	add r4, r0, #0
 	ldr r0, [r5, #0x34]
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_IsButtonInputMode
+	bl sub_02019F90
 	cmp r0, #0
 	bne _021EF956
 	mov r4, #1
@@ -20344,7 +20344,7 @@ ov14_021EF9BC: ; 0x021EF9BC
 	push {r3, lr}
 	ldr r0, [r0, #0x34]
 	ldr r0, [r0, #0xc]
-	bl Heap_Free
+	bl FreeToHeap
 	mov r0, #0x88
 	pop {r3, pc}
 	.balign 4, 0
@@ -20586,7 +20586,7 @@ _021EFBBC:
 	lsr r5, r0, #0x18
 	ldr r0, [r4, #0x34]
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_GetNextInput
+	bl sub_02019F74
 	add r2, r0, #0
 	ldr r0, [r4, #0x34]
 	add r1, r5, #0
@@ -20594,7 +20594,7 @@ _021EFBBC:
 	ldr r0, [r4, #0x34]
 	add r1, r5, #0
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_SetNextInput
+	bl sub_02019F7C
 	mov r0, #0x2f
 	ldr r1, [r4, #0x34]
 	lsl r0, r0, #4
@@ -20627,11 +20627,11 @@ _021EFC32:
 	lsl r1, r5, #0x18
 	ldr r0, [r0, #0x2c]
 	lsr r1, r1, #0x18
-	bl GridInputHandler_SetNextInput
+	bl sub_02019F7C
 	ldr r0, [r4, #0x34]
 	mov r1, #1
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_SetButtonInputMode
+	bl sub_02019F94
 	add r0, r4, #0
 	bl ov14_021E765C
 	mov r0, #0x8b
@@ -20702,7 +20702,7 @@ _021EFCB8:
 _021EFCCA:
 	ldr r0, [r4, #0x34]
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_GetNextInput
+	bl sub_02019F74
 	add r1, r0, #0
 	cmp r1, #5
 	bhi _021EFCE2
@@ -20743,7 +20743,7 @@ _021EFD12:
 	lsr r5, r0, #0x18
 	ldr r0, [r4, #0x34]
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_GetNextInput
+	bl sub_02019F74
 	add r2, r0, #0
 	ldr r0, [r4, #0x34]
 	add r1, r5, #0
@@ -20751,7 +20751,7 @@ _021EFD12:
 	ldr r0, [r4, #0x34]
 	add r1, r5, #0
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_SetNextInput
+	bl sub_02019F7C
 	add r0, r4, #0
 	mov r1, #0xb
 	mov r2, #0xb1
@@ -20760,7 +20760,7 @@ _021EFD12:
 _021EFD4C:
 	ldr r0, [r4, #0x34]
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_GetNextInput
+	bl sub_02019F74
 	add r1, r0, #0
 	cmp r1, #5
 	bhi _021EFD64
@@ -20796,7 +20796,7 @@ _021EFD7A:
 	bl ov14_021E7588
 	ldr r0, [r4, #0x34]
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_GetNextInput
+	bl sub_02019F74
 	add r2, r0, #0
 	ldr r0, [r4, #0x34]
 	mov r1, #8
@@ -20804,7 +20804,7 @@ _021EFD7A:
 	ldr r0, [r4, #0x34]
 	mov r1, #8
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_SetNextInput
+	bl sub_02019F7C
 	add r5, #0x1e
 	add r0, r4, #0
 	add r1, r5, #0
@@ -20828,7 +20828,7 @@ ov14_021EFDE4: ; 0x021EFDE4
 	push {r3, lr}
 	ldr r0, [r0, #0x34]
 	ldr r0, [r0, #0xc]
-	bl Heap_Free
+	bl FreeToHeap
 	mov r0, #0x8b
 	pop {r3, pc}
 	.balign 4, 0
@@ -20916,11 +20916,11 @@ _021EFE98:
 	ldr r0, [r4, #0x34]
 	mov r1, #8
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_SetNextInput
+	bl sub_02019F7C
 	ldr r0, [r4, #0x34]
 	mov r1, #1
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_SetButtonInputMode
+	bl sub_02019F94
 	mov r0, #0x8b
 	pop {r3, r4, r5, pc}
 _021EFEB0:
@@ -21064,7 +21064,7 @@ _021EFFBA:
 	lsl r1, r1, #0x18
 	ldr r0, [r0, #0x2c]
 	lsr r1, r1, #0x18
-	bl GridInputHandler_SetNextInput
+	bl sub_02019F7C
 	mov r0, #0x2f
 	ldr r1, [r5, #0x34]
 	lsl r0, r0, #4
@@ -21088,7 +21088,7 @@ _021F0006:
 	lsl r1, r1, #0x18
 	ldr r0, [r0, #0x2c]
 	lsr r1, r1, #0x18
-	bl GridInputHandler_SetNextInput
+	bl sub_02019F7C
 	mov r0, #0x2f
 	ldr r1, [r5, #0x34]
 	lsl r0, r0, #4
@@ -21149,7 +21149,7 @@ ov14_021F00A0: ; 0x021F00A0
 	ldr r0, [r4, #0x34]
 	mov r1, #1
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_SetButtonInputMode
+	bl sub_02019F94
 	mov r0, #0x8b
 	pop {r4, pc}
 	thumb_func_end ov14_021F00A0
@@ -21192,7 +21192,7 @@ _021F00FC:
 	lsl r1, r1, #0x18
 	ldr r0, [r0, #0x2c]
 	lsr r1, r1, #0x18
-	bl GridInputHandler_SetNextInput
+	bl sub_02019F7C
 	add r0, r5, #0
 	bl ov14_021F1F38
 	mov r0, #0x91
@@ -21250,11 +21250,11 @@ ov14_021F0164: ; 0x021F0164
 	ldr r0, [r4, #0x34]
 	mov r1, #8
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_SetNextInput
+	bl sub_02019F7C
 	ldr r0, [r4, #0x34]
 	mov r1, #1
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_SetButtonInputMode
+	bl sub_02019F94
 	mov r0, #0x8b
 	pop {r4, pc}
 	.balign 4, 0
@@ -22144,7 +22144,7 @@ ov14_021F08BC: ; 0x021F08BC
 	add r7, r0, #0
 	mov r0, #0xa
 	mov r1, #0xf0
-	bl Heap_Alloc
+	bl AllocFromHeap
 	str r0, [sp]
 	mov r4, #0
 	add r5, r0, #0
@@ -22176,13 +22176,13 @@ ov14_021F08F0: ; 0x021F08F0
 	add r5, r6, #0
 _021F08FA:
 	ldr r0, [r5]
-	bl Heap_Free
+	bl FreeToHeap
 	add r4, r4, #1
 	add r5, #0x20
 	cmp r4, #7
 	blo _021F08FA
 	add r0, r6, #0
-	bl Heap_Free
+	bl FreeToHeap
 	pop {r4, r5, r6, pc}
 	thumb_func_end ov14_021F08F0
 
@@ -22774,11 +22774,11 @@ _021F0D96:
 	lsl r1, r1, #0x18
 	ldr r0, [r0, #0x2c]
 	lsr r1, r1, #0x18
-	bl GridInputHandler_SetNextInput
+	bl sub_02019F7C
 	ldr r0, [r5, #0x34]
 	mov r1, #1
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_SetButtonInputMode
+	bl sub_02019F94
 	ldr r0, [r5, #0x34]
 	mov r1, #9
 	mov r2, #0xe
@@ -22805,11 +22805,11 @@ _021F0DEA:
 	lsl r1, r1, #0x18
 	ldr r0, [r0, #0x2c]
 	lsr r1, r1, #0x18
-	bl GridInputHandler_SetNextInput
+	bl sub_02019F7C
 	ldr r0, [r5, #0x34]
 	mov r1, #1
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_SetButtonInputMode
+	bl sub_02019F94
 	ldr r0, [r5, #0x34]
 	mov r1, #9
 	mov r2, #0xe
@@ -22835,20 +22835,20 @@ _021F0E4E:
 	ldr r0, [r5, #0x34]
 	mov r1, #0x2d
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_SetNextInput
+	bl sub_02019F7C
 	ldr r0, [r5, #0x34]
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_IsButtonInputMode
+	bl sub_02019F90
 	cmp r0, #1
 	bne _021F0E9E
 	ldr r0, [r5, #0x34]
 	mov r1, #0x2d
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_GetDpadBox
+	bl sub_0201A018
 	add r1, sp, #0
 	add r1, #1
 	add r2, sp, #0
-	bl DpadMenuBox_GetPosition
+	bl sub_02020A0C
 	mov r0, #0x32
 	ldr r1, [r5, #0x34]
 	lsl r0, r0, #4
@@ -23251,7 +23251,7 @@ ov14_021F1170: ; 0x021F1170
 	bl ov14_021F57B8
 	ldr r0, [r5, #0x34]
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_GetNextInput
+	bl sub_02019F74
 	add r2, r0, #0
 	ldr r1, [r5, #0x34]
 	ldr r0, _021F11F4 ; =0x0000043C
@@ -23260,15 +23260,15 @@ ov14_021F1170: ; 0x021F1170
 	ldr r0, [r5, #0x34]
 	mov r1, #8
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_SetNextLastUnk0FInputs
+	bl sub_02019F88
 	ldr r0, [r5, #0x34]
 	mov r1, #8
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_GetDpadBox
+	bl sub_0201A018
 	add r1, sp, #0
 	add r1, #1
 	add r2, sp, #0
-	bl DpadMenuBox_GetPosition
+	bl sub_02020A0C
 	mov r0, #0x32
 	ldr r1, [r5, #0x34]
 	lsl r0, r0, #4
@@ -23305,11 +23305,11 @@ ov14_021F11F8: ; 0x021F11F8
 	lsl r1, r1, #0x18
 	ldr r0, [r0, #0x2c]
 	lsr r1, r1, #0x18
-	bl GridInputHandler_SetNextInput
+	bl sub_02019F7C
 	ldr r0, [r4, #0x34]
 	mov r1, #1
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_SetButtonInputMode
+	bl sub_02019F94
 	mov r0, #0x3d
 	pop {r4, pc}
 	.balign 4, 0
@@ -23364,11 +23364,11 @@ _021F125E:
 	add r1, r3, r2
 	lsl r1, r1, #0x18
 	lsr r1, r1, #0x18
-	bl GridInputHandler_SetNextInput
+	bl sub_02019F7C
 	ldr r0, [r4, #0x34]
 	mov r1, #1
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_SetButtonInputMode
+	bl sub_02019F94
 	pop {r4, pc}
 	.balign 4, 0
 _021F1298: .word 0x0000044D
@@ -23390,7 +23390,7 @@ ov14_021F129C: ; 0x021F129C
 	bl ov14_021F58B8
 	ldr r0, [r4, #0x34]
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_GetNextInput
+	bl sub_02019F74
 	ldr r2, [r4, #0x34]
 	ldr r1, _021F1318 ; =0x0000043C
 	str r0, [r2, r1]
@@ -23401,15 +23401,15 @@ ov14_021F129C: ; 0x021F129C
 	lsr r2, r2, #0x18
 	mov r1, #6
 	add r3, r2, #0
-	bl GridInputHandler_SetNextLastUnk0FInputs
+	bl sub_02019F88
 	ldr r0, [r4, #0x34]
 	mov r1, #6
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_GetDpadBox
+	bl sub_0201A018
 	add r1, sp, #0
 	add r1, #1
 	add r2, sp, #0
-	bl DpadMenuBox_GetPosition
+	bl sub_02020A0C
 	mov r0, #0x32
 	ldr r1, [r4, #0x34]
 	lsl r0, r0, #4
@@ -23613,7 +23613,7 @@ _021F148C:
 	bl ov14_021F57B8
 	ldr r0, [r5, #0x34]
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_GetNextInput
+	bl sub_02019F74
 	add r2, r0, #0
 	ldr r1, [r5, #0x34]
 	ldr r0, _021F1500 ; =0x0000043C
@@ -23622,15 +23622,15 @@ _021F148C:
 	ldr r0, [r5, #0x34]
 	mov r1, #8
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_SetNextLastUnk0FInputs
+	bl sub_02019F88
 	ldr r0, [r5, #0x34]
 	mov r1, #8
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_GetDpadBox
+	bl sub_0201A018
 	add r1, sp, #0
 	add r1, #1
 	add r2, sp, #0
-	bl DpadMenuBox_GetPosition
+	bl sub_02020A0C
 	mov r0, #0x32
 	ldr r1, [r5, #0x34]
 	lsl r0, r0, #4
@@ -23669,11 +23669,11 @@ ov14_021F1504: ; 0x021F1504
 	lsl r1, r1, #0x18
 	ldr r0, [r0, #0x2c]
 	lsr r1, r1, #0x18
-	bl GridInputHandler_SetNextInput
+	bl sub_02019F7C
 	ldr r0, [r4, #0x34]
 	mov r1, #1
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_SetButtonInputMode
+	bl sub_02019F94
 	mov r0, #0x61
 	pop {r4, pc}
 	.balign 4, 0
@@ -23977,7 +23977,7 @@ _021F1784:
 _021F1798:
 	ldr r0, [r5, #0x34]
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_GetNextInput
+	bl sub_02019F74
 	add r1, r0, #0
 	cmp r1, #0x24
 	bhs _021F17BE
@@ -24277,11 +24277,11 @@ ov14_021F19F0: ; 0x021F19F0
 	add r1, r4, #0
 	add r1, #0x21
 	ldrb r1, [r1]
-	bl GridInputHandler_SetNextInput
+	bl sub_02019F7C
 	ldr r0, [r4, #0x34]
 	mov r1, #1
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_SetButtonInputMode
+	bl sub_02019F94
 	mov r0, #0x2f
 	ldr r1, [r4, #0x34]
 	lsl r0, r0, #4
@@ -24494,7 +24494,7 @@ ov14_021F1C04: ; 0x021F1C04
 	add r4, r0, #0
 	ldr r0, [r4, #0x34]
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_GetNextInput
+	bl sub_02019F74
 	add r1, r0, #0
 	cmp r1, #0x24
 	bhs _021F1C2E
@@ -24870,7 +24870,7 @@ ov14_021F1F24: ; 0x021F1F24
 	add r4, r0, #0
 	mov r0, #0xa
 	mov r1, #0x1c
-	bl Heap_Alloc
+	bl AllocFromHeap
 	ldr r1, [r4, #0x34]
 	str r0, [r1, #0xc]
 	pop {r4, pc}
@@ -24880,11 +24880,11 @@ ov14_021F1F24: ; 0x021F1F24
 	thumb_func_start ov14_021F1F38
 ov14_021F1F38: ; 0x021F1F38
 	ldr r0, [r0, #0x34]
-	ldr r3, _021F1F40 ; =Heap_Free
+	ldr r3, _021F1F40 ; =FreeToHeap
 	ldr r0, [r0, #0xc]
 	bx r3
 	.balign 4, 0
-_021F1F40: .word Heap_Free
+_021F1F40: .word FreeToHeap
 	thumb_func_end ov14_021F1F38
 
 	thumb_func_start ov14_021F1F44
@@ -24905,7 +24905,7 @@ ov14_021F1F44: ; 0x021F1F44
 	strb r1, [r0]
 	ldr r0, [r5, #0x34]
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_GetNextInput
+	bl sub_02019F74
 	add r1, r5, #0
 	add r1, #0x28
 	strb r0, [r1]
@@ -24920,7 +24920,7 @@ _021F1F7E:
 	add r4, r0, #0
 	ldr r0, [r5, #0x34]
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_IsButtonInputMode
+	bl sub_02019F90
 	cmp r0, #0
 	bne _021F1F96
 	mov r4, #1
@@ -24997,7 +24997,7 @@ ov14_021F2010: ; 0x021F2010
 	push {r3, lr}
 	ldr r0, [r0, #0x34]
 	ldr r0, [r0, #0xc]
-	bl Heap_Free
+	bl FreeToHeap
 	mov r0, #0x73
 	pop {r3, pc}
 	.balign 4, 0
@@ -25214,7 +25214,7 @@ ov14_021F21D0: ; 0x021F21D0
 	ldr r0, [r4, #0x34]
 	mov r1, #1
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_SetButtonInputMode
+	bl sub_02019F94
 	ldr r0, [r4]
 	ldr r0, [r0, #8]
 	cmp r0, #3
@@ -26877,7 +26877,7 @@ _021F2E10:
 	lsl r2, r2, #8
 	bl MIi_CpuCopy32
 	ldr r0, [sp, #8]
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r7, #0
 	bl Boxmon_GetIconPalette
 	ldr r1, [r5, #0x34]
@@ -26945,7 +26945,7 @@ ov14_021F2EA0: ; 0x021F2EA0
 	add r2, r6, #0
 	bl ov14_021F2E78
 	add r0, r7, #0
-	bl Heap_Free
+	bl FreeToHeap
 	pop {r3, r4, r5, r6, r7, pc}
 	.balign 4, 0
 	thumb_func_end ov14_021F2EA0
@@ -27927,7 +27927,7 @@ ov14_021F3614: ; 0x021F3614
 	mov r1, #0x32
 	mov r0, #0xa
 	lsl r1, r1, #6
-	bl Heap_AllocAtEnd
+	bl AllocFromHeapAtEnd
 	add r5, r0, #0
 	ldr r1, [r4]
 	add r0, sp, #0x24
@@ -27997,7 +27997,7 @@ _021F365A:
 	mov r2, #5
 	bl GfGfxLoader_GXLoadPal
 	add r0, r5, #0
-	bl Heap_Free
+	bl FreeToHeap
 	add sp, #0x34
 	pop {r4, r5, r6, r7, pc}
 	.balign 4, 0
@@ -28201,7 +28201,7 @@ ov14_021F3844: ; 0x021F3844
 	lsl r3, r3, #8
 	bl ov14_021F2C1C
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	mov r0, #0xca
 	lsl r0, r0, #2
 	ldr r0, [r5, r0]
@@ -28251,7 +28251,7 @@ ov14_021F38B0: ; 0x021F38B0
 	lsl r3, r3, #8
 	bl ov14_021F2C50
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	mov r0, #0xcb
 	lsl r0, r0, #2
 	ldr r0, [r5, r0]
@@ -28810,7 +28810,7 @@ ov14_021F3D0C: ; 0x021F3D0C
 	lsl r3, r3, #8
 	bl ov14_021F2C50
 	add r0, r6, #0
-	bl Heap_Free
+	bl FreeToHeap
 	mov r0, #0xbf
 	lsl r0, r0, #2
 	add r5, r5, r0
@@ -29733,11 +29733,11 @@ ov14_021F4428: ; 0x021F4428
 	ldr r0, _021F44AC ; =0x00000414
 	mov r1, #1
 	ldr r0, [r4, r0]
-	bl TextOBJ_SetSpritesDrawFlag
+	bl sub_020137C0
 	ldr r0, _021F44B0 ; =0x00000424
 	mov r1, #0
 	ldr r0, [r4, r0]
-	bl TextOBJ_SetSpritesDrawFlag
+	bl sub_020137C0
 	pop {r3, r4, r5, pc}
 	nop
 _021F44AC: .word 0x00000414
@@ -29945,7 +29945,7 @@ ov14_021F462C: ; 0x021F462C
 	lsr r0, r0, #2
 	lsl r5, r0, #2
 	mov r0, #0xa
-	bl Heap_AllocAtEnd
+	bl AllocFromHeapAtEnd
 	add r4, r0, #0
 	mov r0, #0x13
 	mov r1, #0x4a
@@ -29985,9 +29985,9 @@ _021F4660:
 	cmp r0, #4
 	blo _021F4660
 	ldr r0, [sp, #8]
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	add sp, #0x10
 	pop {r3, r4, r5, r6, r7, pc}
 	.balign 4, 0
@@ -30116,12 +30116,12 @@ ov14_021F4720: ; 0x021F4720
 	ldr r0, _021F47B0 ; =0x00000414
 	ldr r0, [r1, r0]
 	mov r1, #1
-	bl TextOBJ_SetSpritesDrawFlag
+	bl sub_020137C0
 	ldr r1, [r4, #0x34]
 	ldr r0, _021F47B4 ; =0x00000424
 	ldr r0, [r1, r0]
 	mov r1, #1
-	bl TextOBJ_SetSpritesDrawFlag
+	bl sub_020137C0
 	pop {r4, pc}
 	nop
 _021F47B0: .word 0x00000414
@@ -30359,7 +30359,7 @@ ov14_021F4958: ; 0x021F4958
 	lsl r2, r2, #0xa
 	bl MI_CpuCopy8
 	add r0, r7, #0
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r5, #0
 	add r1, r6, #0
 	bl ov14_021E7930
@@ -30726,12 +30726,12 @@ _021F4C1C:
 	ldr r0, _021F4C98 ; =0x00000414
 	ldr r0, [r1, r0]
 	mov r1, #1
-	bl TextOBJ_SetSpritesDrawFlag
+	bl sub_020137C0
 	ldr r1, [r5, #0x34]
 	ldr r0, _021F4C9C ; =0x00000424
 	ldr r0, [r1, r0]
 	mov r1, #1
-	bl TextOBJ_SetSpritesDrawFlag
+	bl sub_020137C0
 	ldr r1, [r5, #0x34]
 	ldr r0, _021F4C98 ; =0x00000414
 	ldr r0, [r1, r0]
@@ -30788,12 +30788,12 @@ _021F4CDA:
 	ldr r0, _021F4D08 ; =0x00000414
 	ldr r0, [r1, r0]
 	mov r1, #0
-	bl TextOBJ_SetSpritesDrawFlag
+	bl sub_020137C0
 	ldr r1, [r5, #0x34]
 	ldr r0, _021F4D0C ; =0x00000424
 	ldr r0, [r1, r0]
 	mov r1, #0
-	bl TextOBJ_SetSpritesDrawFlag
+	bl sub_020137C0
 	pop {r4, r5, r6, pc}
 	nop
 _021F4D08: .word 0x00000414
@@ -30807,7 +30807,7 @@ ov14_021F4D10: ; 0x021F4D10
 	add r4, r0, #0
 	mov r0, #2
 	mov r1, #0xa
-	bl FontSystem_NewInit
+	bl sub_02013534
 	mov r1, #0x41
 	lsl r1, r1, #4
 	str r0, [r4, r1]
@@ -30965,7 +30965,7 @@ _021F4E76:
 	add r0, r4, #0
 	bl sub_02021B5C
 	ldr r0, [r5, r7]
-	bl FontOAM_Delete
+	bl sub_02013660
 	add r6, r6, #1
 	add r4, #0x10
 	add r5, #0x10
@@ -30998,7 +30998,7 @@ ov14_021F4EA0: ; 0x021F4EA0
 	ldr r0, [r1, r0]
 	add r1, r7, #0
 	mov r3, #0xa
-	bl TextOBJ_CopyFromBGWindow
+	bl sub_020139D0
 	add r0, r7, #0
 	bl sub_02013938
 	pop {r3, r4, r5, r6, r7, pc}
@@ -31841,7 +31841,7 @@ _021F5546:
 	ldr r0, [sp, #0x2c]
 	bl DestroyMsgData
 	ldr r0, [sp, #0x34]
-	bl Heap_Free
+	bl FreeToHeap
 	ldr r0, [sp, #0x20]
 	add sp, #0x40
 	pop {r3, r4, r5, r6, r7, pc}
@@ -32070,7 +32070,7 @@ ov14_021F5718: ; 0x021F5718
 	mov r0, #0xa
 	mov r1, #0x10
 	add r7, r2, #0
-	bl Heap_AllocAtEnd
+	bl AllocFromHeapAtEnd
 	add r4, r0, #0
 	mov r3, #0
 	lsl r0, r5, #0x18
@@ -32126,7 +32126,7 @@ ov14_021F5718: ; 0x021F5718
 	add r0, r4, #0
 	bl RemoveWindow
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	add sp, #0x18
 	pop {r3, r4, r5, r6, r7, pc}
 	nop
@@ -32598,7 +32598,7 @@ _021F5B2A:
 	blt _021F5B2A
 _021F5B8E:
 	ldr r0, [sp, #0x50]
-	bl Heap_Free
+	bl FreeToHeap
 	ldr r0, [sp, #0x1c]
 	ldr r1, [sp, #0x20]
 	ldr r0, [r0, #0x34]
@@ -32935,7 +32935,7 @@ _021F5DB8:
 	blt _021F5DB8
 _021F5E4A:
 	ldr r0, [sp, #0x34]
-	bl Heap_Free
+	bl FreeToHeap
 	ldr r0, [sp, #0x1c]
 	ldr r1, [sp, #0x20]
 	ldr r0, [r0, #0x34]
@@ -33945,7 +33945,7 @@ _021F6542:
 	blt _021F6542
 _021F65D8:
 	ldr r0, [sp, #0x28]
-	bl Heap_Free
+	bl FreeToHeap
 	ldr r0, [sp, #0x1c]
 	mov r1, #0x41
 	ldr r0, [r0, #0x34]
@@ -34642,7 +34642,7 @@ _021F6A74:
 	ldr r1, [r1, r2]
 	ldr r2, [r3, r2]
 	add r3, r4, #0
-	bl GridInputHandler_Create
+	bl sub_02019BA4
 	ldr r1, [r4, #0x34]
 	str r0, [r1, #0x2c]
 	ldr r1, [r4, #0x2c]
@@ -34681,7 +34681,7 @@ ov14_021F6AC0: ; 0x021F6AC0
 	ldr r1, [r1, r2]
 	ldr r2, [r3, r2]
 	add r3, r5, #0
-	bl GridInputHandler_Create
+	bl sub_02019BA4
 	ldr r1, [r5, #0x34]
 	str r0, [r1, #0x2c]
 	add r0, r5, #0
@@ -34703,7 +34703,7 @@ ov14_021F6B10: ; 0x021F6B10
 	ldr r0, [r0, #0x2c]
 	cmp r0, #0
 	beq _021F6B26
-	bl GridInputHandler_Free
+	bl sub_02019BDC
 	ldr r0, [r4, #0x34]
 	mov r1, #0
 	str r1, [r0, #0x2c]
@@ -34717,7 +34717,7 @@ ov14_021F6B28: ; 0x021F6B28
 	add r4, r0, #0
 	ldr r0, [r4, #0x34]
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_GetDpadBox
+	bl sub_0201A018
 	add r5, r0, #0
 	ldr r0, [r4, #0x34]
 	mov r1, #9
@@ -34727,7 +34727,7 @@ ov14_021F6B28: ; 0x021F6B28
 	add r0, r5, #0
 	add r1, #1
 	add r2, sp, #0
-	bl DpadMenuBox_GetPosition
+	bl sub_02020A0C
 	mov r0, #0x32
 	ldr r1, [r4, #0x34]
 	lsl r0, r0, #4
@@ -34748,7 +34748,7 @@ ov14_021F6B60: ; 0x021F6B60
 	lsl r1, r4, #0x18
 	ldr r0, [r0, #0x2c]
 	lsr r1, r1, #0x18
-	bl GridInputHandler_SetNextInput
+	bl sub_02019F7C
 	add r0, r5, #0
 	add r1, r4, #0
 	bl ov14_021F6B28
@@ -34789,7 +34789,7 @@ ov14_021F6BA4: ; 0x021F6BA4
 	lsl r1, r4, #0x18
 	ldr r0, [r0, #0x2c]
 	lsr r1, r1, #0x18
-	bl GridInputHandler_SetNextInput
+	bl sub_02019F7C
 	add r0, r5, #0
 	add r1, r4, #0
 	bl ov14_021F6B28
@@ -34802,11 +34802,11 @@ ov14_021F6BC0: ; 0x021F6BC0
 	add r5, r0, #0
 	ldr r0, [r5, #0x34]
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_GetNextInput
+	bl sub_02019F74
 	add r6, r0, #0
 	ldr r0, [r5, #0x34]
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_HandleInput_AllowHold
+	bl sub_02019D18
 	add r4, r0, #0
 	cmp r4, #0xc
 	ldr r1, [r5, #0x34]
@@ -34824,7 +34824,7 @@ ov14_021F6BC0: ; 0x021F6BC0
 	ldr r0, [r5, #0x34]
 	add r1, r6, #0
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_SetNextInput
+	bl sub_02019F7C
 	add r0, r5, #0
 	add r1, r6, #0
 	bl ov14_021F6B28
@@ -34902,7 +34902,7 @@ _021F6C7E:
 	lsl r1, r4, #0x18
 	ldr r0, [r0, #0x2c]
 	lsr r1, r1, #0x18
-	bl GridInputHandler_SetNextInput
+	bl sub_02019F7C
 	add r0, r5, #0
 	add r1, r4, #0
 	bl ov14_021F6B28
@@ -34931,15 +34931,15 @@ _021F6CB4:
 	lsl r1, r4, #0x18
 	ldr r0, [r0, #0x2c]
 	lsr r1, r1, #0x18
-	bl GridInputHandler_SetNextInput
+	bl sub_02019F7C
 	ldr r0, [r5, #0x34]
 	add r1, r4, #0
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_GetDpadBox
+	bl sub_0201A018
 	add r1, sp, #0
 	add r1, #1
 	add r2, sp, #0
-	bl DpadMenuBox_GetPosition
+	bl sub_02020A0C
 	mov r0, #0x32
 	ldr r1, [r5, #0x34]
 	lsl r0, r0, #4
@@ -35004,7 +35004,7 @@ _021F6D3A:
 	lsl r1, r4, #0x18
 	lsr r1, r1, #0x18
 	add r3, r2, #0
-	bl GridInputHandler_SetNextLastUnk0FInputs
+	bl sub_02019F88
 _021F6D56:
 	cmp r4, #0
 	blt _021F6D64
@@ -35141,7 +35141,7 @@ ov14_021F6E68: ; 0x021F6E68
 	lsl r1, r4, #0x18
 	ldr r0, [r0, #0x2c]
 	lsr r1, r1, #0x18
-	bl GridInputHandler_SetNextInput
+	bl sub_02019F7C
 	cmp r4, #6
 	beq _021F6E8A
 	cmp r4, #7
@@ -35159,11 +35159,11 @@ ov14_021F6E8C: ; 0x021F6E8C
 	add r5, r0, #0
 	ldr r0, [r5, #0x34]
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_GetNextInput
+	bl sub_02019F74
 	add r6, r0, #0
 	ldr r0, [r5, #0x34]
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_HandleInput_AllowHold
+	bl sub_02019D18
 	add r4, r0, #0
 	cmp r4, #0x27
 	ldr r1, [r5, #0x34]
@@ -35181,7 +35181,7 @@ ov14_021F6E8C: ; 0x021F6E8C
 	ldr r0, [r5, #0x34]
 	add r1, r6, #0
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_SetNextInput
+	bl sub_02019F7C
 	add r0, r5, #0
 	add r1, r6, #0
 	bl ov14_021F6B28
@@ -35268,7 +35268,7 @@ _021F6F5A:
 	lsl r1, r4, #0x18
 	ldr r0, [r0, #0x2c]
 	lsr r1, r1, #0x18
-	bl GridInputHandler_SetNextInput
+	bl sub_02019F7C
 	add r0, r5, #0
 	add r1, r4, #0
 	bl ov14_021F6B28
@@ -35284,7 +35284,7 @@ ov14_021F6F70: ; 0x021F6F70
 	lsl r1, r4, #0x18
 	ldr r0, [r0, #0x2c]
 	lsr r1, r1, #0x18
-	bl GridInputHandler_SetNextInput
+	bl sub_02019F7C
 	cmp r4, #0x1f
 	beq _021F6F92
 	cmp r4, #0x20
@@ -35302,11 +35302,11 @@ ov14_021F6F94: ; 0x021F6F94
 	add r5, r0, #0
 	ldr r0, [r5, #0x34]
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_GetNextInput
+	bl sub_02019F74
 	add r6, r0, #0
 	ldr r0, [r5, #0x34]
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_HandleInput_AllowHold
+	bl sub_02019D18
 	add r4, r0, #0
 	mov r0, #0x2f
 	ldr r1, [r5, #0x34]
@@ -35322,7 +35322,7 @@ ov14_021F6F94: ; 0x021F6F94
 	ldr r0, [r5, #0x34]
 	add r1, r6, #0
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_SetNextInput
+	bl sub_02019F7C
 	add r0, r5, #0
 	add r1, r6, #0
 	bl ov14_021F6B28
@@ -35337,7 +35337,7 @@ _021F6FDC:
 	ldr r0, [r5, #0x34]
 	add r1, r6, #0
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_SetNextInput
+	bl sub_02019F7C
 	add r0, r5, #0
 	add r1, r6, #0
 	bl ov14_021F6B28
@@ -35421,7 +35421,7 @@ _021F7076:
 	lsl r1, r4, #0x18
 	ldr r0, [r0, #0x2c]
 	lsr r1, r1, #0x18
-	bl GridInputHandler_SetNextInput
+	bl sub_02019F7C
 	add r0, r5, #0
 	add r1, r4, #0
 	bl ov14_021F6B28
@@ -35451,7 +35451,7 @@ ov14_021F70A4: ; 0x021F70A4
 	lsl r1, r4, #0x18
 	ldr r0, [r0, #0x2c]
 	lsr r1, r1, #0x18
-	bl GridInputHandler_SetNextInput
+	bl sub_02019F7C
 	add r0, r5, #0
 	add r1, r4, #0
 	bl ov14_021F6B28
@@ -35472,15 +35472,15 @@ ov14_021F70C0: ; 0x021F70C0
 	ldr r0, [r5, #0x34]
 	mov r1, #0x2d
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_ClearEnabledFlag
+	bl sub_02019FD0
 _021F70DE:
 	ldr r0, [r5, #0x34]
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_HandleInput_AllowHold
+	bl sub_02019D18
 	add r4, r0, #0
 	ldr r0, [r5, #0x34]
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_SetAllEnabled
+	bl sub_02019FC4
 	add r0, r4, #0
 	pop {r3, r4, r5, pc}
 	thumb_func_end ov14_021F70C0
@@ -35509,15 +35509,15 @@ _021F7118:
 	lsl r1, r4, #0x18
 	ldr r0, [r0, #0x2c]
 	lsr r1, r1, #0x18
-	bl GridInputHandler_SetNextInput
+	bl sub_02019F7C
 	ldr r0, [r5, #0x34]
 	add r1, r4, #0
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_GetDpadBox
+	bl sub_0201A018
 	add r1, sp, #0
 	add r1, #1
 	add r2, sp, #0
-	bl DpadMenuBox_GetPosition
+	bl sub_02020A0C
 	mov r0, #0x32
 	ldr r1, [r5, #0x34]
 	lsl r0, r0, #4
@@ -35602,7 +35602,7 @@ _021F71D0:
 	ldr r0, _021F7300 ; =0x0000043C
 	ldr r4, [r1, r0]
 	ldr r0, [r1, #0x2c]
-	bl GridInputHandler_GetUnk0F
+	bl sub_02019F78
 	add r3, r0, #0
 	ldr r0, [r5, #0x34]
 	lsl r1, r4, #0x18
@@ -35610,7 +35610,7 @@ _021F71D0:
 	ldr r0, [r0, #0x2c]
 	lsr r1, r1, #0x18
 	lsr r2, r2, #0x18
-	bl GridInputHandler_SetNextLastUnk0FInputs
+	bl sub_02019F88
 _021F71EE:
 	cmp r4, #0x25
 	blt _021F71FC
@@ -35763,7 +35763,7 @@ _021F731C:
 	lsl r1, r4, #0x18
 	ldr r0, [r0, #0x2c]
 	lsr r1, r1, #0x18
-	bl GridInputHandler_SetNextInput
+	bl sub_02019F7C
 	add r0, r5, #0
 	add r1, r4, #0
 	bl ov14_021F6B28
@@ -35787,23 +35787,23 @@ ov14_021F7340: ; 0x021F7340
 	ldr r0, [r5, #0x34]
 	mov r1, #0x2d
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_ClearEnabledFlag
+	bl sub_02019FD0
 _021F735E:
 	ldr r0, [r5, #0x34]
 	mov r1, #0x2b
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_ClearEnabledFlag
+	bl sub_02019FD0
 	ldr r0, [r5, #0x34]
 	mov r1, #0x2c
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_ClearEnabledFlag
+	bl sub_02019FD0
 	ldr r0, [r5, #0x34]
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_HandleInput_AllowHold
+	bl sub_02019D18
 	add r4, r0, #0
 	ldr r0, [r5, #0x34]
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_SetAllEnabled
+	bl sub_02019FC4
 	add r0, r4, #0
 	pop {r3, r4, r5, pc}
 	thumb_func_end ov14_021F7340
@@ -35814,11 +35814,11 @@ ov14_021F7388: ; 0x021F7388
 	add r5, r0, #0
 	ldr r0, [r5, #0x34]
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_GetNextInput
+	bl sub_02019F74
 	add r6, r0, #0
 	ldr r0, [r5, #0x34]
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_HandleInput_AllowHold
+	bl sub_02019D18
 	add r4, r0, #0
 	mov r0, #0x2f
 	ldr r1, [r5, #0x34]
@@ -35834,7 +35834,7 @@ ov14_021F7388: ; 0x021F7388
 	ldr r0, [r5, #0x34]
 	add r1, r6, #0
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_SetNextInput
+	bl sub_02019F7C
 	add r0, r5, #0
 	add r1, r6, #0
 	bl ov14_021F6B28
@@ -35902,7 +35902,7 @@ _021F742E:
 	lsl r1, r4, #0x18
 	ldr r0, [r0, #0x2c]
 	lsr r1, r1, #0x18
-	bl GridInputHandler_SetNextInput
+	bl sub_02019F7C
 	add r0, r5, #0
 	add r1, r4, #0
 	bl ov14_021F6B28
@@ -35944,7 +35944,7 @@ _021F747E:
 	ldr r0, [r5, #0x34]
 	mov r1, #7
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_SetNextInput
+	bl sub_02019F7C
 	mov r4, #7
 _021F7492:
 	ldr r0, [r5, #0x34]
@@ -35966,11 +35966,11 @@ ov14_021F74B0: ; 0x021F74B0
 	add r5, r0, #0
 	ldr r0, [r5, #0x34]
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_GetNextInput
+	bl sub_02019F74
 	add r6, r0, #0
 	ldr r0, [r5, #0x34]
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_HandleInput_AllowHold
+	bl sub_02019D18
 	add r4, r0, #0
 	mov r0, #0x2f
 	ldr r1, [r5, #0x34]
@@ -35984,7 +35984,7 @@ ov14_021F74B0: ; 0x021F74B0
 	ldr r0, [r5, #0x34]
 	add r1, r6, #0
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_SetNextInput
+	bl sub_02019F7C
 	add r0, r5, #0
 	add r1, r6, #0
 	bl ov14_021F6B28
@@ -35999,7 +35999,7 @@ _021F74F4:
 	ldr r0, [r5, #0x34]
 	add r1, r6, #0
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_SetNextInput
+	bl sub_02019F7C
 	add r0, r5, #0
 	add r1, r6, #0
 	bl ov14_021F6B28
@@ -36074,7 +36074,7 @@ _021F757E:
 	lsl r1, r4, #0x18
 	ldr r0, [r0, #0x2c]
 	lsr r1, r1, #0x18
-	bl GridInputHandler_SetNextInput
+	bl sub_02019F7C
 	add r0, r5, #0
 	add r1, r4, #0
 	bl ov14_021F6B28
@@ -36104,7 +36104,7 @@ ov14_021F75AC: ; 0x021F75AC
 	lsl r1, r4, #0x18
 	ldr r0, [r0, #0x2c]
 	lsr r1, r1, #0x18
-	bl GridInputHandler_SetNextInput
+	bl sub_02019F7C
 	add r0, r5, #0
 	add r1, r4, #0
 	bl ov14_021F6B28
@@ -36117,11 +36117,11 @@ ov14_021F75C8: ; 0x021F75C8
 	add r5, r0, #0
 	ldr r0, [r5, #0x34]
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_GetNextInput
+	bl sub_02019F74
 	add r6, r0, #0
 	ldr r0, [r5, #0x34]
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_HandleInput_AllowHold
+	bl sub_02019D18
 	add r4, r0, #0
 	mov r0, #0x2f
 	ldr r1, [r5, #0x34]
@@ -36135,7 +36135,7 @@ ov14_021F75C8: ; 0x021F75C8
 	ldr r0, [r5, #0x34]
 	add r1, r6, #0
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_SetNextInput
+	bl sub_02019F7C
 	add r0, r5, #0
 	add r1, r6, #0
 	bl ov14_021F6B28
@@ -36194,7 +36194,7 @@ _021F765A:
 	lsl r1, r4, #0x18
 	ldr r0, [r0, #0x2c]
 	lsr r1, r1, #0x18
-	bl GridInputHandler_SetNextInput
+	bl sub_02019F7C
 	add r0, r5, #0
 	add r1, r4, #0
 	bl ov14_021F6B28
@@ -36237,15 +36237,15 @@ _021F76A8:
 	lsl r1, r4, #0x18
 	ldr r0, [r0, #0x2c]
 	lsr r1, r1, #0x18
-	bl GridInputHandler_SetNextInput
+	bl sub_02019F7C
 	ldr r0, [r5, #0x34]
 	add r1, r4, #0
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_GetDpadBox
+	bl sub_0201A018
 	add r1, sp, #0
 	add r1, #1
 	add r2, sp, #0
-	bl DpadMenuBox_GetPosition
+	bl sub_02020A0C
 	mov r0, #0x32
 	ldr r1, [r5, #0x34]
 	lsl r0, r0, #4
@@ -36306,7 +36306,7 @@ _021F7726:
 	lsl r1, r4, #0x18
 	lsr r1, r1, #0x18
 	add r3, r2, #0
-	bl GridInputHandler_SetNextLastUnk0FInputs
+	bl sub_02019F88
 _021F7742:
 	cmp r4, #0
 	blt _021F7750
@@ -36443,7 +36443,7 @@ ov14_021F7854: ; 0x021F7854
 	lsl r1, r4, #0x18
 	ldr r0, [r0, #0x2c]
 	lsr r1, r1, #0x18
-	bl GridInputHandler_SetNextInput
+	bl sub_02019F7C
 	cmp r4, #6
 	beq _021F7876
 	cmp r4, #7
@@ -36480,15 +36480,15 @@ _021F789C:
 	lsl r1, r4, #0x18
 	ldr r0, [r0, #0x2c]
 	lsr r1, r1, #0x18
-	bl GridInputHandler_SetNextInput
+	bl sub_02019F7C
 	ldr r0, [r5, #0x34]
 	add r1, r4, #0
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_GetDpadBox
+	bl sub_0201A018
 	add r1, sp, #0
 	add r1, #1
 	add r2, sp, #0
-	bl DpadMenuBox_GetPosition
+	bl sub_02020A0C
 	mov r0, #0x32
 	ldr r1, [r5, #0x34]
 	lsl r0, r0, #4
@@ -36551,7 +36551,7 @@ _021F791E:
 	lsl r1, r4, #0x18
 	lsr r1, r1, #0x18
 	add r3, r2, #0
-	bl GridInputHandler_SetNextLastUnk0FInputs
+	bl sub_02019F88
 _021F793A:
 	cmp r4, #0
 	blt _021F7948
@@ -36671,7 +36671,7 @@ ov14_021F7A2C: ; 0x021F7A2C
 	lsl r1, r4, #0x18
 	ldr r0, [r0, #0x2c]
 	lsr r1, r1, #0x18
-	bl GridInputHandler_SetNextInput
+	bl sub_02019F7C
 	cmp r4, #4
 	beq _021F7A4E
 	cmp r4, #5
@@ -36690,46 +36690,46 @@ ov14_021F7A50: ; 0x021F7A50
 	ldr r0, [r5, #0x34]
 	mov r1, #0x2b
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_ClearEnabledFlag
+	bl sub_02019FD0
 	ldr r0, [r5, #0x34]
 	mov r1, #0x2c
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_ClearEnabledFlag
+	bl sub_02019FD0
 	ldr r0, [r5, #0x34]
 	mov r1, #0x2d
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_ClearEnabledFlag
+	bl sub_02019FD0
 	ldr r0, [r5, #0x34]
 	mov r1, #0x25
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_ClearEnabledFlag
+	bl sub_02019FD0
 	ldr r0, [r5, #0x34]
 	mov r1, #0x26
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_ClearEnabledFlag
+	bl sub_02019FD0
 	ldr r0, [r5, #0x34]
 	mov r1, #0x27
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_ClearEnabledFlag
+	bl sub_02019FD0
 	ldr r0, [r5, #0x34]
 	mov r1, #0x28
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_ClearEnabledFlag
+	bl sub_02019FD0
 	ldr r0, [r5, #0x34]
 	mov r1, #0x29
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_ClearEnabledFlag
+	bl sub_02019FD0
 	ldr r0, [r5, #0x34]
 	mov r1, #0x2a
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_ClearEnabledFlag
+	bl sub_02019FD0
 	ldr r0, [r5, #0x34]
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_HandleInput_AllowHold
+	bl sub_02019D18
 	add r4, r0, #0
 	ldr r0, [r5, #0x34]
 	ldr r0, [r0, #0x2c]
-	bl GridInputHandler_SetAllEnabled
+	bl sub_02019FC4
 	add r0, r4, #0
 	pop {r3, r4, r5, pc}
 	thumb_func_end ov14_021F7A50
@@ -36740,22 +36740,22 @@ ov14_021F7AC4: ; 0x021F7AC4
 	add r5, r0, #0
 	ldr r0, [r5, #0x2c]
 	add r4, r2, #0
-	bl GridInputHandler_GetDpadBox
+	bl sub_0201A018
 	add r1, sp, #0
 	add r2, sp, #0
 	add r1, #3
 	add r2, #2
-	bl DpadMenuBox_GetPosition
+	bl sub_02020A0C
 	ldr r0, [r5, #0x2c]
 	add r1, r4, #0
-	bl GridInputHandler_GetDpadBox
+	bl sub_0201A018
 	add r1, sp, #0
 	add r1, #1
 	add r2, sp, #0
-	bl DpadMenuBox_GetPosition
+	bl sub_02020A0C
 	mov r0, #0xa
 	mov r1, #8
-	bl Heap_Alloc
+	bl AllocFromHeap
 	add r4, r0, #0
 	ldr r1, [r4, #4]
 	mov r0, #3

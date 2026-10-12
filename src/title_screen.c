@@ -23,12 +23,12 @@
 #include "msgdata.h"
 #include "overlay_62.h"
 #include "overlay_manager.h"
-#include "screen_fade.h"
 #include "sound.h"
 #include "sound_02004A44.h"
 #include "system.h"
 #include "text.h"
 #include "unk_02005D10.h"
+#include "unk_0200FA24.h"
 #include "unk_02020B8C.h"
 #include "unk_02026E30.h"
 
@@ -88,18 +88,18 @@ static void TitleScreen_VBlankCB(void *pVoid);
 static void TitleScreen_SetGfxBanks(void);
 static void TitleScreen_Create3DVramMan(TitleScreenOverlayData *data);
 static void TitleScreen_Delete3DVramMan(TitleScreenOverlayData *data);
-static void TitleScreen_Load3DObjects(TitleScreenAnimObject *animObj, int texFileId, int anim1Id, int anim2Id, int anim3Id, int anim4Id, enum HeapID heapID);
+static void TitleScreen_Load3DObjects(TitleScreenAnimObject *animObj, int texFileId, int anim1Id, int anim2Id, int anim3Id, int anim4Id, HeapID heapID);
 static void TitleScreen_Unload3DObjects(TitleScreenAnimObject *animObj);
 static void TitleScreen_AdvanceAnimObjsFrame(NNSG3dAnmObj **ppAnmObj, fx32 a1);
 static void TitleScreenAnimObjs_Run(TitleScreenAnimObject *animObj);
 static void TitleScreen_InitBgs(TitleScreenOverlayData *data);
 static void TitleScreen_ReleaseBgs(TitleScreenOverlayData *data);
-static BOOL TitleScreenAnim_InitObjectsAndCamera(TitleScreenAnimData *animData, BgConfig *bgConfig, enum HeapID heapID);
-static BOOL TitleScreenAnim_Run(TitleScreenAnimData *animData, BgConfig *bgConfig, enum HeapID heapID);
-static BOOL TitleScreenAnim_UnloadAndRemoveTopScreenResources(TitleScreenAnimData *animData, BgConfig *bgConfig, enum HeapID heapID);
-static void TitleScreenAnim_Load2dBgGfx(BgConfig *bgConfig, enum HeapID heapID, TitleScreenAnimData *animData);
+static BOOL TitleScreenAnim_InitObjectsAndCamera(TitleScreenAnimData *animData, BgConfig *bgConfig, HeapID heapID);
+static BOOL TitleScreenAnim_Run(TitleScreenAnimData *animData, BgConfig *bgConfig, HeapID heapID);
+static BOOL TitleScreenAnim_UnloadAndRemoveTopScreenResources(TitleScreenAnimData *animData, BgConfig *bgConfig, HeapID heapID);
+static void TitleScreenAnim_Load2dBgGfx(BgConfig *bgConfig, HeapID heapID, TitleScreenAnimData *animData);
 static void TitleScreenAnim_RunTopScreenGlow(TitleScreenAnimData *animData);
-static void TitleScreen_RemoveTouchToStartWindow(BgConfig *bgConfig, enum HeapID heapID, TitleScreenAnimData *animData);
+static void TitleScreen_RemoveTouchToStartWindow(BgConfig *bgConfig, HeapID heapID, TitleScreenAnimData *animData);
 static void TitleScreenAnim_SetCameraInitialPos(TitleScreenAnimData *animData);
 static fx32 fx32_abs(fx32 x);
 static void TitleScreenAnim_GetCameraNextPosition(TitleScreenAnimData *animData);
@@ -117,7 +117,7 @@ static BOOL TitleScreen_Init(OverlayManager *man, int *state) {
     GX_SetVisiblePlane(0);
     GXS_SetVisiblePlane(0);
     SetKeyRepeatTimers(4, 8);
-    Heap_Create(HEAP_ID_3, HEAP_ID_TITLE_SCREEN, 0x50000);
+    CreateHeap(HEAP_ID_3, HEAP_ID_TITLE_SCREEN, 0x50000);
     TitleScreenOverlayData *data = OverlayManager_CreateAndGetData(man, sizeof(TitleScreenOverlayData), HEAP_ID_TITLE_SCREEN);
     memset(data, 0, sizeof(TitleScreenOverlayData));
     data->heapID = HEAP_ID_TITLE_SCREEN;
@@ -146,7 +146,7 @@ static BOOL TitleScreen_Main(OverlayManager *man, int *state) {
         }
         break;
     case TITLESCREEN_MAIN_START_MUSIC:
-        Sound_SetScene(SOUND_SCENE_NONE);
+        sub_02004AD8(0);
         Sound_SetSceneAndPlayBGM(1, SEQ_GS_POKEMON_THEME, 1);
         *state = (int)TITLESCREEN_MAIN_PLAY;
         break;
@@ -161,24 +161,24 @@ static BOOL TitleScreen_Main(OverlayManager *man, int *state) {
             ++data->timer;
             if ((gSystem.newKeys & PAD_BUTTON_A) == PAD_BUTTON_A || (gSystem.newKeys & PAD_BUTTON_START) == PAD_BUTTON_START || gSystem.touchNew) {
                 data->exitMode = TITLESCREEN_EXIT_MENU;
-                GF_SndStartFadeOutBGM(SEQ_NONE, 60);
+                GF_SndStartFadeOutBGM(0, 60);
                 PlayCry(TITLE_SCREEN_SPECIES, 0);
                 GF_SetVolumeBySeqNo(1, 48);
-                BeginNormalPaletteFade(FADE_BOTH_SCREENS, FADE_TYPE_BRIGHTNESS_OUT, FADE_TYPE_BRIGHTNESS_OUT, RGB_WHITE, 5, 1, HEAP_ID_TITLE_SCREEN);
+                BeginNormalPaletteFade(0, 0, 0, RGB_WHITE, 5, 1, HEAP_ID_TITLE_SCREEN);
                 *state = (int)TITLESCREEN_MAIN_PROCEED_FLASH;
             } else if ((gSystem.heldKeys & CLEAR_SAVE_KEY_COMBO) == CLEAR_SAVE_KEY_COMBO) {
                 data->exitMode = TITLESCREEN_EXIT_CLEARSAVE;
-                BeginNormalPaletteFade(FADE_BOTH_SCREENS, FADE_TYPE_BRIGHTNESS_OUT, FADE_TYPE_BRIGHTNESS_OUT, RGB_BLACK, 6, 1, data->heapID);
+                BeginNormalPaletteFade(0, 0, 0, RGB_BLACK, 6, 1, data->heapID);
                 *state = (int)TITLESCREEN_MAIN_FADEOUT;
             } else if ((gSystem.heldKeys & MIC_TEST_KEY_COMBO) == MIC_TEST_KEY_COMBO) {
                 data->exitMode = TITLESCREEN_EXIT_MIC_TEST;
-                BeginNormalPaletteFade(FADE_BOTH_SCREENS, FADE_TYPE_BRIGHTNESS_OUT, FADE_TYPE_BRIGHTNESS_OUT, RGB_BLACK, 6, 1, data->heapID);
+                BeginNormalPaletteFade(0, 0, 0, RGB_BLACK, 6, 1, data->heapID);
                 *state = (int)TITLESCREEN_MAIN_FADEOUT;
             } else if (data->timer > TITLE_SCREEN_DURATION) {
                 data->exitMode = TITLESCREEN_EXIT_TIMEOUT;
                 gSystem.unk70 = TRUE;
                 GfGfx_EngineATogglePlanes(GX_PLANEMASK_BG3, GF_PLANE_TOGGLE_OFF);
-                GF_SndStartFadeOutBGM(SEQ_NONE, 60);
+                GF_SndStartFadeOutBGM(0, 60);
                 *state = (int)TITLESCREEN_MAIN_PROCEED_NOFLASH;
             } else {
                 TitleScreenAnim_GetCameraNextPosition(&data->animData);
@@ -191,12 +191,12 @@ static BOOL TitleScreen_Main(OverlayManager *man, int *state) {
         data->animData.enableStartInstructionFlash = FALSE;
         TitleScreenAnim_Run(&data->animData, data->bgConfig, data->heapID);
         if (IsPaletteFadeFinished()) {
-            BeginNormalPaletteFade(FADE_BOTH_SCREENS, FADE_TYPE_BRIGHTNESS_IN, FADE_TYPE_BRIGHTNESS_IN, RGB_WHITE, 12, 1, HEAP_ID_TITLE_SCREEN);
+            BeginNormalPaletteFade(0, 1, 1, RGB_WHITE, 12, 1, HEAP_ID_TITLE_SCREEN);
             *state = (int)TITLESCREEN_MAIN_PROCEED_FLASH_2;
         }
         if (GF_SndGetFadeTimer() == 0) {
             StopBGM(SEQ_GS_POKEMON_THEME, 0);
-            BeginNormalPaletteFade(FADE_BOTH_SCREENS, FADE_TYPE_BRIGHTNESS_OUT, FADE_TYPE_BRIGHTNESS_OUT, RGB_BLACK, 6, 1, data->heapID);
+            BeginNormalPaletteFade(0, 0, 0, RGB_BLACK, 6, 1, data->heapID);
             *state = (int)TITLESCREEN_MAIN_FADEOUT;
         }
         break;
@@ -206,7 +206,7 @@ static BOOL TitleScreen_Main(OverlayManager *man, int *state) {
         TitleScreenAnim_Run(&data->animData, data->bgConfig, data->heapID);
         if (GF_SndGetFadeTimer() == 0) {
             StopBGM(SEQ_GS_POKEMON_THEME, 0);
-            BeginNormalPaletteFade(FADE_BOTH_SCREENS, FADE_TYPE_BRIGHTNESS_OUT, FADE_TYPE_BRIGHTNESS_OUT, RGB_BLACK, 6, 1, data->heapID);
+            BeginNormalPaletteFade(0, 0, 0, RGB_BLACK, 6, 1, data->heapID);
             *state = (int)TITLESCREEN_MAIN_FADEOUT;
         }
         break;
@@ -216,7 +216,7 @@ static BOOL TitleScreen_Main(OverlayManager *man, int *state) {
         TitleScreenAnim_Run(&data->animData, data->bgConfig, data->heapID);
         if (GF_SndGetFadeTimer() == 0) {
             StopBGM(SEQ_GS_POKEMON_THEME, 0);
-            BeginNormalPaletteFade(FADE_BOTH_SCREENS, FADE_TYPE_BRIGHTNESS_OUT, FADE_TYPE_BRIGHTNESS_OUT, RGB_BLACK, 6, 1, data->heapID);
+            BeginNormalPaletteFade(0, 0, 0, RGB_BLACK, 6, 1, data->heapID);
             *state = (int)TITLESCREEN_MAIN_FADEOUT;
         }
         break;
@@ -233,14 +233,14 @@ static BOOL TitleScreen_Main(OverlayManager *man, int *state) {
 
 static BOOL TitleScreen_Exit(OverlayManager *man, int *state) {
     TitleScreenOverlayData *data = OverlayManager_GetData(man);
-    enum HeapID heapID = data->heapID;
+    HeapID heapID = data->heapID;
     int exitMode = data->exitMode;
 
     Main_SetVBlankIntrCB(NULL, NULL);
     TitleScreen_Delete3DVramMan(data);
     TitleScreen_ReleaseBgs(data);
     OverlayManager_FreeData(man);
-    Heap_Destroy(heapID);
+    DestroyHeap(heapID);
 
     switch (exitMode) {
     default:
@@ -251,11 +251,11 @@ static BOOL TitleScreen_Exit(OverlayManager *man, int *state) {
         RegisterMainOverlay(FS_OVERLAY_ID_NONE, &gApplication_DeleteSave);
         break;
     case TITLESCREEN_EXIT_TIMEOUT:
-        Sound_SetScene(SOUND_SCENE_NONE);
+        sub_02004AD8(0);
         RegisterMainOverlay(FS_OVERLAY_ID(intro_title), &gApplication_IntroMovie);
         break;
     case TITLESCREEN_EXIT_MIC_TEST:
-        Sound_SetScene(SOUND_SCENE_NONE);
+        sub_02004AD8(0);
         RegisterMainOverlay(FS_OVERLAY_ID(OVY_62), &gApplication_MicTest);
         break;
     }
@@ -304,12 +304,12 @@ static void TitleScreen_Delete3DVramMan(TitleScreenOverlayData *data) {
     GF_3DVramMan_Delete(data->_3dVramMan);
 }
 
-static void TitleScreen_Load3DObjects(TitleScreenAnimObject *animObj, int texFileId, int nsbcaId, int nsbta, int nsbtp, int nsbma, enum HeapID heapID) {
+static void TitleScreen_Load3DObjects(TitleScreenAnimObject *animObj, int texFileId, int nsbcaId, int nsbta, int nsbtp, int nsbma, HeapID heapID) {
     for (int i = 0; i < 4; ++i) {
         animObj->_3dResObjsArc[i] = animObj->_3dAnmObjs[i] = NULL;
     }
 
-    HeapExp_FndInitAllocator(&animObj->allocator, heapID, 4);
+    GF_ExpHeap_FndInitAllocator(&animObj->allocator, heapID, 4);
     void *pAnim;
     animObj->resFileHeader = AllocAndReadWholeNarcMemberByIdPair(NARC_demo_title_titledemo, texFileId, heapID);
     GF3dRender_InitObjFromHeader(&animObj->renderObj, &animObj->resModel, &animObj->resFileHeader);
@@ -358,10 +358,10 @@ static void TitleScreen_Unload3DObjects(TitleScreenAnimObject *animObj) {
     for (int i = 0; i < 4; ++i) {
         if (animObj->_3dAnmObjs[i] != NULL) {
             NNS_G3dFreeAnmObj(&animObj->allocator, animObj->_3dAnmObjs[i]);
-            Heap_Free(animObj->_3dResObjsArc[i]);
+            FreeToHeap(animObj->_3dResObjsArc[i]);
         }
     }
-    Heap_Free(animObj->resFileHeader);
+    FreeToHeap(animObj->resFileHeader);
 }
 
 static void TitleScreen_AdvanceAnimObjsFrame(NNSG3dAnmObj **ppAnmObj, fx32 frameBy) {
@@ -481,12 +481,12 @@ static void TitleScreen_ReleaseBgs(TitleScreenOverlayData *data) {
     FreeBgTilemapBuffer(data->bgConfig, GF_BG_LYR_MAIN_1);
     FreeBgTilemapBuffer(data->bgConfig, GF_BG_LYR_MAIN_2);
     FreeBgTilemapBuffer(data->bgConfig, GF_BG_LYR_SUB_3);
-    Heap_Free(data->bgConfig);
+    FreeToHeap(data->bgConfig);
 }
 
 static const WindowTemplate sTouchToStartWindow = { GF_BG_LYR_MAIN_3, 0, 18, 32, 2, 2, 0x001 };
 
-static BOOL TitleScreenAnim_InitObjectsAndCamera(TitleScreenAnimData *animData, BgConfig *bgConfig, enum HeapID heapID) {
+static BOOL TitleScreenAnim_InitObjectsAndCamera(TitleScreenAnimData *animData, BgConfig *bgConfig, HeapID heapID) {
     TitleScreenAnim_SetCameraInitialPos(animData);
     TitleScreenAnim_Load2dBgGfx(bgConfig, heapID, animData);
     if (animData->gameVersion == VERSION_HEARTGOLD) {
@@ -527,7 +527,7 @@ static BOOL TitleScreenAnim_InitObjectsAndCamera(TitleScreenAnimData *animData, 
     return TRUE;
 }
 
-static BOOL TitleScreenAnim_Run(TitleScreenAnimData *animData, BgConfig *bgConfig, enum HeapID heapID) {
+static BOOL TitleScreenAnim_Run(TitleScreenAnimData *animData, BgConfig *bgConfig, HeapID heapID) {
     BOOL ret = FALSE;
 
     switch (animData->state) {
@@ -540,8 +540,8 @@ static BOOL TitleScreenAnim_Run(TitleScreenAnimData *animData, BgConfig *bgConfi
         GfGfx_EngineBTogglePlanes(GX_PLANEMASK_BG2, GF_PLANE_TOGGLE_ON);
         GfGfx_EngineBTogglePlanes(GX_PLANEMASK_BG1, GF_PLANE_TOGGLE_ON);
         GfGfx_EngineATogglePlanes(GX_PLANEMASK_BG1, GF_PLANE_TOGGLE_ON);
-        SetMasterBrightnessNeutral(PM_LCD_TOP);
-        SetMasterBrightnessNeutral(PM_LCD_BOTTOM);
+        SetMasterBrightnessNeutral(0);
+        SetMasterBrightnessNeutral(1);
         SetBlendBrightness(0, (GXBlendPlaneMask)(GX_BLEND_PLANEMASK_BG1 | GX_BLEND_PLANEMASK_BG2), SCREEN_MASK_MAIN);
         SetBlendBrightness(0, (GXBlendPlaneMask)(GX_BLEND_PLANEMASK_BG0 | GX_BLEND_PLANEMASK_BG1 | GX_BLEND_PLANEMASK_BG2), SCREEN_MASK_SUB);
         G2S_SetBlendAlpha(4, 0x39, 0, 0x1F);
@@ -575,7 +575,7 @@ static BOOL TitleScreenAnim_Run(TitleScreenAnimData *animData, BgConfig *bgConfi
     return ret;
 }
 
-static BOOL TitleScreenAnim_UnloadAndRemoveTopScreenResources(TitleScreenAnimData *animData, BgConfig *bgConfig, enum HeapID heapID) {
+static BOOL TitleScreenAnim_UnloadAndRemoveTopScreenResources(TitleScreenAnimData *animData, BgConfig *bgConfig, HeapID heapID) {
     PaletteData_FreeBuffers(animData->plttData, PLTTBUF_SUB_BG);
     PaletteData_Free(animData->plttData);
     animData->plttData = NULL;
@@ -590,7 +590,7 @@ static BOOL TitleScreenAnim_UnloadAndRemoveTopScreenResources(TitleScreenAnimDat
     return TRUE;
 }
 
-static void TitleScreenAnim_Load2dBgGfx(BgConfig *bgConfig, enum HeapID heapID, TitleScreenAnimData *animData) {
+static void TitleScreenAnim_Load2dBgGfx(BgConfig *bgConfig, HeapID heapID, TitleScreenAnimData *animData) {
     s32 res1, res2;
 
     if (animData->gameVersion == VERSION_HEARTGOLD) {
@@ -683,7 +683,7 @@ static void TitleScreenAnim_RunTopScreenGlow(TitleScreenAnimData *animData) {
     PaletteData_FadePalettesTowardsColorStep(animData->plttData, 0x0002, 0xFF00, 160, animData->glowFadeStep, RGB(12, 12, 12));
 }
 
-static void TitleScreen_RemoveTouchToStartWindow(BgConfig *bgConfig, enum HeapID heapID, TitleScreenAnimData *animData) {
+static void TitleScreen_RemoveTouchToStartWindow(BgConfig *bgConfig, HeapID heapID, TitleScreenAnimData *animData) {
     RemoveWindow(&animData->window);
 }
 

@@ -34,5 +34,17 @@
       "anchor": 0,
       "y": 0
     }
+  ],
+  "coords": [
+    {
+      "scriptId": "_EV_scr_seq_R07R0101_001 + 1",
+      "x": 2,
+      "z": 5,
+      "w": 1,
+      "h": 5,
+      "y": 0,
+      "val": 0,
+      "var": "VAR_TEMP_x4000"
+    }
   ]
 }

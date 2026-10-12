@@ -5,956 +5,989 @@
 
 	.rodata
 
-	ScrDef scr_seq_0146_000
-	ScrDef scr_seq_0146_001
-	ScrDef scr_seq_0146_002
-	ScrDef scr_seq_0146_003
-	ScrDef scr_seq_0146_004
-	ScrDef scr_seq_0146_005
-	ScrDef scr_seq_0146_006
-	ScrDef scr_seq_0146_007
-	ScrDef scr_seq_0146_008
-	ScrDef scr_seq_0146_009
-	ScrDef scr_seq_0146_010
-	ScrDef scr_seq_0146_011
-	ScrDef scr_seq_0146_012
-	ScrDef scr_seq_0146_013
-	ScrDef scr_seq_0146_014
-	ScrDef scr_seq_0146_015
-	ScrDef scr_seq_0146_016
-	ScrDef scr_seq_0146_017
-	ScrDef scr_seq_0146_018
-	ScrDefEnd
+	scrdef scr_seq_0146_000
+	scrdef scr_seq_0146_001
+	scrdef scr_seq_0146_002
+	scrdef scr_seq_0146_003
+	scrdef scr_seq_0146_004
+	scrdef scr_seq_0146_005
+	scrdef scr_seq_0146_006
+	scrdef scr_seq_0146_007
+	scrdef scr_seq_0146_008
+	scrdef scr_seq_0146_009
+	scrdef scr_seq_0146_010
+	scrdef scr_seq_0146_011
+	scrdef scr_seq_0146_012
+	scrdef scr_seq_0146_013
+	scrdef scr_seq_0146_014
+	scrdef scr_seq_0146_015
+	scrdef scr_seq_0146_016
+	scrdef scr_seq_0146_017
+	scrdef scr_seq_0146_018
+	scrdef_end
 
 scr_seq_0146_000:
-	PlaySE SEQ_SE_DP_SELECT
-	LockAll
-	FacePlayer
-	GetPartySlotWithMove VAR_SPECIAL_RESULT, MOVE_CUT
-	Compare VAR_SPECIAL_RESULT, 6
-	GoToIfEq _009E
-	CheckBadge BADGE_HIVE, VAR_SPECIAL_RESULT
-	Compare VAR_SPECIAL_RESULT, 0
-	GoToIfEq _009E
-	NPCMsg msg_0211_00000
-	TouchscreenMenuHide
-	GetMenuChoice VAR_SPECIAL_RESULT
-	TouchscreenMenuShow
-	Compare VAR_SPECIAL_RESULT, 0
-	GoToIfEq _00AD
-	CloseMsg
-	GoTo _093D
-	End
+	play_se SEQ_SE_DP_SELECT
+	lockall
+	faceplayer
+	get_party_slot_with_move VAR_SPECIAL_RESULT, MOVE_CUT
+	compare VAR_SPECIAL_RESULT, 6
+	goto_if_ne _APOCHM00
+	hasitem ITEM_HM01, 1, VAR_SPECIAL_RESULT
+	compare VAR_SPECIAL_RESULT, 0
+	goto_if_eq _009E
+_APOCHM00:
+	npc_msg msg_0211_00000
+	touchscreen_menu_hide
+	getmenuchoice VAR_SPECIAL_RESULT
+	touchscreen_menu_show
+	compare VAR_SPECIAL_RESULT, 0
+	goto_if_eq _00AD
+	closemsg
+	goto _093D
+	end
 
 _009E:
-	NPCMsg msg_0211_00002
-	WaitButton
-	CloseMsg
-	GoTo _093D
-	End
+	npc_msg msg_0211_00002
+	wait_button_or_walk_away
+	closemsg
+	goto _093D
+	end
 
 _00AD:
-	GetPartySlotWithMove VAR_SPECIAL_RESULT, MOVE_CUT
-	CopyVar VAR_SPECIAL_x8004, VAR_SPECIAL_RESULT
-	GetFollowPokePartyIndex VAR_SPECIAL_x8005
-	BufferPartyMonNick 0, VAR_SPECIAL_RESULT
-	NPCMsg msg_0211_00001
-	CloseMsg
-	GetPlayerState VAR_SPECIAL_RESULT
-	ScrCmd_730 VAR_SPECIAL_x8006
-	Compare VAR_SPECIAL_RESULT, 2
-	GoToIfNe _00EC
-	ScrCmd_183 VAR_SPECIAL_x8004
-	ScrCmd_560 0, VAR_SPECIAL_x8005
-	GoTo _0165
+	get_party_slot_with_move VAR_SPECIAL_RESULT, MOVE_CUT
+	compare VAR_SPECIAL_RESULT, 6
+	goto_if_ne _APOCHM05
+	get_party_lead_alive VAR_SPECIAL_RESULT
+_APOCHM05:
+	copyvar VAR_SPECIAL_x8004, VAR_SPECIAL_RESULT
+	get_follow_poke_party_index VAR_SPECIAL_x8005
+	bufferpartymonnick 0, VAR_SPECIAL_RESULT
+	npc_msg msg_0211_00001
+	closemsg
+	get_player_state VAR_SPECIAL_RESULT
+	scrcmd_730 VAR_SPECIAL_x8006
+	compare VAR_SPECIAL_RESULT, 2
+	goto_if_ne _00EC
+	scrcmd_183 VAR_SPECIAL_x8004
+	scrcmd_560 0, VAR_SPECIAL_x8005
+	goto _0165
 
 _00EC:
-	Compare VAR_SPECIAL_RESULT, 1
-	GoToIfNe _0109
-	ScrCmd_183 VAR_SPECIAL_x8004
-	ScrCmd_560 0, VAR_SPECIAL_x8005
-	GoTo _0165
+	compare VAR_SPECIAL_RESULT, 1
+	goto_if_ne _0109
+	scrcmd_183 VAR_SPECIAL_x8004
+	scrcmd_560 0, VAR_SPECIAL_x8005
+	goto _0165
 
 _0109:
-	Compare VAR_SPECIAL_x8004, VAR_SPECIAL_x8005
-	GoToIfEq _0126
-	ScrCmd_183 VAR_SPECIAL_x8004
-	ScrCmd_560 0, VAR_SPECIAL_x8005
-	GoTo _0165
+	compare VAR_SPECIAL_x8004, VAR_SPECIAL_x8005
+	goto_if_eq _0126
+	scrcmd_183 VAR_SPECIAL_x8004
+	scrcmd_560 0, VAR_SPECIAL_x8005
+	goto _0165
 
 _0126:
-	Compare VAR_SPECIAL_x8006, 1
-	GoToIfNe _0143
-	ScrCmd_183 VAR_SPECIAL_x8004
-	ScrCmd_560 0, VAR_SPECIAL_x8005
-	GoTo _0165
+	compare VAR_SPECIAL_x8006, 1
+	goto_if_ne _0143
+	scrcmd_183 VAR_SPECIAL_x8004
+	scrcmd_560 0, VAR_SPECIAL_x8005
+	goto _0165
 
 _0143:
-	ScrCmd_598 1
-	GetPartyLeadAlive VAR_TEMP_x4000
-	GetPartyMonSpecies VAR_TEMP_x4000, VAR_TEMP_x4000
-	Call _025B
-	PlayCry VAR_TEMP_x4000, 0
-	WaitCry
-	ScrCmd_560 3, VAR_SPECIAL_x8005
+	scrcmd_598 1
+	get_party_lead_alive VAR_TEMP_x4000
+	get_partymon_species VAR_TEMP_x4000, VAR_TEMP_x4000
+	call _025B
+	play_cry VAR_TEMP_x4000, 0
+	wait_cry
+	scrcmd_560 3, VAR_SPECIAL_x8005
 _0165:
-	Wait 7, VAR_SPECIAL_RESULT
-	HidePerson VAR_SPECIAL_LAST_TALKED
+	wait 7, VAR_SPECIAL_RESULT
+	hide_person VAR_SPECIAL_LAST_TALKED
 _016F:
-	Wait 1, VAR_SPECIAL_RESULT
-	Compare VAR_SPECIAL_x8005, 0
-	GoToIfEq _016F
-	GoTo _093D
-	End
+	wait 1, VAR_SPECIAL_RESULT
+	compare VAR_SPECIAL_x8005, 0
+	goto_if_eq _016F
+	goto _093D
+	end
 
 scr_seq_0146_007:
-	ScrCmd_609
-	LockAll
-	BufferPartyMonNick 0, VAR_SPECIAL_x8000
-	NPCMsg msg_0211_00001
-	CloseMsg
-	GetFollowPokePartyIndex VAR_SPECIAL_x8004
-	GetPlayerState VAR_SPECIAL_RESULT
-	ScrCmd_730 VAR_SPECIAL_x8006
-	Compare VAR_SPECIAL_RESULT, 2
-	GoToIfNe _01C1
-	ScrCmd_183 VAR_SPECIAL_x8000
-	ScrCmd_560 0, VAR_SPECIAL_x8005
-	GoTo _023A
+	scrcmd_609
+	lockall
+	bufferpartymonnick 0, VAR_SPECIAL_x8000
+	npc_msg msg_0211_00001
+	closemsg
+	get_follow_poke_party_index VAR_SPECIAL_x8004
+	get_player_state VAR_SPECIAL_RESULT
+	scrcmd_730 VAR_SPECIAL_x8006
+	compare VAR_SPECIAL_RESULT, 2
+	goto_if_ne _01C1
+	scrcmd_183 VAR_SPECIAL_x8000
+	scrcmd_560 0, VAR_SPECIAL_x8005
+	goto _023A
 
 _01C1:
-	Compare VAR_SPECIAL_RESULT, 1
-	GoToIfNe _01DE
-	ScrCmd_183 VAR_SPECIAL_x8000
-	ScrCmd_560 0, VAR_SPECIAL_x8005
-	GoTo _023A
+	compare VAR_SPECIAL_RESULT, 1
+	goto_if_ne _01DE
+	scrcmd_183 VAR_SPECIAL_x8000
+	scrcmd_560 0, VAR_SPECIAL_x8005
+	goto _023A
 
 _01DE:
-	Compare VAR_SPECIAL_x8000, VAR_SPECIAL_x8004
-	GoToIfEq _01FB
-	ScrCmd_183 VAR_SPECIAL_x8000
-	ScrCmd_560 0, VAR_SPECIAL_x8005
-	GoTo _023A
+	compare VAR_SPECIAL_x8000, VAR_SPECIAL_x8004
+	goto_if_eq _01FB
+	scrcmd_183 VAR_SPECIAL_x8000
+	scrcmd_560 0, VAR_SPECIAL_x8005
+	goto _023A
 
 _01FB:
-	Compare VAR_SPECIAL_x8006, 1
-	GoToIfNe _0218
-	ScrCmd_183 VAR_SPECIAL_x8004
-	ScrCmd_560 0, VAR_SPECIAL_x8005
-	GoTo _023A
+	compare VAR_SPECIAL_x8006, 1
+	goto_if_ne _0218
+	scrcmd_183 VAR_SPECIAL_x8004
+	scrcmd_560 0, VAR_SPECIAL_x8005
+	goto _023A
 
 _0218:
-	ScrCmd_598 1
-	GetPartyLeadAlive VAR_TEMP_x4000
-	GetPartyMonSpecies VAR_TEMP_x4000, VAR_TEMP_x4000
-	Call _025B
-	PlayCry VAR_TEMP_x4000, 0
-	WaitCry
-	ScrCmd_560 3, VAR_SPECIAL_x8005
+	scrcmd_598 1
+	get_party_lead_alive VAR_TEMP_x4000
+	get_partymon_species VAR_TEMP_x4000, VAR_TEMP_x4000
+	call _025B
+	play_cry VAR_TEMP_x4000, 0
+	wait_cry
+	scrcmd_560 3, VAR_SPECIAL_x8005
 _023A:
-	Wait 7, VAR_SPECIAL_RESULT
-	HidePerson VAR_SPECIAL_LAST_TALKED
+	wait 7, VAR_SPECIAL_RESULT
+	hide_person VAR_SPECIAL_LAST_TALKED
 _0244:
-	Wait 1, VAR_SPECIAL_RESULT
-	Compare VAR_SPECIAL_x8005, 0
-	GoToIfEq _0244
-	ReleaseAll
-	End
+	wait 1, VAR_SPECIAL_RESULT
+	compare VAR_SPECIAL_x8005, 0
+	goto_if_eq _0244
+	releaseall
+	end
 
 _025B:
-	ScrCmd_732 20
-	ScrCmd_733 12, VAR_SPECIAL_RESULT
-	Compare VAR_SPECIAL_RESULT, 1
-	GoToIfNe _027C
-	ScrCmd_734 2
-	ScrCmd_732 1
-	GoTo _027F
+	scrcmd_732 20
+	scrcmd_733 12, VAR_SPECIAL_RESULT
+	compare VAR_SPECIAL_RESULT, 1
+	goto_if_ne _027C
+	scrcmd_734 2
+	scrcmd_732 1
+	goto _027F
 
 _027C:
-	ScrCmd_734 1
+	scrcmd_734 1
 _027F:
-	Return
+	return
 
 scr_seq_0146_001:
-	PlaySE SEQ_SE_DP_SELECT
-	LockAll
-	FacePlayer
-	GetPartySlotWithMove VAR_SPECIAL_RESULT, MOVE_ROCK_SMASH
-	CopyVar VAR_SPECIAL_x8004, VAR_SPECIAL_RESULT
-	Compare VAR_SPECIAL_RESULT, 6
-	GoToIfEq _02D7
-	CheckBadge BADGE_ZEPHYR, VAR_SPECIAL_RESULT
-	Compare VAR_SPECIAL_RESULT, 0
-	GoToIfEq _02D7
-	NPCMsg msg_0211_00003
-	TouchscreenMenuHide
-	GetMenuChoice VAR_SPECIAL_RESULT
-	TouchscreenMenuShow
-	Compare VAR_SPECIAL_RESULT, 0
-	GoToIfEq _02E6
-	CloseMsg
-	GoTo _093D
-	End
+	play_se SEQ_SE_DP_SELECT
+	lockall
+	faceplayer
+	get_party_slot_with_move VAR_SPECIAL_RESULT, MOVE_ROCK_SMASH
+	compare VAR_SPECIAL_RESULT, 6
+	goto_if_ne _APOCHM06
+	get_party_lead_alive VAR_SPECIAL_RESULT
+_APOCHM06:
+	copyvar VAR_SPECIAL_x8004, VAR_SPECIAL_RESULT
+	compare VAR_SPECIAL_RESULT, 6
+	goto_if_eq _02D7
+	npc_msg msg_0211_00003
+	touchscreen_menu_hide
+	getmenuchoice VAR_SPECIAL_RESULT
+	touchscreen_menu_show
+	compare VAR_SPECIAL_RESULT, 0
+	goto_if_eq _02E6
+	closemsg
+	goto _093D
+	end
 
 _02D7:
-	NPCMsg msg_0211_00004
-	WaitButton
-	CloseMsg
-	GoTo _093D
-	End
+	npc_msg msg_0211_00004
+	wait_button_or_walk_away
+	closemsg
+	goto _093D
+	end
 
 _02E6:
-	BufferPartyMonNick 0, VAR_SPECIAL_x8004
-	NPCMsg msg_0211_00005
-	CloseMsg
-	GetFollowPokePartyIndex VAR_SPECIAL_x8005
-	GetPlayerState VAR_SPECIAL_RESULT
-	ScrCmd_730 VAR_SPECIAL_x8006
-	Compare VAR_SPECIAL_RESULT, 2
-	GoToIfNe _031F
-	SetVar VAR_SPECIAL_x8007, 0
-	ScrCmd_183 VAR_SPECIAL_x8004
-	ScrCmd_560 1, VAR_SPECIAL_x8005
-	GoTo _03AA
+	bufferpartymonnick 0, VAR_SPECIAL_x8004
+	npc_msg msg_0211_00005
+	closemsg
+	get_follow_poke_party_index VAR_SPECIAL_x8005
+	get_player_state VAR_SPECIAL_RESULT
+	scrcmd_730 VAR_SPECIAL_x8006
+	compare VAR_SPECIAL_RESULT, 2
+	goto_if_ne _031F
+	setvar VAR_SPECIAL_x8007, 0
+	scrcmd_183 VAR_SPECIAL_x8004
+	scrcmd_560 1, VAR_SPECIAL_x8005
+	goto _03AA
 
 _031F:
-	Compare VAR_SPECIAL_RESULT, 1
-	GoToIfNe _0342
-	SetVar VAR_SPECIAL_x8007, 0
-	ScrCmd_183 VAR_SPECIAL_x8004
-	ScrCmd_560 1, VAR_SPECIAL_x8005
-	GoTo _03AA
+	compare VAR_SPECIAL_RESULT, 1
+	goto_if_ne _0342
+	setvar VAR_SPECIAL_x8007, 0
+	scrcmd_183 VAR_SPECIAL_x8004
+	scrcmd_560 1, VAR_SPECIAL_x8005
+	goto _03AA
 
 _0342:
-	Compare VAR_SPECIAL_x8004, VAR_SPECIAL_x8005
-	GoToIfEq _0365
-	SetVar VAR_SPECIAL_x8007, 0
-	ScrCmd_183 VAR_SPECIAL_x8004
-	ScrCmd_560 1, VAR_SPECIAL_x8005
-	GoTo _03AA
+	compare VAR_SPECIAL_x8004, VAR_SPECIAL_x8005
+	goto_if_eq _0365
+	setvar VAR_SPECIAL_x8007, 0
+	scrcmd_183 VAR_SPECIAL_x8004
+	scrcmd_560 1, VAR_SPECIAL_x8005
+	goto _03AA
 
 _0365:
-	Compare VAR_SPECIAL_x8006, 1
-	GoToIfNe _0382
-	ScrCmd_183 VAR_SPECIAL_x8004
-	ScrCmd_560 1, VAR_SPECIAL_x8005
-	GoTo _03AA
+	compare VAR_SPECIAL_x8006, 1
+	goto_if_ne _0382
+	scrcmd_183 VAR_SPECIAL_x8004
+	scrcmd_560 1, VAR_SPECIAL_x8005
+	goto _03AA
 
 _0382:
-	SetVar VAR_SPECIAL_x8007, 1
-	ScrCmd_598 1
-	GetPartyLeadAlive VAR_TEMP_x4000
-	GetPartyMonSpecies VAR_TEMP_x4000, VAR_TEMP_x4000
-	Call _04D0
-	PlayCry VAR_TEMP_x4000, 0
-	WaitCry
-	ScrCmd_560 2, VAR_SPECIAL_x8005
+	setvar VAR_SPECIAL_x8007, 1
+	scrcmd_598 1
+	get_party_lead_alive VAR_TEMP_x4000
+	get_partymon_species VAR_TEMP_x4000, VAR_TEMP_x4000
+	call _04D0
+	play_cry VAR_TEMP_x4000, 0
+	wait_cry
+	scrcmd_560 2, VAR_SPECIAL_x8005
 _03AA:
-	Wait 10, VAR_SPECIAL_RESULT
-	HidePerson VAR_SPECIAL_LAST_TALKED
+	wait 10, VAR_SPECIAL_RESULT
+	hide_person VAR_SPECIAL_LAST_TALKED
 _03B4:
-	Wait 1, VAR_SPECIAL_RESULT
-	Compare VAR_SPECIAL_x8005, 0
-	GoToIfEq _03B4
-	ReleaseAll
-	RockSmashItemCheck VAR_SPECIAL_x8007, VAR_SPECIAL_RESULT, VAR_SPECIAL_x8006
-	GoTo _0CEB
-	End
+	wait 1, VAR_SPECIAL_RESULT
+	compare VAR_SPECIAL_x8005, 0
+	goto_if_eq _03B4
+	releaseall
+	scrcmd_rock_smash_item_check VAR_SPECIAL_x8007, VAR_SPECIAL_RESULT, VAR_SPECIAL_x8006
+	goto _0CEB
+	end
 
 scr_seq_0146_008:
-	ScrCmd_609
-	LockAll
-	BufferPartyMonNick 0, VAR_SPECIAL_x8000
-	NPCMsg msg_0211_00005
-	CloseMsg
-	GetFollowPokePartyIndex VAR_SPECIAL_x8004
-	GetPlayerState VAR_SPECIAL_RESULT
-	ScrCmd_730 VAR_SPECIAL_x8006
-	Compare VAR_SPECIAL_RESULT, 2
-	GoToIfNe _0416
-	SetVar VAR_SPECIAL_x8007, 0
-	ScrCmd_183 VAR_SPECIAL_x8000
-	ScrCmd_560 1, VAR_SPECIAL_x8005
-	GoTo _04A1
+	scrcmd_609
+	lockall
+	bufferpartymonnick 0, VAR_SPECIAL_x8000
+	npc_msg msg_0211_00005
+	closemsg
+	get_follow_poke_party_index VAR_SPECIAL_x8004
+	get_player_state VAR_SPECIAL_RESULT
+	scrcmd_730 VAR_SPECIAL_x8006
+	compare VAR_SPECIAL_RESULT, 2
+	goto_if_ne _0416
+	setvar VAR_SPECIAL_x8007, 0
+	scrcmd_183 VAR_SPECIAL_x8000
+	scrcmd_560 1, VAR_SPECIAL_x8005
+	goto _04A1
 
 _0416:
-	Compare VAR_SPECIAL_RESULT, 1
-	GoToIfNe _0439
-	SetVar VAR_SPECIAL_x8007, 0
-	ScrCmd_183 VAR_SPECIAL_x8000
-	ScrCmd_560 1, VAR_SPECIAL_x8005
-	GoTo _04A1
+	compare VAR_SPECIAL_RESULT, 1
+	goto_if_ne _0439
+	setvar VAR_SPECIAL_x8007, 0
+	scrcmd_183 VAR_SPECIAL_x8000
+	scrcmd_560 1, VAR_SPECIAL_x8005
+	goto _04A1
 
 _0439:
-	Compare VAR_SPECIAL_x8000, VAR_SPECIAL_x8004
-	GoToIfEq _045C
-	SetVar VAR_SPECIAL_x8007, 0
-	ScrCmd_183 VAR_SPECIAL_x8000
-	ScrCmd_560 1, VAR_SPECIAL_x8005
-	GoTo _04A1
+	compare VAR_SPECIAL_x8000, VAR_SPECIAL_x8004
+	goto_if_eq _045C
+	setvar VAR_SPECIAL_x8007, 0
+	scrcmd_183 VAR_SPECIAL_x8000
+	scrcmd_560 1, VAR_SPECIAL_x8005
+	goto _04A1
 
 _045C:
-	Compare VAR_SPECIAL_x8006, 1
-	GoToIfNe _0479
-	ScrCmd_183 VAR_SPECIAL_x8004
-	ScrCmd_560 1, VAR_SPECIAL_x8005
-	GoTo _04A1
+	compare VAR_SPECIAL_x8006, 1
+	goto_if_ne _0479
+	scrcmd_183 VAR_SPECIAL_x8004
+	scrcmd_560 1, VAR_SPECIAL_x8005
+	goto _04A1
 
 _0479:
-	ScrCmd_598 1
-	SetVar VAR_SPECIAL_x8007, 1
-	GetPartyLeadAlive VAR_TEMP_x4000
-	GetPartyMonSpecies VAR_TEMP_x4000, VAR_TEMP_x4000
-	Call _04D0
-	PlayCry VAR_TEMP_x4000, 0
-	WaitCry
-	ScrCmd_560 2, VAR_SPECIAL_x8005
+	scrcmd_598 1
+	setvar VAR_SPECIAL_x8007, 1
+	get_party_lead_alive VAR_TEMP_x4000
+	get_partymon_species VAR_TEMP_x4000, VAR_TEMP_x4000
+	call _04D0
+	play_cry VAR_TEMP_x4000, 0
+	wait_cry
+	scrcmd_560 2, VAR_SPECIAL_x8005
 _04A1:
-	Wait 10, VAR_SPECIAL_RESULT
-	HidePerson VAR_SPECIAL_LAST_TALKED
+	wait 10, VAR_SPECIAL_RESULT
+	hide_person VAR_SPECIAL_LAST_TALKED
 _04AB:
-	Wait 1, VAR_SPECIAL_RESULT
-	Compare VAR_SPECIAL_x8005, 0
-	GoToIfEq _04AB
-	ReleaseAll
-	RockSmashItemCheck VAR_SPECIAL_x8007, VAR_SPECIAL_RESULT, VAR_SPECIAL_x8006
-	GoTo _0CEB
-	End
+	wait 1, VAR_SPECIAL_RESULT
+	compare VAR_SPECIAL_x8005, 0
+	goto_if_eq _04AB
+	releaseall
+	scrcmd_rock_smash_item_check VAR_SPECIAL_x8007, VAR_SPECIAL_RESULT, VAR_SPECIAL_x8006
+	goto _0CEB
+	end
 
 _04D0:
-	ScrCmd_732 20
-	ScrCmd_733 1, VAR_SPECIAL_RESULT
-	Compare VAR_SPECIAL_RESULT, 1
-	GoToIfNe _04F1
-	ScrCmd_734 2
-	ScrCmd_732 1
-	GoTo _04F4
+	scrcmd_732 20
+	scrcmd_733 1, VAR_SPECIAL_RESULT
+	compare VAR_SPECIAL_RESULT, 1
+	goto_if_ne _04F1
+	scrcmd_734 2
+	scrcmd_732 1
+	goto _04F4
 
 _04F1:
-	ScrCmd_734 1
+	scrcmd_734 1
 _04F4:
-	Return
+	return
 
 scr_seq_0146_002:
-	PlaySE SEQ_SE_DP_SELECT
-	LockAll
-	FacePlayer
-	StrengthFlagAction 2, VAR_SPECIAL_RESULT
-	Compare VAR_SPECIAL_RESULT, 1
-	GoToIfNe _051C
-	Call _061D
-	GoTo _093D
+	play_se SEQ_SE_DP_SELECT
+	lockall
+	faceplayer
+	strength_flag_action 2, VAR_SPECIAL_RESULT
+	compare VAR_SPECIAL_RESULT, 1
+	goto_if_ne _051C
+	call _061D
+	goto _093D
 
 _051C:
-	GetPartySlotWithMove VAR_SPECIAL_RESULT, MOVE_STRENGTH
-	Compare VAR_SPECIAL_RESULT, 6
-	GoToIfEq _0564
-	CheckBadge BADGE_PLAIN, VAR_SPECIAL_RESULT
-	Compare VAR_SPECIAL_RESULT, 0
-	GoToIfEq _0564
-	NPCMsg msg_0211_00007
-	TouchscreenMenuHide
-	GetMenuChoice VAR_SPECIAL_RESULT
-	TouchscreenMenuShow
-	Compare VAR_SPECIAL_RESULT, 0
-	GoToIfEq _0573
-	CloseMsg
-	GoTo _093D
-	End
+	get_party_slot_with_move VAR_SPECIAL_RESULT, MOVE_STRENGTH
+	compare VAR_SPECIAL_RESULT, 6
+	goto_if_ne _APOCHM01
+	hasitem ITEM_HM04, 1, VAR_SPECIAL_RESULT
+	compare VAR_SPECIAL_RESULT, 0
+	goto_if_eq _0564
+_APOCHM01:
+	npc_msg msg_0211_00007
+	touchscreen_menu_hide
+	getmenuchoice VAR_SPECIAL_RESULT
+	touchscreen_menu_show
+	compare VAR_SPECIAL_RESULT, 0
+	goto_if_eq _0573
+	closemsg
+	goto _093D
+	end
 
 _0564:
-	NPCMsg msg_0211_00009
-	WaitButton
-	CloseMsg
-	GoTo _093D
-	End
+	npc_msg msg_0211_00009
+	wait_button_or_walk_away
+	closemsg
+	goto _093D
+	end
 
 _0573:
-	StrengthFlagAction 1
-	GetPartySlotWithMove VAR_SPECIAL_RESULT, MOVE_STRENGTH
-	CopyVar VAR_SPECIAL_x8004, VAR_SPECIAL_RESULT
-	BufferPartyMonNick 0, VAR_SPECIAL_RESULT
-	NPCMsg msg_0211_00011
-	CloseMsg
-	GetFollowPokePartyIndex VAR_SPECIAL_x8005
-	GetPlayerState VAR_SPECIAL_RESULT
-	ScrCmd_730 VAR_SPECIAL_x8006
-	Compare VAR_SPECIAL_RESULT, 2
-	GoToIfNe _05AF
-	ScrCmd_183 VAR_SPECIAL_x8004
-	GoTo _060E
+	strength_flag_action 1
+	get_party_slot_with_move VAR_SPECIAL_RESULT, MOVE_STRENGTH
+	compare VAR_SPECIAL_RESULT, 6
+	goto_if_ne _APOCHM07
+	get_party_lead_alive VAR_SPECIAL_RESULT
+_APOCHM07:
+	copyvar VAR_SPECIAL_x8004, VAR_SPECIAL_RESULT
+	bufferpartymonnick 0, VAR_SPECIAL_RESULT
+	npc_msg msg_0211_00011
+	closemsg
+	get_follow_poke_party_index VAR_SPECIAL_x8005
+	get_player_state VAR_SPECIAL_RESULT
+	scrcmd_730 VAR_SPECIAL_x8006
+	compare VAR_SPECIAL_RESULT, 2
+	goto_if_ne _05AF
+	scrcmd_183 VAR_SPECIAL_x8004
+	goto _060E
 
 _05AF:
-	Compare VAR_SPECIAL_RESULT, 1
-	GoToIfNe _05C6
-	ScrCmd_183 VAR_SPECIAL_x8004
-	GoTo _060E
+	compare VAR_SPECIAL_RESULT, 1
+	goto_if_ne _05C6
+	scrcmd_183 VAR_SPECIAL_x8004
+	goto _060E
 
 _05C6:
-	Compare VAR_SPECIAL_x8004, VAR_SPECIAL_x8005
-	GoToIfEq _05DD
-	ScrCmd_183 VAR_SPECIAL_x8004
-	GoTo _060E
+	compare VAR_SPECIAL_x8004, VAR_SPECIAL_x8005
+	goto_if_eq _05DD
+	scrcmd_183 VAR_SPECIAL_x8004
+	goto _060E
 
 _05DD:
-	Compare VAR_SPECIAL_x8006, 1
-	GoToIfNe _05F4
-	ScrCmd_183 VAR_SPECIAL_x8004
-	GoTo _060E
+	compare VAR_SPECIAL_x8006, 1
+	goto_if_ne _05F4
+	scrcmd_183 VAR_SPECIAL_x8004
+	goto _060E
 
 _05F4:
-	GetPartyLeadAlive VAR_TEMP_x4000
-	GetPartyMonSpecies VAR_TEMP_x4000, VAR_TEMP_x4000
-	Call _0715
-	PlayCry VAR_TEMP_x4000, 0
-	WaitCry
-	ScrCmd_731
+	get_party_lead_alive VAR_TEMP_x4000
+	get_partymon_species VAR_TEMP_x4000, VAR_TEMP_x4000
+	call _0715
+	play_cry VAR_TEMP_x4000, 0
+	wait_cry
+	scrcmd_731
 _060E:
-	NPCMsg msg_0211_00012
-	WaitButton
-	CloseMsg
-	GoTo _093D
-	End
+	npc_msg msg_0211_00012
+	wait_button_or_walk_away
+	closemsg
+	goto _093D
+	end
 
 _061D:
-	NPCMsg msg_0211_00010
-	WaitButton
-	CloseMsg
-	Return
+	npc_msg msg_0211_00010
+	wait_button_or_walk_away
+	closemsg
+	return
 
 scr_seq_0146_009:
-	ScrCmd_609
-	LockAll
-	StrengthFlagAction 2, VAR_SPECIAL_RESULT
-	Compare VAR_SPECIAL_RESULT, 1
-	GoToIfNe _0648
-	Call _061D
-	GoTo _0945
+	scrcmd_609
+	lockall
+	strength_flag_action 2, VAR_SPECIAL_RESULT
+	compare VAR_SPECIAL_RESULT, 1
+	goto_if_ne _0648
+	call _061D
+	goto _0945
 
 _0648:
-	StrengthFlagAction 1
-	BufferPartyMonNick 0, VAR_SPECIAL_x8000
-	NPCMsg msg_0211_00011
-	CloseMsg
-	GetFollowPokePartyIndex VAR_SPECIAL_x8004
-	GetPlayerState VAR_SPECIAL_RESULT
-	ScrCmd_730 VAR_SPECIAL_x8006
-	Compare VAR_SPECIAL_RESULT, 2
-	GoToIfNe _0678
-	ScrCmd_183 VAR_SPECIAL_x8000
-	GoTo _06D7
+	strength_flag_action 1
+	bufferpartymonnick 0, VAR_SPECIAL_x8000
+	npc_msg msg_0211_00011
+	closemsg
+	get_follow_poke_party_index VAR_SPECIAL_x8004
+	get_player_state VAR_SPECIAL_RESULT
+	scrcmd_730 VAR_SPECIAL_x8006
+	compare VAR_SPECIAL_RESULT, 2
+	goto_if_ne _0678
+	scrcmd_183 VAR_SPECIAL_x8000
+	goto _06D7
 
 _0678:
-	Compare VAR_SPECIAL_RESULT, 1
-	GoToIfNe _068F
-	ScrCmd_183 VAR_SPECIAL_x8000
-	GoTo _06D7
+	compare VAR_SPECIAL_RESULT, 1
+	goto_if_ne _068F
+	scrcmd_183 VAR_SPECIAL_x8000
+	goto _06D7
 
 _068F:
-	Compare VAR_SPECIAL_x8000, VAR_SPECIAL_x8004
-	GoToIfEq _06A6
-	ScrCmd_183 VAR_SPECIAL_x8000
-	GoTo _06D7
+	compare VAR_SPECIAL_x8000, VAR_SPECIAL_x8004
+	goto_if_eq _06A6
+	scrcmd_183 VAR_SPECIAL_x8000
+	goto _06D7
 
 _06A6:
-	Compare VAR_SPECIAL_x8006, 1
-	GoToIfNe _06BD
-	ScrCmd_183 VAR_SPECIAL_x8000
-	GoTo _06D7
+	compare VAR_SPECIAL_x8006, 1
+	goto_if_ne _06BD
+	scrcmd_183 VAR_SPECIAL_x8000
+	goto _06D7
 
 _06BD:
-	GetPartyLeadAlive VAR_TEMP_x4000
-	GetPartyMonSpecies VAR_TEMP_x4000, VAR_TEMP_x4000
-	Call _0715
-	PlayCry VAR_TEMP_x4000, 0
-	WaitCry
-	ScrCmd_731
+	get_party_lead_alive VAR_TEMP_x4000
+	get_partymon_species VAR_TEMP_x4000, VAR_TEMP_x4000
+	call _0715
+	play_cry VAR_TEMP_x4000, 0
+	wait_cry
+	scrcmd_731
 _06D7:
-	NPCMsg msg_0211_00012
-	WaitButton
-	CloseMsg
-	GoTo _0945
-	End
+	npc_msg msg_0211_00012
+	wait_button_or_walk_away
+	closemsg
+	goto _0945
+	end
 
 scr_seq_0146_015:
-	PlaySE SEQ_SE_GS_IWAOTOSHI01
-	Wait 12, VAR_SPECIAL_RESULT
-	PlaySE SEQ_SE_GS_IWAOTOSHI02
-	ScreenShake 0, 4, 2, 8
-	ScreenShake 0, 2, 1, 8
-	WaitSE SEQ_SE_GS_IWAOTOSHI02
-	NPCMsg msg_0211_00013
-	WaitButton
-	CloseMsg
-	End
+	play_se SEQ_SE_GS_IWAOTOSHI01
+	wait 12, VAR_SPECIAL_RESULT
+	play_se SEQ_SE_GS_IWAOTOSHI02
+	screen_shake 0, 4, 2, 8
+	screen_shake 0, 2, 1, 8
+	wait_se SEQ_SE_GS_IWAOTOSHI02
+	npc_msg msg_0211_00013
+	wait_button_or_walk_away
+	closemsg
+	end
 
 _0715:
-	ScrCmd_733 0, VAR_SPECIAL_RESULT
-	Compare VAR_SPECIAL_RESULT, 1
-	GoToIfNe _0733
-	ScrCmd_734 2
-	ScrCmd_732 1
-	GoTo _0736
+	scrcmd_733 0, VAR_SPECIAL_RESULT
+	compare VAR_SPECIAL_RESULT, 1
+	goto_if_ne _0733
+	scrcmd_734 2
+	scrcmd_732 1
+	goto _0736
 
 _0733:
-	ScrCmd_734 1
+	scrcmd_734 1
 _0736:
-	Return
+	return
 
 scr_seq_0146_003:
-	PlaySE SEQ_SE_DP_SELECT
-	LockAll
-	GetPartySlotWithMove VAR_SPECIAL_RESULT, MOVE_ROCK_CLIMB
-	Compare VAR_SPECIAL_RESULT, 6
-	GoToIfEq _0797
-	CheckBadge BADGE_EARTH, VAR_SPECIAL_RESULT
-	Compare VAR_SPECIAL_RESULT, 0
-	GoToIfEq _0797
-	CheckEscortMode VAR_SPECIAL_RESULT
-	Compare VAR_SPECIAL_RESULT, 1
-	GoToIfEq _07A6
-	NPCMsg msg_0211_00020
-	TouchscreenMenuHide
-	GetMenuChoice VAR_SPECIAL_RESULT
-	TouchscreenMenuShow
-	Compare VAR_SPECIAL_RESULT, 0
-	GoToIfEq _07B5
-	CloseMsg
-	GoTo _0941
-	End
+	play_se SEQ_SE_DP_SELECT
+	lockall
+	get_party_slot_with_move VAR_SPECIAL_RESULT, MOVE_ROCK_CLIMB
+	compare VAR_SPECIAL_RESULT, 6
+	goto_if_ne _APOCHM02
+	hasitem ITEM_HM08, 1, VAR_SPECIAL_RESULT
+	compare VAR_SPECIAL_RESULT, 0
+	goto_if_eq _0797
+_APOCHM02:
+	check_escort_mode VAR_SPECIAL_RESULT
+	compare VAR_SPECIAL_RESULT, 1
+	goto_if_eq _07A6
+	npc_msg msg_0211_00020
+	touchscreen_menu_hide
+	getmenuchoice VAR_SPECIAL_RESULT
+	touchscreen_menu_show
+	compare VAR_SPECIAL_RESULT, 0
+	goto_if_eq _07B5
+	closemsg
+	goto _0941
+	end
 
 _0797:
-	NPCMsg msg_0211_00022
-	WaitButton
-	CloseMsg
-	GoTo _0941
-	End
+	npc_msg msg_0211_00022
+	wait_button_or_walk_away
+	closemsg
+	goto _0941
+	end
 
 _07A6:
-	NPCMsg msg_0211_00023
-	WaitButton
-	CloseMsg
-	GoTo _0941
-	End
+	npc_msg msg_0211_00023
+	wait_button_or_walk_away
+	closemsg
+	goto _0941
+	end
 
 _07B5:
-	GetPartySlotWithMove VAR_SPECIAL_RESULT, MOVE_ROCK_CLIMB
-	CopyVar VAR_SPECIAL_x8004, VAR_SPECIAL_RESULT
-	BufferPartyMonNick 0, VAR_SPECIAL_RESULT
-	NPCMsg msg_0211_00021
-	CloseMsg
-	RockClimb VAR_SPECIAL_x8004
-	GoTo _0941
-	End
+	get_party_slot_with_move VAR_SPECIAL_RESULT, MOVE_ROCK_CLIMB
+	compare VAR_SPECIAL_RESULT, 6
+	goto_if_ne _APOCHM08
+	get_party_lead_alive VAR_SPECIAL_RESULT
+_APOCHM08:
+	copyvar VAR_SPECIAL_x8004, VAR_SPECIAL_RESULT
+	bufferpartymonnick 0, VAR_SPECIAL_RESULT
+	npc_msg msg_0211_00021
+	closemsg
+	rock_climb VAR_SPECIAL_x8004
+	goto _0941
+	end
 
 scr_seq_0146_010:
-	ScrCmd_609
-	LockAll
-	BufferPartyMonNick 0, VAR_SPECIAL_x8000
-	NPCMsg msg_0211_00021
-	CloseMsg
-	RockClimb VAR_SPECIAL_x8000
-	ReleaseAll
-	End
+	scrcmd_609
+	lockall
+	bufferpartymonnick 0, VAR_SPECIAL_x8000
+	npc_msg msg_0211_00021
+	closemsg
+	rock_climb VAR_SPECIAL_x8000
+	releaseall
+	end
 
 scr_seq_0146_004:
-	PlaySE SEQ_SE_DP_SELECT
-	LockAll
-	CheckEscortMode VAR_SPECIAL_RESULT
-	Compare VAR_SPECIAL_RESULT, 1
-	GoToIfEq _0826
-	NPCMsg msg_0211_00014
-	TouchscreenMenuHide
-	GetMenuChoice VAR_SPECIAL_RESULT
-	TouchscreenMenuShow
-	Compare VAR_SPECIAL_RESULT, 0
-	GoToIfEq _0833
-	CloseMsg
-	GoTo _0941
-	End
+	play_se SEQ_SE_DP_SELECT
+	lockall
+	hasitem ITEM_HM03, 1, VAR_SPECIAL_RESULT
+	compare VAR_SPECIAL_RESULT, 0
+	goto_if_eq _0826
+	check_escort_mode VAR_SPECIAL_RESULT
+	compare VAR_SPECIAL_RESULT, 1
+	goto_if_eq _0826
+	npc_msg msg_0211_00014
+	touchscreen_menu_hide
+	getmenuchoice VAR_SPECIAL_RESULT
+	touchscreen_menu_show
+	compare VAR_SPECIAL_RESULT, 0
+	goto_if_eq _0833
+	closemsg
+	goto _0941
+	end
 
 _0826:
-	NPCMsg msg_0211_00016
-	WaitButton
-	CloseMsg
-	GoTo _0941
+	npc_msg msg_0211_00016
+	wait_button_or_walk_away
+	closemsg
+	goto _0941
 
 _0833:
-	GetPartySlotWithMove VAR_SPECIAL_RESULT, MOVE_SURF
-	CopyVar VAR_SPECIAL_x8004, VAR_SPECIAL_RESULT
-	BufferPartyMonNick 0, VAR_SPECIAL_RESULT
-	NPCMsg msg_0211_00015
-	CloseMsg
-	Surf VAR_SPECIAL_x8004
-	GoTo _0941
-	End
+	get_party_slot_with_move VAR_SPECIAL_RESULT, MOVE_SURF
+	compare VAR_SPECIAL_RESULT, 6
+	goto_if_ne _APOCHM09
+	get_party_lead_alive VAR_SPECIAL_RESULT
+_APOCHM09:
+	copyvar VAR_SPECIAL_x8004, VAR_SPECIAL_RESULT
+	bufferpartymonnick 0, VAR_SPECIAL_RESULT
+	npc_msg msg_0211_00015
+	closemsg
+	surf VAR_SPECIAL_x8004
+	goto _0941
+	end
 
 scr_seq_0146_011:
-	ScrCmd_609
-	LockAll
-	BufferPartyMonNick 0, VAR_SPECIAL_x8000
-	NPCMsg msg_0211_00015
-	CloseMsg
-	Release obj_player
-	Surf VAR_SPECIAL_x8000
-	Lock obj_player
-	ReleaseAll
-	End
+	scrcmd_609
+	lockall
+	bufferpartymonnick 0, VAR_SPECIAL_x8000
+	npc_msg msg_0211_00015
+	closemsg
+	release obj_player
+	surf VAR_SPECIAL_x8000
+	lock obj_player
+	releaseall
+	end
 
 scr_seq_0146_013:
-	ScrCmd_609
-	LockAll
-	BufferPartyMonNick 0, VAR_SPECIAL_x8000
-	NPCMsg msg_0211_00028
-	CloseMsg
-	GetFollowPokePartyIndex VAR_SPECIAL_x8005
-	GetPlayerState VAR_SPECIAL_RESULT
-	ScrCmd_730 VAR_SPECIAL_x8006
-	Compare VAR_SPECIAL_RESULT, 2
-	GoToIfNe _08A4
-	ScrCmd_183 VAR_SPECIAL_x8000
-	GoTo _0909
+	scrcmd_609
+	lockall
+	bufferpartymonnick 0, VAR_SPECIAL_x8000
+	npc_msg msg_0211_00028
+	closemsg
+	get_follow_poke_party_index VAR_SPECIAL_x8005
+	get_player_state VAR_SPECIAL_RESULT
+	scrcmd_730 VAR_SPECIAL_x8006
+	compare VAR_SPECIAL_RESULT, 2
+	goto_if_ne _08A4
+	scrcmd_183 VAR_SPECIAL_x8000
+	goto _0909
 
 _08A4:
-	Compare VAR_SPECIAL_RESULT, 1
-	GoToIfNe _08BB
-	ScrCmd_183 VAR_SPECIAL_x8000
-	GoTo _0909
+	compare VAR_SPECIAL_RESULT, 1
+	goto_if_ne _08BB
+	scrcmd_183 VAR_SPECIAL_x8000
+	goto _0909
 
 _08BB:
-	Compare VAR_SPECIAL_x8000, VAR_SPECIAL_x8005
-	GoToIfEq _08D2
-	ScrCmd_183 VAR_SPECIAL_x8000
-	GoTo _0909
+	compare VAR_SPECIAL_x8000, VAR_SPECIAL_x8005
+	goto_if_eq _08D2
+	scrcmd_183 VAR_SPECIAL_x8000
+	goto _0909
 
 _08D2:
-	Compare VAR_SPECIAL_x8006, 1
-	GoToIfNe _08E9
-	ScrCmd_183 VAR_SPECIAL_x8000
-	GoTo _0909
+	compare VAR_SPECIAL_x8006, 1
+	goto_if_ne _08E9
+	scrcmd_183 VAR_SPECIAL_x8000
+	goto _0909
 
 _08E9:
-	GetPartyLeadAlive VAR_TEMP_x4000
-	GetPartyMonSpecies VAR_TEMP_x4000, VAR_TEMP_x4000
-	Call _091A
-	PlayCry VAR_TEMP_x4000, 0
-	WaitCry
-	ScrCmd_728 16, 2
-	ScrCmd_728 16, 2
+	get_party_lead_alive VAR_TEMP_x4000
+	get_partymon_species VAR_TEMP_x4000, VAR_TEMP_x4000
+	call _091A
+	play_cry VAR_TEMP_x4000, 0
+	wait_cry
+	scrcmd_728 16, 2
+	scrcmd_728 16, 2
 _0909:
-	FlashAction 1
-	FlashEffect
-	Wait 42, VAR_SPECIAL_RESULT
-	GoTo _0945
+	flash_action 1
+	flash_effect
+	wait 42, VAR_SPECIAL_RESULT
+	goto _0945
 
 _091A:
-	ScrCmd_733 14, VAR_SPECIAL_RESULT
-	Compare VAR_SPECIAL_RESULT, 1
-	GoToIfNe _0938
-	ScrCmd_734 2
-	ScrCmd_732 1
-	GoTo _093B
+	scrcmd_733 14, VAR_SPECIAL_RESULT
+	compare VAR_SPECIAL_RESULT, 1
+	goto_if_ne _0938
+	scrcmd_734 2
+	scrcmd_732 1
+	goto _093B
 
 _0938:
-	ScrCmd_734 1
+	scrcmd_734 1
 _093B:
-	Return
+	return
 
 _093D:
-	ReleaseAll
-	End
+	releaseall
+	end
 
 _0941:
-	ReleaseAll
-	End
+	releaseall
+	end
 
 _0945:
-	ReleaseAll
-	End
+	releaseall
+	end
 
 scr_seq_0146_005:
-	PlaySE SEQ_SE_DP_SELECT
-	LockAll
-	GetPartySlotWithMove VAR_SPECIAL_RESULT, MOVE_WATERFALL
-	Compare VAR_SPECIAL_RESULT, 6
-	GoToIfEq _0997
-	CheckBadge BADGE_RISING, VAR_SPECIAL_RESULT
-	Compare VAR_SPECIAL_RESULT, 0
-	GoToIfEq _0997
-	NPCMsg msg_0211_00024
-	TouchscreenMenuHide
-	GetMenuChoice VAR_SPECIAL_RESULT
-	TouchscreenMenuShow
-	Compare VAR_SPECIAL_RESULT, 0
-	GoToIfEq _09A6
-	CloseMsg
-	GoTo _0941
-	End
+	play_se SEQ_SE_DP_SELECT
+	lockall
+	get_party_slot_with_move VAR_SPECIAL_RESULT, MOVE_WATERFALL
+	compare VAR_SPECIAL_RESULT, 6
+	goto_if_ne _APOCHM03
+	hasitem ITEM_HM07, 1, VAR_SPECIAL_RESULT
+	compare VAR_SPECIAL_RESULT, 0
+	goto_if_eq _0997
+_APOCHM03:
+	npc_msg msg_0211_00024
+	touchscreen_menu_hide
+	getmenuchoice VAR_SPECIAL_RESULT
+	touchscreen_menu_show
+	compare VAR_SPECIAL_RESULT, 0
+	goto_if_eq _09A6
+	closemsg
+	goto _0941
+	end
 
 _0997:
-	NPCMsg msg_0211_00026
-	WaitButton
-	CloseMsg
-	GoTo _0941
-	End
+	npc_msg msg_0211_00026
+	wait_button_or_walk_away
+	closemsg
+	goto _0941
+	end
 
 _09A6:
-	GetPartySlotWithMove VAR_SPECIAL_RESULT, MOVE_WATERFALL
-	CopyVar VAR_SPECIAL_x8004, VAR_SPECIAL_RESULT
-	BufferPartyMonNick 0, VAR_SPECIAL_RESULT
-	NPCMsg msg_0211_00025
-	CloseMsg
-	Waterfall VAR_SPECIAL_x8004
-	GoTo _0941
-	End
+	get_party_slot_with_move VAR_SPECIAL_RESULT, MOVE_WATERFALL
+	compare VAR_SPECIAL_RESULT, 6
+	goto_if_ne _APOCHM10
+	get_party_lead_alive VAR_SPECIAL_RESULT
+_APOCHM10:
+	copyvar VAR_SPECIAL_x8004, VAR_SPECIAL_RESULT
+	bufferpartymonnick 0, VAR_SPECIAL_RESULT
+	npc_msg msg_0211_00025
+	closemsg
+	waterfall VAR_SPECIAL_x8004
+	goto _0941
+	end
 
 scr_seq_0146_012:
-	ScrCmd_609
-	LockAll
-	BufferPartyMonNick 0, VAR_SPECIAL_x8000
-	NPCMsg msg_0211_00025
-	CloseMsg
-	Release obj_player
-	Waterfall VAR_SPECIAL_x8000
-	Lock obj_player
-	ReleaseAll
-	End
+	scrcmd_609
+	lockall
+	bufferpartymonnick 0, VAR_SPECIAL_x8000
+	npc_msg msg_0211_00025
+	closemsg
+	release obj_player
+	waterfall VAR_SPECIAL_x8000
+	lock obj_player
+	releaseall
+	end
 
 scr_seq_0146_016:
-	PlaySE SEQ_SE_DP_SELECT
-	LockAll
-	GetPartySlotWithMove VAR_SPECIAL_RESULT, MOVE_WHIRLPOOL
-	Compare VAR_SPECIAL_RESULT, 6
-	GoToIfEq _0A34
-	CheckBadge BADGE_GLACIER, VAR_SPECIAL_RESULT
-	Compare VAR_SPECIAL_RESULT, 0
-	GoToIfEq _0A34
-	NPCMsg msg_0211_00029
-	TouchscreenMenuHide
-	GetMenuChoice VAR_SPECIAL_RESULT
-	TouchscreenMenuShow
-	Compare VAR_SPECIAL_RESULT, 0
-	GoToIfEq _0A43
-	CloseMsg
-	GoTo _0941
-	End
+	play_se SEQ_SE_DP_SELECT
+	lockall
+	get_party_slot_with_move VAR_SPECIAL_RESULT, MOVE_WHIRLPOOL
+	compare VAR_SPECIAL_RESULT, 6
+	goto_if_ne _APOCHM04
+	hasitem ITEM_HM05, 1, VAR_SPECIAL_RESULT
+	compare VAR_SPECIAL_RESULT, 0
+	goto_if_eq _0A34
+_APOCHM04:
+	npc_msg msg_0211_00029
+	touchscreen_menu_hide
+	getmenuchoice VAR_SPECIAL_RESULT
+	touchscreen_menu_show
+	compare VAR_SPECIAL_RESULT, 0
+	goto_if_eq _0A43
+	closemsg
+	goto _0941
+	end
 
 _0A34:
-	NPCMsg msg_0211_00031
-	WaitButton
-	CloseMsg
-	GoTo _0941
-	End
+	npc_msg msg_0211_00031
+	wait_button_or_walk_away
+	closemsg
+	goto _0941
+	end
 
 _0A43:
-	GetPartySlotWithMove VAR_SPECIAL_RESULT, MOVE_WHIRLPOOL
-	CopyVar VAR_SPECIAL_x8004, VAR_SPECIAL_RESULT
-	BufferPartyMonNick 0, VAR_SPECIAL_RESULT
-	NPCMsg msg_0211_00030
-	CloseMsg
-	Whirlpool VAR_SPECIAL_x8004
-	GoTo _0941
-	End
+	get_party_slot_with_move VAR_SPECIAL_RESULT, MOVE_WHIRLPOOL
+	compare VAR_SPECIAL_RESULT, 6
+	goto_if_ne _APOCHM11
+	get_party_lead_alive VAR_SPECIAL_RESULT
+_APOCHM11:
+	copyvar VAR_SPECIAL_x8004, VAR_SPECIAL_RESULT
+	bufferpartymonnick 0, VAR_SPECIAL_RESULT
+	npc_msg msg_0211_00030
+	closemsg
+	whirlpool VAR_SPECIAL_x8004
+	goto _0941
+	end
 
 scr_seq_0146_017:
-	ScrCmd_609
-	LockAll
-	BufferPartyMonNick 0, VAR_SPECIAL_x8000
-	NPCMsg msg_0211_00030
-	CloseMsg
-	Release obj_player
-	Whirlpool VAR_SPECIAL_x8000
-	Lock obj_player
-	ReleaseAll
-	End
+	scrcmd_609
+	lockall
+	bufferpartymonnick 0, VAR_SPECIAL_x8000
+	npc_msg msg_0211_00030
+	closemsg
+	release obj_player
+	whirlpool VAR_SPECIAL_x8000
+	lock obj_player
+	releaseall
+	end
 
 scr_seq_0146_006:
-	End
+	end
 
 scr_seq_0146_014:
-	PlaySE SEQ_SE_DP_SELECT
-	LockAll
-	FacePlayer
-	GetPartySlotWithMove VAR_SPECIAL_RESULT, MOVE_HEADBUTT
-	Compare VAR_SPECIAL_RESULT, 6
-	GoToIfEq _0AC2
-	NPCMsg msg_0211_00032
-	TouchscreenMenuHide
-	GetMenuChoice VAR_SPECIAL_RESULT
-	TouchscreenMenuShow
-	Compare VAR_SPECIAL_RESULT, 0
-	GoToIfEq _0AD1
-	CloseMsg
-	GoTo _093D
-	End
+	play_se SEQ_SE_DP_SELECT
+	lockall
+	faceplayer
+	get_party_slot_with_move VAR_SPECIAL_RESULT, MOVE_HEADBUTT
+	compare VAR_SPECIAL_RESULT, 6
+	goto_if_eq _0AC2
+	npc_msg msg_0211_00032
+	touchscreen_menu_hide
+	getmenuchoice VAR_SPECIAL_RESULT
+	touchscreen_menu_show
+	compare VAR_SPECIAL_RESULT, 0
+	goto_if_eq _0AD1
+	closemsg
+	goto _093D
+	end
 
 _0AC2:
-	NPCMsg msg_0211_00034
-	WaitButton
-	CloseMsg
-	GoTo _093D
-	End
+	npc_msg msg_0211_00034
+	wait_button_or_walk_away
+	closemsg
+	goto _093D
+	end
 
 _0AD1:
-	GetPartySlotWithMove VAR_SPECIAL_RESULT, MOVE_HEADBUTT
-	CopyVar VAR_SPECIAL_x8004, VAR_SPECIAL_RESULT
-	GetFollowPokePartyIndex VAR_SPECIAL_x8005
-	BufferPartyMonNick 0, VAR_SPECIAL_RESULT
-	NPCMsg msg_0211_00033
-	CloseMsg
-	GetPlayerState VAR_SPECIAL_RESULT
-	ScrCmd_730 VAR_SPECIAL_x8006
-	Compare VAR_SPECIAL_RESULT, 2
-	GoToIfNe _0B10
-	ScrCmd_183 VAR_SPECIAL_x8004
-	ScrCmd_560 4, VAR_SPECIAL_x8005
-	GoTo _0BAE
+	get_party_slot_with_move VAR_SPECIAL_RESULT, MOVE_HEADBUTT
+	copyvar VAR_SPECIAL_x8004, VAR_SPECIAL_RESULT
+	get_follow_poke_party_index VAR_SPECIAL_x8005
+	bufferpartymonnick 0, VAR_SPECIAL_RESULT
+	npc_msg msg_0211_00033
+	closemsg
+	get_player_state VAR_SPECIAL_RESULT
+	scrcmd_730 VAR_SPECIAL_x8006
+	compare VAR_SPECIAL_RESULT, 2
+	goto_if_ne _0B10
+	scrcmd_183 VAR_SPECIAL_x8004
+	scrcmd_560 4, VAR_SPECIAL_x8005
+	goto _0BAE
 
 _0B10:
-	Compare VAR_SPECIAL_RESULT, 1
-	GoToIfNe _0B2D
-	ScrCmd_183 VAR_SPECIAL_x8004
-	ScrCmd_560 4, VAR_SPECIAL_x8005
-	GoTo _0BAE
+	compare VAR_SPECIAL_RESULT, 1
+	goto_if_ne _0B2D
+	scrcmd_183 VAR_SPECIAL_x8004
+	scrcmd_560 4, VAR_SPECIAL_x8005
+	goto _0BAE
 
 _0B2D:
-	Compare VAR_SPECIAL_x8004, VAR_SPECIAL_x8005
-	GoToIfEq _0B4A
-	ScrCmd_183 VAR_SPECIAL_x8004
-	ScrCmd_560 4, VAR_SPECIAL_x8005
-	GoTo _0BAE
+	compare VAR_SPECIAL_x8004, VAR_SPECIAL_x8005
+	goto_if_eq _0B4A
+	scrcmd_183 VAR_SPECIAL_x8004
+	scrcmd_560 4, VAR_SPECIAL_x8005
+	goto _0BAE
 
 _0B4A:
-	Compare VAR_SPECIAL_x8006, 1
-	GoToIfNe _0B67
-	ScrCmd_183 VAR_SPECIAL_x8004
-	ScrCmd_560 4, VAR_SPECIAL_x8005
-	GoTo _0BAE
+	compare VAR_SPECIAL_x8006, 1
+	goto_if_ne _0B67
+	scrcmd_183 VAR_SPECIAL_x8004
+	scrcmd_560 4, VAR_SPECIAL_x8005
+	goto _0BAE
 
 _0B67:
-	ScrCmd_829 VAR_SPECIAL_RESULT
-	Compare VAR_SPECIAL_RESULT, 1
-	GoToIfNe _0BA0
-	ScrCmd_598 1
-	GetPartyLeadAlive VAR_TEMP_x4000
-	GetPartyMonSpecies VAR_TEMP_x4000, VAR_TEMP_x4000
-	Call _0CC5
-	PlayCry VAR_TEMP_x4000, 0
-	WaitCry
-	ScrCmd_560 5, VAR_SPECIAL_x8005
-	GoTo _0BAE
+	scrcmd_829 VAR_SPECIAL_RESULT
+	compare VAR_SPECIAL_RESULT, 1
+	goto_if_ne _0BA0
+	scrcmd_598 1
+	get_party_lead_alive VAR_TEMP_x4000
+	get_partymon_species VAR_TEMP_x4000, VAR_TEMP_x4000
+	call _0CC5
+	play_cry VAR_TEMP_x4000, 0
+	wait_cry
+	scrcmd_560 5, VAR_SPECIAL_x8005
+	goto _0BAE
 
 _0BA0:
-	ScrCmd_600
-	ScrCmd_606
-	ScrCmd_183 VAR_SPECIAL_x8004
-	ScrCmd_560 4, VAR_SPECIAL_x8005
+	scrcmd_600
+	scrcmd_606
+	scrcmd_183 VAR_SPECIAL_x8004
+	scrcmd_560 4, VAR_SPECIAL_x8005
 _0BAE:
-	Wait 7, VAR_SPECIAL_RESULT
+	wait 7, VAR_SPECIAL_RESULT
 _0BB4:
-	Wait 1, VAR_SPECIAL_RESULT
-	Compare VAR_SPECIAL_x8005, 0
-	GoToIfEq _0BB4
-	ReleaseAll
-	TryHeadbuttEncounter VAR_SPECIAL_RESULT
-	End
+	wait 1, VAR_SPECIAL_RESULT
+	compare VAR_SPECIAL_x8005, 0
+	goto_if_eq _0BB4
+	releaseall
+	try_headbutt_encounter VAR_SPECIAL_RESULT
+	end
 
 scr_seq_0146_018:
-	ScrCmd_609
-	LockAll
-	BufferPartyMonNick 0, VAR_SPECIAL_x8000
-	NPCMsg msg_0211_00033
-	CloseMsg
-	GetFollowPokePartyIndex VAR_SPECIAL_x8004
-	GetPlayerState VAR_SPECIAL_RESULT
-	ScrCmd_730 VAR_SPECIAL_x8006
-	Compare VAR_SPECIAL_RESULT, 2
-	GoToIfNe _0C06
-	ScrCmd_183 VAR_SPECIAL_x8000
-	ScrCmd_560 4, VAR_SPECIAL_x8005
-	GoTo _0CA4
+	scrcmd_609
+	lockall
+	bufferpartymonnick 0, VAR_SPECIAL_x8000
+	npc_msg msg_0211_00033
+	closemsg
+	get_follow_poke_party_index VAR_SPECIAL_x8004
+	get_player_state VAR_SPECIAL_RESULT
+	scrcmd_730 VAR_SPECIAL_x8006
+	compare VAR_SPECIAL_RESULT, 2
+	goto_if_ne _0C06
+	scrcmd_183 VAR_SPECIAL_x8000
+	scrcmd_560 4, VAR_SPECIAL_x8005
+	goto _0CA4
 
 _0C06:
-	Compare VAR_SPECIAL_RESULT, 1
-	GoToIfNe _0C23
-	ScrCmd_183 VAR_SPECIAL_x8000
-	ScrCmd_560 4, VAR_SPECIAL_x8005
-	GoTo _0CA4
+	compare VAR_SPECIAL_RESULT, 1
+	goto_if_ne _0C23
+	scrcmd_183 VAR_SPECIAL_x8000
+	scrcmd_560 4, VAR_SPECIAL_x8005
+	goto _0CA4
 
 _0C23:
-	Compare VAR_SPECIAL_x8000, VAR_SPECIAL_x8004
-	GoToIfEq _0C40
-	ScrCmd_183 VAR_SPECIAL_x8000
-	ScrCmd_560 4, VAR_SPECIAL_x8005
-	GoTo _0CA4
+	compare VAR_SPECIAL_x8000, VAR_SPECIAL_x8004
+	goto_if_eq _0C40
+	scrcmd_183 VAR_SPECIAL_x8000
+	scrcmd_560 4, VAR_SPECIAL_x8005
+	goto _0CA4
 
 _0C40:
-	Compare VAR_SPECIAL_x8006, 1
-	GoToIfNe _0C5D
-	ScrCmd_183 VAR_SPECIAL_x8004
-	ScrCmd_560 4, VAR_SPECIAL_x8005
-	GoTo _0CA4
+	compare VAR_SPECIAL_x8006, 1
+	goto_if_ne _0C5D
+	scrcmd_183 VAR_SPECIAL_x8004
+	scrcmd_560 4, VAR_SPECIAL_x8005
+	goto _0CA4
 
 _0C5D:
-	ScrCmd_829 VAR_SPECIAL_RESULT
-	Compare VAR_SPECIAL_RESULT, 1
-	GoToIfNe _0C96
-	ScrCmd_598 1
-	GetPartyLeadAlive VAR_TEMP_x4000
-	GetPartyMonSpecies VAR_TEMP_x4000, VAR_TEMP_x4000
-	Call _0CC5
-	PlayCry VAR_TEMP_x4000, 0
-	WaitCry
-	ScrCmd_560 5, VAR_SPECIAL_x8005
-	GoTo _0CA4
+	scrcmd_829 VAR_SPECIAL_RESULT
+	compare VAR_SPECIAL_RESULT, 1
+	goto_if_ne _0C96
+	scrcmd_598 1
+	get_party_lead_alive VAR_TEMP_x4000
+	get_partymon_species VAR_TEMP_x4000, VAR_TEMP_x4000
+	call _0CC5
+	play_cry VAR_TEMP_x4000, 0
+	wait_cry
+	scrcmd_560 5, VAR_SPECIAL_x8005
+	goto _0CA4
 
 _0C96:
-	ScrCmd_600
-	ScrCmd_606
-	ScrCmd_183 VAR_SPECIAL_x8004
-	ScrCmd_560 4, VAR_SPECIAL_x8005
+	scrcmd_600
+	scrcmd_606
+	scrcmd_183 VAR_SPECIAL_x8004
+	scrcmd_560 4, VAR_SPECIAL_x8005
 _0CA4:
-	Wait 7, VAR_SPECIAL_RESULT
+	wait 7, VAR_SPECIAL_RESULT
 _0CAA:
-	Wait 1, VAR_SPECIAL_RESULT
-	Compare VAR_SPECIAL_x8005, 0
-	GoToIfEq _0CAA
-	ReleaseAll
-	TryHeadbuttEncounter VAR_SPECIAL_RESULT
-	End
+	wait 1, VAR_SPECIAL_RESULT
+	compare VAR_SPECIAL_x8005, 0
+	goto_if_eq _0CAA
+	releaseall
+	try_headbutt_encounter VAR_SPECIAL_RESULT
+	end
 
 _0CC5:
-	ScrCmd_732 20
-	ScrCmd_733 0, VAR_SPECIAL_RESULT
-	Compare VAR_SPECIAL_RESULT, 1
-	GoToIfNe _0CE6
-	ScrCmd_734 2
-	ScrCmd_732 1
-	GoTo _0CE9
+	scrcmd_732 20
+	scrcmd_733 0, VAR_SPECIAL_RESULT
+	compare VAR_SPECIAL_RESULT, 1
+	goto_if_ne _0CE6
+	scrcmd_734 2
+	scrcmd_732 1
+	goto _0CE9
 
 _0CE6:
-	ScrCmd_734 1
+	scrcmd_734 1
 _0CE9:
-	Return
+	return
 
 _0CEB:
-	Compare VAR_SPECIAL_RESULT, 0
-	GoToIfEq _0D2A
-	CopyVar VAR_SPECIAL_x8004, VAR_SPECIAL_x8006
-	SetVar VAR_SPECIAL_x8005, 1
-	BufferItemNameIndef 1, VAR_SPECIAL_x8004
-	Capitalize 1
-	NPCMsg msg_0211_00006
-	HasSpaceForItem VAR_SPECIAL_x8004, VAR_SPECIAL_x8005, VAR_SPECIAL_RESULT
-	Compare VAR_SPECIAL_RESULT, 0
-	GoToIfEq _0D2C
-	CallStd std_obtain_item_verbose
-	CloseMsg
+	compare VAR_SPECIAL_RESULT, 0
+	goto_if_eq _0D2A
+	copyvar VAR_SPECIAL_x8004, VAR_SPECIAL_x8006
+	setvar VAR_SPECIAL_x8005, 1
+	buffer_item_name_indef 1, VAR_SPECIAL_x8004
+	capitalize 1
+	npc_msg msg_0211_00006
+	hasspaceforitem VAR_SPECIAL_x8004, VAR_SPECIAL_x8005, VAR_SPECIAL_RESULT
+	compare VAR_SPECIAL_RESULT, 0
+	goto_if_eq _0D2C
+	callstd std_obtain_item_verbose
+	closemsg
 _0D2A:
-	End
+	end
 
 _0D2C:
-	CallStd std_bag_is_full
-	CloseMsg
-	End
+	callstd std_bag_is_full
+	closemsg
+	end
 	.balign 4, 0

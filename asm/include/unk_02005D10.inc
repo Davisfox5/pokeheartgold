@@ -85,8 +85,8 @@
 .public sub_02006E3C
 .public SysTask_CreateOnMainQueue
 .public SysTask_Destroy
-.public Heap_Alloc
-.public Heap_Free
+.public AllocFromHeap
+.public FreeToHeap
 .public SysTask_GetData
 .public GF_AssertFail
 .public NNS_SndPlayerStopSeq

@@ -2222,7 +2222,7 @@ ov08_0221CF38: ; 0x0221CF38
 	add r1, #0xc
 	bl ov08_022217F0
 	add r0, r6, #0
-	bl Heap_Free
+	bl FreeToHeap
 	ldr r2, [r5]
 	add r0, r4, #0
 	ldr r2, [r2, #0xc]
@@ -2236,7 +2236,7 @@ ov08_0221CF38: ; 0x0221CF38
 	add r1, #0xc
 	bl ov08_02221B1C
 	add r0, r6, #0
-	bl Heap_Free
+	bl FreeToHeap
 	mov r0, #1
 	str r0, [sp]
 	lsl r0, r0, #9
@@ -2338,7 +2338,7 @@ ov08_0221CF38: ; 0x0221CF38
 	ldr r0, [r5]
 	mov r1, #0x20
 	ldr r0, [r0, #0xc]
-	bl Heap_Alloc
+	bl AllocFromHeap
 	mov r1, #0x1a
 	lsl r1, r1, #4
 	add r1, r6, r1
@@ -2378,7 +2378,7 @@ ov08_0221CF38: ; 0x0221CF38
 	add r1, r4, #0
 	bl PaletteData_LoadPalette
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	add sp, #0x14
 	pop {r3, r4, r5, r6, pc}
 	nop
@@ -3425,7 +3425,7 @@ _0221D8BE:
 	lsr r1, r1, #0x18
 	bl ScheduleBgTilemapBufferTransfer
 	add r0, r7, #0
-	bl Heap_Free
+	bl FreeToHeap
 	add r4, r4, #1
 	add r6, r6, #4
 	cmp r4, #2
@@ -8670,7 +8670,7 @@ _0222053A:
 	bl String_Delete
 _0222056A:
 	add r0, r6, #0
-	bl Heap_Free
+	bl FreeToHeap
 	add sp, #0x10
 	pop {r3, r4, r5, r6, r7, pc}
 	.balign 4, 0
@@ -8763,7 +8763,7 @@ ov08_0222061C: ; 0x0222061C
 	stmia r2!, {r0, r1}
 	ldr r0, [r5]
 	ldr r0, [r0, #8]
-	bl BattleSystem_GetSpriteSystem
+	bl BattleSystem_GetSpriteRenderer
 	add r4, r0, #0
 	bl SpriteManager_New
 	ldr r1, _02220664 ; =0x00001FB4
@@ -8796,7 +8796,7 @@ ov08_02220668: ; 0x02220668
 	add r7, r0, #0
 	ldr r0, [r6]
 	ldr r0, [r0, #8]
-	bl BattleSystem_GetSpriteSystem
+	bl BattleSystem_GetSpriteRenderer
 	str r0, [sp, #0x18]
 	bl sub_02074490
 	str r7, [sp]
@@ -8899,7 +8899,7 @@ ov08_02220750: ; 0x02220750
 	add r5, r0, #0
 	ldr r0, [r5]
 	ldr r0, [r0, #8]
-	bl BattleSystem_GetSpriteSystem
+	bl BattleSystem_GetSpriteRenderer
 	ldr r1, [r5]
 	add r4, r0, #0
 	ldr r1, [r1, #0xc]
@@ -8977,7 +8977,7 @@ ov08_02220800: ; 0x02220800
 	add r5, r0, #0
 	ldr r0, [r5]
 	ldr r0, [r0, #8]
-	bl BattleSystem_GetSpriteSystem
+	bl BattleSystem_GetSpriteRenderer
 	add r6, r0, #0
 	mov r0, #2
 	str r0, [sp]
@@ -9039,7 +9039,7 @@ ov08_02220878: ; 0x02220878
 	add r4, r0, #0
 	ldr r0, [r5]
 	ldr r0, [r0, #8]
-	bl BattleSystem_GetSpriteSystem
+	bl BattleSystem_GetSpriteRenderer
 	add r6, r0, #0
 	bl sub_0207CAA0
 	str r4, [sp]
@@ -9112,7 +9112,7 @@ ov08_02220928: ; 0x02220928
 	add r5, r0, #0
 	ldr r0, [r5]
 	ldr r0, [r0, #8]
-	bl BattleSystem_GetSpriteSystem
+	bl BattleSystem_GetSpriteRenderer
 	add r4, r0, #0
 	mov r0, #0x47
 	str r0, [sp]
@@ -9182,7 +9182,7 @@ ov08_022209B8: ; 0x022209B8
 	ldr r0, [r5]
 	add r4, r1, #0
 	ldr r0, [r0, #8]
-	bl BattleSystem_GetSpriteSystem
+	bl BattleSystem_GetSpriteRenderer
 	mov r2, #0
 	add r1, sp, #0
 	strh r2, [r1]
@@ -9256,7 +9256,7 @@ ov08_02220A50: ; 0x02220A50
 	add r7, r0, #0
 	ldr r0, [r7]
 	ldr r0, [r0, #8]
-	bl BattleSystem_GetSpriteSystem
+	bl BattleSystem_GetSpriteRenderer
 	ldr r6, _02220A84 ; =0x00001FB8
 	str r0, [sp]
 	mov r4, #0
@@ -9343,7 +9343,7 @@ ov08_02220AEC: ; 0x02220AEC
 	ldr r0, [r0, #8]
 	add r7, r1, #0
 	add r4, r2, #0
-	bl BattleSystem_GetSpriteSystem
+	bl BattleSystem_GetSpriteRenderer
 	str r0, [sp, #8]
 	bl sub_020776B4
 	str r0, [sp, #0xc]
@@ -9379,7 +9379,7 @@ ov08_02220B3C: ; 0x02220B3C
 	add r4, r2, #0
 	ldr r0, [r0, #8]
 	add r6, r1, #0
-	bl BattleSystem_GetSpriteSystem
+	bl BattleSystem_GetSpriteRenderer
 	add r7, r0, #0
 	bl sub_02077830
 	str r0, [sp, #8]
@@ -10747,7 +10747,7 @@ ov08_0222162C: ; 0x0222162C
 	add r5, r0, #0
 	ldr r0, [r5]
 	ldr r0, [r0, #8]
-	bl BattleSystem_GetSpriteSystem
+	bl BattleSystem_GetSpriteRenderer
 	ldr r1, _02221688 ; =0x0000B018
 	mov r2, #0x7a
 	str r1, [sp]
@@ -11784,7 +11784,7 @@ ov08_02221E6C: ; 0x02221E6C
 	mul r1, r7
 	ldr r0, [r0, #0xc]
 	lsl r1, r1, #1
-	bl Heap_Alloc
+	bl AllocFromHeap
 	str r0, [sp, #0x18]
 	ldr r0, [sp, #0x14]
 	ldr r1, [sp, #0x18]
@@ -11812,7 +11812,7 @@ ov08_02221E6C: ; 0x02221E6C
 	mov r1, #6
 	bl ScheduleBgTilemapBufferTransfer
 	ldr r0, [sp, #0x18]
-	bl Heap_Free
+	bl FreeToHeap
 	add sp, #0x1c
 	pop {r4, r5, r6, r7, pc}
 	nop
@@ -14144,7 +14144,7 @@ ov08_022230F4: ; 0x022230F4
 	add r1, #0xc
 	bl ov08_02224254
 	add r0, r6, #0
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r4, #0
 	bl NARC_Delete
 	mov r0, #1
@@ -15676,7 +15676,7 @@ ov08_02223D34: ; 0x02223D34
 	stmia r2!, {r0, r1}
 	ldr r0, [r5]
 	ldr r0, [r0]
-	bl BattleSystem_GetSpriteSystem
+	bl BattleSystem_GetSpriteRenderer
 	add r4, r0, #0
 	bl SpriteManager_New
 	mov r1, #0xc3
@@ -15710,7 +15710,7 @@ ov08_02223D80: ; 0x02223D80
 	add r7, r0, #0
 	ldr r0, [r6]
 	ldr r0, [r0]
-	bl BattleSystem_GetSpriteSystem
+	bl BattleSystem_GetSpriteRenderer
 	str r0, [sp, #0x18]
 	mov r4, #0
 _02223D9E:
@@ -15794,7 +15794,7 @@ ov08_02223E3C: ; 0x02223E3C
 	add r6, r1, #0
 	ldr r0, [r0]
 	add r4, r2, #0
-	bl BattleSystem_GetSpriteSystem
+	bl BattleSystem_GetSpriteRenderer
 	add r7, r0, #0
 	add r0, r6, #0
 	mov r1, #1
@@ -15848,7 +15848,7 @@ ov08_02223EA4: ; 0x02223EA4
 	ldr r0, [r5]
 	add r4, r1, #0
 	ldr r0, [r0]
-	bl BattleSystem_GetSpriteSystem
+	bl BattleSystem_GetSpriteRenderer
 	mov r2, #0
 	add r1, sp, #0
 	strh r2, [r1]
@@ -15919,7 +15919,7 @@ ov08_02223F34: ; 0x02223F34
 	add r7, r0, #0
 	ldr r0, [r7]
 	ldr r0, [r0]
-	bl BattleSystem_GetSpriteSystem
+	bl BattleSystem_GetSpriteRenderer
 	mov r6, #0x31
 	str r0, [sp]
 	mov r4, #0
@@ -16113,7 +16113,7 @@ ov08_022240A8: ; 0x022240A8
 	add r5, r0, #0
 	ldr r0, [r5]
 	ldr r0, [r0]
-	bl BattleSystem_GetSpriteSystem
+	bl BattleSystem_GetSpriteRenderer
 	ldr r1, _02224104 ; =0x0000B4BE
 	add r4, r0, #0
 	str r1, [sp]
@@ -16235,7 +16235,7 @@ ov08_0222419C: ; 0x0222419C
 	add r5, r0, #0
 	ldr r0, [r5]
 	ldr r0, [r0]
-	bl BattleSystem_GetSpriteSystem
+	bl BattleSystem_GetSpriteRenderer
 	ldr r1, _022241F0 ; =0x0000B4BD
 	add r4, r0, #0
 	str r1, [sp]
@@ -17028,7 +17028,7 @@ ov08_022247E4: ; 0x022247E4
 	mul r1, r7
 	ldr r0, [r0, #0xc]
 	lsl r1, r1, #1
-	bl Heap_Alloc
+	bl AllocFromHeap
 	str r0, [sp, #0x18]
 	ldr r0, [sp, #0x14]
 	ldr r1, [sp, #0x18]
@@ -17052,7 +17052,7 @@ ov08_022247E4: ; 0x022247E4
 	mov r1, #6
 	bl ScheduleBgTilemapBufferTransfer
 	ldr r0, [sp, #0x18]
-	bl Heap_Free
+	bl FreeToHeap
 	add sp, #0x1c
 	pop {r4, r5, r6, r7, pc}
 	nop
@@ -17467,7 +17467,7 @@ _02224B60: .word 0x0000114D
 ov08_02224B64: ; 0x02224B64
 	push {r3, lr}
 	mov r1, #0x10
-	bl Heap_Alloc
+	bl AllocFromHeap
 	add r3, r0, #0
 	mov r2, #0x10
 	mov r1, #0
@@ -17481,10 +17481,10 @@ _02224B72:
 
 	thumb_func_start ov08_02224B7C
 ov08_02224B7C: ; 0x02224B7C
-	ldr r3, _02224B80 ; =Heap_Free
+	ldr r3, _02224B80 ; =FreeToHeap
 	bx r3
 	.balign 4, 0
-_02224B80: .word Heap_Free
+_02224B80: .word FreeToHeap
 	thumb_func_end ov08_02224B7C
 
 	thumb_func_start ov08_02224B84
@@ -17696,7 +17696,7 @@ _02224CAA:
 	str r0, [sp, #4]
 	str r1, [sp, #8]
 	ldr r0, [r5, #4]
-	bl DpadMenuBox_GetNeighborInDirection
+	bl sub_02020A24
 	add r4, r0, #0
 	mov r6, #0
 	b _02224D36
@@ -17713,7 +17713,7 @@ _02224CCE:
 	mov r0, #1
 	str r0, [sp, #8]
 	ldr r0, [r5, #4]
-	bl DpadMenuBox_GetNeighborInDirection
+	bl sub_02020A24
 	add r4, r0, #0
 	mov r6, #1
 	b _02224D36
@@ -17730,7 +17730,7 @@ _02224CF0:
 	mov r0, #2
 	str r0, [sp, #8]
 	ldr r0, [r5, #4]
-	bl DpadMenuBox_GetNeighborInDirection
+	bl sub_02020A24
 	add r4, r0, #0
 	mov r6, #2
 	b _02224D36
@@ -17747,7 +17747,7 @@ _02224D12:
 	mov r0, #3
 	str r0, [sp, #8]
 	ldr r0, [r5, #4]
-	bl DpadMenuBox_GetNeighborInDirection
+	bl sub_02020A24
 	add r4, r0, #0
 	mov r6, #3
 	b _02224D36
@@ -17787,7 +17787,7 @@ _02224D58:
 	add r1, r7, #0
 	add r2, r7, #0
 	add r3, r7, #0
-	bl DpadMenuBox_GetNeighborInDirection
+	bl sub_02020A24
 	mov r1, #0x7f
 	and r0, r1
 	lsl r0, r0, #0x18
@@ -17814,13 +17814,13 @@ _02224D90:
 	add r0, r0, r7
 	add r1, #3
 	add r2, #2
-	bl DpadMenuBox_GetPosition
+	bl sub_02020A0C
 	ldr r0, [r5, #4]
 	add r1, sp, #0x10
 	add r0, r0, r7
 	add r1, #1
 	add r2, sp, #0x10
-	bl DpadMenuBox_GetDimensions
+	bl sub_02020A18
 	ldr r0, [r5, #4]
 	add r1, r6, #0
 	add r0, r0, r7

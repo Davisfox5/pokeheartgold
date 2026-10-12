@@ -11,12 +11,11 @@
 #include "main.h"
 #include "msgdata.h"
 #include "render_window.h"
-#include "screen_fade.h"
-#include "sound.h"
 #include "sound_02004A44.h"
 #include "system.h"
 #include "text.h"
 #include "unk_02005D10.h"
+#include "unk_0200FA24.h"
 
 typedef enum DeleteSavedataApp_MainState {
     MAINSTATE_ASK_TO_DELETE,
@@ -35,7 +34,7 @@ typedef enum DeleteSavedataApp_PrintState {
 } DeleteSavedataApp_PrintState;
 
 typedef struct DeleteSavedataApp_Data {
-    enum HeapID heapID;
+    HeapID heapId;
     DeleteSavedataApp_MainState mainState;
     DeleteSavedataApp_PrintState printState;
     u32 textPrinterId;
@@ -121,11 +120,11 @@ static BOOL DeleteSavedataApp_DoMainTask(DeleteSavedataApp_Data *data);
 static BOOL DeleteSavedataApp_PrintMessage(DeleteSavedataApp_Data *data, u32 msgNum, BOOL skipWaitingForAPress, u32 textSpeed);
 
 BOOL DeleteSavedataApp_Init(OverlayManager *manager, int *state) {
-    Heap_Create(HEAP_ID_3, HEAP_ID_DELETE_SAVEDATA, 0x20000);
+    CreateHeap(HEAP_ID_3, HEAP_ID_DELETE_SAVEDATA, 0x20000);
 
     DeleteSavedataApp_Data *data = OverlayManager_CreateAndGetData(manager, sizeof(DeleteSavedataApp_Data), HEAP_ID_DELETE_SAVEDATA);
     memset(data, 0, sizeof(DeleteSavedataApp_Data));
-    data->heapID = HEAP_ID_DELETE_SAVEDATA;
+    data->heapId = HEAP_ID_DELETE_SAVEDATA;
     data->mainState = MAINSTATE_ASK_TO_DELETE;
     UnkStruct_02111868_sub *args = OverlayManager_GetArgs(manager);
     data->savedata = args->saveData;
@@ -148,10 +147,10 @@ BOOL DeleteSavedataApp_Main(OverlayManager *manager, int *state) {
     case STATE_SETUP:
         StopBGM(SEQ_GS_POKEMON_THEME, 0);
         sub_02005AF8(0);
-        Sound_SetScene(SOUND_SCENE_NONE);
+        sub_02004AD8(0);
 
-        sub_0200FBF4(PM_LCD_TOP, RGB_BLACK);
-        sub_0200FBF4(PM_LCD_BOTTOM, RGB_BLACK);
+        sub_0200FBF4(0, 0);
+        sub_0200FBF4(1, 0);
 
         Main_SetVBlankIntrCB(NULL, NULL);
         Main_SetHBlankIntrCB(NULL, NULL);
@@ -170,7 +169,7 @@ BOOL DeleteSavedataApp_Main(OverlayManager *manager, int *state) {
 
         GfGfx_BothDispOn();
 
-        BeginNormalPaletteFade(FADE_BOTH_SCREENS, FADE_TYPE_BRIGHTNESS_IN, FADE_TYPE_BRIGHTNESS_IN, RGB_BLACK, 6, 1, data->heapID);
+        BeginNormalPaletteFade(0, 1, 1, RGB_BLACK, 6, 1, data->heapId);
 
         *state = STATE_WAIT_FOR_FADE_IN;
         break;
@@ -181,7 +180,7 @@ BOOL DeleteSavedataApp_Main(OverlayManager *manager, int *state) {
         break;
     case STATE_DELETE_SAVE:
         if (DeleteSavedataApp_DoMainTask(data) == TRUE) {
-            BeginNormalPaletteFade(FADE_BOTH_SCREENS, FADE_TYPE_BRIGHTNESS_OUT, FADE_TYPE_BRIGHTNESS_OUT, RGB_BLACK, 6, 1, data->heapID);
+            BeginNormalPaletteFade(0, 0, 0, RGB_BLACK, 6, 1, data->heapId);
             *state = STATE_EXIT;
         }
         break;
@@ -201,11 +200,11 @@ BOOL DeleteSavedataApp_Main(OverlayManager *manager, int *state) {
 
 BOOL DeleteSavedataApp_Exit(OverlayManager *manager, int *state) {
     DeleteSavedataApp_Data *data = OverlayManager_GetData(manager);
-    enum HeapID heapID = data->heapID;
+    HeapID heapId = data->heapId;
 
     OverlayManager_FreeData(manager);
 
-    Heap_Destroy(heapID);
+    DestroyHeap(heapId);
 
     OS_ResetSystem(0);
 
@@ -220,7 +219,7 @@ static void DeleteSavedataApp_SetupBgConfig(DeleteSavedataApp_Data *data) {
     GraphicsBanks banks = sDeleteSave_GraphicsBanks;
     GfGfx_SetBanks(&banks);
 
-    data->bgConfig = BgConfig_Alloc(data->heapID);
+    data->bgConfig = BgConfig_Alloc(data->heapId);
 
     GraphicsModes modes = sDeleteSave_GraphicsModes;
     SetBothScreensModesAndDisable(&modes);
@@ -228,10 +227,10 @@ static void DeleteSavedataApp_SetupBgConfig(DeleteSavedataApp_Data *data) {
     BgTemplate template = sDeleteSave_BgTemplate;
     InitBgFromTemplate(data->bgConfig, GF_BG_LYR_MAIN_0, &template, GX_BGMODE_0);
     BgClearTilemapBufferAndCommit(data->bgConfig, GF_BG_LYR_MAIN_0);
-    LoadUserFrameGfx2(data->bgConfig, GF_BG_LYR_MAIN_0, 0x1E2, 2, 0, data->heapID);
-    LoadUserFrameGfx1(data->bgConfig, GF_BG_LYR_MAIN_0, 0x1D9, 3, 0, data->heapID);
-    LoadFontPal0(GF_PAL_LOCATION_MAIN_BG, GF_PAL_SLOT_1_OFFSET, data->heapID);
-    BG_ClearCharDataRange(GF_BG_LYR_MAIN_0, 32, 0, data->heapID);
+    LoadUserFrameGfx2(data->bgConfig, GF_BG_LYR_MAIN_0, 0x1E2, 2, 0, data->heapId);
+    LoadUserFrameGfx1(data->bgConfig, GF_BG_LYR_MAIN_0, 0x1D9, 3, 0, data->heapId);
+    LoadFontPal0(GF_PAL_LOCATION_MAIN_BG, GF_PAL_SLOT_1_OFFSET, data->heapId);
+    BG_ClearCharDataRange(GF_BG_LYR_MAIN_0, 32, 0, data->heapId);
     BG_SetMaskColor(GF_BG_LYR_MAIN_0, RGB(1, 1, 27));
     BG_SetMaskColor(GF_BG_LYR_SUB_0, RGB(1, 1, 27));
 }
@@ -247,11 +246,11 @@ static void DeleteSavedataApp_FreeBgConfig(DeleteSavedataApp_Data *data) {
     ToggleBgLayer(GF_BG_LYR_SUB_3, GF_PLANE_TOGGLE_OFF);
 
     FreeBgTilemapBuffer(data->bgConfig, GF_BG_LYR_MAIN_0);
-    Heap_Free(data->bgConfig);
+    FreeToHeap(data->bgConfig);
 }
 
 static void DeleteSavedataApp_SetupTextAndWindow(DeleteSavedataApp_Data *data) {
-    data->msgData = NewMsgDataFromNarc(MSGDATA_LOAD_LAZY, NARC_msgdata_msg, NARC_msg_msg_0007_bin, data->heapID);
+    data->msgData = NewMsgDataFromNarc(MSGDATA_LOAD_LAZY, NARC_msgdata_msg, NARC_msg_msg_0007_bin, data->heapId);
     ResetAllTextPrinters();
 
     data->printState = PRINTSTATE_PRINT_TEXT;
@@ -272,12 +271,12 @@ static BOOL DeleteSavedataApp_DoMainTask(DeleteSavedataApp_Data *data) {
     case MAINSTATE_ASK_TO_DELETE:
         // "Delete all saved data?"
         if (DeleteSavedataApp_PrintMessage(data, msg_0007_00000, TRUE, 4) == TRUE) {
-            data->yesNoMenu = CreateYesNoMenu(data->bgConfig, &sDeleteSave_WindowTemplate2, 0x1D9, 3, 1, data->heapID);
+            data->yesNoMenu = CreateYesNoMenu(data->bgConfig, &sDeleteSave_WindowTemplate2, 0x1D9, 3, 1, data->heapId);
             data->mainState = MAINSTATE_HANDLE_INPUT;
         }
         break;
     case MAINSTATE_HANDLE_INPUT: {
-        u32 result = Handle2dMenuInput_DeleteOnFinish(data->yesNoMenu, data->heapID);
+        u32 result = Handle2dMenuInput_DeleteOnFinish(data->yesNoMenu, data->heapId);
         switch (result) {
         case LIST_NO_MULTIPLE_SCROLL:
             data->mainState = MAINSTATE_ASK_TO_CONFIRM;
@@ -291,12 +290,12 @@ static BOOL DeleteSavedataApp_DoMainTask(DeleteSavedataApp_Data *data) {
     case MAINSTATE_ASK_TO_CONFIRM:
         // "Once data has been deleted, there is no way to recover it. [...]"
         if (DeleteSavedataApp_PrintMessage(data, msg_0007_00001, TRUE, 4) == TRUE) {
-            data->yesNoMenu = CreateYesNoMenu(data->bgConfig, &sDeleteSave_WindowTemplate2, 0x1D9, 3, 1, data->heapID);
+            data->yesNoMenu = CreateYesNoMenu(data->bgConfig, &sDeleteSave_WindowTemplate2, 0x1D9, 3, 1, data->heapId);
             data->mainState = MAINSTATE_HANDLE_CONFIRMATION;
         }
         break;
     case MAINSTATE_HANDLE_CONFIRMATION: {
-        u32 result = Handle2dMenuInput_DeleteOnFinish(data->yesNoMenu, data->heapID);
+        u32 result = Handle2dMenuInput_DeleteOnFinish(data->yesNoMenu, data->heapId);
         switch (result) {
         case LIST_NO_MULTIPLE_SCROLL:
             data->mainState = MAINSTATE_PRINT_DELETING_MESSAGE;
@@ -336,7 +335,7 @@ static BOOL DeleteSavedataApp_PrintMessage(DeleteSavedataApp_Data *data, u32 msg
         FillWindowPixelRect(&data->window, 0xF, 0, 0, 216, 32);
         DrawFrameAndWindow2(&data->window, FALSE, 0x1E2, 2);
 
-        data->textString = String_New(1024, data->heapID);
+        data->textString = String_New(1024, data->heapId);
         ReadMsgDataIntoString(data->msgData, msgNum, data->textString);
         data->textPrinterId = AddTextPrinterParameterized(&data->window, 1, data->textString, 0, 0, textSpeed, NULL);
 

@@ -5,287 +5,287 @@
 
 	.rodata
 
-	ScrDef scr_seq_T22R0301_000
-	ScrDef scr_seq_T22R0301_001
-	ScrDef scr_seq_T22R0301_002
-	ScrDef scr_seq_T22R0301_003
-	ScrDef scr_seq_T22R0301_004
-	ScrDef scr_seq_T22R0301_005
-	ScrDef scr_seq_T22R0301_006
-	ScrDef scr_seq_T22R0301_007
-	ScrDefEnd
+	scrdef scr_seq_T22R0301_000
+	scrdef scr_seq_T22R0301_001
+	scrdef scr_seq_T22R0301_002
+	scrdef scr_seq_T22R0301_003
+	scrdef scr_seq_T22R0301_004
+	scrdef scr_seq_T22R0301_005
+	scrdef scr_seq_T22R0301_006
+	scrdef scr_seq_T22R0301_007
+	scrdef_end
 
 scr_seq_T22R0301_000:
-	PlaySE SEQ_SE_DP_SELECT
-	LockAll
-	FacePlayer
-	GetPlayerFacing VAR_SPECIAL_RESULT
-	Compare VAR_SPECIAL_RESULT, 2
-	GoToIfNe _0049
-	ApplyMovement obj_T22R0301_gsbigman, _0164
-	GoTo _0087
+	play_se SEQ_SE_DP_SELECT
+	lockall
+	faceplayer
+	get_player_facing VAR_SPECIAL_RESULT
+	compare VAR_SPECIAL_RESULT, 2
+	goto_if_ne _0049
+	apply_movement obj_T22R0301_gsbigman, _0164
+	goto _0087
 
 _0049:
-	Compare VAR_SPECIAL_RESULT, 3
-	GoToIfNe _0064
-	ApplyMovement obj_T22R0301_gsbigman, _0188
-	GoTo _0087
+	compare VAR_SPECIAL_RESULT, 3
+	goto_if_ne _0064
+	apply_movement obj_T22R0301_gsbigman, _0188
+	goto _0087
 
 _0064:
-	Compare VAR_SPECIAL_RESULT, 0
-	GoToIfNe _007F
-	ApplyMovement obj_T22R0301_gsbigman, _01AC
-	GoTo _0087
+	compare VAR_SPECIAL_RESULT, 0
+	goto_if_ne _007F
+	apply_movement obj_T22R0301_gsbigman, _01AC
+	goto _0087
 
 _007F:
-	ApplyMovement obj_T22R0301_gsbigman, _01D0
+	apply_movement obj_T22R0301_gsbigman, _01D0
 _0087:
-	WaitMovement
-	NPCMsg msg_0560_T22R0301_00000
-	TouchscreenMenuHide
-	GetMenuChoice VAR_SPECIAL_RESULT
-	TouchscreenMenuShow
-	Compare VAR_SPECIAL_RESULT, 0
-	GoToIfEq _00B0
-	Compare VAR_SPECIAL_RESULT, 1
-	GoToIfEq _00D7
-	End
+	wait_movement
+	npc_msg msg_0560_T22R0301_00000
+	touchscreen_menu_hide
+	getmenuchoice VAR_SPECIAL_RESULT
+	touchscreen_menu_show
+	compare VAR_SPECIAL_RESULT, 0
+	goto_if_eq _00B0
+	compare VAR_SPECIAL_RESULT, 1
+	goto_if_eq _00D7
+	end
 
 _00B0:
-	NPCMsg msg_0560_T22R0301_00001
-	TouchscreenMenuHide
-	GetMenuChoice VAR_SPECIAL_RESULT
-	TouchscreenMenuShow
-	Compare VAR_SPECIAL_RESULT, 0
-	GoToIfEq _00D7
-	Compare VAR_SPECIAL_RESULT, 1
-	GoToIfEq _0157
-	End
+	npc_msg msg_0560_T22R0301_00001
+	touchscreen_menu_hide
+	getmenuchoice VAR_SPECIAL_RESULT
+	touchscreen_menu_show
+	compare VAR_SPECIAL_RESULT, 0
+	goto_if_eq _00D7
+	compare VAR_SPECIAL_RESULT, 1
+	goto_if_eq _0157
+	end
 
 _00D7:
-	NPCMsg msg_0560_T22R0301_00002
-	TouchscreenMenuHide
-	GetMenuChoice VAR_SPECIAL_RESULT
-	TouchscreenMenuShow
-	Compare VAR_SPECIAL_RESULT, 0
-	GoToIfEq _00FE
-	Compare VAR_SPECIAL_RESULT, 1
-	GoToIfEq _0125
-	End
+	npc_msg msg_0560_T22R0301_00002
+	touchscreen_menu_hide
+	getmenuchoice VAR_SPECIAL_RESULT
+	touchscreen_menu_show
+	compare VAR_SPECIAL_RESULT, 0
+	goto_if_eq _00FE
+	compare VAR_SPECIAL_RESULT, 1
+	goto_if_eq _0125
+	end
 
 _00FE:
-	NPCMsg msg_0560_T22R0301_00003
-	TouchscreenMenuHide
-	GetMenuChoice VAR_SPECIAL_RESULT
-	TouchscreenMenuShow
-	Compare VAR_SPECIAL_RESULT, 0
-	GoToIfEq _0125
-	Compare VAR_SPECIAL_RESULT, 1
-	GoToIfEq _0157
-	End
+	npc_msg msg_0560_T22R0301_00003
+	touchscreen_menu_hide
+	getmenuchoice VAR_SPECIAL_RESULT
+	touchscreen_menu_show
+	compare VAR_SPECIAL_RESULT, 0
+	goto_if_eq _0125
+	compare VAR_SPECIAL_RESULT, 1
+	goto_if_eq _0157
+	end
 
 _0125:
-	NPCMsg msg_0560_T22R0301_00004
-	TouchscreenMenuHide
-	GetMenuChoice VAR_SPECIAL_RESULT
-	TouchscreenMenuShow
-	Compare VAR_SPECIAL_RESULT, 0
-	GoToIfEq _014C
-	Compare VAR_SPECIAL_RESULT, 1
-	GoToIfEq _0157
-	End
+	npc_msg msg_0560_T22R0301_00004
+	touchscreen_menu_hide
+	getmenuchoice VAR_SPECIAL_RESULT
+	touchscreen_menu_show
+	compare VAR_SPECIAL_RESULT, 0
+	goto_if_eq _014C
+	compare VAR_SPECIAL_RESULT, 1
+	goto_if_eq _0157
+	end
 
 _014C:
-	NPCMsg msg_0560_T22R0301_00005
-	WaitButton
-	CloseMsg
-	ReleaseAll
-	End
+	npc_msg msg_0560_T22R0301_00005
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
 
 _0157:
-	NPCMsg msg_0560_T22R0301_00006
-	WaitButton
-	CloseMsg
-	ReleaseAll
-	End
+	npc_msg msg_0560_T22R0301_00006
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
 
 	.balign 4, 0
 _0164:
-	FaceSouth
-	FaceWest
-	FaceNorth
-	FaceEast
-	FaceSouth
-	FaceWest
-	FaceNorth
-	FaceEast
-	EndMovement
+	step 1, 1
+	step 2, 1
+	step 0, 1
+	step 3, 1
+	step 1, 1
+	step 2, 1
+	step 0, 1
+	step 3, 1
+	step_end
 
 	.balign 4, 0
 _0188:
-	FaceNorth
-	FaceEast
-	FaceSouth
-	FaceWest
-	FaceNorth
-	FaceEast
-	FaceSouth
-	FaceWest
-	EndMovement
+	step 0, 1
+	step 3, 1
+	step 1, 1
+	step 2, 1
+	step 0, 1
+	step 3, 1
+	step 1, 1
+	step 2, 1
+	step_end
 
 	.balign 4, 0
 _01AC:
-	FaceWest
-	FaceNorth
-	FaceEast
-	FaceSouth
-	FaceWest
-	FaceNorth
-	FaceEast
-	FaceSouth
-	EndMovement
+	step 2, 1
+	step 0, 1
+	step 3, 1
+	step 1, 1
+	step 2, 1
+	step 0, 1
+	step 3, 1
+	step 1, 1
+	step_end
 
 	.balign 4, 0
 _01D0:
-	FaceEast
-	FaceSouth
-	FaceWest
-	FaceNorth
-	FaceEast
-	FaceSouth
-	FaceWest
-	FaceNorth
-	EndMovement
+	step 3, 1
+	step 1, 1
+	step 2, 1
+	step 0, 1
+	step 3, 1
+	step 1, 1
+	step 2, 1
+	step 0, 1
+	step_end
 
 scr_seq_T22R0301_001:
-	PlaySE SEQ_SE_DP_SELECT
-	LockAll
-	FacePlayer
-	NPCMsg msg_0560_T22R0301_00012
-	GoTo _0207
-	End
+	play_se SEQ_SE_DP_SELECT
+	lockall
+	faceplayer
+	npc_msg msg_0560_T22R0301_00012
+	goto _0207
+	end
 
 _0207:
-	NPCMsg msg_0560_T22R0301_00013
-	TouchscreenMenuHide
-	MenuInit 1, 1, 0, 1, VAR_SPECIAL_RESULT
-	MenuItemAdd 24, 255, 1
-	MenuItemAdd 25, 255, 2
-	MenuItemAdd 26, 255, 3
-	MenuItemAdd 27, 255, 4
-	MenuItemAdd 28, 255, 5
-	MenuItemAdd 29, 255, 0
-	MenuExec
-	TouchscreenMenuShow
-	Compare VAR_SPECIAL_RESULT, 1
-	GoToIfNe _0264
-	NPCMsg msg_0560_T22R0301_00014
-	GoTo _0207
+	npc_msg msg_0560_T22R0301_00013
+	touchscreen_menu_hide
+	menu_init 1, 1, 0, 1, VAR_SPECIAL_RESULT
+	menu_item_add 24, 255, 1
+	menu_item_add 25, 255, 2
+	menu_item_add 26, 255, 3
+	menu_item_add 27, 255, 4
+	menu_item_add 28, 255, 5
+	menu_item_add 29, 255, 0
+	menu_exec
+	touchscreen_menu_show
+	compare VAR_SPECIAL_RESULT, 1
+	goto_if_ne _0264
+	npc_msg msg_0560_T22R0301_00014
+	goto _0207
 
 _025E:
-	GoTo _02D8
+	goto _02D8
 
 _0264:
-	Compare VAR_SPECIAL_RESULT, 2
-	GoToIfNe _0280
-	NPCMsg msg_0560_T22R0301_00015
-	GoTo _0207
+	compare VAR_SPECIAL_RESULT, 2
+	goto_if_ne _0280
+	npc_msg msg_0560_T22R0301_00015
+	goto _0207
 
 _027A:
-	GoTo _02D8
+	goto _02D8
 
 _0280:
-	Compare VAR_SPECIAL_RESULT, 3
-	GoToIfNe _029C
-	NPCMsg msg_0560_T22R0301_00016
-	GoTo _0207
+	compare VAR_SPECIAL_RESULT, 3
+	goto_if_ne _029C
+	npc_msg msg_0560_T22R0301_00016
+	goto _0207
 
 _0296:
-	GoTo _02D8
+	goto _02D8
 
 _029C:
-	Compare VAR_SPECIAL_RESULT, 4
-	GoToIfNe _02B8
-	NPCMsg msg_0560_T22R0301_00017
-	GoTo _0207
+	compare VAR_SPECIAL_RESULT, 4
+	goto_if_ne _02B8
+	npc_msg msg_0560_T22R0301_00017
+	goto _0207
 
 _02B2:
-	GoTo _02D8
+	goto _02D8
 
 _02B8:
-	Compare VAR_SPECIAL_RESULT, 5
-	GoToIfNe _02D4
-	NPCMsg msg_0560_T22R0301_00018
-	GoTo _0207
+	compare VAR_SPECIAL_RESULT, 5
+	goto_if_ne _02D4
+	npc_msg msg_0560_T22R0301_00018
+	goto _0207
 
 _02CE:
-	GoTo _02D8
+	goto _02D8
 
 _02D4:
-	CloseMsg
-	ReleaseAll
+	closemsg
+	releaseall
 
 _02D8:
-	End
+	end
 
 scr_seq_T22R0301_003:
-	SimpleNPCMsg msg_0560_T22R0301_00011
-	End
+	simple_npc_msg msg_0560_T22R0301_00011
+	end
 
 scr_seq_T22R0301_002:
-	PlaySE SEQ_SE_DP_SELECT
-	LockAll
-	FacePlayer
-	NPCMsg msg_0560_T22R0301_00019
-	TouchscreenMenuHide
-	GetMenuChoice VAR_SPECIAL_RESULT
-	Compare VAR_SPECIAL_RESULT, 1
-	GoToIfEq _0353
-	NPCMsg msg_0560_T22R0301_00020
-	TouchscreenMenuHide
-	GetMenuChoice VAR_SPECIAL_RESULT
-	Compare VAR_SPECIAL_RESULT, 1
-	GoToIfEq _0353
-	NPCMsg msg_0560_T22R0301_00021
-	TouchscreenMenuHide
-	GetMenuChoice VAR_SPECIAL_RESULT
-	Compare VAR_SPECIAL_RESULT, 1
-	GoToIfEq _0353
-	NPCMsg msg_0560_T22R0301_00022
-	CloseMsg
-	TouchscreenMenuShow
-	ApplyMovement obj_T22R0301_gsboy1, _035C
-	WaitMovement
-	NPCMsg msg_0560_T22R0301_00023
-	WaitButton
-	CloseMsg
-	ReleaseAll
-	End
+	play_se SEQ_SE_DP_SELECT
+	lockall
+	faceplayer
+	npc_msg msg_0560_T22R0301_00019
+	touchscreen_menu_hide
+	getmenuchoice VAR_SPECIAL_RESULT
+	compare VAR_SPECIAL_RESULT, 1
+	goto_if_eq _0353
+	npc_msg msg_0560_T22R0301_00020
+	touchscreen_menu_hide
+	getmenuchoice VAR_SPECIAL_RESULT
+	compare VAR_SPECIAL_RESULT, 1
+	goto_if_eq _0353
+	npc_msg msg_0560_T22R0301_00021
+	touchscreen_menu_hide
+	getmenuchoice VAR_SPECIAL_RESULT
+	compare VAR_SPECIAL_RESULT, 1
+	goto_if_eq _0353
+	npc_msg msg_0560_T22R0301_00022
+	closemsg
+	touchscreen_menu_show
+	apply_movement obj_T22R0301_gsboy1, _035C
+	wait_movement
+	npc_msg msg_0560_T22R0301_00023
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
 
 _0353:
-	CloseMsg
-	TouchscreenMenuShow
-	ReleaseAll
-	End
+	closemsg
+	touchscreen_menu_show
+	releaseall
+	end
 
 	.balign 4, 0
 _035C:
-	WalkOnSpotNormalNorth
-	EndMovement
+	step 32, 1
+	step_end
 
 scr_seq_T22R0301_004:
-	SimpleNPCMsg msg_0560_T22R0301_00007
-	End
+	simple_npc_msg msg_0560_T22R0301_00007
+	end
 
 scr_seq_T22R0301_005:
-	SimpleNPCMsg msg_0560_T22R0301_00010
-	End
+	simple_npc_msg msg_0560_T22R0301_00010
+	end
 
 scr_seq_T22R0301_006:
-	SimpleNPCMsg msg_0560_T22R0301_00009
-	End
+	simple_npc_msg msg_0560_T22R0301_00009
+	end
 
 scr_seq_T22R0301_007:
-	SimpleNPCMsg msg_0560_T22R0301_00008
-	End
+	simple_npc_msg msg_0560_T22R0301_00008
+	end
 	.balign 4, 0

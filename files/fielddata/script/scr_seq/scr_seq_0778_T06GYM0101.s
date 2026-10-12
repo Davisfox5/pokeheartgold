@@ -5,375 +5,375 @@
 
 	.rodata
 
-	ScrDef scr_seq_T06GYM0101_000
-	ScrDef scr_seq_T06GYM0101_001
-	ScrDef scr_seq_T06GYM0101_002
-	ScrDef scr_seq_T06GYM0101_003
-	ScrDef scr_seq_T06GYM0101_004
-	ScrDef scr_seq_T06GYM0101_005
-	ScrDef scr_seq_T06GYM0101_006
-	ScrDef scr_seq_T06GYM0101_007
-	ScrDef scr_seq_T06GYM0101_008
-	ScrDef scr_seq_T06GYM0101_009
-	ScrDef scr_seq_T06GYM0101_010
-	ScrDef scr_seq_T06GYM0101_011
-	ScrDef scr_seq_T06GYM0101_012
-	ScrDef scr_seq_T06GYM0101_013
-	ScrDef scr_seq_T06GYM0101_014
-	ScrDef scr_seq_T06GYM0101_015
-	ScrDef scr_seq_T06GYM0101_016
-	ScrDef scr_seq_T06GYM0101_017
-	ScrDef scr_seq_T06GYM0101_018
-	ScrDef scr_seq_T06GYM0101_019
-	ScrDef scr_seq_T06GYM0101_020
-	ScrDef scr_seq_T06GYM0101_021
-	ScrDef scr_seq_T06GYM0101_022
-	ScrDef scr_seq_T06GYM0101_023
-	ScrDef scr_seq_T06GYM0101_024
-	ScrDef scr_seq_T06GYM0101_025
-	ScrDefEnd
+	scrdef scr_seq_T06GYM0101_000
+	scrdef scr_seq_T06GYM0101_001
+	scrdef scr_seq_T06GYM0101_002
+	scrdef scr_seq_T06GYM0101_003
+	scrdef scr_seq_T06GYM0101_004
+	scrdef scr_seq_T06GYM0101_005
+	scrdef scr_seq_T06GYM0101_006
+	scrdef scr_seq_T06GYM0101_007
+	scrdef scr_seq_T06GYM0101_008
+	scrdef scr_seq_T06GYM0101_009
+	scrdef scr_seq_T06GYM0101_010
+	scrdef scr_seq_T06GYM0101_011
+	scrdef scr_seq_T06GYM0101_012
+	scrdef scr_seq_T06GYM0101_013
+	scrdef scr_seq_T06GYM0101_014
+	scrdef scr_seq_T06GYM0101_015
+	scrdef scr_seq_T06GYM0101_016
+	scrdef scr_seq_T06GYM0101_017
+	scrdef scr_seq_T06GYM0101_018
+	scrdef scr_seq_T06GYM0101_019
+	scrdef scr_seq_T06GYM0101_020
+	scrdef scr_seq_T06GYM0101_021
+	scrdef scr_seq_T06GYM0101_022
+	scrdef scr_seq_T06GYM0101_023
+	scrdef scr_seq_T06GYM0101_024
+	scrdef scr_seq_T06GYM0101_025
+	scrdef_end
 
 scr_seq_T06GYM0101_021:
-	GoToIfSet FLAG_HIDE_VERMILION_GYM_STOPS, _0079
-	ClearFlag FLAG_SYS_SOLVED_LT_SURGE_GYM
+	goto_if_set FLAG_HIDE_VERMILION_GYM_STOPS, _0079
+	clearflag FLAG_SYS_SOLVED_LT_SURGE_GYM
 _0079:
-	VermilionGymInit
-	GetPhoneBookRematch PHONE_CONTACT_LT__SURGE, VAR_TEMP_x4001
-	Compare VAR_TEMP_x4001, 0
-	GoToIfNe _014A
-	GoToIfUnset FLAG_CAUGHT_ZAPDOS, _0144
-	CheckRegisteredPhoneNumber PHONE_CONTACT_LT__SURGE, VAR_TEMP_x4001
-	Compare VAR_TEMP_x4001, 1
-	GoToIfEq _00FB
-	ScrCmd_522 VAR_TEMP_x4000
-	Compare VAR_TEMP_x4000, 9
-	GoToIfNe _00C7
-	SetFlag FLAG_HIDE_VERMILION_GYM_LT_SURGE
-	GoTo _00F9
+	vermilion_gym_init
+	get_phone_book_rematch PHONE_CONTACT_LT__SURGE, VAR_TEMP_x4001
+	compare VAR_TEMP_x4001, 0
+	goto_if_ne _014A
+	goto_if_unset FLAG_CAUGHT_ZAPDOS, _0144
+	check_registered_phone_number PHONE_CONTACT_LT__SURGE, VAR_TEMP_x4001
+	compare VAR_TEMP_x4001, 1
+	goto_if_eq _00FB
+	scrcmd_522 VAR_TEMP_x4000
+	compare VAR_TEMP_x4000, 9
+	goto_if_ne _00C7
+	setflag FLAG_HIDE_VERMILION_GYM_LT_SURGE
+	goto _00F9
 
 _00C7:
-	Compare VAR_TEMP_x4000, 10
-	GoToIfNe _00DE
-	SetFlag FLAG_HIDE_VERMILION_GYM_LT_SURGE
-	GoTo _00F9
+	compare VAR_TEMP_x4000, 10
+	goto_if_ne _00DE
+	setflag FLAG_HIDE_VERMILION_GYM_LT_SURGE
+	goto _00F9
 
 _00DE:
-	Compare VAR_TEMP_x4000, 11
-	GoToIfNe _00F5
-	SetFlag FLAG_HIDE_VERMILION_GYM_LT_SURGE
-	GoTo _00F9
+	compare VAR_TEMP_x4000, 11
+	goto_if_ne _00F5
+	setflag FLAG_HIDE_VERMILION_GYM_LT_SURGE
+	goto _00F9
 
 _00F5:
-	ClearFlag FLAG_HIDE_VERMILION_GYM_LT_SURGE
+	clearflag FLAG_HIDE_VERMILION_GYM_LT_SURGE
 _00F9:
-	End
+	end
 
 _00FB:
-	GoToIfSet FLAG_TRADE_LT_SURGE_PIKACHU, _010C
-	SetFlag FLAG_HIDE_VERMILION_GYM_LT_SURGE
-	End
+	goto_if_set FLAG_TRADE_LT_SURGE_PIKACHU, _010C
+	setflag FLAG_HIDE_VERMILION_GYM_LT_SURGE
+	end
 
 _010C:
-	GetWeekday VAR_TEMP_x4000
-	Compare VAR_TEMP_x4000, 5
-	GoToIfNe _0127
-	SetFlag FLAG_HIDE_VERMILION_GYM_LT_SURGE
-	GoTo _0142
+	get_weekday VAR_TEMP_x4000
+	compare VAR_TEMP_x4000, 5
+	goto_if_ne _0127
+	setflag FLAG_HIDE_VERMILION_GYM_LT_SURGE
+	goto _0142
 
 _0127:
-	Compare VAR_TEMP_x4000, 6
-	GoToIfNe _013E
-	SetFlag FLAG_HIDE_VERMILION_GYM_LT_SURGE
-	GoTo _0142
+	compare VAR_TEMP_x4000, 6
+	goto_if_ne _013E
+	setflag FLAG_HIDE_VERMILION_GYM_LT_SURGE
+	goto _0142
 
 _013E:
-	ClearFlag FLAG_HIDE_VERMILION_GYM_LT_SURGE
+	clearflag FLAG_HIDE_VERMILION_GYM_LT_SURGE
 _0142:
-	End
+	end
 
 _0144:
-	ClearFlag FLAG_HIDE_VERMILION_GYM_LT_SURGE
-	End
+	clearflag FLAG_HIDE_VERMILION_GYM_LT_SURGE
+	end
 
 _014A:
-	SetFlag FLAG_HIDE_VERMILION_GYM_LT_SURGE
-	End
+	setflag FLAG_HIDE_VERMILION_GYM_LT_SURGE
+	end
 
 scr_seq_T06GYM0101_022:
-	GoToIfSet FLAG_HIDE_VERMILION_GYM_STOPS, _0175
-	MakeObjectVisible obj_T06GYM0101_stop
-	MakeObjectVisible obj_T06GYM0101_stop_2
-	MakeObjectVisible obj_T06GYM0101_stop_3
-	MakeObjectVisible obj_T06GYM0101_stop_4
-	MakeObjectVisible obj_T06GYM0101_stop_5
-	MakeObjectVisible obj_T06GYM0101_stop_6
-	End
+	goto_if_set FLAG_HIDE_VERMILION_GYM_STOPS, _0175
+	make_object_visible obj_T06GYM0101_stop
+	make_object_visible obj_T06GYM0101_stop_2
+	make_object_visible obj_T06GYM0101_stop_3
+	make_object_visible obj_T06GYM0101_stop_4
+	make_object_visible obj_T06GYM0101_stop_5
+	make_object_visible obj_T06GYM0101_stop_6
+	end
 
 _0175:
-	End
+	end
 
 scr_seq_T06GYM0101_000:
-	VermilionGymCanCheck 0, VAR_SPECIAL_RESULT
-	GoTo _023A
-	End
+	vermilion_gym_can_check 0, VAR_SPECIAL_RESULT
+	goto _023A
+	end
 
 scr_seq_T06GYM0101_001:
-	VermilionGymCanCheck 1, VAR_SPECIAL_RESULT
-	GoTo _023A
-	End
+	vermilion_gym_can_check 1, VAR_SPECIAL_RESULT
+	goto _023A
+	end
 
 scr_seq_T06GYM0101_002:
-	VermilionGymCanCheck 2, VAR_SPECIAL_RESULT
-	GoTo _023A
-	End
+	vermilion_gym_can_check 2, VAR_SPECIAL_RESULT
+	goto _023A
+	end
 
 scr_seq_T06GYM0101_003:
-	VermilionGymCanCheck 3, VAR_SPECIAL_RESULT
-	GoTo _023A
-	End
+	vermilion_gym_can_check 3, VAR_SPECIAL_RESULT
+	goto _023A
+	end
 
 scr_seq_T06GYM0101_004:
-	VermilionGymCanCheck 4, VAR_SPECIAL_RESULT
-	GoTo _023A
-	End
+	vermilion_gym_can_check 4, VAR_SPECIAL_RESULT
+	goto _023A
+	end
 
 scr_seq_T06GYM0101_005:
-	VermilionGymCanCheck 5, VAR_SPECIAL_RESULT
-	GoTo _023A
-	End
+	vermilion_gym_can_check 5, VAR_SPECIAL_RESULT
+	goto _023A
+	end
 
 scr_seq_T06GYM0101_006:
-	VermilionGymCanCheck 6, VAR_SPECIAL_RESULT
-	GoTo _023A
-	End
+	vermilion_gym_can_check 6, VAR_SPECIAL_RESULT
+	goto _023A
+	end
 
 scr_seq_T06GYM0101_007:
-	VermilionGymCanCheck 7, VAR_SPECIAL_RESULT
-	GoTo _023A
-	End
+	vermilion_gym_can_check 7, VAR_SPECIAL_RESULT
+	goto _023A
+	end
 
 scr_seq_T06GYM0101_008:
-	VermilionGymCanCheck 8, VAR_SPECIAL_RESULT
-	GoTo _023A
-	End
+	vermilion_gym_can_check 8, VAR_SPECIAL_RESULT
+	goto _023A
+	end
 
 scr_seq_T06GYM0101_009:
-	VermilionGymCanCheck 9, VAR_SPECIAL_RESULT
-	GoTo _023A
-	End
+	vermilion_gym_can_check 9, VAR_SPECIAL_RESULT
+	goto _023A
+	end
 
 scr_seq_T06GYM0101_010:
-	VermilionGymCanCheck 10, VAR_SPECIAL_RESULT
-	GoTo _023A
-	End
+	vermilion_gym_can_check 10, VAR_SPECIAL_RESULT
+	goto _023A
+	end
 
 scr_seq_T06GYM0101_011:
-	VermilionGymCanCheck 11, VAR_SPECIAL_RESULT
-	GoTo _023A
-	End
+	vermilion_gym_can_check 11, VAR_SPECIAL_RESULT
+	goto _023A
+	end
 
 scr_seq_T06GYM0101_012:
-	VermilionGymCanCheck 12, VAR_SPECIAL_RESULT
-	GoTo _023A
-	End
+	vermilion_gym_can_check 12, VAR_SPECIAL_RESULT
+	goto _023A
+	end
 
 scr_seq_T06GYM0101_013:
-	VermilionGymCanCheck 13, VAR_SPECIAL_RESULT
-	GoTo _023A
-	End
+	vermilion_gym_can_check 13, VAR_SPECIAL_RESULT
+	goto _023A
+	end
 
 scr_seq_T06GYM0101_014:
-	VermilionGymCanCheck 14, VAR_SPECIAL_RESULT
-	GoTo _023A
-	End
+	vermilion_gym_can_check 14, VAR_SPECIAL_RESULT
+	goto _023A
+	end
 
 _023A:
-	Compare VAR_SPECIAL_RESULT, 4
-	GoToIfEq _027D
-	Compare VAR_SPECIAL_RESULT, 2
-	GoToIfEq _02AA
-	Compare VAR_SPECIAL_RESULT, 1
-	GoToIfEq _028E
-	Compare VAR_SPECIAL_RESULT, 3
-	GoToIfEq _02CE
-	Compare VAR_SPECIAL_RESULT, 0
-	GoToIfEq _02E5
-	End
+	compare VAR_SPECIAL_RESULT, 4
+	goto_if_eq _027D
+	compare VAR_SPECIAL_RESULT, 2
+	goto_if_eq _02AA
+	compare VAR_SPECIAL_RESULT, 1
+	goto_if_eq _028E
+	compare VAR_SPECIAL_RESULT, 3
+	goto_if_eq _02CE
+	compare VAR_SPECIAL_RESULT, 0
+	goto_if_eq _02E5
+	end
 
 _027D:
-	PlaySE SEQ_SE_DP_SELECT
-	LockAll
-	NPCMsg msg_0485_T06GYM0101_00008
-	WaitButton
-	CloseMsg
-	ReleaseAll
-	End
+	play_se SEQ_SE_DP_SELECT
+	lockall
+	npc_msg msg_0485_T06GYM0101_00008
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
 
 _028E:
-	PlaySE SEQ_SE_DP_SELECT
-	LockAll
-	NPCMsg msg_0485_T06GYM0101_00009
-	WaitButton
-	CloseMsg
-	VermilionGymLockAction 0, 0
-	NPCMsg msg_0485_T06GYM0101_00011
-	WaitButton
-	CloseMsg
-	ReleaseAll
-	End
+	play_se SEQ_SE_DP_SELECT
+	lockall
+	npc_msg msg_0485_T06GYM0101_00009
+	wait_button_or_walk_away
+	closemsg
+	vermilion_gym_lock_action 0, 0
+	npc_msg msg_0485_T06GYM0101_00011
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
 
 _02AA:
-	PlaySE SEQ_SE_DP_SELECT
-	LockAll
-	NPCMsg msg_0485_T06GYM0101_00009
-	WaitButton
-	CloseMsg
-	VermilionGymLockAction 1, 0
-	SetFlag FLAG_SYS_SOLVED_LT_SURGE_GYM
-	StopSE SEQ_SE_GS_DENGEKIBARIA
-	NPCMsg msg_0485_T06GYM0101_00012
-	WaitButton
-	CloseMsg
-	ReleaseAll
-	End
+	play_se SEQ_SE_DP_SELECT
+	lockall
+	npc_msg msg_0485_T06GYM0101_00009
+	wait_button_or_walk_away
+	closemsg
+	vermilion_gym_lock_action 1, 0
+	setflag FLAG_SYS_SOLVED_LT_SURGE_GYM
+	stop_se SEQ_SE_GS_DENGEKIBARIA
+	npc_msg msg_0485_T06GYM0101_00012
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
 
 _02CE:
-	PlaySE SEQ_SE_DP_SELECT
-	LockAll
-	NPCMsg msg_0485_T06GYM0101_00010
-	WaitButton
-	CloseMsg
-	VermilionGymLockAction 0, 1
-	ResampleVermilionGymCans
-	ReleaseAll
-	End
+	play_se SEQ_SE_DP_SELECT
+	lockall
+	npc_msg msg_0485_T06GYM0101_00010
+	wait_button_or_walk_away
+	closemsg
+	vermilion_gym_lock_action 0, 1
+	resample_vermilion_gym_cans
+	releaseall
+	end
 
 _02E5:
-	PlaySE SEQ_SE_DP_SELECT
-	LockAll
-	NPCMsg msg_0485_T06GYM0101_00008
-	WaitButton
-	CloseMsg
-	ReleaseAll
-	End
+	play_se SEQ_SE_DP_SELECT
+	lockall
+	npc_msg msg_0485_T06GYM0101_00008
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
 
 scr_seq_T06GYM0101_015:
-	End
+	end
 
 scr_seq_T06GYM0101_016:
-	End
+	end
 
 scr_seq_T06GYM0101_017:
-	End
+	end
 
 scr_seq_T06GYM0101_018:
-	End
+	end
 
 scr_seq_T06GYM0101_019:
-	End
+	end
 
 scr_seq_T06GYM0101_020:
-	End
+	end
 
 scr_seq_T06GYM0101_023:
-	PlaySE SEQ_SE_DP_SELECT
-	LockAll
-	FacePlayer
-	CheckBadge BADGE_THUNDER, VAR_SPECIAL_RESULT
-	Compare VAR_SPECIAL_RESULT, 1
-	GoToIfEq _03C7
-	NPCMsg msg_0485_T06GYM0101_00000
-	CloseMsg
-	TrainerBattle TRAINER_LEADER_LT_SURGE_LT__SURGE, 0, 0, 0
-	CheckBattleWon VAR_SPECIAL_RESULT
-	Compare VAR_SPECIAL_RESULT, 0
-	GoToIfEq _03DD
-	GiveBadge BADGE_THUNDER
-	AddVar VAR_UNK_4135, 1
-	AddSpecialGameStat SCORE_EVENT_BADGE_GET
-	SetFlag FLAG_HIDE_VERMILION_GYM_STOPS
-	HidePerson obj_T06GYM0101_stop
-	HidePerson obj_T06GYM0101_stop_2
-	HidePerson obj_T06GYM0101_stop_3
-	HidePerson obj_T06GYM0101_stop_4
-	HidePerson obj_T06GYM0101_stop_5
-	HidePerson obj_T06GYM0101_stop_6
-	SetTrainerFlag TRAINER_GUITARIST_VINCENT
-	SetTrainerFlag TRAINER_GENTLEMAN_GREGORY
-	SetTrainerFlag TRAINER_JUGGLER_HORTON
-	NPCMsg msg_0485_T06GYM0101_00001
-	BufferPlayersName 0
-	NPCMsg msg_0485_T06GYM0101_00002
-	PlayFanfare SEQ_ME_BADGE
-	WaitFanfare
-	NPCMsg msg_0485_T06GYM0101_00003
-	GoTo _0389
+	play_se SEQ_SE_DP_SELECT
+	lockall
+	faceplayer
+	check_badge BADGE_THUNDER, VAR_SPECIAL_RESULT
+	compare VAR_SPECIAL_RESULT, 1
+	goto_if_eq _03C7
+	npc_msg msg_0485_T06GYM0101_00000
+	closemsg
+	trainer_battle TRAINER_LEADER_LT_SURGE_LT__SURGE, 0, 0, 0
+	check_battle_won VAR_SPECIAL_RESULT
+	compare VAR_SPECIAL_RESULT, 0
+	goto_if_eq _03DD
+	give_badge BADGE_THUNDER
+	addvar VAR_UNK_4135, 1
+	add_special_game_stat SCORE_EVENT_BADGE_GET
+	setflag FLAG_HIDE_VERMILION_GYM_STOPS
+	hide_person obj_T06GYM0101_stop
+	hide_person obj_T06GYM0101_stop_2
+	hide_person obj_T06GYM0101_stop_3
+	hide_person obj_T06GYM0101_stop_4
+	hide_person obj_T06GYM0101_stop_5
+	hide_person obj_T06GYM0101_stop_6
+	settrainerflag TRAINER_GUITARIST_VINCENT
+	settrainerflag TRAINER_GENTLEMAN_GREGORY
+	settrainerflag TRAINER_JUGGLER_HORTON
+	npc_msg msg_0485_T06GYM0101_00001
+	buffer_players_name 0
+	npc_msg msg_0485_T06GYM0101_00002
+	play_fanfare SEQ_ME_BADGE
+	wait_fanfare
+	npc_msg msg_0485_T06GYM0101_00003
+	goto _0389
 
 _0389:
-	GoToIfNoItemSpace ITEM_TM34, 1, _03BD
-	CallStd std_give_item_verbose
-	SetFlag FLAG_GOT_TM34_FROM_LT_SURGE
-	NPCMsg msg_0485_T06GYM0101_00004
-	WaitButton
-	CloseMsg
-	ReleaseAll
-	End
+	goto_if_no_item_space ITEM_TM34, 1, _03BD
+	callstd std_give_item_verbose
+	setflag FLAG_GOT_TM34_FROM_LT_SURGE
+	npc_msg msg_0485_T06GYM0101_00004
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
 
 _03BD:
-	CallStd std_bag_is_full
-	CloseMsg
-	ReleaseAll
-	End
+	callstd std_bag_is_full
+	closemsg
+	releaseall
+	end
 
 _03C7:
-	GoToIfUnset FLAG_GOT_TM34_FROM_LT_SURGE, _0389
-	NPCMsg msg_0485_T06GYM0101_00005
-	WaitButton
-	CloseMsg
-	ReleaseAll
-	End
+	goto_if_unset FLAG_GOT_TM34_FROM_LT_SURGE, _0389
+	npc_msg msg_0485_T06GYM0101_00005
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
 
 _03DD:
-	WhiteOut
-	ReleaseAll
-	End
+	white_out
+	releaseall
+	end
 
 scr_seq_T06GYM0101_024:
-	PlaySE SEQ_SE_DP_SELECT
-	LockAll
-	FacePlayer
-	CheckBadge BADGE_THUNDER, VAR_SPECIAL_RESULT
-	Compare VAR_SPECIAL_RESULT, 1
-	GoToIfEq _0409
-	NPCMsg msg_0485_T06GYM0101_00006
-	WaitButton
-	CloseMsg
-	ReleaseAll
-	End
+	play_se SEQ_SE_DP_SELECT
+	lockall
+	faceplayer
+	check_badge BADGE_THUNDER, VAR_SPECIAL_RESULT
+	compare VAR_SPECIAL_RESULT, 1
+	goto_if_eq _0409
+	npc_msg msg_0485_T06GYM0101_00006
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
 
 _0409:
-	NPCMsg msg_0485_T06GYM0101_00007
-	WaitButton
-	CloseMsg
-	ReleaseAll
-	End
+	npc_msg msg_0485_T06GYM0101_00007
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
 
 scr_seq_T06GYM0101_025:
-	PlaySE SEQ_SE_DP_SELECT
-	LockAll
-	FacePlayer
-	CheckBadge BADGE_THUNDER, VAR_SPECIAL_RESULT
-	BufferPlayersName 0
-	Compare VAR_SPECIAL_RESULT, 0
-	GoToIfNe _043B
-	NPCMsg msg_0485_T06GYM0101_00013
-	GoTo _043E
+	play_se SEQ_SE_DP_SELECT
+	lockall
+	faceplayer
+	check_badge BADGE_THUNDER, VAR_SPECIAL_RESULT
+	buffer_players_name 0
+	compare VAR_SPECIAL_RESULT, 0
+	goto_if_ne _043B
+	npc_msg msg_0485_T06GYM0101_00013
+	goto _043E
 
 _043B:
-	NPCMsg msg_0485_T06GYM0101_00014
+	npc_msg msg_0485_T06GYM0101_00014
 _043E:
-	WaitButton
-	CloseMsg
-	ReleaseAll
-	End
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
 	.balign 4, 0

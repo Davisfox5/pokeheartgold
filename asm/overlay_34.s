@@ -432,11 +432,11 @@ ov34_0225D87C: ; 0x0225D87C
 	mov r0, #0x59
 	lsl r0, r0, #2
 	ldr r0, [r6, r0]
-	bl SpriteTransfer_DeleteCharTransferTask
+	bl sub_0200AEB0
 	mov r0, #0x5a
 	lsl r0, r0, #2
 	ldr r0, [r6, r0]
-	bl SpriteTransfer_DeletePlttTransferTask
+	bl sub_0200B0A8
 	mov r7, #0x55
 	mov r4, #0
 	add r5, r6, #0
@@ -463,7 +463,7 @@ _0225D8B2:
 	ldr r0, [sp]
 	bl ov34_0225D900
 	ldr r0, [r6, #0x20]
-	bl Heap_Free
+	bl FreeToHeap
 	mov r0, #0xa9
 	lsl r0, r0, #2
 	ldr r0, [r6, r0]
@@ -617,7 +617,7 @@ ov34_0225D924: ; 0x0225D924
 	bl GfGfxLoader_LoadScrnData
 	mov r0, #4
 	mov r1, #0
-	bl FieldMessage_LoadTextPalettes
+	bl sub_0205B4EC
 	add sp, #0x80
 	pop {r3, r4, r5, pc}
 	nop
@@ -716,11 +716,11 @@ _0225DA6C:
 	str r0, [r6, r1]
 	sub r1, #0xc
 	ldr r0, [r6, r1]
-	bl SpriteTransfer_CreateCharTransferTask_AllocAtEnd
+	bl sub_0200ADA4
 	mov r0, #0x5a
 	lsl r0, r0, #2
 	ldr r0, [r6, r0]
-	bl SpriteTransfer_CreatePlttTransferTask
+	bl sub_0200B00C
 	add sp, #0x10
 	pop {r3, r4, r5, r6, r7, pc}
 	nop

@@ -251,8 +251,8 @@ sub_02004AB8: ; 0x02004AB8
 	.balign 4, 0
 	thumb_func_end sub_02004AB8
 
-	thumb_func_start Sound_SetFieldBGM
-Sound_SetFieldBGM: ; 0x02004AC8
+	thumb_func_start sub_02004AC8
+sub_02004AC8: ; 0x02004AC8
 	push {r4, lr}
 	add r4, r0, #0
 	mov r0, #0x20
@@ -260,10 +260,10 @@ Sound_SetFieldBGM: ; 0x02004AC8
 	strh r4, [r0]
 	pop {r4, pc}
 	.balign 4, 0
-	thumb_func_end Sound_SetFieldBGM
+	thumb_func_end sub_02004AC8
 
-	thumb_func_start Sound_SetScene
-Sound_SetScene: ; 0x02004AD8
+	thumb_func_start sub_02004AD8
+sub_02004AD8: ; 0x02004AD8
 	push {r3, r4, r5, lr}
 	add r5, r0, #0
 	mov r0, #0x15
@@ -281,7 +281,7 @@ _02004AF6:
 	strb r5, [r0]
 	pop {r3, r4, r5, pc}
 	.balign 4, 0
-	thumb_func_end Sound_SetScene
+	thumb_func_end sub_02004AD8
 
 	thumb_func_start sub_02004AFC
 sub_02004AFC: ; 0x02004AFC
@@ -760,7 +760,7 @@ _02004EF8:
 	pop {r3, r4, r5, r6, r7, pc}
 _02004F06:
 	add r0, r4, #0
-	bl Sound_SetScene
+	bl sub_02004AD8
 	cmp r4, #0x4a
 	bls _02004F12
 	b _02005054
@@ -1165,7 +1165,7 @@ sub_02005260: ; 0x02005260
 	mov r0, #0x18
 	bl GF_SdatGetAttrPtr
 	bl Sound_Stop
-	bl Sound_ClearBGMPauseFlags
+	bl sub_020053F0
 	mov r0, #4
 	bl sub_02005060
 	add r0, r4, #0
@@ -1363,8 +1363,8 @@ _020053EE:
 	pop {r4, r5, r6, pc}
 	thumb_func_end sub_020053A8
 
-	thumb_func_start Sound_ClearBGMPauseFlags
-Sound_ClearBGMPauseFlags: ; 0x020053F0
+	thumb_func_start sub_020053F0
+sub_020053F0: ; 0x020053F0
 	push {r4, lr}
 	mov r0, #0xc
 	bl GF_SdatGetAttrPtr
@@ -1375,7 +1375,7 @@ Sound_ClearBGMPauseFlags: ; 0x020053F0
 	strb r1, [r4]
 	strb r1, [r0]
 	pop {r4, pc}
-	thumb_func_end Sound_ClearBGMPauseFlags
+	thumb_func_end sub_020053F0
 
 	thumb_func_start GF_SndHandleMoveVolume
 GF_SndHandleMoveVolume: ; 0x02005408
@@ -1938,7 +1938,7 @@ _020057FC:
 	bne _0200584A
 	ldr r0, [sp, #0x48]
 	add r1, r6, #0
-	bl Heap_Alloc
+	bl AllocFromHeap
 	str r0, [r4]
 	cmp r0, #0
 	bne _02005818
@@ -2054,7 +2054,7 @@ _020058DC:
 	mov r0, #0
 	strb r0, [r4]
 	ldr r0, [r6]
-	bl Heap_Free
+	bl FreeToHeap
 _020058F2:
 	pop {r4, r5, r6, pc}
 	thumb_func_end sub_020058B8

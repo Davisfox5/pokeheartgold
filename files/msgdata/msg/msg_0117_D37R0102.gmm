@@ -110,7 +110,7 @@
 	</row>
 	<row id="msg_0117_D37R0102_00027" index="27">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">NO ENTRY BEYOND THIS POINT</language>
+		<language name="English">The old warehouse shutters are\nlocked up tight.</language>
 	</row>
 	<row id="msg_0117_D37R0102_00028" index="28">
 		<attribute name="window_context_name">used</attribute>
@@ -118,11 +118,11 @@
 	</row>
 	<row id="msg_0117_D37R0102_00029" index="29">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">Welcome to the Memorial Photo Studio.\nWe are no ordinary studio!\rYou can wear a Team Rocket uniform\nto take a picture!\rWould you like to try it? {YESNO 0}</language>
+		<language name="English">Welcome to the Memorial Photo Studio.\nWe are no ordinary studio!\rTake home a souvenir photo of you\nand your Pokémon!\rWould you like to try it? {YESNO 0}</language>
 	</row>
 	<row id="msg_0117_D37R0102_00030" index="30">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">Please stand in front of the camera\nonce you have changed.\r</language>
+		<language name="English">Please stand in front of the camera\nwhenever you are ready.\r</language>
 	</row>
 	<row id="msg_0117_D37R0102_00031" index="31">
 		<attribute name="window_context_name">used</attribute>
@@ -134,11 +134,11 @@
 	</row>
 	<row id="msg_0117_D37R0102_00033" index="33">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">You can wear a Team Rocket uniform\nto take a picture!\rWould you like to try it? {YESNO 0}</language>
+		<language name="English">-</language>
 	</row>
 	<row id="msg_0117_D37R0102_00034" index="34">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">...Fair enough.\rNo one should look up to Team Rocket.</language>
+		<language name="English">...Fair enough.\rCome back anytime you want\na keepsake.</language>
 	</row>
 	<row id="msg_0117_D37R0102_00035" index="35">
 		<attribute name="window_context_name">used</attribute>
@@ -150,7 +150,7 @@
 	</row>
 	<row id="msg_0117_D37R0102_00037" index="37">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">Look at you! Pretty good!\rOh, but you shouldn’t try to scare\npeople walking around looking\flike that, OK?</language>
+		<language name="English">-</language>
 	</row>
 	<row id="msg_0117_D37R0102_00038" index="38">
 		<attribute name="window_context_name">garbage</attribute>

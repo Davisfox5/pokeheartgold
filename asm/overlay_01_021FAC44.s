@@ -20,7 +20,7 @@ ov01_021FAC44: ; 0x021FAC44
 	add r7, r0, #0
 	mov r0, #4
 	mov r1, #0x20
-	bl Heap_Alloc
+	bl AllocFromHeap
 	add r5, r0, #0
 	mov r4, #0
 _021FAC54:
@@ -44,7 +44,7 @@ _021FAC70:
 	mov r1, #9
 	mov r0, #4
 	lsl r1, r1, #0xc
-	bl Heap_Alloc
+	bl AllocFromHeap
 	str r0, [r6, #0x10]
 	cmp r0, #0
 	bne _021FAC88
@@ -88,7 +88,7 @@ _021FACBC:
 	ldr r0, [r5, #0x10]
 	cmp r0, #0
 	beq _021FACD0
-	bl Heap_Free
+	bl FreeToHeap
 	mov r0, #0
 	str r0, [r5, #0x10]
 _021FACD0:
@@ -98,7 +98,7 @@ _021FACD0:
 	cmp r4, #4
 	blo _021FACBC
 	add r0, r6, #0
-	bl Heap_Free
+	bl FreeToHeap
 	pop {r3, r4, r5, r6, r7, pc}
 	.balign 4, 0
 	thumb_func_end ov01_021FACB4

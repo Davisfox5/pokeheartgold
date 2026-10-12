@@ -5,43 +5,43 @@
 
 	.rodata
 
-	ScrDef scr_seq_D27R0105_000
-	ScrDefEnd
+	scrdef scr_seq_D27R0105_000
+	scrdef_end
 
 scr_seq_D27R0105_000:
-	ScrCmd_609
-	LockAll
-	SetVar VAR_UNK_40A7, 1
-	ScrCmd_729 VAR_SPECIAL_RESULT
-	Compare VAR_SPECIAL_RESULT, 0
-	GoToIfEq _0039
-	ApplyMovement obj_player, _0070
-	ApplyMovement obj_partner_poke, _007C
-	WaitMovement
-	GoTo _0043
+	scrcmd_609
+	lockall
+	setvar VAR_UNK_40A7, 1
+	scrcmd_729 VAR_SPECIAL_RESULT
+	compare VAR_SPECIAL_RESULT, 0
+	goto_if_eq _0039
+	apply_movement obj_player, _0070
+	apply_movement obj_partner_poke, _007C
+	wait_movement
+	goto _0043
 
 _0039:
-	ApplyMovement obj_player, _0070
-	WaitMovement
+	apply_movement obj_player, _0070
+	wait_movement
 _0043:
-	PlaySE SEQ_SE_GS_RAKKA01
-	FadeScreen 6, 1, 0, RGB_BLACK
-	WaitFade
-	Warp MAP_OLIVINE_LIGHTHOUSE_EXTERIOR, 0, 15, 3, DIR_SOUTH
-	FadeScreen 6, 1, 1, RGB_BLACK
-	WaitFade
-	ReleaseAll
-	End
+	play_se SEQ_SE_GS_RAKKA01
+	fade_screen 6, 1, 0, RGB_BLACK
+	wait_fade
+	warp MAP_OLIVINE_LIGHTHOUSE_EXTERIOR, 0, 15, 3, DIR_SOUTH
+	fade_screen 6, 1, 1, RGB_BLACK
+	wait_fade
+	releaseall
+	end
 
 	.balign 4, 0
 _0070:
-	WalkFastEast
-	SetInvisible
-	EndMovement
+	step 19, 1
+	step 69, 1
+	step_end
 
 	.balign 4, 0
 _007C:
-	WalkFastEast
-	SetInvisible
-	EndMovement
+	step 19, 1
+	step 69, 1
+	step_end
 	.balign 4, 0

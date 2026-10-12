@@ -40,7 +40,7 @@ _021E5916:
 	mov r0, #3
 	mov r1, #0x32
 	lsl r2, r2, #0xc
-	bl Heap_Create
+	bl CreateHeap
 	mov r0, #0x54
 	mov r1, #0x32
 	bl NARC_New
@@ -315,11 +315,11 @@ ov73_021E5BAC: ; 0x021E5BAC
 	mov r0, #0x6b
 	lsl r0, r0, #2
 	ldr r0, [r6, r0]
-	bl SpriteTransfer_DeleteCharTransferTask
+	bl sub_0200AEB0
 	mov r0, #0x1b
 	lsl r0, r0, #4
 	ldr r0, [r6, r0]
-	bl SpriteTransfer_DeletePlttTransferTask
+	bl sub_0200B0A8
 	mov r7, #0x5f
 	mov r4, #0
 	add r5, r6, #0
@@ -376,7 +376,7 @@ _021E5BD8:
 	add r1, r0, #0
 	bl Main_SetVBlankIntrCB
 	mov r0, #0x32
-	bl Heap_Destroy
+	bl DestroyHeap
 	mov r0, #1
 	pop {r3, r4, r5, r6, r7, pc}
 	nop
@@ -686,11 +686,11 @@ ov73_021E5ED4: ; 0x021E5ED4
 	add r6, r0, #0
 	bl ov73_021E77E8
 	ldr r0, [r6, #0x18]
-	bl Heap_Free
+	bl FreeToHeap
 	mov r0, #0xdf
 	lsl r0, r0, #2
 	ldr r0, [r6, r0]
-	bl Heap_Free
+	bl FreeToHeap
 	mov r4, #0
 	add r5, r6, #0
 _021E5EF0:
@@ -723,7 +723,7 @@ ov73_021E5F0C: ; 0x021E5F0C
 	mov r1, #0
 	bl FreeBgTilemapBuffer
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	pop {r4, pc}
 	.balign 4, 0
 	thumb_func_end ov73_021E5F0C
@@ -861,7 +861,7 @@ ov73_021E6048: ; 0x021E6048
 	mov r0, #0x31
 	lsl r0, r0, #4
 	ldr r0, [r4, r0]
-	bl Heap_Free
+	bl FreeToHeap
 	mov r0, #0x31
 	mov r1, #0
 	lsl r0, r0, #4
@@ -1000,11 +1000,11 @@ _021E60D8:
 	str r0, [r6, r1]
 	sub r1, #0xc
 	ldr r0, [r6, r1]
-	bl SpriteTransfer_CreateCharTransferTask
+	bl sub_0200ACF0
 	mov r0, #0x1b
 	lsl r0, r0, #4
 	ldr r0, [r6, r0]
-	bl SpriteTransfer_CreateExtPlttTransferTask
+	bl sub_0200AF94
 	add sp, #0x18
 	pop {r3, r4, r5, r6, r7, pc}
 	thumb_func_end ov73_021E6090
@@ -2341,7 +2341,7 @@ ov73_021E6C20: ; 0x021E6C20
 	mov r1, #1
 	strb r1, [r0, #0xc]
 	ldr r0, [r5, #8]
-	mov r1, #0x13 ; SCORE_EVENT_RECORDS_MIXED
+	mov r1, #0x13
 	ldr r0, [r0, #0xc]
 	bl GameStats_AddScore
 	mov r0, #0xdd
@@ -3875,19 +3875,19 @@ ov73_021E77E8: ; 0x021E77E8
 	mov r0, #0xbf
 	lsl r0, r0, #2
 	ldr r0, [r4, r0]
-	bl Heap_Free
+	bl FreeToHeap
 	mov r0, #3
 	lsl r0, r0, #8
 	ldr r0, [r4, r0]
-	bl Heap_Free
+	bl FreeToHeap
 	mov r0, #0xbb
 	lsl r0, r0, #2
 	ldr r0, [r4, r0]
-	bl Heap_Free
+	bl FreeToHeap
 	mov r0, #0x2f
 	lsl r0, r0, #4
 	ldr r0, [r4, r0]
-	bl Heap_Free
+	bl FreeToHeap
 	pop {r4, pc}
 	.balign 4, 0
 	thumb_func_end ov73_021E77E8
@@ -4359,7 +4359,7 @@ ov73_021E7B3C: ; 0x021E7B3C
 	add r5, r0, #0
 	add r0, r1, #0
 	add r1, r4, #0
-	bl Heap_AllocAtEnd
+	bl AllocFromHeapAtEnd
 	add r7, r0, #0
 	add r0, r5, #0
 	bl sub_020270C4
@@ -4395,7 +4395,7 @@ ov73_021E7B84: ; 0x021E7B84
 	add r5, r0, #0
 	add r0, r1, #0
 	add r1, r4, #0
-	bl Heap_AllocAtEnd
+	bl AllocFromHeapAtEnd
 	add r7, r0, #0
 	add r0, r5, #0
 	bl sub_020270C4
@@ -4429,7 +4429,7 @@ ov73_021E7BC8: ; 0x021E7BC8
 	add r5, r0, #0
 	add r0, r1, #0
 	add r1, r4, #0
-	bl Heap_AllocAtEnd
+	bl AllocFromHeapAtEnd
 	add r7, r0, #0
 	add r0, r5, #0
 	bl sub_020270C4
@@ -4463,7 +4463,7 @@ ov73_021E7C0C: ; 0x021E7C0C
 	add r5, r0, #0
 	add r0, r1, #0
 	add r1, r4, #0
-	bl Heap_AllocAtEnd
+	bl AllocFromHeapAtEnd
 	add r7, r0, #0
 	add r0, r5, #0
 	bl sub_020270C4
@@ -4497,7 +4497,7 @@ ov73_021E7C50: ; 0x021E7C50
 	add r5, r0, #0
 	add r0, r1, #0
 	add r1, r4, #0
-	bl Heap_AllocAtEnd
+	bl AllocFromHeapAtEnd
 	add r7, r0, #0
 	add r0, r5, #0
 	bl sub_020270C4
@@ -4531,7 +4531,7 @@ ov73_021E7C94: ; 0x021E7C94
 	add r5, r0, #0
 	add r0, r1, #0
 	add r1, r4, #0
-	bl Heap_AllocAtEnd
+	bl AllocFromHeapAtEnd
 	add r7, r0, #0
 	add r0, r5, #0
 	bl sub_020270C4
@@ -4804,7 +4804,7 @@ _021E7E62:
 	mov r0, #3
 	mov r1, #0x96
 	lsl r2, r2, #0x10
-	bl Heap_Create
+	bl CreateHeap
 	ldr r1, _021E7F88 ; =0x000012CC
 	add r0, r6, #0
 	mov r2, #0x96
@@ -4870,7 +4870,7 @@ _021E7E62:
 	bl Sound_SetSceneAndPlayBGM
 	ldr r1, _021E7FA8 ; =0x00020020
 	mov r0, #0x96
-	bl Heap_Alloc
+	bl AllocFromHeap
 	str r0, [r4, #0x24]
 	add r0, #0x1f
 	mov r1, #0x1f
@@ -5033,7 +5033,7 @@ ov73_021E808C: ; 0x021E808C
 	bl OverlayManager_GetData
 	add r4, r0, #0
 	ldr r0, [r4, #0x24]
-	bl Heap_Free
+	bl FreeToHeap
 	bl UnloadOVY38
 	bl UnloadDwcOverlay
 	add r0, r4, #0
@@ -5055,14 +5055,14 @@ ov73_021E808C: ; 0x021E808C
 	bl ov73_021E8164
 	bl sub_02034DE0
 	ldr r0, [r4, #4]
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r5, #0
 	bl OverlayManager_FreeData
 	mov r0, #0
 	add r1, r0, #0
 	bl Main_SetVBlankIntrCB
 	mov r0, #0x96
-	bl Heap_Destroy
+	bl DestroyHeap
 	mov r0, #1
 	pop {r3, r4, r5, pc}
 	.balign 4, 0
@@ -5263,10 +5263,10 @@ _021E81E8:
 	str r0, [r6, r1]
 	sub r1, #0xc
 	ldr r0, [r6, r1]
-	bl SpriteTransfer_CreateCharTransferTask
+	bl sub_0200ACF0
 	ldr r0, _021E82A0 ; =0x00000D38
 	ldr r0, [r6, r0]
-	bl SpriteTransfer_CreateExtPlttTransferTask
+	bl sub_0200AF94
 	ldr r0, [sp, #0x14]
 	bl NARC_Delete
 	add sp, #0x18
@@ -5533,10 +5533,10 @@ ov73_021E847C: ; 0x021E847C
 	add r6, r0, #0
 	ldr r0, _021E84C0 ; =0x00000D34
 	ldr r0, [r6, r0]
-	bl SpriteTransfer_DeleteCharTransferTask
+	bl sub_0200AEB0
 	ldr r0, _021E84C4 ; =0x00000D38
 	ldr r0, [r6, r0]
-	bl SpriteTransfer_DeletePlttTransferTask
+	bl sub_0200B0A8
 	ldr r7, _021E84C8 ; =0x00000D24
 	mov r4, #0
 	add r5, r6, #0
@@ -5987,7 +5987,7 @@ ov73_021E8730: ; 0x021E8730
 	mov r2, #0x80
 	bl MIi_CpuCopy16
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	mov r0, #0
 	str r0, [sp, #0x24]
 	str r0, [sp, #0x28]
@@ -6757,17 +6757,17 @@ ov73_021E8E7C: ; 0x021E8E7C
 	add r5, r0, #0
 	ldr r0, [r5]
 	ldr r0, [r0, #8]
-	bl Save_SysInfo_GetDwcProfileId
+	bl Save_SysInfo_GetField4C
 	cmp r0, #0
 	bne _021E8E96
 	ldr r1, [r5]
 	ldr r0, [r1, #8]
 	ldr r1, [r1, #0x1c]
-	bl Save_SysInfo_SetDwcProfileId
+	bl Save_SysInfo_SetField4C
 _021E8E96:
 	ldr r0, [r5]
 	ldr r0, [r0, #8]
-	bl Save_SysInfo_GetDwcProfileId
+	bl Save_SysInfo_GetField4C
 	add r4, r0, #0
 	ldr r0, [r5]
 	ldr r0, [r0, #0x14]
@@ -9385,7 +9385,7 @@ ov73_021EA268: ; 0x021EA268
 	add r6, r0, #0
 	add r0, r4, #0
 	add r1, r5, #0
-	bl Heap_AllocAtEnd
+	bl AllocFromHeapAtEnd
 	add r4, r0, #0
 	add r0, r6, #0
 	bl ov73_021E7960
@@ -9427,7 +9427,7 @@ ov73_021EA2B4: ; 0x021EA2B4
 	add r6, r0, #0
 	add r0, r4, #0
 	add r1, r5, #0
-	bl Heap_AllocAtEnd
+	bl AllocFromHeapAtEnd
 	add r4, r0, #0
 	add r0, r6, #0
 	mov r1, #0
@@ -9509,7 +9509,7 @@ ov73_021EA348: ; 0x021EA348
 	add r6, r0, #0
 	add r0, r1, #0
 	add r1, r5, #0
-	bl Heap_AllocAtEnd
+	bl AllocFromHeapAtEnd
 	add r4, r0, #0
 	mov r1, #0
 	add r2, r5, #0
@@ -9559,7 +9559,7 @@ _021EA3A0:
 	add r2, r4, #0
 	bl MIi_CpuCopyFast
 	add r0, r7, #0
-	bl Heap_Free
+	bl FreeToHeap
 	ldr r0, [sp, #4]
 	sub r6, r6, r4
 	add r0, r0, r4

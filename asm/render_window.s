@@ -9,7 +9,8 @@ _020F5C40:
 _020F5C50:
 	.byte 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x0A, 0x00, 0x00, 0x00, 0x0A, 0x00, 0x00, 0x00
 _020F5C60:
-	.word 1, 1, 1, 1, 0, 0
+	.byte 0x01, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00
+	.byte 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
 _020F5C78:
 	.byte 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
 	.byte 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0xD5, 0x5C, 0x01, 0x00
@@ -909,7 +910,7 @@ sub_0200EA68: ; 0x0200EA68
 	str r0, [sp, #0x30]
 	ldr r1, [sp, #0x30]
 	add r0, r6, #0
-	bl Heap_Alloc
+	bl AllocFromHeap
 	add r5, r0, #0
 	ldr r0, [sp, #0x2c]
 	bl BgGetCharPtr
@@ -1004,9 +1005,9 @@ _0200EB12:
 	add r2, r5, #0
 	bl BG_LoadCharTilesData
 	ldr r0, [sp, #0x34]
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r5, #0
-	bl Heap_Free
+	bl FreeToHeap
 	add sp, #0x48
 	pop {r3, r4, r5, r6, r7, pc}
 	thumb_func_end sub_0200EA68
@@ -1048,7 +1049,7 @@ sub_0200EB80: ; 0x0200EB80
 	mov r1, #9
 	ldr r0, [sp, #0x2c]
 	lsl r1, r1, #6
-	bl Heap_Alloc
+	bl AllocFromHeap
 	ldr r1, [sp, #0x10]
 	mov r2, #9
 	ldr r1, [r1, #0x14]
@@ -1088,16 +1089,16 @@ _0200EBDE:
 	lsl r3, r3, #6
 	bl BG_LoadCharTilesData
 	ldr r0, [sp, #0xc]
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	add sp, #0x14
 	pop {r4, r5, r6, r7, pc}
 	.balign 4, 0
 	thumb_func_end sub_0200EB80
 
-	thumb_func_start LoadMapSignpostFrameAndGraphic
-LoadMapSignpostFrameAndGraphic: ; 0x0200EC0C
+	thumb_func_start sub_0200EC0C
+sub_0200EC0C: ; 0x0200EC0C
 	push {r4, r5, r6, r7, lr}
 	sub sp, #0x1c
 	str r0, [sp, #0x10]
@@ -1136,7 +1137,7 @@ LoadMapSignpostFrameAndGraphic: ; 0x0200EC0C
 	bl BG_LoadPlttData
 	ldr r1, [sp, #0x14]
 	add r0, r4, #0
-	bl Heap_FreeExplicit
+	bl FreeToHeapExplicit
 	add r0, sp, #0x20
 	ldrb r3, [r0, #0x10]
 	cmp r3, #1
@@ -1153,7 +1154,7 @@ LoadMapSignpostFrameAndGraphic: ; 0x0200EC0C
 _0200EC80:
 	add sp, #0x1c
 	pop {r4, r5, r6, r7, pc}
-	thumb_func_end LoadMapSignpostFrameAndGraphic
+	thumb_func_end sub_0200EC0C
 
 	thumb_func_start sub_0200EC84
 sub_0200EC84: ; 0x0200EC84
@@ -1688,7 +1689,7 @@ WaitingIcon_New: ; 0x0200F0AC
 	add r5, r0, #0
 	ldr r0, [sp, #0x28]
 	ldr r1, _0200F1C4 ; =0x0000048C
-	bl Heap_Alloc
+	bl AllocFromHeap
 	ldr r1, [sp, #0x24]
 	add r4, r0, #0
 	ldr r0, _0200F1C8 ; =0x00000404
@@ -1700,7 +1701,7 @@ WaitingIcon_New: ; 0x0200F0AC
 	bl memcpy
 	ldr r0, [sp, #0x28]
 	mov r1, #0x80
-	bl Heap_Alloc
+	bl AllocFromHeap
 	ldr r1, [sp, #0x24]
 	mov r2, #0x20
 	add r1, #0xa
@@ -1742,7 +1743,7 @@ _0200F12E:
 	cmp r5, #8
 	blo _0200F12E
 	add r0, r6, #0
-	bl Heap_Free
+	bl FreeToHeap
 	ldr r0, [sp, #0x28]
 	mov r1, #0x17
 	str r0, [sp]
@@ -1768,7 +1769,7 @@ _0200F12E:
 	ldr r0, [r0, #0x14]
 	bl sub_0200EA24
 	add r0, r5, #0
-	bl Heap_Free
+	bl FreeToHeap
 	ldr r0, [sp, #0x20]
 	ldr r1, _0200F1CC ; =0x00000484
 	str r0, [r4]
@@ -2110,7 +2111,7 @@ sub_0200F43C: ; 0x0200F43C
 	push {r4, lr}
 	add r4, r0, #0
 	add r0, r1, #0
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r4, #0
 	bl SysTask_Destroy
 	pop {r4, pc}
@@ -2261,7 +2262,7 @@ _0200F564:
 	ldr r0, [r4, r0]
 	bl Sprite_DeleteAndFreeResources
 	add r0, r4, #0
-	bl FieldSpriteManager_ReleaseWithoutResDat
+	bl ov01_021E86F4
 	add r0, r5, #0
 	bl DestroySysTaskAndEnvironment
 	pop {r3, r4, r5, pc}
@@ -2348,7 +2349,7 @@ sub_0200F600: ; 0x0200F600
 	add r1, r2, #0
 	add r0, r6, #0
 	mov r2, #1
-	bl FieldSpriteManager_InitEmptyResLists
+	bl ov01_021E8298
 	add sp, #0x18
 	pop {r4, r5, r6, pc}
 	.balign 4, 0
@@ -2368,21 +2369,21 @@ sub_0200F62C: ; 0x0200F62C
 	mov r1, #0x26
 	mov r3, #0
 	add r4, r0, #0
-	bl FieldSpriteManager_AddPlttRes
+	bl ov01_021E8378
 	ldr r0, _0200F680 ; =0x00015CD5
 	mov r1, #0x26
 	str r0, [sp]
 	add r0, r4, #0
 	mov r2, #0x30
 	mov r3, #0
-	bl FieldSpriteManager_AddCellRes
+	bl ov01_021E83F0
 	ldr r0, _0200F680 ; =0x00015CD5
 	mov r1, #0x26
 	str r0, [sp]
 	add r0, r4, #0
 	mov r2, #0x2f
 	mov r3, #0
-	bl FieldSpriteManager_AddAnimRes
+	bl ov01_021E8404
 	mov r0, #1
 	str r0, [sp]
 	ldr r0, _0200F680 ; =0x00015CD5
@@ -2391,7 +2392,7 @@ sub_0200F62C: ; 0x0200F62C
 	add r0, r4, #0
 	mov r2, #0x31
 	mov r3, #0
-	bl FieldSpriteManager_AddCharRes
+	bl ov01_021E8418
 	add sp, #0xc
 	pop {r3, r4, pc}
 	nop
@@ -2424,7 +2425,7 @@ _0200F694:
 	strh r1, [r0, #2]
 	add r0, r4, #0
 	add r1, sp, #0
-	bl FieldSpriteManager_CreateManagedSprite
+	bl ov01_021E851C
 	mov r1, #0x59
 	lsl r1, r1, #2
 	str r0, [r4, r1]
@@ -2505,7 +2506,7 @@ sub_0200F748: ; 0x0200F748
 	mov r1, #0x19
 	ldrh r0, [r5, r0]
 	lsl r1, r1, #8
-	bl Heap_Alloc
+	bl AllocFromHeap
 	add r2, sp, #0x18
 	ldr r3, _0200F820 ; =_020F5C50
 	add r4, r0, #0
@@ -2543,7 +2544,7 @@ sub_0200F748: ; 0x0200F748
 	ldr r0, [r5, r0]
 	ldr r1, _0200F828 ; =0x00015CD5
 	bl SpriteResourceCollection_Find
-	bl SpriteTransfer_GetCharProxy
+	bl sub_0200AF00
 	mov r1, #1
 	str r0, [sp, #4]
 	bl NNS_G2dGetImageLocation
@@ -2558,7 +2559,7 @@ sub_0200F748: ; 0x0200F748
 	lsl r2, r2, #8
 	bl GX_LoadOBJ
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	ldr r2, _0200F81C ; =0x00000162
 	ldrh r0, [r6]
 	ldrh r1, [r6, #4]
@@ -2583,7 +2584,7 @@ sub_0200F748: ; 0x0200F748
 	mov r2, #0x20
 	bl GX_LoadOBJPltt
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	add sp, #0x28
 	pop {r3, r4, r5, r6, r7, pc}
 	nop

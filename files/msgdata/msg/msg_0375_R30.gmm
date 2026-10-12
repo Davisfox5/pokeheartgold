@@ -26,7 +26,7 @@
 	</row>
 	<row id="msg_0375_R30_00006" index="6">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">When you follow that path up north,\nyou will see Mr. Pokémon’s house.\rBut before you go, let me finish what\nI have to say.\rDo you...have any Apricorns?\fApricorn trees bear fruit once a day.\fI have one of those trees, too!\rApricorns are really something.\nYou can make Poké Balls and\fother things.\rThey are quite useful.\rI have a feeling this is meant to be,\nbecause I have something for you!\r</language>
+		<language name="English">Apricorns! Pick ‘em, dry ‘em, and\nold Kurt down in Azalea turns ‘em\finto Balls you can’t buy in any\nshop.\rHere--take a Box to carry them.</language>
 	</row>
 	<row id="msg_0375_R30_00007" index="7">
 		<attribute name="window_context_name">garbage</attribute>
@@ -35,7 +35,7 @@
 	</row>
 	<row id="msg_0375_R30_00008" index="8">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">With that Apricorn Box, you can carry\nso many Apricorns.\rYou’ll be a decent Apricorn collector!\r</language>
+		<language name="English">With that Apricorn Box, you can\ncarry so many Apricorns.\rWhen you reach Azalea, tell Kurt\nthat Wesley still sends his best.\fHe’ll know.</language>
 	</row>
 	<row id="msg_0375_R30_00009" index="9">
 		<attribute name="window_context_name">used</attribute>
@@ -56,5 +56,45 @@
 	<row id="msg_0375_R30_00013" index="13">
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">Oh! You’re wearing the Running Shoes.\rThey make you feel like you are flying,\ndon’t they?\rBut beware of wild Pokémon and\nTrainers!\rWhen you run, the noise will\nattract them.</language>
+	</row>
+	<row id="msg_0375_R30_00014" index="14">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">KESTRA: There you are! I was\nstarting to think Gold’s shoes\fwere decorative.\rOkay. Real talk. Cherrygrove was\nthe tutorial. THIS is the game.\fWild Pokémon that don’t care about\nus, Trainers who absolutely do,\fand an Apricorn guy who’ll talk\nyour ear off if you let him.</language>
+	</row>
+	<row id="msg_0375_R30_00015" index="15">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">KESTRA: Rule one of being Trainers:\nif a sign says Trainer Tips, we\fpretend we read it.\rRule two: Mr. Pokémon’s place is up\nnorth and he gives stuff away.\fWe are DEFINITELY visiting\nMr. Pokémon.</language>
+	</row>
+	<row id="msg_0375_R30_00016" index="16">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">KESTRA: Race you to the first\nTrainer, {STRVAR_1 3, 0, 0}!\rLoser carries the conversation!</language>
+	</row>
+	<row id="msg_0375_R30_00017" index="17">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">KESTRA: There you are, slowpoke!\rLook at this place - real tall grass,\nreal wild Pokémon, just waiting.\rI’ve been creeping around trying not\nto spook ’em -\r</language>
+	</row>
+	<row id="msg_0375_R30_00018" index="18">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">KESTRA: ...Wait. Wait wait wait.\nTHERE’S one!\rCome on, {STRVAR_1 3, 0, 0} - let’s\nget him!\r</language>
+	</row>
+	<row id="msg_0375_R30_00019" index="19">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">GOLD: Whoa - HOLD it, you two! You\ndon’t go charging a wild Pokémon\nwith none of your own.\r...And now it’s spotted you. Of\ncourse it has.\fStand back, both of you.\rLet me show you how this is done.\r</language>
+	</row>
+	<row id="msg_0375_R30_00020" index="20">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">GOLD: ...And - gotcha.\rHeh. Still got the touch.\r</language>
+	</row>
+	<row id="msg_0375_R30_00021" index="21">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">GOLD: Phew. That was close.\rYou kids can’t go running off into\ntall grass like that!\rWhat to do with you two... *sigh*\fAlright. Come with me.\rGuess it’s my job to show you the\nropes, now that the old man’s gone.\r</language>
+	</row>
+	<row id="msg_0375_R30_00022" index="22">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Gold</language>
+	</row>
+	<row id="msg_0375_R30_00023" index="23">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">GOLD: Here--take these. Five Poké\nBalls, on me.\rYou saw how it’s done. When it’s your\nturn out there, you’ll be ready.\r</language>
 	</row>
 </body>

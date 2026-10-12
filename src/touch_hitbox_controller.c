@@ -7,23 +7,23 @@ static int sub_02026D88(TouchHitboxControllerTemplate *template, u32 unused, u32
 static int sub_02026DA4(TouchHitboxControllerTemplate *template, u32 touchHeld, u32 unused);
 static void sub_02026DD8(TouchHitboxControllerTemplate *template, u8 a1);
 
-TouchHitboxController *TouchHitboxController_Create(const TouchscreenHitbox *hitboxes, u32 numTemplates, TouchHitboxControllerCallback callback, void *callbackArg, enum HeapID heapID) {
+TouchHitboxController *TouchHitboxController_Create(const TouchscreenHitbox *hitboxes, u32 numTemplates, TouchHitboxControllerCallback callback, void *callbackArg, HeapID heapId) {
     GF_ASSERT(numTemplates != 0);
 
-    TouchHitboxController *controller = Heap_Alloc(heapID, sizeof(TouchHitboxController));
+    TouchHitboxController *controller = AllocFromHeap(heapId, sizeof(TouchHitboxController));
     if (controller != NULL) {
         controller->hitboxes = hitboxes;
         controller->numTemplates = numTemplates;
         controller->callback = callback;
         controller->callbackArg = callbackArg;
 
-        controller->templates = Heap_Alloc(heapID, numTemplates * sizeof(TouchHitboxControllerTemplate));
+        controller->templates = AllocFromHeap(heapId, numTemplates * sizeof(TouchHitboxControllerTemplate));
         if (controller->templates != NULL) {
             for (u32 i = 0; i < numTemplates; i++) {
                 TouchHitboxControllerTemplate_Init(&controller->templates[i]);
             }
         } else {
-            Heap_Free(controller);
+            FreeToHeap(controller);
             controller = NULL;
         }
     }
@@ -38,8 +38,8 @@ static void TouchHitboxControllerTemplate_Init(TouchHitboxControllerTemplate *te
 
 void TouchHitboxController_Destroy(TouchHitboxController *controller) {
     GF_ASSERT(controller != NULL);
-    Heap_Free(controller->templates);
-    Heap_Free(controller);
+    FreeToHeap(controller->templates);
+    FreeToHeap(controller);
 }
 
 typedef int (*TouchHitboxControllerTemplate_UnkCallback)(TouchHitboxControllerTemplate *template, u32 touchHeld, u32 touchNew);

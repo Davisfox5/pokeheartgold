@@ -2,12 +2,8 @@
 
 #include "constants/sndseq.h"
 
-#include "field/fieldmap.h"
-#include "field/hblank_system.h"
-#include "field/map_load_manager.h"
-
 #include "camera.h"
-#include "field_bgm.h"
+#include "field_player_avatar.h"
 #include "field_warp_tasks.h"
 #include "follow_mon.h"
 #include "heap.h"
@@ -17,14 +13,17 @@
 #include "overlay_01.h"
 #include "overlay_01_021E90C0.h"
 #include "overlay_01_021F1AFC.h"
+#include "overlay_01_021F4704.h"
+#include "overlay_01_021FB4C0.h"
 #include "overlay_01_022031C0.h"
 #include "overlay_01_022053EC.h"
-#include "player_avatar.h"
 #include "save_follow_mon.h"
 #include "script.h"
 #include "sound.h"
 #include "unk_02005D10.h"
+#include "unk_0200FA24.h"
 #include "unk_02054648.h"
+#include "unk_02054E00.h"
 #include "unk_02055244.h"
 #include "unk_020552A4.h"
 #include "unk_02056680.h"
@@ -39,9 +38,9 @@ extern TaskFunc sMapEnterRoutines[9];
 extern TaskFunc sMapExitRoutines[9];
 extern FieldSystemFunc _020FC76C[9];
 
-void NewFieldFadeEnvironment(TaskManager *man, enum FadeMode fadeMode, enum FadeType typeTop, enum FadeType typeBottom, u16 colour, int duration, int framesPer, enum HeapID heapID) {
-    FieldFadeEnvironment *sfenv = Heap_Alloc(heapID, sizeof(FieldFadeEnvironment));
-    sfenv->fadeMode = fadeMode;
+void NewFieldFadeEnvironment(TaskManager *man, int pattern, int typeTop, int typeBottom, u16 colour, int duration, int framesPer, HeapID heapID) {
+    FieldFadeEnvironment *sfenv = AllocFromHeap(heapID, sizeof(FieldFadeEnvironment));
+    sfenv->pattern = pattern;
     sfenv->typeTop = typeTop;
     sfenv->typeBottom = typeBottom;
     sfenv->colour = colour;
@@ -57,14 +56,14 @@ BOOL RoutineFieldFade(TaskManager *man) {
     FieldFadeEnvironment *fenv = TaskManager_GetEnvironment(man);
     switch (fenv->state) {
     case 0:
-        HBlankSystem_Stop(fieldSystem->unk4->hBlankSystem);
-        BeginNormalPaletteFade(fenv->fadeMode, fenv->typeTop, fenv->typeBottom, fenv->colour, fenv->duration, fenv->framesPer, fenv->heapID);
+        ov01_021FB514(fieldSystem->unk4->unk1c);
+        BeginNormalPaletteFade(fenv->pattern, fenv->typeTop, fenv->typeBottom, fenv->colour, fenv->duration, fenv->framesPer, fenv->heapID);
         fenv->state++;
         break;
     case 1:
         if (IsPaletteFadeFinished()) {
-            HBlankSystem_Start(fieldSystem->unk4->hBlankSystem);
-            Heap_Free(fenv);
+            ov01_021FB4F4(fieldSystem->unk4->unk1c);
+            FreeToHeap(fenv);
             return TRUE;
         }
         break;
@@ -73,7 +72,7 @@ BOOL RoutineFieldFade(TaskManager *man) {
 }
 
 void NewFieldTransitionEnvironment(FieldSystem *fieldSystem, int mapID, int warpID, int x, int y, int dir, u32 transNo) {
-    FieldTransitionEnvironment *fenv = Heap_AllocAtEnd(HEAP_ID_FIELD2, sizeof(FieldTransitionEnvironment));
+    FieldTransitionEnvironment *fenv = AllocFromHeapAtEnd(HEAP_ID_FIELD, sizeof(FieldTransitionEnvironment));
     fenv->state = 0;
     fenv->transitionState = 0;
     fenv->unk1 = 0;
@@ -87,7 +86,7 @@ void NewFieldTransitionEnvironment(FieldSystem *fieldSystem, int mapID, int warp
 }
 
 void sub_02055CD8(FieldSystem *fieldSystem, int mapID, int warpID, int x, int y, int dir) {
-    FieldTransitionEnvironment *fenv = Heap_AllocAtEnd(HEAP_ID_FIELD2, sizeof(FieldTransitionEnvironment));
+    FieldTransitionEnvironment *fenv = AllocFromHeapAtEnd(HEAP_ID_FIELD, sizeof(FieldTransitionEnvironment));
     fenv->state = 0;
     fenv->transitionState = 0;
     fenv->unk1 = 0;
@@ -162,7 +161,7 @@ BOOL sub_02055DBC(TaskManager *man) {
         if (env->unk24 && sub_02068CCC(env->unk24)) {
             break;
         }
-        FieldBGM_TryFadeIn(fieldSystem, env->location.mapId);
+        FieldSystem_BeginFadeOutMusic(fieldSystem, env->location.mapId);
         TaskManager_Call(man, sMapExitRoutines[env->transitionNo], env);
         if (FollowMon_IsActive(fieldSystem) && ov01_022057C4(fieldSystem) && !FollowMon_GetPermission(fieldSystem)) {
             ov01_022057D0(fieldSystem);
@@ -192,7 +191,7 @@ BOOL sub_02055DBC(TaskManager *man) {
         break;
     case 7:
         if (GF_SndGetFadeTimer() == 0) {
-            FieldBGM_PlayForMapHeader(fieldSystem, env->location.mapId, TRUE);
+            sub_02055110(fieldSystem, env->location.mapId, 1);
             if (!MapHeader_IsCave(env->destinationMapID)) {                  // this has gotta be for the pre-entering images right?
                 int index = MapPreviewGraphic_GetIndex(env->location.mapId); // this gets the index of the location in the list of maps that have map icons
                 if (index != 255) {
@@ -221,7 +220,7 @@ BOOL sub_02055DBC(TaskManager *man) {
         break;
     case 8:
         Camera_SetHistoryUnk24(fieldSystem->camera, 1);
-        Heap_Free(env);
+        FreeToHeap(env);
         return TRUE;
     case 9:
         env->unk1++;
@@ -254,7 +253,7 @@ BOOL sub_02056040(TaskManager *man) {
     switch (fenv->transitionState) {
     case 0:
         fenv->unk18 = ov01_021E90C0();
-        ov01_021E90DC(PlayerAvatar_GetXCoord(fieldSystem->playerAvatar), PlayerAvatar_GetZCoord(fieldSystem->playerAvatar), fenv->unk18);
+        ov01_021E90DC(GetPlayerXCoord(fieldSystem->playerAvatar), GetPlayerZCoord(fieldSystem->playerAvatar), fenv->unk18);
         fenv->transitionState++;
         break;
     case 1:
@@ -279,7 +278,7 @@ BOOL sub_020560C4(TaskManager *man) {
     switch (fenv->transitionState) {
     case 0:
         fenv->unk18 = ov01_021E90C0();
-        ov01_021E90DC(PlayerAvatar_GetXCoord(fieldSystem->playerAvatar), PlayerAvatar_GetZCoord(fieldSystem->playerAvatar), fenv->unk18);
+        ov01_021E90DC(GetPlayerXCoord(fieldSystem->playerAvatar), GetPlayerZCoord(fieldSystem->playerAvatar), fenv->unk18);
         fenv->transitionState++;
         break;
     case 1: {
@@ -334,7 +333,7 @@ BOOL sub_0205613C(TaskManager *man) {
     }
     case 3:
         PlaySE(SEQ_SE_DP_KAIDAN2);
-        FieldMap_FadeScreen(FADE_TYPE_BRIGHTNESS_OUT);
+        ov01_021E636C(FALSE);
         fenv->transitionState++;
         break;
     case 4:
@@ -387,12 +386,12 @@ BOOL sub_020562B0(TaskManager *man) {
         Field_PlayerAvatar_OrrTransitionFlags(fieldSystem->playerAvatar, 512);
         Field_PlayerAvatar_ApplyTransitionFlags(fieldSystem->playerAvatar);
         sub_0205F328(obj, 0);
-        fenv->unk18 = Heap_AllocAtEnd(HEAP_ID_FIELD2, sizeof(FieldEnvSubUnk18));
+        fenv->unk18 = AllocFromHeapAtEnd(HEAP_ID_FIELD, sizeof(FieldEnvSubUnk18));
         fenv18 = fenv->unk18;
         fenv18->state = 0;
         fenv18->direction = PlayerAvatar_GetFacingDirection(fieldSystem->playerAvatar);
         PlayerAvatar_ToggleAutomaticHeightUpdating(fieldSystem->playerAvatar, FALSE);
-        MapLoadManager_ForgetTrackedTarget(fieldSystem->mapLoadManager);
+        ov01_021F6304(fieldSystem->unk2C);
         if (FollowMon_IsActive(fieldSystem)) {
             BOOL flag = TRUE;
             int var;
@@ -415,7 +414,7 @@ BOOL sub_020562B0(TaskManager *man) {
                 break;
             }
             if (flag) {
-                ov01_02205990(var, MapObject_GetPreviousXCoord(obj), MapObject_GetPreviousZCoord(obj), &fieldSystem->followMon);
+                ov01_02205990(var, MapObject_GetPreviousX(obj), MapObject_GetPreviousZ(obj), &fieldSystem->followMon);
             }
         }
         fenv->transitionState++;
@@ -440,13 +439,13 @@ BOOL sub_020562B0(TaskManager *man) {
         break;
     case 2:
         PlaySE(SEQ_SE_DP_KAIDAN2);
-        FieldMap_FadeScreen(FADE_TYPE_BRIGHTNESS_OUT);
+        ov01_021E636C(0);
         fenv->transitionState++;
         break;
     case 3:
         if (IsPaletteFadeFinished()) {
-            PlayerAvatar_ToggleAutomaticHeightUpdatingImmediate(fieldSystem->playerAvatar, TRUE);
-            Heap_Free(fenv->unk18);
+            PlayerAvatar_ToggleAutomaticHeightUpdating_NowApply(fieldSystem->playerAvatar, TRUE);
+            FreeToHeap(fenv->unk18);
             return TRUE;
         }
     }
@@ -473,7 +472,7 @@ BOOL sub_02056424(TaskManager *man) {
             Field_PlayerAvatar_OrrTransitionFlags(fieldSystem->playerAvatar, 512);
             Field_PlayerAvatar_ApplyTransitionFlags(fieldSystem->playerAvatar);
             sub_0205F328(obj, 0);
-            fenv->unk18 = Heap_AllocAtEnd(HEAP_ID_FIELD2, sizeof(FieldEnvSubUnk18));
+            fenv->unk18 = AllocFromHeapAtEnd(HEAP_ID_FIELD, sizeof(FieldEnvSubUnk18));
             fenv->unk18->state = 0;
             PlayerAvatar_ToggleAutomaticHeightUpdating(fieldSystem->playerAvatar, FALSE);
             fenv->transitionState++;
@@ -493,13 +492,13 @@ BOOL sub_02056424(TaskManager *man) {
         break;
     case 3:
         PlaySE(SEQ_SE_DP_KAIDAN2);
-        FieldMap_FadeScreen(FADE_TYPE_BRIGHTNESS_OUT);
+        ov01_021E636C(0);
         fenv->transitionState++;
         break;
     case 4:
         if (IsPaletteFadeFinished()) {
-            PlayerAvatar_ToggleAutomaticHeightUpdatingImmediate(fieldSystem->playerAvatar, TRUE);
-            Heap_Free(fenv->unk18);
+            PlayerAvatar_ToggleAutomaticHeightUpdating_NowApply(fieldSystem->playerAvatar, TRUE);
+            FreeToHeap(fenv->unk18);
             return TRUE;
         }
     }
@@ -513,7 +512,7 @@ BOOL sub_02056530(TaskManager *man) {
     switch (fenv->transitionState) {
     case 0:
         obj = PlayerAvatar_GetMapObject(fieldSystem->playerAvatar);
-        if (MetatileBehavior_IsDoor(GetMetatileBehavior(fieldSystem, PlayerAvatar_GetXCoord(fieldSystem->playerAvatar), PlayerAvatar_GetZCoord(fieldSystem->playerAvatar)))) {
+        if (sub_0205B70C(GetMetatileBehavior(fieldSystem, GetPlayerXCoord(fieldSystem->playerAvatar), GetPlayerZCoord(fieldSystem->playerAvatar)))) {
             MapObject_SetVisible(obj, TRUE);
             fenv->transitionState = 1;
             break;
@@ -523,7 +522,7 @@ BOOL sub_02056530(TaskManager *man) {
         break;
     case 1:
         fenv->unk18 = ov01_021E90C0();
-        ov01_021E90DC(PlayerAvatar_GetXCoord(fieldSystem->playerAvatar), PlayerAvatar_GetZCoord(fieldSystem->playerAvatar), fenv->unk18);
+        ov01_021E90DC(GetPlayerXCoord(fieldSystem->playerAvatar), GetPlayerZCoord(fieldSystem->playerAvatar), fenv->unk18);
         fenv->transitionState++;
         break;
     case 2: {
@@ -547,7 +546,7 @@ BOOL sub_020565FC(TaskManager *man) {
     switch (fenv->transitionState) {
     case 0: {
         LocalMapObject *mapObj = PlayerAvatar_GetMapObject(fieldSystem->playerAvatar);
-        if (MetatileBehavior_IsDoor(GetMetatileBehavior(fieldSystem, PlayerAvatar_GetXCoord(fieldSystem->playerAvatar), PlayerAvatar_GetZCoord(fieldSystem->playerAvatar)))) {
+        if (sub_0205B70C(GetMetatileBehavior(fieldSystem, GetPlayerXCoord(fieldSystem->playerAvatar), GetPlayerZCoord(fieldSystem->playerAvatar)))) {
             MapObject_SetVisible(mapObj, TRUE);
             fenv->transitionState = 1;
             TaskManager_Jump(man, sub_02056530, fenv);

@@ -18,7 +18,7 @@ sub_020979A8: ; 0x020979A8
 	mov r1, #0x58
 	add r7, r2, #0
 	str r3, [sp]
-	bl Heap_AllocAtEnd
+	bl AllocFromHeapAtEnd
 	add r4, r0, #0
 	strb r6, [r4, #1]
 	add r1, r4, #0
@@ -51,7 +51,7 @@ sub_020979EC: ; 0x020979EC
 	mov r0, #0xb
 	mov r1, #8
 	add r7, r2, #0
-	bl Heap_AllocAtEnd
+	bl AllocFromHeapAtEnd
 	add r4, r0, #0
 	str r7, [r4, #4]
 	add r0, r5, #0
@@ -127,7 +127,7 @@ _02097A7C:
 	pop {r4, r5, r6, pc}
 _02097A8A:
 	add r0, r6, #0
-	bl Heap_Free
+	bl FreeToHeap
 	mov r0, #1
 	pop {r4, r5, r6, pc}
 _02097A94:
@@ -230,14 +230,14 @@ _02097B52:
 	ldr r1, [r4, #4]
 	add r0, r6, #0
 	mov r2, #0
-	bl FieldBGM_PlayForMapHeader
+	bl sub_02055110
 	add r0, r5, #0
 	bl sub_02055408
 	mov r0, #5
 	strb r0, [r4]
 	b _02097B72
 _02097B68:
-	bl Heap_Free
+	bl FreeToHeap
 	add sp, #0xc
 	mov r0, #1
 	pop {r3, r4, r5, r6, pc}

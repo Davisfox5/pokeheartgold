@@ -2,26 +2,98 @@
 <body language="English">
 	<row id="msg_0091_D26R0102_00000" index="0">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">Kurt: Way to go, {STRVAR_1 3, 0, 0}!\rTeam Rocket has taken off.\rMy back’s better, too.\nLet’s get out of here.\r</language>
+		<language name="English">...</language>
 	</row>
 	<row id="msg_0091_D26R0102_00001" index="1">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">Proton: What do we have here?\rI am often labeled as the scariest and\ncruelest guy in Team Rocket...\rI strongly urge you not to interfere\nwith our business!\r</language>
+		<language name="English">...</language>
 	</row>
 	<row id="msg_0091_D26R0102_00002" index="2">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">Proton: Humph...\nTeam Rocket was indeed broken up\fthree years ago. But we continued\four activities underground.\rA small obstacle like you won’t\nbe much of a problem for our mission.\rI advise you to be very afraid of what\nis to come!\r</language>
+		<language name="English">...</language>
 	</row>
 	<row id="msg_0091_D26R0102_00003" index="3">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">A SLOWPOKE with its tail cut off...\rHuh? It has Mail. Read it? {YESNO 0}</language>
+		<language name="English">SUBJECT 04--induced-evolution\ntrial 11. King’s Rock variant,\fmodified. Result: incomplete.\rNote: stress response higher than\nmodeled. Continue.</language>
 	</row>
 	<row id="msg_0091_D26R0102_00004" index="4">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">{STRVAR_1 3, 0, 0} read the Mail.\rBe good and look after the house\nwith Grandpa and SLOWPOKE.\f           Love, Dad</language>
+		<language name="English">“Higher than modeled”--flagged\nthree trials ago. Why are we still\fcontinuing?\r--appended, unsigned.</language>
 	</row>
 	<row id="msg_0091_D26R0102_00005" index="5">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">A SLOWPOKE with its tail cut off...</language>
+		<language name="English">Six SLOWPOKE sit inside a\nchalk-and-cable ring.\rSmall devices are clipped where\ntheir tails meet the floor.\rNone of them look up.</language>
+	</row>
+	<row id="msg_0091_D26R0102_00006" index="6">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">LEAD RESEARCHER: Children.\nOf course it’s children.\rDo you know what you’re standing\nin? No. You think you walked into\fa kidnapping.\rYou walked into a MEASUREMENT.</language>
+	</row>
+	<row id="msg_0091_D26R0102_00007" index="7">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">TURK: They’re not numbers. They\nhave names.\rThat one’s Bubbles--a little girl\nup top is waiting on her step\fright now.</language>
+	</row>
+	<row id="msg_0091_D26R0102_00008" index="8">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">LEAD RESEARCHER: ...How\nsentimental.\rHold them off.\nI need ninety seconds.</language>
+	</row>
+	<row id="msg_0091_D26R0102_00009" index="9">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">LEAD RESEARCHER: The readings were\ninconclusive. Remember that, if\fanyone asks. INCONCLUSIVE.\rLeave the husks.\nThey’re no use to anyone now.</language>
+	</row>
+	<row id="msg_0091_D26R0102_00010" index="10">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">TURK: Stop--you can’t just--!</language>
+	</row>
+	<row id="msg_0091_D26R0102_00011" index="11">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">TURK: ...He didn’t even run.\nHe just LEFT. Like we were weather.</language>
+	</row>
+	<row id="msg_0091_D26R0102_00012" index="12">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">TURK: Hey. Hey, it’s okay. You’re\nokay now.\rCome on. Let’s get you all home.</language>
+	</row>
+	<row id="msg_0091_D26R0102_00013" index="13">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">FIELD TECH: How did--the steps\nwere BLOCKED.\rWe’ve got two kids on B1F. No,\nI’ll handle it. It’s children.</language>
+	</row>
+	<row id="msg_0091_D26R0102_00014" index="14">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">FIELD TECH: Listen. Turn around.\nThere is nothing down here a child\fneeds to see, and I’d rather not\nmake it a battle.\rTURK: Then let the SLOWPOKE go and\nwe’ll leave together.</language>
+	</row>
+	<row id="msg_0091_D26R0102_00015" index="15">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">FIELD TECH: ...Of course you’d\nsay that. Fine. Quickly, then.</language>
+	</row>
+	<row id="msg_0091_D26R0102_00016" index="16">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">FIELD TECH: Go ahead. Look.\rIt won’t mean anything to you\nanyway.</language>
+	</row>
+	<row id="msg_0091_D26R0102_00017" index="17">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">TURK: He’s not even angry. Why\nisn’t he angry?\rYou break into someone’s home,\nyou should at least have the\fdecency to be ANGRY.</language>
+	</row>
+	<row id="msg_0091_D26R0102_00018" index="18">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">FIELD RESEARCHER: I’m not paid to\nfight children.\rI’m also not paid to let you near\nthe main terminal. So.</language>
+	</row>
+	<row id="msg_0091_D26R0102_00019" index="19">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">FIELD RESEARCHER: That clay one\nisn’t even local, in case you’re\fwondering. We bring what works.\rWe bring it from a long way off.\f...</language>
+	</row>
+	<row id="msg_0091_D26R0102_00020" index="20">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">FIELD RESEARCHER: You’re\npersistent.\rPersistent isn’t the same as\nwelcome.</language>
+	</row>
+	<row id="msg_0091_D26R0102_00021" index="21">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">TURK: What did she mean, “won’t\nmatter”?\r{STRVAR_1 3, 0, 0}--the screens.\nThey’re wiping the screens.\fGo, GO!</language>
+	</row>
+	<row id="msg_0091_D26R0102_00022" index="22">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">A lab coat is folded over the lid\nof the equipment case.\rThe only mark on any of it: a\nsmall printed logo on the breast\fpocket.\r“Silph Co.”</language>
+	</row>
+	<row id="msg_0091_D26R0102_00023" index="23">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">TURK: Silph. That’s--that’s a\nreal company. They make the\fPokégear my mom uses. Why would...\rNo. Keep moving. Tell someone who\nknows what it means.\fWe free the SLOWPOKE first.</language>
 	</row>
 </body>

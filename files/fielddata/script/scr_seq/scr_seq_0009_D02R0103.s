@@ -5,33 +5,37 @@
 
 	.rodata
 
-	ScrDef scr_seq_D02R0103_000
-	ScrDef scr_seq_D02R0103_001
-	ScrDef scr_seq_D02R0103_002
-	ScrDefEnd
+	scrdef scr_seq_D02R0103_000
+	scrdef scr_seq_D02R0103_001
+	scrdef scr_seq_D02R0103_002
+	scrdef_end
 
 scr_seq_D02R0103_002:
-	MakeObjectVisible obj_D02R0103_stop
-	ScrCmd_379 VAR_TEMP_x4001
-	Compare VAR_TEMP_x4001, 3
-	GoToIfNe _003D
-	MovePersonFacing obj_D02R0103_stop, 18, 0, 10, DIR_SOUTH
-	MoveWarp 2, 20, 3
-	GoTo _005E
+	make_object_visible obj_D02R0103_stop
+	scrcmd_379 VAR_TEMP_x4001
+	compare VAR_TEMP_x4001, 3
+	goto_if_ne _003D
+	move_person_facing obj_D02R0103_stop, 18, 0, 10, DIR_SOUTH
+	move_warp 2, 20, 3
+	goto _005E
 
 _003D:
-	Compare VAR_TEMP_x4001, 4
-	GoToIfNe _005E
-	MovePersonFacing obj_D02R0103_stop, 18, 0, 10, DIR_SOUTH
-	MoveWarp 2, 20, 3
+	compare VAR_TEMP_x4001, 4
+	goto_if_ne _005E
+	move_person_facing obj_D02R0103_stop, 18, 0, 10, DIR_SOUTH
+	move_warp 2, 20, 3
 _005E:
-	End
+	end
 
 scr_seq_D02R0103_000:
-	TrainerTipsEx 2, msg_0050_D02R0103_00000
-	End
+	scrcmd_055 2, 0
+	scrcmd_057 3
+	scrcmd_058
+	trainer_tips msg_0050_D02R0103_00000, VAR_SPECIAL_RESULT
+	callstd std_signpost
+	end
 
 scr_seq_D02R0103_001:
-	SimpleNPCMsg msg_0050_D02R0103_00001
-	End
+	simple_npc_msg msg_0050_D02R0103_00001
+	end
 	.balign 4, 0

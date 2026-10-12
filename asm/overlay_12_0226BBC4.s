@@ -114,7 +114,7 @@ _0226BC78:
 	ldr r0, [sp, #0x60]
 	str r0, [sp, #0x30]
 	add r0, r2, #0
-	bl Heap_Alloc
+	bl AllocFromHeap
 	mov r1, #0
 	mov r2, #0x20
 	add r4, r0, #0
@@ -152,7 +152,7 @@ ov12_0226BCE4: ; 0x0226BCE4
 	ldr r0, [r4, #4]
 	bl SysTask_Destroy
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	pop {r4, pc}
 	thumb_func_end ov12_0226BCE4
 

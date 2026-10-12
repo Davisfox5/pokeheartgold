@@ -6,8 +6,8 @@
 
 static void BattleCursor_Update(SysTask *task, void *data);
 
-void BattleCursor_LoadResources(SpriteSystem *renderer, SpriteManager *gfxHandler, PaletteData *plttData, enum HeapID heapID, u32 character, u32 pal, u32 cell, u32 animation) {
-    NARC *narc = NARC_New(NARC_a_0_0_8, heapID);
+void BattleCursor_LoadResources(SpriteSystem *renderer, SpriteManager *gfxHandler, PaletteData *plttData, HeapID heapId, u32 character, u32 pal, u32 cell, u32 animation) {
+    NARC *narc = NARC_New(NARC_a_0_0_8, heapId);
     SpriteSystem_LoadPaletteBufferFromOpenNarc(plttData, PLTTBUF_SUB_OBJ, renderer, gfxHandler, narc, 80, 0, 1, NNS_G2D_VRAM_TYPE_2DSUB, pal);
     SpriteSystem_LoadCharResObjFromOpenNarc(renderer, gfxHandler, narc, 250, 1, NNS_G2D_VRAM_TYPE_2DSUB, character);
     SpriteSystem_LoadCellResObjFromOpenNarc(renderer, gfxHandler, narc, 251, 1, cell);
@@ -27,7 +27,7 @@ static const ManagedSpriteTemplate ov12_0226EBA0 = {
     .y = 0,
     .z = 0,
     .animation = 0,
-    .drawPriority = 0,
+    .spritePriority = 0,
     .pal = 0,
     .vram = NNS_G2D_VRAM_TYPE_2DSUB,
     .resIdList = { 0, 0, 0, 0, -1, -1 },
@@ -35,7 +35,7 @@ static const ManagedSpriteTemplate ov12_0226EBA0 = {
     .vramTransfer = 0
 };
 
-BattleCursor *BattleCursor_New(SpriteSystem *renderer, SpriteManager *gfxHandler, enum HeapID heapID, u32 character, u32 pal, u32 cell, u32 animation, u32 a7, u32 a8) {
+BattleCursor *BattleCursor_New(SpriteSystem *renderer, SpriteManager *gfxHandler, HeapID heapId, u32 character, u32 pal, u32 cell, u32 animation, u32 a7, u32 a8) {
     BattleCursor *cursor;
     ManagedSpriteTemplate unkStruct;
     int i;
@@ -45,10 +45,10 @@ BattleCursor *BattleCursor_New(SpriteSystem *renderer, SpriteManager *gfxHandler
     unkStruct.resIdList[1] = pal;
     unkStruct.resIdList[2] = cell;
     unkStruct.resIdList[3] = animation;
-    unkStruct.drawPriority = a7;
+    unkStruct.spritePriority = a7;
     unkStruct.bgPriority = a8;
 
-    cursor = Heap_Alloc(heapID, sizeof(BattleCursor));
+    cursor = AllocFromHeap(heapId, sizeof(BattleCursor));
     MI_CpuFill8(cursor, 0, sizeof(BattleCursor));
 
     for (i = 0; i < 5; i++) {
@@ -67,7 +67,7 @@ void BattleCursor_Delete(BattleCursor *cursor) {
     }
 
     SysTask_Destroy(cursor->task);
-    Heap_Free(cursor);
+    FreeToHeap(cursor);
 }
 
 void ov12_0226BA4C(BattleCursor *cursor, int x0, int y0, int x1, int y1, int x2, int y2, int x3, int y3, fx32 a9) {

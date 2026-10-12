@@ -255,7 +255,7 @@ Field_SaveStatsPrinter_Print: ; 0x021F412C
 	add r4, r0, #0
 	ldr r0, [r4, #4]
 	mov r1, #0x10
-	bl Heap_Alloc
+	bl AllocFromHeap
 	str r0, [r4, #0x10]
 	mov r3, #1
 	str r3, [sp]
@@ -314,7 +314,7 @@ Field_SaveStatsPrinter_RemoveFromScreen: ; 0x021F41A4
 	ldr r0, [r4, #0x10]
 	bl RemoveWindow
 	ldr r0, [r4, #0x10]
-	bl Heap_Free
+	bl FreeToHeap
 	pop {r4, pc}
 	.balign 4, 0
 	thumb_func_end Field_SaveStatsPrinter_RemoveFromScreen
@@ -327,7 +327,7 @@ Field_SaveStatsPrinter_New: ; 0x021F41C0
 	add r0, r5, #0
 	mov r1, #0x34
 	add r7, r2, #0
-	bl Heap_Alloc
+	bl AllocFromHeap
 	add r4, r0, #0
 	str r6, [r4]
 	str r5, [r4, #4]
@@ -372,7 +372,7 @@ Field_SaveStatsPrinter_Delete: ; 0x021F421C
 	ldr r0, [r4, #0x14]
 	bl MessageFormat_Delete
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	pop {r4, pc}
 	thumb_func_end Field_SaveStatsPrinter_Delete
 
@@ -485,7 +485,7 @@ ov01_021F42F8: ; 0x021F42F8
 	add r4, r0, #0
 	ldr r0, [r4, #4]
 	mov r1, #0x10
-	bl Heap_Alloc
+	bl AllocFromHeap
 	str r0, [r4, #0x10]
 	mov r0, #2
 	str r0, [sp]
@@ -526,7 +526,7 @@ ov01_021F434C: ; 0x021F434C
 	ldr r0, [r4, #0x10]
 	bl RemoveWindow
 	ldr r0, [r4, #0x10]
-	bl Heap_Free
+	bl FreeToHeap
 	pop {r4, pc}
 	.balign 4, 0
 	thumb_func_end ov01_021F434C
@@ -539,7 +539,7 @@ ov01_021F4360: ; 0x021F4360
 	add r0, r5, #0
 	mov r1, #0x34
 	add r7, r2, #0
-	bl Heap_Alloc
+	bl AllocFromHeap
 	add r4, r0, #0
 	str r6, [r4]
 	str r5, [r4, #4]
@@ -590,7 +590,7 @@ ov01_021F43D0: ; 0x021F43D0
 	ldr r0, [r4, #0x14]
 	bl MessageFormat_Delete
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	pop {r4, pc}
 	thumb_func_end ov01_021F43D0
 
@@ -621,11 +621,11 @@ ov01_021F4404: ; 0x021F4404
 	mov r2, #0
 	bl ov01_021F6830
 	ldr r0, [r4, #0x40]
-	bl PlayerAvatar_GetXCoord
+	bl GetPlayerXCoord
 	ldr r1, [r4, #0x20]
 	str r0, [r1, #8]
 	ldr r0, [r4, #0x40]
-	bl PlayerAvatar_GetZCoord
+	bl GetPlayerZCoord
 	ldr r1, [r4, #0x20]
 	str r0, [r1, #0xc]
 	mov r1, #0

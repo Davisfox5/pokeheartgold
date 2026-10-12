@@ -12,7 +12,7 @@
 .public PaletteData_PushTransparentBuffers
 .public PaletteData_SetAutoTransparent
 .public PaletteData_FillPaletteInBuffer
-.public Sound_SetFieldBGM
+.public sub_02004AC8
 .public NARC_New
 .public NARC_Delete
 .public GfGfxLoader_LoadCharDataFromOpenNarc
@@ -56,10 +56,10 @@
 .public Main_SetVBlankIntrCB
 .public HBlankInterruptDisable
 .public SetKeyRepeatTimers
-.public Heap_Create
-.public Heap_Destroy
-.public Heap_Alloc
-.public Heap_Free
+.public CreateHeap
+.public DestroyHeap
+.public AllocFromHeap
+.public FreeToHeap
 .public BgConfig_Alloc
 .public SetBothScreensModesAndDisable
 .public InitBgFromTemplate
@@ -91,7 +91,7 @@
 .public sub_0203A880
 .public sub_0203A914
 .public sub_02055198
-.public Frontier_GetLaunchArgs
+.public Frontier_GetLaunchParam
 .public sub_02096864
 .public sub_02096868
 .public sub_0209686C

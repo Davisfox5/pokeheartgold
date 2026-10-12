@@ -21,7 +21,7 @@ sub_02066EDC: ; 0x02066EDC
 	add r6, r1, #0
 	add r0, r2, #0
 	mov r1, #0x44
-	bl Heap_AllocAtEnd
+	bl AllocFromHeapAtEnd
 	ldr r7, [r6, #0xc]
 	mov r1, #0
 	mov r2, #0x44
@@ -143,7 +143,7 @@ _02066FC4:
 	ldrb r0, [r0]
 	strb r0, [r5, #0xd]
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	ldr r0, [r5, #0x14]
 	mov r1, #0
 	str r1, [r0]
@@ -160,7 +160,7 @@ sub_02066FEC: ; 0x02066FEC
 	ldr r5, [r7, #0xc]
 	add r0, r2, #0
 	mov r1, #0x3c
-	bl Heap_AllocAtEnd
+	bl AllocFromHeapAtEnd
 	mov r1, #0
 	mov r2, #0x3c
 	add r4, r0, #0
@@ -234,7 +234,7 @@ _0206709A:
 	ldr r0, [r0]
 	ldrb r1, [r0, #0x14]
 	strb r1, [r4, #0xd]
-	bl Heap_Free
+	bl FreeToHeap
 	ldr r1, [r4, #0x14]
 	mov r0, #0
 	str r0, [r1]
@@ -289,7 +289,7 @@ _02067100:
 	str r0, [r4, #4]
 	b _02067112
 _0206710A:
-	bl Heap_Free
+	bl FreeToHeap
 	mov r0, #1
 	pop {r3, r4, r5, pc}
 _02067112:
@@ -308,7 +308,7 @@ sub_02067118: ; 0x02067118
 	str r0, [sp]
 	mov r0, #0xb
 	mov r1, #0x18
-	bl Heap_Alloc
+	bl AllocFromHeap
 	add r4, r0, #0
 	mov r1, #0
 	mov r2, #0x18
@@ -373,7 +373,7 @@ _0206719E:
 	ldr r0, [r0, #0x20]
 	str r0, [r4]
 	ldr r0, [r4, #8]
-	bl Heap_Free
+	bl FreeToHeap
 	mov r0, #2
 	pop {r4, pc}
 	.balign 4, 0
@@ -413,7 +413,7 @@ _020671E6:
 	ldr r1, [r4]
 	strh r1, [r0]
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	mov r0, #1
 	pop {r3, r4, r5, pc}
 _020671FC:
@@ -431,7 +431,7 @@ sub_02067200: ; 0x02067200
 	str r0, [sp]
 	mov r0, #0xb
 	mov r1, #0x18
-	bl Heap_Alloc
+	bl AllocFromHeap
 	add r4, r0, #0
 	mov r1, #0
 	mov r2, #0x18
@@ -498,7 +498,7 @@ _02067290:
 	strh r0, [r4]
 _0206729A:
 	add r0, r5, #0
-	bl Heap_Free
+	bl FreeToHeap
 	mov r0, #1
 	pop {r3, r4, r5, r6, r7, pc}
 	thumb_func_end sub_02067238
@@ -512,7 +512,7 @@ sub_020672A4: ; 0x020672A4
 	add r7, r0, #0
 	mov r0, #0xb
 	mov r1, #4
-	bl Heap_Alloc
+	bl AllocFromHeap
 	add r4, r0, #0
 	mov r1, #0
 	mov r2, #4

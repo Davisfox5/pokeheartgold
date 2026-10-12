@@ -1,347 +1,347 @@
 {
   "commands": [
     {
-      "name": "Nop",
+      "name": "snop",
       "args": []
     },
     {
-      "name": "Dummy",
+      "name": "dummy",
       "args": []
     },
     {
-      "name": "End",
+      "name": "end",
       "args": [],
       "is_return": true,
       "is_abs_branch": true
     },
     {
-      "name": "Wait",
+      "name": "wait",
       "args": [
         2,
         "var"
       ]
     },
     {
-      "name": "LoadByte",
+      "name": "loadbyte",
       "args": [
         1,
         1
       ]
     },
     {
-      "name": "LoadWord",
-      "args": [
-        1,
-        4
-      ]
-    },
-    {
-      "name": "LoadByteFromAddr",
+      "name": "loadword",
       "args": [
         1,
         4
       ]
     },
     {
-      "name": "WriteByteToAddr",
-      "args": [
-        4,
-        1
-      ]
-    },
-    {
-      "name": "SetPtrByte",
-      "args": [
-        4,
-        1
-      ]
-    },
-    {
-      "name": "CopyLocal",
-      "args": [
-        1,
-        1
-      ]
-    },
-    {
-      "name": "CopyByte",
-      "args": [
-        4,
-        4
-      ]
-    },
-    {
-      "name": "CompareLocalToLocal",
-      "args": [
-        1,
-        1
-      ]
-    },
-    {
-      "name": "CompareLocalToValue",
-      "args": [
-        1,
-        1
-      ]
-    },
-    {
-      "name": "CompareLocalToAddr",
+      "name": "loadbytefromscript",
       "args": [
         1,
         4
       ]
     },
     {
-      "name": "CompareAddrToLocal",
+      "name": "writebytetoscript",
       "args": [
         4,
         1
       ]
     },
     {
-      "name": "CompareAddrToValue",
+      "name": "setptrbyte",
       "args": [
         4,
         1
       ]
     },
     {
-      "name": "CompareAddrToAddr",
+      "name": "copylocal",
+      "args": [
+        1,
+        1
+      ]
+    },
+    {
+      "name": "copybyte",
       "args": [
         4,
         4
       ]
     },
     {
-      "name": "CompareVarToValue",
+      "name": "compare_local_to_local",
+      "args": [
+        1,
+        1
+      ]
+    },
+    {
+      "name": "compare_local_to_value",
+      "args": [
+        1,
+        1
+      ]
+    },
+    {
+      "name": "compare_local_to_addr",
+      "args": [
+        1,
+        4
+      ]
+    },
+    {
+      "name": "compare_addr_to_local",
+      "args": [
+        4,
+        1
+      ]
+    },
+    {
+      "name": "compare_addr_to_value",
+      "args": [
+        4,
+        1
+      ]
+    },
+    {
+      "name": "compare_addr_to_addr",
+      "args": [
+        4,
+        4
+      ]
+    },
+    {
+      "name": "compare_var_to_value",
       "args": [
         "var",
         2
       ]
     },
     {
-      "name": "CompareVarToVar",
+      "name": "compare_var_to_var",
       "args": [
         "var",
         "var"
       ]
     },
     {
-      "name": "RunScript",
+      "name": "runscript",
       "args": [
         2
       ]
     },
     {
-      "name": "CallStd",
+      "name": "callstd",
       "args": [
         "stdscr"
       ]
     },
     {
-      "name": "RestartCurrentScript",
+      "name": "endstd",
       "args": []
     },
     {
-      "name": "GoTo",
+      "name": "goto",
       "args": [
         "script"
       ],
       "is_abs_branch": true
     },
     {
-      "name": "ObjectGoTo",
+      "name": "objectgoto",
       "args": [
         "object1",
         "script"
       ]
     },
     {
-      "name": "BGGoTo",
+      "name": "bggoto",
       "args": [
         1,
         "script"
       ]
     },
     {
-      "name": "DirectionGoTo",
+      "name": "directiongoto",
       "args": [
         1,
         "script"
       ]
     },
     {
-      "name": "Call",
+      "name": "call",
       "args": [
         "script"
       ]
     },
     {
-      "name": "Return",
+      "name": "return",
       "args": [],
       "is_return": true,
       "is_abs_branch": true
     },
     {
-      "name": "GoToIf",
+      "name": "goto_if",
       "args": [
         "condition",
         "script"
       ]
     },
     {
-      "name": "CallIf",
+      "name": "call_if",
       "args": [
         "condition",
         "script"
       ]
     },
     {
-      "name": "SetFlag",
+      "name": "setflag",
       "args": [
         "flag"
       ]
     },
     {
-      "name": "ClearFlag",
+      "name": "clearflag",
       "args": [
         "flag"
       ]
     },
     {
-      "name": "CheckFlag",
+      "name": "checkflag",
       "args": [
         "flag"
       ]
     },
     {
-      "name": "SetFlagVar",
+      "name": "setflagvar",
       "args": [
         "var"
       ]
     },
     {
-      "name": "ClearFlagVar",
+      "name": "clearflagvar",
       "args": [
         "var"
       ]
     },
     {
-      "name": "CheckFlagVar",
+      "name": "checkflagvar",
       "args": [
         "var",
         "var"
       ]
     },
     {
-      "name": "SetTrainerFlag",
+      "name": "settrainerflag",
       "args": [
         "trainer"
       ]
     },
     {
-      "name": "ClearTrainerFlag",
+      "name": "cleartrainerflag",
       "args": [
         "trainer"
       ]
     },
     {
-      "name": "CheckTrainerFlag",
+      "name": "checktrainerflag",
       "args": [
         "trainer"
       ]
     },
     {
-      "name": "AddVar",
+      "name": "addvar",
       "args": [
         "var",
         "var"
       ]
     },
     {
-      "name": "SubVar",
+      "name": "subvar",
       "args": [
         "var",
         "var"
       ]
     },
     {
-      "name": "SetVar",
+      "name": "setvar",
       "args": [
         "var",
         2
       ]
     },
     {
-      "name": "CopyVar",
+      "name": "copyvar",
       "args": [
         "var",
         "var"
       ]
     },
     {
-      "name": "SetOrCopyVar",
+      "name": "setorcopyvar",
       "args": [
         "var",
         "var"
       ]
     },
     {
-      "name": "NonNPCMsg",
+      "name": "non_npc_msg",
       "args": [
         "message"
       ]
     },
     {
-      "name": "NPCMsg",
+      "name": "npc_msg",
       "args": [
         "message"
       ]
     },
     {
-      "name": "NonNPCMsgVar",
+      "name": "non_npc_msg_var",
       "args": [
         "message_var"
       ]
     },
     {
-      "name": "NPCMsgVar",
+      "name": "npc_msg_var",
       "args": [
         "message_var"
       ]
     },
     {
-      "name": "ScrCmd_048",
+      "name": "scrcmd_048",
       "args": [
         "message"
       ]
     },
     {
-      "name": "WaitABPress",
+      "name": "wait_button",
       "args": []
     },
     {
-      "name": "WaitButton",
+      "name": "wait_button_or_walk_away",
       "args": []
     },
     {
-      "name": "WaitButtonOrDpad",
+      "name": "wait_button_or_dpad",
       "args": []
     },
     {
-      "name": "OpenMsg",
+      "name": "openmsg",
       "args": []
     },
     {
-      "name": "CloseMsg",
+      "name": "closemsg",
       "args": []
     },
     {
-      "name": "HoldMsg",
+      "name": "holdmsg",
       "args": []
     },
     {
-      "name": "DirectionSignpost",
+      "name": "direction_signpost",
       "args": [
         "message",
         1,
@@ -350,41 +350,41 @@
       ]
     },
     {
-      "name": "SetSignpostMap",
+      "name": "scrcmd_055",
       "args": [
         1,
         2
       ]
     },
     {
-      "name": "SetSignpostAction",
+      "name": "scrcmd_057",
       "args": [
         1
       ]
     },
     {
-      "name": "WaitSignpostAction",
+      "name": "scrcmd_058",
       "args": []
     },
     {
-      "name": "TrainerTips",
+      "name": "trainer_tips",
       "args": [
         "message",
         "var"
       ]
     },
     {
-      "name": "WaitSignpost",
+      "name": "scrcmd_060",
       "args": [
         "var"
       ]
     },
     {
-      "name": "ScrCmd_061",
+      "name": "scrcmd_061",
       "args": []
     },
     {
-      "name": "ScrCmd_062",
+      "name": "scrcmd_062",
       "args": [
         1,
         1,
@@ -395,23 +395,13 @@
       ]
     },
     {
-      "name": "YesNo",
+      "name": "yesno",
       "args": [
         "var"
       ]
     },
     {
-      "name": "ScrCmd_064",
-      "args": [
-        1,
-        1,
-        1,
-        1,
-        "var"
-      ]
-    },
-    {
-      "name": "ScrCmd_065",
+      "name": "scrcmd_064",
       "args": [
         1,
         1,
@@ -421,18 +411,28 @@
       ]
     },
     {
-      "name": "ScrCmd_066",
+      "name": "scrcmd_065",
+      "args": [
+        1,
+        1,
+        1,
+        1,
+        "var"
+      ]
+    },
+    {
+      "name": "scrcmd_066",
       "args": [
         "message",
         1
       ]
     },
     {
-      "name": "ScrCmd_067",
+      "name": "scrcmd_067",
       "args": []
     },
     {
-      "name": "ScrCmd_068",
+      "name": "scrcmd_068",
       "args": [
         1,
         1,
@@ -442,7 +442,7 @@
       ]
     },
     {
-      "name": "ScrCmd_069",
+      "name": "scrcmd_069",
       "args": [
         1,
         1,
@@ -452,7 +452,7 @@
       ]
     },
     {
-      "name": "ScrCmd_070",
+      "name": "scrcmd_070",
       "args": [
         2,
         2,
@@ -460,199 +460,199 @@
       ]
     },
     {
-      "name": "ScrCmd_071",
+      "name": "scrcmd_071",
       "args": []
     },
     {
-      "name": "ScrCmd_072",
+      "name": "scrcmd_072",
       "args": [
         1
       ]
     },
     {
-      "name": "PlaySE",
+      "name": "play_se",
       "args": [
         "sound"
       ]
     },
     {
-      "name": "StopSE",
+      "name": "stop_se",
       "args": [
         "sound"
       ]
     },
     {
-      "name": "WaitSE",
+      "name": "wait_se",
       "args": [
         "sound"
       ]
     },
     {
-      "name": "PlayCry",
+      "name": "play_cry",
       "args": [
         "species",
         2
       ]
     },
     {
-      "name": "WaitCry",
+      "name": "wait_cry",
       "args": []
     },
     {
-      "name": "PlayFanfare",
+      "name": "play_fanfare",
       "args": [
         "sound"
       ]
     },
     {
-      "name": "WaitFanfare",
+      "name": "wait_fanfare",
       "args": []
     },
     {
-      "name": "PlayBGM",
+      "name": "play_bgm",
       "args": [
         "sound"
       ]
     },
     {
-      "name": "StopBGM",
+      "name": "stop_bgm",
       "args": [
         "sound"
       ]
     },
     {
-      "name": "ResetBGM",
+      "name": "reset_bgm",
       "args": []
     },
     {
-      "name": "ScrCmd_083",
+      "name": "scrcmd_083",
       "args": [
         2
       ]
     },
     {
-      "name": "FadeOutBGM",
+      "name": "fade_out_bgm",
       "args": [
         2,
         2
       ]
     },
     {
-      "name": "FadeInBGM",
+      "name": "fade_in_bgm",
       "args": [
         2
       ]
     },
     {
-      "name": "ScrCmd_086",
+      "name": "scrcmd_086",
       "args": [
         1,
         1
       ]
     },
     {
-      "name": "TempBGM",
+      "name": "temp_bgm",
       "args": [
         "sound"
       ]
     },
     {
-      "name": "ScrCmd_088",
+      "name": "scrcmd_088",
       "args": [
         1
       ]
     },
     {
-      "name": "ChatotHasCry",
+      "name": "chatot_has_cry",
       "args": [
         "var"
       ]
     },
     {
-      "name": "ChatotStartRecording",
+      "name": "chatot_start_recording",
       "args": [
         "var"
       ]
     },
     {
-      "name": "ChatotStopRecording",
+      "name": "chatot_stop_recording",
       "args": []
     },
     {
-      "name": "ChatotSaveRecording",
+      "name": "chatot_save_recording",
       "args": []
     },
     {
-      "name": "ScrCmd_093",
+      "name": "scrcmd_093",
       "args": []
     },
     {
-      "name": "ApplyMovement",
+      "name": "apply_movement",
       "args": [
         "object2",
         "movement"
       ]
     },
     {
-      "name": "WaitMovement",
+      "name": "wait_movement",
       "args": []
     },
     {
-      "name": "LockAll",
+      "name": "lockall",
       "args": []
     },
     {
-      "name": "ReleaseAll",
+      "name": "releaseall",
       "args": []
     },
     {
-      "name": "Lock",
+      "name": "lock",
       "args": [
         "object2"
       ]
     },
     {
-      "name": "Release",
+      "name": "release",
       "args": [
         "object2"
       ]
     },
     {
-      "name": "ShowPerson",
+      "name": "show_person",
       "args": [
         "object2"
       ]
     },
     {
-      "name": "HidePerson",
+      "name": "hide_person",
       "args": [
         "object2"
       ]
     },
     {
-      "name": "ScrCmd_102",
+      "name": "scrcmd_102",
       "args": [
         "var",
         "var"
       ]
     },
     {
-      "name": "ScrCmd_103",
+      "name": "scrcmd_103",
       "args": []
     },
     {
-      "name": "FacePlayer",
+      "name": "faceplayer",
       "args": []
     },
     {
-      "name": "GetPlayerCoords",
+      "name": "get_player_coords",
       "args": [
         "var",
         "var"
       ]
     },
     {
-      "name": "GetPersonCoords",
+      "name": "get_person_coords",
       "args": [
         2,
         "var",
@@ -660,7 +660,7 @@
       ]
     },
     {
-      "name": "ScrCmd_107",
+      "name": "scrcmd_107",
       "args": [
         2,
         2,
@@ -668,55 +668,55 @@
       ]
     },
     {
-      "name": "ScrCmd_108",
+      "name": "scrcmd_108",
       "args": [
         2,
         1
       ]
     },
     {
-      "name": "ScrCmd_109",
+      "name": "scrcmd_109",
       "args": [
         "var",
         2
       ]
     },
     {
-      "name": "AddMoney",
+      "name": "addmoney",
       "args": [
         4
       ]
     },
     {
-      "name": "SubMoneyImmediate",
+      "name": "submoneyimmediate",
       "args": [
         4
       ]
     },
     {
-      "name": "HasEnoughMoneyImmediate",
+      "name": "hasenoughmoneyimmediate",
       "args": [
         "var",
         4
       ]
     },
     {
-      "name": "ShowMoneyBox",
+      "name": "show_money_box",
       "args": [
         2,
         2
       ]
     },
     {
-      "name": "HideMoneyBox",
+      "name": "hide_money_box",
       "args": []
     },
     {
-      "name": "UpdateMoneyBox",
+      "name": "update_money_box",
       "args": []
     },
     {
-      "name": "ScrCmd_116",
+      "name": "scrcmd_116",
       "args": [
         1,
         2,
@@ -724,54 +724,54 @@
       ]
     },
     {
-      "name": "ScrCmd_117",
+      "name": "scrcmd_117",
       "args": []
     },
     {
-      "name": "ScrCmd_118",
+      "name": "scrcmd_118",
       "args": [
         1
       ]
     },
     {
-      "name": "GetCoinAmount",
+      "name": "get_coin_amount",
       "args": [
         "var"
       ]
     },
     {
-      "name": "GiveCoins",
+      "name": "give_coins",
       "args": [
         "var"
       ]
     },
     {
-      "name": "TakeCoins",
+      "name": "take_coins",
       "args": [
         "var"
       ]
     },
     {
-      "name": "GiveAthletePoints",
+      "name": "give_athlete_points",
       "args": [
         "var"
       ]
     },
     {
-      "name": "TakeAthletePoints",
+      "name": "take_athlete_points",
       "args": [
         2
       ]
     },
     {
-      "name": "CheckAthletePoints",
+      "name": "check_athlete_points",
       "args": [
         "var",
         2
       ]
     },
     {
-      "name": "GiveItem",
+      "name": "giveitem",
       "args": [
         "item",
         "var",
@@ -779,7 +779,7 @@
       ]
     },
     {
-      "name": "TakeItem",
+      "name": "takeitem",
       "args": [
         "item",
         "var",
@@ -787,7 +787,7 @@
       ]
     },
     {
-      "name": "HasSpaceForItem",
+      "name": "hasspaceforitem",
       "args": [
         "item",
         "var",
@@ -795,7 +795,7 @@
       ]
     },
     {
-      "name": "HasItem",
+      "name": "hasitem",
       "args": [
         "item",
         "var",
@@ -803,48 +803,48 @@
       ]
     },
     {
-      "name": "ItemIsTMOrHM",
+      "name": "itemistmorhm",
       "args": [
         "item",
         "var"
       ]
     },
     {
-      "name": "GetItemPocket",
+      "name": "getitempocket",
       "args": [
         "item",
         "var"
       ]
     },
     {
-      "name": "SetStarterChoice",
+      "name": "set_starter_choice",
       "args": [
         "var"
       ]
     },
     {
-      "name": "GenderMsgBox",
+      "name": "gender_msgbox",
       "args": [
         "message",
         "message"
       ]
     },
     {
-      "name": "GetSealQuantity",
+      "name": "get_seal_quantity",
       "args": [
         "var",
         "var"
       ]
     },
     {
-      "name": "GiveOrTakeSeal",
+      "name": "give_or_take_seal",
       "args": [
         "var",
         "var"
       ]
     },
     {
-      "name": "GiveRandomSeal",
+      "name": "give_random_seal",
       "args": [
         "var",
         "var",
@@ -852,14 +852,14 @@
       ]
     },
     {
-      "name": "ScrCmd_136",
+      "name": "scrcmd_136",
       "args": [
         2,
         2
       ]
     },
     {
-      "name": "GiveMon",
+      "name": "give_mon",
       "args": [
         "species",
         "var",
@@ -870,14 +870,14 @@
       ]
     },
     {
-      "name": "GiveEgg",
+      "name": "give_egg",
       "args": [
         "species",
         "var"
       ]
     },
     {
-      "name": "SetMonMove",
+      "name": "set_mon_move",
       "args": [
         "var",
         "var",
@@ -885,7 +885,7 @@
       ]
     },
     {
-      "name": "MonHasMove",
+      "name": "mon_has_move",
       "args": [
         "var",
         "move",
@@ -893,83 +893,83 @@
       ]
     },
     {
-      "name": "GetPartySlotWithMove",
+      "name": "get_party_slot_with_move",
       "args": [
         "var",
         "move"
       ]
     },
     {
-      "name": "GetPhoneBookRematch",
+      "name": "get_phone_book_rematch",
       "args": [
         "phone_contact",
         "var"
       ]
     },
     {
-      "name": "NameRival",
+      "name": "name_rival",
       "args": [
         "var"
       ]
     },
     {
-      "name": "GetFriendSprite",
+      "name": "get_friend_sprite",
       "args": [
         "var"
       ]
     },
     {
-      "name": "RegisterPokegearCard",
+      "name": "register_pokegear_card",
       "args": [
         1
       ]
     },
     {
-      "name": "RegisterGearNumber",
+      "name": "register_gear_number",
       "args": [
         "phone_contact"
       ]
     },
     {
-      "name": "CheckRegisteredPhoneNumber",
+      "name": "check_registered_phone_number",
       "args": [
         "phone_contact",
         "var"
       ]
     },
     {
-      "name": "ScrCmd_148",
+      "name": "scrcmd_148",
       "args": [
         1,
         1
       ]
     },
     {
-      "name": "UnsetPhoneCallTrigger",
+      "name": "scrcmd_149",
       "args": [
         1
       ]
     },
     {
-      "name": "RestoreOverworld",
+      "name": "restore_overworld",
       "args": []
     },
     {
-      "name": "ScrCmd_151",
+      "name": "scrcmd_151",
       "args": []
     },
     {
-      "name": "ScrCmd_152",
+      "name": "scrcmd_152",
       "args": []
     },
     {
-      "name": "ScrCmd_153",
+      "name": "scrcmd_153",
       "args": [
         2
       ]
     },
     {
-      "name": "ScrCmd_154",
+      "name": "scrcmd_154",
       "args": [
         "var",
         "var",
@@ -977,110 +977,110 @@
       ]
     },
     {
-      "name": "ScrCmd_155",
+      "name": "scrcmd_155",
       "args": [
         2,
         "var"
       ]
     },
     {
-      "name": "ScrCmd_156",
+      "name": "scrcmd_156",
       "args": []
     },
     {
-      "name": "TownMap",
+      "name": "town_map",
       "args": []
     },
     {
-      "name": "ScrCmd_158",
+      "name": "scrcmd_158",
       "args": [
         1
       ]
     },
     {
-      "name": "ScrCmd_159",
+      "name": "scrcmd_159",
       "args": []
     },
     {
-      "name": "ScrCmd_160",
+      "name": "scrcmd_160",
       "args": []
     },
     {
-      "name": "ScrCmd_161",
+      "name": "scrcmd_161",
       "args": []
     },
     {
-      "name": "ScrCmd_162",
+      "name": "scrcmd_162",
       "args": []
     },
     {
-      "name": "HOFCredits",
+      "name": "hof_credits",
       "args": [
         2
       ]
     },
     {
-      "name": "ScrCmd_164",
+      "name": "scrcmd_164",
       "args": []
     },
     {
-      "name": "ScrCmd_165",
+      "name": "scrcmd_165",
       "args": [
         "var",
         "var"
       ]
     },
     {
-      "name": "ScrCmd_166",
+      "name": "scrcmd_166",
       "args": [
         "var"
       ]
     },
     {
-      "name": "ChooseStarter",
+      "name": "choose_starter",
       "args": []
     },
     {
-      "name": "GetTrainerPathToPlayer",
+      "name": "get_trainer_path_to_player",
       "args": [
         2
       ]
     },
     {
-      "name": "TrainerStepTowardsPlayer",
+      "name": "trainer_step_towards_player",
       "args": [
         2,
         "var"
       ]
     },
     {
-      "name": "GetTrainerEyeType",
+      "name": "get_trainer_eye_type",
       "args": [
         "var"
       ]
     },
     {
-      "name": "GetEyeTrainerNum",
+      "name": "get_eye_trainer_num",
       "args": [
         "var",
         "var"
       ]
     },
     {
-      "name": "NamePlayer",
+      "name": "name_player",
       "args": [
         2
       ]
     },
     {
-      "name": "NicknameInput",
+      "name": "nickname_input",
       "args": [
         "var",
         "var"
       ]
     },
     {
-      "name": "FadeScreen",
+      "name": "fade_screen",
       "args": [
         2,
         2,
@@ -1089,11 +1089,11 @@
       ]
     },
     {
-      "name": "WaitFade",
+      "name": "wait_fade",
       "args": []
     },
     {
-      "name": "Warp",
+      "name": "warp",
       "args": [
         "maps",
         2,
@@ -1103,25 +1103,25 @@
       ]
     },
     {
-      "name": "RockClimb",
+      "name": "rock_climb",
       "args": [
         "var"
       ]
     },
     {
-      "name": "Surf",
+      "name": "surf",
       "args": [
         "var"
       ]
     },
     {
-      "name": "Waterfall",
+      "name": "waterfall",
       "args": [
         "var"
       ]
     },
     {
-      "name": "ScrCmd_180",
+      "name": "scrcmd_180",
       "args": [
         2,
         2,
@@ -1129,137 +1129,137 @@
       ]
     },
     {
-      "name": "FlashEffect",
+      "name": "flash_effect",
       "args": []
     },
     {
-      "name": "Whirlpool",
+      "name": "whirlpool",
       "args": [
         "var"
       ]
     },
     {
-      "name": "ScrCmd_183",
+      "name": "scrcmd_183",
       "args": [
         "var"
       ]
     },
     {
-      "name": "PlayerOnBikeCheck",
+      "name": "player_on_bike_check",
       "args": [
         "var"
       ]
     },
     {
-      "name": "PlayerOnBikeSet",
+      "name": "player_on_bike_set",
       "args": [
         1
       ]
     },
     {
-      "name": "SetBikeStateLock",
+      "name": "set_bike_state_lock",
       "args": [
         1
       ]
     },
     {
-      "name": "GetPlayerState",
+      "name": "get_player_state",
       "args": [
         "var"
       ]
     },
     {
-      "name": "SetAvatarBits",
+      "name": "set_avatar_bits",
       "args": [
         "player_transition"
       ]
     },
     {
-      "name": "UpdateAvatarState",
+      "name": "update_avatar_state",
       "args": []
     },
     {
-      "name": "BufferPlayersName",
+      "name": "buffer_players_name",
       "args": [
         1
       ]
     },
     {
-      "name": "BufferRivalsName",
+      "name": "buffer_rivals_name",
       "args": [
         1
       ]
     },
     {
-      "name": "BufferFriendsName",
+      "name": "buffer_friends_name",
       "args": [
         1
       ]
     },
     {
-      "name": "BufferMonSpeciesName",
+      "name": "buffer_mon_species_name",
       "args": [
         1,
         "var"
       ]
     },
     {
-      "name": "BufferItemName",
+      "name": "buffer_item_name",
       "args": [
         1,
         "item"
       ]
     },
     {
-      "name": "BufferPocketName",
+      "name": "buffer_pocket_name",
       "args": [
         1,
         "var"
       ]
     },
     {
-      "name": "BufferTMHMMoveName",
+      "name": "buffer_tmhm_move_name",
       "args": [
         1,
         "var"
       ]
     },
     {
-      "name": "BufferMoveName",
+      "name": "buffer_move_name",
       "args": [
         1,
         "move"
       ]
     },
     {
-      "name": "BufferInt",
+      "name": "buffer_int",
       "args": [
         1,
         "var"
       ]
     },
     {
-      "name": "BufferPartyMonNick",
+      "name": "bufferpartymonnick",
       "args": [
         1,
         "var"
       ]
     },
     {
-      "name": "BufferTrainerClassName",
+      "name": "buffer_trainer_class_name",
       "args": [
         1,
         "var"
       ]
     },
     {
-      "name": "BufferPlayerUnionAvatarClassName",
+      "name": "buffer_player_union_avatar_class_name",
       "args": [
         1
       ]
     },
     {
-      "name": "BufferSpeciesName",
+      "name": "buffer_species_name",
       "args": [
         1,
         "species",
@@ -1268,72 +1268,72 @@
       ]
     },
     {
-      "name": "BufferStarterSpeciesName",
+      "name": "buffer_starter_species_name",
       "args": [
         1
       ]
     },
     {
-      "name": "BufferDPPtRivalStarterSpeciesName",
+      "name": "buffer_dppt_rival_starter_species_name",
       "args": [
         1
       ]
     },
     {
-      "name": "BufferDPPtFriendStarterSpeciesName",
+      "name": "buffer_dppt_friend_starter_species_name",
       "args": [
         1
       ]
     },
     {
-      "name": "GetStarterChoice",
+      "name": "get_starter_choice",
       "args": [
         "var"
       ]
     },
     {
-      "name": "BufferDecorationName",
-      "args": [
-        1,
-        "var"
-      ]
-    },
-    {
-      "name": "ScrCmd_208",
+      "name": "buffer_decoration_name",
       "args": [
         1,
         "var"
       ]
     },
     {
-      "name": "ScrCmd_209",
+      "name": "scrcmd_208",
       "args": [
         1,
         "var"
       ]
     },
     {
-      "name": "BufferMapSecName",
+      "name": "scrcmd_209",
       "args": [
         1,
         "var"
       ]
     },
     {
-      "name": "ScrCmd_211",
+      "name": "buffer_map_sec_name",
+      "args": [
+        1,
+        "var"
+      ]
+    },
+    {
+      "name": "scrcmd_211",
       "args": [
         2,
         2
       ]
     },
     {
-      "name": "GetTrainerNum",
+      "name": "get_trainer_num",
       "args": [
         "var"
       ]
     },
     {
-      "name": "TrainerBattle",
+      "name": "trainer_battle",
       "args": [
         "trainer",
         "var",
@@ -1342,14 +1342,14 @@
       ]
     },
     {
-      "name": "TrainerMessage",
+      "name": "trainer_message",
       "args": [
         "trainer",
         "var"
       ]
     },
     {
-      "name": "GetTrainerMsgParams",
+      "name": "get_trainer_msg_params",
       "args": [
         "var",
         "var",
@@ -1357,7 +1357,7 @@
       ]
     },
     {
-      "name": "GetRematchMsgParams",
+      "name": "get_rematch_msg_params",
       "args": [
         "var",
         "var",
@@ -1365,56 +1365,56 @@
       ]
     },
     {
-      "name": "TrainerIsDoubleBattle",
+      "name": "trainer_is_double_battle",
       "args": [
         "var"
       ]
     },
     {
-      "name": "EncounterMusic",
+      "name": "encounter_music",
       "args": [
         "trainer"
       ]
     },
     {
-      "name": "WhiteOut",
+      "name": "white_out",
       "args": []
     },
     {
-      "name": "CheckBattleWon",
+      "name": "check_battle_won",
       "args": [
         "var"
       ]
     },
     {
-      "name": "StaticWildWonOrCaughtCheck",
+      "name": "static_wild_won_or_caught",
       "args": [
         "var",
         1
       ]
     },
     {
-      "name": "PartyCheckForDouble",
+      "name": "party_check_for_double",
       "args": [
         "var"
       ]
     },
     {
-      "name": "ScrCmd_223",
+      "name": "scrcmd_223",
       "args": []
     },
     {
-      "name": "ScrCmd_224",
+      "name": "scrcmd_224",
       "args": []
     },
     {
-      "name": "GoToIfTrainerDefeated",
+      "name": "goto_if_trainer_defeated",
       "args": [
         "script"
       ]
     },
     {
-      "name": "ScrCmd_226",
+      "name": "scrcmd_226",
       "args": [
         "var",
         "var",
@@ -1423,7 +1423,7 @@
       ]
     },
     {
-      "name": "ScrCmd_227",
+      "name": "scrcmd_227",
       "args": [
         "var",
         "var",
@@ -1432,39 +1432,39 @@
       ]
     },
     {
-      "name": "ScrCmd_228",
+      "name": "scrcmd_228",
       "args": [
         2
       ]
     },
     {
-      "name": "ScrCmd_229",
+      "name": "scrcmd_229",
       "args": [
         2
       ]
     },
     {
-      "name": "ScrCmd_230",
+      "name": "scrcmd_230",
       "args": []
     },
     {
-      "name": "ScrCmd_231",
+      "name": "scrcmd_231",
       "args": []
     },
     {
-      "name": "ScrCmd_232",
+      "name": "scrcmd_232",
       "args": [
         2
       ]
     },
     {
-      "name": "ScrCmd_233",
+      "name": "scrcmd_233",
       "args": [
         2
       ]
     },
     {
-      "name": "ScrCmd_234",
+      "name": "scrcmd_234",
       "args": [
         "var",
         "var",
@@ -1473,36 +1473,36 @@
       ]
     },
     {
-      "name": "ScrCmd_235",
+      "name": "scrcmd_235",
       "args": [
         "var"
       ]
     },
     {
-      "name": "ScrCmd_236",
+      "name": "scrcmd_236",
       "args": [
         2
       ]
     },
     {
-      "name": "ScrCmd_237",
+      "name": "scrcmd_237",
       "args": []
     },
     {
-      "name": "PartyHasPokerus",
+      "name": "party_has_pokerus",
       "args": [
         "var"
       ]
     },
     {
-      "name": "MonGetGender",
+      "name": "mon_get_gender",
       "args": [
         "var",
         "var"
       ]
     },
     {
-      "name": "SetDynamicWarp",
+      "name": "set_dynamic_warp",
       "args": [
         "maps",
         2,
@@ -1512,13 +1512,13 @@
       ]
     },
     {
-      "name": "GetDynamicWarpFloorNo",
+      "name": "get_dynamic_warp_floor_no",
       "args": [
         "var"
       ]
     },
     {
-      "name": "ElevatorCurFloorBox",
+      "name": "elevator_cur_floor_box",
       "args": [
         1,
         1,
@@ -1527,35 +1527,35 @@
       ]
     },
     {
-      "name": "CountJohtoDexSeen",
+      "name": "count_johto_dex_seen",
       "args": [
         "var"
       ]
     },
     {
-      "name": "CountJohtoDexOwned",
+      "name": "count_johto_dex_owned",
       "args": [
         "var"
       ]
     },
     {
-      "name": "CountNationalDexSeen",
+      "name": "count_national_dex_seen",
       "args": [
         "var"
       ]
     },
     {
-      "name": "CountNationalDexOwned",
+      "name": "count_national_dex_owned",
       "args": [
         "var"
       ]
     },
     {
-      "name": "ScrCmd_247",
+      "name": "scrcmd_247",
       "args": []
     },
     {
-      "name": "GetDexEvalResult",
+      "name": "get_dex_eval_result",
       "args": [
         1,
         "var",
@@ -1563,319 +1563,319 @@
       ]
     },
     {
-      "name": "RocketTrapBattle",
+      "name": "rocket_trap_battle",
       "args": [
         "species",
         2
       ]
     },
     {
-      "name": "ScrCmd_250",
+      "name": "scrcmd_250",
       "args": [
         2,
         2
       ]
     },
     {
-      "name": "CatchingTutorial",
+      "name": "catching_tutorial",
       "args": []
     },
     {
-      "name": "ScrCmd_252",
+      "name": "scrcmd_252",
       "args": []
     },
     {
-      "name": "GetSaveFileState",
+      "name": "get_save_file_state",
       "args": [
         "var"
       ]
     },
     {
-      "name": "SaveGameNormal",
+      "name": "save_game_normal",
       "args": [
         "var"
       ]
     },
     {
-      "name": "ScrCmd_255",
+      "name": "scrcmd_255",
       "args": [
         2,
         "var"
       ]
     },
     {
-      "name": "ScrCmd_256",
+      "name": "scrcmd_256",
       "args": [
         "var"
       ]
     },
     {
-      "name": "ScrCmd_257",
+      "name": "scrcmd_257",
       "args": [
         2
       ]
     },
     {
-      "name": "ScrCmd_258",
+      "name": "scrcmd_258",
       "args": []
     },
     {
-      "name": "ScrCmd_259",
+      "name": "scrcmd_259",
       "args": [
         2
       ]
     },
     {
-      "name": "ScrCmd_260",
+      "name": "scrcmd_260",
       "args": [
         "var"
       ]
     },
     {
-      "name": "ScrCmd_261",
+      "name": "scrcmd_261",
       "args": [
         2
       ]
     },
     {
-      "name": "ScrCmd_262",
+      "name": "scrcmd_262",
       "args": []
     },
     {
-      "name": "ScrCmd_263",
+      "name": "scrcmd_263",
       "args": []
     },
     {
-      "name": "ScrCmd_264",
+      "name": "scrcmd_264",
       "args": [
         2
       ]
     },
     {
-      "name": "ScrCmd_265",
+      "name": "scrcmd_265",
       "args": []
     },
     {
-      "name": "ScrCmd_266",
+      "name": "scrcmd_266",
       "args": []
     },
     {
-      "name": "ScrCmd_267",
+      "name": "scrcmd_267",
       "args": [
         2,
         "var"
       ]
     },
     {
-      "name": "ScrCmd_268",
+      "name": "scrcmd_268",
       "args": [
         "var"
       ]
     },
     {
-      "name": "ScrCmd_269",
+      "name": "scrcmd_269",
       "args": [
         "var"
       ]
     },
     {
-      "name": "ScrCmd_270",
+      "name": "scrcmd_270",
       "args": []
     },
     {
-      "name": "ScrCmd_271",
+      "name": "scrcmd_271",
       "args": [
         2,
         2
       ]
     },
     {
-      "name": "ScrCmd_272",
+      "name": "scrcmd_272",
       "args": [
         "var"
       ]
     },
     {
-      "name": "ScrCmd_273",
+      "name": "scrcmd_273",
       "args": [
         "var"
       ]
     },
     {
-      "name": "ScrCmd_274",
+      "name": "scrcmd_274",
       "args": [
         "var",
         "var"
       ]
     },
     {
-      "name": "MartBuy",
+      "name": "mart_buy",
       "args": [
         "var"
       ]
     },
     {
-      "name": "SpecialMartBuy",
+      "name": "special_mart_buy",
       "args": [
         "var"
       ]
     },
     {
-      "name": "DecorationMart",
+      "name": "decoration_mart",
       "args": [
         2
       ]
     },
     {
-      "name": "SealMart",
+      "name": "seal_mart",
       "args": [
         2
       ]
     },
     {
-      "name": "OverworldWhiteOut",
+      "name": "overworld_white_out",
       "args": []
     },
     {
-      "name": "SetSpawn",
+      "name": "set_spawn",
       "args": [
         "spawn"
       ]
     },
     {
-      "name": "GetPlayerGender",
+      "name": "get_player_gender",
       "args": [
         "var"
       ]
     },
     {
-      "name": "HealParty",
+      "name": "heal_party",
       "args": []
     },
     {
-      "name": "ScrCmd_283",
+      "name": "scrcmd_283",
       "args": []
     },
     {
-      "name": "ScrCmd_284",
+      "name": "scrcmd_284",
       "args": []
     },
     {
-      "name": "ScrCmd_285",
+      "name": "scrcmd_285",
       "args": [
         2
       ]
     },
     {
-      "name": "ScrCmd_286",
+      "name": "scrcmd_286",
       "args": []
     },
     {
-      "name": "BufferUnionRoomAvatarChoices",
+      "name": "buffer_union_room_avatar_choices",
       "args": []
     },
     {
-      "name": "UnionRoomAvatarIdxToTrainerClass",
+      "name": "union_room_avatar_idx_to_trainer_class",
       "args": [
         "var",
         "var"
       ]
     },
     {
-      "name": "ScrCmd_289",
+      "name": "scrcmd_289",
       "args": [
         "var"
       ]
     },
     {
-      "name": "CheckPokedex",
+      "name": "check_pokedex",
       "args": [
         2
       ]
     },
     {
-      "name": "GivePokedex",
+      "name": "give_pokedex",
       "args": []
     },
     {
-      "name": "CheckRunningShoes",
+      "name": "check_running_shoes",
       "args": [
         2
       ]
     },
     {
-      "name": "GiveRunningShoes",
+      "name": "give_running_shoes",
       "args": []
     },
     {
-      "name": "CheckBadge",
+      "name": "check_badge",
       "args": [
         "badge",
         "var"
       ]
     },
     {
-      "name": "GiveBadge",
+      "name": "give_badge",
       "args": [
         "badge"
       ]
     },
     {
-      "name": "CountBadges",
+      "name": "count_badges",
       "args": [
         "badge"
       ]
     },
     {
-      "name": "ScrCmd_297",
+      "name": "scrcmd_297",
       "args": [
         "var"
       ]
     },
     {
-      "name": "ScrCmd_298",
+      "name": "scrcmd_298",
       "args": []
     },
     {
-      "name": "CheckEscortMode",
+      "name": "check_escort_mode",
       "args": [
         "var"
       ]
     },
     {
-      "name": "SetEscortMode",
+      "name": "set_escort_mode",
       "args": []
     },
     {
-      "name": "ClearEscortMode",
+      "name": "clear_escort_mode",
       "args": []
     },
     {
-      "name": "CheckStepTakenFlag",
+      "name": "scrcmd_302",
       "args": [
         2
       ]
     },
     {
-      "name": "SetStepTakenFlag",
+      "name": "scrcmd_303",
       "args": []
     },
     {
-      "name": "GetStepTakenFlag",
+      "name": "scrcmd_304",
       "args": []
     },
     {
-      "name": "ScrCmd_CheckGameClearFlag",
+      "name": "scrcmd_305",
       "args": [
         2
       ]
     },
     {
-      "name": "ScrCmd_SetGameClearFlag",
+      "name": "scrcmd_306",
       "args": []
     },
     {
-      "name": "ScrCmd_307",
+      "name": "scrcmd_307",
       "args": [
         2,
         2,
@@ -1885,152 +1885,152 @@
       ]
     },
     {
-      "name": "ScrCmd_308",
+      "name": "scrcmd_308",
       "args": [
         1
       ]
     },
     {
-      "name": "ScrCmd_309",
+      "name": "scrcmd_309",
       "args": [
         1
       ]
     },
     {
-      "name": "ScrCmd_310",
+      "name": "scrcmd_310",
       "args": [
         1
       ]
     },
     {
-      "name": "ScrCmd_311",
+      "name": "scrcmd_311",
       "args": [
         1
       ]
     },
     {
-      "name": "BufferDaycareMonNicks",
+      "name": "buffer_day_care_mon_nicks",
       "args": []
     },
     {
-      "name": "GetDaycareState",
+      "name": "get_day_care_state",
       "args": [
         "var"
       ]
     },
     {
-      "name": "EcruteakGymInit",
+      "name": "ecruteak_gym_init",
       "args": []
     },
     {
-      "name": "BindEcruteakGymCandleToTrainerSprite",
+      "name": "scrcmd_315",
       "args": []
     },
     {
-      "name": "UnbindEcruteakGymCandleFromTrainerSprite",
+      "name": "scrcmd_316",
       "args": []
     },
     {
-      "name": "ExtinguishEcruteakGymCandle",
+      "name": "scrcmd_317",
       "args": [
         1
       ]
     },
     {
-      "name": "CianwoodGymInit",
+      "name": "cianwood_gym_init",
       "args": []
     },
     {
-      "name": "CianwoodGymTurnWinch",
+      "name": "cianwood_gym_turn_winch",
       "args": [
         "var"
       ]
     },
     {
-      "name": "VermilionGymInit",
+      "name": "vermilion_gym_init",
       "args": []
     },
     {
-      "name": "VermilionGymLockAction",
+      "name": "vermilion_gym_lock_action",
       "args": [
         1,
         1
       ]
     },
     {
-      "name": "VermilionGymCanCheck",
+      "name": "vermilion_gym_can_check",
       "args": [
         1,
         "var"
       ]
     },
     {
-      "name": "ResampleVermilionGymCans",
+      "name": "resample_vermilion_gym_cans",
       "args": []
     },
     {
-      "name": "VioletGymInit",
+      "name": "violet_gym_init",
       "args": []
     },
     {
-      "name": "VioletGymElevator",
+      "name": "violet_gym_elevator",
       "args": []
     },
     {
-      "name": "AzaleaGymInit",
+      "name": "azalea_gym_init",
       "args": []
     },
     {
-      "name": "AzaleaGymSpinarak",
+      "name": "azalea_gym_spinarak",
       "args": [
         1
       ]
     },
     {
-      "name": "AzaleaGymSwitch",
+      "name": "azalea_gym_switch",
       "args": [
         1
       ]
     },
     {
-      "name": "BlackthornGymInit",
+      "name": "blackthorn_gym_init",
       "args": []
     },
     {
-      "name": "FuchsiaGymInit",
+      "name": "fuchsia_gym_init",
       "args": []
     },
     {
-      "name": "ViridianGymInit",
+      "name": "viridian_gym_init",
       "args": []
     },
     {
-      "name": "GetPartyCount",
+      "name": "get_party_count",
       "args": [
         "var"
       ]
     },
     {
-      "name": "ScrCmd_333",
+      "name": "scrcmd_333",
       "args": [
         1
       ]
     },
     {
-      "name": "ScrCmd_334",
+      "name": "scrcmd_334",
       "args": [
         2
       ]
     },
     {
-      "name": "ScrCmd_335",
+      "name": "scrcmd_335",
       "args": [
         2,
         2
       ]
     },
     {
-      "name": "BufferBerryName",
+      "name": "buffer_berry_name",
       "args": [
         1,
         "item",
@@ -2038,14 +2038,14 @@
       ]
     },
     {
-      "name": "BufferNatureName",
+      "name": "buffer_nature_name",
       "args": [
         1,
         "var"
       ]
     },
     {
-      "name": "MovePerson",
+      "name": "move_person",
       "args": [
         "object2",
         "var",
@@ -2053,7 +2053,7 @@
       ]
     },
     {
-      "name": "MovePersonFacing",
+      "name": "move_person_facing",
       "args": [
         "object2",
         "var",
@@ -2063,21 +2063,21 @@
       ]
     },
     {
-      "name": "SetObjectMovementType",
+      "name": "set_object_movement_type",
       "args": [
         "object2",
         "var"
       ]
     },
     {
-      "name": "SetObjectFacing",
+      "name": "set_object_facing",
       "args": [
         "object2",
         "direction"
       ]
     },
     {
-      "name": "MoveWarp",
+      "name": "move_warp",
       "args": [
         2,
         2,
@@ -2085,7 +2085,7 @@
       ]
     },
     {
-      "name": "MoveBGEvent",
+      "name": "move_bg_event",
       "args": [
         2,
         2,
@@ -2093,48 +2093,48 @@
       ]
     },
     {
-      "name": "ScrCmd_344",
+      "name": "scrcmd_344",
       "args": [
         2,
         2
       ]
     },
     {
-      "name": "AddWaitingIcon",
+      "name": "add_waiting_icon",
       "args": []
     },
     {
-      "name": "RemoveWaitingIcon",
+      "name": "remove_waiting_icon",
       "args": []
     },
     {
-      "name": "ScrCmd_347",
+      "name": "scrcmd_347",
       "args": [
         "var"
       ]
     },
     {
-      "name": "WaitButtonOrDelay",
+      "name": "wait_button_or_delay",
       "args": [
         2
       ]
     },
     {
-      "name": "PartySelectUI",
+      "name": "party_select_ui",
       "args": []
     },
     {
-      "name": "ScrCmd_350",
+      "name": "scrcmd_350",
       "args": []
     },
     {
-      "name": "GetPartySelection",
+      "name": "get_party_selection",
       "args": [
         "var"
       ]
     },
     {
-      "name": "PokemonSummaryScreen",
+      "name": "pokemon_summary_screen",
       "args": [
         1,
         "var",
@@ -2142,66 +2142,66 @@
       ]
     },
     {
-      "name": "GetMoveSelection",
+      "name": "get_move_selection",
       "args": [
         1,
         "var"
       ]
     },
     {
-      "name": "GetPartyMonSpecies",
+      "name": "get_partymon_species",
       "args": [
         "var",
         "var"
       ]
     },
     {
-      "name": "PartyMonIsMine",
+      "name": "partymon_is_mine",
       "args": [
         "var",
         "var"
       ]
     },
     {
-      "name": "PartyCountNotEgg",
+      "name": "party_count_not_egg",
       "args": [
         "var"
       ]
     },
     {
-      "name": "CountAliveMons",
-      "args": [
-        "var",
-        "var"
-      ]
-    },
-    {
-      "name": "CountAliveMonsAndPC",
-      "args": [
-        "var"
-      ]
-    },
-    {
-      "name": "PartyCountEgg",
-      "args": [
-        "var"
-      ]
-    },
-    {
-      "name": "SubMoneyVar",
-      "args": [
-        "var"
-      ]
-    },
-    {
-      "name": "RetrieveDaycareMon",
+      "name": "count_alive_mons",
       "args": [
         "var",
         "var"
       ]
     },
     {
-      "name": "GiveLoanMon",
+      "name": "count_alive_mons_and_pc",
+      "args": [
+        "var"
+      ]
+    },
+    {
+      "name": "party_count_egg",
+      "args": [
+        "var"
+      ]
+    },
+    {
+      "name": "submoneyvar",
+      "args": [
+        "var"
+      ]
+    },
+    {
+      "name": "retrieve_day_care_mon",
+      "args": [
+        "var",
+        "var"
+      ]
+    },
+    {
+      "name": "give_loan_mon",
       "args": [
         1,
         1,
@@ -2209,7 +2209,7 @@
       ]
     },
     {
-      "name": "CheckReturnLoanMon",
+      "name": "check_return_loan_mon",
       "args": [
         1,
         "var",
@@ -2217,134 +2217,134 @@
       ]
     },
     {
-      "name": "ReturnLoanMon",
+      "name": "return_loan_mon",
       "args": [
         "var"
       ]
     },
     {
-      "name": "ResetDaycareEgg",
+      "name": "reset_day_care_egg",
       "args": []
     },
     {
-      "name": "GiveDaycareEgg",
+      "name": "give_day_care_egg",
       "args": []
     },
     {
-      "name": "BufferDaycareWithdrawCost",
-      "args": [
-        "var",
-        "var"
-      ]
-    },
-    {
-      "name": "HasEnoughMoneyVar",
+      "name": "buffer_day_care_withdraw_cost",
       "args": [
         "var",
         "var"
       ]
     },
     {
-      "name": "EggHatchAnim",
+      "name": "hasenoughmoneyvar",
+      "args": [
+        "var",
+        "var"
+      ]
+    },
+    {
+      "name": "egg_hatch_anim",
       "args": []
     },
     {
-      "name": "ScrCmd_370",
+      "name": "scrcmd_370",
       "args": [
         1
       ]
     },
     {
-      "name": "BufferDaycareMonGrowth",
+      "name": "buffer_day_care_mon_growth",
       "args": [
         "var",
         "var"
       ]
     },
     {
-      "name": "GetTailDaycareMonSpeciesAndNick",
+      "name": "get_tail_day_care_mon_species_and_nick",
       "args": [
         "var"
       ]
     },
     {
-      "name": "PutMonInDaycare",
+      "name": "put_mon_in_day_care",
       "args": [
         "var"
       ]
     },
     {
-      "name": "ScrCmd_374",
+      "name": "scrcmd_374",
       "args": [
         "object2"
       ]
     },
     {
-      "name": "MakeObjectVisible",
+      "name": "make_object_visible",
       "args": [
         "object2"
       ]
     },
     {
-      "name": "ScrCmd_376",
+      "name": "scrcmd_376",
       "args": []
     },
     {
-      "name": "ScrCmd_377",
+      "name": "scrcmd_377",
       "args": [
         "var"
       ]
     },
     {
-      "name": "ViewRankings",
+      "name": "view_rankings",
       "args": [
         2,
         "var"
       ]
     },
     {
-      "name": "ScrCmd_379",
+      "name": "scrcmd_379",
       "args": [
         "var"
       ]
     },
     {
-      "name": "Random",
+      "name": "random",
       "args": [
         "var",
         2
       ]
     },
     {
-      "name": "ScrCmd_381",
+      "name": "scrcmd_381",
       "args": [
         2,
         2
       ]
     },
     {
-      "name": "MonGetFriendship",
+      "name": "mon_get_friendship",
       "args": [
         "var",
         "var"
       ]
     },
     {
-      "name": "MonAddFriendship",
+      "name": "mon_add_friendship",
       "args": [
         2,
         "var"
       ]
     },
     {
-      "name": "MonSubtractFriendship",
+      "name": "mon_subtract_friendship",
       "args": [
         2,
         2
       ]
     },
     {
-      "name": "BufferDaycareMonStats",
+      "name": "buffer_day_care_mon_stats",
       "args": [
         2,
         2,
@@ -2353,45 +2353,45 @@
       ]
     },
     {
-      "name": "GetPlayerFacing",
+      "name": "get_player_facing",
       "args": [
         "var"
       ]
     },
     {
-      "name": "GetDaycareCompatibility",
+      "name": "get_day_care_compatibility",
       "args": [
         "var"
       ]
     },
     {
-      "name": "CheckDaycareEgg",
+      "name": "check_day_care_egg",
       "args": [
         "var"
       ]
     },
     {
-      "name": "PlayerHasSpecies",
+      "name": "player_has_species",
       "args": [
         "var",
         "species"
       ]
     },
     {
-      "name": "SizeRecordCompare",
+      "name": "size_record_compare",
       "args": [
         "var",
         "var"
       ]
     },
     {
-      "name": "SizeRecordUpdate",
+      "name": "size_record_update",
       "args": [
         "var"
       ]
     },
     {
-      "name": "BufferMonSize",
+      "name": "buffer_mon_size",
       "args": [
         "var",
         "var",
@@ -2399,7 +2399,7 @@
       ]
     },
     {
-      "name": "BufferRecordSize",
+      "name": "buffer_record_size",
       "args": [
         "var",
         "var",
@@ -2407,33 +2407,33 @@
       ]
     },
     {
-      "name": "ScrCmd_394",
+      "name": "scrcmd_394",
       "args": [
         "var"
       ]
     },
     {
-      "name": "ScrCmd_395",
+      "name": "scrcmd_395",
       "args": [
         "var"
       ]
     },
     {
-      "name": "CountMonMoves",
-      "args": [
-        "var",
-        "var"
-      ]
-    },
-    {
-      "name": "MonForgetMove",
+      "name": "count_mon_moves",
       "args": [
         "var",
         "var"
       ]
     },
     {
-      "name": "MonGetMove",
+      "name": "mon_forget_move",
+      "args": [
+        "var",
+        "var"
+      ]
+    },
+    {
+      "name": "mon_get_move",
       "args": [
         "var",
         "var",
@@ -2441,7 +2441,7 @@
       ]
     },
     {
-      "name": "BufferPartyMonMoveName",
+      "name": "buffer_party_mon_move_name",
       "args": [
         1,
         "var",
@@ -2449,56 +2449,50 @@
       ]
     },
     {
-      "name": "StrengthFlagAction",
+      "name": "strength_flag_action",
       "args": [
         1
       ],
       "cases": {
         "0": [],
         "1": [],
-        "2": [
-          "var"
-        ]
+        "2": ["var"]
       },
       "switch_arg": 0
     },
     {
-      "name": "FlashAction",
+      "name": "flash_action",
       "args": [
         1
       ],
       "cases": {
         "0": [],
         "1": [],
-        "2": [
-          "var"
-        ]
+        "2": ["var"]
       },
       "switch_arg": 0
     },
     {
-      "name": "DefogAction",
+      "name": "defog_action",
       "args": [
         1
       ],
       "cases": {
         "0": [],
         "1": [],
-        "2": [
-          "var"
-        ]
+        "2": ["var"]
       },
       "switch_arg": 0
     },
     {
-      "name": "ScrCmd_403",
+      "name": "scrcmd_403",
       "args": [
         "var",
         "var"
       ]
     },
     {
-      "name": "ScrCmd_404",
+      "name": "scrcmd_404",
       "args": [
         "var",
         "var",
@@ -2506,7 +2500,7 @@
       ]
     },
     {
-      "name": "ScrCmd_405",
+      "name": "scrcmd_405",
       "args": [
         2,
         2,
@@ -2514,42 +2508,42 @@
       ]
     },
     {
-      "name": "ScrCmd_406",
+      "name": "scrcmd_406",
       "args": [
         "var"
       ]
     },
     {
-      "name": "ScrCmd_407",
-      "args": [
-        "var",
-        "var"
-      ]
-    },
-    {
-      "name": "ScrCmd_408",
+      "name": "scrcmd_407",
       "args": [
         "var",
         "var"
       ]
     },
     {
-      "name": "ScrCmd_409",
+      "name": "scrcmd_408",
+      "args": [
+        "var",
+        "var"
+      ]
+    },
+    {
+      "name": "scrcmd_409",
       "args": []
     },
     {
-      "name": "ScrCmd_410",
+      "name": "scrcmd_410",
       "args": [
         2,
         2
       ]
     },
     {
-      "name": "ScrCmd_411",
+      "name": "scrcmd_411",
       "args": []
     },
     {
-      "name": "ScrCmd_412",
+      "name": "scrcmd_412",
       "args": [
         2,
         "var",
@@ -2557,7 +2551,7 @@
       ]
     },
     {
-      "name": "ScrCmd_413",
+      "name": "scrcmd_413",
       "args": [
         "var",
         2,
@@ -2566,53 +2560,53 @@
       ]
     },
     {
-      "name": "ScrCmd_414",
+      "name": "scrcmd_414",
       "args": [
         "var"
       ]
     },
     {
-      "name": "ScrCmd_415",
+      "name": "scrcmd_415",
       "args": [
         "var"
       ]
     },
     {
-      "name": "ScrCmd_416",
+      "name": "scrcmd_416",
       "args": [
         2,
-        2,
-        "var"
-      ]
-    },
-    {
-      "name": "ScrCmd_417",
-      "args": [
         2,
         "var"
       ]
     },
     {
-      "name": "ScrCmd_418",
+      "name": "scrcmd_417",
+      "args": [
+        2,
+        "var"
+      ]
+    },
+    {
+      "name": "scrcmd_418",
       "args": [
         "var",
         "var"
       ]
     },
     {
-      "name": "ScrCmd_419",
+      "name": "scrcmd_419",
       "args": [
         "var"
       ]
     },
     {
-      "name": "ScrCmd_420",
+      "name": "scrcmd_420",
       "args": [
         2
       ]
     },
     {
-      "name": "ScrCmd_421",
+      "name": "scrcmd_421",
       "args": [
         2,
         2,
@@ -2620,7 +2614,7 @@
       ]
     },
     {
-      "name": "ScrCmd_422",
+      "name": "scrcmd_422",
       "args": [
         2,
         2,
@@ -2629,25 +2623,25 @@
       ]
     },
     {
-      "name": "CheckJohtoDexComplete",
+      "name": "check_johto_dex_complete",
       "args": [
         "var"
       ]
     },
     {
-      "name": "CheckNationalDexComplete",
+      "name": "check_national_dex_complete",
       "args": [
         "var"
       ]
     },
     {
-      "name": "ShowCertificate",
+      "name": "show_certificate",
       "args": [
         2
       ]
     },
     {
-      "name": "KenyaCheck",
+      "name": "kenya_check",
       "args": [
         "var",
         "var",
@@ -2655,25 +2649,25 @@
       ]
     },
     {
-      "name": "ScrCmd_427",
+      "name": "scrcmd_427",
       "args": [
         2
       ]
     },
     {
-      "name": "MonGiveMail",
+      "name": "mon_give_mail",
       "args": [
         "var"
       ]
     },
     {
-      "name": "CountFossils",
+      "name": "countfossils",
       "args": [
         "var"
       ]
     },
     {
-      "name": "SetPhoneCall",
+      "name": "set_phone_call",
       "args": [
         "phone_contact",
         "var",
@@ -2681,18 +2675,18 @@
       ]
     },
     {
-      "name": "RunPhoneCall",
+      "name": "run_phone_call",
       "args": []
     },
     {
-      "name": "GetFossilPokemon",
+      "name": "getfossilpokemon",
       "args": [
         "var",
         "var"
       ]
     },
     {
-      "name": "GetFossilMinimumAmount",
+      "name": "getfossilminimumamount",
       "args": [
         "var",
         "var",
@@ -2700,52 +2694,52 @@
       ]
     },
     {
-      "name": "PartyCountMonsAtOrBelowLevel",
+      "name": "party_count_mons_at_or_below_level",
       "args": [
         "var",
         2
       ]
     },
     {
-      "name": "SurvivePoisoning",
+      "name": "survive_poisoning",
       "args": [
         "var",
         "var"
       ]
     },
     {
-      "name": "ScrCmd_436",
+      "name": "scrcmd_436",
       "args": []
     },
     {
-      "name": "DebugWatch",
+      "name": "debugwatch",
       "args": [
         "var"
       ]
     },
     {
-      "name": "GetStdMsgNaix",
-      "args": [
-        "var",
-        "var"
-      ]
-    },
-    {
-      "name": "NonNPCMsgExtern",
+      "name": "get_std_msg_naix",
       "args": [
         "var",
         "var"
       ]
     },
     {
-      "name": "MsgBoxExtern",
+      "name": "non_npc_msg_extern",
       "args": [
         "var",
         "var"
       ]
     },
     {
-      "name": "ScrCmd_441",
+      "name": "msgbox_extern",
+      "args": [
+        "var",
+        "var"
+      ]
+    },
+    {
+      "name": "scrcmd_441",
       "args": [
         2,
         2,
@@ -2754,7 +2748,7 @@
       ]
     },
     {
-      "name": "ScrCmd_442",
+      "name": "scrcmd_442",
       "args": [
         2,
         2,
@@ -2763,13 +2757,13 @@
       ]
     },
     {
-      "name": "ScrCmd_443",
+      "name": "scrcmd_443",
       "args": [
         1
       ]
     },
     {
-      "name": "ScrCmd_444",
+      "name": "scrcmd_444",
       "args": [
         1,
         2,
@@ -2778,26 +2772,26 @@
       ]
     },
     {
-      "name": "ScrCmd_445",
+      "name": "scrcmd_445",
       "args": [
         "var"
       ]
     },
     {
-      "name": "ScrCmd_446",
+      "name": "scrcmd_446",
       "args": [
         "var"
       ]
     },
     {
-      "name": "SafariZoneAction",
+      "name": "safari_zone_action",
       "args": [
         1,
         1
       ]
     },
     {
-      "name": "ScrCmd_448",
+      "name": "scrcmd_448",
       "args": [
         "maps",
         2,
@@ -2807,71 +2801,71 @@
       ]
     },
     {
-      "name": "ScrCmd_449",
+      "name": "scrcmd_449",
       "args": []
     },
     {
-      "name": "ScrCmd_450",
+      "name": "scrcmd_450",
       "args": []
     },
     {
-      "name": "ScrCmd_451",
+      "name": "scrcmd_451",
       "args": [
         "var"
       ]
     },
     {
-      "name": "ScrCmd_452",
+      "name": "scrcmd_452",
       "args": [
         "species",
         2
       ]
     },
     {
-      "name": "ScrCmd_453",
+      "name": "scrcmd_453",
       "args": []
     },
     {
-      "name": "ScrCmd_454",
+      "name": "scrcmd_454",
       "args": []
     },
     {
-      "name": "ScrCmd_455",
+      "name": "scrcmd_455",
       "args": []
     },
     {
-      "name": "ScrCmd_456",
+      "name": "scrcmd_456",
       "args": [
         1
       ]
     },
     {
-      "name": "MonGetNature",
+      "name": "mon_get_nature",
       "args": [
         2,
         2
       ]
     },
     {
-      "name": "GetPartySlotWithNature",
+      "name": "get_party_slot_with_nature",
       "args": [
         2,
         2
       ]
     },
     {
-      "name": "ScrCmd_459",
+      "name": "scrcmd_459",
       "args": []
     },
     {
-      "name": "LoadPhoneDat",
+      "name": "load_phone_dat",
       "args": [
         "var",
         "var"
       ]
     },
     {
-      "name": "GetPhoneContactMsgIds",
+      "name": "get_phone_contact_msg_ids",
       "args": [
         1,
         "var",
@@ -2879,23 +2873,23 @@
       ]
     },
     {
-      "name": "ScrCmd_462",
+      "name": "scrcmd_462",
       "args": [
         "var"
       ]
     },
     {
-      "name": "EnableMassOutbreaks",
+      "name": "enable_mass_outbreaks",
       "args": []
     },
     {
-      "name": "CreateRoamer",
+      "name": "create_roamer",
       "args": [
         1
       ]
     },
     {
-      "name": "ScrCmd_465",
+      "name": "scrcmd_465",
       "args": [
         2
       ],
@@ -2930,89 +2924,89 @@
       }
     },
     {
-      "name": "ScrCmd_466",
+      "name": "scrcmd_466",
       "args": [
         "var",
         "var"
       ]
     },
     {
-      "name": "MoveRelearnerInit",
+      "name": "move_relearner_init",
       "args": [
         "var"
       ]
     },
     {
-      "name": "MoveTutorInit",
+      "name": "move_tutor_init",
       "args": [
         "var",
         "move"
       ]
     },
     {
-      "name": "MoveRelearnerGetResult",
+      "name": "move_relearner_get_result",
       "args": [
         "var"
       ]
     },
     {
-      "name": "LoadNPCTrade",
+      "name": "load_npc_trade",
       "args": [
         1
       ]
     },
     {
-      "name": "GetOfferedSpecies",
+      "name": "get_offered_species",
       "args": [
         2
       ]
     },
     {
-      "name": "NPCTradeGetReqSpecies",
+      "name": "npc_trade_get_req_species",
       "args": [
         "var"
       ]
     },
     {
-      "name": "NPCTradeExec",
+      "name": "npc_trade_exec",
       "args": [
         "var"
       ]
     },
     {
-      "name": "NPCTradeEnd",
+      "name": "npc_trade_end",
       "args": []
     },
     {
-      "name": "ScrCmd_475",
+      "name": "scrcmd_475",
       "args": []
     },
     {
-      "name": "EnablePokedexFormDetection",
+      "name": "scrcmd_476",
       "args": []
     },
     {
-      "name": "NatDexFlagAction",
+      "name": "nat_dex_flag_action",
       "args": [
         1,
         "var"
       ]
     },
     {
-      "name": "MonGetRibbonCount",
+      "name": "mon_get_ribbon_count",
       "args": [
         "var",
         "var"
       ]
     },
     {
-      "name": "GetPartyRibbonCount",
+      "name": "party_get_ribbon_count",
       "args": [
         "var"
       ]
     },
     {
-      "name": "MonHasRibbon",
+      "name": "mon_has_ribbon",
       "args": [
         "var",
         "var",
@@ -3020,57 +3014,57 @@
       ]
     },
     {
-      "name": "GiveRibbon",
+      "name": "give_ribbon",
       "args": [
         "var",
         "ribbon"
       ]
     },
     {
-      "name": "BufferRibbonName",
+      "name": "buffer_ribbon_name",
       "args": [
         1,
         "ribbon"
       ]
     },
     {
-      "name": "GetEVTotal",
+      "name": "get_ev_total",
       "args": [
         "var",
         "var"
       ]
     },
     {
-      "name": "GetWeekday",
+      "name": "get_weekday",
       "args": [
         "var"
       ]
     },
     {
-      "name": "StartBattleRegulationMenuTask",
+      "name": "scrcmd_485",
       "args": [
         2
       ]
     },
     {
-      "name": "Dummy486",
+      "name": "dummy_486",
       "args": []
     },
     {
-      "name": "PokeCenAnim",
+      "name": "pokecen_anim",
       "args": [
         "var"
       ]
     },
     {
-      "name": "ElevatorAnim",
+      "name": "elevator_anim",
       "args": [
         "var",
         "var"
       ]
     },
     {
-      "name": "MysteryGift",
+      "name": "mystery_gift",
       "args": [
         2
       ],
@@ -3100,19 +3094,19 @@
       "switch_arg": 0
     },
     {
-      "name": "NopVar490",
+      "name": "nop_var_490",
       "args": [
         "var"
       ]
     },
     {
-      "name": "ScrCmd_491",
+      "name": "scrcmd_491",
       "args": [
         2
       ]
     },
     {
-      "name": "ScrCmd_492",
+      "name": "scrcmd_492",
       "args": [
         "var",
         "var",
@@ -3120,7 +3114,7 @@
       ]
     },
     {
-      "name": "PromptEasyChat",
+      "name": "prompt_easy_chat",
       "args": [
         "var",
         "var",
@@ -3128,26 +3122,26 @@
       ]
     },
     {
-      "name": "ScrCmd_494",
+      "name": "scrcmd_494",
       "args": [
         2,
         "var"
       ]
     },
     {
-      "name": "GetGameVersion",
+      "name": "get_game_version",
       "args": [
         "var"
       ]
     },
     {
-      "name": "GetPartyLead",
+      "name": "get_party_lead",
       "args": [
         2
       ]
     },
     {
-      "name": "GetMonTypes",
+      "name": "get_mon_types",
       "args": [
         "var",
         "var",
@@ -3155,17 +3149,7 @@
       ]
     },
     {
-      "name": "PrimoPasswordCheck1",
-      "args": [
-        "var",
-        "var",
-        "var",
-        "var",
-        "var"
-      ]
-    },
-    {
-      "name": "PrimoPasswordCheck2",
+      "name": "primo_password_check_1",
       "args": [
         "var",
         "var",
@@ -3175,31 +3159,41 @@
       ]
     },
     {
-      "name": "ScrCmd_500",
+      "name": "primo_password_check_2",
+      "args": [
+        "var",
+        "var",
+        "var",
+        "var",
+        "var"
+      ]
+    },
+    {
+      "name": "scrcmd_500",
       "args": [
         1
       ]
     },
     {
-      "name": "ScrCmd_501",
+      "name": "scrcmd_501",
       "args": [
         1
       ]
     },
     {
-      "name": "ScrCmd_502",
+      "name": "scrcmd_502",
       "args": [
         1
       ]
     },
     {
-      "name": "LotoIDGet",
+      "name": "loto_id_get",
       "args": [
         "var"
       ]
     },
     {
-      "name": "LotoIDSearch",
+      "name": "loto_id_search",
       "args": [
         "var",
         "var",
@@ -3208,107 +3202,107 @@
       ]
     },
     {
-      "name": "LotoIDSet",
+      "name": "loto_id_set",
       "args": []
     },
     {
-      "name": "BufferBoxMonNick",
+      "name": "bufferboxmonnick",
       "args": [
         1,
         "var"
       ]
     },
     {
-      "name": "CountPCEmptySpace",
+      "name": "count_pc_empty_space",
       "args": [
         "var"
       ]
     },
     {
-      "name": "PalParkAction",
+      "name": "palpark_action",
       "args": [
         2
       ]
     },
     {
-      "name": "ScrCmd_509",
+      "name": "scrcmd_509",
       "args": [
         "var"
       ]
     },
     {
-      "name": "ScrCmd_510",
+      "name": "scrcmd_510",
       "args": []
     },
     {
-      "name": "PalParkScoreGet",
+      "name": "pal_park_score_get",
       "args": [
         2,
         "var"
       ]
     },
     {
-      "name": "PlayerMovementSavingSet",
+      "name": "player_movement_saving_set",
       "args": []
     },
     {
-      "name": "PlayerMovementSavingClear",
+      "name": "player_movement_saving_clear",
       "args": []
     },
     {
-      "name": "HallOfFameAnim",
+      "name": "hall_of_fame_anim",
       "args": [
         "var"
       ]
     },
     {
-      "name": "AddSpecialGameStat",
+      "name": "add_special_game_stat",
       "args": [
         2
       ]
     },
     {
-      "name": "BufferFashionName",
+      "name": "buffer_fashion_name",
       "args": [
         1,
         "var"
       ]
     },
     {
-      "name": "ScrCmd_517",
+      "name": "scrcmd_517",
       "args": [
         "species",
         "var"
       ]
     },
     {
-      "name": "ScrCmd_518",
+      "name": "scrcmd_518",
       "args": [
         "var"
       ]
     },
     {
-      "name": "ScrCmd_519",
+      "name": "scrcmd_519",
       "args": [
         2
       ]
     },
     {
-      "name": "ScrCmd_520",
+      "name": "scrcmd_520",
       "args": []
     },
     {
-      "name": "ScrCmd_521",
+      "name": "scrcmd_521",
       "args": []
     },
     {
-      "name": "ScrCmd_522",
+      "name": "scrcmd_522",
       "args": [
         "var"
       ]
     },
     {
-      "name": "ScrCmd_523",
+      "name": "scrcmd_523",
       "args": [
         "object2",
         2,
@@ -3318,7 +3312,7 @@
       ]
     },
     {
-      "name": "ScrCmd_524",
+      "name": "scrcmd_524",
       "args": [
         2,
         2,
@@ -3326,108 +3320,108 @@
       ]
     },
     {
-      "name": "ScrCmd_525",
+      "name": "scrcmd_525",
       "args": [
         2
       ]
     },
     {
-      "name": "ScrCmd_526",
+      "name": "scrcmd_526",
       "args": [
         2
       ]
     },
     {
-      "name": "ScrCmd_527",
+      "name": "scrcmd_527",
       "args": [
         2
       ]
     },
     {
-      "name": "ScrCmd_528",
+      "name": "scrcmd_528",
       "args": [
         "var"
       ]
     },
     {
-      "name": "GetPartyLeadAlive",
+      "name": "get_party_lead_alive",
       "args": [
         "var"
       ]
     },
     {
-      "name": "ScrCmd_530",
+      "name": "scrcmd_530",
       "args": [
         2,
         1
       ]
     },
     {
-      "name": "BufferBackgroundName",
+      "name": "buffer_background_name",
       "args": [
         1,
         "var"
       ]
     },
     {
-      "name": "CheckCoinsImmediate",
+      "name": "check_coins_immediate",
       "args": [
         "var",
         4
       ]
     },
     {
-      "name": "CheckGiveCoins",
+      "name": "checkgivecoins",
       "args": [
         "var",
         "var"
       ]
     },
     {
-      "name": "ScrCmd_534",
+      "name": "scrcmd_534",
       "args": [
         2
       ]
     },
     {
-      "name": "MonGetLevel",
-      "args": [
-        2,
-        2
-      ]
-    },
-    {
-      "name": "ScrCmd_536",
+      "name": "mon_get_level",
       "args": [
         2,
         2
       ]
     },
     {
-      "name": "ScrCmd_537",
+      "name": "scrcmd_536",
+      "args": [
+        2,
+        2
+      ]
+    },
+    {
+      "name": "scrcmd_537",
       "args": []
     },
     {
-      "name": "ScrCmd_538",
+      "name": "scrcmd_538",
       "args": [
         "var",
         2
       ]
     },
     {
-      "name": "ScrCmd_539",
+      "name": "scrcmd_539",
       "args": [
         2
       ]
     },
     {
-      "name": "ScrCmd_540",
+      "name": "scrcmd_540",
       "args": [
         "var"
       ]
     },
     {
-      "name": "BufferIntEx",
+      "name": "buffer_int_ex",
       "args": [
         1,
         "var",
@@ -3436,7 +3430,7 @@
       ]
     },
     {
-      "name": "MonGetContestValue",
+      "name": "mon_get_contest_value",
       "args": [
         2,
         2,
@@ -3444,121 +3438,121 @@
       ]
     },
     {
-      "name": "ScrCmd_543",
+      "name": "scrcmd_543",
       "args": [
         2
       ]
     },
     {
-      "name": "ScrCmd_544",
+      "name": "scrcmd_544",
       "args": [
         2,
         2
       ]
     },
     {
-      "name": "ScrCmd_545",
+      "name": "scrcmd_545",
       "args": [
         "var"
       ]
     },
     {
-      "name": "ScrCmd_546",
+      "name": "scrcmd_546",
       "args": [
         1,
         "var"
       ]
     },
     {
-      "name": "ScrCmd_547",
+      "name": "scrcmd_547",
       "args": [
         "var"
       ]
     },
     {
-      "name": "ScrCmd_548",
+      "name": "scrcmd_548",
       "args": []
     },
     {
-      "name": "ScrCmd_549",
+      "name": "scrcmd_549",
       "args": [
         "var"
       ]
     },
     {
-      "name": "ScrCmd_550",
+      "name": "scrcmd_550",
       "args": [
         2
       ]
     },
     {
-      "name": "ScrCmd_551",
+      "name": "scrcmd_551",
       "args": [
         "var"
       ]
     },
     {
-      "name": "ScrCmd_552",
+      "name": "scrcmd_552",
       "args": [
         "var",
         "var"
       ]
     },
     {
-      "name": "ScrCmd_553",
+      "name": "scrcmd_553",
       "args": [
         1,
         "var"
       ]
     },
     {
-      "name": "ScrCmd_554",
+      "name": "scrcmd_554",
       "args": [
         2
       ]
     },
     {
-      "name": "ScrCmd_555",
+      "name": "scrcmd_555",
       "args": [
         2
       ]
     },
     {
-      "name": "ScrCmd_556",
+      "name": "scrcmd_556",
       "args": [
         "var"
       ]
     },
     {
-      "name": "CheckBattlePoints",
+      "name": "check_battle_points",
       "args": [
         "var",
         "var"
       ]
     },
     {
-      "name": "UnionRoomAvatarIdxToSprite",
+      "name": "scrcmd_558",
       "args": [
         "var",
         "var"
       ]
     },
     {
-      "name": "ScrCmd_559",
+      "name": "scrcmd_559",
       "args": [
         2,
         2
       ]
     },
     {
-      "name": "ScrCmd_560",
+      "name": "scrcmd_560",
       "args": [
         2,
         "var"
       ]
     },
     {
-      "name": "ScreenShake",
+      "name": "screen_shake",
       "args": [
         2,
         2,
@@ -3567,7 +3561,7 @@
       ]
     },
     {
-      "name": "MultiBattle",
+      "name": "multi_battle",
       "args": [
         "trainer",
         "trainer",
@@ -3576,7 +3570,7 @@
       ]
     },
     {
-      "name": "ScrCmd_563",
+      "name": "scrcmd_563",
       "args": [
         2,
         2,
@@ -3584,23 +3578,23 @@
       ]
     },
     {
-      "name": "ScrCmd_564",
+      "name": "scrcmd_564",
       "args": [
         "var"
       ]
     },
     {
-      "name": "ScrCmd_565",
+      "name": "scrcmd_565",
       "args": [
         "var"
       ]
     },
     {
-      "name": "ScrCmd_566",
+      "name": "scrcmd_566",
       "args": []
     },
     {
-      "name": "GetDPPlPrizeItemIDAndCost",
+      "name": "getdpplprizeitemidandcost",
       "args": [
         2,
         2,
@@ -3608,27 +3602,27 @@
       ]
     },
     {
-      "name": "ScrCmd_568",
+      "name": "scrcmd_568",
       "args": [
         2,
         2
       ]
     },
     {
-      "name": "ScrCmd_569",
+      "name": "scrcmd_569",
       "args": [
         2
       ]
     },
     {
-      "name": "CheckCoinsVar",
+      "name": "check_coins_var",
       "args": [
         "var",
         "var"
       ]
     },
     {
-      "name": "ScrCmd_571",
+      "name": "scrcmd_571",
       "args": [
         2,
         2,
@@ -3638,60 +3632,60 @@
       ]
     },
     {
-      "name": "GetUniqueSealsQuantity",
+      "name": "get_unique_seals_quantity",
       "args": [
         "var"
       ]
     },
     {
-      "name": "ScrCmd_573",
+      "name": "scrcmd_573",
       "args": []
     },
     {
-      "name": "ScrCmd_574",
+      "name": "scrcmd_574",
       "args": [
         "var",
         "var"
       ]
     },
     {
-      "name": "ScrCmd_575",
+      "name": "scrcmd_575",
       "args": [
         2,
         2
       ]
     },
     {
-      "name": "ScrCmd_576",
+      "name": "scrcmd_576",
       "args": [
         "var"
       ]
     },
     {
-      "name": "ScrCmd_577",
+      "name": "scrcmd_577",
       "args": []
     },
     {
-      "name": "ScrCmd_578",
+      "name": "scrcmd_578",
       "args": []
     },
     {
-      "name": "ScrCmd_579",
+      "name": "scrcmd_579",
       "args": []
     },
     {
-      "name": "BufferSealName",
+      "name": "buffer_seal_name",
       "args": [
         1,
         "var"
       ]
     },
     {
-      "name": "LockLastTalked",
+      "name": "lock_last_talked",
       "args": []
     },
     {
-      "name": "ScrCmd_582",
+      "name": "scrcmd_582",
       "args": [
         "maps",
         "var",
@@ -3699,40 +3693,40 @@
       ]
     },
     {
-      "name": "ScrCmd_583",
+      "name": "scrcmd_583",
       "args": [
         2,
         1
       ]
     },
     {
-      "name": "PartyLegalCheck",
+      "name": "party_legal_check",
       "args": [
         "var"
       ]
     },
     {
-      "name": "ScrCmd_585",
+      "name": "scrcmd_585",
       "args": []
     },
     {
-      "name": "ScrCmd_586",
+      "name": "scrcmd_586",
       "args": [
         "var"
       ]
     },
     {
-      "name": "ScrCmd_587",
+      "name": "scrcmd_587",
       "args": []
     },
     {
-      "name": "LatiCaughtCheck",
+      "name": "lati_caught_check",
       "args": [
         "var"
       ]
     },
     {
-      "name": "WildBattle",
+      "name": "wild_battle",
       "args": [
         "species",
         "var",
@@ -3740,110 +3734,110 @@
       ]
     },
     {
-      "name": "GetTrcardStars",
+      "name": "get_trcard_stars",
       "args": [
         "var"
       ]
     },
     {
-      "name": "ScrCmd_591",
+      "name": "scrcmd_591",
       "args": []
     },
     {
-      "name": "ScrCmd_592",
+      "name": "scrcmd_592",
       "args": [
         "var"
       ]
     },
     {
-      "name": "ShowSaveStats",
+      "name": "show_save_stats",
       "args": []
     },
     {
-      "name": "HideSaveStats",
+      "name": "hide_save_stats",
       "args": []
     },
     {
-      "name": "ScrCmd_595",
+      "name": "scrcmd_595",
       "args": [
         1
       ]
     },
     {
-      "name": "ScrCmd_596",
+      "name": "scrcmd_596",
       "args": [
         "var"
       ]
     },
     {
-      "name": "ScrCmd_597",
+      "name": "scrcmd_597",
       "args": []
     },
     {
-      "name": "ScrCmd_598",
+      "name": "scrcmd_598",
       "args": [
         2
       ]
     },
     {
-      "name": "ScrCmd_599",
+      "name": "scrcmd_599",
       "args": []
     },
     {
-      "name": "ScrCmd_600",
+      "name": "scrcmd_600",
       "args": []
     },
     {
-      "name": "FollowMonFacePlayer",
+      "name": "follow_mon_face_player",
       "args": []
     },
     {
-      "name": "ToggleFollowingPokemonMovement",
+      "name": "toggle_following_pokemon_movement",
       "args": [
         2
       ]
     },
     {
-      "name": "WaitFollowingPokemonMovement",
+      "name": "wait_following_pokemon_movement",
       "args": []
     },
     {
-      "name": "FollowingPokemonMovement",
+      "name": "following_pokemon_movement",
       "args": [
         2
       ]
     },
     {
-      "name": "ScrCmd_605",
+      "name": "scrcmd_605",
       "args": [
         1,
         1
       ]
     },
     {
-      "name": "ScrCmd_606",
+      "name": "scrcmd_606",
       "args": []
     },
     {
-      "name": "ScrCmd_607",
+      "name": "scrcmd_607",
       "args": []
     },
     {
-      "name": "ScrCmd_608",
+      "name": "scrcmd_608",
       "args": []
     },
     {
-      "name": "ScrCmd_609",
+      "name": "scrcmd_609",
       "args": []
     },
     {
-      "name": "ScrCmd_610",
+      "name": "scrcmd_610",
       "args": [
         2
       ]
     },
     {
-      "name": "Pokeathlon",
+      "name": "pokeathlon",
       "args": [
         1,
         1,
@@ -3855,82 +3849,82 @@
       ]
     },
     {
-      "name": "GetNPCTradeUnusedFlag",
+      "name": "get_npc_trade_unused_flag",
       "args": [
         2
       ]
     },
     {
-      "name": "GetPhoneContactRandomGiftBerry",
+      "name": "get_phone_contact_random_gift_berry",
       "args": [
         "var"
       ]
     },
     {
-      "name": "GetPhoneContactGiftItem",
+      "name": "get_phone_contact_gift_item",
       "args": [
         "var"
       ]
     },
     {
-      "name": "CameronPhoto",
+      "name": "cameron_photo",
       "args": [
         2
       ]
     },
     {
-      "name": "CountSavedPhotos",
+      "name": "count_saved_photos",
       "args": [
         "var"
       ]
     },
     {
-      "name": "OpenPhotoAlbum",
+      "name": "open_photo_album",
       "args": []
     },
     {
-      "name": "PhotoAlbumIsFull",
+      "name": "photo_album_is_full",
       "args": [
         "var"
       ]
     },
     {
-      "name": "RocketCostumeFlagCheck",
+      "name": "rocket_costume_flag_check",
       "args": [
         2
       ]
     },
     {
-      "name": "RocketCostumeFlagAction",
+      "name": "rocket_costume_flag_action",
       "args": [
         1
       ]
     },
     {
-      "name": "PlaceStarterBallsInElmsLab",
+      "name": "place_starter_balls_in_elms_lab",
       "args": []
     },
     {
-      "name": "ScrCmd_622",
+      "name": "scrcmd_622",
       "args": [
         2,
         "var"
       ]
     },
     {
-      "name": "AnimApricornTree",
+      "name": "anim_apricorn_tree",
       "args": [
         "var"
       ]
     },
     {
-      "name": "ApricornTreeGetApricorn",
+      "name": "apricorn_tree_get_apricorn",
       "args": [
         "var"
       ]
     },
     {
-      "name": "GiveApricornFromTree",
+      "name": "give_apricorn_from_tree",
       "args": [
         "var",
         "var",
@@ -3938,37 +3932,37 @@
       ]
     },
     {
-      "name": "BufferApricornName",
+      "name": "buffer_apricorn_name",
       "args": [
         1,
         "var"
       ]
     },
     {
-      "name": "ScrCmd_627",
+      "name": "scrcmd_627",
       "args": [
         1
       ]
     },
     {
-      "name": "ScrCmd_628",
+      "name": "scrcmd_628",
       "args": [
         "var",
         "var"
       ]
     },
     {
-      "name": "ScrCmd_629",
+      "name": "scrcmd_629",
       "args": []
     },
     {
-      "name": "ScrCmd_630",
+      "name": "scrcmd_630",
       "args": [
         "var"
       ]
     },
     {
-      "name": "ScrCmd_631",
+      "name": "scrcmd_631",
       "args": [
         "var",
         "var",
@@ -3976,14 +3970,14 @@
       ]
     },
     {
-      "name": "CountPartyMonsOfSpecies",
+      "name": "count_party_mons_of_species",
       "args": [
         "var",
         "species"
       ]
     },
     {
-      "name": "ScrCmd_633",
+      "name": "scrcmd_633",
       "args": [
         2,
         "var",
@@ -3991,27 +3985,27 @@
       ]
     },
     {
-      "name": "ScrCmd_634",
+      "name": "scrcmd_634",
       "args": [
         "var",
         "var"
       ]
     },
     {
-      "name": "ScrCmd_635",
+      "name": "scrcmd_635",
       "args": [
         "var",
         "var"
       ]
     },
     {
-      "name": "ScrCmd_636",
+      "name": "scrcmd_636",
       "args": [
         "var"
       ]
     },
     {
-      "name": "ScrCmd_637",
+      "name": "scrcmd_637",
       "args": [
         2,
         "var",
@@ -4019,7 +4013,7 @@
       ]
     },
     {
-      "name": "ScrCmd_638",
+      "name": "scrcmd_638",
       "args": [
         "var",
         "var",
@@ -4027,7 +4021,7 @@
       ]
     },
     {
-      "name": "ScrCmd_639",
+      "name": "scrcmd_639",
       "args": [
         "var",
         "var",
@@ -4035,23 +4029,23 @@
       ]
     },
     {
-      "name": "ScrCmd_640",
+      "name": "scrcmd_640",
       "args": [
         "var"
       ]
     },
     {
-      "name": "SaveWipeExtraChunks",
+      "name": "save_wipe_extra_chunks",
       "args": []
     },
     {
-      "name": "ScrCmd_642",
+      "name": "scrcmd_642",
       "args": [
         "var"
       ]
     },
     {
-      "name": "ScrCmd_643",
+      "name": "scrcmd_643",
       "args": [
         2,
         "var",
@@ -4059,7 +4053,7 @@
       ]
     },
     {
-      "name": "ScrCmd_644",
+      "name": "scrcmd_644",
       "args": [
         "var",
         "var",
@@ -4067,7 +4061,7 @@
       ]
     },
     {
-      "name": "ScrCmd_645",
+      "name": "scrcmd_645",
       "args": [
         "var",
         "var",
@@ -4075,20 +4069,20 @@
       ]
     },
     {
-      "name": "ScrCmd_646",
+      "name": "scrcmd_646",
       "args": [
         "var"
       ]
     },
     {
-      "name": "GetPartySlotWithSpecies",
+      "name": "get_party_slot_with_species",
       "args": [
         "var",
         "species"
       ]
     },
     {
-      "name": "ScrCmd_648",
+      "name": "scrcmd_648",
       "args": [
         2,
         2,
@@ -4098,15 +4092,15 @@
       ]
     },
     {
-      "name": "ScratchOffCard",
+      "name": "scratch_off_card",
       "args": []
     },
     {
-      "name": "ScratchOffCardEnd",
+      "name": "scratch_off_card_end",
       "args": []
     },
     {
-      "name": "GetScratchOffPrize",
+      "name": "get_scratch_off_prize",
       "args": [
         2,
         "var",
@@ -4114,7 +4108,7 @@
       ]
     },
     {
-      "name": "ScrCmd_652",
+      "name": "scrcmd_652",
       "args": [
         "var",
         "var",
@@ -4122,38 +4116,7 @@
       ]
     },
     {
-      "name": "MoveTutorChooseMove",
-      "args": [
-        "var",
-        "var",
-        "var",
-        "var"
-      ]
-    },
-    {
-      "name": "TutorMoveTeachInSlot",
-      "args": [
-        "var",
-        "var",
-        "var"
-      ]
-    },
-    {
-      "name": "TutorMoveGetPrice",
-      "args": [
-        "var",
-        "var"
-      ]
-    },
-    {
-      "name": "ScrCmd_656",
-      "args": [
-        "var",
-        "var"
-      ]
-    },
-    {
-      "name": "StatJudge",
+      "name": "move_tutor_choose_move",
       "args": [
         "var",
         "var",
@@ -4162,28 +4125,59 @@
       ]
     },
     {
-      "name": "BufferStatName",
+      "name": "tutor_move_teach_in_slot",
+      "args": [
+        "var",
+        "var",
+        "var"
+      ]
+    },
+    {
+      "name": "tutor_move_get_price",
+      "args": [
+        "var",
+        "var"
+      ]
+    },
+    {
+      "name": "scrcmd_656",
+      "args": [
+        "var",
+        "var"
+      ]
+    },
+    {
+      "name": "stat_judge",
+      "args": [
+        "var",
+        "var",
+        "var",
+        "var"
+      ]
+    },
+    {
+      "name": "buffer_stat_name",
       "args": [
         1,
         "var"
       ]
     },
     {
-      "name": "SetMonForm",
+      "name": "set_mon_form",
       "args": [
         2,
         2
       ]
     },
     {
-      "name": "BufferTrainerName",
+      "name": "buffer_trainer_name",
       "args": [
         1,
         "trainer"
       ]
     },
     {
-      "name": "ScrCmd_661",
+      "name": "scrcmd_661",
       "args": [
         1,
         4,
@@ -4192,7 +4186,7 @@
       ]
     },
     {
-      "name": "ScrCmd_662",
+      "name": "scrcmd_662",
       "args": [
         "var",
         "var",
@@ -4200,60 +4194,60 @@
       ]
     },
     {
-      "name": "ScrCmd_663",
+      "name": "scrcmd_663",
       "args": [
         "var"
       ]
     },
     {
-      "name": "ScrCmd_664",
+      "name": "scrcmd_664",
       "args": []
     },
     {
-      "name": "ScrCmd_665",
+      "name": "scrcmd_665",
       "args": [
         2
       ]
     },
     {
-      "name": "ScrCmd_666",
+      "name": "scrcmd_666",
       "args": [
         2
       ]
     },
     {
-      "name": "ScrCmd_667",
+      "name": "scrcmd_667",
       "args": [
         2
       ]
     },
     {
-      "name": "BufferTypeName",
+      "name": "buffer_type_name",
       "args": [
         1,
         "var"
       ]
     },
     {
-      "name": "GetItemQuantity",
+      "name": "getitemquantity",
       "args": [
         "item",
         "var"
       ]
     },
     {
-      "name": "GetHiddenPowerType",
+      "name": "get_hidden_power_type",
       "args": [
         "var",
         "var"
       ]
     },
     {
-      "name": "SetFavoriteMon",
+      "name": "set_favorite_mon",
       "args": []
     },
     {
-      "name": "GetFavoriteMon",
+      "name": "get_favorite_mon",
       "args": [
         2,
         2,
@@ -4261,7 +4255,7 @@
       ]
     },
     {
-      "name": "GetOwnedRotomForms",
+      "name": "get_owned_rotom_forms",
       "args": [
         "var",
         "var",
@@ -4271,14 +4265,14 @@
       ]
     },
     {
-      "name": "CountTranformedRotomsInParty",
+      "name": "count_transformed_rotoms_in_party",
       "args": [
         "var",
         "var"
       ]
     },
     {
-      "name": "UpdateRotomForm",
+      "name": "update_rotom_form",
       "args": [
         "var",
         "var",
@@ -4287,109 +4281,109 @@
       ]
     },
     {
-      "name": "GetPartyMonForm",
+      "name": "get_party_mon_form",
       "args": [
         "var",
         "var"
       ]
     },
     {
-      "name": "ScrCmd_677",
+      "name": "scrcmd_677",
       "args": [
         2,
         2
       ]
     },
     {
-      "name": "ScrCmd_678",
+      "name": "scrcmd_678",
       "args": [
         2,
         2
       ]
     },
     {
-      "name": "ScrCmd_679",
+      "name": "scrcmd_679",
       "args": []
     },
     {
-      "name": "AddSpecialGameStat2",
+      "name": "add_special_game_stat_2",
       "args": [
         2
       ]
     },
     {
-      "name": "ScrCmd_681",
+      "name": "scrcmd_681",
       "args": [
         "var"
       ]
     },
     {
-      "name": "ScrCmd_682",
+      "name": "scrcmd_682",
       "args": [
         2
       ]
     },
     {
-      "name": "GetStaticEncounterOutcome",
+      "name": "scrcmd_683",
       "args": [
         "var"
       ]
     },
     {
-      "name": "ScrCmd_684",
+      "name": "scrcmd_684",
       "args": [
         2
       ]
     },
     {
-      "name": "GetPlayerXYZ",
+      "name": "get_player_xyz",
       "args": [
         2,
-        2,
-        2
-      ]
-    },
-    {
-      "name": "ScrCmd_686",
-      "args": [
         2,
         2
       ]
     },
     {
-      "name": "ScrCmd_687",
+      "name": "scrcmd_686",
+      "args": [
+        2,
+        2
+      ]
+    },
+    {
+      "name": "scrcmd_687",
       "args": [
         2
       ]
     },
     {
-      "name": "GetPartySlotWithFatefulEncounter",
+      "name": "get_party_slot_with_fateful_encounter",
       "args": [
         "var",
         2
       ]
     },
     {
-      "name": "CommSanitizeParty",
+      "name": "comm_sanitize_party",
       "args": [
         "var"
       ]
     },
     {
-      "name": "DaycareSanitizeMon",
+      "name": "day_care_sanitize_mon",
       "args": [
         "var",
         "var"
       ]
     },
     {
-      "name": "ScrCmd_691",
+      "name": "scrcmd_691",
       "args": [
         "var"
       ]
     },
     {
-      "name": "BufferBattleHallStreak",
+      "name": "buffer_battle_hall_streak",
       "args": [
         1,
         1,
@@ -4400,37 +4394,37 @@
       ]
     },
     {
-      "name": "BattleHallCountUsedSpecies",
+      "name": "battle_hall_count_used_species",
       "args": [
         "var"
       ]
     },
     {
-      "name": "BattleHallGetTotalStreak",
+      "name": "battle_hall_get_total_streak",
       "args": [
         "var"
       ]
     },
     {
-      "name": "ScrCmd_695",
+      "name": "scrcmd_695",
       "args": [
         2
       ]
     },
     {
-      "name": "ScrCmd_696",
+      "name": "scrcmd_696",
       "args": [
         2
       ]
     },
     {
-      "name": "ScrCmd_697",
+      "name": "scrcmd_697",
       "args": [
         2
       ]
     },
     {
-      "name": "FollowerPokeIsEventTrigger",
+      "name": "follower_poke_is_event_trigger",
       "args": [
         1,
         "var",
@@ -4438,135 +4432,135 @@
       ]
     },
     {
-      "name": "ScrCmd_699",
+      "name": "scrcmd_699",
       "args": []
     },
     {
-      "name": "ScrCmd_700",
+      "name": "scrcmd_700",
       "args": []
     },
     {
-      "name": "MonHasItem",
+      "name": "mon_has_item",
       "args": [
         2,
         2
       ]
     },
     {
-      "name": "BattleTowerSetUpMultiBattle",
+      "name": "battle_tower_setup_multi_battle",
       "args": []
     },
     {
-      "name": "SetPlayerVolume",
+      "name": "set_player_volume",
       "args": [
         2
       ]
     },
     {
-      "name": "ScrCmd_704",
+      "name": "scrcmd_704",
       "args": [
         2,
         2
       ]
     },
     {
-      "name": "ScrCmd_705",
+      "name": "scrcmd_705",
       "args": [
         2,
         4
       ]
     },
     {
-      "name": "ScrCmd_706",
+      "name": "scrcmd_706",
       "args": [
         "var"
       ]
     },
     {
-      "name": "CheckMonSeen",
+      "name": "check_mon_seen",
       "args": [
         2,
         "var"
       ]
     },
     {
-      "name": "ScrCmd_708",
+      "name": "scrcmd_708",
       "args": [
         2
       ]
     },
     {
-      "name": "ScrCmd_709",
+      "name": "scrcmd_709",
       "args": []
     },
     {
-      "name": "ScrCmd_710",
+      "name": "scrcmd_710",
       "args": []
     },
     {
-      "name": "FollowMonInteract",
+      "name": "follow_mon_interact",
       "args": []
     },
     {
-      "name": "ScrCmd_712",
+      "name": "scrcmd_712",
       "args": [
         1
       ]
     },
     {
-      "name": "AlphPuzzle",
+      "name": "alph_puzzle",
       "args": [
         1
       ]
     },
     {
-      "name": "OpenAlphHiddenRoom",
+      "name": "open_alph_hidden_room",
       "args": [
         1
       ]
     },
     {
-      "name": "UpdateDaycareMonObjects",
+      "name": "update_day_care_mon_objects",
       "args": []
     },
     {
-      "name": "ScrCmd_716",
+      "name": "scrcmd_716",
       "args": []
     },
     {
-      "name": "ScrCmd_717",
+      "name": "scrcmd_717",
       "args": [
         "var"
       ]
     },
     {
-      "name": "ScrCmd_718",
+      "name": "scrcmd_718",
       "args": [
         1,
         "var"
       ]
     },
     {
-      "name": "ScrCmd_719",
+      "name": "scrcmd_719",
       "args": [
         "var",
         "var"
       ]
     },
     {
-      "name": "ScrCmd_720",
+      "name": "scrcmd_720",
       "args": [
         "var"
       ]
     },
     {
-      "name": "ScrCmd_721",
+      "name": "scrcmd_721",
       "args": [
         "var"
       ]
     },
     {
-      "name": "ScrCmd_722",
+      "name": "scrcmd_722",
       "args": [
         1,
         1,
@@ -4576,7 +4570,7 @@
       ]
     },
     {
-      "name": "ScrCmd_723",
+      "name": "scrcmd_723",
       "args": [
         1,
         1,
@@ -4586,598 +4580,598 @@
       ]
     },
     {
-      "name": "ScrCmd_724",
+      "name": "scrcmd_724",
       "args": [
         2,
         "var"
       ]
     },
     {
-      "name": "ScrCmd_725",
+      "name": "scrcmd_725",
       "args": [
         1,
         2
       ]
     },
     {
-      "name": "ProcessSoundplate",
+      "name": "scrcmd_726",
       "args": []
     },
     {
-      "name": "GetFollowPokePartyIndex",
+      "name": "get_follow_poke_party_index",
       "args": [
         "var"
       ]
     },
     {
-      "name": "ScrCmd_728",
-      "args": [
-        1,
-        1
-      ]
-    },
-    {
-      "name": "ScrCmd_729",
-      "args": [
-        "var"
-      ]
-    },
-    {
-      "name": "ScrCmd_730",
-      "args": [
-        "var"
-      ]
-    },
-    {
-      "name": "ScrCmd_731",
-      "args": []
-    },
-    {
-      "name": "ScrCmd_732",
-      "args": [
-        1
-      ]
-    },
-    {
-      "name": "ScrCmd_733",
-      "args": [
-        1,
-        "var"
-      ]
-    },
-    {
-      "name": "ScrCmd_734",
-      "args": [
-        1
-      ]
-    },
-    {
-      "name": "ScrCmd_735",
-      "args": [
-        "var"
-      ]
-    },
-    {
-      "name": "ClearKurtApricorn",
-      "args": []
-    },
-    {
-      "name": "ScrCmd_737",
-      "args": [
-        "var"
-      ]
-    },
-    {
-      "name": "GetTotalApricornCount",
-      "args": [
-        "var"
-      ]
-    },
-    {
-      "name": "ScrCmd_739",
-      "args": []
-    },
-    {
-      "name": "ScrCmd_740",
-      "args": [
-        "var",
-        "var"
-      ]
-    },
-    {
-      "name": "ScrCmd_741",
-      "args": [
-        "var",
-        "var",
-        "var",
-        "var"
-      ]
-    },
-    {
-      "name": "ScrCmd_742",
-      "args": [
-        2,
-        2,
-        2
-      ]
-    },
-    {
-      "name": "ScrCmd_743",
-      "args": [
-        "var"
-      ]
-    },
-    {
-      "name": "CreatePokeathlonFriendshipRoomStatues",
-      "args": []
-    },
-    {
-      "name": "BufferPokeathlonCourseName",
-      "args": [
-        1,
-        "var"
-      ]
-    },
-    {
-      "name": "TouchscreenMenuHide",
-      "args": []
-    },
-    {
-      "name": "TouchscreenMenuShow",
-      "args": []
-    },
-    {
-      "name": "GetMenuChoice",
-      "args": [
-        "var"
-      ]
-    },
-    {
-      "name": "MenuInitStdGmm",
-      "args": [
-        1,
-        1,
-        1,
-        1,
-        "var"
-      ]
-    },
-    {
-      "name": "MenuInit",
-      "args": [
-        1,
-        1,
-        1,
-        1,
-        "var"
-      ]
-    },
-    {
-      "name": "MenuItemAdd",
-      "args": [
-        "var",
-        2,
-        "var"
-      ]
-    },
-    {
-      "name": "MenuExec",
-      "args": []
-    },
-    {
-      "name": "RockSmashItemCheck",
-      "args": [
-        "var",
-        "var",
-        "var"
-      ]
-    },
-    {
-      "name": "TryHeadbuttEncounter",
-      "args": [
-        "var"
-      ]
-    },
-    {
-      "name": "LegendCutsceneClearBellAnimBegin",
-      "args": []
-    },
-    {
-      "name": "LegendCutsceneClearBellAnimEnd",
-      "args": []
-    },
-    {
-      "name": "LegendCutsceneClearBellRiseFromBag",
-      "args": []
-    },
-    {
-      "name": "LegendCutsceneClearBellShimmer",
-      "args": [
-        2
-      ]
-    },
-    {
-      "name": "LegendCutsceneLugiaEyeGlimmerEffect",
-      "args": []
-    },
-    {
-      "name": "ScrCmd_760",
-      "args": []
-    },
-    {
-      "name": "LegendCutsceneMoveCameraTo",
-      "args": [
-        2
-      ]
-    },
-    {
-      "name": "LegendCutscenePanCameraTo",
-      "args": [
-        2
-      ]
-    },
-    {
-      "name": "LegendCutsceneWaitCameraPan",
-      "args": []
-    },
-    {
-      "name": "LegendCutsceneBirdFinalApproach",
-      "args": []
-    },
-    {
-      "name": "LegendCutsceneWavesOrLeavesEffectBegin",
-      "args": []
-    },
-    {
-      "name": "LegendCutsceneWavesOrLeavesEffectEnd",
-      "args": []
-    },
-    {
-      "name": "LegendCutsceneLugiaArrivesEffectBegin",
-      "args": []
-    },
-    {
-      "name": "LegendCutsceneLugiaArrivesEffectEnd",
-      "args": []
-    },
-    {
-      "name": "LegendCutsceneLugiaArrivesEffectCameraPan",
-      "args": []
-    },
-    {
-      "name": "CheckSeenAllLetterUnown",
-      "args": [
-        "var"
-      ]
-    },
-    {
-      "name": "ScrCmd_771",
-      "args": []
-    },
-    {
-      "name": "ScrCmd_772",
-      "args": []
-    },
-    {
-      "name": "Cinematic",
-      "args": [
-        2
-      ]
-    },
-    {
-      "name": "ShowLegendaryWing",
-      "args": [
-        2
-      ]
-    },
-    {
-      "name": "ScrCmd_775",
-      "args": [
-        2,
-        2
-      ]
-    },
-    {
-      "name": "GiveTogepiEgg",
-      "args": []
-    },
-    {
-      "name": "ScrCmd_777",
-      "args": [
-        2,
-        2
-      ]
-    },
-    {
-      "name": "GiveSpikyEarPichu",
-      "args": []
-    },
-    {
-      "name": "RadioMusicIsPlaying",
-      "args": [
-        "var",
-        "var"
-      ]
-    },
-    {
-      "name": "CasinoGame",
+      "name": "scrcmd_728",
       "args": [
         1,
         1
       ]
     },
     {
-      "name": "KenyaCheckPartyOrMailbox",
+      "name": "scrcmd_729",
       "args": [
         "var"
       ]
     },
     {
-      "name": "MartSell",
+      "name": "scrcmd_730",
+      "args": [
+        "var"
+      ]
+    },
+    {
+      "name": "scrcmd_731",
       "args": []
     },
     {
-      "name": "SetFollowMonInhibitState",
+      "name": "scrcmd_732",
       "args": [
         1
       ]
     },
     {
-      "name": "ScriptOverlayCmd",
-      "args": [
-        1,
-        1
-      ]
-    },
-    {
-      "name": "BugContestAction",
+      "name": "scrcmd_733",
       "args": [
         1,
         "var"
       ]
     },
     {
-      "name": "BufferBugContestWinner",
+      "name": "scrcmd_734",
       "args": [
         1
       ]
     },
     {
-      "name": "JudgeBugContest",
+      "name": "scrcmd_735",
       "args": [
-        "var",
-        "var",
         "var"
       ]
     },
     {
-      "name": "BufferBugContestMonNick",
-      "args": [
-        1,
-        "var"
-      ]
-    },
-    {
-      "name": "BugContestGetTimeLeft",
-      "args": [
-        1
-      ]
-    },
-    {
-      "name": "IsBugContestantRegistered",
-      "args": [
-        "var",
-        "var"
-      ]
-    },
-    {
-      "name": "CheckSafariZoneChallengeCompleted",
-      "args": [
-        1,
-        "var"
-      ]
-    },
-    {
-      "name": "UpdateSafariZoneIGT",
+      "name": "clear_kurt_apricorn",
       "args": []
     },
     {
-      "name": "BankTransaction",
+      "name": "scrcmd_737",
+      "args": [
+        "var"
+      ]
+    },
+    {
+      "name": "get_total_apricorn_count",
+      "args": [
+        "var"
+      ]
+    },
+    {
+      "name": "scrcmd_739",
+      "args": []
+    },
+    {
+      "name": "scrcmd_740",
+      "args": [
+        "var",
+        "var"
+      ]
+    },
+    {
+      "name": "scrcmd_741",
+      "args": [
+        "var",
+        "var",
+        "var",
+        "var"
+      ]
+    },
+    {
+      "name": "scrcmd_742",
+      "args": [
+        2,
+        2,
+        2
+      ]
+    },
+    {
+      "name": "scrcmd_743",
+      "args": [
+        "var"
+      ]
+    },
+    {
+      "name": "create_friendship_room_statues",
+      "args": []
+    },
+    {
+      "name": "buffer_pokeathlon_course_name",
+      "args": [
+        1,
+        "var"
+      ]
+    },
+    {
+      "name": "touchscreen_menu_hide",
+      "args": []
+    },
+    {
+      "name": "touchscreen_menu_show",
+      "args": []
+    },
+    {
+      "name": "getmenuchoice",
+      "args": [
+        "var"
+      ]
+    },
+    {
+      "name": "menu_init_std_gmm",
+      "args": [
+        1,
+        1,
+        1,
+        1,
+        "var"
+      ]
+    },
+    {
+      "name": "menu_init",
+      "args": [
+        1,
+        1,
+        1,
+        1,
+        "var"
+      ]
+    },
+    {
+      "name": "menu_item_add",
+      "args": [
+        "var",
+        2,
+        "var"
+      ]
+    },
+    {
+      "name": "menu_exec",
+      "args": []
+    },
+    {
+      "name": "scrcmd_rock_smash_item_check",
+      "args": [
+        "var",
+        "var",
+        "var"
+      ]
+    },
+    {
+      "name": "try_headbutt_encounter",
+      "args": [
+        "var"
+      ]
+    },
+    {
+      "name": "legend_cutscene_clear_bell_anim_begin",
+      "args": []
+    },
+    {
+      "name": "legend_cutscene_clear_bell_anim_end",
+      "args": []
+    },
+    {
+      "name": "legend_cutscene_clear_bell_rise_from_bag",
+      "args": []
+    },
+    {
+      "name": "legend_cutscene_clear_bell_shimmer",
+      "args": [
+        2
+      ]
+    },
+    {
+      "name": "legend_cutscene_lugia_eye_glimmer_effect",
+      "args": []
+    },
+    {
+      "name": "scrcmd_760",
+      "args": []
+    },
+    {
+      "name": "legend_cutscene_move_camera_to",
+      "args": [
+        2
+      ]
+    },
+    {
+      "name": "legend_cutscene_pan_camera_to",
+      "args": [
+        2
+      ]
+    },
+    {
+      "name": "legend_cutscene_wait_camera_pan",
+      "args": []
+    },
+    {
+      "name": "legend_cutscene_bird_final_approach",
+      "args": []
+    },
+    {
+      "name": "legend_cutscene_waves_or_leaves_effect_begin",
+      "args": []
+    },
+    {
+      "name": "legend_cutscene_waves_or_leaves_effect_end",
+      "args": []
+    },
+    {
+      "name": "legend_cutscene_lugia_arrives_effect_begin",
+      "args": []
+    },
+    {
+      "name": "legend_cutscene_lugia_arrives_effect_end",
+      "args": []
+    },
+    {
+      "name": "legend_cutscene_lugia_arrives_effect_camera_pan",
+      "args": []
+    },
+    {
+      "name": "check_seen_all_letter_unown",
+      "args": [
+        "var"
+      ]
+    },
+    {
+      "name": "scrcmd_771",
+      "args": []
+    },
+    {
+      "name": "scrcmd_772",
+      "args": []
+    },
+    {
+      "name": "cinematic",
+      "args": [
+        2
+      ]
+    },
+    {
+      "name": "show_legendary_wing",
+      "args": [
+        2
+      ]
+    },
+    {
+      "name": "scrcmd_775",
+      "args": [
+        2,
+        2
+      ]
+    },
+    {
+      "name": "give_togepi_egg",
+      "args": []
+    },
+    {
+      "name": "scrcmd_777",
+      "args": [
+        2,
+        2
+      ]
+    },
+    {
+      "name": "give_spiky_ear_pichu",
+      "args": []
+    },
+    {
+      "name": "radio_music_is_playing",
+      "args": [
+        "var",
+        "var"
+      ]
+    },
+    {
+      "name": "casino_game",
+      "args": [
+        1,
+        1
+      ]
+    },
+    {
+      "name": "kenya_check_party_or_mailbox",
+      "args": [
+        "var"
+      ]
+    },
+    {
+      "name": "mart_sell",
+      "args": []
+    },
+    {
+      "name": "set_follow_mon_inhibit_state",
+      "args": [
+        1
+      ]
+    },
+    {
+      "name": "script_overlay_cmd",
+      "args": [
+        1,
+        1
+      ]
+    },
+    {
+      "name": "bug_contest_action",
+      "args": [
+        1,
+        "var"
+      ]
+    },
+    {
+      "name": "buffer_bug_contest_winner",
+      "args": [
+        1
+      ]
+    },
+    {
+      "name": "judge_bug_contest",
+      "args": [
+        "var",
+        "var",
+        "var"
+      ]
+    },
+    {
+      "name": "buffer_bug_contest_mon_nick",
+      "args": [
+        1,
+        "var"
+      ]
+    },
+    {
+      "name": "scrcmd_789",
+      "args": [
+        1
+      ]
+    },
+    {
+      "name": "is_npc_bug_contestant_registered",
+      "args": [
+        "var",
+        "var"
+      ]
+    },
+    {
+      "name": "scrcmd_791",
+      "args": [
+        1,
+        "var"
+      ]
+    },
+    {
+      "name": "scrcmd_792",
+      "args": []
+    },
+    {
+      "name": "bank_transaction",
       "args": [
         2,
         "var"
       ]
     },
     {
-      "name": "CheckBankBalance",
+      "name": "check_bank_balance",
       "args": [
         "var",
         4
       ]
     },
     {
-      "name": "ScrCmd_795",
+      "name": "scrcmd_795",
       "args": [
         2,
         2
       ]
     },
     {
-      "name": "ScrCmd_796",
+      "name": "scrcmd_796",
       "args": []
     },
     {
-      "name": "ScrCmd_797",
+      "name": "scrcmd_797",
       "args": []
     },
     {
-      "name": "BufferRulesetName",
+      "name": "buffer_ruleset_name",
       "args": [
         2
       ]
     },
     {
-      "name": "ScrCmd_799",
+      "name": "scrcmd_799",
       "args": [
         "var"
       ]
     },
     {
-      "name": "ScrCmd_800",
+      "name": "scrcmd_800",
       "args": [
         "var"
       ]
     },
     {
-      "name": "ScrCmd_801",
+      "name": "scrcmd_801",
       "args": [
         "var"
       ]
     },
     {
-      "name": "ScrCmd_802",
+      "name": "scrcmd_802",
       "args": []
     },
     {
-      "name": "ScrCmd_803",
+      "name": "scrcmd_803",
       "args": [
         "var",
         "var"
       ]
     },
     {
-      "name": "ScrCmd_804",
+      "name": "scrcmd_804",
       "args": [
         1
       ]
     },
     {
-      "name": "ScrCmd_805",
+      "name": "scrcmd_805",
       "args": []
     },
     {
-      "name": "ScrCmd_806",
+      "name": "scrcmd_806",
       "args": []
     },
     {
-      "name": "SetTrainerHouseSprite",
+      "name": "scrcmd_807",
       "args": [
         "var",
         "var"
       ]
     },
     {
-      "name": "ScrCmd_808",
+      "name": "scrcmd_808",
       "args": [
         "var"
       ]
     },
     {
-      "name": "ShowTrainerHouseIntroMessage",
+      "name": "scrcmd_809",
       "args": [
         "var"
       ]
     },
     {
-      "name": "ScrCmd_810",
+      "name": "scrcmd_810",
       "args": []
     },
     {
-      "name": "ScrCmd_811",
+      "name": "scrcmd_811",
       "args": [
         "var",
         "var"
       ]
     },
     {
-      "name": "ScrCmd_812",
+      "name": "scrcmd_812",
       "args": []
     },
     {
-      "name": "MomGiftCheck",
+      "name": "mom_gift_check",
       "args": [
         "var"
       ]
     },
     {
-      "name": "ScrCmd_814",
+      "name": "scrcmd_814",
       "args": []
     },
     {
-      "name": "ScrCmd_815",
+      "name": "scrcmd_815",
       "args": [
         2
       ]
     },
     {
-      "name": "UnownCircle",
+      "name": "unown_circle",
       "args": []
     },
     {
-      "name": "ScrCmd_817",
+      "name": "scrcmd_817",
       "args": [
         1
       ]
     },
     {
-      "name": "MystriStageGymmickInit",
+      "name": "mystry_stage_gymmick_init",
       "args": []
     },
     {
-      "name": "ScrCmd_819",
+      "name": "scrcmd_819",
       "args": []
     },
     {
-      "name": "ScrCmd_820",
+      "name": "scrcmd_820",
       "args": [
         1
       ]
     },
     {
-      "name": "GetBuenasPassword",
+      "name": "get_buenas_password",
       "args": [
         "var",
         "var"
       ]
     },
     {
-      "name": "ScrCmd_822",
+      "name": "scrcmd_822",
       "args": []
     },
     {
-      "name": "ScrCmd_823",
+      "name": "scrcmd_823",
       "args": [
         "var"
       ]
     },
     {
-      "name": "ScrCmd_824",
+      "name": "scrcmd_824",
       "args": [
         "var"
       ]
     },
     {
-      "name": "GetShinyLeafCount",
-      "args": [
-        "var",
-        "var"
-      ]
-    },
-    {
-      "name": "TryGiveShinyLeafCrown",
-      "args": [
-        "var"
-      ]
-    },
-    {
-      "name": "GetPartyMonForm2",
+      "name": "get_shiny_leaf_count",
       "args": [
         "var",
         "var"
       ]
     },
     {
-      "name": "MonAddContestValue",
+      "name": "try_give_shiny_leaf_crown",
+      "args": [
+        "var"
+      ]
+    },
+    {
+      "name": "get_partymon_form",
+      "args": [
+        "var",
+        "var"
+      ]
+    },
+    {
+      "name": "mon_add_contest_value",
       "args": [
         "var",
         1,
@@ -5185,114 +5179,114 @@
       ]
     },
     {
-      "name": "ScrCmd_829",
+      "name": "scrcmd_829",
       "args": [
         "var"
       ]
     },
     {
-      "name": "ScrCmd_830",
+      "name": "scrcmd_830",
       "args": [
         "var"
       ]
     },
     {
-      "name": "ScrCmd_831",
+      "name": "scrcmd_831",
       "args": [
         "var"
       ]
     },
     {
-      "name": "ScrCmd_832",
+      "name": "scrcmd_832",
       "args": [
         "var"
       ]
     },
     {
-      "name": "ScrCmd_833",
+      "name": "scrcmd_833",
       "args": [
         "var"
       ]
     },
     {
-      "name": "ScrCmd_834",
+      "name": "scrcmd_834",
       "args": [
         "var"
       ]
     },
     {
-      "name": "ScrCmd_835",
+      "name": "scrcmd_835",
       "args": [
         "var"
       ]
     },
     {
-      "name": "CheckKyogreGroudonInParty",
+      "name": "scrcmd_836",
       "args": [
         "var"
       ]
     },
     {
-      "name": "ScrCmd_837",
+      "name": "scrcmd_837",
       "args": [
         "var"
       ]
     },
     {
-      "name": "BankOrWalletIsFull",
+      "name": "bank_or_wallet_is_full",
       "args": [
         2,
         "var"
       ]
     },
     {
-      "name": "SysSetSleepFlag",
+      "name": "sys_set_sleep_flag",
       "args": [
         2
       ]
     },
     {
-      "name": "ScrCmd_840",
+      "name": "scrcmd_840",
       "args": [
         "var",
         "var"
       ]
     },
     {
-      "name": "ScrCmd_841",
+      "name": "scrcmd_841",
       "args": [
         1
       ]
     },
     {
-      "name": "ScrCmd_842",
+      "name": "scrcmd_842",
       "args": [
         1
       ]
     },
     {
-      "name": "BufferItemNameIndef",
+      "name": "buffer_item_name_indef",
       "args": [
         1,
         "item"
       ]
     },
     {
-      "name": "BufferItemNamePlural",
+      "name": "buffer_item_name_plural",
       "args": [
         1,
         "item"
       ]
     },
     {
-      "name": "BufferPartyMonSpeciesNameIndef",
+      "name": "buffer_party_mon_species_name_indef",
       "args": [
         1,
         "var"
       ]
     },
     {
-      "name": "BufferSpeciesNameIndef",
+      "name": "buffer_species_name_indef",
       "args": [
         1,
         "species",
@@ -5301,40 +5295,40 @@
       ]
     },
     {
-      "name": "BufferDPPtFriendStarterSpeciesNameIndef",
+      "name": "buffer_dppt_friend_starter_species_name_indef",
       "args": [
         1
       ]
     },
     {
-      "name": "BufferFashionNameIndef",
+      "name": "buffer_fashion_name_indef",
       "args": [
         1,
         "var"
       ]
     },
     {
-      "name": "BufferTrainerClassNameIndef",
+      "name": "buffer_trainer_class_name_indef",
       "args": [
         1,
         "var"
       ]
     },
     {
-      "name": "BufferSealNamePlural",
+      "name": "buffer_seal_name_plural",
       "args": [
         1,
         "var"
       ]
     },
     {
-      "name": "Capitalize",
+      "name": "capitalize",
       "args": [
         1
       ]
     },
     {
-      "name": "BufferDeptStoreFloorNo",
+      "name": "buffer_dept_store_floor_no",
       "args": [
         1,
         1
@@ -5342,15 +5336,15 @@
     }
   ],
   "argtypes": {
-    "var": {
-      "header": "include/constants/vars.h",
-      "prefix": "VAR_"
+    "var":  {
+      "header":"include/constants/vars.h",
+      "prefix":"VAR_"
     },
     "flag": {
       "header": "include/constants/flags.h",
       "prefix": "FLAG_"
     },
-    "species": {
+    "species":  {
       "header": "include/constants/species.h",
       "prefix": "SPECIES_"
     },
@@ -5358,7 +5352,7 @@
       "header": "include/constants/items.h",
       "prefix": "ITEM_"
     },
-    "move": {
+    "move":  {
       "header": "include/constants/moves.h",
       "prefix": "MOVE_"
     },
@@ -5366,7 +5360,7 @@
       "header": "include/constants/sndseq.h",
       "prefix": "SEQ_"
     },
-    "ribbon": {
+    "ribbon":  {
       "header": "include/constants/ribbon.h",
       "prefix": "RIBBON_"
     },
@@ -5374,7 +5368,7 @@
       "header": "include/constants/std_script.h",
       "prefix": "std_"
     },
-    "trainer": {
+    "trainer":  {
       "header": "include/constants/trainers.h",
       "prefix": "TRAINER_"
     },
@@ -5382,7 +5376,7 @@
       "header": "include/constants/sprites.h",
       "prefix": "SPRITE_"
     },
-    "maps": {
+    "maps":  {
       "header": "include/constants/maps.h",
       "prefix": "MAP_"
     },
@@ -5390,7 +5384,7 @@
       "header": "include/constants/phone_contacts.h",
       "prefix": "PHONE_CONTACT_"
     },
-    "spawn": {
+    "spawn":  {
       "header": "include/constants/spawns.h",
       "prefix": "SPAWN_"
     },
@@ -5398,12 +5392,12 @@
       "header": "include/constants/badge.h",
       "prefix": "BADGE_"
     },
-    "player_transition": {
-      "header": "include/constants/global_fieldmap.h",
+    "player_transition":  {
+      "header": "include/constants/global.fieldmap.h",
       "prefix": "PLAYER_TRANSITION_"
     },
     "direction": {
-      "header": "include/constants/global_fieldmap.h",
+      "header": "include/constants/global.fieldmap.h",
       "prefix": "DIR_"
     }
   }

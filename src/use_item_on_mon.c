@@ -11,7 +11,7 @@
 #include "pokemon.h"
 #include "pokemon_mood.h"
 
-BOOL CanUseItemOnPokemon(Pokemon *mon, u16 itemID, s32 moveIdx, enum HeapID heapID) {
+BOOL CanUseItemOnPokemon(Pokemon *mon, u16 itemID, s32 moveIdx, HeapID heapID) {
     int atkEv;
     int defEv;
     int speedEv;
@@ -21,78 +21,78 @@ BOOL CanUseItemOnPokemon(Pokemon *mon, u16 itemID, s32 moveIdx, enum HeapID heap
 
     ItemData *itemData = LoadItemDataOrGfx(itemID, ITEMNARC_PARAM, heapID);
     if (GetItemAttr_PreloadedItemData(itemData, ITEMATTR_PARTY_USE) != 1) {
-        Heap_Free(itemData);
+        FreeToHeap(itemData);
         return FALSE;
     }
 
     u32 status = GetMonData(mon, MON_DATA_STATUS, NULL);
     // Sleep
     if (GetItemAttr_PreloadedItemData(itemData, ITEMATTR_SLP_HEAL) && (status & MON_STATUS_SLP_MASK)) {
-        Heap_Free(itemData);
+        FreeToHeap(itemData);
         return TRUE;
     }
 
     // Poison
     if (GetItemAttr_PreloadedItemData(itemData, ITEMATTR_PSN_HEAL) && (status & (MON_STATUS_PSN_MASK | MON_STATUS_TOX_MASK))) {
-        Heap_Free(itemData);
+        FreeToHeap(itemData);
         return TRUE;
     }
 
     // Burn
     if (GetItemAttr_PreloadedItemData(itemData, ITEMATTR_BRN_HEAL) && (status & MON_STATUS_BRN_MASK)) {
-        Heap_Free(itemData);
+        FreeToHeap(itemData);
         return TRUE;
     }
 
     // Freeze
     if (GetItemAttr_PreloadedItemData(itemData, ITEMATTR_FRZ_HEAL) && (status & MON_STATUS_FRZ_MASK)) {
-        Heap_Free(itemData);
+        FreeToHeap(itemData);
         return TRUE;
     }
 
     // Paralysis
     if (GetItemAttr_PreloadedItemData(itemData, ITEMATTR_PRZ_HEAL) && (status & MON_STATUS_PRZ_MASK)) {
-        Heap_Free(itemData);
+        FreeToHeap(itemData);
         return TRUE;
     }
 
     u32 hp = GetMonData(mon, MON_DATA_HP, NULL);
     if ((GetItemAttr_PreloadedItemData(itemData, ITEMATTR_REVIVE) || GetItemAttr_PreloadedItemData(itemData, ITEMATTR_REVIVE_ALL)) && !GetItemAttr_PreloadedItemData(itemData, ITEMATTR_LEVEL_UP)) {
         if (hp == 0) {
-            Heap_Free(itemData);
+            FreeToHeap(itemData);
             return TRUE;
         }
-    } else if (GetItemAttr_PreloadedItemData(itemData, ITEMATTR_HP_RESTORE) && hp != 0 && hp < GetMonData(mon, MON_DATA_MAX_HP, NULL)) {
-        Heap_Free(itemData);
+    } else if (GetItemAttr_PreloadedItemData(itemData, ITEMATTR_HP_RESTORE) && hp != 0 && hp < GetMonData(mon, MON_DATA_MAXHP, NULL)) {
+        FreeToHeap(itemData);
         return TRUE;
     }
 
     if (GetItemAttr_PreloadedItemData(itemData, ITEMATTR_LEVEL_UP) && GetMonData(mon, MON_DATA_LEVEL, NULL) < MAX_LEVEL) {
-        Heap_Free(itemData);
+        FreeToHeap(itemData);
         return TRUE;
     }
 
     if (GetItemAttr_PreloadedItemData(itemData, ITEMATTR_EVOLVE) && GetMonEvolution(NULL, mon, EVOCTX_ITEM_USE, itemID, NULL) != SPECIES_NONE) {
-        Heap_Free(itemData);
+        FreeToHeap(itemData);
         return TRUE;
     }
 
     if (GetItemAttr_PreloadedItemData(itemData, ITEMATTR_PP_UP) || GetItemAttr_PreloadedItemData(itemData, ITEMATTR_PP_MAX)) {
-        if (GetMonData(mon, MON_DATA_MOVE1_PP_UPS + moveIdx, NULL) < 3 && GetMoveMaxPP(GetMonData(mon, MON_DATA_MOVE1 + moveIdx, NULL), 0) >= 5) {
-            Heap_Free(itemData);
+        if (GetMonData(mon, MON_DATA_MOVE1PPUP + moveIdx, NULL) < 3 && GetMoveMaxPP(GetMonData(mon, MON_DATA_MOVE1 + moveIdx, NULL), 0) >= 5) {
+            FreeToHeap(itemData);
             return TRUE;
         }
     }
 
     if (GetItemAttr_PreloadedItemData(itemData, ITEMATTR_PP_RESTORE) && MonMoveCanRestorePP(mon, moveIdx) == TRUE) {
-        Heap_Free(itemData);
+        FreeToHeap(itemData);
         return TRUE;
     }
 
     if (GetItemAttr_PreloadedItemData(itemData, ITEMATTR_PP_RESTORE_ALL)) {
         for (int i = 0; i < MAX_MON_MOVES; i++) {
             if (MonMoveCanRestorePP(mon, i) == TRUE) {
-                Heap_Free(itemData);
+                FreeToHeap(itemData);
                 return TRUE;
             }
         }
@@ -107,16 +107,16 @@ BOOL CanUseItemOnPokemon(Pokemon *mon, u16 itemID, s32 moveIdx, enum HeapID heap
     if (GetMonData(mon, MON_DATA_SPECIES, NULL) != SPECIES_SHEDINJA && GetItemAttr_PreloadedItemData(itemData, ITEMATTR_HP_EV_UP)) {
         int dHpEv = GetItemAttr_PreloadedItemData(itemData, ITEMATTR_HP_EV_UP_PARAM);
         if (dHpEv > 0) {
-            if (hpEv < MAX_EV_VITAMINS && (hpEv + atkEv + defEv + speedEv + spAtkEv + spDefEv) < MAX_EV_SUM) {
-                Heap_Free(itemData);
+            if (hpEv < MAX_EV && (hpEv + atkEv + defEv + speedEv + spAtkEv + spDefEv) < MAX_EV_SUM) {
+                FreeToHeap(itemData);
                 return TRUE;
             }
         } else if (dHpEv < 0) {
             if (hpEv > 0) {
-                Heap_Free(itemData);
+                FreeToHeap(itemData);
                 return TRUE;
             } else if (CanItemModFriendship(mon, itemData) == TRUE) {
-                Heap_Free(itemData);
+                FreeToHeap(itemData);
                 return TRUE;
             }
         }
@@ -125,16 +125,16 @@ BOOL CanUseItemOnPokemon(Pokemon *mon, u16 itemID, s32 moveIdx, enum HeapID heap
     if (GetItemAttr_PreloadedItemData(itemData, ITEMATTR_ATK_EV_UP)) {
         int dAtkEv = GetItemAttr_PreloadedItemData(itemData, ITEMATTR_ATK_EV_UP_PARAM);
         if (dAtkEv > 0) {
-            if (atkEv < MAX_EV_VITAMINS && (hpEv + atkEv + defEv + speedEv + spAtkEv + spDefEv) < MAX_EV_SUM) {
-                Heap_Free(itemData);
+            if (atkEv < MAX_EV && (hpEv + atkEv + defEv + speedEv + spAtkEv + spDefEv) < MAX_EV_SUM) {
+                FreeToHeap(itemData);
                 return TRUE;
             }
         } else if (dAtkEv < 0) {
             if (atkEv > 0) {
-                Heap_Free(itemData);
+                FreeToHeap(itemData);
                 return TRUE;
             } else if (CanItemModFriendship(mon, itemData) == TRUE) {
-                Heap_Free(itemData);
+                FreeToHeap(itemData);
                 return TRUE;
             }
         }
@@ -143,16 +143,16 @@ BOOL CanUseItemOnPokemon(Pokemon *mon, u16 itemID, s32 moveIdx, enum HeapID heap
     if (GetItemAttr_PreloadedItemData(itemData, ITEMATTR_DEF_EV_UP)) {
         int dDefEv = GetItemAttr_PreloadedItemData(itemData, ITEMATTR_DEF_EV_UP_PARAM);
         if (dDefEv > 0) {
-            if (defEv < MAX_EV_VITAMINS && (hpEv + atkEv + defEv + speedEv + spAtkEv + spDefEv) < MAX_EV_SUM) {
-                Heap_Free(itemData);
+            if (defEv < MAX_EV && (hpEv + atkEv + defEv + speedEv + spAtkEv + spDefEv) < MAX_EV_SUM) {
+                FreeToHeap(itemData);
                 return TRUE;
             }
         } else if (dDefEv < 0) {
             if (defEv > 0) {
-                Heap_Free(itemData);
+                FreeToHeap(itemData);
                 return TRUE;
             } else if (CanItemModFriendship(mon, itemData) == TRUE) {
-                Heap_Free(itemData);
+                FreeToHeap(itemData);
                 return TRUE;
             }
         }
@@ -161,16 +161,16 @@ BOOL CanUseItemOnPokemon(Pokemon *mon, u16 itemID, s32 moveIdx, enum HeapID heap
     if (GetItemAttr_PreloadedItemData(itemData, ITEMATTR_SPEED_EV_UP)) {
         int dSpeedEv = GetItemAttr_PreloadedItemData(itemData, ITEMATTR_SPEED_EV_UP_PARAM);
         if (dSpeedEv > 0) {
-            if (speedEv < MAX_EV_VITAMINS && (hpEv + atkEv + defEv + speedEv + spAtkEv + spDefEv) < MAX_EV_SUM) {
-                Heap_Free(itemData);
+            if (speedEv < MAX_EV && (hpEv + atkEv + defEv + speedEv + spAtkEv + spDefEv) < MAX_EV_SUM) {
+                FreeToHeap(itemData);
                 return TRUE;
             }
         } else if (dSpeedEv < 0) {
             if (speedEv > 0) {
-                Heap_Free(itemData);
+                FreeToHeap(itemData);
                 return TRUE;
             } else if (CanItemModFriendship(mon, itemData) == TRUE) {
-                Heap_Free(itemData);
+                FreeToHeap(itemData);
                 return TRUE;
             }
         }
@@ -179,16 +179,16 @@ BOOL CanUseItemOnPokemon(Pokemon *mon, u16 itemID, s32 moveIdx, enum HeapID heap
     if (GetItemAttr_PreloadedItemData(itemData, ITEMATTR_SPATK_EV_UP)) {
         int dSpAtkEv = GetItemAttr_PreloadedItemData(itemData, ITEMATTR_SPATK_EV_UP_PARAM);
         if (dSpAtkEv > 0) {
-            if (spAtkEv < MAX_EV_VITAMINS && (hpEv + atkEv + defEv + speedEv + spAtkEv + spDefEv) < MAX_EV_SUM) {
-                Heap_Free(itemData);
+            if (spAtkEv < MAX_EV && (hpEv + atkEv + defEv + speedEv + spAtkEv + spDefEv) < MAX_EV_SUM) {
+                FreeToHeap(itemData);
                 return TRUE;
             }
         } else if (dSpAtkEv < 0) {
             if (spAtkEv > 0) {
-                Heap_Free(itemData);
+                FreeToHeap(itemData);
                 return TRUE;
             } else if (CanItemModFriendship(mon, itemData) == TRUE) {
-                Heap_Free(itemData);
+                FreeToHeap(itemData);
                 return TRUE;
             }
         }
@@ -197,31 +197,31 @@ BOOL CanUseItemOnPokemon(Pokemon *mon, u16 itemID, s32 moveIdx, enum HeapID heap
     if (GetItemAttr_PreloadedItemData(itemData, ITEMATTR_SPDEF_EV_UP)) {
         int dSpDefEv = GetItemAttr_PreloadedItemData(itemData, ITEMATTR_SPDEF_EV_UP_PARAM);
         if (dSpDefEv > 0) {
-            if (spDefEv < MAX_EV_VITAMINS && (hpEv + atkEv + defEv + speedEv + spAtkEv + spDefEv) < MAX_EV_SUM) {
-                Heap_Free(itemData);
+            if (spDefEv < MAX_EV && (hpEv + atkEv + defEv + speedEv + spAtkEv + spDefEv) < MAX_EV_SUM) {
+                FreeToHeap(itemData);
                 return TRUE;
             }
         } else if (dSpDefEv < 0) {
             if (spDefEv > 0) {
-                Heap_Free(itemData);
+                FreeToHeap(itemData);
                 return TRUE;
             } else if (CanItemModFriendship(mon, itemData) == TRUE) {
-                Heap_Free(itemData);
+                FreeToHeap(itemData);
                 return TRUE;
             }
         }
     }
 
-    Heap_Free(itemData);
+    FreeToHeap(itemData);
     return FALSE;
 }
 
-BOOL CanUseItemOnMonInParty(Party *party, u16 itemID, s32 partyIdx, s32 moveIdx, enum HeapID heapID) {
+BOOL CanUseItemOnMonInParty(Party *party, u16 itemID, s32 partyIdx, s32 moveIdx, HeapID heapID) {
     Pokemon *mon = Party_GetMonByIndex(party, partyIdx);
     return CanUseItemOnPokemon(mon, itemID, moveIdx, heapID);
 }
 
-BOOL UseItemOnPokemon(Pokemon *mon, u16 itemID, u16 moveIdx, u16 location, enum HeapID heapID) {
+BOOL UseItemOnPokemon(Pokemon *mon, u16 itemID, u16 moveIdx, u16 location, HeapID heapID) {
     s32 stack_data[8];
 #define sp70 stack_data[7]
 #define sp6C stack_data[6]
@@ -236,7 +236,7 @@ BOOL UseItemOnPokemon(Pokemon *mon, u16 itemID, u16 moveIdx, u16 location, enum 
 
     ItemData *itemData = LoadItemDataOrGfx(itemID, ITEMNARC_PARAM, heapID);
     if (GetItemAttr_PreloadedItemData(itemData, ITEMATTR_PARTY_USE) != 1) {
-        Heap_Free(itemData);
+        FreeToHeap(itemData);
         return FALSE;
     }
 
@@ -275,7 +275,7 @@ BOOL UseItemOnPokemon(Pokemon *mon, u16 itemID, u16 moveIdx, u16 location, enum 
     }
 
     sp54 = GetMonData(mon, MON_DATA_HP, NULL);
-    sp58 = GetMonData(mon, MON_DATA_MAX_HP, NULL);
+    sp58 = GetMonData(mon, MON_DATA_MAXHP, NULL);
     if ((GetItemAttr_PreloadedItemData(itemData, ITEMATTR_REVIVE) || GetItemAttr_PreloadedItemData(itemData, ITEMATTR_REVIVE_ALL)) && GetItemAttr_PreloadedItemData(itemData, ITEMATTR_LEVEL_UP)) {
         if (sp54 == 0) {
             RestoreMonHPBy(mon, sp54, sp58, GetItemAttr_PreloadedItemData(itemData, ITEMATTR_HP_RESTORE_PARAM));
@@ -296,7 +296,7 @@ BOOL UseItemOnPokemon(Pokemon *mon, u16 itemID, u16 moveIdx, u16 location, enum 
             AddMonData(mon, MON_DATA_EXPERIENCE, CalcMonExpToNextLevel(mon));
             CalcMonLevelAndStats(mon);
             if (sp54 == 0) {
-                sp60 = GetMonData(mon, MON_DATA_MAX_HP, NULL);
+                sp60 = GetMonData(mon, MON_DATA_MAXHP, NULL);
                 RestoreMonHPBy(mon, sp54, sp60, sp60 - sp58);
             }
             hadEffect = TRUE;
@@ -432,7 +432,7 @@ BOOL UseItemOnPokemon(Pokemon *mon, u16 itemID, u16 moveIdx, u16 location, enum 
     }
 
     if (hadEffect == FALSE && effectFound == TRUE) {
-        Heap_Free(itemData);
+        FreeToHeap(itemData);
         return FALSE;
     }
 
@@ -441,26 +441,26 @@ BOOL UseItemOnPokemon(Pokemon *mon, u16 itemID, u16 moveIdx, u16 location, enum 
         if (GetItemAttr_PreloadedItemData(itemData, ITEMATTR_FRIENDSHIP_MOD_LO)) {
             ApplyItemEffectOnMonMood(mon, itemID);
             DoItemFriendshipMod(mon, sp54, GetItemAttr_PreloadedItemData(itemData, ITEMATTR_FRIENDSHIP_MOD_LO_PARAM), location, heapID);
-            Heap_Free(itemData);
+            FreeToHeap(itemData);
             return hadEffect;
         }
     } else if (sp54 >= 100 && sp54 < 200) {
         if (GetItemAttr_PreloadedItemData(itemData, ITEMATTR_FRIENDSHIP_MOD_MED)) {
             ApplyItemEffectOnMonMood(mon, itemID);
             DoItemFriendshipMod(mon, sp54, GetItemAttr_PreloadedItemData(itemData, ITEMATTR_FRIENDSHIP_MOD_MED_PARAM), location, heapID);
-            Heap_Free(itemData);
+            FreeToHeap(itemData);
             return hadEffect;
         }
     } else if (sp54 >= 200 && sp54 <= 255) {
         if (GetItemAttr_PreloadedItemData(itemData, ITEMATTR_FRIENDSHIP_MOD_HI)) {
             ApplyItemEffectOnMonMood(mon, itemID);
             DoItemFriendshipMod(mon, sp54, GetItemAttr_PreloadedItemData(itemData, ITEMATTR_FRIENDSHIP_MOD_HI_PARAM), location, heapID);
-            Heap_Free(itemData);
+            FreeToHeap(itemData);
             return hadEffect;
         }
     }
 
-    Heap_Free(itemData);
+    FreeToHeap(itemData);
     return hadEffect;
 }
 #undef sp70
@@ -472,7 +472,7 @@ BOOL UseItemOnPokemon(Pokemon *mon, u16 itemID, u16 moveIdx, u16 location, enum 
 #undef sp58
 #undef sp54
 
-BOOL UseItemOnMonInParty(Party *party, u16 itemID, s32 partyIdx, u8 moveIdx, u16 location, enum HeapID heapID) {
+BOOL UseItemOnMonInParty(Party *party, u16 itemID, s32 partyIdx, u8 moveIdx, u16 location, HeapID heapID) {
     Pokemon *mon = Party_GetMonByIndex(party, partyIdx);
     return UseItemOnPokemon(mon, itemID, moveIdx, location, heapID);
 }
@@ -483,8 +483,8 @@ BOOL MonMoveCanRestorePP(Pokemon *mon, int moveIdx) {
         return FALSE;
     }
 
-    u8 pp = GetMonData(mon, MON_DATA_MOVE1_PP + moveIdx, NULL);
-    u8 ppUp = GetMonData(mon, MON_DATA_MOVE1_PP_UPS + moveIdx, NULL);
+    u8 pp = GetMonData(mon, MON_DATA_MOVE1PP + moveIdx, NULL);
+    u8 ppUp = GetMonData(mon, MON_DATA_MOVE1PPUP + moveIdx, NULL);
     return (u8)(pp < GetMoveMaxPP(moveID, ppUp));
 }
 
@@ -494,9 +494,9 @@ BOOL MonMoveRestorePP(Pokemon *mon, int moveIdx, int ppRestore) {
         return FALSE;
     }
 
-    int ppAttr = MON_DATA_MOVE1_PP + moveIdx;
+    int ppAttr = MON_DATA_MOVE1PP + moveIdx;
     u8 pp = GetMonData(mon, ppAttr, NULL);
-    int ppUpAttr = MON_DATA_MOVE1_PP_UPS + moveIdx;
+    int ppUpAttr = MON_DATA_MOVE1PPUP + moveIdx;
     u8 maxPp = GetMoveMaxPP(move_id, GetMonData(mon, ppUpAttr, NULL));
     if (pp < maxPp) {
         if (ppRestore == PP_RESTORE_ALL) {
@@ -517,7 +517,7 @@ BOOL BoostMonMovePpUpBy(Pokemon *mon, int moveIdx, int nPpUp) {
     u16 move;
     u8 pp;
 
-    int ppUpAttr = MON_DATA_MOVE1_PP_UPS + moveIdx;
+    int ppUpAttr = MON_DATA_MOVE1PPUP + moveIdx;
     u8 ppUp = GetMonData(mon, ppUpAttr, NULL);
     if (ppUp == 3) {
         return FALSE;
@@ -528,7 +528,7 @@ BOOL BoostMonMovePpUpBy(Pokemon *mon, int moveIdx, int nPpUp) {
         return FALSE;
     }
 
-    int ppAttr = MON_DATA_MOVE1_PP + moveIdx;
+    int ppAttr = MON_DATA_MOVE1PP + moveIdx;
     pp = GetMonData(mon, ppAttr, NULL);
     u8 maxPp = GetMoveMaxPP(move, ppUp);
     if ((u32)(ppUp + nPpUp) > 3) {
@@ -570,7 +570,7 @@ s32 TryModEV(s32 ev, s32 evSum, s32 by) {
         return -1;
     }
 
-    if (ev >= MAX_EV_VITAMINS && by > 0) {
+    if (ev >= MAX_EV && by > 0) {
         return -1;
     }
 
@@ -579,8 +579,8 @@ s32 TryModEV(s32 ev, s32 evSum, s32 by) {
     }
 
     ev += by;
-    if (ev > MAX_EV_VITAMINS) {
-        ev = MAX_EV_VITAMINS;
+    if (ev > MAX_EV) {
+        ev = MAX_EV;
     } else if (ev < 0) {
         ev = 0;
     }
@@ -613,7 +613,7 @@ BOOL CanItemModFriendship(Pokemon *mon, ItemData *itemData) {
     return FALSE;
 }
 
-BOOL DoItemFriendshipMod(Pokemon *mon, s32 friendship, s32 mod, u16 location, enum HeapID heapID) {
+BOOL DoItemFriendshipMod(Pokemon *mon, s32 friendship, s32 mod, u16 location, HeapID heapID) {
     if (friendship == 255 && mod > 0) {
         return FALSE;
     }
@@ -627,7 +627,7 @@ BOOL DoItemFriendshipMod(Pokemon *mon, s32 friendship, s32 mod, u16 location, en
             mod++;
         }
 
-        if (location == GetMonData(mon, MON_DATA_EGG_LOCATION, NULL)) {
+        if (location == GetMonData(mon, MON_DATA_EGG_MET_LOCATION, NULL)) {
             mod++;
         }
 
@@ -656,7 +656,7 @@ void HealParty(Party *party) {
     for (i = 0; i < partyCount; i++) {
         Pokemon *mon = Party_GetMonByIndex(party, i);
         if (GetMonData(mon, MON_DATA_SPECIES_EXISTS, NULL)) {
-            u32 sp8 = GetMonData(mon, MON_DATA_MAX_HP, NULL);
+            u32 sp8 = GetMonData(mon, MON_DATA_MAXHP, NULL);
             SetMonData(mon, MON_DATA_HP, &sp8);
 
             sp8 = 0;

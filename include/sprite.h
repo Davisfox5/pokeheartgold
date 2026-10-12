@@ -16,7 +16,7 @@ typedef struct SimpleSpriteTemplate {
     VecFx32 position;                    // 008
     u32 priority;                        // 014
     NNS_G2D_VRAM_TYPE whichScreen;       // 018
-    enum HeapID heapID;                  // 01C
+    HeapID heapId;                       // 01C
 } SimpleSpriteTemplate;
 
 typedef struct SpriteTemplate {
@@ -25,9 +25,9 @@ typedef struct SpriteTemplate {
     VecFx32 position;                    // 008
     VecFx32 scale;                       // 014
     u16 rotation;                        // 020
-    u32 drawPriority;                    // 024
+    u32 priority;                        // 024
     NNS_G2D_VRAM_TYPE whichScreen;       // 028
-    enum HeapID heapID;                  // 02C
+    HeapID heapId;                       // 02C
 } SpriteTemplate;
 
 typedef struct SpriteAnimationData {
@@ -148,7 +148,7 @@ void Sprite_SetPalOffset(Sprite *sprite, u8 offset);
 void Sprite_SetPalOffsetRespectVramOffset(Sprite *sprite, u8 offset);
 u8 Sprite_GetPalOffset(Sprite *sprite);
 void Sprite_SetDrawPriority(Sprite *sprite, u32 priority);
-u32 Sprite_GetDrawPriority(Sprite *sprite);
+u16 Sprite_GetDrawPriority(Sprite *sprite);
 void Sprite_SetImageProxy(Sprite *sprite, NNSG2dImageProxy *proxy);
 NNSG2dImageProxy *Sprite_GetImageProxy(Sprite *sprite);
 void Sprite_SetPaletteProxy(Sprite *sprite, NNSG2dImagePaletteProxy *proxy);
@@ -158,8 +158,8 @@ NNS_G2D_VRAM_TYPE Sprite_GetVramType(Sprite *sprite);
 int Sprite_IsAnimated(Sprite *sprite);
 void Sprite_SetOamMode(Sprite *sprite, GXOamMode mode);
 GXOamMode Sprite_GetOamMode(Sprite *sprite);
-void ClearMainOAM(enum HeapID heapID);
-void ClearSubOAM(enum HeapID heapID);
+void ClearMainOAM(HeapID heapId);
+void ClearSubOAM(HeapID heapId);
 u32 Sprite_GetCurrentAnimFrameExAttr(Sprite *sprite);
 NNSG2dCellAnimation *Sprite_GetCellAnim(Sprite *sprite);
 

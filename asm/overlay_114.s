@@ -35,7 +35,7 @@ _0225F04E:
 	mov r1, #0x69
 	mov r0, #4
 	lsl r1, r1, #2
-	bl Heap_Alloc
+	bl AllocFromHeap
 	mov r2, #0x69
 	str r0, [r4, #0xc]
 	mov r1, #0
@@ -200,7 +200,7 @@ _0225F168:
 	ldr r0, [r4, #0x10]
 	ldr r0, [r0, #4]
 	ldr r0, [r0, #0x1c]
-	bl HBlankSystem_Stop
+	bl ov01_021FB514
 	mov r0, #6
 	str r0, [sp]
 	mov r0, #1
@@ -254,7 +254,7 @@ _0225F21C:
 	ldr r0, [r4, #0x10]
 	ldr r0, [r0, #4]
 	ldr r0, [r0, #0x1c]
-	bl HBlankSystem_Start
+	bl ov01_021FB4F4
 	ldr r1, [r4, #0x14]
 	cmp r1, #0
 	beq _0225F238
@@ -322,7 +322,7 @@ _0225F2AC:
 	mov r1, #0x1b
 	mov r0, #4
 	lsl r1, r1, #4
-	bl Heap_Alloc
+	bl AllocFromHeap
 	mov r2, #0x1b
 	str r0, [r6, #0xc]
 	mov r1, #0
@@ -528,7 +528,7 @@ _0225F45C:
 	ldr r0, [r6, #0x10]
 	ldr r0, [r0, #4]
 	ldr r0, [r0, #0x1c]
-	bl HBlankSystem_Stop
+	bl ov01_021FB514
 	mov r0, #8
 	str r0, [sp]
 	mov r0, #1
@@ -559,7 +559,7 @@ _0225F496:
 	ldr r0, [r6, #0x10]
 	ldr r0, [r0, #4]
 	ldr r0, [r0, #0x1c]
-	bl HBlankSystem_Start
+	bl ov01_021FB4F4
 	ldr r1, [r6, #0x14]
 	cmp r1, #0
 	beq _0225F4B2

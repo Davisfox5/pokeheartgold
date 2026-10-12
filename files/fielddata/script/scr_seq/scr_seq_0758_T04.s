@@ -5,270 +5,290 @@
 
 	.rodata
 
-	ScrDef scr_seq_T04_000
-	ScrDef scr_seq_T04_001
-	ScrDef scr_seq_T04_002
-	ScrDef scr_seq_T04_003
-	ScrDef scr_seq_T04_004
-	ScrDef scr_seq_T04_005
-	ScrDef scr_seq_T04_006
-	ScrDef scr_seq_T04_007
-	ScrDef scr_seq_T04_008
-	ScrDef scr_seq_T04_009
-	ScrDef scr_seq_T04_010
-	ScrDef scr_seq_T04_011
-	ScrDef scr_seq_T04_012
-	ScrDef scr_seq_T04_013
-	ScrDefEnd
+	scrdef scr_seq_T04_000
+	scrdef scr_seq_T04_001
+	scrdef scr_seq_T04_002
+	scrdef scr_seq_T04_003
+	scrdef scr_seq_T04_004
+	scrdef scr_seq_T04_005
+	scrdef scr_seq_T04_006
+	scrdef scr_seq_T04_007
+	scrdef scr_seq_T04_008
+	scrdef scr_seq_T04_009
+	scrdef scr_seq_T04_010
+	scrdef scr_seq_T04_011
+	scrdef scr_seq_T04_012
+	scrdef scr_seq_T04_013
+	scrdef_end
 
 scr_seq_T04_012:
-	GoToIfUnset FLAG_UNK_189, _004B
-	ClearFlag FLAG_UNK_189
-	End
+	goto_if_unset FLAG_UNK_189, _004B
+	clearflag FLAG_UNK_189
+	end
 
 _004B:
-	GetWeekday VAR_TEMP_x4000
-	Compare VAR_TEMP_x4000, 4
-	GoToIfEq _006F
-	Compare VAR_TEMP_x4000, 0
-	GoToIfEq _006F
-	SetFlag FLAG_HIDE_CAMERON
-	End
+	get_weekday VAR_TEMP_x4000
+	compare VAR_TEMP_x4000, 4
+	goto_if_eq _006F
+	compare VAR_TEMP_x4000, 0
+	goto_if_eq _006F
+	setflag FLAG_HIDE_CAMERON
+	end
 
 _006F:
-	ClearFlag FLAG_HIDE_CAMERON
-	End
+	clearflag FLAG_HIDE_CAMERON
+	end
 
 scr_seq_T04_000:
-	PlaySE SEQ_SE_DP_SELECT
-	LockAll
-	FacePlayer
-	GoToIfSet FLAG_RESTORED_POWER, _0093
-	NPCMsg msg_0467_T04_00000
-	WaitButton
-	CloseMsg
-	ReleaseAll
-	End
+	play_se SEQ_SE_DP_SELECT
+	lockall
+	faceplayer
+	goto_if_set FLAG_RESTORED_POWER, _0093
+	npc_msg msg_0467_T04_00000
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
 
 _0093:
-	NPCMsg msg_0467_T04_00001
-	WaitButton
-	CloseMsg
-	ReleaseAll
-	End
+	npc_msg msg_0467_T04_00001
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
 
 scr_seq_T04_001:
-	SimpleNPCMsg msg_0467_T04_00002
-	End
+	simple_npc_msg msg_0467_T04_00002
+	end
 
 scr_seq_T04_002:
-	SimpleNPCMsg msg_0467_T04_00005
-	End
+	simple_npc_msg msg_0467_T04_00005
+	end
 
 scr_seq_T04_003:
-	PlaySE SEQ_SE_DP_SELECT
-	LockAll
-	FacePlayer
-	NPCMsg msg_0467_T04_00003
-	PlayCry SPECIES_SLOWBRO, 0
-	WaitCry
-	NPCMsg msg_0467_T04_00004
-	WaitButton
-	CloseMsg
-	ReleaseAll
-	End
+	play_se SEQ_SE_DP_SELECT
+	lockall
+	faceplayer
+	npc_msg msg_0467_T04_00003
+	play_cry SPECIES_SLOWBRO, 0
+	wait_cry
+	npc_msg msg_0467_T04_00004
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
 
 scr_seq_T04_004:
-	PlaySE SEQ_SE_DP_SELECT
-	LockAll
-	FacePlayer
-	Compare VAR_SCENE_ROUTE_24_ROCKET, 3
-	GoToIfGe _012C
-	Compare VAR_UNK_411C, 2
-	GoToIfEq _0123
-	Compare VAR_UNK_411C, 1
-	GoToIfEq _011A
-	NPCMsg msg_0467_T04_00006
-	GoTo _012F
+	play_se SEQ_SE_DP_SELECT
+	lockall
+	faceplayer
+	compare VAR_SCENE_ROUTE_24_ROCKET, 3
+	goto_if_ge _012C
+	compare VAR_UNK_411C, 2
+	goto_if_eq _0123
+	compare VAR_UNK_411C, 1
+	goto_if_eq _011A
+	npc_msg msg_0467_T04_00006
+	goto _012F
 
 _011A:
-	NPCMsg msg_0467_T04_00007
-	GoTo _012F
+	npc_msg msg_0467_T04_00007
+	goto _012F
 
 _0123:
-	NPCMsg msg_0467_T04_00008
-	GoTo _012F
+	npc_msg msg_0467_T04_00008
+	goto _012F
 
 _012C:
-	NPCMsg msg_0467_T04_00009
+	npc_msg msg_0467_T04_00009
 _012F:
-	WaitButton
-	CloseMsg
-	ReleaseAll
-	End
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
 
 scr_seq_T04_005:
-	PlaySE SEQ_SE_DP_SELECT
-	LockAll
-	FacePlayer
-	NPCMsg msg_0467_T04_00010
-	NPCMsg msg_0467_T04_00011
-	WaitButton
-	CloseMsg
-	ReleaseAll
-	End
+	play_se SEQ_SE_DP_SELECT
+	lockall
+	faceplayer
+	npc_msg msg_0467_T04_00010
+	npc_msg msg_0467_T04_00011
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
 
 scr_seq_T04_013:
-	SimpleNPCMsg msg_0467_T04_00012
-	End
+	simple_npc_msg msg_0467_T04_00012
+	end
 
 scr_seq_T04_006:
-	DirectionSignpostEx 0, 4, msg_0467_T04_00013
-	End
+	direction_signpost msg_0467_T04_00013, 0, 4, VAR_SPECIAL_RESULT
+	scrcmd_057 3
+	scrcmd_058
+	scrcmd_060 VAR_SPECIAL_RESULT
+	callstd std_signpost
+	end
 
 scr_seq_T04_007:
-	TrainerTipsEx 2, msg_0467_T04_00014
-	End
+	scrcmd_055 2, 0
+	scrcmd_057 3
+	scrcmd_058
+	trainer_tips msg_0467_T04_00014, VAR_SPECIAL_RESULT
+	callstd std_signpost
+	end
 
 scr_seq_T04_008:
-	TrainerTipsEx 2, msg_0467_T04_00015
-	End
+	scrcmd_055 2, 0
+	scrcmd_057 3
+	scrcmd_058
+	trainer_tips msg_0467_T04_00015, VAR_SPECIAL_RESULT
+	callstd std_signpost
+	end
 
 scr_seq_T04_009:
-	TrainerTipsEx 3, msg_0467_T04_00016
-	End
+	scrcmd_055 3, 0
+	scrcmd_057 3
+	scrcmd_058
+	trainer_tips msg_0467_T04_00016, VAR_SPECIAL_RESULT
+	callstd std_signpost
+	end
 
 scr_seq_T04_010:
-	DirectionSignpostEx 1, 14, msg_0467_T04_00017
-	End
+	direction_signpost msg_0467_T04_00017, 1, 14, VAR_SPECIAL_RESULT
+	scrcmd_057 3
+	scrcmd_058
+	scrcmd_060 VAR_SPECIAL_RESULT
+	callstd std_signpost
+	end
 
 scr_seq_T04_011:
-	PlaySE SEQ_SE_DP_SELECT
-	LockAll
-	FacePlayer
-	GetStdMsgNaix 2, VAR_SPECIAL_RESULT
-	MsgBoxExtern VAR_SPECIAL_RESULT, 0
-	TouchscreenMenuHide
-	GetMenuChoice VAR_SPECIAL_RESULT
-	TouchscreenMenuShow
-	Compare VAR_SPECIAL_RESULT, 1
-	GoToIfEq _02F5
-	PhotoAlbumIsFull VAR_SPECIAL_RESULT
-	Compare VAR_SPECIAL_RESULT, 1
-	GoToIfEq _0309
-	GetStdMsgNaix 2, VAR_SPECIAL_RESULT
-	MsgBoxExtern VAR_SPECIAL_RESULT, 1
-	CloseMsg
-	ToggleFollowingPokemonMovement 0
-	WaitFollowingPokemonMovement
-	FollowingPokemonMovement 55
-	GetPlayerFacing VAR_SPECIAL_RESULT
-	Compare VAR_SPECIAL_RESULT, 0
-	GoToIfNe _0246
-	ApplyMovement obj_player, _0320
-	ApplyMovement obj_T04_gsmiddleman1, _036C
-	GoTo _0294
+	play_se SEQ_SE_DP_SELECT
+	lockall
+	faceplayer
+	get_std_msg_naix 2, VAR_SPECIAL_RESULT
+	msgbox_extern VAR_SPECIAL_RESULT, 0
+	touchscreen_menu_hide
+	getmenuchoice VAR_SPECIAL_RESULT
+	touchscreen_menu_show
+	compare VAR_SPECIAL_RESULT, 1
+	goto_if_eq _02F5
+	photo_album_is_full VAR_SPECIAL_RESULT
+	compare VAR_SPECIAL_RESULT, 1
+	goto_if_eq _0309
+	get_std_msg_naix 2, VAR_SPECIAL_RESULT
+	msgbox_extern VAR_SPECIAL_RESULT, 1
+	closemsg
+	toggle_following_pokemon_movement 0
+	wait_following_pokemon_movement
+	following_pokemon_movement 55
+	get_player_facing VAR_SPECIAL_RESULT
+	compare VAR_SPECIAL_RESULT, 0
+	goto_if_ne _0246
+	apply_movement obj_player, _0320
+	apply_movement obj_T04_gsmiddleman1, _036C
+	goto _0294
 
 _0246:
-	Compare VAR_SPECIAL_RESULT, 1
-	GoToIfNe _0261
-	ApplyMovement obj_player, _0338
-	GoTo _0294
+	compare VAR_SPECIAL_RESULT, 1
+	goto_if_ne _0261
+	apply_movement obj_player, _0338
+	goto _0294
 
 _0261:
-	Compare VAR_SPECIAL_RESULT, 3
-	GoToIfNe _0284
-	ApplyMovement obj_player, _0358
-	ApplyMovement obj_T04_gsmiddleman1, _036C
-	GoTo _0294
+	compare VAR_SPECIAL_RESULT, 3
+	goto_if_ne _0284
+	apply_movement obj_player, _0358
+	apply_movement obj_T04_gsmiddleman1, _036C
+	goto _0294
 
 _0284:
-	ApplyMovement obj_player, _0344
-	ApplyMovement obj_T04_gsmiddleman1, _036C
+	apply_movement obj_player, _0344
+	apply_movement obj_T04_gsmiddleman1, _036C
 _0294:
-	WaitMovement
-	WaitFollowingPokemonMovement
-	ToggleFollowingPokemonMovement 1
-	FollowingPokemonMovement 48
-	ScrCmd_729 VAR_SPECIAL_RESULT
-	Compare VAR_SPECIAL_RESULT, 1
-	GoToIfNe _02BB
-	ApplyMovement obj_partner_poke, _0378
-	WaitMovement
+	wait_movement
+	wait_following_pokemon_movement
+	toggle_following_pokemon_movement 1
+	following_pokemon_movement 48
+	scrcmd_729 VAR_SPECIAL_RESULT
+	compare VAR_SPECIAL_RESULT, 1
+	goto_if_ne _02BB
+	apply_movement obj_partner_poke, _0378
+	wait_movement
 _02BB:
-	SetFlag FLAG_UNK_189
-	FadeScreen 6, 1, 0, RGB_BLACK
-	WaitFade
-	CameronPhoto 55
-	LockAll
-	FadeScreen 6, 1, 1, RGB_BLACK
-	WaitFade
-	ClearFlag FLAG_UNK_189
-	GetStdMsgNaix 2, VAR_SPECIAL_RESULT
-	MsgBoxExtern VAR_SPECIAL_RESULT, 2
-	WaitButton
-	CloseMsg
-	ReleaseAll
-	End
+	setflag FLAG_UNK_189
+	fade_screen 6, 1, 0, RGB_BLACK
+	wait_fade
+	cameron_photo 55
+	lockall
+	fade_screen 6, 1, 1, RGB_BLACK
+	wait_fade
+	clearflag FLAG_UNK_189
+	get_std_msg_naix 2, VAR_SPECIAL_RESULT
+	msgbox_extern VAR_SPECIAL_RESULT, 2
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
 
 _02F5:
-	GetStdMsgNaix 2, VAR_SPECIAL_RESULT
-	MsgBoxExtern VAR_SPECIAL_RESULT, 5
-	WaitButton
-	CloseMsg
-	ReleaseAll
-	End
+	get_std_msg_naix 2, VAR_SPECIAL_RESULT
+	msgbox_extern VAR_SPECIAL_RESULT, 5
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
 
 _0309:
-	GetStdMsgNaix 2, VAR_SPECIAL_RESULT
-	MsgBoxExtern VAR_SPECIAL_RESULT, 3
-	WaitButton
-	CloseMsg
-	ReleaseAll
-	End
+	get_std_msg_naix 2, VAR_SPECIAL_RESULT
+	msgbox_extern VAR_SPECIAL_RESULT, 3
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
 
 	.balign 4, 0
 _0320:
-	WalkNormalEast
-	WalkNormalNorth 2
-	WalkNormalWest
-	WalkNormalNorth 3
-	WalkOnSpotNormalSouth
-	EndMovement
+	step 15, 1
+	step 12, 2
+	step 14, 1
+	step 12, 3
+	step 33, 1
+	step_end
 
 	.balign 4, 0
 _0338:
-	WalkNormalNorth 3
-	WalkOnSpotNormalSouth
-	EndMovement
+	step 12, 3
+	step 33, 1
+	step_end
 
 	.balign 4, 0
 _0344:
-	WalkNormalNorth
-	WalkNormalWest
-	WalkNormalNorth 3
-	WalkOnSpotNormalSouth
-	EndMovement
+	step 12, 1
+	step 14, 1
+	step 12, 3
+	step 33, 1
+	step_end
 
 	.balign 4, 0
 _0358:
-	WalkNormalNorth
-	WalkNormalEast
-	WalkNormalNorth 3
-	WalkOnSpotNormalSouth
-	EndMovement
+	step 12, 1
+	step 15, 1
+	step 12, 3
+	step 33, 1
+	step_end
 
 	.balign 4, 0
 _036C:
-	Delay8
-	WalkOnSpotNormalNorth
-	EndMovement
+	step 63, 1
+	step 32, 1
+	step_end
 
 	.balign 4, 0
 _0378:
-	WalkNormalEast
-	WalkNormalNorth
-	FaceSouth
-	EndMovement
+	step 15, 1
+	step 12, 1
+	step 1, 1
+	step_end
 
 	.balign 4, 0

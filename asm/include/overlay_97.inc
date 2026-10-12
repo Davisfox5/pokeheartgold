@@ -19,11 +19,11 @@
 .public AddCharResObjFromNarc
 .public AddPlttResObjFromNarc
 .public AddCellOrAnimResObjFromNarc
-.public SpriteTransfer_CreateCharTransferTask_AllocAtEnd
-.public SpriteTransfer_DeleteCharTransferTask
-.public SpriteTransfer_GetCharProxy
-.public SpriteTransfer_CreateExtPlttTransferTask
-.public SpriteTransfer_DeletePlttTransferTask
+.public sub_0200ADA4
+.public sub_0200AEB0
+.public sub_0200AF00
+.public sub_0200AF94
+.public sub_0200B0A8
 .public SpriteTransfer_GetPaletteProxy
 .public OamManager_Create
 .public OamManager_Free
@@ -40,8 +40,8 @@
 .public IsPaletteFadeFinished
 .public sub_02014540
 .public Main_SetVBlankIntrCB
-.public Heap_Alloc
-.public Heap_Free
+.public AllocFromHeap
+.public FreeToHeap
 .public BgConfig_Alloc
 .public SetBothScreensModesAndDisable
 .public InitBgFromTemplate
@@ -76,7 +76,7 @@
 .public CopyU16ArrayToString
 .public SaveArray_PCStorage_Get
 .public Save_Pokeathlon_Get
-.public PokeathlonSave_GetUnkDC_AtIndex
+.public sub_020319A8
 .public sub_0203A994
 .public GetMonData
 .public GetBoxMonData
@@ -90,7 +90,7 @@
 .public PCStorage_GetBoxName
 .public PCStorage_GetMonByIndexPair
 .public Party_GetMonByIndex
-.public Party_GetMonAprijuiceModifiers
+.public Party_GetUnkSubSlot
 .public SaveArray_Party_Get
 .public sub_0208B85C
 .public sub_020932E0

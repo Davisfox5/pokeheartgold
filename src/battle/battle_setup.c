@@ -5,11 +5,10 @@
 #include "constants/battle.h"
 
 #include "msgdata/msg.naix"
-#include "msgdata/msg/msg_0445.h"
+#include "msgdata/msg/msg_0375_R30.h"
 
 #include "follow_mon.h"
 #include "metatile_behavior.h"
-#include "mom_gift.h"
 #include "msgdata.h"
 #include "save_link_ruleset.h"
 #include "save_local_field_data.h"
@@ -28,6 +27,7 @@
 #include "unk_0206D494.h"
 #include "unk_02088288.h"
 #include "unk_02092BE8.h"
+#include "unk_020931C4.h"
 
 static void BattleSetup_SetParty(BattleSetup *setup, Party *party, int battlerId);
 static void BattleSetup_SetProfile(BattleSetup *setup, PlayerProfile *profile, int battlerId);
@@ -36,9 +36,9 @@ static void sub_0205230C(FieldSystem *fieldSystem, PlayerProfile *profile1, Play
 static Terrain FieldSystem_GetTerrainFromStandingTile(FieldSystem *fieldSystem, BattleBg battleBg);
 static void sub_02052504(BattleSetup *setup, FieldSystem *fieldSystem);
 
-BattleSetup *BattleSetup_New(enum HeapID heapID, u32 battleTypeFlags) {
+BattleSetup *BattleSetup_New(HeapID heapId, u32 battleTypeFlags) {
     int i;
-    BattleSetup *setup = Heap_Alloc(heapID, sizeof(BattleSetup));
+    BattleSetup *setup = AllocFromHeap(heapId, sizeof(BattleSetup));
     MI_CpuClear8(setup, sizeof(BattleSetup));
     setup->battleType = battleTypeFlags;
     setup->battleSpecial = 0;
@@ -54,22 +54,22 @@ BattleSetup *BattleSetup_New(enum HeapID heapID, u32 battleTypeFlags) {
     for (i = 0; i < BATTLER_MAX; ++i) {
         setup->trainerId[i] = 0;
         MI_CpuClear32(&setup->trainer[i], sizeof(Trainer));
-        setup->party[i] = SaveArray_Party_Alloc(heapID);
-        setup->profile[i] = PlayerProfile_New(heapID);
-        setup->chatot[i] = Chatot_New(heapID);
+        setup->party[i] = SaveArray_Party_Alloc(heapId);
+        setup->profile[i] = PlayerProfile_New(heapId);
+        setup->chatot[i] = Chatot_New(heapId);
         setup->unk1CC[i] = 0xFF;
     }
-    setup->bag = Save_Bag_New(heapID);
-    setup->pokedex = Pokedex_New(heapID);
-    setup->options = Options_New(heapID);
-    setup->unk_134 = sub_02067A60(heapID);
+    setup->bag = Save_Bag_New(heapId);
+    setup->pokedex = Pokedex_New(heapId);
+    setup->options = Options_New(heapId);
+    setup->unk_134 = sub_02067A60(heapId);
     setup->bagCursor = NULL;
     setup->unk1B8 = NULL;
     setup->safariBalls = 0;
     setup->wifiHistory = NULL;
     setup->gameStats = NULL;
     setup->fixedDamaageMovesBanned = FALSE;
-    setup->bugContestMon = AllocMonZeroed(heapID);
+    setup->bugContestMon = AllocMonZeroed(heapId);
 
     setup->unk_19C = RngSeedFromRTC();
 
@@ -83,35 +83,44 @@ BattleSetup *BattleSetup_New(enum HeapID heapID, u32 battleTypeFlags) {
     return setup;
 }
 
-BattleSetup *BattleSetup_New_SafariZone(enum HeapID heapID, int balls) {
-    BattleSetup *setup = BattleSetup_New(heapID, BATTLE_TYPE_SAFARI);
+BattleSetup *BattleSetup_New_SafariZone(HeapID heapId, int balls) {
+    BattleSetup *setup = BattleSetup_New(heapId, BATTLE_TYPE_SAFARI);
     setup->safariBalls = balls;
     return setup;
 }
 
-BattleSetup *BattleSetup_New_BugContest(enum HeapID heapID, int balls, Pokemon *bugmon) {
-    BattleSetup *setup = BattleSetup_New(heapID, BATTLE_TYPE_BUG_CONTEST);
+BattleSetup *BattleSetup_New_BugContest(HeapID heapId, int balls, Pokemon *bugmon) {
+    BattleSetup *setup = BattleSetup_New(heapId, BATTLE_TYPE_BUG_CONTEST);
     setup->safariBalls = balls;
     CopyPokemonToPokemon(bugmon, setup->bugContestMon);
     return setup;
 }
 
-BattleSetup *BattleSetup_New_PalPark(enum HeapID heapID, int balls) {
-    BattleSetup *setup = BattleSetup_New(heapID, BATTLE_TYPE_PAL_PARK);
+BattleSetup *BattleSetup_New_PalPark(HeapID heapId, int balls) {
+    BattleSetup *setup = BattleSetup_New(heapId, BATTLE_TYPE_PAL_PARK);
     setup->safariBalls = balls;
     return setup;
 }
 
-BattleSetup *BattleSetup_New_Tutorial(enum HeapID heapID, FieldSystem *fieldSystem) {
+BattleSetup *BattleSetup_New_Tutorial(HeapID heapId, FieldSystem *fieldSystem) {
     PlayerProfile *profile = Save_PlayerData_GetProfile(fieldSystem->saveData);
     Options *options = Save_PlayerData_GetOptionsAddr(fieldSystem->saveData);
-    BattleSetup *setup = BattleSetup_New(heapID, BATTLE_TYPE_TUTORIAL);
+    BattleSetup *setup = BattleSetup_New(heapId, BATTLE_TYPE_TUTORIAL | BATTLE_TYPE_SAFARI);
     setup->saveData = fieldSystem->saveData;
+    setup->safariBalls = 1;
+    // Apocrypha: the Ch1 Route 30 demo is GOLD's bare-handed rescue catch. He has
+    // no Pokemon on hand, so the battle is staged SAFARI-style (no send-out, no
+    // enemy turn) while keeping the TUTORIAL bit for its canned guarantees: the
+    // catch always succeeds (ov12_02247228 forces 4 shakes for TUTORIAL/PAL_PARK)
+    // and the one ball throw is auto-injected with no player input
+    // (BattleControllerPlayer_SelectionScreenInput). The backsprite stays the
+    // opposite-gender hero (matches his SPRITE_HEROINE overworld placeholder
+    // until real Gold art lands); the name shown is "Gold".
     {
-        MsgData *msgData = NewMsgDataFromNarc(MSGDATA_LOAD_LAZY, NARC_msgdata_msg, NARC_msg_msg_0445_bin, heapID);
+        MsgData *msgData = NewMsgDataFromNarc(MSGDATA_LOAD_LAZY, NARC_msgdata_msg, NARC_msg_msg_0375_R30_bin, heapId);
         {
-            String *name = String_New(PLAYER_NAME_LENGTH + 1, heapID);
-            ReadMsgDataIntoString(msgData, PlayerProfile_GetTrainerGender(profile) ^ 1, name);
+            String *name = String_New(PLAYER_NAME_LENGTH + 1, heapId);
+            ReadMsgDataIntoString(msgData, msg_0375_R30_00022, name);
             Save_Profile_PlayerName_Set(setup->profile[BATTLER_PLAYER], String_cstr(name));
             String_Delete(name);
         }
@@ -121,14 +130,17 @@ BattleSetup *BattleSetup_New_Tutorial(enum HeapID heapID, FieldSystem *fieldSyst
     sub_02052504(setup, fieldSystem);
     Options_Copy(options, setup->options);
     setup->timeOfDay = Field_GetTimeOfDay(fieldSystem);
-    Bag_AddItem(setup->bag, ITEM_POKE_BALL, 20, heapID);
+    Bag_AddItem(setup->bag, ITEM_POKE_BALL, 20, heapId);
     {
-        Pokemon *pokemon = AllocMonZeroed(heapID);
-        CreateMon(pokemon, SPECIES_MARILL, 5, 32, FALSE, 0, OT_ID_RANDOM_NO_SHINY, 0);
+        Pokemon *pokemon = AllocMonZeroed(heapId);
+        // The demo party is never sent out (safari staging); one placeholder mon
+        // keeps party code happy and leaves a discard slot for the caught Rattata
+        // (the whole setup is thrown away by Encounter_Delete afterwards).
+        CreateMon(pokemon, SPECIES_RATTATA, 2, 32, FALSE, 0, OT_ID_RANDOM_NO_SHINY, 0);
         Party_AddMon(setup->party[BATTLER_PLAYER], pokemon);
         CreateMon(pokemon, SPECIES_RATTATA, 2, 32, FALSE, 0, OT_ID_RANDOM_NO_SHINY, 0);
         Party_AddMon(setup->party[BATTLER_ENEMY], pokemon);
-        Heap_Free(pokemon);
+        FreeToHeap(pokemon);
     }
     setup->unk1CC[BATTLER_PLAYER] = 0;
     setup->storagePC = SaveArray_PCStorage_Get(fieldSystem->saveData);
@@ -145,25 +157,25 @@ void BattleSetup_Delete(BattleSetup *setup) {
 
     for (i = 0; i < BATTLER_MAX; ++i) {
         GF_ASSERT(setup->party[i] != NULL);
-        Heap_Free(setup->party[i]);
+        FreeToHeap(setup->party[i]);
     }
 
     for (i = 0; i < BATTLER_MAX; ++i) {
         GF_ASSERT(setup->profile[i] != NULL);
-        Heap_Free(setup->profile[i]);
+        FreeToHeap(setup->profile[i]);
     }
 
     for (i = 0; i < BATTLER_MAX; ++i) {
         GF_ASSERT(setup->chatot[i] != NULL);
-        Heap_Free(setup->chatot[i]);
+        FreeToHeap(setup->chatot[i]);
     }
 
-    Heap_Free(setup->bag);
-    Heap_Free(setup->pokedex);
-    Heap_Free(setup->options);
+    FreeToHeap(setup->bag);
+    FreeToHeap(setup->pokedex);
+    FreeToHeap(setup->options);
     sub_02067A78(setup->unk_134);
-    Heap_Free(setup->bugContestMon);
-    Heap_Free(setup);
+    FreeToHeap(setup->bugContestMon);
+    FreeToHeap(setup);
 }
 
 void BattleSetup_AddMonToParty(BattleSetup *setup, Pokemon *mon, int battlerId) {
@@ -278,7 +290,7 @@ void BattleSetup_InitForFixedLevelFacility(BattleSetup *setup, FieldSystem *fiel
     setup->terrain = TERRAIN_BUILDING;
     BattleSetup_SetProfile(setup, profile, BATTLER_PLAYER);
 
-    Pokemon *pokemon = AllocMonZeroed(HEAP_ID_FIELD2);
+    Pokemon *pokemon = AllocMonZeroed(HEAP_ID_FIELD);
     Party_InitWithMaxSize(setup->party[BATTLER_PLAYER], Party_GetCount(party));
     for (int i = 0; i < Party_GetCount(party); ++i) {
         CopyPokemonToPokemon(Party_GetMonByIndex(party, i), pokemon);
@@ -289,7 +301,7 @@ void BattleSetup_InitForFixedLevelFacility(BattleSetup *setup, FieldSystem *fiel
         }
         BattleSetup_AddMonToParty(setup, pokemon, BATTLER_PLAYER);
     }
-    Heap_Free(pokemon);
+    FreeToHeap(pokemon);
 
     Save_Bag_Copy(bag, setup->bag);
     Pokedex_Copy(pokedex, setup->pokedex);
@@ -313,7 +325,7 @@ void sub_020520B0(BattleSetup *setup, FieldSystem *fieldSystem, Party *party, u8
     Pokedex *pokedex;
     SOUND_CHATOT *chatot;
     Options *options;
-    LinkBattleRuleset *ruleset;
+    void *ruleset;
 
     profile = Save_PlayerData_GetProfile(fieldSystem->saveData);
     bag = Save_Bag_Get(fieldSystem->saveData);
@@ -345,7 +357,7 @@ void sub_020520B0(BattleSetup *setup, FieldSystem *fieldSystem, Party *party, u8
             }
             cnt = Party_GetCount(party);
         }
-        Pokemon *pokemon = AllocMonZeroed(HEAP_ID_FIELD2);
+        Pokemon *pokemon = AllocMonZeroed(HEAP_ID_FIELD);
         Party_InitWithMaxSize(setup->party[BATTLER_PLAYER], cnt);
         for (i = 0; i < cnt; ++i) {
             CopyPokemonToPokemon(Party_GetMonByIndex(party, partySlots_cpy[i] - 1), pokemon);
@@ -356,7 +368,7 @@ void sub_020520B0(BattleSetup *setup, FieldSystem *fieldSystem, Party *party, u8
             }
             BattleSetup_AddMonToParty(setup, pokemon, BATTLER_PLAYER);
         }
-        Heap_Free(pokemon);
+        FreeToHeap(pokemon);
     }
 
     if (ruleset != NULL && LinkBattleRuleset_GetRuleValue(ruleset, LINKBATTLERULE_DRAGON_RAGE_CLAUSE)) {
@@ -409,7 +421,7 @@ static void sub_0205230C(FieldSystem *fieldSystem, PlayerProfile *profile1, Play
         } else {
             balanceResult = savingsBalance;
         }
-        if (MomGift_TryEnqueueGiftOnBalanceChange(savings, balanceResult, savingsBalance)) {
+        if (sub_0209322C(savings, balanceResult, savingsBalance)) {
             sub_02092E14(FieldSystem_GetGearPhoneRingManager(fieldSystem), 12, TRUE);
         }
     }
@@ -489,22 +501,22 @@ static const Terrain _020FC4C0[] = {
 static Terrain FieldSystem_GetTerrainFromStandingTile(FieldSystem *fieldSystem, BattleBg battleBg) {
     u8 behavior = GetMetatileBehavior(fieldSystem, fieldSystem->location->x, fieldSystem->location->y);
 
-    if (MetatileBehavior_IsIce(behavior)) {
+    if (sub_0205B828(behavior)) {
         return TERRAIN_ICE;
     }
-    if (MetatileBehavior_IsTallGrass(behavior) || MetatileBehavior_IsVeryTallGrass(behavior)) {
+    if (MetatileBehavior_IsEncounterGrass(behavior) || sub_0205B6F4(behavior)) {
         return TERRAIN_GRASS;
     }
-    if (MetatileBehavior_IsSand(behavior)) {
+    if (sub_0205B798(behavior)) {
         return TERRAIN_SAND;
     }
-    if (MetatileBehavior_IsSnow(behavior)) {
+    if (sub_0205B8B8(behavior)) {
         return TERRAIN_SNOW;
     }
-    if (MetatileBehavior_IsMud(behavior)) {
+    if (sub_0205B8AC(behavior)) {
         return TERRAIN_GREAT_MARSH;
     }
-    if (MetatileBehavior_IsCaveFloor(behavior)) {
+    if (sub_0205B8D0(behavior)) {
         return TERRAIN_CAVE;
     }
     if (MetatileBehavior_IsSurfableWater(behavior)) {
@@ -522,7 +534,7 @@ static void sub_02052504(BattleSetup *setup, FieldSystem *fieldSystem) {
     PlayerSaveData *player = LocalFieldData_GetPlayer(Save_LocalFieldData_Get(fieldSystem->saveData));
     setup->battleBg = MapHeader_GetBattleBg(fieldSystem->location->mapId);
 
-    if (player->state == PLAYER_STATE_SURFING) {
+    if (player->unk4 == 2) {
         setup->battleBg = BATTLE_BG_OCEAN;
     }
 

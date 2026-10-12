@@ -50,10 +50,10 @@ _021FCEC8: ; jump table
 _021FCED8:
 	ldr r6, [r5]
 	add r0, r5, #0
-	bl Heap_Free
+	bl FreeToHeap
 	mov r0, #0xb
 	mov r1, #0xc
-	bl Heap_AllocAtEnd
+	bl AllocFromHeapAtEnd
 	str r0, [r7, #4]
 	str r6, [r0, #8]
 	ldr r0, [r4]
@@ -65,7 +65,7 @@ _021FCEF4:
 	add r7, r0, #0
 	mov r0, #0xb
 	add r1, r7, #0
-	bl Heap_AllocAtEnd
+	bl AllocFromHeapAtEnd
 	str r0, [r5, #4]
 	mov r1, #0
 	add r2, r7, #0
@@ -165,9 +165,9 @@ _021FCFBC:
 	b _021FCFDE
 _021FCFCE:
 	add r0, r5, #0
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r7, #0
-	bl Heap_Free
+	bl FreeToHeap
 	mov r0, #1
 	pop {r3, r4, r5, r6, r7, pc}
 _021FCFDE:
@@ -184,7 +184,7 @@ ov01_021FCFEC: ; 0x021FCFEC
 	add r5, r0, #0
 	mov r0, #4
 	mov r1, #0xd4
-	bl Heap_AllocAtEnd
+	bl AllocFromHeapAtEnd
 	add r4, r0, #0
 	mov r0, #4
 	add r1, r5, #0
@@ -233,7 +233,7 @@ _021FD050:
 	add r0, r5, #0
 	bl ov01_021FD128
 	add r0, r5, #0
-	bl Heap_Free
+	bl FreeToHeap
 	mov r0, #1
 	pop {r3, r4, r5, pc}
 _021FD060:
@@ -251,7 +251,7 @@ ov01_021FD064: ; 0x021FD064
 	add r0, r4, #0
 	add r1, r5, #0
 	mov r2, #0x20
-	bl HeapExp_FndInitAllocator
+	bl GF_ExpHeap_FndInitAllocator
 	add r0, r4, #0
 	add r0, #0x10
 	mov r1, #0x86

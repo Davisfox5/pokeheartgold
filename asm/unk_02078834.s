@@ -242,7 +242,7 @@ _020789CC:
 	ldr r2, _02078B28 ; =0x00040100
 	mov r0, #3
 	mov r1, #0x35
-	bl Heap_Create
+	bl CreateHeap
 	bl LoadOVY13
 	mov r0, #0x35
 	bl ov13_0221BA00
@@ -251,9 +251,9 @@ _020789CC:
 	b _02078B20
 _020789E8:
 	ldr r0, [r4]
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	ldr r0, [r4, #4]
 	add r0, r0, #1
 	str r0, [r4, #4]
@@ -276,7 +276,7 @@ _02078A16:
 	cmp r0, #0
 	bne _02078B20
 	ldr r0, [r4, #0x10]
-	bl Heap_Free
+	bl FreeToHeap
 	mov r0, #2
 	str r0, [r4, #4]
 	b _02078B20
@@ -410,14 +410,14 @@ sub_02078B2C: ; 0x02078B2C
 	push {r4, lr}
 	mov r0, #0xb
 	mov r1, #0x18
-	bl Heap_AllocAtEnd
+	bl AllocFromHeapAtEnd
 	mov r1, #0
 	mov r2, #0x18
 	add r4, r0, #0
 	bl MI_CpuFill8
 	mov r0, #0xb
 	mov r1, #0xc
-	bl Heap_AllocAtEnd
+	bl AllocFromHeapAtEnd
 	mov r1, #0
 	mov r2, #0xc
 	str r0, [r4]
@@ -471,7 +471,7 @@ sub_02078B9C: ; 0x02078B9C
 	add r0, r2, #0
 	mov r1, #0xc
 	add r4, r3, #0
-	bl Heap_Alloc
+	bl AllocFromHeap
 	add r2, r0, #0
 	strb r4, [r2]
 	mov r0, #2
@@ -528,7 +528,7 @@ _02078C08:
 	ldrb r0, [r0, #4]
 	str r0, [r4, #0x14]
 	ldr r0, [r4, #0x10]
-	bl Heap_Free
+	bl FreeToHeap
 	ldr r0, [r4, #4]
 	pop {r4, pc}
 	.balign 4, 0
@@ -541,7 +541,7 @@ sub_02078C18: ; 0x02078C18
 	add r0, r1, #0
 	mov r1, #0x3c
 	add r6, r2, #0
-	bl Heap_Alloc
+	bl AllocFromHeap
 	add r4, r0, #0
 	mov r1, #0
 	mov r2, #0x3c
@@ -572,7 +572,7 @@ _02078C5C: .word _02101260
 	thumb_func_start sub_02078C60
 sub_02078C60: ; 0x02078C60
 	push {r3, lr}
-	bl Heap_Free
+	bl FreeToHeap
 	ldr r0, _02078C70 ; =FS_OVERLAY_ID(OVY_90)
 	bl UnloadOverlayByID
 	pop {r3, pc}
@@ -587,7 +587,7 @@ sub_02078C74: ; 0x02078C74
 	add r0, r1, #0
 	mov r1, #0x40
 	add r6, r2, #0
-	bl Heap_Alloc
+	bl AllocFromHeap
 	add r4, r0, #0
 	mov r1, #0
 	mov r2, #0x40
@@ -614,7 +614,7 @@ _02078CB0: .word _02101270
 	thumb_func_start sub_02078CB4
 sub_02078CB4: ; 0x02078CB4
 	push {r3, lr}
-	bl Heap_Free
+	bl FreeToHeap
 	ldr r0, _02078CC4 ; =FS_OVERLAY_ID(OVY_90)
 	bl UnloadOverlayByID
 	pop {r3, pc}
@@ -629,7 +629,7 @@ sub_02078CC8: ; 0x02078CC8
 	add r0, r1, #0
 	mov r1, #0x3c
 	add r6, r2, #0
-	bl Heap_Alloc
+	bl AllocFromHeap
 	add r4, r0, #0
 	mov r1, #0
 	mov r2, #0x3c
@@ -660,7 +660,7 @@ _02078D0C: .word _021012A0
 	thumb_func_start sub_02078D10
 sub_02078D10: ; 0x02078D10
 	push {r3, lr}
-	bl Heap_Free
+	bl FreeToHeap
 	ldr r0, _02078D20 ; =FS_OVERLAY_ID(OVY_90)
 	bl UnloadOverlayByID
 	pop {r3, pc}

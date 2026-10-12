@@ -12,7 +12,7 @@
 .public StringExpandPlaceholders
 .public sub_0200CDAC
 .public DrawFrameAndWindow2
-.public Heap_Free
+.public FreeToHeap
 .public BgCommitTilemapBufferToVram
 .public FillBgTilemapRect
 .public AllocWindows

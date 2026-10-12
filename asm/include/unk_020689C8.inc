@@ -2,8 +2,8 @@
 #pragma once
 .public SysTask_CreateOnMainQueue
 .public SysTask_Destroy
-.public Heap_Alloc
-.public Heap_FreeExplicit
+.public AllocFromHeap
+.public FreeToHeapExplicit
 .public GF_AssertFail
 .public sub_020689C8
 .public sub_020689F8

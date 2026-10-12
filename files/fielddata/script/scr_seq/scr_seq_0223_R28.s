@@ -5,15 +5,19 @@
 
 	.rodata
 
-	ScrDef scr_seq_R28_000
-	ScrDef scr_seq_R28_001
-	ScrDefEnd
+	scrdef scr_seq_R28_000
+	scrdef scr_seq_R28_001
+	scrdef_end
 
 scr_seq_R28_000:
-	SetVar VAR_UNK_4126, 0
-	End
+	setvar VAR_UNK_4126, 0
+	end
 
 scr_seq_R28_001:
-	DirectionSignpostEx 1, 2, msg_0371_R28_00000
-	End
+	direction_signpost msg_0371_R28_00000, 1, 2, VAR_SPECIAL_RESULT
+	scrcmd_057 3
+	scrcmd_058
+	scrcmd_060 VAR_SPECIAL_RESULT
+	callstd std_signpost
+	end
 	.balign 4, 0

@@ -18,7 +18,6 @@
 #include "player_data.h"
 #include "render_window.h"
 #include "save_vars_flags.h"
-#include "screen_fade.h"
 #include "sound_02004A44.h"
 #include "sprite.h"
 #include "sprite_system.h"
@@ -28,6 +27,7 @@
 #include "touchscreen.h"
 #include "unk_02005D10.h"
 #include "unk_0200B150.h"
+#include "unk_0200FA24.h"
 #include "unk_020210A0.h"
 #include "vram_transfer_manager.h"
 #include "yes_no_prompt.h"
@@ -91,7 +91,7 @@ typedef struct AlphPuzzleTile {
 } AlphPuzzleTile;
 
 typedef struct AlphPuzzleData {
-    enum HeapID heapID;
+    HeapID heapId;
     MenuInputState menuInputState;
     int unkState;
     u16 subState;
@@ -553,14 +553,14 @@ static const OamManagerParam ov110_021E6EA4 = { 0, 128, 0, 32, 0, 128, 0, 32 };
 
 static const OamCharTransferParam ov110_021E6DD0 = { 5, 0, 0, GX_OBJVRAMMODE_CHAR_1D_32K, GX_OBJVRAMMODE_CHAR_1D_32K };
 
-static const ResdatIdList sResdatInfo = {
-    .charRes = NARC_resdat_resdat_00000010_bin,
-    .plttRes = NARC_resdat_resdat_00000011_bin,
-    .cellRes = NARC_resdat_resdat_00000009_bin,
-    .animRes = NARC_resdat_resdat_00000008_bin,
-    .mcelRes = 0xFFFF,
-    .manmRes = 0xFFFF,
-    .headerId = NARC_resdat_resdat_00000074_bin,
+static const u16 sResdatInfo[7] = {
+    NARC_resdat_resdat_00000010_bin, // GF_GFX_RES_TYPE_CHAR
+    NARC_resdat_resdat_00000011_bin, // GF_GFX_RES_TYPE_PLTT
+    NARC_resdat_resdat_00000009_bin, // GF_GFX_RES_TYPE_CELL
+    NARC_resdat_resdat_00000008_bin, // GF_GFX_RES_TYPE_ANIM
+    0xFFFF,                          // GF_GFX_RES_TYPE_MCEL
+    0xFFFF,                          // GF_GFX_RES_TYPE_MANM
+    NARC_resdat_resdat_00000074_bin,
 };
 
 static const UnmanagedSpriteTemplate sSpriteTemplates[3] = {
@@ -582,10 +582,10 @@ BOOL AlphPuzzle_Init(OverlayManager *man, int *state) {
     switch (*state) {
     case 0:
         AlphPuzzle_ScreenOff();
-        Heap_Create(HEAP_ID_3, HEAP_ID_ALPH_PUZZLE, 0x20000);
+        CreateHeap(HEAP_ID_3, HEAP_ID_ALPH_PUZZLE, 0x20000);
         AlphPuzzleData *data = OverlayManager_CreateAndGetData(man, sizeof(AlphPuzzleData), HEAP_ID_ALPH_PUZZLE);
         MI_CpuFill8(data, 0, sizeof(AlphPuzzleData));
-        data->heapID = HEAP_ID_ALPH_PUZZLE;
+        data->heapId = HEAP_ID_ALPH_PUZZLE;
         data->args = OverlayManager_GetArgs(man);
         Sound_SetSceneAndPlayBGM(74, 0, 0);
         AlphPuzzle_InitTextOptionsAndPuzzleIndex(data);
@@ -642,7 +642,7 @@ BOOL AlphPuzzle_Exit(OverlayManager *man, int *state) {
     AlphPuzzle_ScreenOff();
     AlphPuzzle_Finish(data);
     OverlayManager_FreeData(man);
-    Heap_Destroy(HEAP_ID_ALPH_PUZZLE);
+    DestroyHeap(HEAP_ID_ALPH_PUZZLE);
     return TRUE;
 }
 
@@ -651,12 +651,12 @@ static void AlphPuzzle_ScreenOff(void) {
     HBlankInterruptDisable();
     GfGfx_DisableEngineAPlanes();
     GfGfx_DisableEngineBPlanes();
-    GX_SetVisiblePlane(GX_PLANEMASK_NONE);
-    GXS_SetVisiblePlane(GX_PLANEMASK_NONE);
-    sub_0200FBF4(PM_LCD_TOP, RGB_BLACK);
-    sub_0200FBF4(PM_LCD_BOTTOM, RGB_BLACK);
-    ResetVisibleHardwareWindows(PM_LCD_TOP);
-    ResetVisibleHardwareWindows(PM_LCD_BOTTOM);
+    GX_SetVisiblePlane(0);
+    GXS_SetVisiblePlane(0);
+    sub_0200FBF4(0, 0);
+    sub_0200FBF4(1, 0);
+    sub_0200FBDC(0);
+    sub_0200FBDC(1);
 }
 
 static void AlphPuzzle_InitTextOptionsAndPuzzleIndex(AlphPuzzleData *data) {
@@ -699,7 +699,7 @@ static BOOL AlphPuzzle_OverlayExitStep(AlphPuzzleData *data) {
 static int AlphPuzzleMainSeq_FadeIn(AlphPuzzleData *data) {
     switch (data->unkState) {
     case 0:
-        BeginNormalPaletteFade(FADE_BOTH_SCREENS, FADE_TYPE_BRIGHTNESS_IN, FADE_TYPE_BRIGHTNESS_IN, RGB_BLACK, 6, 1, data->heapID);
+        BeginNormalPaletteFade(0, 1, 1, 0, 6, 1, data->heapId);
         data->unkState++;
         break;
     case 1:
@@ -715,7 +715,7 @@ static int AlphPuzzleMainSeq_FadeIn(AlphPuzzleData *data) {
 static int AlphPuzzleMainSeq_FadeOut(AlphPuzzleData *data) {
     switch (data->unkState) {
     case 0:
-        BeginNormalPaletteFade(FADE_BOTH_SCREENS, FADE_TYPE_BRIGHTNESS_OUT, FADE_TYPE_BRIGHTNESS_OUT, RGB_BLACK, 6, 1, data->heapID);
+        BeginNormalPaletteFade(0, 0, 0, 0, 6, 1, data->heapId);
         data->unkState++;
         break;
     case 1:
@@ -773,8 +773,8 @@ static void AlphPuzzle_TeardownGraphics(AlphPuzzleData *data) {
 static void AlphPuzzle_DrawHintTextAndHideCursor(AlphPuzzleData *data) {
     AlphPuzzle_ToggleDropCursorSprite(data, 0);
     AlphPuzzle_PrintHintText(data);
-    ScheduleBgTilemapBufferTransfer(data->bgConfig, GF_BG_LYR_MAIN_2);
-    ScheduleBgTilemapBufferTransfer(data->bgConfig, GF_BG_LYR_SUB_0);
+    ScheduleBgTilemapBufferTransfer(data->bgConfig, 2);
+    ScheduleBgTilemapBufferTransfer(data->bgConfig, 4);
 }
 
 static int AlphPuzzle_CheckInput(AlphPuzzleData *data) {
@@ -1003,13 +1003,13 @@ static int AlphPuzzleMainSeq_Clear_impl(AlphPuzzleData *data) {
         data->subState++;
         break;
     case 1:
-        PaletteData_BlendPalette(data->palette, PLTTBUF_MAIN_OBJ, 0x2b, 5, data->sceneTimer, RGB_WHITE);
+        PaletteData_BlendPalette(data->palette, PLTTBUF_MAIN_OBJ, 0x2b, 5, data->sceneTimer, 0x7FFF);
         if (data->sceneTimer++ >= 15) {
             data->subState++;
         }
         break;
     case 2:
-        PaletteData_BlendPalette(data->palette, PLTTBUF_MAIN_OBJ, 0x2b, 5, data->sceneTimer, RGB_WHITE);
+        PaletteData_BlendPalette(data->palette, PLTTBUF_MAIN_OBJ, 0x2b, 5, data->sceneTimer, 0x7FFF);
         if (data->sceneTimer-- == 0) {
             data->subState++;
         }
@@ -1068,7 +1068,7 @@ static void AlphPuzzle_SetGraphicsBanks() {
 
 static void AlphPuzzle_AllocBackgroundBuffers(AlphPuzzleData *data) {
     AlphPuzzle_SetGraphicsBanks();
-    data->bgConfig = BgConfig_Alloc(data->heapID);
+    data->bgConfig = BgConfig_Alloc(data->heapId);
 
     GraphicsModes mode = sGraphicsMode;
 
@@ -1100,10 +1100,10 @@ static void AlphPuzzle_AllocBackgroundBuffers(AlphPuzzleData *data) {
     InitBgFromTemplate(data->bgConfig, 3, &temp6, 0);
     BgClearTilemapBufferAndCommit(data->bgConfig, 3);
 
-    BG_ClearCharDataRange(4, 32, 0, data->heapID);
-    BG_ClearCharDataRange(7, 32, 0, data->heapID);
-    BG_ClearCharDataRange(0, 32, 0, data->heapID);
-    BG_ClearCharDataRange(3, 64, 0, data->heapID);
+    BG_ClearCharDataRange(4, 32, 0, data->heapId);
+    BG_ClearCharDataRange(7, 32, 0, data->heapId);
+    BG_ClearCharDataRange(0, 32, 0, data->heapId);
+    BG_ClearCharDataRange(3, 64, 0, data->heapId);
 }
 
 static void AlphPuzzle_FreeBackgroundBuffers(AlphPuzzleData *data) {
@@ -1113,43 +1113,43 @@ static void AlphPuzzle_FreeBackgroundBuffers(AlphPuzzleData *data) {
     FreeBgTilemapBuffer(data->bgConfig, 7);
     FreeBgTilemapBuffer(data->bgConfig, 6);
     FreeBgTilemapBuffer(data->bgConfig, 4);
-    Heap_Free(data->bgConfig);
+    FreeToHeap(data->bgConfig);
 
     GX_SetDispSelect(GX_DISP_SELECT_MAIN_SUB);
 }
 
 static void AlphPuzzle_LoadBackgroundGraphics(AlphPuzzleData *data) {
-    NARC *narc = NARC_New(NARC_application_annon_puzzle_gra, data->heapID);
-    data->palette = PaletteData_Init(data->heapID);
+    NARC *narc = NARC_New(NARC_application_annon_puzzle_gra, data->heapId);
+    data->palette = PaletteData_Init(data->heapId);
 
-    PaletteData_AllocBuffers(data->palette, PLTTBUF_MAIN_BG, 256, data->heapID);
-    PaletteData_AllocBuffers(data->palette, PLTTBUF_SUB_BG, 256, data->heapID);
-    PaletteData_AllocBuffers(data->palette, PLTTBUF_MAIN_OBJ, 256, data->heapID);
+    PaletteData_AllocBuffers(data->palette, PLTTBUF_MAIN_BG, 256, data->heapId);
+    PaletteData_AllocBuffers(data->palette, PLTTBUF_SUB_BG, 256, data->heapId);
+    PaletteData_AllocBuffers(data->palette, PLTTBUF_MAIN_OBJ, 256, data->heapId);
 
-    PaletteData_LoadFromOpenNarc(data->palette, narc, NARC_puzzle_gra_puzzle_gra_00000010_NCLR, data->heapID, PLTTBUF_MAIN_BG, 256, 0, 0);
-    PaletteData_LoadFromOpenNarc(data->palette, narc, NARC_puzzle_gra_puzzle_gra_00000010_NCLR, data->heapID, PLTTBUF_SUB_BG, 256, 0, 0);
-    PaletteData_LoadFromOpenNarc(data->palette, narc, NARC_puzzle_gra_puzzle_gra_00000000_NCLR, data->heapID, PLTTBUF_MAIN_OBJ, 256, 0, 0);
+    PaletteData_LoadFromOpenNarc(data->palette, narc, NARC_puzzle_gra_puzzle_gra_00000010_NCLR, data->heapId, PLTTBUF_MAIN_BG, 256, 0, 0);
+    PaletteData_LoadFromOpenNarc(data->palette, narc, NARC_puzzle_gra_puzzle_gra_00000010_NCLR, data->heapId, PLTTBUF_SUB_BG, 256, 0, 0);
+    PaletteData_LoadFromOpenNarc(data->palette, narc, NARC_puzzle_gra_puzzle_gra_00000000_NCLR, data->heapId, PLTTBUF_MAIN_OBJ, 256, 0, 0);
 
-    GfGfxLoader_LoadCharDataFromOpenNarc(narc, NARC_puzzle_gra_puzzle_gra_00000011_NCGR, data->bgConfig, GF_BG_LYR_SUB_3, 0, 0, 0, data->heapID);
-    GfGfxLoader_LoadScrnDataFromOpenNarc(narc, NARC_puzzle_gra_puzzle_gra_00000014_NSCR, data->bgConfig, GF_BG_LYR_SUB_3, 0, 0, 0, data->heapID);
-    GfGfxLoader_LoadScrnDataFromOpenNarc(narc, NARC_puzzle_gra_puzzle_gra_00000015_NSCR, data->bgConfig, GF_BG_LYR_SUB_2, 0, 0, 0, data->heapID);
-    GfGfxLoader_LoadCharDataFromOpenNarc(narc, NARC_puzzle_gra_puzzle_gra_00000011_NCGR, data->bgConfig, GF_BG_LYR_MAIN_3, 0, 0, 0, data->heapID);
+    GfGfxLoader_LoadCharDataFromOpenNarc(narc, NARC_puzzle_gra_puzzle_gra_00000011_NCGR, data->bgConfig, GF_BG_LYR_SUB_3, 0, 0, 0, data->heapId);
+    GfGfxLoader_LoadScrnDataFromOpenNarc(narc, NARC_puzzle_gra_puzzle_gra_00000014_NSCR, data->bgConfig, GF_BG_LYR_SUB_3, 0, 0, 0, data->heapId);
+    GfGfxLoader_LoadScrnDataFromOpenNarc(narc, NARC_puzzle_gra_puzzle_gra_00000015_NSCR, data->bgConfig, GF_BG_LYR_SUB_2, 0, 0, 0, data->heapId);
+    GfGfxLoader_LoadCharDataFromOpenNarc(narc, NARC_puzzle_gra_puzzle_gra_00000011_NCGR, data->bgConfig, GF_BG_LYR_MAIN_3, 0, 0, 0, data->heapId);
 
-    GfGfxLoader_LoadScrnDataFromOpenNarc(narc, NARC_puzzle_gra_puzzle_gra_00000012_NSCR, data->bgConfig, GF_BG_LYR_MAIN_3, 0, 0, 0, data->heapID);
-    data->screenDataAlloc = GfGfxLoader_GetScrnDataFromOpenNarc(narc, NARC_puzzle_gra_puzzle_gra_00000013_NSCR, 0, &data->screenData, data->heapID);
+    GfGfxLoader_LoadScrnDataFromOpenNarc(narc, NARC_puzzle_gra_puzzle_gra_00000012_NSCR, data->bgConfig, GF_BG_LYR_MAIN_3, 0, 0, 0, data->heapId);
+    data->screenDataAlloc = GfGfxLoader_GetScrnDataFromOpenNarc(narc, NARC_puzzle_gra_puzzle_gra_00000013_NSCR, 0, &data->screenData, data->heapId);
 
     NARC_Delete(narc);
 
-    PaletteData_LoadNarc(data->palette, NARC_a_0_3_8, data->frame + 26, data->heapID, PLTTBUF_MAIN_BG, 32, 80);
-    PaletteData_LoadNarc(data->palette, NARC_graphic_font, 8, data->heapID, PLTTBUF_MAIN_BG, 32, 64);
+    PaletteData_LoadNarc(data->palette, NARC_a_0_3_8, data->frame + 26, data->heapId, PLTTBUF_MAIN_BG, 32, 80);
+    PaletteData_LoadNarc(data->palette, NARC_graphic_font, 8, data->heapId, PLTTBUF_MAIN_BG, 32, 64);
 
-    LoadUserFrameGfx2(data->bgConfig, GF_BG_LYR_MAIN_0, 1, 5, data->frame, data->heapID);
+    LoadUserFrameGfx2(data->bgConfig, GF_BG_LYR_MAIN_0, 1, 5, data->frame, data->heapId);
     PaletteData_SetAutoTransparent(data->palette, TRUE);
     PaletteData_PushTransparentBuffers(data->palette);
 }
 
 static void AlphPuzzle_FreeBackgroundGraphics(AlphPuzzleData *data) {
-    Heap_Free(data->screenDataAlloc);
+    FreeToHeap(data->screenDataAlloc);
     PaletteData_FreeBuffers(data->palette, PLTTBUF_MAIN_OBJ);
     PaletteData_FreeBuffers(data->palette, PLTTBUF_SUB_BG);
     PaletteData_FreeBuffers(data->palette, PLTTBUF_MAIN_BG);
@@ -1157,11 +1157,11 @@ static void AlphPuzzle_FreeBackgroundGraphics(AlphPuzzleData *data) {
 }
 
 static void AlphPuzzle_InitText(AlphPuzzleData *data) {
-    FontID_Alloc(4, data->heapID);
+    FontID_Alloc(4, data->heapId);
 
-    data->msgData = NewMsgDataFromNarc(MSGDATA_LOAD_DIRECT, NARC_msgdata_msg, NARC_msg_msg_0002_bin, data->heapID);
-    data->messageFormat = MessageFormat_New_Custom(6, 16, data->heapID);
-    data->unk30 = String_New(0x80, data->heapID);
+    data->msgData = NewMsgDataFromNarc(MSGDATA_LOAD_DIRECT, NARC_msgdata_msg, NARC_msg_msg_0002_bin, data->heapId);
+    data->messageFormat = MessageFormat_New_Custom(6, 16, data->heapId);
+    data->unk30 = String_New(0x80, data->heapId);
 
     data->quitText = NewString_ReadMsgData(data->msgData, msg_0002_00000);
 
@@ -1189,7 +1189,7 @@ static void AlphPuzzle_CreateWindows(AlphPuzzleData *data) {
         AddWindow(data->bgConfig, &data->window[i], &sWindowTemplates[i]);
         FillWindowPixelBuffer(&data->window[i], 0);
     }
-    data->yesNoPrompt = YesNoPrompt_Create(data->heapID);
+    data->yesNoPrompt = YesNoPrompt_Create(data->heapId);
 }
 
 static void AlphPuzzle_DestroyWindows(AlphPuzzleData *data) {
@@ -1201,14 +1201,14 @@ static void AlphPuzzle_DestroyWindows(AlphPuzzleData *data) {
 }
 
 static void AlphPuzzle_InitSpriteGraphics(AlphPuzzleData *data) {
-    GF_CreateVramTransferManager(32, data->heapID);
-    data->spriteRenderer = SpriteSystem_Alloc(data->heapID);
+    GF_CreateVramTransferManager(32, data->heapId);
+    data->spriteRenderer = SpriteSystem_Alloc(data->heapId);
     SpriteSystem_Init(data->spriteRenderer, &ov110_021E6EA4, &ov110_021E6DD0, 3);
-    thunk_ClearMainOAM(data->heapID);
-    thunk_ClearSubOAM(data->heapID);
+    sub_0200B2E0(data->heapId);
+    sub_0200B2E8(data->heapId);
     data->spriteGfxHandler = SpriteManager_New(data->spriteRenderer);
     SpriteSystem_InitSprites(data->spriteRenderer, data->spriteGfxHandler, ALPH_SPRITE_INDEX_MAX);
-    sub_0200D2A4(data->spriteRenderer, data->spriteGfxHandler, &sResdatInfo, 2, 1);
+    sub_0200D2A4(data->spriteRenderer, data->spriteGfxHandler, sResdatInfo, 2, 1);
 }
 
 static void AlphPuzzle_DestroySpriteGraphicsEngine(AlphPuzzleData *data) {
@@ -1217,7 +1217,7 @@ static void AlphPuzzle_DestroySpriteGraphicsEngine(AlphPuzzleData *data) {
     SpriteSystem_Free(data->spriteRenderer);
     data->spriteRenderer = NULL;
     GF_DestroyVramTransferManager();
-    thunk_ClearMainOAM(data->heapID);
+    sub_0200B2E0(data->heapId);
 }
 
 static void AlphPuzzle_CreateSpriteGraphics(AlphPuzzleData *data) {
@@ -1409,7 +1409,7 @@ typedef struct AlphPuzzleQuitTaskData {
 } AlphPuzzleQuitTaskData;
 
 static void AlphPuzzle_CreateQuitTask(AlphPuzzleData *data) {
-    AlphPuzzleQuitTaskData *unkStruct = Heap_AllocAtEnd(data->heapID, sizeof(AlphPuzzleQuitTaskData));
+    AlphPuzzleQuitTaskData *unkStruct = AllocFromHeapAtEnd(data->heapId, sizeof(AlphPuzzleQuitTaskData));
     MI_CpuFill8(unkStruct, 0, sizeof(AlphPuzzleQuitTaskData));
     unkStruct->data = data;
     SysTask_CreateOnMainQueue(Task_AlphPuzzle_WaitDropCursorAnimOnQuit, unkStruct, 0);
@@ -1423,7 +1423,7 @@ static void Task_AlphPuzzle_WaitDropCursorAnimOnQuit(SysTask *task, void *_data)
         AlphPuzzle_ToggleDropCursorSprite(data->data, 0);
         data->data->quitTaskActive = 0;
         MI_CpuFill8(data, 0, sizeof(AlphPuzzleQuitTaskData));
-        Heap_Free(data);
+        FreeToHeap(data);
         SysTask_Destroy(task);
     }
 }

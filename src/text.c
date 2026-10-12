@@ -52,7 +52,7 @@ static void DestroyTextPrinterSysTask(u8 printerId) {
     TextPrinter *printer = SysTask_GetData(sTextPrinterTasks[printerId]);
     if (printer != NULL) {
         sub_02020548(printer);
-        Heap_Free(printer);
+        FreeToHeap(printer);
     }
 
     SysTask_Destroy(sTextPrinterTasks[printerId]);
@@ -151,7 +151,7 @@ static u8 AddTextPrinter(TextPrinterTemplate *template, u32 speed, PrinterCallba
         return 0xFF;
     }
 
-    TextPrinter *printer = Heap_Alloc(HEAP_ID_DEFAULT, sizeof(TextPrinter));
+    TextPrinter *printer = AllocFromHeap(HEAP_ID_DEFAULT, sizeof(TextPrinter));
     printer->active = TRUE;
     printer->state = 0;
     printer->textSpeedBottom = speed;
@@ -193,7 +193,7 @@ static u8 AddTextPrinter(TextPrinterTemplate *template, u32 speed, PrinterCallba
     }
 
     sub_02020548(printer);
-    Heap_Free(printer);
+    FreeToHeap(printer);
 
     return MAX_TEXT_PRINTERS;
 }
@@ -283,12 +283,12 @@ static void sub_020204B8(TextPrinter *printer) {
 }
 
 static u16 *LoadScreenFocusIndicatorGraphics(void) {
-    u16 *ret = Heap_Alloc(HEAP_ID_DEFAULT, 32 * 24 * sizeof(u16));
+    u16 *ret = AllocFromHeap(HEAP_ID_DEFAULT, 32 * 24 * sizeof(u16));
 
     NNSG2dCharacterData *g2dCharData;
     void *charData = GfGfxLoader_GetCharData(NARC_graphic_font, 6, FALSE, &g2dCharData, HEAP_ID_DEFAULT);
     MI_CpuCopy32(g2dCharData->pRawData, ret, 32 * 24 * sizeof(u16));
-    Heap_Free(charData);
+    FreeToHeap(charData);
 
     return ret;
 }
@@ -307,7 +307,7 @@ void RenderScreenFocusIndicatorTile(TextPrinter *printer, u32 unusedX, u32 unuse
 
 static void sub_02020548(TextPrinter *printer) {
     if (printer->unk30 != NULL) {
-        Heap_Free(printer->unk30);
+        FreeToHeap(printer->unk30);
         printer->unk30 = NULL;
     }
 }

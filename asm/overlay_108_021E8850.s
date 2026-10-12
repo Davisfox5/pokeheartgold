@@ -21,7 +21,7 @@ _021E8862:
 	mov r0, #3
 	mov r1, #0x5f
 	lsl r2, r2, #0xe
-	bl Heap_Create
+	bl CreateHeap
 	add r0, r4, #0
 	bl OverlayManager_GetArgs
 	mov r1, #0x53
@@ -84,7 +84,7 @@ _021E88DA:
 	add r0, r6, #0
 	bl OverlayManager_FreeData
 	add r0, r5, #0
-	bl Heap_Destroy
+	bl DestroyHeap
 	mov r0, #1
 	pop {r4, r5, r6, pc}
 	.balign 4, 0
@@ -282,7 +282,7 @@ ov108_021E8A88: ; 0x021E8A88
 	mov r0, #0xcd
 	lsl r0, r0, #2
 	ldr r0, [r4, r0]
-	bl Heap_Free
+	bl FreeToHeap
 	add r2, r4, #0
 	ldr r0, [r4, #0x20]
 	mov r1, #0
@@ -340,9 +340,9 @@ ov108_021E8AD4: ; 0x021E8AD4
 	mov r1, #0
 	bl sub_0200FBF4
 	mov r0, #0
-	bl ResetVisibleHardwareWindows
+	bl sub_0200FBDC
 	mov r0, #1
-	bl ResetVisibleHardwareWindows
+	bl sub_0200FBDC
 	pop {r3, pc}
 	.balign 4, 0
 _021E8B1C: .word 0xFFFFE0FF
@@ -652,7 +652,7 @@ ov108_021E8CD4: ; 0x021E8CD4
 	add r6, r0, #0
 	ldr r0, [r5, #0x14]
 	add r1, r6, #0
-	bl Heap_Alloc
+	bl AllocFromHeap
 	add r1, r5, #0
 	add r1, #0xec
 	str r0, [r1]
@@ -671,7 +671,7 @@ ov108_021E8CD4: ; 0x021E8CD4
 	add r6, r0, #0
 	ldr r0, [r5, #0x14]
 	add r1, r6, #0
-	bl Heap_Alloc
+	bl AllocFromHeap
 	add r1, r5, #0
 	add r1, #0xe8
 	str r0, [r1]
@@ -686,7 +686,7 @@ ov108_021E8CD4: ; 0x021E8CD4
 	add r0, r5, #4
 	add r1, r4, #0
 	mov r2, #0x20
-	bl HeapExp_FndInitAllocator
+	bl GF_ExpHeap_FndInitAllocator
 	mov r0, #0x28
 	add r1, r4, #0
 	bl NARC_New
@@ -781,11 +781,11 @@ _021E8E76:
 	add r0, r4, #0
 	add r0, #0xe8
 	ldr r0, [r0]
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r4, #0
 	add r0, #0xec
 	ldr r0, [r0]
-	bl Heap_Free
+	bl FreeToHeap
 	ldr r0, [r4, #0x20]
 	bl NARC_Delete
 	ldr r0, [r4, #0x1c]
@@ -1113,7 +1113,7 @@ _021E9124:
 	ldr r0, [r6]
 	cmp r0, #0
 	beq _021E912E
-	bl Heap_Free
+	bl FreeToHeap
 _021E912E:
 	add r0, r6, #0
 	mov r1, #0
@@ -1212,7 +1212,7 @@ ov108_021E91D4: ; 0x021E91D4
 	add r0, r0, #4
 	bl NNS_G3dFreeAnmObj
 	ldr r0, [r4]
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r4, #0
 	mov r1, #0
 	mov r2, #0x14
@@ -2269,7 +2269,7 @@ ov108_021E9A08: ; 0x021E9A08
 	bl FreeBgTilemapBuffer
 	ldr r0, _021E9A5C ; =0x00000438
 	ldr r0, [r4, r0]
-	bl Heap_Free
+	bl FreeToHeap
 	pop {r4, pc}
 	.balign 4, 0
 _021E9A5C: .word 0x00000438
@@ -2455,14 +2455,14 @@ ov108_021E9BD4: ; 0x021E9BD4
 	bl G2x_SetBlendAlpha_
 	ldr r0, _021E9C0C ; =0x00000528
 	ldr r0, [r4, r0]
-	bl Heap_Free
+	bl FreeToHeap
 	mov r0, #0x52
 	lsl r0, r0, #4
 	ldr r0, [r4, r0]
-	bl Heap_Free
+	bl FreeToHeap
 	ldr r0, _021E9C10 ; =0x00000518
 	ldr r0, [r4, r0]
-	bl Heap_Free
+	bl FreeToHeap
 	add sp, #4
 	pop {r3, r4, pc}
 	nop
@@ -2760,9 +2760,9 @@ ov108_021E9E10: ; 0x021E9E10
 	ldr r2, _021E9E7C ; =ov108_021EAAB0
 	bl sub_0200D2A4
 	ldr r0, [r4]
-	bl thunk_ClearMainOAM
+	bl sub_0200B2E0
 	ldr r0, [r4]
-	bl thunk_ClearSubOAM
+	bl sub_0200B2E8
 	add sp, #4
 	pop {r3, r4, pc}
 	.balign 4, 0
@@ -2791,9 +2791,9 @@ ov108_021E9E80: ; 0x021E9E80
 	str r1, [r4, r0]
 	bl GF_DestroyVramTransferManager
 	ldr r0, [r4]
-	bl thunk_ClearMainOAM
+	bl sub_0200B2E0
 	ldr r0, [r4]
-	bl thunk_ClearSubOAM
+	bl sub_0200B2E8
 	pop {r4, pc}
 	.balign 4, 0
 _021E9EB4: .word 0x0000043C
@@ -3659,7 +3659,7 @@ ov108_021EA584: ; 0x021EA584
 	ldr r0, [r5]
 	mov r1, #0x14
 	add r7, r2, #0
-	bl Heap_Alloc
+	bl AllocFromHeap
 	mov r1, #0
 	mov r2, #0x14
 	add r4, r0, #0
@@ -3719,7 +3719,7 @@ ov108_021EA5E4: ; 0x021EA5E4
 	sub r0, r0, #1
 	str r0, [r1]
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r5, #0
 	bl SysTask_Destroy
 _021EA61E:
@@ -3799,7 +3799,7 @@ _021EA69C:
 	lsl r5, r6, #2
 	ldr r0, [sp, #0x28]
 	add r1, r6, r5
-	bl Heap_Alloc
+	bl AllocFromHeap
 	mov r1, #0
 	add r2, r6, r5
 	str r0, [sp, #0x10]
@@ -3818,7 +3818,7 @@ _021EA6B4:
 	ldr r2, [sp, #4]
 	add r0, r5, #2
 	add r1, r6, #0
-	bl GetSafariObjectConfig
+	bl sub_02097268
 	ldrb r1, [r5, #3]
 	lsl r0, r1, #0x1c
 	lsl r1, r1, #0x19

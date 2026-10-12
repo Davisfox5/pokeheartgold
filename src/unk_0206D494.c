@@ -7,8 +7,10 @@
 #include "msgdata/msg.naix"
 
 #include "assert.h"
+#include "field_player_avatar.h"
 #include "field_system.h"
 #include "field_warp_tasks.h"
+#include "fieldmap.h"
 #include "gf_gfx_loader.h"
 #include "gymmick.h"
 #include "heap.h"
@@ -18,7 +20,6 @@
 #include "msgdata.h"
 #include "npc_trade.h"
 #include "overlay_111.h"
-#include "player_avatar.h"
 #include "player_data.h"
 #include "pm_string.h"
 #include "pokemon.h"
@@ -28,7 +29,6 @@
 #include "save_vars_flags.h"
 #include "scrcmd.h"
 #include "script.h"
-#include "script_manager.h"
 #include "sys_flags.h"
 #include "task.h"
 #include "unk_02005D10.h"
@@ -60,10 +60,10 @@ static BOOL MonIsInGameTradePokeInternal(Pokemon *mon, NPCTrade *trade, NpcTrade
 static BOOL Task_BugContest_PromptSwapPokemon(TaskManager *taskManager);
 
 BOOL sub_0206D494(FieldSystem *fieldSystem) {
-    LocalMapObject *unk1 = MapObjectManager_GetFirstActiveObjectWithMovement1(fieldSystem->mapObjectManager);
+    LocalMapObject *unk1 = sub_0205C600(fieldSystem->mapObjectManager);
     LocalMapObject *unk2 = sub_0206D590(unk1);
     if (unk2) {
-        UnkStruct_0206D494 *unkStruct = Heap_AllocAtEnd(HEAP_ID_FIELD2, sizeof(UnkStruct_0206D494));
+        UnkStruct_0206D494 *unkStruct = AllocFromHeapAtEnd(HEAP_ID_FIELD, sizeof(UnkStruct_0206D494));
         unkStruct->unk00 = unk2;
         unkStruct->unk04 = NULL;
         unkStruct->unk08 = MapObject_GetFacingDirection(unk1);
@@ -82,7 +82,7 @@ static BOOL sub_0206D4E4(TaskManager *taskManager) {
     u32 *state = TaskManager_GetStatePtr(taskManager);
     switch (*state) {
     case 0:
-        if (MapObject_IsMovementPaused(MapObjectManager_GetFirstActiveObjectWithMovement1(fieldSystem->mapObjectManager))) {
+        if (MapObject_IsMovementPaused(sub_0205C600(fieldSystem->mapObjectManager))) {
             PlaySE(SEQ_SE_GS_HYOUKAI_SUBERU);
             (*state)++;
         }
@@ -104,7 +104,7 @@ static BOOL sub_0206D4E4(TaskManager *taskManager) {
         break;
     case 3:
         sub_0206D850(fieldSystem->playerAvatar);
-        Heap_Free(unkStruct);
+        FreeToHeap(unkStruct);
         return TRUE;
     }
     return FALSE;
@@ -113,10 +113,10 @@ static BOOL sub_0206D4E4(TaskManager *taskManager) {
 static LocalMapObject *sub_0206D590(LocalMapObject *object) {
     MapObjectManager *manager = MapObject_GetManager(object);
     u32 direction = MapObject_GetFacingDirection(object);
-    u32 x = MapObject_GetXCoord(object);
+    u32 x = MapObject_GetCurrentX(object);
     u32 dx = GetDeltaXByFacingDirection(direction);
-    u32 y = MapObject_GetYCoord(object);
-    u32 z = MapObject_GetZCoord(object);
+    u32 y = MapObject_GetCurrentY(object);
+    u32 z = MapObject_GetCurrentZ(object);
     u32 dy = GetDeltaYByFacingDirection(direction);
     LocalMapObject *obj = sub_0206D614(manager, x + dx, y, z + dy);
     if (obj) {
@@ -139,10 +139,10 @@ static LocalMapObject *sub_0206D614(MapObjectManager *manager, u32 x, u32 a2, u3
     do {
         if (MapObject_GetFlagsBitsMask(object, MAPOBJECTFLAG_ACTIVE)
             && !MapObject_GetFlagsBitsMask(object, MAPOBJECTFLAG_UNK18)) {
-            u32 curX = MapObject_GetXCoord(object);
-            u32 curZ = MapObject_GetZCoord(object);
+            u32 curX = MapObject_GetCurrentX(object);
+            u32 curZ = MapObject_GetCurrentZ(object);
             if (curX == x && curZ == y) {
-                s32 y = MapObject_GetYCoord(object) - a2;
+                s32 y = MapObject_GetCurrentY(object) - a2;
                 if (y < 0) {
                     y = -y;
                 }
@@ -160,10 +160,10 @@ static u32 sub_0206D688(UnkStruct_0206D494 *a0) {
     switch (a0->unk09) {
     case 0:
         if (MapObject_IsMovementPaused(a0->unk00)) {
-            u32 x = MapObject_GetXCoord(a0->unk00);
+            u32 x = MapObject_GetCurrentX(a0->unk00);
             u32 dx = GetDeltaXByFacingDirection(a0->unk08);
-            u32 y = MapObject_GetYCoord(a0->unk00);
-            u32 z = MapObject_GetZCoord(a0->unk00);
+            u32 y = MapObject_GetCurrentY(a0->unk00);
+            u32 z = MapObject_GetCurrentZ(a0->unk00);
             u32 dy = GetDeltaYByFacingDirection(a0->unk08);
             u32 flags = sub_0206D7B8(a0->unk00, x + dx, y, z + dy);
             if (flags & 2) {
@@ -225,7 +225,8 @@ static u32 sub_0206D7B8(LocalMapObject *object, u32 x, u32 height, u32 y) {
     if (sub_020549F4(MapObject_GetFieldSystem(object), &position, x, y, &unk) == 1) {
         flags |= 1;
     }
-    if (MetatileBehavior_IsIce(GetMetatileBehavior(MapObject_GetFieldSystem(object), x, y)) == FALSE) {
+    u8 behavior = GetMetatileBehavior(MapObject_GetFieldSystem(object), x, y);
+    if (sub_0205B828(behavior) == 0) {
         flags |= 4;
     }
     if (sub_02060BFC(object, x, height, y) == 1) {
@@ -256,12 +257,12 @@ static u32 sub_0206D81C(u32 direction) {
 }
 
 static void sub_0206D850(PlayerAvatar *playerAvatar) {
-    if (PlayerAvatar_CheckForcedMovement(playerAvatar) == TRUE) {
+    if (PlayerAvatar_CheckFlag0(playerAvatar) == TRUE) {
         MapObject_ClearFlagsBits(PlayerAvatar_GetMapObject(playerAvatar), (MapObjectFlagBits)(MAPOBJECTFLAG_UNK7 | MAPOBJECTFLAG_UNK8));
         if (PlayerAvatar_CheckFlag7(playerAvatar) == 0) {
-            PlayerAvatar_ClearUnk24ClearFlag2(playerAvatar);
+            sub_0205C74C(playerAvatar);
         }
-        PlayerAvatar_SetForcedMovement(playerAvatar, FALSE);
+        PlayerAvatar_SetFlag0(playerAvatar, 0);
         PlayerAvatar_SetFlag7(playerAvatar, 0);
         PlayerAvatar_SetFlag5(playerAvatar, 0);
     }
@@ -269,9 +270,9 @@ static void sub_0206D850(PlayerAvatar *playerAvatar) {
 }
 
 BOOL MonIsInGameTradePoke(Pokemon *mon, NpcTradeNum tradeNum) {
-    NPCTrade *trade = GfGfxLoader_LoadFromNarc(NARC_a_1_1_2, tradeNum, FALSE, HEAP_ID_FIELD2, TRUE);
+    NPCTrade *trade = GfGfxLoader_LoadFromNarc(NARC_a_1_1_2, tradeNum, FALSE, HEAP_ID_FIELD, TRUE);
     BOOL result = MonIsInGameTradePokeInternal(mon, trade, tradeNum);
-    Heap_Free(trade);
+    FreeToHeap(trade);
     return result != FALSE;
 }
 
@@ -288,19 +289,19 @@ BOOL MonIsFromTogepiEgg(Pokemon *mon, SaveData *saveData) {
     // to explicit variables before being compared for the function to match,
     // even though the values are never used again afterwards. Also, the same
     // variables are used for different calls to GetMonData.
-    int word = GetMonData(mon, MON_DATA_OT_ID, NULL);
+    int word = GetMonData(mon, MON_DATA_OTID, NULL);
     if (word != PlayerProfile_GetTrainerID(profile)) {
         return FALSE;
     }
-    u8 byte = GetMonData(mon, MON_DATA_OT_GENDER, NULL);
+    u8 byte = GetMonData(mon, MON_DATA_MET_GENDER, NULL);
     if (byte != PlayerProfile_GetTrainerGender(profile)) {
         return FALSE;
     }
-    byte = GetMonData(mon, MON_DATA_LANGUAGE, NULL);
+    byte = GetMonData(mon, MON_DATA_GAME_LANGUAGE, NULL);
     if (byte != gGameLanguage) {
         return FALSE;
     }
-    byte = GetMonData(mon, MON_DATA_MET_GAME, NULL);
+    byte = GetMonData(mon, MON_DATA_GAME_VERSION, NULL);
     if (byte != gGameVersion) {
         return FALSE;
     }
@@ -328,7 +329,7 @@ static BOOL MonIsInGameTradePokeInternal(Pokemon *mon, NPCTrade *trade, NpcTrade
     else if (species != trade->give_species) {
         return FALSE;
     }
-    u32 otId = GetMonData(mon, MON_DATA_OT_ID, NULL);
+    u32 otId = GetMonData(mon, MON_DATA_OTID, NULL);
     if (otId != trade->otId) {
         return FALSE;
     }
@@ -336,20 +337,20 @@ static BOOL MonIsInGameTradePokeInternal(Pokemon *mon, NPCTrade *trade, NpcTrade
     if (pid != trade->pid) {
         return FALSE;
     }
-    u8 gender = GetMonData(mon, MON_DATA_OT_GENDER, NULL);
+    u8 gender = GetMonData(mon, MON_DATA_MET_GENDER, NULL);
     if (gender != trade->gender) {
         return FALSE;
     }
-    u8 language = GetMonData(mon, MON_DATA_LANGUAGE, NULL);
+    u8 language = GetMonData(mon, MON_DATA_GAME_LANGUAGE, NULL);
     if (language != trade->language) {
         return FALSE;
     }
-    u8 version = GetMonData(mon, MON_DATA_MET_GAME, NULL);
+    u8 version = GetMonData(mon, MON_DATA_GAME_VERSION, NULL);
     if (version != gGameVersion) {
         return FALSE;
     }
-    MsgData *messageData = NewMsgDataFromNarc(MSGDATA_LOAD_DIRECT, NARC_msgdata_msg, NARC_msg_msg_0200_bin, HEAP_ID_FIELD2);
-    String *monNickname = String_New(12, HEAP_ID_FIELD2);
+    MsgData *messageData = NewMsgDataFromNarc(MSGDATA_LOAD_DIRECT, NARC_msgdata_msg, NARC_msg_msg_0200_bin, HEAP_ID_FIELD);
+    String *monNickname = String_New(12, HEAP_ID_FIELD);
     GetMonData(mon, MON_DATA_NICKNAME_STRING, monNickname);
     String *tradeNickname = NewString_ReadMsgData(messageData, tradeNum);
     BOOL differentNickname = String_Compare(monNickname, tradeNickname);
@@ -359,8 +360,8 @@ static BOOL MonIsInGameTradePokeInternal(Pokemon *mon, NPCTrade *trade, NpcTrade
         DestroyMsgData(messageData);
         return FALSE;
     }
-    String *monOtName = String_New(8, HEAP_ID_FIELD2);
-    GetMonData(mon, MON_DATA_OT_NAME_STRING, monOtName);
+    String *monOtName = String_New(8, HEAP_ID_FIELD);
+    GetMonData(mon, MON_DATA_OT_NAME_2, monOtName);
     String *tradeOtName = NewString_ReadMsgData(messageData, NPC_TRADE_OT_NUM(tradeNum));
     BOOL differentOtName = String_Compare(monOtName, tradeOtName);
     String_Delete(tradeOtName);
@@ -401,7 +402,7 @@ void BugContest_WarpToJudging(TaskManager *taskManager, FieldSystem *fieldSystem
 }
 
 void BugContest_PromptSwapPokemon(TaskManager *taskManager, Pokemon *mon) {
-    UnkStruct_0206DB94 *unkStruct = Heap_AllocAtEnd(HEAP_ID_3, sizeof(UnkStruct_0206DB94));
+    UnkStruct_0206DB94 *unkStruct = AllocFromHeapAtEnd(HEAP_ID_3, sizeof(UnkStruct_0206DB94));
     MI_CpuFill8(unkStruct, 0, sizeof(UnkStruct_0206DB94));
     unkStruct->newlyCaughtMon = mon;
     TaskManager_Call(taskManager, Task_BugContest_PromptSwapPokemon, unkStruct);
@@ -427,8 +428,8 @@ static BOOL Task_BugContest_PromptSwapPokemon(TaskManager *taskManager) {
             if (!contest->caught_poke) {
                 contest->caught_poke = TRUE;
             }
-            Heap_Free(unkStruct->unk08);
-            Heap_Free(unkStruct);
+            FreeToHeap(unkStruct->unk08);
+            FreeToHeap(unkStruct);
             return TRUE;
         }
         break;

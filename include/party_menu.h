@@ -13,7 +13,7 @@
 #include "pokemon_types_def.h"
 #include "task.h"
 #include "unk_02014DA0.h"
-#include "unk_02020A0C.h"
+#include "unk_02020654.h"
 #include "unk_0202E41C.h"
 #include "yes_no_prompt.h"
 
@@ -258,7 +258,7 @@ typedef enum PartyMenuSpriteId {
 } PartyMenuSpriteId;
 
 typedef struct UnkTemplatePartyMenuContextMenu_0207E590 {
-    ListMenuItem *items;
+    LISTMENUITEM *items;
     Window *window;
     u8 unk_08;
     u8 unk_09;
@@ -390,10 +390,10 @@ struct PartyMenu {
     String *formattedStrBuf;             // 0x7c8
     String *unformattedStrBuf;
     String *contextMenuStrings[PARTY_MON_CONTEXT_MENU_NUM_STRINGS]; // 0x7d0
-    ListMenuItem *listMenuItems;                                    // 0x820
+    LISTMENUITEM *listMenuItems;                                    // 0x820
     PartyMenuContextMenuCursor *contextMenuCursor;
     PartyMenuMonsDrawState monsDrawState[PARTY_SIZE]; // 0x828
-    const DpadMenuBox *dpadMenuBox;
+    const UnkStruct_02020654 *unk_948;
     PartyMenuSwapMonsData swapMonsData;
     int (*itemUseCallback)(PartyMenu *);
     int (*yesCallback)(PartyMenu *); // 0xc58
@@ -442,7 +442,7 @@ u32 sub_0207CA9C(void);
 u32 sub_0207CAA0(void);
 u32 sub_0207CAA4(void);
 u32 sub_0207CAA8(void);
-void sub_0207CAAC(enum HeapID heapID, u16 *a1, u16 *a2, u16 *a3);
+void sub_0207CAAC(HeapID heapId, u16 *a1, u16 *a2, u16 *a3);
 void PartyMenu_FormChangeScene_End(PartyMenu *partyMenu);
 void PartyMenu_DeleteContextMenuAndList(PartyMenu *partyMenu);
 void sub_0207CB3C(PartyMenu *partyMenu, MenuInputState menuInputState);

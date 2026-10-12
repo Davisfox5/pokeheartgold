@@ -15,7 +15,7 @@ ov48_02258800: ; 0x02258800
 	mov r0, #3
 	mov r1, #0x70
 	lsl r2, r2, #0x10
-	bl Heap_Create
+	bl CreateHeap
 	ldr r1, _0225890C ; =0x0000C724
 	add r0, r4, #0
 	mov r2, #0x70
@@ -282,7 +282,7 @@ ov48_022589FC: ; 0x022589FC
 	add r0, r5, #0
 	bl OverlayManager_FreeData
 	mov r0, #0x70
-	bl Heap_Destroy
+	bl DestroyHeap
 	mov r0, #1
 	pop {r3, r4, r5, pc}
 	.balign 4, 0
@@ -348,7 +348,7 @@ _02258AE6:
 	blt _02258ABC
 _02258AEE:
 	ldr r0, [sp, #0x20]
-	bl Heap_Free
+	bl FreeToHeap
 	mov r7, #1
 	bl LocationGmmDatCountGet
 	str r0, [sp, #0x18]
@@ -404,7 +404,7 @@ _02258B2E:
 	blt _02258B2E
 _02258B64:
 	ldr r0, [sp, #0x1c]
-	bl Heap_Free
+	bl FreeToHeap
 	ldr r0, [sp, #0x18]
 	add r7, r7, #1
 	cmp r7, r0
@@ -1851,7 +1851,7 @@ _02259658:
 	cmp r4, #5
 	blt _02259658
 	ldr r0, [r6]
-	bl Heap_Free
+	bl FreeToHeap
 	ldr r0, _02259684 ; =gSystem + 0x60
 	mov r1, #0
 	strb r1, [r0, #9]
@@ -3294,7 +3294,7 @@ ov48_0225A108: ; 0x0225A108
 	add r0, r5, #0
 	add r0, #0x94
 	ldr r0, [r0]
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r5, #0
 	bl ov48_0225A768
 	mov r0, #0x6a
@@ -4425,7 +4425,7 @@ ov48_0225A928: ; 0x0225A928
 	add r5, r6, #0
 _0225A93A:
 	ldr r0, [r5, #8]
-	bl Heap_Free
+	bl FreeToHeap
 	ldrh r0, [r6, #0x18]
 	add r4, r4, #1
 	add r5, r5, #4
@@ -4438,7 +4438,7 @@ _0225A94A:
 	cmp r0, #0
 	beq _0225A95A
 	ldr r0, [r6, #0x1c]
-	bl Heap_Free
+	bl FreeToHeap
 _0225A95A:
 	pop {r4, r5, r6, pc}
 	thumb_func_end ov48_0225A928
@@ -4671,7 +4671,7 @@ ov48_0225AAAC: ; 0x0225AAAC
 	bl AddPlttResObjFromOpenNarc
 	ldr r1, [sp, #0x2c]
 	str r0, [r1, #0x70]
-	bl SpriteTransfer_CreatePlttTransferTask
+	bl sub_0200B00C
 	cmp r0, #0
 	bne _0225AB18
 	bl GF_AssertFail
@@ -4735,7 +4735,7 @@ _0225AB32:
 	bl AddCellOrAnimResObjFromOpenNarc
 	str r0, [r4, #0x78]
 	ldr r0, [r4, #0x6c]
-	bl SpriteTransfer_CreateCharTransferTask_AllocAtEnd
+	bl sub_0200ADA4
 	cmp r0, #0
 	bne _0225ABA0
 	bl GF_AssertFail
@@ -4826,12 +4826,12 @@ _0225AC4A:
 	ldr r0, [r0, #0x3c]
 	bl Sprite_Delete
 	ldr r0, [r7, #0x6c]
-	bl SpriteTransfer_DeleteCharTransferTask
+	bl sub_0200AEB0
 	ldr r0, [sp, #8]
 	cmp r0, #0
 	bne _0225AC72
 	ldr r0, [r7, #0x70]
-	bl SpriteTransfer_DeletePlttTransferTask
+	bl sub_0200B0A8
 	mov r0, #0x4d
 	ldr r1, [sp, #4]
 	lsl r0, r0, #2

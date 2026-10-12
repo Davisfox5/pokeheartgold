@@ -14,7 +14,7 @@ ov80_022324C4: ; 0x022324C4
 	mov r0, #0xb
 	add r6, r2, #0
 	str r3, [sp, #4]
-	bl Heap_Alloc
+	bl AllocFromHeap
 	ldr r1, _0223281C ; =ov80_0223DD48
 	ldr r2, _02232818 ; =0x00000A28
 	str r0, [r1]
@@ -575,7 +575,7 @@ _02232986:
 	cmp r7, #4
 	blt _02232986
 	add r0, r6, #0
-	bl Heap_Free
+	bl FreeToHeap
 	add sp, #0x18c
 	pop {r4, r5, r6, r7, pc}
 	.balign 4, 0
@@ -711,19 +711,19 @@ ov80_02232ABC: ; 0x02232ABC
 	ldr r0, [r4, #0x28]
 	cmp r0, #0
 	beq _02232ACC
-	bl Heap_Free
+	bl FreeToHeap
 _02232ACC:
 	ldr r0, [r4, #0x2c]
 	cmp r0, #0
 	beq _02232AD6
-	bl Heap_Free
+	bl FreeToHeap
 _02232AD6:
 	ldr r2, _02232AE8 ; =0x00000A28
 	add r0, r4, #0
 	mov r1, #0
 	bl MI_CpuFill8
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 _02232AE6:
 	pop {r4, pc}
 	.balign 4, 0
@@ -1163,7 +1163,7 @@ ov80_02232E68: ; 0x02232E68
 	mov r2, #0xb
 	mov r3, #0xcc
 	bl ov80_02229F04
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, sp, #0
 	ldrh r0, [r0, #4]
 	lsl r0, r0, #0x18
@@ -1669,7 +1669,7 @@ _02233244:
 _0223326A:
 	add r0, r6, #0
 	bl Save_GameStats_Get
-	mov r1, #0x42 ; GAME_STAT_UNK66
+	mov r1, #0x42
 	add r2, r4, #0
 	bl GameStats_Add
 	add sp, #0xc

@@ -4,7 +4,7 @@
 .public IsPaletteFadeFinished
 .public sub_0200FBF4
 .public sub_0200FC20
-.public Heap_Alloc
+.public AllocFromHeap
 .public BG_ClearCharDataRange
 .public BG_LoadPlttData
 .public BgClearTilemapBufferAndCommit
@@ -65,8 +65,8 @@
 .public ov01_021F12D0
 .public ov01_021F12E8
 .public ov01_021F1310
-.public HBlankSystem_Start
-.public HBlankSystem_Stop
+.public ov01_021FB4F4
+.public ov01_021FB514
 .public ov119_0225F020
 .public ov119_0225F37C
 .public ov119_0225F670

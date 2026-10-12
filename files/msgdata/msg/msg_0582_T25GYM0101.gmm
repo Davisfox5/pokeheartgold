@@ -43,7 +43,7 @@
 	</row>
 	<row id="msg_0582_T25GYM0101_00010" index="10">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">Yo! Champ in the making!\rThis Gym is home to Normal-type\nPokémon Trainers.\rI recommend you use Fighting-type\nPokémon.</language>
+		<language name="English">Yo! Champ in the making!\rSorry to say it, but the Gym’s shut.\rLeader Whitney is away on League\nbusiness--no telling when she’s back.</language>
 	</row>
 	<row id="msg_0582_T25GYM0101_00011" index="11">
 		<attribute name="window_context_name">used</attribute>

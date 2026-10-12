@@ -5,36 +5,36 @@
 
 	.rodata
 
-	ScrDef scr_seq_T05R0201_000
-	ScrDef scr_seq_T05R0201_001
-	ScrDef scr_seq_T05R0201_002
-	ScrDef scr_seq_T05R0201_003
-	ScrDef scr_seq_T05R0201_004
-	ScrDefEnd
+	scrdef scr_seq_T05R0201_000
+	scrdef scr_seq_T05R0201_001
+	scrdef scr_seq_T05R0201_002
+	scrdef scr_seq_T05R0201_003
+	scrdef scr_seq_T05R0201_004
+	scrdef_end
 
 scr_seq_T05R0201_000:
-	SimpleNPCMsg msg_0478_T05R0201_00000
-	End
+	simple_npc_msg msg_0478_T05R0201_00000
+	end
 
 scr_seq_T05R0201_001:
-	SimpleNPCMsg msg_0478_T05R0201_00001
-	End
+	simple_npc_msg msg_0478_T05R0201_00001
+	end
 
 scr_seq_T05R0201_002:
-	PlayCry SPECIES_PSYDUCK, 0
-	SimpleNPCMsg msg_0478_T05R0201_00002
-	WaitCry
-	End
+	play_cry SPECIES_PSYDUCK, 0
+	simple_npc_msg msg_0478_T05R0201_00002
+	wait_cry
+	end
 
 scr_seq_T05R0201_003:
-	PlayCry SPECIES_NIDORINO, 0
-	SimpleNPCMsg msg_0478_T05R0201_00003
-	WaitCry
-	End
+	play_cry SPECIES_NIDORINO, 0
+	simple_npc_msg msg_0478_T05R0201_00003
+	wait_cry
+	end
 
 scr_seq_T05R0201_004:
-	PlayCry SPECIES_PIDGEY, 0
-	SimpleNPCMsg msg_0478_T05R0201_00004
-	WaitCry
-	End
+	play_cry SPECIES_PIDGEY, 0
+	simple_npc_msg msg_0478_T05R0201_00004
+	wait_cry
+	end
 	.balign 4, 0

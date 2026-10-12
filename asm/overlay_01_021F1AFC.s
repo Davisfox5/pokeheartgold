@@ -16,10 +16,10 @@
 
 	thumb_func_start Field_PlayerAvatar_OrrTransitionFlags
 Field_PlayerAvatar_OrrTransitionFlags: ; 0x021F1AFC
-	ldr r3, _021F1B00 ; =PlayerAvatar_SetTransitionFlagsBits
+	ldr r3, _021F1B00 ; =PlayerAvatar_OrrTransitionFlags
 	bx r3
 	.balign 4, 0
-_021F1B00: .word PlayerAvatar_SetTransitionFlagsBits
+_021F1B00: .word PlayerAvatar_OrrTransitionFlags
 	thumb_func_end Field_PlayerAvatar_OrrTransitionFlags
 
 	thumb_func_start Field_PlayerAvatar_ApplyTransitionFlags
@@ -66,16 +66,16 @@ ov01_021F1B38: ; 0x021F1B38
 	mov r1, #0
 	bl PlayerAvatar_SetState
 	add r0, r4, #0
-	bl PlayerAvatar_ClearUnk24ClearFlag2
+	bl sub_0205C74C
 	add r0, r4, #0
-	bl PlayerAvatar_GetUnk34
+	bl sub_0205C790
 	cmp r0, #0
 	beq _021F1B6C
 	bl ov01_021F1640
 _021F1B6C:
 	add r0, r4, #0
 	mov r1, #0
-	bl PlayerAvatar_SetUnk34
+	bl sub_0205C78C
 	pop {r4, pc}
 	.balign 4, 0
 	thumb_func_end ov01_021F1B38
@@ -95,16 +95,16 @@ ov01_021F1B78: ; 0x021F1B78
 	mov r1, #1
 	bl PlayerAvatar_SetState
 	add r0, r4, #0
-	bl PlayerAvatar_ClearUnk24ClearFlag2
+	bl sub_0205C74C
 	add r0, r4, #0
-	bl PlayerAvatar_GetUnk34
+	bl sub_0205C790
 	cmp r0, #0
 	beq _021F1BAC
 	bl ov01_021F1640
 _021F1BAC:
 	add r0, r4, #0
 	mov r1, #0
-	bl PlayerAvatar_SetUnk34
+	bl sub_0205C78C
 	ldr r0, _021F1BBC ; =SEQ_SE_DP_JITENSYA
 	bl PlaySE
 	pop {r4, pc}
@@ -128,16 +128,16 @@ ov01_021F1BC0: ; 0x021F1BC0
 	mov r1, #2
 	bl PlayerAvatar_SetState
 	add r0, r5, #0
-	bl PlayerAvatar_ClearUnk24ClearFlag2
+	bl sub_0205C74C
 	add r0, r5, #0
-	bl PlayerAvatar_GetUnk34
+	bl sub_0205C790
 	cmp r0, #0
 	beq _021F1BF6
 	bl ov01_021F1640
 _021F1BF6:
 	add r0, r5, #0
 	mov r1, #0
-	bl PlayerAvatar_SetUnk34
+	bl sub_0205C78C
 	add r0, r5, #0
 	bl PlayerAvatar_GetFacingDirection
 	add r4, r0, #0
@@ -154,7 +154,7 @@ _021F1BF6:
 	bl ov01_021FE7DC
 	add r1, r0, #0
 	add r0, r5, #0
-	bl PlayerAvatar_SetUnk34
+	bl sub_0205C78C
 	add sp, #4
 	pop {r3, r4, r5, r6, pc}
 	.balign 4, 0
@@ -175,16 +175,16 @@ ov01_021F1C30: ; 0x021F1C30
 	mov r1, #3
 	bl PlayerAvatar_SetState
 	add r0, r4, #0
-	bl PlayerAvatar_ClearUnk24ClearFlag2
+	bl sub_0205C74C
 	add r0, r4, #0
-	bl PlayerAvatar_GetUnk34
+	bl sub_0205C790
 	cmp r0, #0
 	beq _021F1C64
 	bl ov01_021F1640
 _021F1C64:
 	add r0, r4, #0
 	mov r1, #0
-	bl PlayerAvatar_SetUnk34
+	bl sub_0205C78C
 	pop {r4, pc}
 	.balign 4, 0
 	thumb_func_end ov01_021F1C30
@@ -356,7 +356,7 @@ ov01_021F1D94: ; 0x021F1D94
 	add r0, r5, #0
 	add r4, r2, #0
 	add r7, r3, #0
-	bl PlayerAvatar_CheckForcedMovement
+	bl PlayerAvatar_CheckFlag0
 	cmp r0, #1
 	bne _021F1DBE
 	add r0, r6, #0
@@ -626,12 +626,12 @@ _021F1F96:
 	cmp r1, r0
 	bne _021F1FF4
 	add r0, r5, #0
-	bl MapObject_GetXCoord
+	bl MapObject_GetCurrentX
 	ldrh r1, [r4, #2]
 	cmp r1, r0
 	bne _021F1FF4
 	add r0, r5, #0
-	bl MapObject_GetZCoord
+	bl MapObject_GetCurrentZ
 	ldrh r1, [r4, #4]
 	cmp r1, r0
 	bne _021F1FF4
@@ -844,11 +844,11 @@ _021F2148:
 	bne _021F2172
 	ldr r0, [r4, #0x1c]
 	mov r1, #0
-	bl FieldBGM_SetOverride
+	bl FieldSystem_SetSavedMusicId
 	ldr r0, [r4, #0x1c]
 	ldr r1, _021F2328 ; =0x000003F6
 	mov r2, #1
-	bl FieldBGM_TryFadeOut
+	bl FieldSystem_PlayOrFadeToNewMusicId
 _021F2172:
 	ldr r0, [r4]
 	add r0, r0, #1
@@ -943,13 +943,13 @@ _021F221E:
 	b _021F2324
 _021F222A:
 	ldr r0, [r4, #0x20]
-	bl PlayerAvatar_GetXCoord
+	bl GetPlayerXCoord
 	add r5, r0, #0
 	ldr r0, [r4, #4]
 	bl GetDeltaXByFacingDirection
 	add r6, r0, #0
 	ldr r0, [r4, #0x20]
-	bl PlayerAvatar_GetZCoord
+	bl GetPlayerZCoord
 	add r7, r0, #0
 	ldr r0, [r4, #4]
 	bl GetDeltaYByFacingDirection
@@ -964,7 +964,7 @@ _021F222A:
 	str r0, [r4, #0x28]
 	ldr r0, [r4, #0x20]
 	ldr r1, [r4, #0x28]
-	bl PlayerAvatar_SetUnk34
+	bl sub_0205C78C
 	ldr r0, [r4, #0x20]
 	mov r1, #2
 	bl PlayerAvatar_SetState
@@ -1041,7 +1041,7 @@ _021F22C2:
 _021F2312:
 	ldr r0, [r4, #0x1c]
 	mov r1, #0
-	bl FieldSystem_ProcessSoundplate
+	bl ov01_021E7F00
 	add r0, r4, #0
 	bl ov01_021F30F4
 	mov r0, #1
@@ -1111,7 +1111,7 @@ ov01_021F2378: ; 0x021F2378
 	bl PlayerAvatar_GetMapObject
 	str r0, [r4, #0x10]
 	add r0, r7, #0
-	bl PlayerAvatar_GetUnk34
+	bl sub_0205C790
 	str r0, [r4, #0x14]
 	cmp r0, #0
 	bne _021F23A6
@@ -1178,13 +1178,13 @@ _021F2412:
 	bl ov01_021F1640
 	ldr r0, [r4, #0xc]
 	mov r1, #0
-	bl PlayerAvatar_SetUnk34
+	bl sub_0205C78C
 	ldr r0, [r4, #0xc]
 	mov r1, #0
 	bl PlayerAvatar_SetState
 	ldr r0, [r4, #8]
 	mov r1, #0
-	bl FieldSystem_ProcessSoundplate
+	bl ov01_021E7F00
 	ldr r0, [r4, #8]
 	bl FollowMon_IsActive
 	cmp r0, #0
@@ -1215,11 +1215,11 @@ _021F2476:
 	ldr r0, [r4, #8]
 	ldr r1, [r0, #0x20]
 	ldr r1, [r1]
-	bl FieldBGM_GetForMapHeader
+	bl GetMapMusic
 	add r1, r0, #0
 	ldr r0, [r4, #8]
 	mov r2, #4
-	bl FieldBGM_TryFadeOut
+	bl FieldSystem_PlayOrFadeToNewMusicId
 _021F249A:
 	bl SndRadio_GetSeqNo
 	cmp r0, #0
@@ -1241,7 +1241,7 @@ _021F24B8:
 	bne _021F24D2
 	ldr r0, [r4, #8]
 	mov r1, #1
-	bl FieldSystem_ProcessSoundplate
+	bl ov01_021E7F00
 	add r0, r4, #0
 	bl ov01_021F30F4
 	mov r0, #1
@@ -1255,7 +1255,7 @@ _021F24D2:
 	bne _021F24F0
 	ldr r0, [r4, #8]
 	mov r1, #1
-	bl FieldSystem_ProcessSoundplate
+	bl ov01_021E7F00
 	add r0, r4, #0
 	bl ov01_021F30F4
 	mov r0, #1
@@ -1413,7 +1413,7 @@ _021F25FA: ; jump table
 _021F2602:
 	lsl r0, r0, #0x18
 	lsr r0, r0, #0x18
-	bl MetatileBehavior_IsRockClimbNorthSouth
+	bl sub_0205B834
 	cmp r0, #1
 	bne _021F2622
 	mov r0, #1
@@ -1421,7 +1421,7 @@ _021F2602:
 _021F2612:
 	lsl r0, r0, #0x18
 	lsr r0, r0, #0x18
-	bl MetatileBehavior_IsRockClimbEastWest
+	bl sub_0205B840
 	cmp r0, #1
 	bne _021F2622
 	mov r0, #1
@@ -1602,13 +1602,13 @@ ov01_021F2758: ; 0x021F2758
 	push {r3, r4, r5, r6, r7, lr}
 	add r5, r0, #0
 	ldr r0, [r5, #0x10]
-	bl PlayerAvatar_GetXCoord
+	bl GetPlayerXCoord
 	add r4, r0, #0
 	ldr r0, [r5, #4]
 	bl GetDeltaXByFacingDirection
 	add r6, r0, #0
 	ldr r0, [r5, #0x10]
-	bl PlayerAvatar_GetZCoord
+	bl GetPlayerZCoord
 	add r7, r0, #0
 	ldr r0, [r5, #4]
 	bl GetDeltaYByFacingDirection
@@ -1942,14 +1942,14 @@ ov01_021F29E4: ; 0x021F29E4
 	sub sp, #0x24
 	add r5, r0, #0
 	ldr r0, [r5, #0x3c]
-	bl MapObject_GetXCoord
+	bl MapObject_GetCurrentX
 	add r4, r0, #0
 	mov r0, #0
 	bl GetDeltaXByFacingDirection
 	lsl r0, r0, #1
 	add r4, r4, r0
 	ldr r0, [r5, #0x3c]
-	bl MapObject_GetZCoord
+	bl MapObject_GetCurrentZ
 	add r6, r0, #0
 	mov r0, #0
 	bl GetDeltaYByFacingDirection
@@ -2190,14 +2190,14 @@ ov01_021F2BC8: ; 0x021F2BC8
 	sub sp, #0x18
 	add r5, r0, #0
 	ldr r0, [r5, #0x3c]
-	bl MapObject_GetXCoord
+	bl MapObject_GetCurrentX
 	add r4, r0, #0
 	mov r0, #1
 	bl GetDeltaXByFacingDirection
 	lsl r0, r0, #1
 	add r4, r4, r0
 	ldr r0, [r5, #0x3c]
-	bl MapObject_GetZCoord
+	bl MapObject_GetCurrentZ
 	add r6, r0, #0
 	mov r0, #1
 	bl GetDeltaYByFacingDirection
@@ -2680,7 +2680,7 @@ _021F2F88:
 	str r0, [sp]
 	mov r0, #4
 	mov r1, #0x10
-	bl Heap_AllocAtEnd
+	bl AllocFromHeapAtEnd
 	add r5, r0, #0
 	mov r0, #0
 	str r0, [r5]
@@ -2749,7 +2749,7 @@ _021F3018:
 	bl ov01_021F1B38
 _021F3022:
 	add r0, r6, #0
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r5, #0
 	bl SysTask_Destroy
 _021F302E:
@@ -2824,13 +2824,13 @@ ov01_021F3094: ; 0x021F3094
 	push {r3, r4, r5, r6, r7, lr}
 	add r5, r1, #0
 	add r4, r0, #0
-	bl PlayerAvatar_GetXCoord
+	bl GetPlayerXCoord
 	add r6, r0, #0
 	add r0, r5, #0
 	bl GetDeltaXByFacingDirection
 	add r7, r0, #0
 	add r0, r4, #0
-	bl PlayerAvatar_GetZCoord
+	bl GetPlayerZCoord
 	str r0, [sp]
 	add r0, r5, #0
 	bl GetDeltaYByFacingDirection
@@ -2852,7 +2852,7 @@ ov01_021F30D0: ; 0x021F30D0
 	add r5, r0, #0
 	mov r0, #4
 	add r1, r5, #0
-	bl Heap_AllocAtEnd
+	bl AllocFromHeapAtEnd
 	add r4, r0, #0
 	bne _021F30E4
 	bl GF_AssertFail
@@ -2868,12 +2868,12 @@ _021F30E4:
 
 	thumb_func_start ov01_021F30F4
 ov01_021F30F4: ; 0x021F30F4
-	ldr r3, _021F30FC ; =Heap_FreeExplicit
+	ldr r3, _021F30FC ; =FreeToHeapExplicit
 	add r1, r0, #0
 	mov r0, #4
 	bx r3
 	.balign 4, 0
-_021F30FC: .word Heap_FreeExplicit
+_021F30FC: .word FreeToHeapExplicit
 	thumb_func_end ov01_021F30F4
 
 	thumb_func_start ov01_021F3100

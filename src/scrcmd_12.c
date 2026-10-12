@@ -1,6 +1,5 @@
-#include "catching_show.h"
 #include "field_system.h"
-#include "palPark_migration.h"
+#include "pal_park.h"
 #include "pokedex.h"
 #include "save_arrays.h"
 #include "save_pokegear.h"
@@ -28,49 +27,49 @@ BOOL ScrCmd_PalParkAction(ScriptContext *ctx) {
     u16 var0 = ScriptGetVar(ctx);
     if (var0 == 2) {
         Save_VarsFlags_SetPalParkSysFlag(script);
-        CatchingShow_ClearState(ctx->fieldSystem);
+        PalPark_ClearState(ctx->fieldSystem);
     } else if (var0 == 0) {
-        CatchingShow_Start(ctx->fieldSystem);
+        PalPark_InitFromSave(ctx->fieldSystem);
     } else if (var0 == 1) {
         Save_VarsFlags_ClearPalParkSysFlag(script);
-        CatchingShow_End(ctx->fieldSystem);
+        PalPark_StopClock(ctx->fieldSystem);
     } else {
-        GF_ASSERT(FALSE);
+        GF_ASSERT(0);
     }
 
     return FALSE;
 }
 
 BOOL ScrCmd_509(ScriptContext *ctx) {
-    struct MigratedPokemon *unkStruct = Save_MigratedPokemon_Get(ctx->fieldSystem->saveData);
-    Pokemon *mon = AllocMonZeroed(HEAP_ID_FIELD3);
+    struct MigratedPokemonSav *unkStruct = Save_MigratedPokemon_Get(ctx->fieldSystem->saveData);
+    Pokemon *mon = AllocMonZeroed(HEAP_ID_32);
     u16 *retPtr = ScriptGetVarPointer(ctx);
-    if (MigratedPokemon_CountPokemon(unkStruct) == PARTY_SIZE) {
+    if (sub_0202EC98(unkStruct) == PARTY_SIZE) {
         *retPtr = TRUE;
     } else {
         *retPtr = FALSE;
     }
-    Heap_Free(mon);
+    FreeToHeap(mon);
     return FALSE;
 }
 
 BOOL ScrCmd_510(ScriptContext *ctx) {
-    MigratedPokemon *unkStruct = Save_MigratedPokemon_Get(ctx->fieldSystem->saveData);
+    struct MigratedPokemonSav *unkStruct = Save_MigratedPokemon_Get(ctx->fieldSystem->saveData);
     PCStorage *storage = SaveArray_PCStorage_Get(ctx->fieldSystem->saveData);
-    Pokemon *mon = AllocMonZeroed(HEAP_ID_FIELD3);
+    Pokemon *mon = AllocMonZeroed(HEAP_ID_32);
     PlayerProfile *profile = Save_PlayerData_GetProfile(ctx->fieldSystem->saveData);
     Pokedex *pokedex = Save_Pokedex_Get(ctx->fieldSystem->saveData);
     int i;
 
     for (i = 0; i < PARTY_SIZE; i++) {
-        MigratedPokemon_ConvertToPokemon(unkStruct, i, mon);
-        MonSetTrainerMemo(mon, profile, 2, 0, HEAP_ID_FIELD3);
+        GetMigratedPokemonByIndex(unkStruct, i, mon);
+        MonSetTrainerMemo(mon, profile, 2, 0, HEAP_ID_32);
         GF_ASSERT(PCStorage_PlaceMonInFirstEmptySlotInAnyBox(storage, Mon_GetBoxMon(mon)));
         UpdatePokedexWithReceivedSpecies(ctx->fieldSystem->saveData, mon);
     }
 
-    Heap_Free(mon);
-    MigratedPokemon_InitPokemonOnly(unkStruct);
+    FreeToHeap(mon);
+    sub_0202EB74(unkStruct);
     sub_02093070(ctx->fieldSystem);
     return FALSE;
 }
@@ -81,18 +80,18 @@ BOOL ScrCmd_PalParkScoreGet(ScriptContext *ctx) {
 
     switch (var0) {
     case 0:
-        *retPtr = CatchingShow_CalcCatchingPoints(ctx->fieldSystem);
+        *retPtr = PalPark_CalcSpeciesScore(ctx->fieldSystem);
         break;
     case 1:
-        *retPtr = CatchingShow_GetTimePoints(ctx->fieldSystem);
+        *retPtr = PalPark_CalcTimeScore(ctx->fieldSystem);
         break;
     case 2:
-        *retPtr = CatchingShow_GetTypePoints(ctx->fieldSystem);
+        *retPtr = PalPark_CalcTypesScore(ctx->fieldSystem);
         break;
     case 3: {
-        int val0 = CatchingShow_GetTimePoints(ctx->fieldSystem);
-        int val1 = CatchingShow_CalcCatchingPoints(ctx->fieldSystem);
-        int val2 = CatchingShow_GetTypePoints(ctx->fieldSystem);
+        int val0 = PalPark_CalcTimeScore(ctx->fieldSystem);
+        int val1 = PalPark_CalcSpeciesScore(ctx->fieldSystem);
+        int val2 = PalPark_CalcTypesScore(ctx->fieldSystem);
         *retPtr = val1 + val2 + val0;
         break;
     }

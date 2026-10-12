@@ -1,7 +1,7 @@
 #include <nitro/fs/overlay.h>
 #pragma once
-.public Sound_SetFieldBGM
-.public Sound_SetScene
+.public sub_02004AC8
+.public sub_02004AD8
 .public Sound_SetSceneAndPlayBGM
 .public GF_SndHandleSetPlayerVolume
 .public sub_02005B68
@@ -14,10 +14,10 @@
 .public OverlayManager_FreeData
 .public OverlayManager_GetArgs
 .public OverlayManager_Run
-.public Heap_Create
-.public Heap_Destroy
-.public Heap_Alloc
-.public Heap_Free
+.public CreateHeap
+.public DestroyHeap
+.public AllocFromHeap
+.public FreeToHeap
 .public Save_GameStats_Get
 .public sub_0202FC24
 .public sub_0202FC48
@@ -27,8 +27,8 @@
 .public Save_VarsFlags_Get
 .public BattleSetup_New
 .public BattleSetup_Delete
-.public FieldBGM_GetEffective
-.public FieldBGM_GetForMapHeader
+.public FieldSystem_GetOverriddenMusicId
+.public GetMapMusic
 .public sub_02055198
 .public Save_VarsFlags_FlypointFlagAction
 .public BagCursor_New

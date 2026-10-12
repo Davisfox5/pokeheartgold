@@ -1578,7 +1578,7 @@ _02238446:
 	mov r0, #3
 	mov r1, #0x3d
 	lsl r2, r2, #0x10
-	bl Heap_Create
+	bl CreateHeap
 	bl LoadDwcOverlay
 	bl LoadOVY38
 	mov r0, #0x3d
@@ -1666,7 +1666,7 @@ _02238446:
 	bl Sound_SetSceneAndPlayBGM
 	ldr r1, _022385BC ; =0x00020020
 	mov r0, #0x3d
-	bl Heap_Alloc
+	bl AllocFromHeap
 	str r0, [r4, #0x4c]
 	add r0, #0x1f
 	mov r1, #0x1f
@@ -1859,7 +1859,7 @@ ov70_022386F4: ; 0x022386F4
 	bl OverlayManager_GetData
 	add r4, r0, #0
 	ldr r0, [r4, #0x4c]
-	bl Heap_Free
+	bl FreeToHeap
 	bl UnloadOVY38
 	bl UnloadDwcOverlay
 	add r0, r4, #0
@@ -1890,9 +1890,9 @@ ov70_022386F4: ; 0x022386F4
 	mov r0, #0
 	bl TextFlags_SetCanTouchSpeedUpPrint
 	ldr r0, [r4, #4]
-	bl Heap_Free
+	bl FreeToHeap
 	ldr r0, [r4]
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r5, #0
 	bl OverlayManager_FreeData
 	mov r0, #4
@@ -1911,7 +1911,7 @@ ov70_022386F4: ; 0x022386F4
 	add r1, r0, #0
 	bl Main_SetVBlankIntrCB
 	mov r0, #0x3d
-	bl Heap_Destroy
+	bl DestroyHeap
 	mov r0, #1
 	pop {r3, r4, r5, pc}
 	.balign 4, 0
@@ -2282,17 +2282,17 @@ _02238970:
 	str r0, [r5, r1]
 	sub r1, #0x1c
 	ldr r0, [r5, r1]
-	bl SpriteTransfer_CreateCharTransferTask
+	bl sub_0200ACF0
 	mov r0, #0x35
 	lsl r0, r0, #6
 	ldr r0, [r5, r0]
-	bl SpriteTransfer_CreateCharTransferTask
+	bl sub_0200ACF0
 	ldr r0, _02238B3C ; =0x00000D34
 	ldr r0, [r5, r0]
-	bl SpriteTransfer_CreateExtPlttTransferTask
+	bl sub_0200AF94
 	ldr r0, _02238B48 ; =0x00000D44
 	ldr r0, [r5, r0]
-	bl SpriteTransfer_CreateExtPlttTransferTask
+	bl sub_0200AF94
 	bl sub_02074490
 	add r1, r0, #0
 	mov r0, #0x14
@@ -2353,7 +2353,7 @@ _02238ACC:
 	mov r2, #0x60
 	bl GX_LoadOBJPltt
 	ldr r0, [sp, #0x14]
-	bl Heap_Free
+	bl FreeToHeap
 	ldr r0, [sp, #0x18]
 	bl NARC_Delete
 	add sp, #0x20
@@ -2825,17 +2825,17 @@ ov70_02238E98: ; 0x02238E98
 	mov r0, #0xd3
 	lsl r0, r0, #4
 	ldr r0, [r6, r0]
-	bl SpriteTransfer_DeleteCharTransferTask
+	bl sub_0200AEB0
 	mov r0, #0x35
 	lsl r0, r0, #6
 	ldr r0, [r6, r0]
-	bl SpriteTransfer_DeleteCharTransferTask
+	bl sub_0200AEB0
 	ldr r0, _02238EF8 ; =0x00000D34
 	ldr r0, [r6, r0]
-	bl SpriteTransfer_DeletePlttTransferTask
+	bl sub_0200B0A8
 	ldr r0, _02238EFC ; =0x00000D44
 	ldr r0, [r6, r0]
-	bl SpriteTransfer_DeletePlttTransferTask
+	bl sub_0200B0A8
 	mov r7, #0xd2
 	mov r4, #0
 	add r5, r6, #0
@@ -5947,7 +5947,7 @@ ov70_0223A7E4: ; 0x0223A7E4
 	add r5, r0, #0
 	mov r0, #0x3d
 	lsl r1, r1, #6
-	bl Heap_Alloc
+	bl AllocFromHeap
 	add r4, r0, #0
 	add r0, sp, #0x20
 	add r1, r5, #0
@@ -6000,7 +6000,7 @@ ov70_0223A7E4: ; 0x0223A7E4
 	lsl r3, r3, #4
 	bl GfGfxLoader_GXLoadPal
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	add sp, #0x30
 	pop {r4, r5, r6, pc}
 	.balign 4, 0
@@ -8434,7 +8434,7 @@ ov70_0223BC7C: ; 0x0223BC7C
 	str r0, [r4, r1]
 	mov r0, #0x3d
 	mov r1, #0x30
-	bl Heap_Alloc
+	bl AllocFromHeap
 	ldr r1, _0223BCCC ; =0x000011C4
 	mov r2, #0x30
 	str r0, [r4, r1]
@@ -8462,10 +8462,10 @@ ov70_0223BCD0: ; 0x0223BCD0
 	ldr r0, _0223BCFC ; =0x000011C4
 	ldr r0, [r4, r0]
 	ldr r0, [r0, #0x14]
-	bl Heap_Free
+	bl FreeToHeap
 	ldr r0, _0223BCFC ; =0x000011C4
 	ldr r0, [r4, r0]
-	bl Heap_Free
+	bl FreeToHeap
 	ldr r0, _0223BD00 ; =0x00000BBC
 	ldr r0, [r4, r0]
 	bl String_Delete
@@ -11321,7 +11321,7 @@ ov70_0223D3BC: ; 0x0223D3BC
 _0223D3F2:
 	mov r0, #0x3d
 	mov r1, #0x78
-	bl Heap_Alloc
+	bl AllocFromHeap
 	ldr r1, _0223D410 ; =0x000011F4
 	str r0, [r4, r1]
 	pop {r4, pc}
@@ -11339,7 +11339,7 @@ ov70_0223D414: ; 0x0223D414
 	add r4, r0, #0
 	ldr r0, _0223D43C ; =0x000011F4
 	ldr r0, [r4, r0]
-	bl Heap_Free
+	bl FreeToHeap
 	ldr r0, _0223D440 ; =0x00000BB4
 	ldr r0, [r4, r0]
 	bl String_Delete
@@ -12916,7 +12916,7 @@ ov70_0223E094: ; 0x0223E094
 	cmp r0, #0
 	bne _0223E0B6
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	mov r0, #0
 	pop {r3, r4, r5, pc}
 _0223E0B6:
@@ -12963,7 +12963,7 @@ ov70_0223E0BC: ; 0x0223E0BC
 	add r0, r0, #3
 	str r0, [r4, #4]
 	ldr r0, [sp, #4]
-	bl Heap_Free
+	bl FreeToHeap
 	add sp, #0xc
 	pop {r4, r5, r6, r7, pc}
 	thumb_func_end ov70_0223E0BC
@@ -13014,7 +13014,7 @@ _0223E158:
 	ldr r0, [sp]
 	lsl r1, r1, #8
 	ldr r0, [r0, r1]
-	bl Heap_Free
+	bl FreeToHeap
 	pop {r3, r4, r5, r6, r7, pc}
 	.balign 4, 0
 	thumb_func_end ov70_0223E120
@@ -13143,7 +13143,7 @@ ov70_0223E264: ; 0x0223E264
 	ldr r1, _0223E46C ; =0x00003D68
 	str r0, [sp, #0x20]
 	mov r0, #3
-	bl Heap_AllocAtEnd
+	bl AllocFromHeapAtEnd
 	mov r1, #0x12
 	lsl r1, r1, #8
 	str r0, [r5, r1]
@@ -14448,7 +14448,7 @@ ov70_0223ECCC: ; 0x0223ECCC
 	str r0, [r4, r1]
 	mov r0, #0x3d
 	mov r1, #0x30
-	bl Heap_Alloc
+	bl AllocFromHeap
 	ldr r1, _0223ED20 ; =0x000011C4
 	mov r2, #0x30
 	str r0, [r4, r1]
@@ -14485,14 +14485,14 @@ ov70_0223ED24: ; 0x0223ED24
 	ldr r0, _0223ED50 ; =0x000011C4
 	ldr r0, [r4, r0]
 	ldr r0, [r0, #0x14]
-	bl Heap_Free
+	bl FreeToHeap
 	ldr r0, _0223ED50 ; =0x000011C4
 	ldr r0, [r4, r0]
 	ldr r0, [r0, #0x18]
-	bl Heap_Free
+	bl FreeToHeap
 	ldr r0, _0223ED50 ; =0x000011C4
 	ldr r0, [r4, r0]
-	bl Heap_Free
+	bl FreeToHeap
 	ldr r0, _0223ED54 ; =0x00000BBC
 	ldr r0, [r4, r0]
 	bl String_Delete
@@ -15717,7 +15717,7 @@ ov70_0223F684: ; 0x0223F684
 	ldr r1, _0223F6DC ; =0x000001EE
 	add r5, r0, #0
 	mov r0, #0x3d
-	bl Heap_Alloc
+	bl AllocFromHeap
 	add r4, r0, #0
 	ldr r2, _0223F6DC ; =0x000001EE
 	mov r0, #0
@@ -15751,7 +15751,7 @@ _0223F6C8:
 	blo _0223F6C0
 _0223F6D0:
 	add r0, r7, #0
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r4, #0
 	add sp, #0xc
 	pop {r4, r5, r6, r7, pc}
@@ -16672,7 +16672,7 @@ _0223FDE2:
 	mov r1, #1
 	bl ov70_022409C0
 	ldr r0, [r4]
-	mov r1, #0x2d ; GAME_STAT_UNK45
+	mov r1, #0x2d
 	ldr r0, [r0, #0x28]
 	bl GameStats_Inc
 	mov r0, #0x1e
@@ -17404,7 +17404,7 @@ _0224030A:
 	ldr r0, [r0]
 	bl sub_0202DB5C
 	add r0, r5, #0
-	bl Heap_Free
+	bl FreeToHeap
 	b _022403E6
 _0224036A:
 	add r0, r4, #0
@@ -17440,7 +17440,7 @@ _02240372:
 	ldr r0, [r0]
 	bl sub_0202DB5C
 	add r0, r5, #0
-	bl Heap_Free
+	bl FreeToHeap
 	b _022403E6
 _022403BE:
 	str r0, [r4, #0x3c]
@@ -17627,10 +17627,10 @@ ov70_02240500: ; 0x02240500
 	ldr r0, [r5]
 	add r4, r1, #0
 	ldr r0, [r0, #0x28]
-	mov r1, #0x18 ; SCORE_EVENT_GTS_TRADE
+	mov r1, #0x18
 	bl GameStats_AddScore
 	ldr r0, [r5]
-	mov r1, #0x19 ; GAME_STAT_WIFI_TRADES
+	mov r1, #0x19
 	ldr r0, [r0, #0x28]
 	bl GameStats_Inc
 	add r0, r4, #0
@@ -18317,7 +18317,7 @@ ov70_022409C0: ; 0x022409C0
 	ldr r0, [r0, #0xc]
 	bl PCStorage_DeleteBoxMonByIndexPair
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	b _02240A62
 _02240A1A:
 	ldr r0, [r5]
@@ -19443,10 +19443,10 @@ ov70_02241308: ; 0x02241308
 	beq _02241324
 	add r0, #0xc
 	ldr r0, [r4, r0]
-	bl Heap_Free
+	bl FreeToHeap
 	ldr r0, _0224132C ; =0x000011E0
 	ldr r0, [r4, r0]
-	bl Heap_Free
+	bl FreeToHeap
 _02241324:
 	pop {r4, pc}
 	nop
@@ -20027,7 +20027,7 @@ _022417A6:
 	mov r4, #4
 _022417B2:
 	add r0, r7, #0
-	bl Heap_Free
+	bl FreeToHeap
 	b _022417FE
 _022417BA:
 	add r0, r5, #0
@@ -20074,11 +20074,11 @@ ov70_02241808: ; 0x02241808
 	add r4, r0, #0
 	ldr r0, _02241828 ; =0x000011F0
 	ldr r0, [r4, r0]
-	bl Heap_Free
+	bl FreeToHeap
 	mov r0, #0x13
 	lsl r0, r0, #4
 	ldr r0, [r4, r0]
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r4, #0
 	bl ov70_02238E58
 	mov r0, #1
@@ -21075,7 +21075,7 @@ ov70_02242014: ; 0x02242014
 	mov r0, #0x3d
 	mov r1, #0x80
 	add r7, r2, #0
-	bl Heap_Alloc
+	bl AllocFromHeap
 	add r4, r0, #0
 	ldr r0, [r5]
 	mov r1, #0
@@ -21224,7 +21224,7 @@ ov70_0224212C: ; 0x0224212C
 	ldr r0, [r4, #0x1c]
 	bl sub_020195C0
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	pop {r4, pc}
 	thumb_func_end ov70_0224212C
 
@@ -23759,7 +23759,7 @@ _022434AA:
 	blt _02243492
 _022434B4:
 	ldr r0, [sp, #4]
-	bl Heap_Free
+	bl FreeToHeap
 	ldr r0, [sp, #8]
 	add sp, #0x10
 	pop {r3, r4, r5, r6, r7, pc}
@@ -25124,7 +25124,7 @@ ov70_02243F54: ; 0x02243F54
 	bl ov70_0224342C
 	add r4, r0, #0
 	add r0, r5, #0
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r4, #0
 	pop {r3, r4, r5, pc}
 	.balign 4, 0
@@ -25661,7 +25661,7 @@ ov70_022442B4: ; 0x022442B4
 	mov r2, #0x80
 	bl MIi_CpuCopy16
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	mov r0, #0
 	str r0, [sp, #0x24]
 	str r0, [sp, #0x28]
@@ -26449,17 +26449,17 @@ ov70_02244A04: ; 0x02244A04
 	add r4, r0, #0
 	ldr r0, [r5]
 	ldr r0, [r0, #4]
-	bl Save_SysInfo_GetDwcProfileId
+	bl Save_SysInfo_GetField4C
 	cmp r0, #0
 	bne _02244A28
 	ldr r1, [r5]
 	ldr r0, [r1, #4]
 	ldr r1, [r1, #0x34]
-	bl Save_SysInfo_SetDwcProfileId
+	bl Save_SysInfo_SetField4C
 _02244A28:
 	ldr r0, [r5]
 	ldr r0, [r0, #4]
-	bl Save_SysInfo_GetDwcProfileId
+	bl Save_SysInfo_GetField4C
 	add r6, r0, #0
 	add r0, r4, #0
 	bl DWC_CreateFriendKey

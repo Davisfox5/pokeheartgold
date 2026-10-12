@@ -30,10 +30,10 @@ _020566A2:
 	bl ov01_021E90C0
 	str r0, [r4, #0x18]
 	ldr r0, [r5, #0x40]
-	bl PlayerAvatar_GetXCoord
+	bl GetPlayerXCoord
 	add r6, r0, #0
 	ldr r0, [r5, #0x40]
-	bl PlayerAvatar_GetZCoord
+	bl GetPlayerZCoord
 	add r1, r0, #0
 	ldr r2, [r4, #0x18]
 	add r0, r6, #0
@@ -93,7 +93,7 @@ _0205671C: ; jump table
 	.short _020567AA - _0205671C - 2 ; case 3
 _02056724:
 	mov r0, #1
-	bl FieldMap_FadeScreen
+	bl ov01_021E636C
 	ldr r0, [r5, #0x40]
 	bl PlayerAvatar_GetMapObject
 	add r6, r0, #0
@@ -183,10 +183,10 @@ _020567D8:
 	str r0, [r4, #0x18]
 	add r7, r0, #0
 	ldr r0, [r5, #0x40]
-	bl PlayerAvatar_GetXCoord
+	bl GetPlayerXCoord
 	str r0, [sp]
 	ldr r0, [r5, #0x40]
-	bl PlayerAvatar_GetZCoord
+	bl GetPlayerZCoord
 	add r1, r0, #0
 	ldr r0, [sp]
 	add r2, r7, #0
@@ -240,12 +240,12 @@ _02056842: ; jump table
 _0205684E:
 	mov r0, #0xb
 	mov r1, #8
-	bl Heap_AllocAtEnd
+	bl AllocFromHeapAtEnd
 	str r0, [r4, #0x18]
 	mov r1, #0
 	str r1, [r0]
 	mov r0, #1
-	bl FieldMap_FadeScreen
+	bl ov01_021E636C
 	ldrh r0, [r4, #2]
 	add r0, r0, #1
 	strh r0, [r4, #2]
@@ -273,7 +273,7 @@ _0205686A:
 	blt _02056932
 	ldr r0, [r5, #0x40]
 	mov r1, #1
-	bl PlayerAvatar_ToggleAutomaticHeightUpdatingImmediate
+	bl PlayerAvatar_ToggleAutomaticHeightUpdating_NowApply
 	ldrh r0, [r4, #2]
 	add r0, r0, #1
 	strh r0, [r4, #2]
@@ -333,7 +333,7 @@ _0205691E:
 	b _02056932
 _02056926:
 	ldr r0, [r4, #0x18]
-	bl Heap_Free
+	bl FreeToHeap
 	add sp, #0xc
 	mov r0, #1
 	pop {r4, r5, r6, r7, pc}
@@ -372,12 +372,12 @@ _0205695E: ; jump table
 _0205696A:
 	mov r0, #0xb
 	mov r1, #8
-	bl Heap_AllocAtEnd
+	bl AllocFromHeapAtEnd
 	str r0, [r4, #0x18]
 	mov r1, #0
 	str r1, [r0]
 	mov r0, #1
-	bl FieldMap_FadeScreen
+	bl ov01_021E636C
 	ldrh r0, [r4, #2]
 	add r0, r0, #1
 	strh r0, [r4, #2]
@@ -405,7 +405,7 @@ _02056986:
 	blt _02056A4E
 	ldr r0, [r5, #0x40]
 	mov r1, #1
-	bl PlayerAvatar_ToggleAutomaticHeightUpdatingImmediate
+	bl PlayerAvatar_ToggleAutomaticHeightUpdating_NowApply
 	ldrh r0, [r4, #2]
 	add r0, r0, #1
 	strh r0, [r4, #2]
@@ -465,7 +465,7 @@ _02056A3A:
 	b _02056A4E
 _02056A42:
 	ldr r0, [r4, #0x18]
-	bl Heap_Free
+	bl FreeToHeap
 	add sp, #0xc
 	mov r0, #1
 	pop {r4, r5, r6, r7, pc}
@@ -502,7 +502,7 @@ sub_02056A54: ; 0x02056A54
 	add r5, r0, #0
 	ldr r0, [r4, #0x40]
 	add r1, sp, #0x28
-	bl PlayerAvatar_CopyPositionVector
+	bl PlayerAvatar_GetPositionVec
 	cmp r5, #3
 	bne _02056AA2
 	mov r0, #1
@@ -531,11 +531,11 @@ _02056AAC:
 	add r2, r5, #0
 	bl sub_0205C810
 	ldr r0, [r4, #0x40]
-	bl PlayerAvatar_GetPositionVector
+	bl PlayerAvatar_GetPositionVecConst
 	ldr r1, [r4, #0x24]
 	bl Camera_SetLookAtTargetAndRecalcPos
 	ldr r0, [r4, #0x40]
-	bl PlayerAvatar_GetPositionVector
+	bl PlayerAvatar_GetPositionVecConst
 	ldr r1, [r4, #0x24]
 	bl Camera_SetFixedTarget
 	ldr r1, [r4, #0x24]
@@ -572,18 +572,18 @@ sub_02056AEC: ; 0x02056AEC
 	add r4, r0, #0
 	ldr r0, [r5, #0x40]
 	add r1, sp, #0x28
-	bl PlayerAvatar_CopyPositionVector
+	bl PlayerAvatar_GetPositionVec
 	ldr r0, [r5, #0x40]
-	bl PlayerAvatar_GetXCoord
+	bl GetPlayerXCoord
 	add r6, r0, #0
 	ldr r0, [r5, #0x40]
-	bl PlayerAvatar_GetZCoord
+	bl GetPlayerZCoord
 	add r2, r0, #0
 	add r0, r5, #0
 	add r1, r6, #0
 	bl GetMetatileBehavior
 	add r6, r0, #0
-	bl MetatileBehavior_IsWarpStairsEast
+	bl sub_0205B810
 	cmp r0, #0
 	beq _02056B5A
 	mov r0, #1
@@ -595,7 +595,7 @@ sub_02056AEC: ; 0x02056AEC
 	b _02056B70
 _02056B5A:
 	add r0, r6, #0
-	bl MetatileBehavior_IsWarpStairsWest
+	bl sub_0205B81C
 	cmp r0, #0
 	beq _02056B70
 	mov r0, #1
@@ -618,11 +618,11 @@ _02056B70:
 	add r2, r4, #0
 	bl sub_0205C810
 	ldr r0, [r5, #0x40]
-	bl PlayerAvatar_GetPositionVector
+	bl PlayerAvatar_GetPositionVecConst
 	ldr r1, [r5, #0x24]
 	bl Camera_SetLookAtTargetAndRecalcPos
 	ldr r0, [r5, #0x40]
-	bl PlayerAvatar_GetPositionVector
+	bl PlayerAvatar_GetPositionVecConst
 	ldr r1, [r5, #0x24]
 	bl Camera_SetFixedTarget
 	ldr r1, [r5, #0x24]
@@ -669,7 +669,7 @@ sub_02056BC8: ; 0x02056BC8
 	add r5, r0, #0
 	ldr r0, [r4, #0x40]
 	add r1, sp, #0x24
-	bl PlayerAvatar_CopyPositionVector
+	bl PlayerAvatar_GetPositionVec
 	ldr r0, [r4, #0x40]
 	mov r1, #0
 	bl PlayerAvatar_ToggleAutomaticHeightUpdating
@@ -683,11 +683,11 @@ sub_02056BC8: ; 0x02056BC8
 	mov r2, #0
 	bl sub_0205C810
 	ldr r0, [r4, #0x40]
-	bl PlayerAvatar_GetPositionVector
+	bl PlayerAvatar_GetPositionVecConst
 	ldr r1, [r4, #0x24]
 	bl Camera_SetLookAtTargetAndRecalcPos
 	ldr r0, [r4, #0x40]
-	bl PlayerAvatar_GetPositionVector
+	bl PlayerAvatar_GetPositionVecConst
 	ldr r1, [r4, #0x24]
 	bl Camera_SetFixedTarget
 	ldr r1, [r4, #0x24]
@@ -735,7 +735,7 @@ sub_02056C64: ; 0x02056C64
 	add r5, r0, #0
 	ldr r0, [r4, #0x40]
 	add r1, sp, #0x24
-	bl PlayerAvatar_CopyPositionVector
+	bl PlayerAvatar_GetPositionVec
 	ldr r0, [r4, #0x40]
 	mov r1, #0
 	bl PlayerAvatar_ToggleAutomaticHeightUpdating
@@ -749,11 +749,11 @@ sub_02056C64: ; 0x02056C64
 	mov r2, #0
 	bl sub_0205C810
 	ldr r0, [r4, #0x40]
-	bl PlayerAvatar_GetPositionVector
+	bl PlayerAvatar_GetPositionVecConst
 	ldr r1, [r4, #0x24]
 	bl Camera_SetLookAtTargetAndRecalcPos
 	ldr r0, [r4, #0x40]
-	bl PlayerAvatar_GetPositionVector
+	bl PlayerAvatar_GetPositionVecConst
 	ldr r1, [r4, #0x24]
 	bl Camera_SetFixedTarget
 	ldr r1, [r4, #0x24]
@@ -781,7 +781,7 @@ sub_02056D00: ; 0x02056D00
 	add r4, r1, #0
 	mov r0, #0xb
 	mov r1, #0x10
-	bl Heap_AllocAtEnd
+	bl AllocFromHeapAtEnd
 	add r2, r0, #0
 	add r3, r2, #0
 	mov r1, #0x10
@@ -831,7 +831,7 @@ _02056D4E:
 	strh r0, [r4]
 	b _02056D74
 _02056D6C:
-	bl Heap_Free
+	bl FreeToHeap
 	mov r0, #1
 	pop {r4, r5, r6, pc}
 _02056D74:

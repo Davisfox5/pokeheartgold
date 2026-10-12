@@ -70,7 +70,7 @@
 .public sub_0200F450
 .public BeginNormalPaletteFade
 .public IsPaletteFadeFinished
-.public ResetVisibleHardwareWindows
+.public sub_0200FBDC
 .public sub_0200FBF4
 .public sub_02014494
 .public sub_02015494
@@ -82,8 +82,8 @@
 .public sub_0201A738
 .public sub_0201A748
 .public sub_0201A774
-.public Heap_Alloc
-.public Heap_Free
+.public AllocFromHeap
+.public FreeToHeap
 .public ToggleBgLayer
 .public BgSetPosTextAndCommit
 .public BG_ClearCharDataRange
@@ -164,7 +164,7 @@
 .public NamingScreen_CreateArgs
 .public NamingScreen_DeleteArgs
 .public HealParty
-.public Frontier_GetLaunchArgs
+.public Frontier_GetLaunchParam
 .public sub_0209680C
 .public Frontier_GetData
 .public Frontier_SetData
@@ -193,12 +193,12 @@
 .public ov80_0222A7EC
 .public ov80_0222AB2C
 .public FrontierSystem_GetFrontierMap
-.public FrontierScriptContext_Pause
-.public FrontierScriptContext_Stop
-.public FrontierScriptContext_Call
-.public FrontierScriptContext_Return
-.public FrontierScriptContext_ReadHalfWord
-.public FrontierScriptContext_ReadWord
+.public ov80_0222AB84
+.public ov80_0222AB90
+.public ov80_0222AC3C
+.public ov80_0222AC4C
+.public FrontierScript_ReadU16
+.public ov80_0222AC70
 .public FrontierScript_ReadVarPtr
 .public FrontierScript_ReadVar
 .public ov80_0222BE24

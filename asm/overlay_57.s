@@ -27,7 +27,7 @@ ov57_022378DC: ; 0x022378DC
 	mov r0, #3
 	mov r1, #0x34
 	lsl r2, r2, #0x12
-	bl Heap_Create
+	bl CreateHeap
 	mov r1, #0x46
 	add r0, r5, #0
 	lsl r1, r1, #4
@@ -345,7 +345,7 @@ ov57_02237B20: ; 0x02237B20
 	add r0, r4, #0
 	add r0, #0xe4
 	ldr r0, [r0]
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r4, #0
 	add r0, #0xe8
 	ldr r0, [r0]
@@ -379,7 +379,7 @@ ov57_02237B20: ; 0x02237B20
 	bl ov57_02237E80
 	ldr r0, _02237C94 ; =0x00000458
 	ldr r0, [r4, r0]
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, r4, #0
 	bl ov57_022383AC
 	mov r0, #0x7b
@@ -418,7 +418,7 @@ ov57_02237B20: ; 0x02237B20
 	bl OverlayManager_FreeData
 	bl sub_02021238
 	mov r0, #0x34
-	bl Heap_Destroy
+	bl DestroyHeap
 	ldr r0, _02237CA0 ; =FS_OVERLAY_ID(OVY_6)
 	bl UnloadOverlayByID
 	ldr r0, _02237CA4 ; =FS_OVERLAY_ID(OVY_7)
@@ -1817,7 +1817,7 @@ ov57_022386F0: ; 0x022386F0
 	add r4, r0, #0
 	mov r0, #2
 	mov r1, #0x34
-	bl FontSystem_NewInit
+	bl sub_02013534
 	mov r1, #0x97
 	lsl r1, r1, #2
 	str r0, [r4, r1]
@@ -1841,7 +1841,7 @@ ov57_02238714: ; 0x02238714
 	mov r0, #0x26
 	lsl r0, r0, #4
 	ldr r0, [r4, r0]
-	bl FontOAM_Delete
+	bl sub_02013660
 	mov r0, #0x9a
 	lsl r0, r0, #2
 	add r0, r4, r0
@@ -1849,7 +1849,7 @@ ov57_02238714: ; 0x02238714
 	mov r0, #0x99
 	lsl r0, r0, #2
 	ldr r0, [r4, r0]
-	bl FontOAM_Delete
+	bl sub_02013660
 	mov r0, #0x9d
 	lsl r0, r0, #2
 	add r0, r4, r0
@@ -1925,12 +1925,12 @@ ov57_022387C0: ; 0x022387C0
 	lsl r0, r0, #4
 	ldr r0, [r5, r0]
 	add r4, r1, #0
-	bl TextOBJ_SetSpritesDrawFlag
+	bl sub_020137C0
 	mov r0, #0x99
 	lsl r0, r0, #2
 	ldr r0, [r5, r0]
 	add r1, r4, #0
-	bl TextOBJ_SetSpritesDrawFlag
+	bl sub_020137C0
 	pop {r3, r4, r5, pc}
 	.balign 4, 0
 	thumb_func_end ov57_022387C0
@@ -3760,7 +3760,7 @@ _022395E2:
 	cmp r4, #9
 	blo _022395E2
 	ldr r0, [sp, #0x14]
-	bl Heap_Free
+	bl FreeToHeap
 	mov r0, #0
 	str r0, [sp]
 	mov r1, #0x20
@@ -5447,7 +5447,7 @@ _0223A39A:
 	ldr r0, [r4]
 	ldr r0, [r0, #0x28]
 	bl Save_GameStats_Get
-	mov r1, #7 ; SCORE_EVENT_BALL_CAPSULE_MODIFIED
+	mov r1, #7
 	bl GameStats_AddScore
 	mov r0, #0xfb
 	lsl r0, r0, #2
@@ -8111,7 +8111,7 @@ _0223B8E4:
 	add r0, r5, #0
 	bl SysTask_Destroy
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	pop {r3, r4, r5, pc}
 _0223B904:
 	add r0, r0, #1
@@ -8127,7 +8127,7 @@ ov57_0223B90C: ; 0x0223B90C
 	add r5, r1, #0
 	mov r0, #0x34
 	mov r1, #0xc
-	bl Heap_Alloc
+	bl AllocFromHeap
 	add r4, r0, #0
 	mov r0, #1
 	str r0, [r4]

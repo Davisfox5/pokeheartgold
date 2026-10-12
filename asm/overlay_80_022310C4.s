@@ -14,7 +14,7 @@ ov80_022310C4: ; 0x022310C4
 	mov r0, #0xb
 	add r6, r2, #0
 	str r3, [sp, #8]
-	bl Heap_Alloc
+	bl AllocFromHeap
 	ldr r1, _022313A4 ; =ov80_0223DD44
 	ldr r2, _022313A0 ; =0x00000D98
 	str r0, [r1]
@@ -487,20 +487,20 @@ ov80_022314A0: ; 0x022314A0
 	ldr r0, [r4, r0]
 	cmp r0, #0
 	beq _022314B4
-	bl Heap_Free
+	bl FreeToHeap
 _022314B4:
 	ldr r0, _022314D4 ; =0x00000D8C
 	ldr r0, [r4, r0]
 	cmp r0, #0
 	beq _022314C0
-	bl Heap_Free
+	bl FreeToHeap
 _022314C0:
 	ldr r2, _022314D8 ; =0x00000D98
 	add r0, r4, #0
 	mov r1, #0
 	bl MI_CpuFill8
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 _022314D0:
 	pop {r4, pc}
 	nop
@@ -882,7 +882,7 @@ ov80_022317D0: ; 0x022317D0
 	mov r2, #0xb
 	mov r3, #0xcc
 	bl ov80_02229F04
-	bl Heap_Free
+	bl FreeToHeap
 	add r0, sp, #0
 	ldrh r0, [r0, #4]
 	lsl r0, r0, #0x18

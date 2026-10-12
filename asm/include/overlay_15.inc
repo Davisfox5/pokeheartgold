@@ -86,11 +86,11 @@
 .public Main_SetVBlankIntrCB
 .public HBlankInterruptDisable
 .public SetKeyRepeatTimers
-.public Heap_Create
-.public Heap_Destroy
-.public Heap_Free
-.public Heap_FreeExplicit
-.public HeapExp_FndInitAllocator
+.public CreateHeap
+.public DestroyHeap
+.public FreeToHeap
+.public FreeToHeapExplicit
+.public GF_ExpHeap_FndInitAllocator
 .public BgConfig_Alloc
 .public SetBothScreensModesAndDisable
 .public InitBgFromTemplate

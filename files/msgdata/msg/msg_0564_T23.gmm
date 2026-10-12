@@ -6,27 +6,27 @@
 	</row>
 	<row id="msg_0564_T23_00001" index="1">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">{STRVAR_1 3, 0, 0}: ...Tell me something.\rIs it true that Team Rocket has\nreturned?\rWhat? You beat them? Hah!\nQuit lying.\rAre you serious?\nThen let’s see how good you are.\r</language>
+		<language name="English">KESTRA: There you are! I get to\nAzalea first, I’m all ready to\fgloat about beating the gym before\nyou--and the whole town’s saying\fyou went down a WELL and met the\nCHAMPION?!\rI leave you alone for ONE route!</language>
 	</row>
 	<row id="msg_0564_T23_00002" index="2">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">{STRVAR_1 3, 0, 0}: I hate the weak.\rPokémon, Trainers.\nIt doesn’t matter who or what.\rI hate to see them hanging around.\nThat goes for Team Rocket, too.\rThey think they are big and tough\nas long as they are in a group.\rBut get them alone, and they’re weak.\nI hate them all.\rYou stay out of my way.\nYou won’t be an exception\fif you get in my way.\r</language>
+		<language name="English">KESTRA: ...You’re okay, though?\nReally?\r...Okay. Okay good. Then I want\nthe badge too, and I want the whole\fstory, in that order.\rRace you to the forest--last one\nto Goldenrod buys lunch!</language>
 	</row>
 	<row id="msg_0564_T23_00003" index="3">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">Nothing is going on.\nIt’s unsafe to go in there, so I’m\fstanding guard to make sure\fpeople don’t wander in.\rAm I not a good Samaritan?</language>
+		<language name="English">Apologies. The well’s under\nprivate survey this week.\rStructural assessment. It isn’t\nsafe for the public right now.</language>
 	</row>
 	<row id="msg_0564_T23_00004" index="4">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">Do you know about SlowpokeTail?\nI heard it’s tasty!\rAren’t you glad I told you that?</language>
+		<language name="English">Site perimeter. The gym is open;\nthe well is not.\rMove along, please.</language>
 	</row>
 	<row id="msg_0564_T23_00005" index="5">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The SLOWPOKE have disappeared\nfrom town...\rI heard their tails are being sold\nsomewhere.</language>
+		<language name="English">Sixty years the well’s made the\nsame sound. Drip, and the slow\fones breathing.\rThree nights ago it started up--\nclicking. Humming. Like the inside\fof a clock.\rI don’t sleep much now.</language>
 	</row>
 	<row id="msg_0564_T23_00006" index="6">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The SLOWPOKE have returned.\rKnowing them, they could’ve just been\ntaking it easy somewhere.</language>
+		<language name="English">The clicking stopped. The water\nsounds like water again.\r...Mostly. Old ears keep listening\nanyway.</language>
 	</row>
 	<row id="msg_0564_T23_00007" index="7">
 		<attribute name="window_context_name">used</attribute>
@@ -34,7 +34,7 @@
 	</row>
 	<row id="msg_0564_T23_00008" index="8">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">Cut through Azalea and you’ll be in\nIlex Forest.\rBut these skinny trees make it\nimpossible to get through.\rThe Charcoal Man’s Pokémon can cut\ndown trees.</language>
+		<language name="English">-</language>
 	</row>
 	<row id="msg_0564_T23_00009" index="9">
 		<attribute name="window_context_name">used</attribute>
@@ -66,18 +66,98 @@
 	</row>
 	<row id="msg_0564_T23_00016" index="16">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">Who are you?\nYou don’t know us?\rWe are...\nTeam Rocket!\r...What?\nWe broke up a while ago?\rGive me a break!\nWe have not broken up!\rActually we did once.\nBut we have come back to\fpursue Giovanni’s ambition.\rEnough talking.\nShut up and just beat it!\r</language>
+		<language name="English">FIELD TECH: Apologies. The well’s\nunder private survey this week.\rStructural assessment. It isn’t\nsafe for the public right now.</language>
 	</row>
 	<row id="msg_0564_T23_00017" index="17">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">{SIZE 200}Thud!{SIZE 100}\r</language>
+		<language name="English">TOWNSMAN: It’s never needed a\n“survey” in sixty years.\rThose are our SLOWPOKE down there.</language>
 	</row>
 	<row id="msg_0564_T23_00018" index="18">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">We have this tough guy called Kurt\nin this town.\fHe should be able to take care of it...</language>
+		<language name="English">They’re polite, the survey\npeople. Polite as a locked door.</language>
 	</row>
 	<row id="msg_0564_T23_00019" index="19">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">I knew we could count on Kurt!</language>
+		<language name="English">They packed up and vanished the\nsame hour you came up.\rSurveys don’t run from children,\ndo they?</language>
+	</row>
+	<row id="msg_0564_T23_00020" index="20">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">...Nine. Nine. There’s supposed\nto be fourteen by the rim this\ftime of morning.\rYou haven’t seen any wandered off\ntoward the gate, have you?\fNo. Course not.</language>
+	</row>
+	<row id="msg_0564_T23_00021" index="21">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Five gone in three days. And the\nones still here...\rLook at him. He won’t even yawn.\nA SLOWPOKE that won’t yawn isn’t\fa SLOWPOKE.\rSomething’s wrong down that well.</language>
+	</row>
+	<row id="msg_0564_T23_00022" index="22">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Nine. I keep counting nine.\nI’ll keep counting till it’s\ffourteen.</language>
+	</row>
+	<row id="msg_0564_T23_00023" index="23">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Fourteen by the rim again.\nI counted twice.\rThree of them still won’t go\nnear the water. But fourteen.\fThey came home.</language>
+	</row>
+	<row id="msg_0564_T23_00024" index="24">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">TURK: You’re the one Gramps\nsent? Okay. Okay, good. I’m Turk.\rI train under Bugsy at the gym,\nI’m--that’s not important. The\fSLOWPOKE are important.\rThere are people down there. Not\ntownsfolk. They’ve got cases and\fscreens and they keep the SLOWPOKE\nin RINGS.\rNobody’ll let me past to look\nbecause I’m “just a kid.”\fI’m done being just a kid\nabout it.</language>
+	</row>
+	<row id="msg_0564_T23_00025" index="25">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">TURK: I’m not asking you to fight\nmy fight for me. I’m asking you\fto fight it WITH me.\rTwo of us, side by side, the whole\nway down. You in? {YESNO 0}</language>
+	</row>
+	<row id="msg_0564_T23_00026" index="26">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">TURK: Then send yours out the\nsecond I send mine. We don’t get\fseparated.\rWhatever’s down there, we meet it\ntogether.\rThere’s a service ladder around\nthe rim--Gramps told me. The steps\fare “blocked.” The ladder isn’t.\nCome on.</language>
+	</row>
+	<row id="msg_0564_T23_00027" index="27">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">TURK: ...I’ll wait. I’m not\ngoing down there alone, and I’m\fnot going home.\rSo. Whenever you’re ready.</language>
+	</row>
+	<row id="msg_0564_T23_00028" index="28">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">KURT: There--there they are!\nThe SLOWPOKE, are they--?</language>
+	</row>
+	<row id="msg_0564_T23_00029" index="29">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">TURK: They’re coming up, Gramps.\nThey’re hurt, some of them.\fBut they’re coming up.</language>
+	</row>
+	<row id="msg_0564_T23_00030" index="30">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">SILVER: ...You.\rYou’re the one Gold mentioned.\nCherrygrove. He said there was a\ftrainer worth watching.\rI should have guessed it would be\nyou down that well.</language>
+	</row>
+	<row id="msg_0564_T23_00031" index="31">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">SILVER: Tell me what you saw.\nAll of it. Slowly.\r...</language>
+	</row>
+	<row id="msg_0564_T23_00032" index="32">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">SILVER: May I?\r...This isn’t improvised. This is\nENGINEERED.\rWhoever did this is not a vandal.\nThey’re a professional. I’ll\ftreat them like one.</language>
+	</row>
+	<row id="msg_0564_T23_00033" index="33">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">SILVER: Here is what happens now.\nThe League takes this.\rWe trace the equipment, we track\nthe people, we put protection on\fthis town’s SLOWPOKE until every\nlast one is accounted for.\rYou have my word--and my word,\nthese days, moves quickly.</language>
+	</row>
+	<row id="msg_0564_T23_00034" index="34">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">SILVER: You did more today than\nmost trainers do in a year,\f{STRVAR_1 3, 0, 0}. Rest. Earn your\nbadge. Leave the rest to me.\rAnd you. You didn’t leave them.\nRemember that the rest of your\flife.</language>
+	</row>
+	<row id="msg_0564_T23_00035" index="35">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">KURT: ...Champion himself. Here,\nfast as that.\r...Well. The boy’s right. You’re\nnot just a kid anymore either, are\fyou.\rGo on. Turk’s been wanting his\nturn at you since you came up those\fsteps.</language>
+	</row>
+	<row id="msg_0564_T23_00036" index="36">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">TURK: I keep thinking about how\ncalm he was. The man at the\fterminal. “No use to anyone now.”\rI’m going to run that gym\nsomeday. And nobody’s Pokémon is\fever going to be a MEASUREMENT in\nmy town.\rCome on. Let me show you why I\nearned the right to ask you down\fthere.</language>
+	</row>
+	<row id="msg_0564_T23_00037" index="37">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">It’s pressed flat against the\nstones, facing the wall.\rIt doesn’t yawn. It doesn’t do\nanything at all.</language>
+	</row>
+	<row id="msg_0564_T23_00038" index="38">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">It’s back by the water’s edge--\nat a distance.\rIt watches the well and will not\ngo nearer.</language>
+	</row>
+	<row id="msg_0564_T23_00039" index="39">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">FIELD TECH: Then you’ll want the\nstructure sound, won’t you.\rWe’ll be done soon.</language>
 	</row>
 </body>

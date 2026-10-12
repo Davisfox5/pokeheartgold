@@ -1,0 +1,102 @@
+{
+  "header": "fielddata/script/scr_seq/event_EVERYWHERE.h",
+  "bgs": [
+    {
+      "scriptId": 35,
+      "type": 1,
+      "x": 822,
+      "z": 445,
+      "y": 0,
+      "dir": 0
+    }
+  ],
+  "objects": [
+    {
+      "id": 0,
+      "spriteId": "SPRITE_GSBIGMAN",
+      "movement": 3,
+      "type": 0,
+      "eventFlag": 0,
+      "scriptId": 3,
+      "facingDirection": 3,
+      "param0": 0,
+      "param1": 0,
+      "param2": 0,
+      "xRange": 1,
+      "yRange": 1,
+      "x": 814,
+      "z": 431,
+      "y": 0
+    },
+    {
+      "id": 1,
+      "spriteId": "SPRITE_GSMAN3",
+      "movement": 0,
+      "type": 0,
+      "eventFlag": 0,
+      "scriptId": 2,
+      "facingDirection": 0,
+      "param0": 0,
+      "param1": 0,
+      "param2": 0,
+      "xRange": 0,
+      "yRange": 0,
+      "x": 829,
+      "z": 433,
+      "y": 0
+    },
+    {
+      "id": 2,
+      "spriteId": "SPRITE_GSMAN3",
+      "movement": 0,
+      "type": 0,
+      "eventFlag": 0,
+      "scriptId": 2,
+      "facingDirection": 2,
+      "param0": 0,
+      "param1": 0,
+      "param2": 0,
+      "xRange": 0,
+      "yRange": 0,
+      "x": 796,
+      "z": 432,
+      "y": 0
+    },
+    {
+      "id": 3,
+      "spriteId": "SPRITE_GSWOMAN3",
+      "movement": 0,
+      "type": 0,
+      "eventFlag": 0,
+      "scriptId": 11,
+      "facingDirection": 2,
+      "param0": 0,
+      "param1": 0,
+      "param2": 0,
+      "xRange": 0,
+      "yRange": 0,
+      "x": 801,
+      "z": 432,
+      "y": 0
+    },
+    {
+      "id": 4,
+      "spriteId": "SPRITE_GSWOMAN3",
+      "movement": 0,
+      "type": 0,
+      "eventFlag": 0,
+      "scriptId": 10,
+      "facingDirection": 1,
+      "param0": 0,
+      "param1": 0,
+      "param2": 0,
+      "xRange": 0,
+      "yRange": 0,
+      "x": 820,
+      "z": 418,
+      "y": 0
+    }
+  ],
+  "warps": [],
+  "coords": []
+}

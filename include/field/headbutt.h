@@ -3,8 +3,6 @@
 
 #include "global.h"
 
-#define NUM_ENCOUNTERS_HEADBUTT 6
-
 typedef struct HeadbuttSlot {
     u16 species;
     u8 minLevel;
@@ -14,9 +12,9 @@ typedef struct HeadbuttSlot {
 typedef struct HeadbuttEncounterData {
     u16 numRegularTrees;
     u16 numSecretTrees;
-    HeadbuttSlot common[NUM_ENCOUNTERS_HEADBUTT];
-    HeadbuttSlot rare[NUM_ENCOUNTERS_HEADBUTT];
-    HeadbuttSlot secret[NUM_ENCOUNTERS_HEADBUTT];
+    HeadbuttSlot common[6];
+    HeadbuttSlot rare[6];
+    HeadbuttSlot secret[6];
     s16 treeCoords[][2];
 } HeadbuttEncounterData;
 

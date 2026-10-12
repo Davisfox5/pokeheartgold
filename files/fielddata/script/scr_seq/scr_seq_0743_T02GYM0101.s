@@ -5,372 +5,372 @@
 
 	.rodata
 
-	ScrDef scr_seq_T02GYM0101_000
-	ScrDef scr_seq_T02GYM0101_001
-	ScrDef scr_seq_T02GYM0101_002
-	ScrDef scr_seq_T02GYM0101_003
-	ScrDef scr_seq_T02GYM0101_004
-	ScrDefEnd
+	scrdef scr_seq_T02GYM0101_000
+	scrdef scr_seq_T02GYM0101_001
+	scrdef scr_seq_T02GYM0101_002
+	scrdef scr_seq_T02GYM0101_003
+	scrdef scr_seq_T02GYM0101_004
+	scrdef_end
 
 scr_seq_T02GYM0101_002:
-	ViridianGymInit
-	SetVar VAR_UNK_4127, 0
-	GetPhoneBookRematch PHONE_CONTACT_BLUE, VAR_TEMP_x4001
-	Compare VAR_TEMP_x4001, 0
-	GoToIfNe _0065
-	Compare VAR_UNK_40FD, 0
-	GoToIfEq _005F
-	GetWeekday VAR_TEMP_x4002
-	Compare VAR_TEMP_x4002, 5
-	GoToIfNe _0059
-	SetFlag FLAG_HIDE_VIRIDIAN_GYM_BLUE
-	GoTo _005D
+	viridian_gym_init
+	setvar VAR_UNK_4127, 0
+	get_phone_book_rematch PHONE_CONTACT_BLUE, VAR_TEMP_x4001
+	compare VAR_TEMP_x4001, 0
+	goto_if_ne _0065
+	compare VAR_UNK_40FD, 0
+	goto_if_eq _005F
+	get_weekday VAR_TEMP_x4002
+	compare VAR_TEMP_x4002, 5
+	goto_if_ne _0059
+	setflag FLAG_HIDE_VIRIDIAN_GYM_BLUE
+	goto _005D
 
 _0059:
-	ClearFlag FLAG_HIDE_VIRIDIAN_GYM_BLUE
+	clearflag FLAG_HIDE_VIRIDIAN_GYM_BLUE
 _005D:
-	End
+	end
 
 _005F:
-	ClearFlag FLAG_HIDE_VIRIDIAN_GYM_BLUE
-	End
+	clearflag FLAG_HIDE_VIRIDIAN_GYM_BLUE
+	end
 
 _0065:
-	SetFlag FLAG_HIDE_VIRIDIAN_GYM_BLUE
-	End
+	setflag FLAG_HIDE_VIRIDIAN_GYM_BLUE
+	end
 
 scr_seq_T02GYM0101_000:
-	PlaySE SEQ_SE_DP_SELECT
-	LockAll
-	FacePlayer
-	CheckBadge BADGE_EARTH, VAR_SPECIAL_RESULT
-	Compare VAR_SPECIAL_RESULT, 1
-	GoToIfEq _0131
-	NPCMsg msg_0454_T02GYM0101_00000
-	CloseMsg
-	TrainerBattle TRAINER_LEADER_BLUE_BLUE, 0, 0, 0
-	CheckBattleWon VAR_SPECIAL_RESULT
-	Compare VAR_SPECIAL_RESULT, 0
-	GoToIfEq _0147
-	GiveBadge BADGE_EARTH
-	AddVar VAR_UNK_4135, 1
-	SetFlag FLAG_UNK_998
-	AddSpecialGameStat SCORE_EVENT_BADGE_GET
-	SetTrainerFlag TRAINER_ACE_TRAINER_M_ARABELLA
-	SetTrainerFlag TRAINER_ACE_TRAINER_F_SALMA
-	SetTrainerFlag TRAINER_ACE_TRAINER_M_BONITA
-	SetTrainerFlag TRAINER_DOUBLE_TEAM_ELAN_AND_IDA
-	SetFlag FLAG_UNK_97F
-	ClearFlag FLAG_HIDE_ROUTE_10_ZAPDOS
-	SetFlag FLAG_HIDE_CERULEAN_CITY_MAN_OUTSIDE_CAVE
-	SetVar VAR_UNK_4096, 1
-	NPCMsg msg_0454_T02GYM0101_00001
-	BufferPlayersName 0
-	NPCMsg msg_0454_T02GYM0101_00002
-	PlayFanfare SEQ_ME_BADGE
-	WaitFanfare
-	NPCMsg msg_0454_T02GYM0101_00003
-	GoTo _00F0
+	play_se SEQ_SE_DP_SELECT
+	lockall
+	faceplayer
+	check_badge BADGE_EARTH, VAR_SPECIAL_RESULT
+	compare VAR_SPECIAL_RESULT, 1
+	goto_if_eq _0131
+	npc_msg msg_0454_T02GYM0101_00000
+	closemsg
+	trainer_battle TRAINER_LEADER_BLUE_BLUE, 0, 0, 0
+	check_battle_won VAR_SPECIAL_RESULT
+	compare VAR_SPECIAL_RESULT, 0
+	goto_if_eq _0147
+	give_badge BADGE_EARTH
+	addvar VAR_UNK_4135, 1
+	setflag FLAG_UNK_998
+	add_special_game_stat SCORE_EVENT_BADGE_GET
+	settrainerflag TRAINER_ACE_TRAINER_M_ARABELLA
+	settrainerflag TRAINER_ACE_TRAINER_F_SALMA
+	settrainerflag TRAINER_ACE_TRAINER_M_BONITA
+	settrainerflag TRAINER_DOUBLE_TEAM_ELAN_AND_IDA
+	setflag FLAG_UNK_97F
+	clearflag FLAG_HIDE_ROUTE_10_ZAPDOS
+	setflag FLAG_HIDE_CERULEAN_CITY_MAN_OUTSIDE_CAVE
+	setvar VAR_UNK_4096, 1
+	npc_msg msg_0454_T02GYM0101_00001
+	buffer_players_name 0
+	npc_msg msg_0454_T02GYM0101_00002
+	play_fanfare SEQ_ME_BADGE
+	wait_fanfare
+	npc_msg msg_0454_T02GYM0101_00003
+	goto _00F0
 
 _00F0:
-	GoToIfNoItemSpace ITEM_TM92, 1, _0127
-	CallStd std_give_item_verbose
-	SetFlag FLAG_GOT_TM92_FROM_BLUE
-	BufferPlayersName 0
-	NPCMsg msg_0454_T02GYM0101_00004
-	WaitButton
-	CloseMsg
-	ReleaseAll
-	End
+	goto_if_no_item_space ITEM_TM92, 1, _0127
+	callstd std_give_item_verbose
+	setflag FLAG_GOT_TM92_FROM_BLUE
+	buffer_players_name 0
+	npc_msg msg_0454_T02GYM0101_00004
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
 
 _0127:
-	CallStd std_bag_is_full
-	CloseMsg
-	ReleaseAll
-	End
+	callstd std_bag_is_full
+	closemsg
+	releaseall
+	end
 
 _0131:
-	GoToIfUnset FLAG_GOT_TM92_FROM_BLUE, _00F0
-	NPCMsg msg_0454_T02GYM0101_00005
-	WaitButton
-	CloseMsg
-	ReleaseAll
-	End
+	goto_if_unset FLAG_GOT_TM92_FROM_BLUE, _00F0
+	npc_msg msg_0454_T02GYM0101_00005
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
 
 _0147:
-	WhiteOut
-	ReleaseAll
-	End
+	white_out
+	releaseall
+	end
 
 scr_seq_T02GYM0101_001:
-	PlaySE SEQ_SE_DP_SELECT
-	LockAll
-	FacePlayer
-	CheckBadge BADGE_EARTH, VAR_SPECIAL_RESULT
-	Compare VAR_SPECIAL_RESULT, 1
-	GoToIfEq _0186
-	NPCMsg msg_0454_T02GYM0101_00006
-	ScrCmd_600
-	SetFollowMonInhibitState 1
-	ScrCmd_607
-	ScrCmd_109 253, 56
-	SetVar VAR_UNK_4127, 1
-	WaitButton
-	CloseMsg
-	ReleaseAll
-	End
+	play_se SEQ_SE_DP_SELECT
+	lockall
+	faceplayer
+	check_badge BADGE_EARTH, VAR_SPECIAL_RESULT
+	compare VAR_SPECIAL_RESULT, 1
+	goto_if_eq _0186
+	npc_msg msg_0454_T02GYM0101_00006
+	scrcmd_600
+	set_follow_mon_inhibit_state 1
+	scrcmd_607
+	scrcmd_109 253, 56
+	setvar VAR_UNK_4127, 1
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
 
 _0186:
-	NPCMsg msg_0454_T02GYM0101_00007
-	WaitButton
-	CloseMsg
-	ReleaseAll
-	End
+	npc_msg msg_0454_T02GYM0101_00007
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
 
 scr_seq_T02GYM0101_003:
-	ScrCmd_609
-	LockAll
-	GoToIfSet FLAG_UNK_13A, _037D
-	GetPlayerCoords VAR_TEMP_x4000, VAR_TEMP_x4001
-	Compare VAR_TEMP_x4000, 1
-	GoToIfNe _01C9
-	ApplyMovement obj_T02GYM0101_sunglasses, _0394
-	ApplyMovement obj_player, _040C
-	GoTo _02AB
+	scrcmd_609
+	lockall
+	goto_if_set FLAG_UNK_13A, _037D
+	get_player_coords VAR_TEMP_x4000, VAR_TEMP_x4001
+	compare VAR_TEMP_x4000, 1
+	goto_if_ne _01C9
+	apply_movement obj_T02GYM0101_sunglasses, _0394
+	apply_movement obj_player, _040C
+	goto _02AB
 
 _01C9:
-	Compare VAR_TEMP_x4000, 2
-	GoToIfNe _01EC
-	ApplyMovement obj_T02GYM0101_sunglasses, _03A4
-	ApplyMovement obj_player, _040C
-	GoTo _02AB
+	compare VAR_TEMP_x4000, 2
+	goto_if_ne _01EC
+	apply_movement obj_T02GYM0101_sunglasses, _03A4
+	apply_movement obj_player, _040C
+	goto _02AB
 
 _01EC:
-	Compare VAR_TEMP_x4000, 3
-	GoToIfNe _020F
-	ApplyMovement obj_T02GYM0101_sunglasses, _03B4
-	ApplyMovement obj_player, _040C
-	GoTo _02AB
+	compare VAR_TEMP_x4000, 3
+	goto_if_ne _020F
+	apply_movement obj_T02GYM0101_sunglasses, _03B4
+	apply_movement obj_player, _040C
+	goto _02AB
 
 _020F:
-	Compare VAR_TEMP_x4000, 4
-	GoToIfNe _0232
-	ApplyMovement obj_T02GYM0101_sunglasses, _03C4
-	ApplyMovement obj_player, _0418
-	GoTo _02AB
+	compare VAR_TEMP_x4000, 4
+	goto_if_ne _0232
+	apply_movement obj_T02GYM0101_sunglasses, _03C4
+	apply_movement obj_player, _0418
+	goto _02AB
 
 _0232:
-	Compare VAR_TEMP_x4000, 5
-	GoToIfNe _0255
-	ApplyMovement obj_T02GYM0101_sunglasses, _03D4
-	ApplyMovement obj_player, _0418
-	GoTo _02AB
+	compare VAR_TEMP_x4000, 5
+	goto_if_ne _0255
+	apply_movement obj_T02GYM0101_sunglasses, _03D4
+	apply_movement obj_player, _0418
+	goto _02AB
 
 _0255:
-	Compare VAR_TEMP_x4000, 6
-	GoToIfNe _0278
-	ApplyMovement obj_T02GYM0101_sunglasses, _03E4
-	ApplyMovement obj_player, _0418
-	GoTo _02AB
+	compare VAR_TEMP_x4000, 6
+	goto_if_ne _0278
+	apply_movement obj_T02GYM0101_sunglasses, _03E4
+	apply_movement obj_player, _0418
+	goto _02AB
 
 _0278:
-	Compare VAR_TEMP_x4000, 8
-	GoToIfNe _029B
-	ApplyMovement obj_T02GYM0101_sunglasses, _03F0
-	ApplyMovement obj_player, _0424
-	GoTo _02AB
+	compare VAR_TEMP_x4000, 8
+	goto_if_ne _029B
+	apply_movement obj_T02GYM0101_sunglasses, _03F0
+	apply_movement obj_player, _0424
+	goto _02AB
 
 _029B:
-	ApplyMovement obj_T02GYM0101_sunglasses, _03FC
-	ApplyMovement obj_player, _0424
+	apply_movement obj_T02GYM0101_sunglasses, _03FC
+	apply_movement obj_player, _0424
 _02AB:
-	WaitMovement
-	NPCMsg msg_0454_T02GYM0101_00008
-	CloseMsg
-	SetFlag FLAG_UNK_13A
-	Compare VAR_TEMP_x4000, 1
-	GoToIfNe _02D1
-	ApplyMovement obj_T02GYM0101_sunglasses, _0430
-	GoTo _037B
+	wait_movement
+	npc_msg msg_0454_T02GYM0101_00008
+	closemsg
+	setflag FLAG_UNK_13A
+	compare VAR_TEMP_x4000, 1
+	goto_if_ne _02D1
+	apply_movement obj_T02GYM0101_sunglasses, _0430
+	goto _037B
 
 _02D1:
-	Compare VAR_TEMP_x4000, 2
-	GoToIfNe _02EC
-	ApplyMovement obj_T02GYM0101_sunglasses, _043C
-	GoTo _037B
+	compare VAR_TEMP_x4000, 2
+	goto_if_ne _02EC
+	apply_movement obj_T02GYM0101_sunglasses, _043C
+	goto _037B
 
 _02EC:
-	Compare VAR_TEMP_x4000, 3
-	GoToIfNe _0307
-	ApplyMovement obj_T02GYM0101_sunglasses, _0448
-	GoTo _037B
+	compare VAR_TEMP_x4000, 3
+	goto_if_ne _0307
+	apply_movement obj_T02GYM0101_sunglasses, _0448
+	goto _037B
 
 _0307:
-	Compare VAR_TEMP_x4000, 4
-	GoToIfNe _0322
-	ApplyMovement obj_T02GYM0101_sunglasses, _0454
-	GoTo _037B
+	compare VAR_TEMP_x4000, 4
+	goto_if_ne _0322
+	apply_movement obj_T02GYM0101_sunglasses, _0454
+	goto _037B
 
 _0322:
-	Compare VAR_TEMP_x4000, 5
-	GoToIfNe _033D
-	ApplyMovement obj_T02GYM0101_sunglasses, _0460
-	GoTo _037B
+	compare VAR_TEMP_x4000, 5
+	goto_if_ne _033D
+	apply_movement obj_T02GYM0101_sunglasses, _0460
+	goto _037B
 
 _033D:
-	Compare VAR_TEMP_x4000, 6
-	GoToIfNe _0358
-	ApplyMovement obj_T02GYM0101_sunglasses, _046C
-	GoTo _037B
+	compare VAR_TEMP_x4000, 6
+	goto_if_ne _0358
+	apply_movement obj_T02GYM0101_sunglasses, _046C
+	goto _037B
 
 _0358:
-	Compare VAR_TEMP_x4000, 8
-	GoToIfNe _0373
-	ApplyMovement obj_T02GYM0101_sunglasses, _046C
-	GoTo _037B
+	compare VAR_TEMP_x4000, 8
+	goto_if_ne _0373
+	apply_movement obj_T02GYM0101_sunglasses, _046C
+	goto _037B
 
 _0373:
-	ApplyMovement obj_T02GYM0101_sunglasses, _0474
+	apply_movement obj_T02GYM0101_sunglasses, _0474
 _037B:
-	WaitMovement
+	wait_movement
 _037D:
-	ScrCmd_600
-	SetFollowMonInhibitState 1
-	ScrCmd_607
-	ScrCmd_109 253, 56
-	SetVar VAR_UNK_4127, 1
-	ReleaseAll
-	End
+	scrcmd_600
+	set_follow_mon_inhibit_state 1
+	scrcmd_607
+	scrcmd_109 253, 56
+	setvar VAR_UNK_4127, 1
+	releaseall
+	end
 
 	.balign 4, 0
 _0394:
-	FaceWest
-	EmoteExclamationMark
-	WalkNormalWest 5
-	EndMovement
+	step 2, 1
+	step 75, 1
+	step 14, 5
+	step_end
 
 	.balign 4, 0
 _03A4:
-	FaceWest
-	EmoteExclamationMark
-	WalkNormalWest 4
-	EndMovement
+	step 2, 1
+	step 75, 1
+	step 14, 4
+	step_end
 
 	.balign 4, 0
 _03B4:
-	FaceWest
-	EmoteExclamationMark
-	WalkNormalWest 3
-	EndMovement
+	step 2, 1
+	step 75, 1
+	step 14, 3
+	step_end
 
 	.balign 4, 0
 _03C4:
-	FaceWest
-	EmoteExclamationMark
-	WalkNormalWest 2
-	EndMovement
+	step 2, 1
+	step 75, 1
+	step 14, 2
+	step_end
 
 	.balign 4, 0
 _03D4:
-	FaceWest
-	EmoteExclamationMark
-	WalkNormalWest
-	EndMovement
+	step 2, 1
+	step 75, 1
+	step 14, 1
+	step_end
 
 	.balign 4, 0
 _03E4:
-	FaceWest
-	EmoteExclamationMark
-	EndMovement
+	step 2, 1
+	step 75, 1
+	step_end
 
 	.balign 4, 0
 _03F0:
-	FaceEast
-	EmoteExclamationMark
-	EndMovement
+	step 3, 1
+	step 75, 1
+	step_end
 
 	.balign 4, 0
 _03FC:
-	FaceEast
-	EmoteExclamationMark
-	WalkNormalEast
-	EndMovement
+	step 3, 1
+	step 75, 1
+	step 15, 1
+	step_end
 
 	.balign 4, 0
 _040C:
-	Delay16 2
-	FaceEast
-	EndMovement
+	step 65, 2
+	step 3, 1
+	step_end
 
 	.balign 4, 0
 _0418:
-	Delay8 2
-	FaceEast
-	EndMovement
+	step 63, 2
+	step 3, 1
+	step_end
 
 	.balign 4, 0
 _0424:
-	Delay8 2
-	FaceWest
-	EndMovement
+	step 63, 2
+	step 2, 1
+	step_end
 
 	.balign 4, 0
 _0430:
-	WalkNormalEast 5
-	FaceSouth
-	EndMovement
+	step 15, 5
+	step 1, 1
+	step_end
 
 	.balign 4, 0
 _043C:
-	WalkNormalEast 4
-	FaceSouth
-	EndMovement
+	step 15, 4
+	step 1, 1
+	step_end
 
 	.balign 4, 0
 _0448:
-	WalkNormalEast 3
-	FaceSouth
-	EndMovement
+	step 15, 3
+	step 1, 1
+	step_end
 
 	.balign 4, 0
 _0454:
-	WalkNormalEast 2
-	FaceSouth
-	EndMovement
+	step 15, 2
+	step 1, 1
+	step_end
 
 	.balign 4, 0
 _0460:
-	WalkNormalEast
-	FaceSouth
-	EndMovement
+	step 15, 1
+	step 1, 1
+	step_end
 
 	.balign 4, 0
 _046C:
-	FaceSouth
-	EndMovement
+	step 1, 1
+	step_end
 
 	.balign 4, 0
 _0474:
-	WalkNormalWest
-	FaceSouth
-	EndMovement
+	step 14, 1
+	step 1, 1
+	step_end
 
 scr_seq_T02GYM0101_004:
-	PlaySE SEQ_SE_DP_SELECT
-	LockAll
-	FacePlayer
-	CheckBadge BADGE_EARTH, VAR_SPECIAL_RESULT
-	BufferPlayersName 0
-	Compare VAR_SPECIAL_RESULT, 0
-	GoToIfNe _04A7
-	NPCMsg msg_0454_T02GYM0101_00009
-	GoTo _04AA
+	play_se SEQ_SE_DP_SELECT
+	lockall
+	faceplayer
+	check_badge BADGE_EARTH, VAR_SPECIAL_RESULT
+	buffer_players_name 0
+	compare VAR_SPECIAL_RESULT, 0
+	goto_if_ne _04A7
+	npc_msg msg_0454_T02GYM0101_00009
+	goto _04AA
 
 _04A7:
-	NPCMsg msg_0454_T02GYM0101_00010
+	npc_msg msg_0454_T02GYM0101_00010
 _04AA:
-	WaitButton
-	CloseMsg
-	ReleaseAll
-	End
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
 	.balign 4, 0

@@ -5,173 +5,153 @@
 
 	.rodata
 
-	ScrDef scr_seq_T23GYM0102_000
-	ScrDef scr_seq_T23GYM0102_001
-	ScrDef scr_seq_T23GYM0102_002
-	ScrDef scr_seq_T23GYM0102_003
-	ScrDef scr_seq_T23GYM0102_004
-	ScrDef scr_seq_T23GYM0102_005
-	ScrDef scr_seq_T23GYM0102_006
-	ScrDef scr_seq_T23GYM0102_007
-	ScrDef scr_seq_T23GYM0102_008
-	ScrDef scr_seq_T23GYM0102_009
-	ScrDef scr_seq_T23GYM0102_010
-	ScrDef scr_seq_T23GYM0102_011
-	ScrDef scr_seq_T23GYM0102_012
-	ScrDef scr_seq_T23GYM0102_013
-	ScrDef scr_seq_T23GYM0102_014
-	ScrDef scr_seq_T23GYM0102_015
-	ScrDef scr_seq_T23GYM0102_016
-	ScrDefEnd
+	scrdef scr_seq_T23GYM0102_000
+	scrdef scr_seq_T23GYM0102_001
+	scrdef scr_seq_T23GYM0102_002
+	scrdef scr_seq_T23GYM0102_003
+	scrdef scr_seq_T23GYM0102_004
+	scrdef scr_seq_T23GYM0102_005
+	scrdef scr_seq_T23GYM0102_006
+	scrdef scr_seq_T23GYM0102_007
+	scrdef scr_seq_T23GYM0102_008
+	scrdef scr_seq_T23GYM0102_009
+	scrdef scr_seq_T23GYM0102_010
+	scrdef scr_seq_T23GYM0102_011
+	scrdef scr_seq_T23GYM0102_012
+	scrdef scr_seq_T23GYM0102_013
+	scrdef scr_seq_T23GYM0102_014
+	scrdef scr_seq_T23GYM0102_015
+	scrdef scr_seq_T23GYM0102_016
+	scrdef scr_seq_T23GYM0102_017
+	scrdef_end
 
 scr_seq_T23GYM0102_016:
-	AzaleaGymInit
-	GetPhoneBookRematch PHONE_CONTACT_BUGSY, VAR_TEMP_x4001
-	Compare VAR_TEMP_x4001, 0
-	GoToIfNe _00CD
-	GoToIfSet FLAG_GAME_CLEAR, _006C
-	ClearFlag FLAG_HIDE_AZALEA_GYM_BUGSY
-	End
+	azalea_gym_init
+	clearflag FLAG_HIDE_AZALEA_GYM_BUGSY
+	end
 
-_006C:
-	CheckRegisteredPhoneNumber PHONE_CONTACT_BUGSY, VAR_TEMP_x4001
-	Compare VAR_TEMP_x4001, 1
-	GoToIfEq _0096
-	GetWeekday VAR_TEMP_x4002
-	Compare VAR_TEMP_x4002, 4
-	GoToIfNe _0096
-	SetFlag FLAG_HIDE_AZALEA_GYM_BUGSY
-	End
-
-_0096:
-	GetWeekday VAR_TEMP_x4001
-	Compare VAR_TEMP_x4001, 1
-	GoToIfEq _00C7
-	Compare VAR_TEMP_x4001, 3
-	GoToIfEq _00C7
-	Compare VAR_TEMP_x4001, 5
-	GoToIfEq _00C7
-	ClearFlag FLAG_HIDE_AZALEA_GYM_BUGSY
-	End
-
-_00C7:
-	SetFlag FLAG_HIDE_AZALEA_GYM_BUGSY
-	End
-
-_00CD:
-	SetFlag FLAG_HIDE_AZALEA_GYM_BUGSY
-	End
-
+; ===== APOCRYPHA Ch3 (3.4a): Bugsy officiates. The badge match is Turk's. =====
 scr_seq_T23GYM0102_001:
-	PlaySE SEQ_SE_DP_SELECT
-	LockAll
-	FacePlayer
-	CheckBadge BADGE_HIVE, VAR_SPECIAL_RESULT
-	Compare VAR_SPECIAL_RESULT, 1
-	GoToIfEq _017A
-	NPCMsg msg_0567_T23GYM0102_00000
-	CloseMsg
-	TrainerBattle TRAINER_LEADER_BUGSY_BUGSY, 0, 0, 0
-	CheckBattleWon VAR_SPECIAL_RESULT
-	Compare VAR_SPECIAL_RESULT, 0
-	GoToIfEq _0174
-	NPCMsg msg_0567_T23GYM0102_00001
-	BufferPlayersName 0
-	NPCMsg msg_0567_T23GYM0102_00002
-	PlayFanfare SEQ_ME_BADGE
-	WaitFanfare
-	GiveBadge BADGE_HIVE
-	SetTrainerFlag TRAINER_BUG_CATCHER_AL
-	SetTrainerFlag TRAINER_BUG_CATCHER_BENNY
-	SetTrainerFlag TRAINER_BUG_CATCHER_JOSH
-	SetTrainerFlag TRAINER_TWINS_AMY_AND_MIMI
-	AddSpecialGameStat SCORE_EVENT_BADGE_GET
-	NPCMsg msg_0567_T23GYM0102_00003
-_0136:
-	GoToIfNoItemSpace ITEM_TM89, 1, _016A
-	CallStd std_give_item_verbose
-	SetFlag FLAG_GOT_TM89_FROM_BUGSY
-	NPCMsg msg_0567_T23GYM0102_00005
-	WaitButton
-	CloseMsg
-	ReleaseAll
-	End
+	play_se SEQ_SE_DP_SELECT
+	lockall
+	faceplayer
+	goto_if_set FLAG_APOC_CH3_BADGE_DONE, _T23GYM_bugsy_after
+	npc_msg msg_0567_T23GYM0102_00000
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
 
-_016A:
-	CallStd std_bag_is_full
-	CloseMsg
-	ReleaseAll
-	End
-
-_0174:
-	WhiteOut
-	ReleaseAll
-	End
-
-_017A:
-	GoToIfUnset FLAG_GOT_TM89_FROM_BUGSY, _0136
-	NPCMsg msg_0567_T23GYM0102_00006
-	WaitButton
-	CloseMsg
-	ReleaseAll
-	End
+_T23GYM_bugsy_after:
+	npc_msg msg_0567_T23GYM0102_00006
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
 
 scr_seq_T23GYM0102_000:
-	End
+	end
 
 scr_seq_T23GYM0102_002:
-	AzaleaGymSpinarak 0
-	End
+	azalea_gym_spinarak 0
+	end
 
 scr_seq_T23GYM0102_003:
-	AzaleaGymSpinarak 1
-	End
+	azalea_gym_spinarak 1
+	end
 
 scr_seq_T23GYM0102_004:
-	AzaleaGymSpinarak 2
-	End
+	azalea_gym_spinarak 2
+	end
 
 scr_seq_T23GYM0102_005:
-	AzaleaGymSpinarak 3
-	End
+	azalea_gym_spinarak 3
+	end
 
 scr_seq_T23GYM0102_006:
-	AzaleaGymSpinarak 4
-	End
+	azalea_gym_spinarak 4
+	end
 
 scr_seq_T23GYM0102_007:
-	AzaleaGymSpinarak 5
-	End
+	azalea_gym_spinarak 5
+	end
 
 scr_seq_T23GYM0102_008:
-	AzaleaGymSpinarak 6
-	End
+	azalea_gym_spinarak 6
+	end
 
 scr_seq_T23GYM0102_009:
-	AzaleaGymSpinarak 7
-	End
+	azalea_gym_spinarak 7
+	end
 
 scr_seq_T23GYM0102_010:
-	AzaleaGymSpinarak 8
-	End
+	azalea_gym_spinarak 8
+	end
 
 scr_seq_T23GYM0102_011:
-	AzaleaGymSpinarak 9
-	End
+	azalea_gym_spinarak 9
+	end
 
 scr_seq_T23GYM0102_012:
-	AzaleaGymSpinarak 10
-	End
+	azalea_gym_spinarak 10
+	end
 
 scr_seq_T23GYM0102_013:
-	AzaleaGymSpinarak 11
-	End
+	azalea_gym_spinarak 11
+	end
 
 scr_seq_T23GYM0102_014:
-	AzaleaGymSwitch 0
-	End
+	azalea_gym_switch 0
+	end
 
 scr_seq_T23GYM0102_015:
-	AzaleaGymSwitch 1
-	End
+	azalea_gym_switch 1
+	end
+; ===== APOCRYPHA Ch3 (3.4c/d): Turk's first real battle; Hive Badge + TM89. =====
+scr_seq_T23GYM0102_017:
+	play_se SEQ_SE_DP_SELECT
+	lockall
+	faceplayer
+	goto_if_set FLAG_APOC_CH3_BADGE_DONE, _T23GYM_turk_after
+	npc_msg msg_0567_T23GYM0102_00007
+	closemsg
+	trainer_battle TRAINER_LEADER_BUGSY_BUGSY, 0, 0, 0
+	check_battle_won VAR_SPECIAL_RESULT
+	compare VAR_SPECIAL_RESULT, 0
+	goto_if_eq _T23GYM_turk_lost
+	npc_msg msg_0567_T23GYM0102_00001
+	buffer_players_name 0
+	npc_msg msg_0567_T23GYM0102_00002
+	play_fanfare SEQ_ME_BADGE
+	wait_fanfare
+	give_badge BADGE_HIVE
+	settrainerflag TRAINER_BUG_CATCHER_AL
+	settrainerflag TRAINER_BUG_CATCHER_BENNY
+	settrainerflag TRAINER_BUG_CATCHER_JOSH
+	settrainerflag TRAINER_TWINS_AMY_AND_MIMI
+	add_special_game_stat SCORE_EVENT_BADGE_GET
+	npc_msg msg_0567_T23GYM0102_00005
+	giveitem_no_check ITEM_TM89, 1
+	setflag FLAG_GOT_TM89_FROM_BUGSY
+	npc_msg msg_0567_T23GYM0102_00008
+	npc_msg msg_0567_T23GYM0102_00009
+	wait_button_or_walk_away
+	closemsg
+	setflag FLAG_APOC_CH3_BADGE_DONE
+	; Kestra is waiting by the west exit (3.4e)
+	setvar VAR_UNK_4075, 1
+	releaseall
+	end
+
+_T23GYM_turk_after:
+	npc_msg msg_0567_T23GYM0102_00010
+	wait_button_or_walk_away
+	closemsg
+	releaseall
+	end
+
+_T23GYM_turk_lost:
+	white_out
+	releaseall
+	end
 	.balign 4, 0

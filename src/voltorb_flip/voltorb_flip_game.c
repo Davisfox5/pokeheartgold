@@ -2,279 +2,72 @@
 
 #include "global.h"
 
+#include "voltorb_flip/voltorb_flip.h"
+#include "voltorb_flip/voltorb_flip_data.h"
+
 #include "heap.h"
 #include "math_util.h"
 
-static void VoltorbFlipGameState_PushBoardHistory(VoltorbFlipGameState *gameState);
-static RoundSummary *VoltorbFlipGameState_GetBoardHistoryTop(VoltorbFlipGameState *gameState);
-static int GetCardValueFromType(CardType cardType);
-static int VoltorbFlipGameState_CalcNextLevel(VoltorbFlipGameState *gameState);
-static void VoltorbFlipGameState_SelectBoardId(VoltorbFlipGameState *gameState);
-static void VoltorbFlipGameState_CountPointsInRowCols(VoltorbFlipGameState *gameState);
-static void VoltorbFlipGameState_CountVoltorbsInRowCols(VoltorbFlipGameState *gameState);
-static void VoltorbFlipGameState_CalcBoardMaxPayout(VoltorbFlipGameState *gameState);
-static void VoltorbFlipGameState_CountMultiplierCards(VoltorbFlipGameState *gameState);
-static void VoltorbFlipGameState_PlaceCardsOnBoard(VoltorbFlipGameState *gameState, CardType type, int n, BOOL isNot1Card);
-static BOOL VoltorbFlipGameState_RetryBoardGen(VoltorbFlipGameState *gameState);
-static void VoltorbFlipGameState_GenerateBoard(VoltorbFlipGameState *gameState);
-static Card *VoltorbFlipGameState_GetCard(VoltorbFlipGameState *gameState, CardID cardId);
+static void AddRoundSummary(GameState *);
+static RoundSummary *PrevRoundSummary(GameState *);
+static int CardValue(CardType);
+static int CalcNextLevel(GameState *);
+static void SelectBoardId(GameState *);
+static void CountPointsInRowCols(GameState *);
+static void CountVoltorbsInRowCols(GameState *);
+static void CalcBoardMaxPayout(GameState *);
+static void CountMultiplierCards(GameState *);
+static void PlaceCardsOnBoard(GameState *, CardType, int, int);
+static BOOL RetryBoardGen(GameState *);
+static void GenerateBoard(GameState *);
+static Card *GetCard(GameState *, int);
 
-// clang-format off
-const u8 sBoardIdDistribution[8][80] = {
-    // Lv. 8
-    {
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        10, 20, 30, 40, 50, 60, 70, 80, 90, 100,
-     },
-    // Lv. 7
-    {
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        10, 20, 30, 40, 50, 60, 70, 80, 90, 100,
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-     },
-    // Lv. 6
-    {
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        10, 20, 30, 40, 50, 60, 70, 80, 90, 100,
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-     },
-    // Lv. 5
-    {
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        10, 20, 30, 40, 50, 60, 70, 80, 90, 100,
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-     },
-    // Lv. 4
-    {
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        10, 20, 30, 40, 50, 60, 70, 80, 90, 100,
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-     },
-    // Lv. 3
-    {
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        10, 20, 30, 40, 50, 60, 70, 80, 90, 100,
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-     },
-    // Lv. 2
-    {
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        10, 20, 30, 40, 50, 60, 70, 80, 90, 100,
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-     },
-    // Lv. 1
-    {
-        10, 20, 30, 40, 50, 60, 70, 80, 90, 100,
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-     },
-};
-// clang-format on
+extern const u8 sBoardIdDistribution[8][80];
+extern const BoardConfig sBoardConfigs[80];
 
-// This is arranged such that the payout monotically increases as you go down
-// the list.
-//
-// MaxFreePerRowCol is generally set to ~half the total number of 2's and 3's
-// on the board. These are mostly the same across both level sets.
-//
-// In the second level set, MaxFreeTotal is the same as MaxFreePerRowCol,
-// meaning you can potentially get up to ~half the multiplier cards for free. In
-// the first level set, MaxFreeTotal is 1 greater, so you can potentially get
-// one more multiplier for free.
-//  - The exception is Lv. 1, where MaxFreeTotal is 1 less than the total number
-//    of multipliers. In this case, your board could give you all but 1 of the
-//    multipliers for free.
-const BoardConfig sBoardConfigs[80] = {
-    // Lv. 1
-    // Voltorbs  Twos  Threes  MaxFreePerRowCol  MaxFreeTotal       Payout
-    { 6,  3, 1, 3, 3 }, //     24
-    { 6,  0, 3, 2, 2 }, //     27
-    { 6,  5, 0, 3, 4 }, //     32
-    { 6,  2, 2, 3, 3 }, //     36
-    { 6,  4, 1, 3, 4 }, //     48
-
-    { 6,  3, 1, 3, 3 }, //     24
-    { 6,  0, 3, 2, 2 }, //     27
-    { 6,  5, 0, 3, 4 }, //     32
-    { 6,  2, 2, 3, 3 }, //     36
-    { 6,  4, 1, 3, 4 }, //     48
-
-    // Lv. 2
-    { 7,  1, 3, 2, 3 }, //     54
-    { 7,  6, 0, 3, 4 }, //     64
-    { 7,  3, 2, 2, 3 }, //     72
-    { 7,  0, 4, 2, 3 }, //     81
-    { 7,  5, 1, 3, 4 }, //     96
-
-    { 7,  1, 3, 2, 2 }, //     54
-    { 7,  6, 0, 3, 3 }, //     64
-    { 7,  3, 2, 2, 2 }, //     72
-    { 7,  0, 4, 2, 2 }, //     81
-    { 7,  5, 1, 3, 3 }, //     96
-
-    // Lv. 3
-    { 8,  2, 3, 2, 3 }, //    108
-    { 8,  7, 0, 3, 4 }, //    128
-    { 8,  4, 2, 3, 4 }, //    144
-    { 8,  1, 4, 2, 3 }, //    162
-    { 8,  6, 1, 4, 3 }, //    192
-
-    { 8,  2, 3, 2, 2 }, //    108
-    { 8,  7, 0, 3, 3 }, //    128
-    { 8,  4, 2, 3, 3 }, //    144
-    { 8,  1, 4, 2, 2 }, //    162
-    { 8,  6, 1, 3, 3 }, //    192
-
-    // Lv. 4
-    { 8,  3, 3, 4, 3 }, //    216
-    { 8,  0, 5, 2, 3 }, //    243
-    { 10, 8, 0, 4, 5 }, //    256
-    { 10, 5, 2, 3, 4 }, //    288
-    { 10, 2, 4, 3, 4 }, //    324
-
-    { 8,  3, 3, 3, 3 }, //    216
-    { 8,  0, 5, 2, 2 }, //    243
-    { 10, 8, 0, 4, 4 }, //    256
-    { 10, 5, 2, 3, 3 }, //    288
-    { 10, 2, 4, 3, 3 }, //    324
-
-    // Lv. 5
-    { 10, 7, 1, 4, 5 }, //    384
-    { 10, 4, 3, 3, 4 }, //    432
-    { 10, 1, 5, 3, 4 }, //    486
-    { 10, 9, 0, 4, 5 }, //    512
-    { 10, 6, 2, 4, 5 }, //    576
-
-    { 10, 7, 1, 4, 4 }, //    384
-    { 10, 4, 3, 3, 3 }, //    432
-    { 10, 1, 5, 3, 3 }, //    486
-    { 10, 9, 0, 4, 4 }, //    512
-    { 10, 6, 2, 4, 4 }, //    576
-
-    // Lv. 6
-    { 10, 3, 4, 3, 4 }, //    648
-    { 10, 0, 6, 3, 4 }, //    729
-    { 10, 8, 1, 4, 5 }, //    768
-    { 10, 5, 3, 4, 5 }, //    864
-    { 10, 2, 5, 3, 4 }, //    972
-
-    { 10, 3, 4, 3, 3 }, //    648
-    { 10, 0, 6, 3, 3 }, //    729
-    { 10, 8, 1, 4, 4 }, //    768
-    { 10, 5, 3, 4, 4 }, //    864
-    { 10, 2, 5, 3, 3 }, //    972
-
-    // Lv. 7
-    { 10, 7, 2, 4, 5 }, //   1152
-    { 10, 4, 4, 4, 5 }, //   1296
-    { 13, 1, 6, 3, 4 }, //   1458
-    { 13, 9, 1, 5, 6 }, //   1536
-    { 10, 6, 3, 4, 5 }, //   1728
-
-    { 10, 7, 2, 4, 4 }, //   1152
-    { 10, 4, 4, 4, 4 }, //   1296
-    { 13, 1, 6, 3, 3 }, //   1458
-    { 13, 9, 1, 5, 5 }, //   1536
-    { 10, 6, 3, 4, 4 }, //   1728
-
-    // Lv. 8
-    { 10, 0, 7, 3, 4 }, //   2187
-    { 10, 8, 2, 5, 6 }, //   2304
-    { 10, 5, 4, 4, 5 }, //   2592
-    { 10, 2, 6, 4, 5 }, //   2916
-    { 10, 7, 3, 5, 6 }, //   3456
-
-    { 10, 0, 7, 3, 3 }, //   2187
-    { 10, 8, 2, 5, 5 }, //   2304
-    { 10, 5, 4, 4, 4 }, //   2592
-    { 10, 2, 6, 4, 4 }, //   2916
-    { 10, 7, 3, 5, 5 }, //   3456
-};
-
-VoltorbFlipGameState *VoltorbFlip_CreateGameState(enum HeapID heapID) {
-    VoltorbFlipGameState *ptr = Heap_Alloc(heapID, sizeof(VoltorbFlipGameState));
-    MI_CpuFill8(ptr, 0, sizeof(VoltorbFlipGameState));
+GameState *CreateGameState(HeapID heapId) {
+    GameState *ptr = AllocFromHeap(heapId, sizeof(GameState));
+    MI_CpuFill8(ptr, 0, sizeof(GameState));
     return ptr;
 }
 
-void VoltorbFlip_FreeGameState(VoltorbFlipGameState *game) {
-    Heap_Free(game);
+void FreeGameState(GameState *game) {
+    FreeToHeap(game);
 }
 
-void VoltorbFlipGameState_NewBoard(VoltorbFlipGameState *game) {
-    VoltorbFlipGameState_SelectBoardId(game);
-    VoltorbFlipGameState_GenerateBoard(game);
-    VoltorbFlipGameState_CountPointsInRowCols(game);
-    VoltorbFlipGameState_CalcBoardMaxPayout(game);
-    VoltorbFlipGameState_CountMultiplierCards(game);
+void NewBoard(GameState *game) {
+    SelectBoardId(game);
+    GenerateBoard(game);
+    CountPointsInRowCols(game);
+    CalcBoardMaxPayout(game);
+    CountMultiplierCards(game);
 }
 
-void VoltorbFlipGameState_UpdateHistoryAndReset(VoltorbFlipGameState *game) {
+void ov122_021E8528(GameState *game) {
     int i;
-    RoundSummary boardHistoryBak[5];
+    RoundSummary temp[5];
 
-    VoltorbFlipGameState_PushBoardHistory(game);
+    AddRoundSummary(game);
 
     for (i = 0; i < 5; i++) {
-        boardHistoryBak[i] = game->boardHistory[i];
+        temp[i] = game->boardHistory[i];
     }
     int head = game->historyHead;
 
-    MI_CpuFill8(game, 0, sizeof(VoltorbFlipGameState));
+    MI_CpuFill8(game, 0, sizeof(GameState));
 
     for (i = 0; i < 5; i++) {
-        game->boardHistory[i] = boardHistoryBak[i];
+        game->boardHistory[i] = temp[i];
     }
     game->historyHead = head;
 }
 
-void VoltorbFlipGameState_SetRoundOutcome(VoltorbFlipGameState *game, VoltorbFlipRoundOutcome outcome) {
+void SetRoundOutcome(GameState *game, RoundOutcome outcome) {
     game->roundOutcome = outcome;
 }
 
-void VoltorbFlipGameState_MultiplyPayoutAndUpdateCardsFlipped(VoltorbFlipGameState *game, CardType type) {
-    u32 value = GetCardValueFromType(type);
+void MultiplyPayoutAndUpdateCardsFlipped(GameState *game, CardType type) {
+    u32 value = CardValue(type);
 
     GF_ASSERT(value < 4);
     if (value == 0) {
@@ -300,8 +93,8 @@ void VoltorbFlipGameState_MultiplyPayoutAndUpdateCardsFlipped(VoltorbFlipGameSta
     game->payout = newPayout;
 }
 
-void VoltorbFlipGameState_FlipCard(VoltorbFlipGameState *game, CardID cardId) {
-    Card *card = VoltorbFlipGameState_GetCard(game, cardId);
+void FlipCard(GameState *game, CardID cardId) {
+    Card *card = GetCard(game, cardId);
     GF_ASSERT(card->flipped == FALSE);
 
     card->flipped = TRUE;
@@ -309,7 +102,7 @@ void VoltorbFlipGameState_FlipCard(VoltorbFlipGameState *game, CardID cardId) {
 }
 
 // Returns TRUE if some amount was deducted.
-BOOL VoltorbFlipGameState_DeductFromPayout(VoltorbFlipGameState *game, u8 amount) {
+BOOL DeductFromPayout(GameState *game, u8 amount) {
     int payout = game->payout;
     if (payout != 0) {
         int newPayout = payout - amount;
@@ -322,37 +115,42 @@ BOOL VoltorbFlipGameState_DeductFromPayout(VoltorbFlipGameState *game, u8 amount
     return FALSE;
 }
 
-BOOL VoltorbFlipGameState_IsCardFlipped(VoltorbFlipGameState *game, CardID cardId) {
-    Card *card = VoltorbFlipGameState_GetCard(game, cardId);
+BOOL IsCardFlipped(GameState *game, CardID cardId) {
+    Card *card = GetCard(game, cardId);
     return card->flipped;
 }
 
-BOOL VoltorbFlipGameState_HasEarnedMaxPayout(VoltorbFlipGameState *game) {
+BOOL EarnedMaxPayout(GameState *game) {
     GF_ASSERT(game->payout <= game->maxPayout);
 
     return game->payout == game->maxPayout;
 }
 
-CardType VoltorbFlipGameState_GetCardType(VoltorbFlipGameState *game, CardID cardId) {
-    Card *card = VoltorbFlipGameState_GetCard(game, cardId);
+CardType GetCardType(GameState *game, CardID cardId) {
+    Card *card = GetCard(game, cardId);
     return card->type;
 }
 
-BOOL VoltorbFlipGameState_IsCardMemoFlagOn(VoltorbFlipGameState *game, CardID cardId, int memoFlag) {
-    Card *card = VoltorbFlipGameState_GetCard(game, cardId);
-    return (card->memo & memoFlag) == memoFlag;
-}
-
-void VoltorbFlipGameState_ToggleCardMemo(VoltorbFlipGameState *game, CardID cardId, int memoFlag) {
-    Card *card = VoltorbFlipGameState_GetCard(game, cardId);
-    if (card->memo & memoFlag) {
-        card->memo -= memoFlag;
-    } else {
-        card->memo |= memoFlag;
+int IsCardMemoFlagOn(GameState *game, CardID cardId, int memoFlag) {
+    Card *card = GetCard(game, cardId);
+    int cardMemoFlag = card->memo & memoFlag;
+    if (cardMemoFlag == memoFlag) {
+        return 1;
     }
+    return 0;
 }
 
-int VoltorbFlipGameStates_GetPointsAlongAxis(VoltorbFlipGameState *game, Axis axis, u8 i) {
+void ToggleCardMemo(GameState *game, CardID cardId, int memoFlag) {
+    Card *card = GetCard(game, cardId);
+    int var2 = card->memo;
+    if (var2 & memoFlag) {
+        card->memo -= memoFlag;
+        return;
+    }
+    card->memo |= memoFlag;
+}
+
+int PointsAlongAxis(GameState *game, Axis axis, u8 i) {
     GF_ASSERT(i < 5);
 
     switch (axis) {
@@ -366,7 +164,7 @@ int VoltorbFlipGameStates_GetPointsAlongAxis(VoltorbFlipGameState *game, Axis ax
     return 0;
 }
 
-int VoltorbFlipGameState_GetVoltorbsAlongAxis(VoltorbFlipGameState *game, Axis axis, u8 i) {
+int VoltorbsAlongAxis(GameState *game, Axis axis, u8 i) {
     GF_ASSERT(i < 5);
 
     switch (axis) {
@@ -380,7 +178,7 @@ int VoltorbFlipGameState_GetVoltorbsAlongAxis(VoltorbFlipGameState *game, Axis a
     return 0;
 }
 
-int VoltorbFlipGameState_CountFlippedCardsAlongAxis(VoltorbFlipGameState *game, Axis axis, u8 i) {
+int FlippedCardsAlongAxis(GameState *game, Axis axis, u8 i) {
     u8 count = 0;
 
     switch (axis) {
@@ -404,29 +202,29 @@ int VoltorbFlipGameState_CountFlippedCardsAlongAxis(VoltorbFlipGameState *game, 
     return count;
 }
 
-u16 VoltorbFlipGameState_GetGamePayout(VoltorbFlipGameState *game) {
+u16 GamePayout(GameState *game) {
     return game->payout;
 }
 
-u8 VoltorbFlipGameState_GetMultiplierCards(VoltorbFlipGameState *game) {
+u8 MultiplierCards(GameState *game) {
     return game->multiplierCards;
 }
 
-u8 VoltorbFlipGameState_GetMultiplierCardsFlipped(VoltorbFlipGameState *game) {
+u8 MultiplierCardsFlipped(GameState *game) {
     return game->multipliersFlipped;
 }
 
-u8 VoltorbFlipGameState_GetGameLevel(VoltorbFlipGameState *game) {
+u8 GameLevel(GameState *game) {
     return game->level;
 }
 
 // Levels gained (as viewed in display).
-int VoltorbFlipGameState_CalculateLevelsGained(VoltorbFlipGameState *game) {
-    RoundSummary *round = VoltorbFlipGameState_GetBoardHistoryTop(game);
+int LevelsGained(GameState *game) {
+    RoundSummary *round = PrevRoundSummary(game);
     return round->level - game->level;
 }
 
-static void VoltorbFlipGameState_PushBoardHistory(VoltorbFlipGameState *game) {
+static void AddRoundSummary(GameState *game) {
     GF_ASSERT(game->historyHead < 5);
 
     RoundSummary *round = &game->boardHistory[game->historyHead];
@@ -438,7 +236,7 @@ static void VoltorbFlipGameState_PushBoardHistory(VoltorbFlipGameState *game) {
     game->historyHead = (game->historyHead + 1) % 5;
 }
 
-static RoundSummary *VoltorbFlipGameState_GetBoardHistoryTop(VoltorbFlipGameState *game) {
+static RoundSummary *PrevRoundSummary(GameState *game) {
     int idx;
 
     int head = game->historyHead;
@@ -451,7 +249,7 @@ static RoundSummary *VoltorbFlipGameState_GetBoardHistoryTop(VoltorbFlipGameStat
     return &game->boardHistory[idx];
 }
 
-static int GetCardValueFromType(CardType type) {
+static int CardValue(CardType type) {
     switch (type) {
     case CARD_TYPE_ONE:
         return 1;
@@ -467,12 +265,12 @@ static int GetCardValueFromType(CardType type) {
 // True if the boardId corresponds to at least level `level`.
 #define LEVEL_AT_LEAST(boardId, level) (boardId >= 10 * (level - 1))
 
-static int VoltorbFlipGameState_CalcNextLevel(VoltorbFlipGameState *game) {
+static int CalcNextLevel(GameState *game) {
     int i;
     u32 boardId;
-    VoltorbFlipRoundOutcome roundOutcome;
+    RoundOutcome roundOutcome;
 
-    RoundSummary *prevRound = VoltorbFlipGameState_GetBoardHistoryTop(game);
+    RoundSummary *prevRound = PrevRoundSummary(game);
     roundOutcome = prevRound->roundOutcome;
 
     if (roundOutcome == ROUND_OUTCOME_WON && LEVEL_AT_LEAST(prevRound->boardId, 8)) {
@@ -517,11 +315,11 @@ static int VoltorbFlipGameState_CalcNextLevel(VoltorbFlipGameState *game) {
     return 7; // Lv. 1
 }
 
-static void VoltorbFlipGameState_SelectBoardId(VoltorbFlipGameState *game) {
+static void SelectBoardId(GameState *game) {
     int i;
 
     int rand = (u32)MTRandom() % 100;
-    int level = VoltorbFlipGameState_CalcNextLevel(game);
+    int level = CalcNextLevel(game);
     GF_ASSERT(level < 8);
 
     for (i = 0; i < 80; i++) {
@@ -534,26 +332,26 @@ static void VoltorbFlipGameState_SelectBoardId(VoltorbFlipGameState *game) {
     game->boardId = i;
 }
 
-static void VoltorbFlipGameState_CountPointsInRowCols(VoltorbFlipGameState *game) {
+static void CountPointsInRowCols(GameState *game) {
     int r;
     int c;
 
     for (r = 0; r < 5; r++) {
         game->pointsPerRow[r] = 0;
         for (c = 0; c < 5; c++) {
-            game->pointsPerRow[r] += GetCardValueFromType(game->cards[r][c].type);
+            game->pointsPerRow[r] += CardValue(game->cards[r][c].type);
         }
     }
 
     for (r = 0; r < 5; r++) {
         game->pointsPerCol[r] = 0;
         for (c = 0; c < 5; c++) {
-            game->pointsPerCol[r] += GetCardValueFromType(game->cards[c][r].type);
+            game->pointsPerCol[r] += CardValue(game->cards[c][r].type);
         }
     }
 }
 
-static void VoltorbFlipGameState_CountVoltorbsInRowCols(VoltorbFlipGameState *game) {
+static void CountVoltorbsInRowCols(GameState *game) {
     int r;
     int c;
 
@@ -576,27 +374,27 @@ static void VoltorbFlipGameState_CountVoltorbsInRowCols(VoltorbFlipGameState *ga
     }
 }
 
-static void VoltorbFlipGameState_CalcBoardMaxPayout(VoltorbFlipGameState *game) {
+static void CalcBoardMaxPayout(GameState *game) {
     int i;
-    int payout = 1;
+    int var1 = 1;
 
     for (i = 0; i < 25; i++) {
-        Card *card = VoltorbFlipGameState_GetCard(game, (u8)i);
+        Card *card = GetCard(game, (u8)i);
         GF_ASSERT(card->type != CARD_TYPE_NONE);
         if (card->type != CARD_TYPE_VOLTORB) {
-            payout *= GetCardValueFromType(card->type);
+            var1 *= CardValue(card->type);
         }
     }
 
-    if (payout > 50000) {
-        payout = 50000;
+    if (var1 > 50000) {
+        var1 = 50000;
     }
-    game->maxPayout = payout;
+    game->maxPayout = var1;
 }
 
-static void VoltorbFlipGameState_CountMultiplierCards(VoltorbFlipGameState *game) {
+static void CountMultiplierCards(GameState *game) {
     for (int i = 0; i < 25; i++) {
-        Card *card = VoltorbFlipGameState_GetCard(game, (u8)i);
+        Card *card = GetCard(game, (u8)i);
         GF_ASSERT(card->type != CARD_TYPE_NONE);
 
         if (IS_MULTIPLIER_CARD(card->type)) {
@@ -605,7 +403,7 @@ static void VoltorbFlipGameState_CountMultiplierCards(VoltorbFlipGameState *game
     }
 }
 
-static void VoltorbFlipGameState_PlaceCardsOnBoard(VoltorbFlipGameState *game, CardType type, int n, BOOL isNot1Card) {
+static void PlaceCardsOnBoard(GameState *game, CardType type, int n, BOOL isNot1Card) {
     u8 cardId;
     int attempts = 0;
 
@@ -616,7 +414,7 @@ static void VoltorbFlipGameState_PlaceCardsOnBoard(VoltorbFlipGameState *game, C
         } else {
             cardId = i;
         }
-        Card *card = VoltorbFlipGameState_GetCard(game, cardId);
+        Card *card = GetCard(game, cardId);
         if (card->type == CARD_TYPE_ONE || !isNot1Card) {
             card->type = type;
         } else {
@@ -633,7 +431,7 @@ static void VoltorbFlipGameState_PlaceCardsOnBoard(VoltorbFlipGameState *game, C
     }
 }
 
-static BOOL VoltorbFlipGameState_RetryBoardGen(VoltorbFlipGameState *game) {
+static BOOL RetryBoardGen(GameState *game) {
     int i;
     const BoardConfig *config;
 
@@ -647,12 +445,12 @@ static BOOL VoltorbFlipGameState_RetryBoardGen(VoltorbFlipGameState *game) {
     config = &sBoardConfigs[game->boardId];
 
     for (i = 0; i < 25; i++) {
-        Card *card = VoltorbFlipGameState_GetCard(game, (u8)i);
+        Card *card = GetCard(game, (u8)i);
         if (IS_MULTIPLIER_CARD(card->type)) {
             int col = i % 5;
             int row = i / 5;
-            int voltorbsInCol = VoltorbFlipGameState_GetVoltorbsAlongAxis(game, AXIS_COL, col);
-            int voltorbsInRow = VoltorbFlipGameState_GetVoltorbsAlongAxis(game, AXIS_ROW, row);
+            int voltorbsInCol = VoltorbsAlongAxis(game, AXIS_COL, col);
+            int voltorbsInRow = VoltorbsAlongAxis(game, AXIS_ROW, row);
             if (voltorbsInRow == 0 || voltorbsInCol == 0) {
                 freeMultipliersPerCol[col]++;
                 freeMultipliersPerRow[row]++;
@@ -674,7 +472,7 @@ static BOOL VoltorbFlipGameState_RetryBoardGen(VoltorbFlipGameState *game) {
     return FALSE;
 }
 
-static void VoltorbFlipGameState_GenerateBoard(VoltorbFlipGameState *game) {
+static void GenerateBoard(GameState *game) {
     GF_ASSERT(game->boardId < 80);
 
     int voltorbs = sBoardConfigs[game->boardId].voltorbs;
@@ -682,19 +480,19 @@ static void VoltorbFlipGameState_GenerateBoard(VoltorbFlipGameState *game) {
     int threes = sBoardConfigs[game->boardId].threes;
 
     for (int i = 0; i < 1000; i++) {
-        VoltorbFlipGameState_PlaceCardsOnBoard(game, CARD_TYPE_ONE, 25, FALSE);
-        VoltorbFlipGameState_PlaceCardsOnBoard(game, CARD_TYPE_VOLTORB, voltorbs, TRUE);
-        VoltorbFlipGameState_PlaceCardsOnBoard(game, CARD_TYPE_TWO, twos, TRUE);
-        VoltorbFlipGameState_PlaceCardsOnBoard(game, CARD_TYPE_THREE, threes, TRUE);
-        VoltorbFlipGameState_CountVoltorbsInRowCols(game);
+        PlaceCardsOnBoard(game, CARD_TYPE_ONE, 25, FALSE);
+        PlaceCardsOnBoard(game, CARD_TYPE_VOLTORB, voltorbs, TRUE);
+        PlaceCardsOnBoard(game, CARD_TYPE_TWO, twos, TRUE);
+        PlaceCardsOnBoard(game, CARD_TYPE_THREE, threes, TRUE);
+        CountVoltorbsInRowCols(game);
 
-        if (!VoltorbFlipGameState_RetryBoardGen(game)) {
+        if (!RetryBoardGen(game)) {
             break;
         }
     }
 }
 
-static Card *VoltorbFlipGameState_GetCard(VoltorbFlipGameState *game, CardID cardId) {
+static Card *GetCard(GameState *game, CardID cardId) {
     GF_ASSERT((u32)cardId < 25);
 
     u8 row = cardId / 5;

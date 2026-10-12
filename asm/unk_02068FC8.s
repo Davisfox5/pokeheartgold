@@ -212,7 +212,7 @@ _020691A4: .word 0x00000668
 sub_020691A8: ; 0x020691A8
 	push {r4, lr}
 	ldr r1, _020691C0 ; =0x0000066C
-	bl Heap_Alloc
+	bl AllocFromHeap
 	ldr r2, _020691C0 ; =0x0000066C
 	mov r1, #0
 	add r4, r0, #0
@@ -227,7 +227,7 @@ _020691C0: .word 0x0000066C
 sub_020691C4: ; 0x020691C4
 	push {r4, lr}
 	ldr r1, _020691DC ; =0x0000067C
-	bl Heap_Alloc
+	bl AllocFromHeap
 	ldr r2, _020691DC ; =0x0000067C
 	mov r1, #0
 	add r4, r0, #0
@@ -240,10 +240,10 @@ _020691DC: .word 0x0000067C
 
 	thumb_func_start sub_020691E0
 sub_020691E0: ; 0x020691E0
-	ldr r3, _020691E4 ; =Heap_Free
+	ldr r3, _020691E4 ; =FreeToHeap
 	bx r3
 	.balign 4, 0
-_020691E4: .word Heap_Free
+_020691E4: .word FreeToHeap
 	thumb_func_end sub_020691E0
 
 	thumb_func_start sub_020691E8
@@ -586,7 +586,7 @@ sub_02069464: ; 0x02069464
 	ldr r1, _02069490 ; =0x00000684
 	add r5, r0, #0
 	mov r0, #0xb
-	bl Heap_AllocAtEnd
+	bl AllocFromHeapAtEnd
 	add r4, r0, #0
 	mov r0, #0
 	str r0, [r4]
@@ -667,7 +667,7 @@ _02069500:
 	ldr r0, [r4]
 	bl sub_0205AC4C
 	add r0, r5, #0
-	bl Heap_Free
+	bl FreeToHeap
 	mov r0, #1
 	pop {r3, r4, r5, pc}
 _0206951C:

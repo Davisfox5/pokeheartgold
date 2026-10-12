@@ -17,7 +17,7 @@ ov82_0223DD60: ; 0x0223DD60
 	mov r0, #3
 	mov r1, #0x69
 	lsl r2, r2, #0x10
-	bl Heap_Create
+	bl CreateHeap
 	mov r1, #0xa1
 	add r0, r4, #0
 	lsl r1, r1, #2
@@ -282,7 +282,7 @@ ov82_0223DF74: ; 0x0223DF74
 	add r1, r0, #0
 	bl Main_SetVBlankIntrCB
 	mov r0, #0x69
-	bl Heap_Destroy
+	bl DestroyHeap
 	ldr r0, _0223DFB8 ; =FS_OVERLAY_ID(OVY_80)
 	bl UnloadOverlayByID
 	mov r0, #1
@@ -679,9 +679,9 @@ ov82_0223E2A4: ; 0x0223E2A4
 	add r0, r4, #0
 	add r0, #0xa4
 	ldr r0, [r0]
-	bl Heap_Free
+	bl FreeToHeap
 	ldr r0, [r4, #4]
-	bl Heap_Free
+	bl FreeToHeap
 	mov r0, #0
 	str r0, [r4, #4]
 	add r0, r4, #0
@@ -1788,7 +1788,7 @@ ov82_0223EBB8: ; 0x0223EBB8
 	mov r1, #4
 	bl FreeBgTilemapBuffer
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	pop {r4, pc}
 	.balign 4, 0
 _0223EC08: .word 0xFFFF1FFF
@@ -2087,7 +2087,7 @@ ov82_0223EE38: ; 0x0223EE38
 	mov r2, #0xc0
 	bl GX_LoadBGPltt
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	add sp, #4
 	pop {r3, r4, pc}
 	.balign 4, 0
@@ -2575,7 +2575,7 @@ ov82_0223F224: ; 0x0223F224
 	add r4, r0, #0
 	mov r0, #0x69
 	mov r1, #0x3c
-	bl Heap_Alloc
+	bl AllocFromHeap
 	add r1, r4, #0
 	add r1, #0xa4
 	str r0, [r1]
@@ -3764,9 +3764,9 @@ _0223F996:
 	sub r6, #0x18
 _0223FAD4:
 	ldr r0, [r5, r7]
-	bl SpriteTransfer_CreateCharTransferTask
+	bl sub_0200ACF0
 	ldr r0, [r5, r6]
-	bl SpriteTransfer_CreateExtPlttTransferTask
+	bl sub_0200AF94
 	add r4, r4, #1
 	add r5, #0x10
 	cmp r4, #2
@@ -3890,9 +3890,9 @@ _0223FBC6:
 	mov r0, #0x4f
 	lsl r0, r0, #2
 	ldr r0, [r6, r0]
-	bl SpriteTransfer_DeleteCharTransferTask
+	bl sub_0200AEB0
 	ldr r0, [r6, r7]
-	bl SpriteTransfer_DeletePlttTransferTask
+	bl sub_0200B0A8
 	add r0, r4, #1
 	lsl r0, r0, #0x18
 	lsr r4, r0, #0x18
@@ -3956,7 +3956,7 @@ ov82_0223FC48: ; 0x0223FC48
 	mov r1, #0x14
 	str r2, [sp, #4]
 	add r5, r3, #0
-	bl Heap_Alloc
+	bl AllocFromHeap
 	add r4, r0, #0
 	add r2, r4, #0
 	mov r1, #0x14
@@ -3997,7 +3997,7 @@ ov82_0223FC9C: ; 0x0223FC9C
 	ldr r0, [r4, #0x10]
 	bl Sprite_Delete
 	add r0, r4, #0
-	bl Heap_Free
+	bl FreeToHeap
 	mov r0, #0
 	pop {r4, pc}
 	thumb_func_end ov82_0223FC9C

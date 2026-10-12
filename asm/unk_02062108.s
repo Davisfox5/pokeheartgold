@@ -173,7 +173,7 @@ EventObjectMovementMan_Create: ; 0x02062214
 	add r6, r1, #0
 	mov r0, #4
 	mov r1, #0x14
-	bl Heap_AllocAtEnd
+	bl AllocFromHeapAtEnd
 	add r4, r0, #0
 	bne _0206222A
 	bl GF_AssertFail
@@ -230,7 +230,7 @@ _02062284:
 	bl MapObject_ClearHeldMovementIfActive
 	mov r0, #4
 	add r1, r4, #0
-	bl Heap_FreeExplicit
+	bl FreeToHeapExplicit
 	add r0, r5, #0
 	bl SysTask_Destroy
 	pop {r3, r4, r5, pc}
@@ -333,7 +333,7 @@ _0206232A:
 	add r1, r3, #4
 	str r1, [r0, #0x10]
 	ldrh r1, [r3, #4]
-	cmp r1, #0xfe ; EndMovement
+	cmp r1, #0xfe ; step_end
 	beq _0206233C
 	mov r1, #0
 	str r1, [r0]

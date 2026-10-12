@@ -5,7 +5,7 @@
 #include "obj_char_transfer.h"
 #include "obj_pltt_transfer.h"
 #include "sprite.h"
-#include "sprite_transfer.h"
+#include "unk_0200ACF0.h"
 #include "unk_0200B150.h"
 #include "unk_02025C44.h"
 
@@ -46,11 +46,11 @@ void CreateSpriteResourcesHeader(struct SpriteResourcesHeader *hdr, int charId, 
         }
     }
     if (transfer) {
-        proxy = SpriteTransfer_GetCharProxyWithCell(charObj, cellObj);
+        proxy = sub_0200AF24(charObj, cellObj);
         GF_ASSERT(proxy != NULL);
         hdr->charData = GF2DGfxResObj_GetCharDataPtr(charObj);
     } else {
-        proxy = SpriteTransfer_GetCharProxy(charObj);
+        proxy = sub_0200AF00(charObj);
         GF_ASSERT(proxy != NULL);
         hdr->charData = NULL;
     }
@@ -73,7 +73,7 @@ void CreateSpriteResourcesHeader(struct SpriteResourcesHeader *hdr, int charId, 
     hdr->priority = priority;
 }
 
-SpriteResourceHeaderList *SpriteResourceHeaderList_Create(const struct ResdatNarcEntry *resdatNarcEntry, enum HeapID heapID, GF_2DGfxResMan *charMan, GF_2DGfxResMan *plttMan, GF_2DGfxResMan *cellMan, GF_2DGfxResMan *animMan, GF_2DGfxResMan *mcelMan, GF_2DGfxResMan *manmMan) {
+SpriteResourceHeaderList *SpriteResourceHeaderList_Create(const struct ResdatNarcEntry *resdatNarcEntry, HeapID heapId, GF_2DGfxResMan *charMan, GF_2DGfxResMan *plttMan, GF_2DGfxResMan *cellMan, GF_2DGfxResMan *animMan, GF_2DGfxResMan *mcelMan, GF_2DGfxResMan *manmMan) {
     int i;
     int num = 0;
     SpriteResourceHeaderList *ret;
@@ -81,8 +81,8 @@ SpriteResourceHeaderList *SpriteResourceHeaderList_Create(const struct ResdatNar
     while (resdatNarcEntry[num].charId != -2) {
         num++;
     }
-    ret = Heap_Alloc(heapID, sizeof(SpriteResourceHeaderList));
-    ret->headers = Heap_Alloc(heapID, sizeof(SpriteResourcesHeader) * num);
+    ret = AllocFromHeap(heapId, sizeof(SpriteResourceHeaderList));
+    ret->headers = AllocFromHeap(heapId, sizeof(SpriteResourcesHeader) * num);
     ret->num = num;
     for (i = 0; i < ret->num; i++) {
         CreateSpriteResourcesHeader(&ret->headers[i], resdatNarcEntry[i].charId, resdatNarcEntry[i].plttId, resdatNarcEntry[i].cellId, resdatNarcEntry[i].animId, resdatNarcEntry[i].mcelId, resdatNarcEntry[i].manmId, resdatNarcEntry[i].xferFlag, resdatNarcEntry[i].priority, charMan, plttMan, cellMan, animMan, mcelMan, manmMan);
@@ -93,12 +93,12 @@ SpriteResourceHeaderList *SpriteResourceHeaderList_Create(const struct ResdatNar
 void SpriteResourceHeaderList_Destroy(SpriteResourceHeaderList *list) {
     GF_ASSERT(list != NULL);
     if (list->headers != NULL) {
-        Heap_Free(list->headers);
+        FreeToHeap(list->headers);
     }
-    Heap_Free(list);
+    FreeToHeap(list);
 }
 
-SpriteList *G2dRenderer_Init(int numSprites, G2dRenderer *renderer, enum HeapID heapID) {
+SpriteList *G2dRenderer_Init(int numSprites, G2dRenderer *renderer, HeapID heapId) {
     struct SpriteListParam param;
     NNSG2dViewRect rect;
 
@@ -115,7 +115,7 @@ SpriteList *G2dRenderer_Init(int numSprites, G2dRenderer *renderer, enum HeapID 
     sub_0200B27C(&renderer->renderSurface[1], &rect, NNS_G2D_VRAM_TYPE_2DSUB, &renderer->rendererInstance);
     param.num = numSprites;
     param.rendererInstance = &renderer->rendererInstance;
-    param.heapID = heapID;
+    param.heapId = heapId;
     return SpriteList_Create(&param);
 }
 
@@ -159,7 +159,7 @@ void G2dRenderer_SetObjCharTransferReservedRegion(NNS_G2D_VRAM_TYPE vram, GXOBJV
         }
         break;
     default:
-        GF_ASSERT(FALSE);
+        GF_ASSERT(0);
         break;
     }
 }
